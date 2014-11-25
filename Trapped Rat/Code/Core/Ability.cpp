@@ -76,6 +76,7 @@ Ability::Ability(const char* path)
 	hp->Attribute( "hp", &tempValue );
 	hpMod = (float)tempValue;
 
+	access = false;
 	}
 
 

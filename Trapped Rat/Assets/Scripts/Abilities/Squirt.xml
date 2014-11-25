@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Flood Name="Squirt" Offensive="true">
+  <Affinity ElementalType="Water" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="false" />
+  <Paths>
+    <AniPath></AniPath>
+    <WavPath></WavPath>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="0.6" />
+    <BaseBP bp="2" />
+    <HPMod />
+  </DamageInfo>
+</Flood>
