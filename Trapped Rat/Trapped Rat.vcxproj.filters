@@ -237,9 +237,6 @@
     <ClCompile Include="Code\Core\CombatPlayer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Code\States\TestStateP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Animation\AnimTestBase.cpp">
       <Filter>Animation</Filter>
     </ClCompile>

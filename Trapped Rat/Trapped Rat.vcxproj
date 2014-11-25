@@ -137,7 +137,6 @@
     <ClCompile Include="Code\States\MainMenuState.cpp" />
     <ClCompile Include="Code\States\OptionsState.cpp" />
     <ClCompile Include="Code\States\SplashState.cpp" />
-    <ClCompile Include="Code\States\TestStateP.cpp" />
     <ClCompile Include="Code\States\TileDebugState.cpp" />
     <ClCompile Include="Code\Tile\Layer.cpp" />
     <ClCompile Include="Code\Tile\Tile.cpp" />
