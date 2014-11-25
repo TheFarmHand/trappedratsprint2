@@ -91,7 +91,6 @@
     <ClCompile Include="Code\Core\CombatPlayer.cpp" />
     <ClCompile Include="Code\Core\CombatSelection.cpp" />
     <ClCompile Include="Code\Core\CommonEnemy.cpp" />
-    <ClCompile Include="Code\Core\DamAbility.cpp" />
     <ClCompile Include="Code\Core\DOTStatus.cpp" />
     <ClCompile Include="Code\Core\Enemy.cpp" />
     <ClCompile Include="Code\Core\GameData.cpp" />
@@ -103,7 +102,6 @@
     <ClCompile Include="Code\Core\MiniBoss.cpp" />
     <ClCompile Include="Code\Core\Numbers.cpp" />
     <ClCompile Include="Code\Core\ObjectManager.cpp" />
-    <ClCompile Include="Code\Core\OtherAbility.cpp" />
     <ClCompile Include="Code\Core\OtherStatus.cpp" />
     <ClCompile Include="Code\Core\OwnedHUD.cpp" />
     <ClCompile Include="Code\Core\Player.cpp" />
@@ -165,7 +163,6 @@
     <ClInclude Include="Code\Core\CombatPlayer.h" />
     <ClInclude Include="Code\Core\CombatSelection.h" />
     <ClInclude Include="Code\Core\CommonEnemy.h" />
-    <ClInclude Include="Code\Core\DamAbility.h" />
     <ClInclude Include="Code\Core\Definitions.h" />
     <ClInclude Include="Code\Core\DOTStatus.h" />
     <ClInclude Include="Code\Core\Enemy.h" />
@@ -178,7 +175,6 @@
     <ClInclude Include="Code\Core\MiniBoss.h" />
     <ClInclude Include="Code\Core\Numbers.h" />
     <ClInclude Include="Code\Core\ObjectManager.h" />
-    <ClInclude Include="Code\Core\OtherAbility.h" />
     <ClInclude Include="Code\Core\OtherStatus.h" />
     <ClInclude Include="Code\Core\OwnedHUD.h" />
     <ClInclude Include="Code\Core\Player.h" />

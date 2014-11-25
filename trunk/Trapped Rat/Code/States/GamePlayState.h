@@ -11,6 +11,7 @@
 #include "../Dialogue/Dialogue.h"
 #include "../Core/SelectableObject.h"
 #include "../Core/HelpText.h"
+#include "../Core/Ability.h"
 
 
 class Player;
@@ -49,6 +50,8 @@ class GamePlayState :
 	SGD::HTexture targeting = SGD::INVALID_HANDLE;
 	SGD::HTexture buttonimg = SGD::INVALID_HANDLE;
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
+
+	std::map<std::string, Ability*> MasterAbilityList;
 
 public:
 	bool is_test_message = false;

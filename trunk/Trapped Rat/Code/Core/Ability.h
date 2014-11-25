@@ -8,16 +8,19 @@ private:
 	std::string explination;
 	std::string abilityName;
 	std::string statusName;
+	std::string elementType;
 	bool status;
 	bool offensive;
 	bool healing;
+	bool areaOfEffect;
 	float formulaTotal;
 	int statusID;
-	float atkDam, mgcDam;
+	float atkMod, mgcMod;
+	float hpMod;
 	int bpCost;
 
 public:
-	Ability();
+	Ability( const char* path );
 	virtual ~Ability();
 
 	std::string GetExplination(){ return explination; }
@@ -26,9 +29,11 @@ public:
 	bool GetHealing();
 	float GetFormulaTotal();
 	int GetStatusID();
-	float GetAtkDam();
-	float GetMgcDam();
+	float GetAtkMod();
+	float GetMgcMod();
 	int GetBPCost();
+	float GetHPMod();
+	bool GetAOE();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );
 	void SetOffensive( bool offense );
