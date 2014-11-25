@@ -161,6 +161,7 @@ void Character::StatusTick()
 	}
 }
 
-void Character::AddStatus(StatusEffect *status ){
+void Character::AddStatus(StatusEffect *status )
+{
 	effects.push_back(status);
 }

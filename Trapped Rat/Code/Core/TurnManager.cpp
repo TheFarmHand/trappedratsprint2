@@ -25,8 +25,8 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	//Safe to add code here
 
 	// Particle Manager Initialization fo Turn Manager (Kinda hacky)
-	//Change to singleton
-	pPartMan = new ParticleManager();
+	// Particle Manager pointer assignment
+	pPartMan = ParticleManager::GetInstance( );
 	pPartMan->LoadEmitter( "../Trapped Rat/Assets/Scripts/bloodparticle.xml", "takedamage" );
 	}
 void TurnManager::Update( float dt )
@@ -107,12 +107,12 @@ void TurnManager::Terminate()
 	EnemyUnits.clear();
 	AllCombatUnits.clear();
 
-	// *** Hacky Stuf *** //
+	// Clear up TurnManager's Particles
 	if ( pPartMan != nullptr )
 		{
 		pPartMan->UnloadEmitter( "takedamage" );
 		pPartMan->ClearAll();
-		delete pPartMan; pPartMan = nullptr;
+		pPartMan = nullptr;
 		}
 	}
 void TurnManager::HealTarget( Character* target, int value )

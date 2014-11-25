@@ -15,7 +15,7 @@ TestStateP* TestStateP::GetInstance()
 
 void TestStateP::Enter( )
 {
-	myParticles = new ParticleManager;
+	myParticles = ParticleManager::GetInstance();
 	std::string relative = "../Trapped Rat/Assets/Scripts/";
 	myParticles->LoadEmitter( relative + "bloodparticle.xml", "Test");
 }
@@ -45,17 +45,7 @@ void TestStateP::Update( float dt )
 
 	}
 
-	if(input->IsKeyPressed(SGD::Key::U))
-	{
-		Character rats;
-		StatusEffect test;
-
-		rats.AddStatus(&test);
-		
-		(*rats.GetEffects().begin())->Clear();
-	}
-
-	if ( input->IsKeyPressed( SGD::Key::Escape) )
+		if ( input->IsKeyPressed( SGD::Key::Escape) )
 	{
 		GameData::GetInstance( )->SwapState( GameOverLoseState::GetInstance( ) );
 		return;
@@ -81,6 +71,7 @@ void TestStateP::Exit( )
 
 	myParticles->ClearAll();
 	
-	delete myParticles;
+
+	myParticles = nullptr;
 	myParticles = NULL;
 }
