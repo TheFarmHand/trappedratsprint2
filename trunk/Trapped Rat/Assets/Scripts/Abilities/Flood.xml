@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Flood Name="Flood" Offensive="true">
+  <Affinity ElementalType="Water" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="true" />
+  <Healing Heals="false" />
+  <Paths>
+    <AniPath></AniPath>
+    <WavPath></WavPath>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="0.4" />
+    <BaseBP bp="4" />
+    <HPMod />
+  </DamageInfo>
+</Flood>

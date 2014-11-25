@@ -18,6 +18,7 @@ private:
 	float atkMod, mgcMod;
 	float hpMod;
 	int bpCost;
+	bool access;
 
 public:
 	Ability( const char* path );

@@ -14,6 +14,8 @@
 #include "../States/LoadGameState.h"
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include <sstream>
+#include <fstream>
+
 GamePlayState* GamePlayState::GetInstance()
 {
 	static GamePlayState data;
@@ -60,7 +62,34 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/HelpTextBox.png");
 	helptextbox->SetImage(helpback);
 
-	Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
+	std::fstream fin;
+
+	fin.open( "Assets/Scripts/Abilities/AbilityList.txt" );
+	if ( fin.is_open() )
+		{
+		int count;
+		char buffer[64];
+		std::string abilPath;
+
+		fin >> count;
+
+		for ( int i = 0; i < count; i++ )
+			{
+			abilPath = "Assets/Scripts/Abilities/";
+			fin.ignore( INT_MAX, '\n' );
+			fin.get( buffer, 64, '\n' );
+			std::string temp( buffer );
+
+			temp += ".xml";
+			abilPath += temp;
+
+			Ability* tempAbility = new Ability( abilPath.c_str() );
+			MasterAbilityList[tempAbility->GetAbilityName()] = tempAbility;
+			}
+
+		}
+
+	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
 
 	p1 = dynamic_cast<CombatPlayer*>( CreateCombatPlayer( "Ratsputin", sts, 1, 50, 50, 32.0f, 0.0f, nullptr, SGD::Point( 100, 150 ), SGD::Size( 64, 64 ), "RatAnimBattle.xml" ));
 	p1->SetOrderPosition(0);
