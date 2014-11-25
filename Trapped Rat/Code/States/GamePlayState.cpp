@@ -93,8 +93,6 @@ void GamePlayState::Enter()
 
 		}
 
-	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
-
 	p1 = dynamic_cast<CombatPlayer*>( CreateCombatPlayer( "Ratsputin", sts, 1, 50, 50, 32.0f, 0.0f, nullptr, SGD::Point( 100, 150 ), SGD::Size( 64, 64 ), "RatAnimBattle.xml" ));
 	p1->SetOrderPosition(0);
 	p1->SetPosition({100,150});

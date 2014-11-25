@@ -52,8 +52,8 @@ bool GameData::Initialize()
 	lasttime = GetTickCount();
 
 	//mounting an initial state
-	CurrentState = TestStateP::GetInstance();
-	//CurrentState = LoadGameState::GetInstance();
+	//CurrentState = TestStateP::GetInstance();
+	CurrentState = LoadGameState::GetInstance();
 	CurrentState->Enter();
 
 	CameraPos = SGD::Point(0.0, 0.0);
