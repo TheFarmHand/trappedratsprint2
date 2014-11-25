@@ -86,7 +86,7 @@ float Character::GetProgress()
 }
 Ability* Character::GetAbility( int index )
 {
-	return abilities[ index ];
+	return abilityList[ index ];
 }
 int Character::GetOrderPosition()
 {
@@ -134,7 +134,7 @@ void Character::SetProgress( float _progress )
 }
 void Character::SetAbility( int index, Ability* _ability )
 {
-	abilities[ index ] = _ability;
+	abilityList[ index ] = _ability;
 }
 void Character::SetOrderPosition( int index )
 {

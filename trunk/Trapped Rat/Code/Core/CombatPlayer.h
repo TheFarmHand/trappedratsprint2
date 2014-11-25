@@ -12,7 +12,7 @@ class CombatPlayer :
 public:
 	CombatPlayer();
 	~CombatPlayer();
-	enum TARGET_SELECT { none, enemy, player, self };
+	enum TARGET_SELECT { none, enemy, player, self,allAlly,allEnemy };
 
 	void virtual Update(float dt);
 	void virtual UpdateAnimation( float dt );
@@ -32,7 +32,7 @@ private:
 	int myTarget = 0;
 	int states;	// 0-Home 1-Attack 2-Items 3-Ability 4-Run 5-AllySelect 6-EnemySelect
 	int hudSelection;
-	std::vector<Ability*> abilityList;
+
 	std::vector<SelectableObject*> menu;
 	//Character* myTarget;
 	AnimationSystem* ansys = nullptr;
@@ -40,5 +40,16 @@ private:
 	void SetSelection( int selected );
 
 	void TargetUnit(std::vector<Character*> &targets);
+
+	void HomeUpdate(float dt);
+	void AttackUpdate(float dt);
+	void ItemsUpdate(float dt);
+	void AbilityUpdate(float dt);
+	void RunUpdate(float dt);
+	void AllySelectUpdate(float dt);
+	void EnemySelectUpdate(float dt);
+
+	int maxBP;
+	int curBP;
 };
 
