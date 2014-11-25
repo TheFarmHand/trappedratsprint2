@@ -17,6 +17,7 @@
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia };
 enum MenuSubStates{None, Options, HowTo};
+
 class HUDItem;
 class GamePlayState :
 	public GameState

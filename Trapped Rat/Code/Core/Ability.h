@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 class Character;
 class Ability
 {
@@ -7,7 +8,7 @@ private:
 	std::string explination;
 	std::string abilityName;
 	std::string statusName;
-	std::string elementType;
+	int elementType;
 	bool status;
 	bool offensive;
 	bool healing;

@@ -30,7 +30,14 @@ Ability::Ability(const char* path)
 	TiXmlElement* affinity = root->FirstChildElement( "Affinity" );
 	const char* tempAff = affinity->Attribute( "ElementalType" );
 	std::string tempA( tempAff );
-	elementType = tempA;
+	if ( tempA == "Wind" )
+		elementType = 1;
+	else if ( tempA == "Fire" )
+		elementType = 2;
+	else if ( tempA == "Earth" )
+		elementType = 3;
+	else if ( tempA == "Water" )
+		elementType = 4;
 
 	TiXmlElement* statusEffect = affinity->NextSiblingElement( "StatusEffect" );
 	const char* tempStatus = statusEffect->Attribute( "Effect" );
