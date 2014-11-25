@@ -31,7 +31,7 @@ class GamePlayState :
 	SGD::HTexture helpback = SGD::INVALID_HANDLE;
 	SGD::HTexture combatback = SGD::INVALID_HANDLE;
 	Layer temp;
-	CombatPlayer* p1, *p2, *p3;
+	std::vector<CombatPlayer*> Party;
 	Enemy e1, e2, e3;
 	Enemy *enemy1;
 	Enemy *enemy2;
@@ -68,8 +68,11 @@ public:
 	void DialogueRender();
 
 	//factory methods
-	Character * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );
-	Character * CreateCombatPlayer(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "");
+	Enemy * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );
+	CombatPlayer * CreateCombatPlayer(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "");
+	CombatPlayer * LoadCombatPlayer(std::string _path); //will only return a combat player if you send in the right path
+	Enemy* LoadEnemy(std::string _path);//will only return a combat player if you send in the right path
+
 
 	HUDItem * CreateHudItem(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	SelectableObject * CreateSelectableObject(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);

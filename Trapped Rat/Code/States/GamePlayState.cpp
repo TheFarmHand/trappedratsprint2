@@ -14,6 +14,8 @@
 #include "../States/LoadGameState.h"
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include <sstream>
+#include "../tinyxml/tinyxml.h"
+#include <Windows.h>
 #include <fstream>
 
 GamePlayState* GamePlayState::GetInstance()
@@ -62,6 +64,8 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/HelpTextBox.png");
 	helptextbox->SetImage(helpback);
 
+	CombatPlayer* p1 = nullptr;
+	p1 = ( LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
 	std::fstream fin;
 
 	fin.open( "Assets/Scripts/Abilities/AbilityList.txt" );
@@ -93,10 +97,13 @@ void GamePlayState::Enter()
 
 	p1 = dynamic_cast<CombatPlayer*>( CreateCombatPlayer( "Ratsputin", sts, 1, 50, 50, 32.0f, 0.0f, nullptr, SGD::Point( 100, 150 ), SGD::Size( 64, 64 ), "RatAnimBattle.xml" ));
 	p1->SetOrderPosition(0);
+	p1->SetPosition({100,150});
+	p1->SetSize({ 64, 64 });
+	Party.push_back(p1);
 	//GameData::GetInstance()->SetCombatParty(dynamic_cast<CombatPlayer*>(p1), 0);
 
-	p2 = dynamic_cast<CombatPlayer*>(CreateCombatPlayer("Ratsputin", sts, 1, 50, 50, 31.0f, 0.0f, nullptr, SGD::Point(100, 250), SGD::Size(64, 64), "RatAnimBattle.xml"));
-	p2->SetOrderPosition(1);
+	//p2 = dynamic_cast<CombatPlayer*>(CreateCombatPlayer("Ratsputin", sts, 1, 50, 50, 31.0f, 0.0f, nullptr, SGD::Point(100, 250), SGD::Size(64, 64), "RatAnimBattle.xml"));
+	//p2->SetOrderPosition(1);
 	//GameData::GetInstance()->SetCombatParty(dynamic_cast<CombatPlayer*>(p2), 1);
 
 
@@ -135,7 +142,11 @@ void const GamePlayState::Render()
 }
 void GamePlayState::Update(float dt)
 {
-
+	//pause the game if alt + tab
+	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Alt) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Tab))
+	{
+		state = GPStates::Menu;
+	}
 SGD::EventManager::GetInstance()->Update();
 
 	//put everything into functions here
@@ -201,17 +212,14 @@ void GamePlayState::Exit()
 
 	if (helptextbox != nullptr )
 	delete helptextbox;
-	if ( p1 != nullptr )
-		delete p1;
-	if ( p2 != nullptr )
-		delete p2;
+	
 
-	for ( unsigned int i = 0; i < GameData::GetInstance()->GetCombatParty().size(); i++ )
+	for ( unsigned int i = 0; i < Party.size(); i++ )
 		{
-		delete GameData::GetInstance()->GetCombatParty()[i];
-		GameData::GetInstance()->GetCombatParty()[i] = nullptr;
+		delete Party[i];
+		Party[i] = nullptr;
 		}
-	GameData::GetInstance()->GetCombatParty().clear();
+	Party.clear();
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(combatback);
 
@@ -272,51 +280,12 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 
 			GameData::GetInstance()->SetIsInCombat(true);
 			state = GPStates::Combat;
-			/*p1.SetOrderPosition( 0 );
-			p1.SetSpeed( 10.0f );
-			p1.SetPosition( SGD::Point( 10.0f, 100.0f ) );
-			p1.SetMaxHP(50);
-			p1.SetHP(45);
-			p1.SetActive( true );
-			p1.SetName( "Jeeves" );
-			p2.SetOrderPosition( 1 );
-			p2.SetSpeed( 10.0f );
-			p2.SetPosition( SGD::Point( 10.0f, 200.0f ) );
-			p2.SetActive( true );
-			p2.SetMaxHP(100);
-			p2.SetHP(50);
-			p2.SetName( "Ratsputin" );
-			p3.SetOrderPosition( 2 );
-			p3.SetSpeed( 12.0f );
-			p3.SetPosition( SGD::Point( 10.0f, 300.0f ) );
-			p3.SetActive( true );
-			p3.SetMaxHP(115);
-			p3.SetHP(5);
-			p3.SetName( "Checkers" );*/
-			/*e1.SetOrderPosition( 0 );
-			e1.SetSpeed( 8.0f );
-			e1.SetPosition( SGD::Point( 600.0f, 100.0f ) );
-			e1.SetName( "Dog" );
-			e2.SetOrderPosition( 1 );
-			e2.SetSpeed( 11.0f );
-			e2.SetPosition( SGD::Point( 600.0f, 200.0f ) );
-			e2.SetName( "Cat" );
-			e3.SetOrderPosition( 2 );
-			e3.SetSpeed( 9.0f );
-			e3.SetPosition( SGD::Point( 600.0f, 300.0f ) );
-			e3.SetName( "Raven" );*/
-			std::vector<CombatPlayer*> tempPlayer;
+			
+			
 			std::vector<Enemy*> tempEnemy;
-			tempPlayer.push_back(p1);
-			tempPlayer.push_back(p2);
-			tempPlayer[0]->TestAbility = false;
-			tempPlayer[1]->TestAbility = true;
+			
 
-			//tempPlayer.push_back( &p2 );
-			//tempPlayer.push_back( &p3 );
-			//tempEnemy.push_back( &e1 );
-			//tempEnemy.push_back( &e2 );
-			//tempEnemy.push_back( &e3 );
+			
 			if (enemy1 != nullptr )
 			delete enemy1;
 			if (enemy2 != nullptr )
@@ -334,8 +303,6 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 			enemy1 = dynamic_cast<Enemy*>(en1);
 			enemy1->SetOrderPosition(0);
 
-
-
 			Character* en2 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 40.0f, 0.0f, nullptr, SGD::Point(600, 260), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy2 = dynamic_cast<Enemy*>(en2);
 			enemy2->SetOrderPosition(1);
@@ -344,22 +311,18 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 			enemy3 = dynamic_cast<Enemy*>(en3);
 			enemy3->SetOrderPosition(2);
 
-
 			tempEnemy.push_back(enemy1);
 			tempEnemy.push_back(enemy2);
 			tempEnemy.push_back(enemy3);
 
-			TurnManager::GetInstance()->Initialize(tempPlayer, tempEnemy);
-			for (size_t i = 0; i < tempPlayer.size(); i++)
+			TurnManager::GetInstance()->Initialize(Party, tempEnemy);
+			for (size_t i = 0; i < Party.size(); i++)
 			{
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempPlayer[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 450 + (tempPlayer[i]->GetOrderPosition()*50.0f)), tempPlayer[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), Party[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 450 + (Party[i]->GetOrderPosition()*50.0f)), Party[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
 			}
 
-			////this is a message test
-			//TestMessage * Test = new TestMessage();
-			//Test->SendMessageNow();
-			//delete Test;
+			
 			for (size_t i = 0; i < tempEnemy.size(); i++)
 			{
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempEnemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
@@ -584,7 +547,7 @@ void GamePlayState::MenuRender()
 void GamePlayState::CombatUpdate(float dt)
 {
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	TurnManager::GetInstance()->Update(dt);
+	
 	
 	if (input->IsKeyPressed(SGD::Key::Backspace))
 	{
@@ -599,6 +562,8 @@ void GamePlayState::CombatUpdate(float dt)
 			SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
 		SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
 		}
+
+	TurnManager::GetInstance()->Update(dt);
 
 }
 void GamePlayState::CombatRender()
@@ -622,7 +587,7 @@ void GamePlayState::CombatRender()
 }
 
 
-Character * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
+Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
 {
 	CommonEnemy * temp = new CommonEnemy();
 	temp->SetName(name);
@@ -655,7 +620,7 @@ Character * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int
 
 	return temp;
 }
-Character * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
+CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
 {
 	CombatPlayer * temp = new CombatPlayer();
 	temp->SetName(name);
@@ -756,4 +721,154 @@ HelpText* GamePlayState::GetHelpText()
 void GamePlayState::SetHelpText(HelpText* help)
 {
 	helptextbox = help;
+}
+CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
+{
+	CombatPlayer * toon = nullptr;
+	TiXmlDocument doc;
+	if (doc.LoadFile(_path.c_str(), TiXmlEncoding::TIXML_ENCODING_UTF8))
+	{
+		TiXmlElement * root = doc.RootElement();
+		//basic info
+		std::string name = root->FirstChildElement("Name")->GetText();
+		std::string element = root->FirstChildElement("Element")->GetText();
+		std::string type = root->FirstChildElement("Type")->GetText();
+		std::string random = root->FirstChildElement("IsRandom")->GetText();
+		//load in the Stats
+		Stats stats;
+		int HP;
+		int BP;
+		int level;
+		float speed;
+		TiXmlElement * Stat = root->FirstChildElement("Stats");
+		HP = std::stoi(Stat->FirstChildElement("HitPoints")->FirstChildElement("Base")->GetText());
+		stats.hp_scale = std::stof(Stat->FirstChildElement("HitPoints")->FirstChildElement("Scale")->GetText());
+
+		BP = std::stoi(Stat->FirstChildElement("BattlePoints")->FirstChildElement("Base")->GetText());
+		stats.bp_scale = std::stof(Stat->FirstChildElement("BattlePoints")->FirstChildElement("Scale")->GetText());
+
+		stats.attack = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.attack_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		stats.magic = std::stoi(Stat->FirstChildElement("Magic")->FirstChildElement("Base")->GetText());
+		stats.magic_scale = std::stof(Stat->FirstChildElement("Magic")->FirstChildElement("Scale")->GetText());
+
+		stats.defense = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.defense_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		speed = std::stof(Stat->FirstChildElement("Speed")->FirstChildElement("Base")->GetText());
+		stats.speed_scale = std::stof(Stat->FirstChildElement("Speed")->FirstChildElement("Scale")->GetText());
+
+		stats.avoision = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.avoision_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		level = std::stoi(root->FirstChildElement("Level")->GetText());
+		
+		std::string hurt = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
+		std::string attack = root->FirstChildElement("Sound")->FirstChildElement("Attack")->GetText();
+		std::string death = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
+
+		std::string animation = root->FirstChildElement("Animation")->GetText();
+
+		
+		if (type == "Ally")
+		{
+			//create a player
+			toon = CreateCombatPlayer(name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
+		}
+		else if(type == "Enemy")
+		{
+			
+			return nullptr;
+			
+		}
+		else if(type == "Guard")
+		{
+			return nullptr;
+		}
+		else
+		{
+			return nullptr;
+		}
+
+		
+
+	}
+	return toon;
+
+
+	
+}
+Enemy* GamePlayState::LoadEnemy(std::string _path)
+{
+
+	Enemy * toon = nullptr;
+	TiXmlDocument doc;
+	if (doc.LoadFile(_path.c_str(), TiXmlEncoding::TIXML_ENCODING_UTF8))
+	{
+		TiXmlElement * root = doc.RootElement();
+		//basic info
+		std::string name = root->FirstChildElement("Name")->GetText();
+		std::string element = root->FirstChildElement("Element")->GetText();
+		std::string type = root->FirstChildElement("Type")->GetText();
+		std::string random = root->FirstChildElement("IsRandom")->GetText();
+		//load in the Stats
+		Stats stats;
+		int HP;
+		int BP;
+		int level;
+		float speed;
+		TiXmlElement * Stat = root->FirstChildElement("Stats");
+		HP = std::stoi(Stat->FirstChildElement("HitPoints")->FirstChildElement("Base")->GetText());
+		stats.hp_scale = std::stof(Stat->FirstChildElement("HitPoints")->FirstChildElement("Scale")->GetText());
+
+		BP = std::stoi(Stat->FirstChildElement("BattlePoints")->FirstChildElement("Base")->GetText());
+		stats.bp_scale = std::stof(Stat->FirstChildElement("BattlePoints")->FirstChildElement("Scale")->GetText());
+
+		stats.attack = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.attack_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		stats.magic = std::stoi(Stat->FirstChildElement("Magic")->FirstChildElement("Base")->GetText());
+		stats.magic_scale = std::stof(Stat->FirstChildElement("Magic")->FirstChildElement("Scale")->GetText());
+
+		stats.defense = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.defense_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		speed = std::stof(Stat->FirstChildElement("Speed")->FirstChildElement("Base")->GetText());
+		stats.speed_scale = std::stof(Stat->FirstChildElement("Speed")->FirstChildElement("Scale")->GetText());
+
+		stats.avoision = std::stoi(Stat->FirstChildElement("Attack")->FirstChildElement("Base")->GetText());
+		stats.avoision_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
+
+		level = std::stoi(root->FirstChildElement("Level")->GetText());
+
+		std::string hurt = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
+		std::string attack = root->FirstChildElement("Attack")->FirstChildElement("Attack")->GetText();
+		std::string death = root->FirstChildElement("Death")->FirstChildElement("Death")->GetText();
+
+		std::string animation = root->FirstChildElement("Animation")->GetText();
+
+
+		if (type == "Ally")
+		{
+
+			return nullptr;
+		}
+		else if (type == "Enemy")
+		{
+			//create a enemy
+			toon = CreateCommonEnemy(name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
+
+		}
+		else if (type == "Guard")
+		{
+			return nullptr;
+		}
+		else
+		{
+			return nullptr;
+		}
+
+	}
+	return toon;
 }
