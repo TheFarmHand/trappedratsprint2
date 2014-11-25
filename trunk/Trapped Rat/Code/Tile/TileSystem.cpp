@@ -125,9 +125,9 @@ SGD::Size TileSystem::GetTileSize()
 
 int TileSystem::GetLayerWidth()
 	{
-	return layers.GetLayerWidth;
+	return layers.GetLayerWidth();
 	}
 int TileSystem::GetLayerHeight()
 	{
-	return layers.GetLayerHeight;
+	return layers.GetLayerHeight();
 	}
