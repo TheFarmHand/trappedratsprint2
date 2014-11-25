@@ -3,13 +3,13 @@
 
 Character::Character()
 {
-	
+
 }
 
 
 Character::~Character()
 {
-	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
+	for ( auto iter = effects.begin(); iter != effects.end(); iter++ )
 	{
 		delete ( *iter );
 	}
@@ -38,17 +38,17 @@ void Character::UseAbility()
 
 void Character::TakeDamage( int dmg, Character* attacker )	// pointer is now the person hitting you
 {
-	HP-=dmg;
+	HP -= dmg;
 	if ( HP <= 0 )
 	{
 		HP = 0;
 		alive = false;
 	}
 	if ( HP > MaxHP )
-		{
+	{
 		HP = MaxHP;
-		}
-	
+	}
+
 }
 void Character::React()
 {
@@ -91,6 +91,11 @@ Ability* Character::GetAbility( int index )
 int Character::GetOrderPosition()
 {
 	return order;
+}
+
+ETYPE Character::GetEType()
+{
+	return element;
 }
 
 std::list<StatusEffect*>& Character::GetEffects()
@@ -155,13 +160,13 @@ void Character::StatusTick()
 // Happens at the beginning of a characters turn
 // Applies 1 tick of every "ticking" status effect on the player
 {
-	for(auto iter = effects.begin(); iter != effects.end(); iter++)
+	for ( auto iter = effects.begin(); iter != effects.end(); iter++ )
 	{
-		(*iter)->Turntick();
+		( *iter )->Turntick();
 	}
 }
 
-void Character::AddStatus(StatusEffect *status )
+void Character::AddStatus( StatusEffect *status )
 {
-	effects.push_back(status);
+	effects.push_back( status );
 }

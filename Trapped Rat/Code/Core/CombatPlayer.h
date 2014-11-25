@@ -20,6 +20,8 @@ public:
 	void virtual Attack( Character* owner, Character * target );
 	void UseItem(Character * target, Items item);
 
+	
+
 	bool GetActive();
 	void SetActive( bool a );
 	void Reset();
@@ -27,6 +29,8 @@ public:
 	void SetAnimations(AnimationSystem*);
 	AnimationSystem* GetAnimations();
 	bool TestAbility;
+
+
 private:
 	bool active;
 	int myTarget = 0;

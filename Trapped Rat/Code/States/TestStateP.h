@@ -2,12 +2,14 @@
 
 #include "GameState.h"
 #include "../Particle/ParticleManager.h"
+#include "../Core/StatusEffectManager.h"
+
 
 class TestStateP : public GameState
 {
 public:
 
-	static TestStateP* GetInstance();
+	static TestStateP* GetInstance( );
 	void virtual Enter( );
 	void virtual Update( float dt );
 	void virtual const Render( );
@@ -20,6 +22,7 @@ private:
 	virtual ~TestStateP( ) = default;
 
 	ParticleManager* myParticles;
+	StatusEffectManager* mySEM;
 	
 };
 

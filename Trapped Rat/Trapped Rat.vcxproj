@@ -108,6 +108,7 @@
     <ClCompile Include="Code\Core\SelectableObject.cpp" />
     <ClCompile Include="Code\Core\Stats.cpp" />
     <ClCompile Include="Code\Core\StatusEffect.cpp" />
+    <ClCompile Include="Code\Core\StatusEffectManager.cpp" />
     <ClCompile Include="Code\Core\TurnManager.cpp" />
     <ClCompile Include="Code\Core\WorldObject.cpp" />
     <ClCompile Include="Code\Dialogue\Dialogue.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Code\Core\SelectableObject.h" />
     <ClInclude Include="Code\Core\Stats.h" />
     <ClInclude Include="Code\Core\StatusEffect.h" />
+    <ClInclude Include="Code\Core\StatusEffectManager.h" />
     <ClInclude Include="Code\Core\TurnManager.h" />
     <ClInclude Include="Code\Core\WorldObject.h" />
     <ClInclude Include="Code\Dialogue\Dialogue.h" />
