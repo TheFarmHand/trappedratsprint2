@@ -56,202 +56,36 @@ void CombatPlayer::Update( float dt )
 
 		if ( states == 0 )
 			{
-			if ( pInput->IsKeyPressed( SGD::Key::Up ) )
-				{
-				SetSelection( 0 );
-				hudSelection = 0;
-
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Right ) )
-				{
-				SetSelection( 2 );
-				hudSelection = 2;
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Left ) )
-				{
-				SetSelection( 1 );
-				hudSelection = 1;
-
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Down ) )
-				{
-				SetSelection( 3 );
-				hudSelection = 3;
-
-				}
-
-			if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
-				{
-				switch ( hudSelection )
-					{
-					case 0:
-						help->UpdateSelection( 3 );
-						states = 1;
-						//if ( abilityList[i].GetHealing() )
-						//	{
-						//	help->UpdateSelection( 4 );
-						//	mySelection = player;
-						//	}
-						//else
-							//{
-							for ( unsigned int i = 0; i < pTurn->GetEnemies().size(); ++i )
-								{
-								if ( pTurn->GetEnemies()[i]->isAlive() )
-									{
-									myTarget = i;
-									break;
-									}
-								}
-							mySelection = enemy;
-							//}
-						break;
-					case 1:
-						help->UpdateSelection( 2 );
-						states = 2;
-						mySelection = player;	// ***************** HACKED CODE FOR USER STORY; BYPASSING ITEM SELECTION *****************
-						help->UpdateSelection( 4 );		// *********  ALSO HACKED ATM ********** //
-						break;
-					case 2:
-						help->UpdateSelection( 1 );
-						states = 3;
-						break;
-					case 3:
-						help->UpdateSelection( 6 );
-						states = 4;
-						mySelection = self;
-						break;
-					}
-				return;
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
-				{
-				states = 0;
-				}
+			HomeUpdate(dt);
 			}
 
-		if ( states == 1 )		// Attacking; Target selection is "enemy"
+		else if ( states == 1 )		// Attacking; Target selection is "enemy"
 			{
-			//
-			//if (TestAbility && tester.GetHealing())
-			//	TargetUnit( pTurn->GetAllies() );
-			//else
-				TargetUnit( pTurn->GetEnemies() );
-			
-
-			if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
-				{
-				// Here is where we decide Attack, or Ability etc
-				//if ( TestAbility )
-				//	{
-				//	if ( tester.GetOffensive() )
-				//		{
-				//		//TargetUnit( pTurn->GetEnemies() );
-				//		tester.CalculateFormula( this, pTurn->GetEnemies()[myTarget] );
-				//		tester.CastAbility( this, pTurn->GetEnemies()[myTarget] );
-				//		tester.SetHealing( true );
-				//		tester.SetOffensive( false );
-				//		}
-				//	else if ( tester.GetHealing() )
-				//		{
-				//		//TargetUnit( pTurn->GetAllies() );
-				//		tester.CalculateFormula( this, pTurn->GetAllies()[myTarget] );
-				//		tester.CastAbility( this, pTurn->GetAllies()[myTarget] );
-				//		tester.SetHealing( false );
-				//		tester.SetOffensive( true );
-				//		}
-				//	}
-				//else
-				//	{
-					
-					Attack( this, pTurn->GetEnemies()[myTarget] );
-				//	}
-				myTarget = 0;
-				progress = 0.0f;
-				TurnManager::GetInstance()->setProgressFullReached( false );
-				hudSelection = 0;
-				TurnManager::GetInstance()->setTimeStop( false );
-				TurnManager::GetInstance()->setTurnPause( true );
-				help->UpdateSelection( 5 );
-				states = 0;
-				mySelection = none;
-				SetSelection( 0 );
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
-				{
-				states = 0;
-				help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-				mySelection = none;
-				SetSelection( 0 );
-				}
+			AttackUpdate(dt);
 			}
 
 		else if ( states == 2 ) // Item Selection
 			{
-			// **************** USER STORY COMPLETION FOR HEALING **************** //
-			// **************** REPLACE WITH ITEM SELECTION CODE  **************** //
-			// This code can be repurposed for actually using a healing item
-			// Factored it out into a function already, to cut back on work later
-
-			// Do player selection
-
-			TargetUnit( pTurn->GetAllies() );		// this is pretty sweet
-			if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
-				{
-				pTurn->HealTarget( pTurn->GetAllies()[myTarget], 15 );
-
-				// These three lines could be factored out to an EndTurn type function
-				progress = 0.0f;
-				mySelection = none;
-				states = 0;
-				pTurn->setTimeStop( false );
-				hudSelection = 0;
-				help->UpdateSelection( 5 );
-				SetSelection( 0 );
-				}
-			else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
-				{
-				states = 0;
-				help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-				mySelection = none;
-				hudSelection = 0;
-				SetSelection( 0 );
-				}
+			ItemsUpdate(dt);
 			}
-		else if ( states == 3 )
+		else if ( states == 3 )// Ability Selection
 			{
-			if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
-				{
-				states = 0;
-				help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-				mySelection = none;
-				hudSelection = 0;
-				SetSelection( 0 );
-				}
+			AbilityUpdate(dt);
 			}
-		else if ( states == 4 )
+		else if ( states == 4 ) // Run update
 			{
-			if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
-				{
-				states = 0;
-				help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-				mySelection = none;
-				hudSelection = 0;
-				SetSelection( 0 );
-				}
-
-
-
-
-			//if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
-			//{
-			//	// Here is where we decide Attack, or Ability etc
-			//	Attack( pTurn->GetEnemies()[ myTarget ] );
-			//	myTarget = 0;
-			//	progress = 0.0f;
-			//	TurnManager::GetInstance()->setTimeStop( false );
-			//}
+			RunUpdate(dt);
 			}
+		else if (states == 5)//Defensive Ability update
+		{
+			AllySelectUpdate(dt);
 		}
+		else if (states == 6) // Offensive ability update
+		{
+			EnemySelectUpdate(dt);
+		}
+		}
+		
 
 	}
 void CombatPlayer::UpdateAnimation( float dt )
@@ -275,6 +109,8 @@ void CombatPlayer::Render()
 
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 301, 451 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 300, 450 + ( order*50.0f ), { 255, 0, 0 }, 1.6f );
+
+
 	//if ( TestAbility && progress >= 100.0f )
 	//	tester.Render();
 	std::string numbers = std::to_string( HP ) + "/" + std::to_string( MaxHP ) + " HP";
@@ -301,6 +137,26 @@ void CombatPlayer::Render()
 			pdraw.y -= pTurn->GetAllies()[myTarget]->GetSize().height / 2;
 			pGraphics->DrawTexture( pTurn->GetArrow(), pdraw );
 			}
+		else if (mySelection == allEnemy)
+		{
+			for (size_t i = 0; i < pTurn->GetEnemies().size(); i++)
+			{
+				pdraw = pTurn->GetEnemies()[i]->GetPosition();
+				pdraw.x -= pTurn->GetEnemies()[i]->GetSize().width + 20;
+				pdraw.y -= pTurn->GetEnemies()[i]->GetSize().height / 2;
+				pGraphics->DrawTexture(pTurn->GetArrow(), pdraw);
+			}
+		}
+		else if (mySelection == allAlly)
+		{
+			for (size_t i = 0; i < pTurn->GetAllies().size(); i++)
+			{
+				pdraw = pTurn->GetAllies()[i]->GetPosition();
+				pdraw.x += pTurn->GetAllies()[i]->GetSize().width + 20;
+				pdraw.y -= pTurn->GetAllies()[i]->GetSize().height / 2;
+				pGraphics->DrawTexture(pTurn->GetArrow(), pdraw);
+			}
+		}
 
 		}
 
@@ -438,4 +294,348 @@ void CombatPlayer::Reset()
 	{
 	states = 0;
 	mySelection = none;
+	myTarget = 0;
+	hudSelection = 0;
 	}
+void CombatPlayer::HomeUpdate(float dt)
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	if (states == 0)
+	{
+		if (pInput->IsKeyPressed(SGD::Key::Up))
+		{
+			SetSelection(0);
+			hudSelection = 0;
+
+		}
+		else if (pInput->IsKeyPressed(SGD::Key::Right))
+		{
+			SetSelection(2);
+			hudSelection = 2;
+		}
+		else if (pInput->IsKeyPressed(SGD::Key::Left))
+		{
+			SetSelection(1);
+			hudSelection = 1;
+
+		}
+		else if (pInput->IsKeyPressed(SGD::Key::Down))
+		{
+			SetSelection(3);
+			hudSelection = 3;
+		}
+
+		if (pInput->IsKeyPressed(SGD::Key::Enter))
+		{
+			switch (hudSelection)
+			{
+			case 0: // Attack
+				help->UpdateSelection(3);
+				states = 1;
+				for (unsigned int i = 0; i < pTurn->GetEnemies().size(); ++i)
+				{
+					if (pTurn->GetEnemies()[i]->isAlive())
+					{
+						myTarget = i;
+						break;
+					}
+				}
+				mySelection = enemy;
+				break;
+			case 1: // Item
+				myTarget = 0;
+				help->UpdateSelection(2);
+				states = 2;
+				mySelection = player;	// ***************** HACKED CODE FOR USER STORY; BYPASSING ITEM SELECTION *****************
+				help->UpdateSelection(4);		// *********  ALSO HACKED ATM ********** //
+				break;
+			case 2: // Ability
+				help->UpdateSelection(1);
+				states = 3;
+				break;
+			case 3: // RUN
+				help->UpdateSelection(6);
+				states = 4;
+				mySelection = self;
+				break;
+			}
+			return;
+		}
+		else if (pInput->IsKeyPressed(SGD::Key::Escape))
+		{
+			states = 0;
+			myTarget = 0;
+		}
+	}
+}
+void CombatPlayer::AttackUpdate(float dt)
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+	//
+	//if (TestAbility && tester.GetHealing())
+	//	TargetUnit( pTurn->GetAllies() );
+	//else
+	TargetUnit(pTurn->GetEnemies());
+
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+	{
+		// Here is where we decide Attack, or Ability etc
+		//if ( TestAbility )
+		//	{
+		//	if ( tester.GetOffensive() )
+		//		{
+		//		//TargetUnit( pTurn->GetEnemies() );
+		//		tester.CalculateFormula( this, pTurn->GetEnemies()[myTarget] );
+		//		tester.CastAbility( this, pTurn->GetEnemies()[myTarget] );
+		//		tester.SetHealing( true );
+		//		tester.SetOffensive( false );
+		//		}
+		//	else if ( tester.GetHealing() )
+		//		{
+		//		//TargetUnit( pTurn->GetAllies() );
+		//		tester.CalculateFormula( this, pTurn->GetAllies()[myTarget] );
+		//		tester.CastAbility( this, pTurn->GetAllies()[myTarget] );
+		//		tester.SetHealing( false );
+		//		tester.SetOffensive( true );
+		//		}
+		//	}
+		//else
+		//	{
+
+		Attack(this, pTurn->GetEnemies()[myTarget]);
+		//	}
+		myTarget = 0;
+		progress = 0.0f;
+		TurnManager::GetInstance()->setProgressFullReached(false);
+		hudSelection = 0;
+		TurnManager::GetInstance()->setTimeStop(false);
+		TurnManager::GetInstance()->setTurnPause(true);
+		help->UpdateSelection(5);
+		states = 0;
+		mySelection = none;
+		SetSelection(0);
+	}
+	else if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		SetSelection(0);
+	}
+}
+void CombatPlayer::ItemsUpdate(float dt)
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	// **************** USER STORY COMPLETION FOR HEALING **************** //
+	// **************** REPLACE WITH ITEM SELECTION CODE  **************** //
+	// This code can be repurposed for actually using a healing item
+	// Factored it out into a function already, to cut back on work later
+
+	// Do player selection
+
+	TargetUnit(pTurn->GetAllies());		// this is pretty sweet
+	if (pInput->IsKeyPressed(SGD::Key::Enter))
+	{
+		pTurn->HealTarget(pTurn->GetAllies()[myTarget], 15);
+
+		// These three lines could be factored out to an EndTurn type function
+		progress = 0.0f;
+		mySelection = none;
+		states = 0;
+		pTurn->setTimeStop(false);
+		hudSelection = 0;
+		help->UpdateSelection(5);
+		SetSelection(0);
+	}
+	else if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		hudSelection = 0;
+		SetSelection(0);
+	}
+}
+void CombatPlayer::AbilityUpdate(float dt)
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	for (size_t i = 0; i < abilityList.size(); i++)
+	{
+		menu[i]->SetAbility(abilityList[i]);
+		menu[i]->SetObjectType(1);
+		if (i > 3)
+			break;
+	}
+	
+
+	if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		hudSelection = 0;
+		SetSelection(0);
+	}
+	else if (pInput->IsKeyPressed(SGD::Key::Enter))
+	{
+		if (menu[hudSelection]->GetAbility()->GetBPCost() <= curBP)
+		{
+			if (menu[hudSelection]->GetAbility()->GetOffensive())//Enemy attack
+			{
+				if (menu[hudSelection]->GetAbility()->GetAOE()) // AOE attack
+				{
+					mySelection = allEnemy;
+					myTarget = 0;
+				}
+				else
+				{
+					mySelection = enemy;
+					myTarget = 0;
+				}
+				states = 6;
+			}
+			else // Ally Ability
+			{
+				if (menu[hudSelection]->GetAbility()->GetAOE()) // AOE attack
+				{
+					mySelection = allAlly;
+					myTarget = 0;
+				}
+				else
+				{
+					mySelection = player;
+					myTarget = 0;
+				}
+				states = 5;
+			}
+		}
+	}
+}
+void CombatPlayer::RunUpdate(float dt)
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		hudSelection = 0;
+		SetSelection(0);
+	}
+
+
+
+
+	//if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
+	//{
+	//	// Here is where we decide Attack, or Ability etc
+	//	Attack( pTurn->GetEnemies()[ myTarget ] );
+	//	myTarget = 0;
+	//	progress = 0.0f;
+	//	TurnManager::GetInstance()->setTimeStop( false );
+	//}
+}
+void CombatPlayer::AllySelectUpdate(float dt) // Defensive ability use
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		hudSelection = 0;
+		SetSelection(0);
+	}
+	if (pInput->IsKeyPressed(SGD::Key::Enter))
+	{
+		//Input Ability Use Here
+		if (mySelection == allAlly)
+		{
+			for (size_t i = 0; i < pTurn->GetAllies().size(); i++)
+			{
+				if (pTurn->GetAllies()[i]->isAlive())
+					menu[hudSelection]->GetAbility()->CastAbility(this, pTurn->GetAllies()[i]);
+			}
+		}
+		else if (mySelection == player)
+		{
+			menu[hudSelection]->GetAbility()->CastAbility(this, pTurn->GetAllies()[myTarget]);
+		}
+		myTarget = 0;
+		progress = 0.0f;
+		TurnManager::GetInstance()->setProgressFullReached(false);
+		hudSelection = 0;
+		TurnManager::GetInstance()->setTimeStop(false);
+		TurnManager::GetInstance()->setTurnPause(true);
+		help->UpdateSelection(5);
+		states = 0;
+		mySelection = none;
+		SetSelection(0);
+	}
+}
+void CombatPlayer::EnemySelectUpdate(float dt) // Offensive Ability use
+{
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	GamePlayState *game = GamePlayState::GetInstance();
+	HelpText *help = game->GetHelpText();
+
+	if (pInput->IsKeyPressed(SGD::Key::Escape))
+	{
+		states = 0;
+		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+		mySelection = none;
+		hudSelection = 0;
+		SetSelection(0);
+	}
+	if (pInput->IsKeyPressed(SGD::Key::Enter))
+	{
+		//Input Ability Use Here
+		if (mySelection == allEnemy)
+		{
+			for (size_t i = 0; i < pTurn->GetEnemies().size(); i++)
+			{
+				if (pTurn->GetEnemies()[i]->isAlive())
+					menu[hudSelection]->GetAbility()->CastAbility(this, pTurn->GetEnemies()[i]);
+			}
+		}
+		else if (mySelection == enemy)
+		{
+			menu[hudSelection]->GetAbility()->CastAbility(this, pTurn->GetEnemies()[myTarget]);
+		}
+		myTarget = 0;
+		progress = 0.0f;
+		TurnManager::GetInstance()->setProgressFullReached(false);
+		hudSelection = 0;
+		TurnManager::GetInstance()->setTimeStop(false);
+		TurnManager::GetInstance()->setTurnPause(true);
+		help->UpdateSelection(5);
+		states = 0;
+		mySelection = none;
+		SetSelection(0);
+	}
+}

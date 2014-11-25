@@ -26,7 +26,7 @@ protected:
 	SGD::HAudio hurt = SGD::INVALID_HANDLE;
 	SGD::HAudio death = SGD::INVALID_HANDLE;
 	std::list<StatusEffect*> effects;
-	Ability* abilities[4];
+	std::vector<Ability*> abilityList;
 	bool alive = true;
 	
 	
