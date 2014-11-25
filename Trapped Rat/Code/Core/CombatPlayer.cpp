@@ -356,6 +356,15 @@ void CombatPlayer::HomeUpdate(float dt)
 			case 2: // Ability
 				help->UpdateSelection(1);
 				states = 3;
+				for (size_t i = 0; i < abilityList.size(); i++)
+				{
+					menu[i]->SetAbility(abilityList[i]);
+					menu[i]->SetObjectType(1);
+					menu[i]->SetString(abilityList[i]->GetAbilityName());
+					if (i > 3)
+						break;
+				}
+
 				break;
 			case 3: // RUN
 				help->UpdateSelection(6);
@@ -475,15 +484,24 @@ void CombatPlayer::AbilityUpdate(float dt)
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	for (size_t i = 0; i < abilityList.size(); i++)
+
+	if (pInput->IsKeyPressed(SGD::Key::Up))
 	{
-		menu[i]->SetAbility(abilityList[i]);
-		menu[i]->SetObjectType(1);
-		menu[i]->SetString(abilityList[i]->GetAbilityName());
-		if (i > 3)
-			break;
+		hudSelection = 0;
+
 	}
-	
+	else if (pInput->IsKeyPressed(SGD::Key::Right))
+	{
+		hudSelection = 2;
+	}
+	else if (pInput->IsKeyPressed(SGD::Key::Left))
+	{
+		hudSelection = 1;
+	}
+	else if (pInput->IsKeyPressed(SGD::Key::Down))
+	{
+		hudSelection = 3;
+	}
 
 	if (pInput->IsKeyPressed(SGD::Key::Escape))
 	{
@@ -527,6 +545,13 @@ void CombatPlayer::AbilityUpdate(float dt)
 			}
 		}
 	}
+	for (unsigned int i = 0; i < menu.size(); i++)
+	{
+		if (i == hudSelection)
+			GamePlayState::GetInstance()->GetSelectableObjects()[i]->SetSelected(true);
+		else
+			GamePlayState::GetInstance()->GetSelectableObjects()[i]->SetSelected(false);
+	}
 }
 void CombatPlayer::RunUpdate(float dt)
 {
@@ -562,6 +587,11 @@ void CombatPlayer::AllySelectUpdate(float dt) // Defensive ability use
 	TurnManager *pTurn = TurnManager::GetInstance();
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
+
+	if (mySelection == player)
+	{
+		TargetUnit(pTurn->GetAllies());
+	}
 
 	if (pInput->IsKeyPressed(SGD::Key::Escape))
 	{
@@ -604,6 +634,11 @@ void CombatPlayer::EnemySelectUpdate(float dt) // Offensive Ability use
 	TurnManager *pTurn = TurnManager::GetInstance();
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
+
+	if (mySelection == enemy)
+	{
+		TargetUnit(pTurn->GetEnemies());
+	}
 
 	if (pInput->IsKeyPressed(SGD::Key::Escape))
 	{
