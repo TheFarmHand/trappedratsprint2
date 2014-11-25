@@ -10,7 +10,7 @@
 
 Emitter::Emitter()
 {
-	
+
 
 }
 
@@ -41,8 +41,8 @@ void Emitter::Update( float dt )
 
 		else
 		{
-			if(myLiveList.size() == 0)
-				active = false;
+			if ( myLiveList.size() == 0 )
+				active = false;					// Trigger to free Emitter
 		}
 	}
 
@@ -63,10 +63,11 @@ void Emitter::Update( float dt )
 
 			else
 			{
-				// Debug else statement for breakpoints; nothing real happens down here
-				tempit;
-				int x;
-				x = 5;
+				// This is where spawn particle code goes for Looping; I'm so dumb.
+				Particle* temp = new Particle( );
+				SetParticle( temp );
+
+				myLiveList.push_back( temp );
 			}
 		}
 	}
@@ -165,7 +166,7 @@ void Emitter::Render()
 
 	// Render Live
 
-	for ( std::list<Particle*>::iterator iter = myLiveList.begin(); iter != myLiveList.end(); iter++ )
+	for ( std::list<Particle*>::reverse_iterator iter = myLiveList.rbegin(); iter != myLiveList.rend(); iter++ )
 	{
 		pGraphics->DrawTexture( myFly.GetImage(),
 		{ ( *iter )->GetPos().x, ( *iter )->GetPos().y },
@@ -219,7 +220,7 @@ void Emitter::SetParticle( Particle* &temp )
 
 	else
 	{
-		range.x = (float)( rand() % ( (int)myDirection.y ) );
+		range.x = (float)( rand() % ( (int)myDirection.x ) );
 		if ( myDirection.x < 0 ) range.x *= -1;
 	}
 

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <PEffect>
   <FlyWeight>
-    <MinLife>1</MinLife>
-    <MaxLife>1</MaxLife>
-    <ScaleStart>1</ScaleStart>
-    <ScaleEnd>1</ScaleEnd>
-    <VelocityStart>10</VelocityStart>
-    <VelocityEnd>20</VelocityEnd>
+    <MinLife>0.5</MinLife>
+    <MaxLife>1.0</MaxLife>
+    <ScaleStart>0.50</ScaleStart>
+    <ScaleEnd>0.8</ScaleEnd>
+    <VelocityStart>15</VelocityStart>
+    <VelocityEnd>25</VelocityEnd>
     <RotationStart>0</RotationStart>
     <RotationEnd>0</RotationEnd>
     <ROffsetX>8</ROffsetX>
@@ -28,9 +28,9 @@
     <MinParticles>1</MinParticles>
     <MaxParticles>20</MaxParticles>
     <Looping>False</Looping>
-    <PositionX>175</PositionX>
-    <PositionY>266</PositionY>
-    <DirectionX>5</DirectionX>
+    <PositionX>256</PositionX>
+    <PositionY>251</PositionY>
+    <DirectionX>9</DirectionX>
     <DirectionY>-5</DirectionY>
     <RangeX>False</RangeX>
     <RangeY>False</RangeY>

@@ -97,11 +97,7 @@ bool ParticleManager::LoadEmitter(std::string filename, std::string particlename
 		by = true;
 	else by = false;
 
-	temp.SetDir(bx,by);
-
-
-	// TEST CASE ONLY; NEEDS PROPPER NAME ADDITION (fixing now)
-	
+	temp.SetDir(bx,by);	
 	
 	LoadedEmitters[particlename] = temp;
 	return true;
@@ -121,6 +117,7 @@ bool ParticleManager::UnloadEmitter(std::string emitter)
 int ParticleManager::CreateEmitter(std::string EmitterID)
 // Creates a new Emitter, copied from LoadedEmitters at index EmitterID
 // Adds it to ActiveEmitters List
+// Returns the new size of ActiveEmitters
 {
 	Emitter* temp = new Emitter();
 	*temp = LoadedEmitters[EmitterID];
@@ -129,7 +126,8 @@ int ParticleManager::CreateEmitter(std::string EmitterID)
 
 	//delete temp;
 
-	return -1;
+	// Return # of active emitters (this could be relevant I guess?)
+	return ActiveEmitters.size();
 }
 
 bool ParticleManager::FreeEmitter(int EmitterID)
