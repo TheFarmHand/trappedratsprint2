@@ -25,12 +25,10 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	//Safe to add code here
 
 	// Particle Manager Initialization fo Turn Manager (Kinda hacky)
-	SetupFireFang();
 	//Change to singleton
 	pPartMan = new ParticleManager();
 	pPartMan->LoadEmitter( "../Trapped Rat/Assets/Scripts/bloodparticle.xml", "takedamage" );
 	}
-
 void TurnManager::Update( float dt )
 	{
 	//*Should be checked first each update, try not to add code here or before
@@ -48,14 +46,22 @@ void TurnManager::Update( float dt )
 		}
 	//*
 
+	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
+	//can modify order if needed, should not break
 	CombatUpdate(dt);
 	AnimationUpdate(dt);
 	ParticleUpdate( dt );
+	//*
 	
 	pPartMan->Update( dt );
 	}
 void TurnManager::Render()
 	{
+	//*Anything added below will render underneath of combat character
+
+	//*
+
+	//*Do not insert any code here
 	for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
 		{
 		AlliedUnits[i]->Render();
@@ -64,13 +70,11 @@ void TurnManager::Render()
 		{
 		EnemyUnits[i]->Render();
 		}
-	if ( timeStop )
-		{
-		GameData::GetInstance()->GetFont()->DrawString( "Current Turn", 350.0f, 450.0f, SGD::Color( 255, 255, 255, 255 ) );
-		GameData::GetInstance()->GetFont()->DrawString( AllCombatUnits[0]->GetName().c_str(), 375.0f, 500.0f, SGD::Color( 255, 255, 255, 255 ) );
-		}
+	//*
 
+	//*Anything added below will render on top of combat characters
 	pPartMan->Render();
+	//*
 	}
 void TurnManager::setTimeStop( bool stop )
 	{
@@ -109,7 +113,6 @@ void TurnManager::Terminate()
 		pPartMan->UnloadEmitter( "takedamage" );
 		pPartMan->ClearAll();
 		delete pPartMan; pPartMan = nullptr;
-		SGD::GraphicsManager::GetInstance()->UnloadTexture( FireFang.GetIcon() );
 		}
 	}
 void TurnManager::HealTarget( Character* target, int value )
@@ -118,18 +121,11 @@ void TurnManager::HealTarget( Character* target, int value )
 	}
 void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	{
-
 	target->TakeDamage( value, owner );
 	// This call places the emitter at the proper location
 	pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
 	// This call creates a new instance of the emitter
 	pPartMan->CreateEmitter( "takedamage" );
-
-	// Blarrrrr
-	StatusEffect *tempstat = new StatusEffect;
-	*tempstat = FireFang;
-	tempstat->SetOwner( target );
-	target->AddStatus( tempstat );
 	}
 bool sortByProgress( Character* a, Character* b )
 	{
@@ -239,14 +235,3 @@ void TurnManager::ParticleUpdate( float dt )
 
 	}
 // Stuff to be deleted...used only for testing stories
-// ** HACKY STUFF AGAIN ** //
-void TurnManager::SetupFireFang()
-	{
-	FireFang.SetName( "Burn" );
-	FireFang.SetOwner( AlliedUnits[0] );
-	FireFang.SetElement( Fire );
-	FireFang.SetTick( 2 );
-	FireFang.SetTickDmg( 15 );
-	FireFang.SetIcon( SGD::GraphicsManager::GetInstance()->LoadTexture(
-		"../Trapped Rat/Assets/Textures/TestParticleRed.png" ) );
-	}
