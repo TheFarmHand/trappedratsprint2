@@ -143,11 +143,7 @@ void GameData::Terminate()
 	OManager->Clean();
 	delete OManager;
 	//delete Party
-	for (size_t i = 0; i < m_vCombatParty.size(); i++)
-	{
-		delete m_vCombatParty[i];
-	}
-	m_vCombatParty.clear();
+	
 
 
 	//terminate all wrappers
@@ -229,29 +225,8 @@ void GameData::UpdateCamera(BaseObject* obj)
 	//CameraPos = SGD::Point(pos.x - screenwidth / 2, pos.y - screenheight / 2);
 	CameraPos = SGD::Point(xpos, ypos);
 }
-CombatPlayer* GameData::GetCombatParty(int _index)
-{
-	if (_index < (int)m_vCombatParty.size())
-		return m_vCombatParty[_index];
-	else
-	{
-		return nullptr;
-	}
-}
-void GameData::SetCombatParty(CombatPlayer* _cbplayer, int _index)
-{
 
-	//if (_index < (int)m_vCombatParty.size())
-	//	m_vCombatParty[_index] = _cbplayer;
-	//else
-	//{
-		m_vCombatParty.push_back(_cbplayer);
-	//}
-}
-std::vector<CombatPlayer*> GameData::GetCombatParty()
-{
-	return m_vCombatParty;
-}
+
 SGD::Point GameData::GetCamera()
 {
 	if (is_inCombat)
