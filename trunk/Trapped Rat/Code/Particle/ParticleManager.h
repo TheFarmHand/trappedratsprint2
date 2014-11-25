@@ -10,8 +10,8 @@
 class ParticleManager
 {
 public:
-	ParticleManager();
-	~ParticleManager();
+	static ParticleManager * GetInstance();
+	void Terminate();
 
 	bool LoadEmitter(std::string filename, std::string particlename);
 	bool UnloadEmitter(std::string emitter);
@@ -32,6 +32,12 @@ public:
 private:
 	std::map<std::string, Emitter> LoadedEmitters;
 	std::vector<Emitter*> ActiveEmitters;
+
+	// Quadilogy of Quandry
+	ParticleManager( ) = default;
+	~ParticleManager( ) = default;
+	ParticleManager(const ParticleManager&) = delete;
+	ParticleManager& operator=(const ParticleManager&) = delete;
 
 	// Helpers
 	void RenderEmitter( int EmitterID );

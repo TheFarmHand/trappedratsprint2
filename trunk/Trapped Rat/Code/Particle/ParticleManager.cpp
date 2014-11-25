@@ -4,16 +4,23 @@
 
 
 
-ParticleManager::ParticleManager()
-{
+//ParticleManager::ParticleManager()
+//{
+//
+//}
+//
+//
+//ParticleManager::~ParticleManager()
+//{
+//
+//}
 
+ParticleManager * ParticleManager::GetInstance()
+{
+	static ParticleManager data;
+	return &data;
 }
 
-
-ParticleManager::~ParticleManager()
-{
-
-}
 
 bool ParticleManager::LoadEmitter(std::string filename, std::string particlename)
 // Adds Emitter(s) found in filename to the LoadedEmitters List
@@ -107,9 +114,10 @@ bool ParticleManager::UnloadEmitter(std::string emitter)
 // Removes emitter from the LoadedEmitter Map
 {
 	if(LoadedEmitters.size() == 0) return true;
+
 	// Gotta get in there and make sure lists are deleted
-	LoadedEmitters[emitter].Cleanup();
-	LoadedEmitters[emitter].EmptyImage();
+	LoadedEmitters[ emitter ].EmptyImage( );
+	LoadedEmitters[ emitter ].Cleanup( );
 	LoadedEmitters.erase(emitter);
 	return true;
 }
@@ -126,8 +134,8 @@ int ParticleManager::CreateEmitter(std::string EmitterID)
 
 	//delete temp;
 
-	// Return # of active emitters (this could be relevant I guess?)
-	return ActiveEmitters.size();
+	
+	return -1;
 }
 
 bool ParticleManager::FreeEmitter(int EmitterID)
@@ -196,10 +204,8 @@ void ParticleManager::ClearAll()
 	
 	for(unsigned int i=0; i<ActiveEmitters.size(); i++)
 	{
-		
-		//ActiveEmitters[i]->Cleanup();
+		// Cleans up all dynamic memory associated with an emitter
 		FreeEmitter( i );
-		//delete ActiveEmitters[i];
 	}
 
 	ActiveEmitters.clear();
@@ -208,4 +214,10 @@ void ParticleManager::ClearAll()
 Emitter* ParticleManager::GetEmitter( std::string emitter_name )
 {
 	return &LoadedEmitters[emitter_name];
+}
+
+
+void ParticleManager::Terminate()
+{
+	ClearAll();
 }
