@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="2">
+  <Animation>
+    <Image numFrames="2">
+      <Path>ratTESTDONOTCHANGE.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>UP</Name>
+    <NextName></NextName>
+    <Frame delay="0.50">
+      <AnchorPoint x="148" y="15" />
+      <DrawRect left="137" top="1" right="158" bottom="26" />
+      <CollisionRect left="137" top="1" right="158" bottom="26" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.5">
+      <AnchorPoint x="169" y="15" />
+      <DrawRect left="159" top="1" right="178" bottom="26" />
+      <CollisionRect left="159" top="1" right="178" bottom="26" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="2">
+      <Path>ratTESTDONOTCHANGE.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Down</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.5">
+      <AnchorPoint x="148" y="38" />
+      <DrawRect left="139" top="27" right="159" bottom="52" />
+      <CollisionRect left="139" top="27" right="159" bottom="52" />
+      <Event>TESTEVENT</Event>
+    </Frame>
+    <Frame delay="0.5">
+      <AnchorPoint x="168" y="37" />
+      <DrawRect left="159" top="27" right="178" bottom="52" />
+      <CollisionRect left="159" top="27" right="178" bottom="52" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F8EE8D2C-48F9-44D2-AE6E-6970446CA7A2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TrappedRat</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Animation\Animation.cpp" />
+    <ClCompile Include="Code\Animation\AnimationSystem.cpp" />
+    <ClCompile Include="Code\Animation\AnimTestBase.cpp" />
+    <ClCompile Include="Code\Animation\AnimTestObject.cpp" />
+    <ClCompile Include="Code\Animation\AnimTestState.cpp" />
+    <ClCompile Include="Code\Animation\Frame.cpp" />
+    <ClCompile Include="Code\Core\Ability.cpp" />
+    <ClCompile Include="Code\Core\AttributeStatus.cpp" />
+    <ClCompile Include="Code\Core\Bars.cpp" />
+    <ClCompile Include="Code\Core\BaseObject.cpp" />
+    <ClCompile Include="Code\Core\Boss.cpp" />
+    <ClCompile Include="Code\Core\Character.cpp" />
+    <ClCompile Include="Code\Core\CombatPlayer.cpp" />
+    <ClCompile Include="Code\Core\CombatSelection.cpp" />
+    <ClCompile Include="Code\Core\CommonEnemy.cpp" />
+    <ClCompile Include="Code\Core\DamAbility.cpp" />
+    <ClCompile Include="Code\Core\DOTStatus.cpp" />
+    <ClCompile Include="Code\Core\Enemy.cpp" />
+    <ClCompile Include="Code\Core\GameData.cpp" />
+    <ClCompile Include="Code\Core\Guard.cpp" />
+    <ClCompile Include="Code\Core\HelpText.cpp" />
+    <ClCompile Include="Code\Core\HUDItem.cpp" />
+    <ClCompile Include="Code\Core\Items.cpp" />
+    <ClCompile Include="Code\Core\Level.cpp" />
+    <ClCompile Include="Code\Core\MiniBoss.cpp" />
+    <ClCompile Include="Code\Core\Numbers.cpp" />
+    <ClCompile Include="Code\Core\ObjectManager.cpp" />
+    <ClCompile Include="Code\Core\OtherAbility.cpp" />
+    <ClCompile Include="Code\Core\OtherStatus.cpp" />
+    <ClCompile Include="Code\Core\OwnedHUD.cpp" />
+    <ClCompile Include="Code\Core\Player.cpp" />
+    <ClCompile Include="Code\Core\SelectableObject.cpp" />
+    <ClCompile Include="Code\Core\Stats.cpp" />
+    <ClCompile Include="Code\Core\StatusEffect.cpp" />
+    <ClCompile Include="Code\Core\TurnManager.cpp" />
+    <ClCompile Include="Code\Core\WorldObject.cpp" />
+    <ClCompile Include="Code\Dialogue\Dialogue.cpp" />
+    <ClCompile Include="Code\Font\Font.cpp" />
+    <ClCompile Include="Code\Font\FontTestState.cpp" />
+    <ClCompile Include="Code\Messages\TestMessage.cpp" />
+    <ClCompile Include="Code\Particle\Emitter.cpp" />
+    <ClCompile Include="Code\Particle\Particle.cpp" />
+    <ClCompile Include="Code\Particle\ParticleFlyweight.cpp" />
+    <ClCompile Include="Code\Particle\ParticleManager.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_AudioManager.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_Event.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_EventManager.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_Geometry.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_GraphicsManager.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_InputManager.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_Listener.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_Message.cpp" />
+    <ClCompile Include="Code\SGD Wrappers\SGD_MessageManager.cpp" />
+    <ClCompile Include="Code\States\CreditsState.cpp" />
+    <ClCompile Include="Code\States\GameOverLoseState.cpp" />
+    <ClCompile Include="Code\States\GameOverWinState.cpp" />
+    <ClCompile Include="Code\States\GamePlayState.cpp" />
+    <ClCompile Include="Code\States\GameState.cpp" />
+    <ClCompile Include="Code\States\LoadGameState.cpp" />
+    <ClCompile Include="Code\States\MainMenuState.cpp" />
+    <ClCompile Include="Code\States\OptionsState.cpp" />
+    <ClCompile Include="Code\States\SplashState.cpp" />
+    <ClCompile Include="Code\States\TestStateP.cpp" />
+    <ClCompile Include="Code\States\TileDebugState.cpp" />
+    <ClCompile Include="Code\Tile\Layer.cpp" />
+    <ClCompile Include="Code\Tile\Tile.cpp" />
+    <ClCompile Include="Code\Tile\TileSystem.cpp" />
+    <ClCompile Include="Code\tinyxml\tinystr.cpp" />
+    <ClCompile Include="Code\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="Code\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="Code\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Animation\Animation.h" />
+    <ClInclude Include="Code\Animation\AnimationSystem.h" />
+    <ClInclude Include="Code\Animation\AnimTestBase.h" />
+    <ClInclude Include="Code\Animation\AnimTestObject.h" />
+    <ClInclude Include="Code\Animation\AnimTestState.h" />
+    <ClInclude Include="Code\Animation\Frame.h" />
+    <ClInclude Include="Code\Core\Ability.h" />
+    <ClInclude Include="Code\Core\AttributeStatus.h" />
+    <ClInclude Include="Code\Core\Bars.h" />
+    <ClInclude Include="Code\Core\BaseObject.h" />
+    <ClInclude Include="Code\Core\Boss.h" />
+    <ClInclude Include="Code\Core\Character.h" />
+    <ClInclude Include="Code\Core\CombatPlayer.h" />
+    <ClInclude Include="Code\Core\CombatSelection.h" />
+    <ClInclude Include="Code\Core\CommonEnemy.h" />
+    <ClInclude Include="Code\Core\DamAbility.h" />
+    <ClInclude Include="Code\Core\Definitions.h" />
+    <ClInclude Include="Code\Core\DOTStatus.h" />
+    <ClInclude Include="Code\Core\Enemy.h" />
+    <ClInclude Include="Code\Core\GameData.h" />
+    <ClInclude Include="Code\Core\Guard.h" />
+    <ClInclude Include="Code\Core\HelpText.h" />
+    <ClInclude Include="Code\Core\HUDItem.h" />
+    <ClInclude Include="Code\Core\Items.h" />
+    <ClInclude Include="Code\Core\Level.h" />
+    <ClInclude Include="Code\Core\MiniBoss.h" />
+    <ClInclude Include="Code\Core\Numbers.h" />
+    <ClInclude Include="Code\Core\ObjectManager.h" />
+    <ClInclude Include="Code\Core\OtherAbility.h" />
+    <ClInclude Include="Code\Core\OtherStatus.h" />
+    <ClInclude Include="Code\Core\OwnedHUD.h" />
+    <ClInclude Include="Code\Core\Player.h" />
+    <ClInclude Include="Code\Core\SelectableObject.h" />
+    <ClInclude Include="Code\Core\Stats.h" />
+    <ClInclude Include="Code\Core\StatusEffect.h" />
+    <ClInclude Include="Code\Core\TurnManager.h" />
+    <ClInclude Include="Code\Core\WorldObject.h" />
+    <ClInclude Include="Code\Dialogue\Dialogue.h" />
+    <ClInclude Include="Code\Font\Font.h" />
+    <ClInclude Include="Code\Font\FontTestState.h" />
+    <ClInclude Include="Code\Messages\TestMessage.h" />
+    <ClInclude Include="Code\Particle\Emitter.h" />
+    <ClInclude Include="Code\Particle\Particle.h" />
+    <ClInclude Include="Code\Particle\ParticleFlyweight.h" />
+    <ClInclude Include="Code\Particle\ParticleManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_AudioManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Color.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Declarations.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Event.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_EventManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Geometry.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_GraphicsManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Handle.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_HandleManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_HandleManager.hpp" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_InputManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Key.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Listener.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_Message.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_MessageManager.h" />
+    <ClInclude Include="Code\SGD Wrappers\SGD_String.h" />
+    <ClInclude Include="Code\States\CreditsState.h" />
+    <ClInclude Include="Code\States\GameOverLoseState.h" />
+    <ClInclude Include="Code\States\GameOverWinState.h" />
+    <ClInclude Include="Code\States\GamePlayState.h" />
+    <ClInclude Include="Code\States\GameState.h" />
+    <ClInclude Include="Code\States\LoadGameState.h" />
+    <ClInclude Include="Code\States\MainMenuState.h" />
+    <ClInclude Include="Code\States\OptionsState.h" />
+    <ClInclude Include="Code\States\SplashState.h" />
+    <ClInclude Include="Code\States\TestStateP.h" />
+    <ClInclude Include="Code\States\TileDebugState.h" />
+    <ClInclude Include="Code\Tile\Layer.h" />
+    <ClInclude Include="Code\Tile\Tile.h" />
+    <ClInclude Include="Code\Tile\TileSystem.h" />
+    <ClInclude Include="Code\tinyxml\tinystr.h" />
+    <ClInclude Include="Code\tinyxml\tinyxml.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

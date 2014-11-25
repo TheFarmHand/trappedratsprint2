@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>Bowie3.png</Portrait>
+    <Words>Welcome To Trapped Rat!</Words>
+  </Message>
+  <Message>
+    <Name>Controls</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Use the Arrow Keys to move around.</Words>
+  </Message>
+</Dialogue>

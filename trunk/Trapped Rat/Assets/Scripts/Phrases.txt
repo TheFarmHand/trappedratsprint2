@@ -1,0 +1,222 @@
+This Phrase is not supported
+Esta frase no se admite
+Play
+Jugar
+Options
+Opciones
+Exit
+Salida
+You are in Combat
+Usted esta en Combate
+You are not in Combat
+Usted no esta en combate
+This is the menu
+Este es el menu
+Language:
+Idioma:
+Spanish
+Espanol
+English
+Ingles
+Settings
+Ajustes
+Pause
+Pausa
+Ratsputin
+Ratsputin
+Jeeves
+Jeeves
+Slippy
+Slippy
+Biggs
+Biggs
+Checkers
+Checkers
+Cecil
+Cecil
+Dog
+Perro
+Cat
+Gato
+Raven
+Cuervo
+Attack
+Ataque
+Item
+Articulo
+Run
+Carrera
+Ability
+Habilidad
+a
+a
+b
+b
+c
+c
+d
+d
+e
+e
+f
+f
+g
+g
+h
+h
+i
+i
+j
+j
+k
+k
+l
+l
+m
+m
+n
+n
+o
+o
+p
+p
+q
+q
+r
+r
+s
+s
+t
+t
+u
+u
+v
+v
+w
+w
+x
+x
+y
+y
+z
+z
+A
+A
+B
+B
+C
+C
+D
+D
+E
+E
+F
+F
+G
+G
+H
+H
+I
+I
+J
+J
+K
+K
+L
+L
+M
+M
+N
+N
+O
+O
+P
+P
+Q
+Q
+R
+R
+S
+S
+T
+T
+U
+U
+V
+V
+W
+W
+X
+X
+Y
+Y
+Z
+Z
+This is a message
+Este es un mensaje
+Select an ENEMY for your _attack or ability
+Seleccionar un enemigo para su_ ataque o habilidad
+Select an ALLY for your _item or ability
+Seleccione un aliado para su _articulo o capacidad
+You are now planning your next move
+Ahora esta planeando su _proximo movimiento
+Select yourself to confirm _your COWARDICE
+Seleccione usted mismo para _confirmar su COBARDIA
+Deal damage to one enemy
+Herido un enemigo
+Use an Item to aide your party
+Utilizar un elemento de ayudante de su partido
+Use a unique ABILITY
+Utilice una capacidad unica
+FLEE from combat
+Huir de combate
+Load File...
+Carga Expediente...
+File 1
+Expediente 1
+File 2
+Expediente 2
+File 3
+Expediente 3
+Music Volume:
+Volumen Musica:
+Effect Volume:
+Volumen Efecto:
+FullScreen:
+Pantalla Completa:
+Credits
+Creditos
+Trapped Rat:
+Rata Trapped:
+Developers...
+Desarrolladores...
+Artists...
+Artistas...
+Executive Producer...
+Productor Ejecutivo...
+Associate Producers...
+Productores Asociados ...
+Press Escape to Exit
+Presione Escape para salir
+Riley Wood, Joe Thompson, Matthew Zanini, Grant Taylor
+Riley Wood, Joe Thompson, Matthew Zanini, Grant Taylor
+Gregory Bey, Caris Frazier
+Gregory Bey, Caris Frazier
+John Oleske
+John Oleske
+Shawn Paris, Robert Martinez
+Shawn Paris, Robert Martinez
+Off
+Apagado
+On
+Sobre
+
+
+
+
+
+
+
+
+
+
