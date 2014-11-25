@@ -19,6 +19,8 @@ public:
 
 	void TileCollision( float &x, float &y, SGD::Rectangle &rect, char dir );
 	void TileEvent( SGD::Point pos );
+	int GetLayerWidth();
+	int GetLayerHeight();
 
 private:
 	Layer layers;

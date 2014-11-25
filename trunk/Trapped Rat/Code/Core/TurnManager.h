@@ -49,6 +49,8 @@ private:
 	TurnManager& operator=( TurnManager& rhs ) = delete;
 		
 	friend bool sortByProgress( Character* a, Character* b );
+	void SetupAllyParty( std::vector<CombatPlayer*> playerParty );
+	void SetupEnemyParty( std::vector<Enemy*> enemyParty );
 
 	ParticleManager *pPartMan;
 
