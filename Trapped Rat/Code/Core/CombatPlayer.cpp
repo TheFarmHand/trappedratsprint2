@@ -513,7 +513,11 @@ void CombatPlayer::AbilityUpdate(float dt)
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Enter))
 	{
-		if (menu[hudSelection]->GetAbility()->GetBPCost() <= curBP)
+		if (menu[hudSelection]->GetAbility() == nullptr)
+		{
+			return;
+		}
+		else if (menu[hudSelection]->GetAbility()->GetBPCost() <= curBP)
 		{
 			if (menu[hudSelection]->GetAbility()->GetOffensive())//Enemy attack
 			{
