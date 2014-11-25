@@ -22,7 +22,6 @@ private:
 	SGD::Point CameraPos;//camera
 
 	//Combat Party Members
-	std::vector<CombatPlayer*> m_vCombatParty;
 	//font
 	Font * font = nullptr;
 	Player * overworldPlayer = nullptr;
@@ -58,8 +57,7 @@ public:
 	Font * GetFont(){ return font; }
 	SGD::Point GetCamera();
 	Player* GetOverworldPlayer() { return overworldPlayer; }
-	CombatPlayer* GetCombatParty(int _index);
-	std::vector<CombatPlayer*> GetCombatParty();
+	
 	bool GetIsInCombat(){ return is_inCombat; }
 	int GetEffectVolume(){ return effect_volume; }
 	int GetMusicVolume(){ return music_volume; }
@@ -68,7 +66,6 @@ public:
 	//mutators
 	void SetCamera(SGD::Point point){ CameraPos = point; }
 	void UpdateCamera(BaseObject* obj);
-	void SetCombatParty(CombatPlayer* _cbplayer, int _index);
 	void SetIsInCombat(bool inCombat){ is_inCombat = inCombat; }
 	void SetEffectVolume(int _effect);
 	void SetMusicVolume(int _music);
