@@ -8,7 +8,6 @@
 
 Ability::Ability(const char* path)
 	{
-	//TODO: Add xml loading
 	TiXmlDocument abilityDoc;
 	
 	if ( !abilityDoc.LoadFile( path ) )
