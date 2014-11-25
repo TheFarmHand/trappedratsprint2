@@ -18,8 +18,8 @@ CombatPlayer::CombatPlayer()
 	states = 0;
 	hudSelection = 0;
 	menu = GamePlayState::GetInstance()->GetSelectableObjects();
-	tester.SetOffensive( true );
-	tester.SetHealing( false );
+	//tester.SetOffensive( true );
+	//tester.SetHealing( false );
 
 	}
 
@@ -87,13 +87,13 @@ void CombatPlayer::Update( float dt )
 					case 0:
 						help->UpdateSelection( 3 );
 						states = 1;
-						if ( TestAbility && tester.GetHealing() )
-							{
-							help->UpdateSelection( 4 );
-							mySelection = player;
-							}
-						else
-							{
+						//if ( abilityList[i].GetHealing() )
+						//	{
+						//	help->UpdateSelection( 4 );
+						//	mySelection = player;
+						//	}
+						//else
+							//{
 							for ( unsigned int i = 0; i < pTurn->GetEnemies().size(); ++i )
 								{
 								if ( pTurn->GetEnemies()[i]->isAlive() )
@@ -103,7 +103,7 @@ void CombatPlayer::Update( float dt )
 									}
 								}
 							mySelection = enemy;
-							}
+							//}
 						break;
 					case 1:
 						help->UpdateSelection( 2 );
@@ -132,39 +132,39 @@ void CombatPlayer::Update( float dt )
 		if ( states == 1 )		// Attacking; Target selection is "enemy"
 			{
 			//
-			if (TestAbility && tester.GetHealing())
-				TargetUnit( pTurn->GetAllies() );
-			else
+			//if (TestAbility && tester.GetHealing())
+			//	TargetUnit( pTurn->GetAllies() );
+			//else
 				TargetUnit( pTurn->GetEnemies() );
 			
 
 			if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
 				{
 				// Here is where we decide Attack, or Ability etc
-				if ( TestAbility )
-					{
-					if ( tester.GetOffensive() )
-						{
-						//TargetUnit( pTurn->GetEnemies() );
-						tester.CalculateFormula( this, pTurn->GetEnemies()[myTarget] );
-						tester.CastAbility( this, pTurn->GetEnemies()[myTarget] );
-						tester.SetHealing( true );
-						tester.SetOffensive( false );
-						}
-					else if ( tester.GetHealing() )
-						{
-						//TargetUnit( pTurn->GetAllies() );
-						tester.CalculateFormula( this, pTurn->GetAllies()[myTarget] );
-						tester.CastAbility( this, pTurn->GetAllies()[myTarget] );
-						tester.SetHealing( false );
-						tester.SetOffensive( true );
-						}
-					}
-				else
-					{
+				//if ( TestAbility )
+				//	{
+				//	if ( tester.GetOffensive() )
+				//		{
+				//		//TargetUnit( pTurn->GetEnemies() );
+				//		tester.CalculateFormula( this, pTurn->GetEnemies()[myTarget] );
+				//		tester.CastAbility( this, pTurn->GetEnemies()[myTarget] );
+				//		tester.SetHealing( true );
+				//		tester.SetOffensive( false );
+				//		}
+				//	else if ( tester.GetHealing() )
+				//		{
+				//		//TargetUnit( pTurn->GetAllies() );
+				//		tester.CalculateFormula( this, pTurn->GetAllies()[myTarget] );
+				//		tester.CastAbility( this, pTurn->GetAllies()[myTarget] );
+				//		tester.SetHealing( false );
+				//		tester.SetOffensive( true );
+				//		}
+				//	}
+				//else
+				//	{
 					
 					Attack( this, pTurn->GetEnemies()[myTarget] );
-					}
+				//	}
 				myTarget = 0;
 				progress = 0.0f;
 				TurnManager::GetInstance()->setProgressFullReached( false );
@@ -275,8 +275,8 @@ void CombatPlayer::Render()
 
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 301, 451 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 300, 450 + ( order*50.0f ), { 255, 0, 0 }, 1.6f );
-	if ( TestAbility && progress >= 100.0f )
-		tester.Render();
+	//if ( TestAbility && progress >= 100.0f )
+	//	tester.Render();
 	std::string numbers = std::to_string( HP ) + "/" + std::to_string( MaxHP ) + " HP";
 	SGD::Point pdraw;
 

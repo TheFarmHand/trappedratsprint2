@@ -7,11 +7,14 @@ class Ability
 private:
 	std::string explination;
 	std::string abilityName;
+	std::string statusName;
+	bool status;
 	bool offensive;
 	bool healing;
 	float formulaTotal;
 	int statusID;
 	float atkDam, mgcDam;
+	int bpCost;
 
 public:
 	Ability();
@@ -25,6 +28,7 @@ public:
 	int GetStatusID();
 	float GetAtkDam();
 	float GetMgcDam();
+	int GetBPCost();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );
 	void SetOffensive( bool offense );

@@ -7,6 +7,7 @@
 
 Ability::Ability()
 {
+	//TODO: Add xml loading
 	atkDam = 0;
 	mgcDam = 2.5;
 }
@@ -21,15 +22,15 @@ void Ability::Render()
 
 	if ( offensive )
 	{
-		SGD::GraphicsManager::GetInstance()->DrawString( L"Offensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
-		abilityName = "Drown";
-		SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
+		//SGD::GraphicsManager::GetInstance()->DrawString( L"Offensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
+		//abilityName = "Drown";
+		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
 	}
 	if ( healing )
 	{
-		SGD::GraphicsManager::GetInstance()->DrawString( L"Defensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
-		abilityName = "Healing Light";
-		SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
+		//SGD::GraphicsManager::GetInstance()->DrawString( L"Defensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
+		//abilityName = "Healing Light";
+		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
 	}
 }
 void Ability::CastAbility( Character* owner, Character* target )
@@ -40,6 +41,8 @@ void Ability::CastAbility( Character* owner, Character* target )
 	}
 	if ( healing )
 		target->TakeDamage( (int)-formulaTotal, owner );
+	//if (status)
+	//	target->AddStatus()
 }
 void Ability::CalculateFormula( Character* owner, Character* target )
 {
@@ -80,6 +83,10 @@ float Ability::GetMgcDam()
 {
 	return mgcDam;
 }
+int Ability::GetBPCost()
+	{
+	return bpCost;
+	}
 void Ability::SetAbilityName( std::string name )
 {
 	abilityName = name;

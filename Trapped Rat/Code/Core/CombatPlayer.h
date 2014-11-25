@@ -32,7 +32,7 @@ private:
 	int myTarget = 0;
 	int states;	// 0-Home 1-Attack 2-Items 3-Ability 4-Run 5-AllySelect 6-EnemySelect
 	int hudSelection;
-	Ability tester;
+	std::vector<Ability*> abilityList;
 	std::vector<SelectableObject*> menu;
 	//Character* myTarget;
 	AnimationSystem* ansys = nullptr;
