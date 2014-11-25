@@ -378,6 +378,7 @@ MessageBoxButtons.OKCancel);
         private void btnReset_Click(object sender, EventArgs e)
         {
             curFrame = 0;
+            listBoxFrames.SelectedIndex = 0;
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
@@ -829,6 +830,7 @@ MessageBoxButtons.OKCancel);
         private void listBoxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateNumericData();
+            curFrame = listBoxFrames.SelectedIndex;
         }
 
         private void numUDPointX_ValueChanged(object sender, EventArgs e)
@@ -1034,6 +1036,8 @@ MessageBoxButtons.OKCancel);
 
             if (curFrame > 0)
                 curFrame--;
+
+            listBoxFrames.SelectedIndex = curFrame;
         }
 
         private void btnNextFrame_Click(object sender, EventArgs e)
@@ -1048,6 +1052,8 @@ MessageBoxButtons.OKCancel);
             {
                 curFrame++;
             }
+
+            listBoxFrames.SelectedIndex = curFrame;
         }
 
         private void btnRemoveFrame_Click(object sender, EventArgs e)
