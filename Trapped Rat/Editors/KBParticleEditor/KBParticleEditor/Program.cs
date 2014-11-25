@@ -20,6 +20,7 @@ namespace KBParticleEditor
 
             KBEdit myForm = new KBEdit();
             myForm.Show();
+            myForm.TopMost = true;
 
             while (myForm.Looping1)
             {

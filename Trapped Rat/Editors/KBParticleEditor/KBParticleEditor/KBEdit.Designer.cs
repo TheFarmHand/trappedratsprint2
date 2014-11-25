@@ -451,7 +451,17 @@
             // 
             // nSize
             // 
+            this.nSize.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.nSize.Location = new System.Drawing.Point(179, 53);
+            this.nSize.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nSize.Name = "nSize";
             this.nSize.Size = new System.Drawing.Size(68, 22);
             this.nSize.TabIndex = 2;
@@ -732,9 +742,15 @@
             // 
             // nScaleEnd
             // 
+            this.nScaleEnd.DecimalPlaces = 1;
+            this.nScaleEnd.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nScaleEnd.Location = new System.Drawing.Point(116, 130);
             this.nScaleEnd.Name = "nScaleEnd";
-            this.nScaleEnd.Size = new System.Drawing.Size(44, 22);
+            this.nScaleEnd.Size = new System.Drawing.Size(68, 22);
             this.nScaleEnd.TabIndex = 17;
             this.nScaleEnd.Value = new decimal(new int[] {
             1,
@@ -744,9 +760,15 @@
             // 
             // nScaleStart
             // 
+            this.nScaleStart.DecimalPlaces = 1;
+            this.nScaleStart.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nScaleStart.Location = new System.Drawing.Point(116, 100);
             this.nScaleStart.Name = "nScaleStart";
-            this.nScaleStart.Size = new System.Drawing.Size(44, 22);
+            this.nScaleStart.Size = new System.Drawing.Size(68, 22);
             this.nScaleStart.TabIndex = 16;
             this.nScaleStart.Value = new decimal(new int[] {
             1,
@@ -756,9 +778,15 @@
             // 
             // nMaxLife
             // 
+            this.nMaxLife.DecimalPlaces = 1;
+            this.nMaxLife.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nMaxLife.Location = new System.Drawing.Point(116, 52);
             this.nMaxLife.Name = "nMaxLife";
-            this.nMaxLife.Size = new System.Drawing.Size(44, 22);
+            this.nMaxLife.Size = new System.Drawing.Size(68, 22);
             this.nMaxLife.TabIndex = 15;
             this.nMaxLife.Value = new decimal(new int[] {
             1,
@@ -769,9 +797,15 @@
             // 
             // nMinLife
             // 
+            this.nMinLife.DecimalPlaces = 1;
+            this.nMinLife.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nMinLife.Location = new System.Drawing.Point(116, 22);
             this.nMinLife.Name = "nMinLife";
-            this.nMinLife.Size = new System.Drawing.Size(44, 22);
+            this.nMinLife.Size = new System.Drawing.Size(68, 22);
             this.nMinLife.TabIndex = 14;
             this.nMinLife.Value = new decimal(new int[] {
             1,
