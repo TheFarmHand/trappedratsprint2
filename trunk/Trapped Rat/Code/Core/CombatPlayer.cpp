@@ -479,6 +479,7 @@ void CombatPlayer::AbilityUpdate(float dt)
 	{
 		menu[i]->SetAbility(abilityList[i]);
 		menu[i]->SetObjectType(1);
+		menu[i]->SetString(abilityList[i]->GetAbilityName());
 		if (i > 3)
 			break;
 	}
