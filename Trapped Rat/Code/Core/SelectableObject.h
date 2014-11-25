@@ -21,16 +21,21 @@ public:
 	void virtual Update(float dt);
 	void virtual Render();
 
-	bool GetSelected(){ return is_selected; }
-	void SetSelected(bool _is){ is_selected = _is; }
+	bool GetSelected();
+	void SetSelected(bool _is);
 
-	Ability* GetAbility(){ return m_ability; }
-	void SetAbility(Ability* abl){ m_ability = abl; }
+	Ability* GetAbility();
+	void SetAbility(Ability* abl);
 
-	Items* GetItem(){ return m_item; }
-	void  SetItem(Items*it){ m_item = it; }
+	Items* GetItem();
+	void  SetItem(Items*it);
+
+	int GetObjectType();
+	void SetObjectType(int type);
 
 	std::string GetExplination();
 	void SetExplination(std::string _str);
+
+
 };
 

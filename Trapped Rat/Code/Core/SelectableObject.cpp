@@ -58,3 +58,24 @@ void SelectableObject::SetExplination(std::string _str)
 {
 	explination = _str;
 }
+bool SelectableObject::GetSelected()
+{ return is_selected; 
+}
+void SelectableObject::SetSelected(bool _is)
+{ is_selected = _is; 
+}
+
+Ability* SelectableObject::GetAbility()
+{ return m_ability; }
+void SelectableObject::SetAbility(Ability* abl)
+{ m_ability = abl; }
+
+Items* SelectableObject::GetItem()
+{ return m_item; }
+void  SelectableObject::SetItem(Items*it)
+{ m_item = it; }
+
+int SelectableObject::GetObjectType()
+{ return m_objecttype; }
+void SelectableObject::SetObjectType(int type)
+{ m_objecttype = type; }
