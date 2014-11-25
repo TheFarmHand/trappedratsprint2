@@ -265,8 +265,10 @@ namespace KBParticleEditor
 
             public Particle(KBEdit data)
             {
+                // Floating point conversion commencing
                 lifeCurrent = 0;
-                lifeEnd = (float)(rand.Next((int)data.nMinLife.Value, (int)data.nMaxLife.Value + 1));
+                lifeEnd = (float)(rand.Next((int)data.nMinLife.Value * 1000, (int)data.nMaxLife.Value *1000) +1);
+                lifeEnd /= 1000;
                 velocity = (float)data.nVelStart.Value;
 
                 // Changing Direction (steering)
@@ -303,7 +305,8 @@ namespace KBParticleEditor
                     }
                 }
 
-                direction.X = (float)rand.Next(min, max + 1);
+                direction.X = (float)rand.Next(min * 1000, (max * 1000) + 1);
+                direction.X /= 1000;
 
                 if (data.cbDirRangeY.Checked)
                 // If this is checked, we can spawn particles with up AND down movements
@@ -336,7 +339,8 @@ namespace KBParticleEditor
                     }
                 }
 
-                direction.Y = rand.Next(min, max + 1);
+                direction.Y = rand.Next(min * 1000, (max * 1000) + 1);
+                direction.Y /= 1000;
 
                 rotation = (float)data.nRotStart.Value;
                 scale = (float)data.nScaleStart.Value;
@@ -585,6 +589,8 @@ namespace KBParticleEditor
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             loadXML.InitialDirectory = saveXML.InitialDirectory;
+            loadXML.DefaultExt = "xml";
+            loadXML.Filter = "XML Files (*.xml)|*.xml";
             if (DialogResult.OK == loadXML.ShowDialog())
             {
                 //XElement root = XElement.Load(loadXML.FileName);
@@ -593,16 +599,16 @@ namespace KBParticleEditor
                 
                 //XNode fly = root.FirstNode;
                 //nMinLife.Value = Convert.ToInt32(fly.Document.Element("MinLife").Value);
-                nMinLife.Value =    Convert.ToInt32(root.Root.Element("FlyWeight").Element("MinLife").Value);
-                nMaxLife.Value =    Convert.ToInt32(root.Root.Element("FlyWeight").Element("MaxLife").Value);
-                nScaleStart.Value = Convert.ToInt32(root.Root.Element("FlyWeight").Element("ScaleStart").Value);
-                nScaleEnd.Value =   Convert.ToInt32(root.Root.Element("FlyWeight").Element("ScaleEnd").Value);
-                nVelStart.Value =   Convert.ToInt32(root.Root.Element("FlyWeight").Element("VelocityStart").Value);
-                nVelEnd.Value =     Convert.ToInt32(root.Root.Element("FlyWeight").Element("VelocityEnd").Value);
-                nRotStart.Value =   Convert.ToInt32(root.Root.Element("FlyWeight").Element("RotationStart").Value);
-                nRotEnd.Value =     Convert.ToInt32(root.Root.Element("FlyWeight").Element("RotationEnd").Value);
-                nOffsetX.Value =    Convert.ToInt32(root.Root.Element("FlyWeight").Element("ROffsetX").Value);
-                nOffsetY.Value = Convert.ToInt32(root.Root.Element("FlyWeight").Element("ROffsetY").Value);
+                nMinLife.Value =    Convert.ToDecimal(root.Root.Element("FlyWeight").Element("MinLife").Value);
+                nMaxLife.Value =    Convert.ToDecimal(root.Root.Element("FlyWeight").Element("MaxLife").Value);
+                nScaleStart.Value = Convert.ToDecimal(root.Root.Element("FlyWeight").Element("ScaleStart").Value);
+                nScaleEnd.Value =   Convert.ToDecimal(root.Root.Element("FlyWeight").Element("ScaleEnd").Value);
+                nVelStart.Value =   Convert.ToDecimal(root.Root.Element("FlyWeight").Element("VelocityStart").Value);
+                nVelEnd.Value =     Convert.ToDecimal(root.Root.Element("FlyWeight").Element("VelocityEnd").Value);
+                nRotStart.Value =   Convert.ToDecimal(root.Root.Element("FlyWeight").Element("RotationStart").Value);
+                nRotEnd.Value =     Convert.ToDecimal(root.Root.Element("FlyWeight").Element("RotationEnd").Value);
+                nOffsetX.Value =    Convert.ToDecimal(root.Root.Element("FlyWeight").Element("ROffsetX").Value);
+                nOffsetY.Value =    Convert.ToInt32(root.Root.Element("FlyWeight").Element("ROffsetY").Value);
 
                 bColorStart.BackColor = Color.FromArgb(
                     Convert.ToInt32(root.Root.Element("FlyWeight").Element("ColorSA").Value),
