@@ -51,6 +51,12 @@ private:
 	friend bool sortByProgress( Character* a, Character* b );
 	void SetupAllyParty( std::vector<CombatPlayer*> playerParty );
 	void SetupEnemyParty( std::vector<Enemy*> enemyParty );
+	bool CheckWin();
+	bool CheckLose();
+	void EndCombat();
+	void CombatUpdate(float dt);
+	void AnimationUpdate( float dt );
+	void ParticleUpdate( float dt );
 
 	ParticleManager *pPartMan;
 

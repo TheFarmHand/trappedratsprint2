@@ -33,65 +33,25 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 
 void TurnManager::Update( float dt )
 	{
-	bool enemiesDead = true;
-	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
-		{
-		if ( EnemyUnits[i]->isAlive() )
-			enemiesDead = false;
-		}
-
-	if ( enemiesDead )
+	//*Should be checked first each update, try not to add code here or before
+	if ( CheckWin() )
 		{
 		// End of Combat, enemies have died
-		GameData::GetInstance()->SetIsInCombat( false );
-		TurnManager::GetInstance()->Terminate();
-		GamePlayState::GetInstance()->SetState( GPStates::Town );
+		EndCombat();
 		return;
 		}
-	bool alliesdead = true;
-	for ( unsigned int i = 0; i < AlliedUnits.size(); i++ )
+	if ( CheckLose() )
 		{
-		if ( AlliedUnits[i]->isAlive() ) alliesdead = false;
-		}
-	if ( alliesdead )
-		{
-		GameData::GetInstance()->SetIsInCombat( false );
-		TurnManager::GetInstance()->Terminate();
-		GamePlayState::GetInstance()->SetState( GPStates::Town );
-
+		EndCombat();
 		GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
 		return;
 		}
-	if ( !turnPause )
-		{
-		if ( !timeStop )
-			{
-			std::sort( AllCombatUnits.begin(), AllCombatUnits.end(), sortByProgress );
-			for ( unsigned int i = 0; i < AllCombatUnits.size(); ++i )
-				{
-				AllCombatUnits[i]->Update( dt );
-				if ( fullProgressReached || turnPause )
-					{
-					break;
-					}
-				}
-			}
-		else
-			{
-			AllCombatUnits[0]->Update( dt );
-			pauseTime = 2.0f;
-			}
-		}
-	else
-		pauseTime -= dt;
-	if ( pauseTime <= 0.0f )
-		turnPause = false;
+	//*
 
-	for ( unsigned int i = 0; i < AllCombatUnits.size(); ++i )
-		{
-		AllCombatUnits[i]->UpdateAnimation( dt );
-		}
-
+	CombatUpdate(dt);
+	AnimationUpdate(dt);
+	ParticleUpdate( dt );
+	
 	pPartMan->Update( dt );
 	}
 void TurnManager::Render()
@@ -152,12 +112,10 @@ void TurnManager::Terminate()
 		SGD::GraphicsManager::GetInstance()->UnloadTexture( FireFang.GetIcon() );
 		}
 	}
-
 void TurnManager::HealTarget( Character* target, int value )
 	{
 	target->TakeDamage( -value, NULL );
 	}
-
 void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	{
 
@@ -173,7 +131,6 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	tempstat->SetOwner( target );
 	target->AddStatus( tempstat );
 	}
-
 bool sortByProgress( Character* a, Character* b )
 	{
 	return a->GetProgress() > b->GetProgress();
@@ -215,10 +172,72 @@ void TurnManager::SetupEnemyParty( std::vector<Enemy*> enemyParty )
 		AllCombatUnits[i]->SetProgress( 0.0f );
 		}
 	}
+bool TurnManager::CheckWin()
+	{
+	bool enemiesDead = true;
+	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
+		{
+		if ( EnemyUnits[i]->isAlive() )
+			enemiesDead = false;
+		}
 
+	return enemiesDead;
+	}
+bool TurnManager::CheckLose()
+	{
+	bool alliesdead = true;
+	for ( unsigned int i = 0; i < AlliedUnits.size(); i++ )
+		{
+		if ( AlliedUnits[i]->isAlive() ) 
+			alliesdead = false;
+		}
 
+	return alliesdead;
+	}
+void TurnManager::EndCombat()
+	{
+	GameData::GetInstance()->SetIsInCombat( false );
+	TurnManager::GetInstance()->Terminate();
+	GamePlayState::GetInstance()->SetState( GPStates::Town );
+	}
+void TurnManager::CombatUpdate(float dt)
+	{
+	if ( !turnPause )
+		{
+		if ( !timeStop )
+			{
+			std::sort( AllCombatUnits.begin(), AllCombatUnits.end(), sortByProgress );
+			for ( unsigned int i = 0; i < AllCombatUnits.size(); ++i )
+				{
+				AllCombatUnits[i]->Update( dt );
+				if ( fullProgressReached || turnPause )
+					{
+					break;
+					}
+				}
+			}
+		else
+			{
+			AllCombatUnits[0]->Update( dt );
+			pauseTime = 2.0f;
+			}
+		}
+	else
+		pauseTime -= dt;
+	if ( pauseTime <= 0.0f )
+		turnPause = false;
+	}
+void TurnManager::AnimationUpdate( float dt )
+	{
+	for ( unsigned int i = 0; i < AllCombatUnits.size(); ++i )
+		{
+		AllCombatUnits[i]->UpdateAnimation( dt );
+		}
+	}
+void TurnManager::ParticleUpdate( float dt )
+	{
 
-
+	}
 // Stuff to be deleted...used only for testing stories
 // ** HACKY STUFF AGAIN ** //
 void TurnManager::SetupFireFang()
