@@ -60,6 +60,8 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/HelpTextBox.png");
 	helptextbox->SetImage(helpback);
 
+	Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
+
 	p1 = dynamic_cast<CombatPlayer*>( CreateCombatPlayer( "Ratsputin", sts, 1, 50, 50, 32.0f, 0.0f, nullptr, SGD::Point( 100, 150 ), SGD::Size( 64, 64 ), "RatAnimBattle.xml" ));
 	p1->SetOrderPosition(0);
 	//GameData::GetInstance()->SetCombatParty(dynamic_cast<CombatPlayer*>(p1), 0);
