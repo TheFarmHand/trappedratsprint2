@@ -242,7 +242,12 @@ void GamePlayState::Exit()
 	// Cleans up those leaks
 	TurnManager::GetInstance()->Terminate();
 
-
+	auto iterAbil = MasterAbilityList.begin();
+		for ( ; iterAbil != MasterAbilityList.end(); ++iterAbil )
+		{
+		delete iterAbil->second;
+		}
+	MasterAbilityList.clear();
 
 }
 

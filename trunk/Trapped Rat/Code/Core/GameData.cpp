@@ -12,7 +12,6 @@
 #include "../States/GamePlayState.h"
 #include "BaseObject.h"
 #include "../Font/Font.h"
-#include "../States/TestStateP.h"
 #include "../Core/CombatPlayer.h"
 #include "../States/LoadGameState.h"
 #include <fstream>
