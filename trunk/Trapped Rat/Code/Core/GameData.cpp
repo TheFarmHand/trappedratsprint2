@@ -209,7 +209,25 @@ void GameData::SetRunning(bool _run)
 void GameData::UpdateCamera(BaseObject* obj)
 {
 	SGD::Point pos = obj->GetPosition();
-	CameraPos = SGD::Point(pos.x - screenwidth / 2, pos.y - screenheight / 2);
+	float xpos = pos.x - screenwidth / 2;
+	float ypos = pos.y - screenheight / 2;
+	if (xpos < 0)
+		xpos = 0;
+	else if (xpos+screenwidth > TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width)
+	{
+		xpos = ((float)TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width)-screenwidth;
+	}
+
+
+	if (ypos < 0)
+		ypos = 0;
+	else if (ypos+screenheight > TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height)
+	{
+		ypos = ((float)TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height)-screenheight;
+	}
+
+	//CameraPos = SGD::Point(pos.x - screenwidth / 2, pos.y - screenheight / 2);
+	CameraPos = SGD::Point(xpos, ypos);
 }
 CombatPlayer* GameData::GetCombatParty(int _index)
 {
