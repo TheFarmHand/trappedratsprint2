@@ -60,9 +60,5 @@ private:
 
 	ParticleManager *pPartMan;
 
-	// ****** HACKY CODE FOR STATUS EFFECT FRAMEWORK ****** //
-	StatusEffect FireFang;
-	void SetupFireFang();
-	StatusEffect& GetFireFang() { return FireFang; }
 };
 

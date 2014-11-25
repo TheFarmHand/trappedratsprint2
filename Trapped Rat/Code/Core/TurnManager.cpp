@@ -53,7 +53,6 @@ void TurnManager::Update( float dt )
 	ParticleUpdate( dt );
 	//*
 	
-	pPartMan->Update( dt );
 	}
 void TurnManager::Render()
 	{
@@ -232,6 +231,6 @@ void TurnManager::AnimationUpdate( float dt )
 	}
 void TurnManager::ParticleUpdate( float dt )
 	{
-
+	pPartMan->Update( dt );
 	}
 // Stuff to be deleted...used only for testing stories
