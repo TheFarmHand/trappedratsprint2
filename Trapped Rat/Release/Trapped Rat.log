@@ -1,78 +1,10 @@
-﻿  Animation.cpp
-  AnimationSystem.cpp
-  AnimTestBase.cpp
-  AnimTestObject.cpp
-  AnimTestState.cpp
-  Frame.cpp
-  Ability.cpp
-  AttributeStatus.cpp
-  Bars.cpp
-  BaseObject.cpp
-  Boss.cpp
-  Character.cpp
-  CombatPlayer.cpp
-  CombatSelection.cpp
-  CommonEnemy.cpp
-  DamAbility.cpp
-  DOTStatus.cpp
+﻿  CombatPlayer.cpp
   Enemy.cpp
   GameData.cpp
-  Guard.cpp
-  Compiling...
-  HelpText.cpp
-  HUDItem.cpp
-  Items.cpp
-  Level.cpp
-  MiniBoss.cpp
-  Numbers.cpp
-  ObjectManager.cpp
-  OtherAbility.cpp
-  OtherStatus.cpp
-  OwnedHUD.cpp
   Player.cpp
-  SelectableObject.cpp
-  Stats.cpp
-  StatusEffect.cpp
   TurnManager.cpp
-  WorldObject.cpp
-  Dialogue.cpp
-  Font.cpp
-  FontTestState.cpp
-  TestMessage.cpp
-  Compiling...
-  Emitter.cpp
-  Particle.cpp
-  ParticleFlyweight.cpp
-  ParticleManager.cpp
-  SGD_AudioManager.cpp
-  SGD_Event.cpp
-  SGD_EventManager.cpp
-  SGD_Geometry.cpp
-  SGD_GraphicsManager.cpp
-  SGD_InputManager.cpp
-  SGD_Listener.cpp
-  SGD_Message.cpp
-  SGD_MessageManager.cpp
-  CreditsState.cpp
-  GameOverLoseState.cpp
-  GameOverWinState.cpp
   GamePlayState.cpp
-  GameState.cpp
-  LoadGameState.cpp
   MainMenuState.cpp
-  Compiling...
-  OptionsState.cpp
-  SplashState.cpp
-  TestStateP.cpp
-  TileDebugState.cpp
-  Layer.cpp
-  Tile.cpp
-  TileSystem.cpp
-  tinystr.cpp
-  tinyxml.cpp
-  tinyxmlerror.cpp
-  tinyxmlparser.cpp
-  WinMain.cpp
   Generating code
   Finished generating code
-  Trapped Rat.vcxproj -> F:\trapped-rat\Release\Trapped Rat.exe
+  Trapped Rat.vcxproj -> F:\trappedrat\Release\Trapped Rat.exe

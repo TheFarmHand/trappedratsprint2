@@ -122,3 +122,12 @@ SGD::Size TileSystem::GetTileSize()
 	{
 	return tileSize;
 	}
+
+int TileSystem::GetLayerWidth()
+	{
+	return layers.GetLayerWidth;
+	}
+int TileSystem::GetLayerHeight()
+	{
+	return layers.GetLayerHeight;
+	}
