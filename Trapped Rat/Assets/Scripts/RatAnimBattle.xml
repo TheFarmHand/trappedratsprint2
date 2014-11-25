@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.50">
+      <AnchorPoint x="121" y="97" />
+      <DrawRect left="94" top="93" right="148" bottom="140" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="169" y="96" />
+      <DrawRect left="147" top="87" right="198" bottom="139" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

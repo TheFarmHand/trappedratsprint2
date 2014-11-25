@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{f558b2e3-ecdb-455a-8122-9b9256d80f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{f7a899db-e107-428a-b9c0-d3a15bdf886c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{a5d84a64-b0ba-4b74-9f32-0ca0420c66bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{45513753-63d1-4467-8823-fb1a96953248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SGD Wrappers">
+      <UniqueIdentifier>{62da9dac-350b-4cec-8534-1bfd76c001d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{f6332a26-8e9a-456e-8638-d287cb0b80f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{3da03c09-72f1-4195-a66e-40a22d434fad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{1ab7e1f6-f475-4e36-975e-1da672282e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Messages">
+      <UniqueIdentifier>{d726b6c2-b9d4-43af-a90a-8fb28a8fcc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogue">
+      <UniqueIdentifier>{ab5d6cfe-3e42-4cc4-8e0b-9fa0892911f8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Animation\Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Animation\AnimationSystem.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Animation\Frame.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Tile\Layer.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Tile\Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Tile\TileSystem.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Particle\Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Particle\ParticleFlyweight.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Particle\ParticleManager.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Ability.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\AttributeStatus.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Bars.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\BaseObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Boss.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Character.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\CombatSelection.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\CommonEnemy.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\DamAbility.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\DOTStatus.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Enemy.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\GameData.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Guard.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\HUDItem.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Items.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Level.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\MiniBoss.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Numbers.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\ObjectManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\OtherAbility.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\OtherStatus.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\OwnedHUD.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Player.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\SelectableObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Stats.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\StatusEffect.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\TurnManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\WorldObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\tinyxml\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\tinyxml\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\tinyxml\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\tinyxml\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\CreditsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\GameOverLoseState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\GameOverWinState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\GamePlayState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\LoadGameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\MainMenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\OptionsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\SplashState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_AudioManager.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_Event.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_EventManager.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_Geometry.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_GraphicsManager.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_InputManager.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_Listener.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_Message.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SGD Wrappers\SGD_MessageManager.cpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Animation\AnimTestState.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Font\Font.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Font\FontTestState.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\TileDebugState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Particle\Emitter.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Animation\AnimTestObject.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\CombatPlayer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\States\TestStateP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Animation\AnimTestBase.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Messages\TestMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Dialogue\Dialogue.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\HelpText.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Animation\Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\AnimationSystem.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\Frame.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Tile\Layer.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Tile\Tile.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Tile\TileSystem.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\ParticleFlyweight.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\ParticleManager.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Ability.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\AttributeStatus.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Bars.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\BaseObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Boss.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Character.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\CombatSelection.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\CommonEnemy.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\DamAbility.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Definitions.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\DOTStatus.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Enemy.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\GameData.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Guard.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\HUDItem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Items.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Level.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\MiniBoss.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Numbers.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\ObjectManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\OtherAbility.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\OtherStatus.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\OwnedHUD.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Player.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\SelectableObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Stats.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\StatusEffect.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\TurnManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\WorldObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\tinyxml\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\tinyxml\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\CreditsState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\GameOverLoseState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\GameOverWinState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\GamePlayState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\LoadGameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\MainMenuState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\OptionsState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\SplashState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_AudioManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Color.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Declarations.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Event.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_EventManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Geometry.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_GraphicsManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Handle.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_HandleManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_HandleManager.hpp">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_InputManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Key.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Listener.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_Message.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_MessageManager.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\SGD Wrappers\SGD_String.h">
+      <Filter>SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\AnimTestState.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Font\Font.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Font\FontTestState.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\TileDebugState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Particle\Emitter.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\AnimTestObject.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\CombatPlayer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\States\TestStateP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Animation\AnimTestBase.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Messages\TestMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Dialogue\Dialogue.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\HelpText.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

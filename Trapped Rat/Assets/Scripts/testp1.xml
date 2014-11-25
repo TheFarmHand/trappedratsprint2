@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<PEffect>
+  <FlyWeight>
+    <MinLife>1</MinLife>
+    <MaxLife>2</MaxLife>
+    <ScaleStart>1</ScaleStart>
+    <ScaleEnd>1</ScaleEnd>
+    <VelocityStart>10</VelocityStart>
+    <VelocityEnd>31</VelocityEnd>
+    <RotationStart>0</RotationStart>
+    <RotationEnd>0</RotationEnd>
+    <ROffsetX>8</ROffsetX>
+    <ROffsetY>8</ROffsetY>
+    <ColorSA>255</ColorSA>
+    <ColorSR>255</ColorSR>
+    <ColorSG>255</ColorSG>
+    <ColorSB>128</ColorSB>
+    <ColorEA>255</ColorEA>
+    <ColorER>0</ColorER>
+    <ColorEG>128</ColorEG>
+    <ColorEB>128</ColorEB>
+    <FileName>targeticon.png</FileName>
+  </FlyWeight>
+  <Emitter>
+    <Shape>Circle</Shape>
+    <Size>50</Size>
+    <SpawnRate>14</SpawnRate>
+    <MinParticles>1</MinParticles>
+    <MaxParticles>50</MaxParticles>
+    <Looping>True</Looping>
+    <PositionX>234</PositionX>
+    <PositionY>143</PositionY>
+    <DirectionX>6</DirectionX>
+    <DirectionY>6</DirectionY>
+    <RangeX>True</RangeX>
+    <RangeY>False</RangeY>
+  </Emitter>
+</PEffect>

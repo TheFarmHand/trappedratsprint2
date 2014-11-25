@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="4">
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Down</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="16" y="16" />
+      <DrawRect left="0" top="0" right="32" bottom="32" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.2">
+      <AnchorPoint x="49" y="16" />
+      <DrawRect left="33" top="0" right="65" bottom="32" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Up</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="16" y="49" />
+      <DrawRect left="0" top="33" right="32" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.2">
+      <AnchorPoint x="49" y="49" />
+      <DrawRect left="33" top="33" right="65" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Left</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="16" y="82" />
+      <DrawRect left="0" top="66" right="32" bottom="98" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.2">
+      <AnchorPoint x="49" y="82" />
+      <DrawRect left="33" top="66" right="65" bottom="98" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Right</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="16" y="115" />
+      <DrawRect left="0" top="99" right="32" bottom="131" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.2">
+      <AnchorPoint x="49" y="115" />
+      <DrawRect left="33" top="99" right="65" bottom="129" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

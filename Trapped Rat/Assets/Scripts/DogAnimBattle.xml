@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>Dog.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.50">
+      <AnchorPoint x="42" y="74" />
+      <DrawRect left="20" top="45" right="66" bottom="79" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="115" y="74" />
+      <DrawRect left="91" top="45" right="140" bottom="79" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="183" y="74" />
+      <DrawRect left="159" top="45" right="210" bottom="78" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
