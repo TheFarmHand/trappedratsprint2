@@ -27,7 +27,7 @@
     <SpawnRate>5</SpawnRate>
     <MinParticles>1</MinParticles>
     <MaxParticles>20</MaxParticles>
-    <Looping>False</Looping>
+    <Looping>True</Looping>
     <PositionX>256</PositionX>
     <PositionY>251</PositionY>
     <DirectionX>9</DirectionX>

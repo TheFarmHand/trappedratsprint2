@@ -7,6 +7,7 @@
 #include "../Core/StatusEffect.h"
 #include "../Core/Character.h"
 
+
 TestStateP* TestStateP::GetInstance()
 {
 	static TestStateP data;
@@ -18,25 +19,16 @@ void TestStateP::Enter( )
 	myParticles = ParticleManager::GetInstance();
 	std::string relative = "../Trapped Rat/Assets/Scripts/";
 	myParticles->LoadEmitter( relative + "bloodparticle.xml", "Test");
+
+	mySEM = StatusEffectManager::GetInstance();
+	mySEM->Initialize();
+
 }
 
 void TestStateP::Update( float dt )
 {
 	SGD::InputManager *input = SGD::InputManager::GetInstance( );
-	bool loopToggle = true;
-	
-	// Test Particle Cases
-
-	// Left Side of Screen
-	//if ( input->IsKeyPressed( SGD::Key::Q ) )
-	//{
-	//	// Add looping
-	//	if(loopToggle)	
-	//	{
-	//		myParticles->CreateEmitter("Test");
-	//		loopToggle = false;
-	//	}
-	//}
+	//bool loopToggle = true;
 
 	// Right Side of Screen
 	if ( input->IsKeyPressed( SGD::Key::E ) )

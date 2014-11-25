@@ -9,7 +9,8 @@
 #include "StatusEffect.h"
 #include "Ability.h"
 
-
+// Elemental Type
+enum ETYPE { PHYS, WIND, FIRE, EARTH, WATER, MULTI };
 
 class Character :
 	public BaseObject
@@ -28,7 +29,7 @@ protected:
 	std::list<StatusEffect*> effects;
 	std::vector<Ability*> abilityList;
 	bool alive = true;
-	
+	ETYPE element;
 	
 public:
 	Character();
@@ -57,6 +58,7 @@ public:
 	int GetOrderPosition();
 	Ability* GetAbility(int index);
 	bool virtual isAlive( );
+	ETYPE GetEType();
 	//std::vector<StatusEffect*>& GetEffects();
 	std::list<StatusEffect*>& GetEffects();
 	
@@ -73,5 +75,7 @@ public:
 	void SetOrderPosition( int index );
 	void SetLiving( bool buul );
 	void AddStatus(StatusEffect *status);
+
+
 };
 

@@ -43,6 +43,9 @@
     <Filter Include="Dialogue">
       <UniqueIdentifier>{ab5d6cfe-3e42-4cc4-8e0b-9fa0892911f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Status Effects">
+      <UniqueIdentifier>{23b4f6cd-d50f-4950-ba3a-1f3ff7fcf49d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Animation\Animation.cpp">
@@ -85,9 +88,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\Boss.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Core\Character.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\CombatSelection.cpp">
@@ -139,9 +139,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\Stats.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Core\StatusEffect.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Code\Core\TurnManager.cpp">
@@ -255,6 +252,15 @@
     <ClCompile Include="Code\Core\HelpText.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\Character.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\StatusEffect.cpp">
+      <Filter>Core\Status Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\StatusEffectManager.cpp">
+      <Filter>Core\Status Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Animation\Animation.h">
@@ -297,9 +303,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Boss.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Core\Character.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\CombatSelection.h">
@@ -354,9 +357,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\Stats.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Core\StatusEffect.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Code\Core\TurnManager.h">
@@ -484,6 +484,15 @@
     </ClInclude>
     <ClInclude Include="Code\Core\HelpText.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Character.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\StatusEffect.h">
+      <Filter>Core\Status Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\StatusEffectManager.h">
+      <Filter>Core\Status Effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

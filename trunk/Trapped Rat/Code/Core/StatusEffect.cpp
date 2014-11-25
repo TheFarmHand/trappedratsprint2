@@ -54,6 +54,7 @@ StatusEffect& StatusEffect::operator=( const StatusEffect& rhs )
 	num_ticks = rhs.num_ticks;
 	curr_tick = rhs.curr_tick ;
 	dmg_tick = rhs.dmg_tick;
+	element = rhs.element;
 
 
 	return *this;
@@ -72,7 +73,7 @@ std::string StatusEffect::GetName( )
 	return name;
 }
 
-Elements StatusEffect::GetElement( )
+int StatusEffect::GetElement( )
 {
 	return element;
 }
@@ -102,7 +103,7 @@ void StatusEffect::SetName( std::string nam )
 {
 	this->name = nam;
 }
-void StatusEffect::SetElement( Elements ele )
+void StatusEffect::SetElement( int ele )
 {
 	element = ele;
 }
