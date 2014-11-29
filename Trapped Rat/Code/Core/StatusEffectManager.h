@@ -2,7 +2,7 @@
 	This class stores StatusEffects to be pointed to by other things
 */
 
-#include <vector>
+#include <map>
 
 class StatusEffect;
 
@@ -15,13 +15,16 @@ public:
 	void Initialize();
 	void Terminate();
 
+	// Accessors
+	StatusEffect& GetStatus(std::string status);
+
 private:
 	StatusEffectManager() = default;
 	~StatusEffectManager( ) = default;
 	StatusEffectManager(const StatusEffectManager&) = delete;
 	StatusEffectManager& operator=(const StatusEffectManager&) = delete;
 
-	std::vector<StatusEffect*> StatusList;
+	std::map<std::string, StatusEffect*> StatusList;
 
 
 	void LoadStatusEffect(std::string filename);

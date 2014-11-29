@@ -28,15 +28,16 @@ void Character::Render()
 }
 void Character::Attack( Character* owner, Character * target )
 {
-	// This needs to do proper math formula based on attack stats, etc.
-	//owner->TakeDamage(20, target);
-}
-void Character::UseAbility()
-{
-	// All Status Effects are applied through this function (attached to Abilities)	
+	
 }
 
-void Character::TakeDamage( int dmg, Character* attacker )	// pointer is now the person hitting you
+void Character::UseAbility()
+// 
+{
+	
+}
+
+void Character::TakeDamage( int dmg)	
 {
 	HP -= dmg;
 	if ( HP <= 0 )
@@ -51,8 +52,9 @@ void Character::TakeDamage( int dmg, Character* attacker )	// pointer is now the
 
 }
 void Character::React()
+// Loops through status effects on the unit and calls their React function (for things like dodge and counter)
 {
-
+	
 }
 
 //accessors
@@ -160,13 +162,32 @@ void Character::StatusTick()
 // Happens at the beginning of a characters turn
 // Applies 1 tick of every "ticking" status effect on the player
 {
+	std::vector<std::list<StatusEffect*>::iterator> todel;	// Used to clear out unused
 	for ( auto iter = effects.begin(); iter != effects.end(); iter++ )
 	{
 		( *iter )->Turntick();
+		if((*iter)->GetCurrTick() == (*iter)->GetNumTicks())
+		{
+
+			//(*iter)->Clear();
+			std::list<StatusEffect*>::iterator temp = iter;
+			todel.push_back((temp));
+
+		}
+	}
+
+	for (unsigned int i = 0; i<todel.size( ); i++ )
+	{
+		( *todel[ i ] )->Clear( );
 	}
 }
 
 void Character::AddStatus( StatusEffect *status )
+// Needs access to attacker for damage calculations
 {
-	effects.push_back( status );
+	StatusEffect* temp = new StatusEffect();
+	// Setup damage values
+	*temp = *status;
+	temp->SetOwner(this);
+	effects.push_back( temp );
 }

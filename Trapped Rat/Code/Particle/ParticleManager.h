@@ -23,6 +23,7 @@ public:
 	void Render();
 
 	void ClearAll();
+	void UnloadAll();
 
 	// Access
 	int GetNumActive();

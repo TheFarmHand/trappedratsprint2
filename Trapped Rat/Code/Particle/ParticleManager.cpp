@@ -219,5 +219,15 @@ Emitter* ParticleManager::GetEmitter( std::string emitter_name )
 
 void ParticleManager::Terminate()
 {
-	ClearAll();
+	ClearAll(); 
+	UnloadAll();
+}
+
+void ParticleManager::UnloadAll()
+{
+	std::map<std::string, Emitter>::reverse_iterator iter;
+	for(iter = LoadedEmitters.rbegin(); iter != LoadedEmitters.rend(); iter++)
+	{
+		UnloadEmitter((*iter).first);					   
+	}
 }

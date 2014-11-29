@@ -1,53 +1,98 @@
 #include "StatusEffectManager.h"
 #include "StatusEffect.h"
+#include "Ability.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
 
 #include <fstream>
 
-StatusEffectManager* StatusEffectManager::GetInstance( )
+StatusEffectManager* StatusEffectManager::GetInstance()
 {
 	static StatusEffectManager data;
 	return &data;
 }
 
-void StatusEffectManager::Initialize( )
+void StatusEffectManager::Initialize()
 {
 	// True Functionality will load in a full list from XML
-	std::string file = "../Trapped Rat/Assets/Scripts/TestStatus.txt";
+	std::string file = "Assets/Scripts/StatusEffects.txt";
 
-	LoadStatusEffect(file);
+	LoadStatusEffect( file );
 }
 
-void StatusEffectManager::Terminate( )
+void StatusEffectManager::Terminate()
 {
-
-}
-
-void StatusEffectManager::LoadStatusEffect(std::string filename)
-{
-	std::fstream infile; 
-	infile.open(filename, std::ios_base::in);
-	StatusEffect temp;
-
-	int length = 0;
-	infile >> length;
-	
-	std::string name;
-	for( ; length>0; length--)
+	// Remove all from Map
+	for(auto iter = StatusList.begin(); iter != StatusList.end(); iter++)
 	{
-		char a;
-		infile >> a;
-		name += a;
+		StatusEffect* temp;
+		temp = (*iter).second;
+		delete temp;
 	}
-	int in = 0;
 
+}
 
+void StatusEffectManager::LoadStatusEffect( std::string filename )
+{
+	std::fstream infile;
+	std::string path = "../Trapped Rat/Assets/Textures";
+	infile.open( filename, std::ios_base::in );
+	StatusEffect *temp;
+	char a = ' ';
+	std::string name;
+	std::string image;
+	while ( !infile.eof() )
+	{
+		
+		name = "";
+		infile >> a;
+		if(a == '*')
+		{
+			break;
+		}
 
-	temp.SetName(name.c_str());
-	
+		temp = new StatusEffect( );
+		do
+		{
+			name += a;
+			infile.get( a );
 
+		} while ( a != '\n' );
 
+		int in = 0;
+
+		// Element, Ticks, Dmg, Type( DOT, STAT, SPECIAL)
+		temp->SetName( name.c_str() );
+		infile >> in;
+		temp->SetElement( (ETYPE)in );
+		infile >> in;
+		temp->SetTick( in );
+		infile >> in;
+		temp->SetTickDmg( in );
+		infile >> in;
+		temp->SetType( in );
+		temp->SetOwner( NULL );
+
+		image = "";
+		infile >> a;	// Skips white space, grabs first letter it finds
+		while ( a != '\n' )
+		{
+			image += a;
+			infile.get(a);
+		}
+
+		temp->SetIcon( SGD::INVALID_HANDLE );	// Load image here later
+		StatusList[ name.c_str() ] = temp;
+	}
 
 	infile.close();
+}
+
+StatusEffect& StatusEffectManager::GetStatus( std::string status )
+{
+	if(status == "Burrow" || status == "Puddle" || status == "Collapse" || status == "Leaf on the Wind")
+		return *StatusList[ "Dodge" ];
+
+	return *StatusList[ status ];
 }
 
 //std::string name;
