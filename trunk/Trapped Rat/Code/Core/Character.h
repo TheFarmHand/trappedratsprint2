@@ -9,8 +9,7 @@
 #include "StatusEffect.h"
 #include "Ability.h"
 
-// Elemental Type
-enum ETYPE { PHYS, WIND, FIRE, EARTH, WATER, MULTI };
+
 
 class Character :
 	public BaseObject
@@ -43,7 +42,7 @@ public:
 	
 	void UseAbility();
 	void virtual StatusTick();
-	void virtual TakeDamage(int dmg, Character* target);
+	void virtual TakeDamage(int dmg);
 	void React();
 
 

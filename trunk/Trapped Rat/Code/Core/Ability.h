@@ -2,6 +2,9 @@
 #include <string>
 
 class Character;
+
+// Elemental Type
+enum ETYPE { PHYS, WIND, FIRE, EARTH, WATER, MULTI };
 class Ability
 {
 private:

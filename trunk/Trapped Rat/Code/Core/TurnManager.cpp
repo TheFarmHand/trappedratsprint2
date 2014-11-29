@@ -42,7 +42,7 @@ void TurnManager::Update( float dt )
 		GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
 		return;
 	}
-	
+
 
 	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
 	//can modify order if needed, should not break
@@ -70,7 +70,7 @@ void TurnManager::Render()
 
 	//*Anything added below will render on top of combat characters
 	pPartMan->Render();
-	
+
 }
 void TurnManager::setTimeStop( bool stop )
 {
@@ -113,16 +113,86 @@ void TurnManager::Terminate()
 }
 void TurnManager::HealTarget( Character* target, int value )
 {
-	target->TakeDamage( -value, NULL );
+	target->TakeDamage( -value);
 }
 void TurnManager::AttackTarget( Character* owner, Character* target, int value )
+// Handles status effects React in here
 {
-	target->TakeDamage( value, owner );
-	// This call places the emitter at the proper location
-	pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
+	bool dodge = false;
+	bool guard = false;
+	bool firespike = false;
+	bool counter = false;
+	Character* Guard = nullptr;
 
-	// This call creates a new instance of the emitter
-	pPartMan->CreateEmitter( "takedamage" );
+	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
+	for ( auto iter = owner->GetEffects().begin(); iter != owner->GetEffects().end(); iter++ )
+	{
+		// Check for Dodge abilities
+		if ( ( *iter )->GetName() == "Dodge" )
+		{
+			// Found dodge!  
+			dodge = true;
+		}
+
+		if ( ( *iter )->GetName() == "Guard" )
+		{
+			// Found guard!
+			guard = true;
+			Guard = (*iter)->GetOwner();
+
+		}
+
+		if ( ( *iter )->GetName() == "Fire Spikes" )
+		{
+			firespike = true;
+		}
+
+		if ( ( *iter )->GetName() == "Counter Claw" )	// Might need refactoring if multiple versions of counter exist
+		{
+			counter = true;
+		}
+	}
+
+	if ( firespike )
+	{
+		// Slap for a little damage
+		// 
+		owner->TakeDamage((int)(target->GetStats().magic * 0.2f));
+	}
+
+	if ( counter )
+	{
+		// Do some damage to attacker
+		value = value / 2;
+		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever
+	}
+
+	if ( dodge )
+	{
+		// Do some Dodge word magic instead of damage
+		// For now:
+		value = 0;
+	}
+
+	if ( guard )
+	{
+		// Redirect attack to Guard
+		owner->Attack(owner, Guard);
+		
+	}
+
+	
+
+	if ( !dodge && !counter && !guard)
+	{
+		target->TakeDamage( value);
+
+		// This call places the emitter at the proper location
+		pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
+
+		// This call creates a new instance of the emitter
+		pPartMan->CreateEmitter( "takedamage" );
+	}
 }
 bool sortByProgress( Character* a, Character* b )
 {

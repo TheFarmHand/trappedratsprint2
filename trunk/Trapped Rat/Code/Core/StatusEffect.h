@@ -6,30 +6,36 @@
 
 class Character;
 //enum ETYPE { PHYS, WIND, FIRE, EARTH, WATER, MULTI };
+enum ETYPE;
 
 class StatusEffect
 {
 private:
 	std::string name;
-	int element;
+	ETYPE element;
 	SGD::HTexture icon;
 	int num_ticks;
 	int curr_tick = 0;
 	int dmg_tick;
 	Character* owner;
+	enum STYPE { DOT, STAT, SPECIAL };
+	STYPE myType;
+
+	int HandleDOT();
+	int ElementalMod(int damage);
 
 public:
 	StatusEffect();
 	virtual ~StatusEffect();
 
-	void virtual React(Character* attacker);
+	void virtual React(Character* attacker, ETYPE ele);
 	void virtual Turntick();
 	void virtual Clear();
 
 	// Access Granted
 	virtual Character* GetOwner();
 	virtual std::string GetName();
-	virtual int GetElement();
+	virtual ETYPE GetElement();
 	virtual SGD::HTexture GetIcon();
 	virtual int GetCurrTick();
 	virtual int GetNumTicks();
@@ -39,10 +45,11 @@ public:
 	// Mutates
 	void virtual SetOwner(Character* own);
 	void virtual SetName(std::string name);
-	void virtual SetElement( int ele );
+	void virtual SetElement( ETYPE ele );
 	void virtual SetIcon(SGD::HTexture ico);
 	void virtual SetTick(int tic);
 	void virtual SetTickDmg(int dmg)	{ dmg_tick = dmg; }
+	void virtual SetType(int type);
 
 	StatusEffect& operator=(const StatusEffect& rhs);
 };
