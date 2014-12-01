@@ -102,6 +102,6 @@ public:
 	void SetSelectableObject(SelectableObject* _obj, int _index);
 	void SetHelpText(HelpText* help);
 	void SetState(GPStates _state){ state = _state; }
-	
+	void PauseGame();
 };
 

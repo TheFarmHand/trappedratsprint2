@@ -67,8 +67,7 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/HelpTextBox.png");
 	helptextbox->SetImage(helpback);
 
-	CombatPlayer* p1 = nullptr;
-	p1 = ( LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
+	
 	std::fstream fin;
 
 	fin.open( "Assets/Scripts/Abilities/AbilityList.txt" );
@@ -96,7 +95,9 @@ void GamePlayState::Enter()
 
 		}
 
-	p1 = dynamic_cast<CombatPlayer*>( CreateCombatPlayer( "Ratsputin", sts, 1, 50, 50, 32.0f, 0.0f, nullptr, SGD::Point( 100, 150 ), SGD::Size( 64, 64 ), "RatAnimBattle.xml" ));
+	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
+	CombatPlayer* p1 = nullptr;
+	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
 	p1->SetOrderPosition(0);
 	p1->SetPosition({100,150});
 	p1->SetSize({ 64, 64 });
@@ -144,9 +145,12 @@ void const GamePlayState::Render()
 void GamePlayState::Update(float dt)
 {
 	//pause the game if alt + tab
-	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Alt) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Tab))
+	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Alt))
 	{
-		state = GPStates::Menu;
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Tab))
+		{
+			state = GPStates::Menu;
+		}
 	}
 SGD::EventManager::GetInstance()->Update();
 
@@ -916,4 +920,8 @@ void GamePlayState::RandomAnimation()
 			
 		}
 	}
+}
+void GamePlayState::PauseGame()
+{
+	state = GPStates::Menu;
 }
