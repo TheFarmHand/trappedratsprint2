@@ -51,8 +51,8 @@ bool GameData::Initialize()
 	lasttime = GetTickCount();
 
 	//mounting an initial state
-	//CurrentState = TestStateP::GetInstance();
 	CurrentState = MainMenuState::GetInstance();
+	//CurrentState = LoadGameState::GetInstance();
 	CurrentState->Enter();
 
 	CameraPos = SGD::Point(0.0, 0.0);
@@ -166,6 +166,14 @@ bool GameData::Update()
 		|| SGD::GraphicsManager::GetInstance()->Update() == false
 		|| SGD::InputManager::GetInstance()->Update() == false)
 		return false;
+
+
+	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Alt) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::Enter))
+	{
+		is_windowed = !is_windowed;
+		SGD::GraphicsManager::GetInstance()->Resize({ GameData::GetInstance()->GetScreenWidth(), GameData::GetInstance()->GetScreenHeight() }, GameData::GetInstance()->GetWindowed());
+		return true;
+	}
 
 
 	//set deltatime
