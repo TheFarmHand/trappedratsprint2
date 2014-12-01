@@ -32,6 +32,9 @@ void GamePlayState::Enter()
 	targeting = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/targeticon.png");
 	buttonimg = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
 	combatback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/CombatTownBack.png");
+	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
+	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/menubutton.png", { 255, 255, 255 });
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
 
 	Stats sts;
 	sts.attack = 10;
@@ -224,6 +227,9 @@ void GamePlayState::Exit()
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_Audio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
 
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(helpback);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(combathud);
@@ -276,6 +282,9 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 		int sorandom = rand() % 250;
 		if (!sorandom)
 		{
+
+			//play animation for entering random combat
+			RandomAnimation();
 		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
 			SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
 
@@ -283,6 +292,8 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 
 			GameData::GetInstance()->SetIsInCombat(true);
 			state = GPStates::Combat;
+
+			
 			
 			
 			std::vector<Enemy*> tempEnemy;
@@ -505,38 +516,54 @@ void GamePlayState::MenuRender()
 {
 
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
+	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
 	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 155, 155, 155 });
 	switch (substate)
 	{
 	case None:
-		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 50.0f, 100.0f, { 155, 155, 155 });
-		GameData::GetInstance()->GetFont()->DrawString("Options", 50.0f, 150.0f, { 155, 155, 155 });
-		GameData::GetInstance()->GetFont()->DrawString("Exit", 50.0f, 200.0f, { 155, 155, 155 });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+		graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
+		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+
 		break;
 	case Options:
 	{
-					GameData::GetInstance()->GetFont()->DrawString("Language:", 50.0f, 100.0f, { 155, 155, 155 });
-					if (GameData::GetInstance()->GetFont()->IsSpanish())
-						GameData::GetInstance()->GetFont()->DrawString("Spanish", 200.0f, 100.0f, { 155, 155, 155 });
-					else
-						GameData::GetInstance()->GetFont()->DrawString("English", 200.0f, 100.0f, { 155, 155, 155 });
+					SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 
-					GameData::GetInstance()->GetFont()->DrawString("Music Volume:", 50.0f, 150.0f, { 155, 155, 155 });
+					graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
+
+					GameData::GetInstance()->GetFont()->DrawString("Language:", 70.0f, 120.0f, { 155, 155, 155 }, 1.5f);
+					if (GameData::GetInstance()->GetFont()->IsSpanish())
+						GameData::GetInstance()->GetFont()->DrawString("Spanish", 150.0f, 125.0f, { 0, 0, 0 });
+					else
+						GameData::GetInstance()->GetFont()->DrawString("English", 175.0f, 125.0f, { 0, 0, 0 });
+
+					GameData::GetInstance()->GetFont()->DrawString("Music Volume:", 70.0f, 200.0f, { 155, 155, 155 }, 1.5f);
 					std::ostringstream mout;
 					mout << GameData::GetInstance()->GetMusicVolume();
-					GameData::GetInstance()->GetFont()->DrawString(mout.str(), 200.0f, 150.0f, { 155, 155, 155 });
-					GameData::GetInstance()->GetFont()->DrawString("Effect Volume:", 50.0f, 200.0f, { 155, 155, 155 });
+					GameData::GetInstance()->GetFont()->DrawString(mout.str(), 220.0f, 205.0f, { 0, 0, 0 });
+					GameData::GetInstance()->GetFont()->DrawString("Effect Volume:", 70.0f, 280.0f, { 155, 155, 155 }, 1.5f);
 					std::ostringstream eout;
 					eout << GameData::GetInstance()->GetEffectVolume();
-					GameData::GetInstance()->GetFont()->DrawString(eout.str(), 200.0f, 200.0f, { 155, 155, 155 });
+					GameData::GetInstance()->GetFont()->DrawString(eout.str(), 220.0f, 285.0f, { 0, 0, 0 });
 
-					GameData::GetInstance()->GetFont()->DrawString("FullScreen:", 50, 250.0f, { 155, 155, 155 });
+					GameData::GetInstance()->GetFont()->DrawString("FullScreen:", 70.0f, 360.0f, { 155, 155, 155 }, 1.5f);
 					if (GameData::GetInstance()->GetWindowed())
-						GameData::GetInstance()->GetFont()->DrawString("Off", 200.0f, 250.0f, { 155, 155, 155 });
+						GameData::GetInstance()->GetFont()->DrawString("Off", 200.0f, 360.0f, { 0, 0, 0 });
 					else
-						GameData::GetInstance()->GetFont()->DrawString("On", 200.0f, 250.0f, { 155, 155, 155 });
+						GameData::GetInstance()->GetFont()->DrawString("On", 200.0f, 360.0f, { 0, 0, 0 });
 
-					GameData::GetInstance()->GetFont()->DrawString("Exit", 50.0f, 300.0f, { 155, 155, 155 });
+					GameData::GetInstance()->GetFont()->DrawString("Exit", 70.0f, 440.0f, { 155, 155, 155 }, 1.5f);
+
 					break;
 	}
 	case HowTo:
@@ -545,7 +572,6 @@ void GamePlayState::MenuRender()
 		break;
 	}
 
-	graphics->DrawRectangle({ 35.0f, 100.0f + (menuindex * 50), 45.0f, 110.0f + (menuindex * 50) }, { 155, 0, 155 }, { 155, 155, 155 });
 }
 void GamePlayState::CombatUpdate(float dt)
 {
@@ -874,4 +900,20 @@ Enemy* GamePlayState::LoadEnemy(std::string _path)
 
 	}
 	return toon;
+}
+
+void GamePlayState::RandomAnimation()
+{
+	for (int i = 0; i < 20; i+=3)
+	{
+		for (int j = 0; j < 20; j+=3)
+		{
+			
+			TownRender();
+			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (i * 40), 0.0f + (j * 40), (i * 40) + 40.0f, (j * 40) + 40.0f }, { 0, 0, 0 });
+			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (j * 40), 0.0f + (i * 40), (j * 40) + 40.0f, (i * 40) + 40.0f }, { 155,155,155 });
+			SGD::GraphicsManager::GetInstance()->Update();
+			
+		}
+	}
 }

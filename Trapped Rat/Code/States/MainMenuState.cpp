@@ -24,7 +24,9 @@ MainMenuState * MainMenuState::GetInstance()
 void MainMenuState::Enter()
 {
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
-
+	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/menubutton.png", { 255, 255, 255 });
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
+	
 }
 void MainMenuState::Update(float dt)
 {
@@ -92,20 +94,28 @@ void MainMenuState::Update(float dt)
 void const MainMenuState::Render()
 {
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
-	graphics->DrawTexture(background, { 0.0, 0.0 });
+	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
 	//display the menu items
 	//graphics->DrawString("Play", { 50.0, 100.0 });
-	GameData::GetInstance()->GetFont()->DrawString("Play",  50.0f, 100.0f , {0,0,0});
-	//graphics->DrawString("Exit", { 50.0, 200.0 });
-	GameData::GetInstance()->GetFont()->DrawString("Options", 50.0f, 150.0f, { 0,0,0});
-	GameData::GetInstance()->GetFont()->DrawString("Credits", 50.0f, 200.0f, { 0,0,0 });
-	GameData::GetInstance()->GetFont()->DrawString("Exit",  50.0f, 250.0f , { 0,0,0});
+	//display the button
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, {15.0f,5.0f,240.0f,70.0f});
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, {15.0f,5.0f,240.0f,70.0f});
+	
 
 	//display the cursor
 	//graphics->DrawString("*", { 45.0f, 100.0f + (index * 100) });
-	graphics->DrawRectangle({ 35.0f, 100.0f + (index * 50), 45.0f, 110.0f + (index * 50) }, { 155, 0, 155 }, { 155, 155, 155 });
+	graphics->DrawTextureSection(cursor,{ 45.0f, 95.0f + (index * 80) }, { 0, 0, 238,73 });
+
+	GameData::GetInstance()->GetFont()->DrawString("Play", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Credits", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
 }
 void MainMenuState::Exit()
 {
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
 }

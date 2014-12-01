@@ -31,6 +31,9 @@ class GamePlayState :
 	HelpText* helptextbox = nullptr;
 	SGD::HTexture helpback = SGD::INVALID_HANDLE;
 	SGD::HTexture combatback = SGD::INVALID_HANDLE;
+	SGD::HTexture background = SGD::INVALID_HANDLE;
+	SGD::HTexture button = SGD::INVALID_HANDLE;
+	SGD::HTexture cursor = SGD::INVALID_HANDLE;
 	Layer temp;
 	std::vector<CombatPlayer*> Party;
 	Enemy e1, e2, e3;
@@ -79,6 +82,8 @@ public:
 	SelectableObject * CreateSelectableObject(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset);
 
+	void RandomAnimation();
+
 	//basic functions
 	static GamePlayState* GetInstance();
 	void virtual Enter();
@@ -97,5 +102,6 @@ public:
 	void SetSelectableObject(SelectableObject* _obj, int _index);
 	void SetHelpText(HelpText* help);
 	void SetState(GPStates _state){ state = _state; }
+	
 };
 
