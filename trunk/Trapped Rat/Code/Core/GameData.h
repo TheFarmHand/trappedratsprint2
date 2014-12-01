@@ -49,7 +49,7 @@ public:
 	bool Update();
 	void SwapState(GameState * _state);
 	void LoadSave();
-
+	void AltTab();
 
 	//accessors
 	float GetScreenWidth(){ return screenwidth; }

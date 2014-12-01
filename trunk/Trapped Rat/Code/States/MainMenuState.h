@@ -11,6 +11,8 @@ private:
 	MainMenuState& operator=(MainMenuState& rhs) = delete;
 	MainMenuState(MainMenuState& rhs) = delete;
 	SGD::HTexture background = SGD::INVALID_HANDLE;
+	SGD::HTexture button = SGD::INVALID_HANDLE;
+	SGD::HTexture cursor = SGD::INVALID_HANDLE;
 	int index = 0;
 public:
 	static MainMenuState * GetInstance();

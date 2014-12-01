@@ -52,7 +52,7 @@ bool GameData::Initialize()
 
 	//mounting an initial state
 	//CurrentState = TestStateP::GetInstance();
-	CurrentState = LoadGameState::GetInstance();
+	CurrentState = MainMenuState::GetInstance();
 	CurrentState->Enter();
 
 	CameraPos = SGD::Point(0.0, 0.0);
@@ -243,6 +243,8 @@ void GameData::SetEffectVolume(int _effect)
 		effect_volume = 100;
 	if (effect_volume < 0)
 		effect_volume = 0;
+
+	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, effect_volume);
 }
 void GameData::SetMusicVolume(int _music)
 {
@@ -251,6 +253,10 @@ void GameData::SetMusicVolume(int _music)
 		music_volume = 100;
 	if (music_volume < 0)
 		music_volume = 0;
+
+	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, music_volume);
+
+	
 }
 
 void GameData::LoadSave()
@@ -278,8 +284,18 @@ void GameData::LoadSave()
 		else
 			GameData::GetInstance()->GetFont()->SetSpanish(false);
 
+		SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, effect_volume);
+		SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, music_volume);
+
 		fin.close();
 	}
 
 	SGD::GraphicsManager::GetInstance()->Resize({ GameData::GetInstance()->GetScreenWidth(), GameData::GetInstance()->GetScreenHeight() }, GameData::GetInstance()->GetWindowed());
+}
+void GameData::AltTab()
+{
+	if (CurrentState == GamePlayState::GetInstance())
+	{
+		GamePlayState::GetInstance()->SetState(GPStates::Menu);
+	}
 }

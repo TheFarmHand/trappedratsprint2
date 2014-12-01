@@ -1,7 +1,7 @@
 #pragma once
 #include "GameState.h"
 #include <list>
-enum states{settings, howto, none};
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
 class OptionsState :
 	public GameState
 {
@@ -12,7 +12,10 @@ class OptionsState :
 
 	int menuindex = 0;
 	int maxindex = 0;
-	std::list<states> _states;
+	
+	SGD::HTexture background = SGD::INVALID_HANDLE;
+	SGD::HTexture button = SGD::INVALID_HANDLE;
+	SGD::HTexture cursor = SGD::INVALID_HANDLE;
 
 public:
 	static OptionsState* GetInstance();

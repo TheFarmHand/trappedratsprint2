@@ -227,6 +227,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_ACTIVATE:		// Window activated / deactivated
 		if (LOWORD(wParam) != WA_INACTIVE)	//	gaining focus (unpause)
 		{
+			GameData::GetInstance()->AltTab();
 		}
 		else									//	losing focus (pause)
 		{
