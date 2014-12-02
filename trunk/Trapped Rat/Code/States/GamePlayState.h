@@ -44,6 +44,7 @@ class GamePlayState :
 	int maxindex = 0;
 	int stepcounter = 0;
 	GPStates state = GPStates::Town;
+	GPStates laststate = GPStates::Town;
 	MenuSubStates substate = MenuSubStates::None;
 	std::vector<HUDItem*> m_vhuditems;
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
@@ -60,6 +61,7 @@ class GamePlayState :
 	std::map<std::string, Ability*> MasterAbilityList;
 
 	//items
+	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 0;
 

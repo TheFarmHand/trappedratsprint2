@@ -59,6 +59,7 @@ public:
 	Ability* GetAbility(int index);
 	bool virtual isAlive( );
 	ETYPE GetEType();
+	void SetEtype(ETYPE _type);
 	//std::vector<StatusEffect*>& GetEffects();
 	std::list<StatusEffect*>& GetEffects();
 	
