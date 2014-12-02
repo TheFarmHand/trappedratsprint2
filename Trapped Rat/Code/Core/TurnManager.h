@@ -40,6 +40,7 @@ private:
 	std::vector<Character*> EnemyUnits;
 
 	SGD::HTexture targetArrow = SGD::INVALID_HANDLE;
+	SGD::HTexture timelineImage = SGD::INVALID_HANDLE;
 	bool timeStop;
 	bool fullProgressReached;
 	bool turnPause;

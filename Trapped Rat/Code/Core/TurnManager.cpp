@@ -23,6 +23,9 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 
 	//Safe to add code here
 
+	//TimelineImageload
+	timelineImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/timeline.png");
+
 	// Particle Manager pointer assignment
 	pPartMan = ParticleManager::GetInstance();
 	pPartMan->LoadEmitter( "../Trapped Rat/Assets/Scripts/bloodparticle.xml", "takedamage" );
@@ -55,7 +58,43 @@ void TurnManager::Render()
 {
 	//*Anything added below will render underneath of combat character
 
+	//Timelinerendering
+	if (timelineImage != SGD::INVALID_HANDLE)
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTexture(timelineImage, { 0, 70 }, 0.0f, {}, {}, {1.0f,.5f});
+		for (unsigned int i = 0; i < AlliedUnits.size(); ++i)
+		{
+			if (AlliedUnits[i]->GetTimelineAnimation() != SGD::INVALID_HANDLE)
+			{
+				//87 = y
+				//95 = start x
+				//650 = end x
+				//555
+				float progress = AlliedUnits[i]->GetProgress() /100.0f;
+				progress *= 555;
+				SGD::GraphicsManager::GetInstance()->DrawTexture(AlliedUnits[i]->GetTimelineAnimation(), { 95+progress, 87 }, 0, {}, {}, {1.0f,1.0f});
+			}
+		}
+		for (size_t i = 0; i < EnemyUnits.size(); i++)
+		{
+			if (EnemyUnits[i]->GetTimelineAnimation() != SGD::INVALID_HANDLE)
+			{
+				float progress = EnemyUnits[i]->GetProgress() / 100.0f;
+				progress *= 555;
+				SGD::GraphicsManager::GetInstance()->DrawTexture(EnemyUnits[i]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+			}
+		}
+		/*if (AllCombatUnits[0]->GetProgress >= 100.0f)
+		{
+			if (AllCombatUnits[0]->GetPortrait() != SGD::INVALID_HANDLE)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+			}
+		}*/
+	}
+
 	//*
+
 
 	//*Do not insert any code here
 	for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
@@ -110,6 +149,10 @@ void TurnManager::Terminate()
 		pPartMan->ClearAll();
 		pPartMan = nullptr;
 	}
+
+	//Unload timeline image
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineImage);
+	timelineImage = SGD::INVALID_HANDLE;
 }
 void TurnManager::HealTarget( Character* target, int value )
 {
@@ -375,8 +418,11 @@ void TurnManager::CombatUpdate( float dt )
 	}
 	else
 		pauseTime -= dt;
-	if ( pauseTime <= 0.0f )
+	if (pauseTime <= 0.0f)
+	{
+		//AllCombatUnits[0]->SetProgress(0.0f);
 		turnPause = false;
+	}
 }
 void TurnManager::AnimationUpdate( float dt )
 {

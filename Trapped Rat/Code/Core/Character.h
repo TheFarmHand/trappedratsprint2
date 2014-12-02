@@ -33,6 +33,9 @@ protected:
 	std::vector<Ability*> abilityList;
 	bool alive = true;
 	ETYPE element;
+
+	SGD::HTexture portrait = SGD::INVALID_HANDLE;
+	SGD::HTexture timelineanimation = SGD::INVALID_HANDLE;
 	
 public:
 	Character();
@@ -67,6 +70,9 @@ public:
 	bool virtual isAlive( );
 	ETYPE GetEType();
 	void SetEtype(ETYPE _type);
+	SGD::HTexture GetPortrait();
+	SGD::HTexture GetTimelineAnimation();
+
 	//std::vector<StatusEffect*>& GetEffects();
 	std::list<StatusEffect*>& GetEffects();
 	
@@ -85,6 +91,10 @@ public:
 	void SetOrderPosition( int index );
 	void SetLiving( bool buul );
 	void AddStatus(StatusEffect *status);
+
+	void SetPortrait(SGD::HTexture _port);
+	void SetTimelineAnimation(SGD::HTexture _timeline);
+
 
 
 };

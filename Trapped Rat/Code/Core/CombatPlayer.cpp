@@ -404,7 +404,7 @@ void CombatPlayer::HomeUpdate( float dt )
 					}
 					}
 				hudSelection = 0;
-
+				help->UpdateSelection(1, menu[0]);
 					break;
 				case 3: // RUN
 					help->UpdateSelection( 6 );

@@ -19,6 +19,14 @@ Character::~Character()
 		delete damagenumbers[i];
 	}
 	damagenumbers.clear();
+	if (portrait != SGD::INVALID_HANDLE)
+	{
+		SGD::GraphicsManager::GetInstance()->UnloadTexture(portrait);
+	}
+	if (timelineanimation != SGD::INVALID_HANDLE)
+	{
+		SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineanimation);
+	}
 }
 void Character::Update( float dt )
 {
@@ -146,6 +154,14 @@ float Character::GetProgress()
 {
 	return progress;
 }
+SGD::HTexture Character::GetPortrait()
+{
+	return portrait;
+}
+SGD::HTexture Character::GetTimelineAnimation()
+{
+	return timelineanimation;
+}
 Ability* Character::GetAbility( int index )
 {
 	return abilityList[ index ];
@@ -229,7 +245,14 @@ void Character::SetLiving( bool buul )
 {
 	alive = buul;
 }
-
+void Character::SetPortrait(SGD::HTexture _port)
+{
+	portrait = _port;
+}
+void Character::SetTimelineAnimation(SGD::HTexture _timeline)
+{
+	timelineanimation = _timeline;
+}
 void Character::StatusTick()
 // Happens at the beginning of a characters turn
 // Applies 1 tick of every "ticking" status effect on the player
