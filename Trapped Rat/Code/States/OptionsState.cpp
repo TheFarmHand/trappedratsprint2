@@ -27,7 +27,7 @@ void OptionsState::Enter()
 
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png", { 255, 255, 255 });
-	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png", { 255, 255, 255 });
 }
 void const OptionsState::Render()
 {
@@ -39,7 +39,7 @@ void const OptionsState::Render()
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 
-	graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
+	graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
 
 	GameData::GetInstance()->GetFont()->DrawString("Language:", 70.0f, 120.0f, { 155, 155, 155 }, 1.5f);
 	if (GameData::GetInstance()->GetFont()->IsSpanish())

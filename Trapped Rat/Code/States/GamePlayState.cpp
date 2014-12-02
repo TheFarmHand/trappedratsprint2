@@ -34,7 +34,10 @@ void GamePlayState::Enter()
 	combatback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/CombatTownBack.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
-	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png");
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
+	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
+	trapcursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/RatTrap.png");
+	cheesecursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
 
 	Stats sts;
 	sts.attack = 10;
@@ -116,7 +119,7 @@ void GamePlayState::Enter()
 	p1->GetAbility( 2 )->SetUnlocked( true );
 	p1->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back(p1);
-	
+
 
 
 	dialogue = new Dialogue();
@@ -127,6 +130,8 @@ void GamePlayState::Enter()
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm");
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/entercombat.wav");
 	SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio, true);
+	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume());
+	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume());
 
 	GameData::GetInstance()->UpdateCamera(GameData::GetInstance()->GetOverworldPlayer());
 	pStatManager = StatusEffectManager::GetInstance();
@@ -247,6 +252,9 @@ void GamePlayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(scroll);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(trapcursor);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(cheesecursor);
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(helpback);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(combathud);
@@ -299,12 +307,12 @@ void GamePlayState::Fight()
 {
 	if (GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::GetInstance()->GetIsInCombat())
 	{
-	stepcounter++;
+		stepcounter++;
 		//int sorandom = rand() % 250;
 		//if (!sorandom)
-	if (stepcounter >= 300)
+		if (stepcounter >= 300)
 		{
-		stepcounter = rand() % 100;
+			stepcounter = rand() % 100;
 			//play animation for entering random combat
 			RandomAnimation();
 			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
@@ -384,24 +392,58 @@ void GamePlayState::TownUpdate(float dt)
 void GamePlayState::MenuUpdate(float dt)
 {
 	//set the maxindex based on what menu we are in
+	SGD::InputManager* input = SGD::InputManager::GetInstance();
 	switch (substate)
 	{
 	case None:
-		maxindex = 3;
+		maxindex = 4;
+		if (input->IsKeyPressed(SGD::Key::Escape))
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+
+			menuindex = 0;
+			state = laststate;
+		}
 		break;
 	case Options:
 		maxindex = 4;
+		if (input->IsKeyPressed(SGD::Key::Escape))
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			menuindex = 0;
+			substate = MenuSubStates::None;
+			
+		}
+		break;
+	case Shop:
+		maxindex = (int)shopinv.size() - 1;
+		if (input->IsKeyPressed(SGD::Key::Escape))
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			menuindex = 0;
+			substate = MenuSubStates::None;
+			shopinv.clear();
+			
+		}
 		break;
 	case HowTo:
 		break;
+	case MenuSubStates::Party:
+		if (input->IsKeyPressed(SGD::Key::Escape))
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			menuindex = 0;
+			substate = MenuSubStates::None;
+			
+
+		}
+		break;
+	default:
+		break;
 	}
 
-	SGD::InputManager* input = SGD::InputManager::GetInstance();
-	if (input->IsKeyPressed(SGD::Key::Escape))
-	{
-		GameData::GetInstance()->PlaySelectionChange();
-		state = GPStates::Town;
-	}
+	
+	
 
 	//if they select a menu item
 	if (input->IsKeyPressed(SGD::Key::Enter))
@@ -442,24 +484,31 @@ void GamePlayState::MenuUpdate(float dt)
 					  shopinv.push_back(largebp);
 					  shopinv.push_back(revive);
 					  shopinv.push_back(maxrevive);
-
-
 					  break;
 			}
 			case 1:
+
+				menuindex = 0;
+				substate = MenuSubStates::Party;
 				GameData::GetInstance()->PlaySelectionChange();
+				
+				break;
+			case 2:
 				GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 				state = GPStates::Town;
 				laststate = state;
 				substate = MenuSubStates::None;
 				menuindex = 0;
+
+
 				break;
-			case 2:
+			case 3:
+
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::Options;
 				break;
-			case 3:
+			case 4:
 				GameData::GetInstance()->PlaySelectionChange();
 				state = laststate;
 				break;
@@ -477,6 +526,16 @@ void GamePlayState::MenuUpdate(float dt)
 				break;
 			default:
 				break;
+			}
+			break;
+		case Shop:
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+			{
+				if (shopinv[menuindex].GetPrice() <= gold)
+				{
+					inventory.push_back(shopinv[menuindex]);
+					gold -= shopinv[menuindex].GetPrice();
+				}
 			}
 			break;
 		default:
@@ -588,7 +647,7 @@ void GamePlayState::MenuRender()
 
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 0,0,0 });
+	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 0, 0, 0 });
 	switch (substate)
 	{
 	case None:
@@ -596,11 +655,13 @@ void GamePlayState::MenuRender()
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
-		graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+		graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
 		GameData::GetInstance()->GetFont()->DrawString("Shop", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Party", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 440.0f, { 0, 0, 0 }, 2.0f);
 
 		break;
 	case Options:
@@ -612,7 +673,7 @@ void GamePlayState::MenuRender()
 					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 
-					graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
+					graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
 
 					GameData::GetInstance()->GetFont()->DrawString("Language:", 70.0f, 120.0f, { 155, 155, 155 }, 1.5f);
 					if (GameData::GetInstance()->GetFont()->IsSpanish())
@@ -640,7 +701,66 @@ void GamePlayState::MenuRender()
 					break;
 	}
 	case Shop:
-		//display each item and the price associated with it
+	{
+				 //display each item and the price associated with it
+				 std::ostringstream yourgold;
+				 yourgold << "Your Gold: " << gold << "g";
+				 GameData::GetInstance()->GetFont()->DrawString(yourgold.str(), 450.0f, 70.0f, { 0, 0, 0 });
+				 GameData::GetInstance()->GetFont()->DrawString("Shop Inventory", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
+				 GameData::GetInstance()->GetFont()->DrawString("Escape to Exit", 60.0f, 70.0f, { 0, 0, 0 });
+				 SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 50.0f, 50.0f }, { 0, 0, 300, 540 });
+				 for (unsigned int i = 0; i < shopinv.size(); i++)
+				 {
+					 GameData::GetInstance()->GetFont()->DrawString(shopinv[i].GetName(), 100.0f, 160.0f + (i * 55), { 0, 0, 0 }, 1.5f);
+					 std::ostringstream price;
+					 price << shopinv[i].GetPrice() << "g";
+					 if (gold < shopinv[i].GetPrice())
+						 GameData::GetInstance()->GetFont()->DrawString(price.str(), 200.0f, 185.0f + (i * 55), { 0, 0, 0 }, 1.5f);
+					 else
+						 GameData::GetInstance()->GetFont()->DrawString(price.str(), 200.0f, 185.0f + (i * 55), { 155, 155, 155 }, 1.5f);
+
+				 }
+				 SGD::GraphicsManager::GetInstance()->DrawTexture(trapcursor, { 240.0f, 145.0f + (menuindex * 55) });
+
+				 //now display the players inventory
+				 GameData::GetInstance()->GetFont()->DrawString("Your Inventory", 450.0f, 40.0f, { 0, 0, 0 }, 2.0f);
+				 SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
+				 for (unsigned int i = 0; i < inventory.size(); i++)
+				 {
+					 bool is_skip = false;
+					 for (int j = i - 1; j > -1; j--)
+					 {
+						 if (inventory[i] == inventory[j])
+						 {
+							 is_skip = true;
+						 }
+					 }
+					 if (is_skip)
+						 continue;
+
+					 GameData::GetInstance()->GetFont()->DrawString(inventory[i].GetName(), 490.0f, 160.0f + (i * 55), { 0, 0, 0 }, 1.5f);
+					 int count = 0;
+					 for (unsigned int j = 0; j < inventory.size(); j++)
+					 {
+						 if (inventory[i] == inventory[j])
+							 count++;
+					 }
+
+					 std::ostringstream total;
+					 total << count << "/5";
+					 GameData::GetInstance()->GetFont()->DrawString(total.str(), 490.0f, 185.0f + (i * 55), { 155, 155, 155 }, 1.5f);
+				 }
+	}
+		break;
+	case MenuSubStates::Party:
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 50.0f, 50.0f }, { 0, 0, 300, 540 });
+		for (unsigned int i = 0; i < Party.size(); i++)
+		{
+			GameData::GetInstance()->GetFont()->DrawString(Party[i]->GetName(), 100.0f, 185.0f + (i * 55), { 0, 0, 0 }, 1.5f);
+			std::ostringstream info;
+			info << "HP: " << Party[i]->GetHP() << "/" << Party[i]->GetMaxHP() << "  BP: " << Party[i]->GetBP() << "/" << Party[i]->GetMaxBP();
+			GameData::GetInstance()->GetFont()->DrawString(info.str(), 100.0f, 200.0f + (i * 55), { 0, 0, 0 }, 1.5f);
+		}
 		break;
 	default:
 		break;
@@ -716,7 +836,7 @@ Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lv
 	temp->SetMaxHP(_maxhp);
 	temp->SetSpeed(_speed);
 	temp->SetProgress(_progress);
-	temp->SetEtype( WIND );
+	temp->SetEtype(WIND);
 	if (abilityarr != nullptr)
 	{
 		for (int i = 0; i < 4; i++)
@@ -899,12 +1019,33 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 		std::string animation = root->FirstChildElement("Animation")->GetText();
 
 
+
 		if (type == "Ally")
 		{
 			//create a player
 			toon = CreateCombatPlayer(name, stats, level, HP, HP, BP, BP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
 			toon->SetMaxBP(BP);
 			toon->SetBP(BP);
+			if (element == "Wind")
+			{
+				toon->SetEtype(ETYPE::WIND);
+			}
+			else if (element == "Fire")
+			{
+				toon->SetEtype(ETYPE::FIRE);
+			}
+			else if (element == "Earth")
+			{
+				toon->SetEtype(ETYPE::EARTH);
+			}
+			else if (element == "Water")
+			{
+				toon->SetEtype(ETYPE::WATER);
+			}
+			else
+			{
+				toon->SetEtype(ETYPE::MULTI);
+			}
 		}
 		else if (type == "Enemy")
 		{
@@ -921,26 +1062,26 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 			return nullptr;
 		}
 
-		if ( element == "Wind" )
-			{
-			toon->SetEtype( ETYPE::WIND );
-			}
-		else if ( element == "Fire" )
-			{
-			toon->SetEtype( ETYPE::FIRE );
-			}
-		else if ( element == "Earth" )
-			{
-			toon->SetEtype( ETYPE::EARTH );
-			}
-		else if ( element == "Water" )
-			{
-			toon->SetEtype( ETYPE::WATER );
-			}
+		if (element == "Wind")
+		{
+			toon->SetEtype(ETYPE::WIND);
+		}
+		else if (element == "Fire")
+		{
+			toon->SetEtype(ETYPE::FIRE);
+		}
+		else if (element == "Earth")
+		{
+			toon->SetEtype(ETYPE::EARTH);
+		}
+		else if (element == "Water")
+		{
+			toon->SetEtype(ETYPE::WATER);
+		}
 		else
-			{
-			toon->SetEtype( ETYPE::MULTI );
-			}
+		{
+			toon->SetEtype(ETYPE::MULTI);
+		}
 
 	}
 	if (toon->GetName() == "Ratsputin")
@@ -1026,26 +1167,26 @@ Enemy* GamePlayState::LoadEnemy(std::string _path)
 		{
 			return nullptr;
 		}
-		if ( element == "Wind" )
-			{
-			toon->SetEtype( ETYPE::WIND );
-			}
-		else if ( element == "Fire" )
-			{
-			toon->SetEtype( ETYPE::FIRE );
-			}
-		else if ( element == "Earth" )
-			{
-			toon->SetEtype( ETYPE::EARTH );
-			}
-		else if ( element == "Water" )
-			{
-			toon->SetEtype( ETYPE::WATER );
-			}
+		if (element == "Wind")
+		{
+			toon->SetEtype(ETYPE::WIND);
+		}
+		else if (element == "Fire")
+		{
+			toon->SetEtype(ETYPE::FIRE);
+		}
+		else if (element == "Earth")
+		{
+			toon->SetEtype(ETYPE::EARTH);
+		}
+		else if (element == "Water")
+		{
+			toon->SetEtype(ETYPE::WATER);
+		}
 		else
-			{
-			toon->SetEtype( ETYPE::MULTI );
-			}
+		{
+			toon->SetEtype(ETYPE::MULTI);
+		}
 	}
 	return toon;
 }
@@ -1060,7 +1201,7 @@ void GamePlayState::RandomAnimation()
 
 			TownRender();
 			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (i * 40), 0.0f + (j * 40), (i * 40) + 40.0f, (j * 40) + 40.0f }, { 0, 0, 0 });
-			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (j * 40), 0.0f + (i * 40), (j * 40) + 40.0f, (i * 40) + 40.0f }, { 0,0,0 });
+			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (j * 40), 0.0f + (i * 40), (j * 40) + 40.0f, (i * 40) + 40.0f }, { 0, 0, 0 });
 			SGD::GraphicsManager::GetInstance()->Update();
 
 		}

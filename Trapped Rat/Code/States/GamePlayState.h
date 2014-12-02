@@ -17,7 +17,7 @@
 
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia };
-enum MenuSubStates{None, Options, HowTo, Shop};
+enum MenuSubStates{ None, Options, HowTo, Party, Shop };
 
 class HUDItem;
 class GamePlayState :
@@ -57,6 +57,10 @@ class GamePlayState :
 
 	SGD::HTexture targeting = SGD::INVALID_HANDLE;
 	SGD::HTexture buttonimg = SGD::INVALID_HANDLE;
+	SGD::HTexture scroll = SGD::INVALID_HANDLE;
+	SGD::HTexture trapcursor = SGD::INVALID_HANDLE;
+	SGD::HTexture cheesecursor = SGD::INVALID_HANDLE;
+
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
 
 	std::map<std::string, Ability*> MasterAbilityList;
@@ -65,7 +69,7 @@ class GamePlayState :
 	//items
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
-	int gold = 0;
+	int gold = 50;
 	
 
 public:
