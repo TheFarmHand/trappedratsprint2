@@ -697,6 +697,7 @@ Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lv
 	temp->SetMaxHP(_maxhp);
 	temp->SetSpeed(_speed);
 	temp->SetProgress(_progress);
+	temp->SetEtype( WIND );
 	if (abilityarr != nullptr)
 	{
 		for (int i = 0; i < 4; i++)
@@ -869,28 +870,6 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 		std::string death = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
 
 		std::string animation = root->FirstChildElement("Animation")->GetText();
-		
-
-		if (element == "Wind")
-		{
-			toon->SetEtype(ETYPE::WIND);
-		}
-		else if (element == "Fire")
-		{
-			toon->SetEtype(ETYPE::FIRE);
-		}
-		else if (element == "Earth")
-		{
-			toon->SetEtype(ETYPE::EARTH);
-		}
-		else if (element == "Water")
-		{
-			toon->SetEtype(ETYPE::WATER);
-		}
-		else
-		{
-			toon->SetEtype(ETYPE::MULTI);
-		}
 
 
 		if (type == "Ally")
@@ -915,7 +894,26 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 			return nullptr;
 		}
 
-
+		if ( element == "Wind" )
+			{
+			toon->SetEtype( ETYPE::WIND );
+			}
+		else if ( element == "Fire" )
+			{
+			toon->SetEtype( ETYPE::FIRE );
+			}
+		else if ( element == "Earth" )
+			{
+			toon->SetEtype( ETYPE::EARTH );
+			}
+		else if ( element == "Water" )
+			{
+			toon->SetEtype( ETYPE::WATER );
+			}
+		else
+			{
+			toon->SetEtype( ETYPE::MULTI );
+			}
 
 	}
 	return toon;
@@ -992,7 +990,26 @@ Enemy* GamePlayState::LoadEnemy(std::string _path)
 		{
 			return nullptr;
 		}
-
+		if ( element == "Wind" )
+			{
+			toon->SetEtype( ETYPE::WIND );
+			}
+		else if ( element == "Fire" )
+			{
+			toon->SetEtype( ETYPE::FIRE );
+			}
+		else if ( element == "Earth" )
+			{
+			toon->SetEtype( ETYPE::EARTH );
+			}
+		else if ( element == "Water" )
+			{
+			toon->SetEtype( ETYPE::WATER );
+			}
+		else
+			{
+			toon->SetEtype( ETYPE::MULTI );
+			}
 	}
 	return toon;
 }

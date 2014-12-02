@@ -90,7 +90,7 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 StatusEffect& StatusEffectManager::GetStatus( std::string status )
 {
 	if(status == "Burrow" || status == "Puddle" || status == "Collapse" || status == "Leaf on the Wind")
-		return *StatusList[ "Dodge" ];
+		return *StatusList[ "Dodging" ];
 
 	return *StatusList[ status ];
 }

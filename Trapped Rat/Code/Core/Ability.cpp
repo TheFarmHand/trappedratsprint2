@@ -2,6 +2,7 @@
 #include "Ability.h"
 #include "Character.h"
 #include "StatusEffect.h"
+#include "StatusEffectManager.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "GameData.h"
 #include "../tinyxml/tinyxml.h"
@@ -124,8 +125,8 @@ void Ability::CastAbility( Character* owner, Character* target )
 		{
 		target->TakeDamage( (int)-formulaTotal );
 		}
-	//if (status)
-	//	target->AddStatus()
+	if ( status )
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
 	}
 void Ability::CalculateFormula( Character* owner, Character* target )
 	{
@@ -140,27 +141,27 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 			break;
 		case 1:
 			if ( target->GetEType() == WATER )
-				weak = false;
+				weak = true;
 			else if ( target->GetEType() == FIRE )
-				strong = false;
+				strong = true;
 			break;
 		case 2:
 			if ( target->GetEType() == WIND)
-				weak = false;
+				weak = true;
 			else if ( target->GetEType() == EARTH )
-				strong = false;
+				strong = true;
 			break;
 		case 3:
 			if ( target->GetEType() == FIRE )
-				weak = false;
+				weak = true;
 			else if ( target->GetEType() == WATER )
-				strong = false;
+				strong = true;
 			break;
 		case 4:
 			if ( target->GetEType() == EARTH )
-				weak = false;
+				weak = true;
 			else if ( target->GetEType() == WIND )
-				strong = false;
+				strong = true;
 			break;
 		default:
 			weak = false;
