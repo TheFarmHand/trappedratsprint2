@@ -29,18 +29,25 @@ void  Bars::Render()
 	}
 	else
 	{
-		width = (int)((float)size.width * ((float)owner->GetHP() / owner->GetMaxHP()));
-		if ((float)owner->GetHP() / owner->GetMaxHP() > .66f)
+		if (is_HP)
 		{
-			color = SGD::Color(0, 255, 0);
-		}
-		else if ((float)owner->GetHP() / owner->GetMaxHP() > .25f)
-		{
-			color = SGD::Color(255, 255, 0);
+			width = (int)((float)size.width * ((float)owner->GetHP() / owner->GetMaxHP()));
+			if ((float)owner->GetHP() / owner->GetMaxHP() > .66f)
+			{
+				color = SGD::Color(0, 255, 0);
+			}
+			else if ((float)owner->GetHP() / owner->GetMaxHP() > .25f)
+			{
+				color = SGD::Color(255, 255, 0);
+			}
+			else
+			{
+				color = SGD::Color(255, 0, 0);
+			}
 		}
 		else
 		{
-			color = SGD::Color(255, 0, 0);
+			//width = (int)((float)size.width * ((float)owner->GetBP() / owner->GetMaxBP()));
 		}
 	}
 	if (width < 5 && width > 0)
@@ -88,4 +95,12 @@ Bars::Bars(SGD::Size sz, SGD::Point pos, Character * _owner)
 void Bars::SetColor(SGD::Color _color)
 {
 	color = _color;
+}
+void Bars::SetisHP(bool _is_HP)
+{
+	is_HP = _is_HP;
+}
+bool Bars::GetIsHP()
+{
+	return is_HP;
 }
