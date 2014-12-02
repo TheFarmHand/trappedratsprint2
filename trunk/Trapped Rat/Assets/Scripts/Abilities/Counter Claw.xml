@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Counter_Claw Name="Counter Claw" Offensive="false">
+<Help Text="::Counter and attack directed at you and reduces the damage taken by half." />
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="Counter" />
   <AreaOfEffect AOE="false" />

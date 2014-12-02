@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Poison_Fang Name="Poison Fang" Offensive="true">
+<Help Text="::Physical attack that poisons a single target." />
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="Poison" />
   <AreaOfEffect AOE="false" />

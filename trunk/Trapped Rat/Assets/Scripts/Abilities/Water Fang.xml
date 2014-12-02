@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Water_Fang Name="Water Fang" Offensive="true">
+<Help Text="::Physical attack that deals Water Elemental damage to a single target." />
   <Affinity ElementalType="Water" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
