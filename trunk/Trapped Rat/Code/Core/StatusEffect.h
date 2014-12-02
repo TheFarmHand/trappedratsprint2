@@ -18,6 +18,7 @@ private:
 	int curr_tick = 0;
 	int dmg_tick;
 	Character* owner;
+	Character* guard_caster;
 	enum STYPE { DOT, STAT, SPECIAL };
 	STYPE myType;
 	float stat_value = 0;

@@ -1,6 +1,7 @@
 
 #include "Character.h"
 #include "Numbers.h"
+#include "TurnManager.h"
 #include <cmath>
 Character::Character()
 {
@@ -55,7 +56,9 @@ void Character::Render()
 }
 void Character::Attack( Character* owner, Character * target )
 {
-
+	int atk = target->GetStats( ).attack;
+	int dmg = rand( ) % atk + 3;
+	TurnManager::GetInstance( )->AttackTarget(owner, target, dmg);
 }
 
 void Character::UseAbility()

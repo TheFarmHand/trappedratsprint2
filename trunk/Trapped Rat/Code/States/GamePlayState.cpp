@@ -797,6 +797,10 @@ void GamePlayState::CombatUpdate(float dt)
 		{
 		Party[0]->SetProgress( 100.0f );
 		}
+	if( input->IsKeyPressed(SGD::Key::L) )
+	{
+		Party[0]->AddStatus(&pStatManager->GetStatus("Regen"));
+	}
 
 	if (state == GPStates::Town)
 	{

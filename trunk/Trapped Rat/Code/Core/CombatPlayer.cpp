@@ -58,11 +58,16 @@ void CombatPlayer::Update( float dt )
 				return;
 			}
 
-			StatusTick();
+			StatusTick( );
+			if ( !alive )
+			{
+				progress = 0.0f;
+				return;
+			}
+			
 		}
 		TurnManager::GetInstance()->setTimeStop( true );
 		// Here is where targeting happens
-
 
 
 		if ( states == 0 )
