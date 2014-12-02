@@ -379,7 +379,7 @@ void GamePlayState::MenuUpdate(float dt)
 	switch (substate)
 	{
 	case None:
-		maxindex = 2;
+		maxindex = 3;
 		break;
 	case Options:
 		maxindex = 4;
@@ -404,26 +404,57 @@ void GamePlayState::MenuUpdate(float dt)
 
 			switch (menuindex)
 			{
-			/*case 1:
-				GameData::GetInstance()->PlaySelectionChange();
-				substate = MenuSubStates::Shop;
-
-				break;*/
 			case 0:
+			{
+					  GameData::GetInstance()->PlaySelectionChange();
+					  substate = MenuSubStates::Shop;
+					  //build the shop inventory
+					  Items smallheal;
+					  smallheal.SetName("Small Heal");
+					  smallheal.SetPrice(10);
+					  Items largeheal;
+					  largeheal.SetName("Large Heal");
+					  largeheal.SetPrice(20);
+					  Items smallbp;
+					  smallbp.SetName("Small BP Restore");
+					  smallbp.SetPrice(10);
+					  Items largebp;
+					  largebp.SetName("Large BP Restore");
+					  largebp.SetPrice(20);
+					  Items revive;
+					  revive.SetName("Revive");
+					  revive.SetPrice(40);
+					  Items maxrevive;
+					  maxrevive.SetName("Max Revive");
+					  maxrevive.SetPrice(100);
+
+					  shopinv.push_back(smallheal);
+					  shopinv.push_back(largeheal);
+					  shopinv.push_back(smallbp);
+					  shopinv.push_back(largebp);
+					  shopinv.push_back(revive);
+					  shopinv.push_back(maxrevive);
+
+
+					  break;
+			}
+			case 1:
 				GameData::GetInstance()->PlaySelectionChange();
 				GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 				state = GPStates::Town;
+				laststate = state;
 				substate = MenuSubStates::None;
 				menuindex = 0;
 				break;
-			case 1:
+			case 2:
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::Options;
 				break;
-			case 2:
+			case 3:
 				GameData::GetInstance()->PlaySelectionChange();
-				state = GPStates::Town;
+				state = laststate;
+				break;
 			default:
 				break;
 			}
@@ -549,17 +580,19 @@ void GamePlayState::MenuRender()
 
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 155, 155, 155 });
+	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 0,0,0 });
 	switch (substate)
 	{
 	case None:
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
-		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Shop", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
 
 		break;
 	case Options:
@@ -598,7 +631,8 @@ void GamePlayState::MenuRender()
 
 					break;
 	}
-	case HowTo:
+	case Shop:
+		//display each item and the price associated with it
 		break;
 	default:
 		break;
@@ -607,12 +641,15 @@ void GamePlayState::MenuRender()
 }
 void GamePlayState::CombatUpdate(float dt)
 {
+
+	laststate = GPStates::Combat;
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 
 
 	if (input->IsKeyPressed(SGD::Key::Backspace))
 	{
 		state = GPStates::Town;
+		laststate = state;
 		GameData::GetInstance()->SetIsInCombat(false);
 		TurnManager::GetInstance()->Terminate();
 
@@ -830,6 +867,28 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 		std::string death = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
 
 		std::string animation = root->FirstChildElement("Animation")->GetText();
+		
+
+		if (element == "Wind")
+		{
+			toon->SetEtype(ETYPE::WIND);
+		}
+		else if (element == "Fire")
+		{
+			toon->SetEtype(ETYPE::FIRE);
+		}
+		else if (element == "Earth")
+		{
+			toon->SetEtype(ETYPE::EARTH);
+		}
+		else if (element == "Water")
+		{
+			toon->SetEtype(ETYPE::WATER);
+		}
+		else
+		{
+			toon->SetEtype(ETYPE::MULTI);
+		}
 
 
 		if (type == "Ally")

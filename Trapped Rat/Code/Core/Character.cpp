@@ -99,6 +99,10 @@ ETYPE Character::GetEType()
 {
 	return element;
 }
+void Character::SetEtype(ETYPE _type)
+{
+	element = _type;
+}
 
 std::list<StatusEffect*>& Character::GetEffects()
 {

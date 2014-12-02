@@ -1,0 +1,12 @@
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\bin\Debug\Character Editor.exe.config
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character Editor.csprojResolveAssemblyReference.cache
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character_Editor.Properties.Resources.resources
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character Editor.csproj.GenerateResource.Cache
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\bin\Debug\Character Editor.exe
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\bin\Debug\Character Editor.pdb
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character Editor.exe
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character Editor.pdb
+C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character_Editor.CharacterEditor.resources
+C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\bin\Debug\Character Editor.exe.config
+C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\obj\Debug\Character Editor.exe
+C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\obj\Debug\Character Editor.pdb
