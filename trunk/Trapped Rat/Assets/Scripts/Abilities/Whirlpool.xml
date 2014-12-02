@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Flood Name="Flood" Offensive="true">
+<Whirlpool Name="Whirlpool" Offensive="true">
   <Affinity ElementalType="Water" />
-  <StatusEffect Effect="None" />
-  <AreaOfEffect AOE="true" />
+  <StatusEffect Effect="Confused" />
+  <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
   <Paths>
     <AniPath></AniPath>
@@ -10,8 +10,8 @@
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.3" />
-    <BaseBP bp="6" />
+    <MagicMod mgcMod="0.0" />
+    <BaseBP bp="2" />
     <HPMod />
   </DamageInfo>
-</Flood>
+</Whirlpool>

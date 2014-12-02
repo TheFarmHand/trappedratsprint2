@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Squirt Name="Squirt" Offensive="true">
-  <Affinity ElementalType="Water" />
+<Earth_Fang Name="Earth Fang" Offensive="true">
+  <Affinity ElementalType="Earth" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
+  <UnlockLevel Level="6" />
   <Paths>
     <AniPath></AniPath>
     <WavPath></WavPath>
   </Paths>
   <DamageInfo>
-    <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.2" />
-    <BaseBP bp="2" />
+    <AttackMod atkMod="1.0" />
+    <MagicMod mgcMod="0.5" />
+    <BaseBP bp="4" />
     <HPMod />
   </DamageInfo>
-</Squirt>
+</Earth_Fang>

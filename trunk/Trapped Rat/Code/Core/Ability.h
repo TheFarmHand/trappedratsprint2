@@ -21,6 +21,8 @@ private:
 	float atkMod, mgcMod;
 	float hpMod;
 	int bpCost;
+	int unlockLevel;
+	bool unlocked;
 	bool access;
 
 public:

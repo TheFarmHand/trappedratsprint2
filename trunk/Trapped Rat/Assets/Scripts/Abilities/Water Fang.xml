@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Flood Name="Flood" Offensive="true">
+<Water_Fang Name="Water Fang" Offensive="true">
   <Affinity ElementalType="Water" />
   <StatusEffect Effect="None" />
-  <AreaOfEffect AOE="true" />
+  <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
+  <UnlockLevel Level="2" />
   <Paths>
     <AniPath></AniPath>
     <WavPath></WavPath>
   </Paths>
   <DamageInfo>
-    <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.3" />
-    <BaseBP bp="6" />
+    <AttackMod atkMod="1.0" />
+    <MagicMod mgcMod="0.5" />
+    <BaseBP bp="4" />
     <HPMod />
   </DamageInfo>
-</Flood>
+</Water_Fang>

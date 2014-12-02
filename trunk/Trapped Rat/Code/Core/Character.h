@@ -39,6 +39,7 @@ public:
 	void virtual UpdateAnimation( float dt );
 	void virtual Render();
 	void virtual Attack( Character* owner, Character * target );
+	void virtual InitializeAbilities( std::vector<Ability*> toSet );
 	
 	void UseAbility();
 	void virtual StatusTick();

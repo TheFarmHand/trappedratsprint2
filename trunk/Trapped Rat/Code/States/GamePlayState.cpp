@@ -101,13 +101,18 @@ void GamePlayState::Enter()
 	p1->SetOrderPosition(0);
 	p1->SetPosition({100,150});
 	p1->SetSize({ 64, 64 });
+	std::vector<Ability*> partyAbilities;
+	partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
+	p1->InitializeAbilities( partyAbilities );
 	Party.push_back(p1);
-	//GameData::GetInstance()->SetCombatParty(dynamic_cast<CombatPlayer*>(p1), 0);
-
-	//p2 = dynamic_cast<CombatPlayer*>(CreateCombatPlayer("Ratsputin", sts, 1, 50, 50, 31.0f, 0.0f, nullptr, SGD::Point(100, 250), SGD::Size(64, 64), "RatAnimBattle.xml"));
-	//p2->SetOrderPosition(1);
-	//GameData::GetInstance()->SetCombatParty(dynamic_cast<CombatPlayer*>(p2), 1);
-
+	
 
 
 	dialogue = new Dialogue();

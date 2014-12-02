@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Poison_Fang Name="Poison Fang" Offensive="true">
+  <Affinity ElementalType="Physical" />
+  <StatusEffect Effect="Poison" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="8" />
+  <Paths>
+    <AniPath></AniPath>
+    <WavPath></WavPath>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0.8" />
+    <MagicMod mgcMod="0.0" />
+    <BaseBP bp="3" />
+    <HPMod />
+  </DamageInfo>
+</Poison_Fang>

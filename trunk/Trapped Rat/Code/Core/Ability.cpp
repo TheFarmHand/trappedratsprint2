@@ -38,6 +38,8 @@ Ability::Ability( const char* path )
 		elementType = 3;
 	else if ( tempA == "Water" )
 		elementType = 4;
+	else if ( tempA == "Physical" )
+		elementType = 0;
 
 	TiXmlElement* statusEffect = affinity->NextSiblingElement( "StatusEffect" );
 	const char* tempStatus = statusEffect->Attribute( "Effect" );
@@ -64,7 +66,10 @@ Ability::Ability( const char* path )
 	else
 		healing = false;
 
-	TiXmlElement* paths = heals->NextSiblingElement( "Paths" );
+	TiXmlElement* unlock = heals->NextSiblingElement( "UnlockLevel" );
+	unlock->Attribute( "Level", &unlockLevel );
+
+	TiXmlElement* paths = unlock->NextSiblingElement( "Paths" );
 	TiXmlElement* aniPath = paths->FirstChildElement( "AniPath" );
 	TiXmlElement* wavPath = aniPath->NextSiblingElement( "WavPath" );
 
@@ -83,6 +88,7 @@ Ability::Ability( const char* path )
 	hpMod = (float)tempValue;
 
 	access = false;
+	unlocked = false;
 }
 
 
