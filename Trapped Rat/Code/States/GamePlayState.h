@@ -65,6 +65,7 @@ class GamePlayState :
 	//items
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
+	std::vector<Items> shopinv;
 	int gold = 0;
 
 public:
