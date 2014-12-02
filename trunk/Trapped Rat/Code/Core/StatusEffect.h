@@ -25,6 +25,7 @@ private:
 	void virtual HandleDOT( );
 	void virtual HandleSpecial( );
 	void virtual HandleStat( );
+	int virtual ElementalMod( );
 	
 
 public:
