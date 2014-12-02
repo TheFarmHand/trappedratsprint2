@@ -18,9 +18,6 @@
 #include <sstream>
 #include "../SGD Wrappers/SGD_EventManager.h"
 
-#include "../States/TestStateP.h"
-
-
 bool GameData::Initialize()
 {
 	srand((unsigned int)time(nullptr));
