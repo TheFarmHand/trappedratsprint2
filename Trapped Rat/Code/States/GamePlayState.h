@@ -16,7 +16,7 @@
 
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia };
-enum MenuSubStates{None, Options, HowTo};
+enum MenuSubStates{None, Options, HowTo, Shop};
 
 class HUDItem;
 class GamePlayState :
@@ -51,12 +51,17 @@ class GamePlayState :
 
 	SGD::HAudio m_Audio;
 	SGD::HAudio m_overAudio;
+	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
 
 	SGD::HTexture targeting = SGD::INVALID_HANDLE;
 	SGD::HTexture buttonimg = SGD::INVALID_HANDLE;
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
 
 	std::map<std::string, Ability*> MasterAbilityList;
+
+	//items
+	std::vector<Items> inventory;
+	int gold = 0;
 
 public:
 	bool is_test_message = false;

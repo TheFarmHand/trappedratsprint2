@@ -27,14 +27,14 @@ GamePlayState* GamePlayState::GetInstance()
 void GamePlayState::Enter()
 {
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
-	TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\TestTown.xml" );
+	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/tempcombathud.png");
 	targeting = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/targeticon.png");
 	buttonimg = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
 	combatback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/CombatTownBack.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
-	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/menubutton.png", { 255, 255, 255 });
-	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
+	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png");
 
 	Stats sts;
 	sts.attack = 10;
@@ -67,39 +67,39 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/HelpTextBox.png");
 	helptextbox->SetImage(helpback);
 
-	
+
 	std::fstream fin;
 
-	fin.open( "Assets/Scripts/Abilities/AbilityList.txt" );
-	if ( fin.is_open() )
-		{
+	fin.open("Assets/Scripts/Abilities/AbilityList.txt");
+	if (fin.is_open())
+	{
 		int count;
 		char buffer[64];
 		std::string abilPath;
 
 		fin >> count;
 
-		for ( int i = 0; i < count; i++ )
-			{
+		for (int i = 0; i < count; i++)
+		{
 			abilPath = "Assets/Scripts/Abilities/";
-			fin.ignore( INT_MAX, '\n' );
-			fin.get( buffer, 64, '\n' );
-			std::string temp( buffer );
+			fin.ignore(INT_MAX, '\n');
+			fin.get(buffer, 64, '\n');
+			std::string temp(buffer);
 
 			temp += ".xml";
 			abilPath += temp;
 
-			Ability* tempAbility = new Ability( abilPath.c_str() );
+			Ability* tempAbility = new Ability(abilPath.c_str());
 			MasterAbilityList[tempAbility->GetAbilityName()] = tempAbility;
-			}
-
 		}
+
+	}
 
 	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
 	CombatPlayer* p1 = nullptr;
 	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
 	p1->SetOrderPosition(0);
-	p1->SetPosition({100,150});
+	p1->SetPosition({ 100, 150 });
 	p1->SetSize({ 64, 64 });
 	std::vector<Ability*> partyAbilities;
 	partyAbilities.push_back( MasterAbilityList["Burrow"] );
@@ -119,11 +119,12 @@ void GamePlayState::Enter()
 	dialogue->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
 	//state = GPStates::Dia;
 
-	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/req.xwm" );
-	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
-	SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio, true );
+	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/req.xwm");
+	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm");
+	entercombat = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/entercombat.wav");
+	SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio, true);
 
-	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
+	GameData::GetInstance()->UpdateCamera(GameData::GetInstance()->GetOverworldPlayer());
 }
 void const GamePlayState::Render()
 {
@@ -157,7 +158,7 @@ void GamePlayState::Update(float dt)
 			state = GPStates::Menu;
 		}
 	}
-SGD::EventManager::GetInstance()->Update();
+	SGD::EventManager::GetInstance()->Update();
 
 	//put everything into functions here
 	//its going to get packed
@@ -201,40 +202,41 @@ void GamePlayState::Exit()
 		delete m_vSelectableItems[i];
 	}
 	m_vSelectableItems.clear();
-	if ( enemy1 != nullptr )
-		{
+	if (enemy1 != nullptr)
+	{
 		delete enemy1;
 		enemy1 = nullptr;
-		}
-	if (dialogue != nullptr )
-	delete dialogue;
-	if ( enemy2 != nullptr )
-		{
+	}
+	if (dialogue != nullptr)
+		delete dialogue;
+	if (enemy2 != nullptr)
+	{
 		delete enemy2;
 		enemy2 = nullptr;
-		}
+	}
 
-	if ( enemy3 != nullptr )
-		{
+	if (enemy3 != nullptr)
+	{
 		delete enemy3;
 		enemy3 = nullptr;
-		}
+	}
 
-	if (helptextbox != nullptr )
-	delete helptextbox;
-	
+	if (helptextbox != nullptr)
+		delete helptextbox;
 
-	for ( unsigned int i = 0; i < Party.size(); i++ )
-		{
+
+	for (unsigned int i = 0; i < Party.size(); i++)
+	{
 		delete Party[i];
 		Party[i] = nullptr;
-		}
+	}
 	Party.clear();
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(combatback);
 
-	SGD::AudioManager::GetInstance()->UnloadAudio( m_Audio );
-	SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_Audio);
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+	SGD::AudioManager::GetInstance()->UnloadAudio(entercombat);
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
@@ -258,10 +260,10 @@ void GamePlayState::Exit()
 	TurnManager::GetInstance()->Terminate();
 
 	auto iterAbil = MasterAbilityList.begin();
-		for ( ; iterAbil != MasterAbilityList.end(); ++iterAbil )
-		{
+	for (; iterAbil != MasterAbilityList.end(); ++iterAbil)
+	{
 		delete iterAbil->second;
-		}
+	}
 	MasterAbilityList.clear();
 
 }
@@ -286,7 +288,7 @@ void GamePlayState::Test()
 
 void GamePlayState::Fight()
 {
-if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::GetInstance()->GetIsInCombat())
+	if (GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::GetInstance()->GetIsInCombat())
 	{
 	stepcounter++;
 		//int sorandom = rand() % 250;
@@ -296,27 +298,27 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 		stepcounter = rand() % 100;
 			//play animation for entering random combat
 			RandomAnimation();
-		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
-			SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
+			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+				SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
 
-		SGD::AudioManager::GetInstance()->PlayAudio( m_Audio, true );
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
 
 			GameData::GetInstance()->SetIsInCombat(true);
 			state = GPStates::Combat;
 
-			
-			
-			
-			std::vector<Enemy*> tempEnemy;
-			
 
-			
-			if (enemy1 != nullptr )
-			delete enemy1;
-			if (enemy2 != nullptr )
-			delete enemy2;
-			if (enemy3 != nullptr )
-			delete enemy3;
+
+
+			std::vector<Enemy*> tempEnemy;
+
+
+
+			if (enemy1 != nullptr)
+				delete enemy1;
+			if (enemy2 != nullptr)
+				delete enemy2;
+			if (enemy3 != nullptr)
+				delete enemy3;
 
 			Stats sts;
 			sts.attack = 10;
@@ -347,7 +349,7 @@ if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::Get
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 450 + (Party[i]->GetOrderPosition()*50.0f)), Party[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
 			}
 
-			
+
 			for (size_t i = 0; i < tempEnemy.size(); i++)
 			{
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempEnemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
@@ -387,6 +389,7 @@ void GamePlayState::MenuUpdate(float dt)
 	SGD::InputManager* input = SGD::InputManager::GetInstance();
 	if (input->IsKeyPressed(SGD::Key::Escape))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		state = GPStates::Town;
 	}
 
@@ -399,17 +402,25 @@ void GamePlayState::MenuUpdate(float dt)
 
 			switch (menuindex)
 			{
+			/*case 1:
+				GameData::GetInstance()->PlaySelectionChange();
+				substate = MenuSubStates::Shop;
+
+				break;*/
 			case 0:
+				GameData::GetInstance()->PlaySelectionChange();
 				GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 				state = GPStates::Town;
 				substate = MenuSubStates::None;
 				menuindex = 0;
 				break;
 			case 1:
+				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::Options;
 				break;
 			case 2:
+				GameData::GetInstance()->PlaySelectionChange();
 				state = GPStates::Town;
 			default:
 				break;
@@ -419,6 +430,7 @@ void GamePlayState::MenuUpdate(float dt)
 			switch (menuindex)
 			{
 			case 4:
+				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::None;
 				break;
@@ -459,10 +471,12 @@ void GamePlayState::MenuUpdate(float dt)
 						{
 								  bool is = GameData::GetInstance()->GetFont()->IsSpanish();
 								  GameData::GetInstance()->GetFont()->SetSpanish(!is);
+								  GameData::GetInstance()->PlaySelectionChange();
 								  break;
 						}
 						case 1:
 						{
+
 								  if (input->IsKeyPressed(SGD::Key::Left))
 								  {
 									  GameData::GetInstance()->SetMusicVolume(GameData::GetInstance()->GetMusicVolume() - 5);
@@ -471,6 +485,7 @@ void GamePlayState::MenuUpdate(float dt)
 								  {
 									  GameData::GetInstance()->SetMusicVolume(GameData::GetInstance()->GetMusicVolume() + 5);
 								  }
+								  GameData::GetInstance()->PlaySelectionChange();
 								  break;
 						}
 						case 2:
@@ -483,10 +498,12 @@ void GamePlayState::MenuUpdate(float dt)
 								  {
 									  GameData::GetInstance()->SetEffectVolume(GameData::GetInstance()->GetEffectVolume() + 5);
 								  }
+								  GameData::GetInstance()->PlaySelectionChange();
 								  break;
 						}
 						case 3:
 						{
+								  GameData::GetInstance()->PlaySelectionChange();
 								  bool is = GameData::GetInstance()->GetWindowed();
 								  GameData::GetInstance()->SetWindowed(!is);
 								  SGD::GraphicsManager::GetInstance()->Resize({ GameData::GetInstance()->GetScreenWidth(), GameData::GetInstance()->GetScreenHeight() }, GameData::GetInstance()->GetWindowed());
@@ -507,12 +524,14 @@ void GamePlayState::MenuUpdate(float dt)
 		menuindex--;
 		if (menuindex < 0)
 			menuindex = maxindex;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 	if (input->IsKeyPressed(SGD::Key::Down))
 	{
 		menuindex++;
 		if (menuindex > maxindex)
 			menuindex = 0;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 }
 void GamePlayState::TownRender()
@@ -587,8 +606,8 @@ void GamePlayState::MenuRender()
 void GamePlayState::CombatUpdate(float dt)
 {
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	
-	
+
+
 	if (input->IsKeyPressed(SGD::Key::Backspace))
 	{
 		state = GPStates::Town;
@@ -596,12 +615,12 @@ void GamePlayState::CombatUpdate(float dt)
 		TurnManager::GetInstance()->Terminate();
 
 	}
-	if ( state == GPStates::Town )
-		{
-		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
-			SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
-		SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
-		}
+	if (state == GPStates::Town)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
+	}
 
 	TurnManager::GetInstance()->Update(dt);
 
@@ -664,7 +683,7 @@ CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats,
 {
 	CombatPlayer * temp = new CombatPlayer();
 	temp->SetName(name);
-	temp->SetActive( true );
+	temp->SetActive(true);
 	temp->SetStats(_stats);
 	temp->SetLevel(_lvl);
 	temp->SetHP(_hp);
@@ -698,7 +717,7 @@ HUDItem * GamePlayState::CreateHudItem(SGD::HTexture _image, SGD::Point _positio
 {
 	HUDItem* temp = new HUDItem();
 	temp->SetImage(_image);
-	temp->SetActive( true );
+	temp->SetActive(true);
 	temp->SetString(_string);
 	temp->SetPosition(_position);
 	temp->SetSize(_size);
@@ -710,7 +729,7 @@ HUDItem* GamePlayState::CreateBar(SGD::Size _size, SGD::Point _pos, Character * 
 	Bars * temp = new Bars(_size, _pos, _owner);
 	//temp->SetImage(_image);
 	temp->SetOffset(_offset);
-	temp->SetActive( true );
+	temp->SetActive(true);
 	temp->SetColor(_color);
 	return temp;
 }
@@ -734,7 +753,7 @@ SelectableObject * GamePlayState::CreateSelectableObject(SGD::HTexture _image, S
 	SelectableObject* temp = new SelectableObject();
 	temp->SetImage(_image);
 	temp->SetString(_string);
-	temp->SetActive( true );
+	temp->SetActive(true);
 	temp->SetPosition(_position);
 	temp->SetSize(_size);
 	return temp;
@@ -803,26 +822,28 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 		stats.avoision_scale = std::stof(Stat->FirstChildElement("Attack")->FirstChildElement("Scale")->GetText());
 
 		level = std::stoi(root->FirstChildElement("Level")->GetText());
-		
+
 		std::string hurt = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
 		std::string attack = root->FirstChildElement("Sound")->FirstChildElement("Attack")->GetText();
 		std::string death = root->FirstChildElement("Sound")->FirstChildElement("Hurt")->GetText();
 
 		std::string animation = root->FirstChildElement("Animation")->GetText();
 
-		
+
 		if (type == "Ally")
 		{
 			//create a player
 			toon = CreateCombatPlayer(name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
+			toon->SetMaxBP(BP);
+			toon->SetCurrBP(BP);
 		}
-		else if(type == "Enemy")
+		else if (type == "Enemy")
 		{
-			
+
 			return nullptr;
-			
+
 		}
-		else if(type == "Guard")
+		else if (type == "Guard")
 		{
 			return nullptr;
 		}
@@ -831,13 +852,13 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 			return nullptr;
 		}
 
-		
+
 
 	}
 	return toon;
 
 
-	
+
 }
 Enemy* GamePlayState::LoadEnemy(std::string _path)
 {
@@ -915,16 +936,17 @@ Enemy* GamePlayState::LoadEnemy(std::string _path)
 
 void GamePlayState::RandomAnimation()
 {
-	for (int i = 0; i < 20; i+=3)
+	SGD::AudioManager::GetInstance()->PlayAudio(entercombat);
+	for (int i = 0; i < 20; i += 3)
 	{
-		for (int j = 0; j < 20; j+=3)
+		for (int j = 0; j < 20; j += 3)
 		{
-			
+
 			TownRender();
 			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (i * 40), 0.0f + (j * 40), (i * 40) + 40.0f, (j * 40) + 40.0f }, { 0, 0, 0 });
-			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (j * 40), 0.0f + (i * 40), (j * 40) + 40.0f, (i * 40) + 40.0f }, { 155,155,155 });
+			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0f + (j * 40), 0.0f + (i * 40), (j * 40) + 40.0f, (i * 40) + 40.0f }, { 0,0,0 });
 			SGD::GraphicsManager::GetInstance()->Update();
-			
+
 		}
 	}
 }

@@ -30,6 +30,9 @@ public:
 	AnimationSystem* GetAnimations();
 	bool TestAbility;
 
+	void SetMaxBP(int _bp){ maxBP = _bp; }
+	void SetCurrBP(int _bp){ curBP = _bp; }
+
 
 private:
 	bool active;

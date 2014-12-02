@@ -245,6 +245,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Left ) )
 		{
+		GameData::GetInstance()->PlaySelectionChange();
 		--myTarget;
 		if ( myTarget < 0 ) 
 			myTarget = targets.size() - 1;
@@ -269,6 +270,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsKeyPressed( SGD::Key::Right ) )
 		{
+		GameData::GetInstance()->PlaySelectionChange();
 		++myTarget;
 		
 		if ( myTarget > (int)targets.size() - 1 )
@@ -308,29 +310,34 @@ void CombatPlayer::HomeUpdate(float dt)
 	{
 		if (pInput->IsKeyPressed(SGD::Key::Up))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection(0);
 			hudSelection = 0;
 
 		}
 		else if (pInput->IsKeyPressed(SGD::Key::Right))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection(2);
 			hudSelection = 2;
 		}
 		else if (pInput->IsKeyPressed(SGD::Key::Left))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection(1);
 			hudSelection = 1;
 
 		}
 		else if (pInput->IsKeyPressed(SGD::Key::Down))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection(3);
 			hudSelection = 3;
 		}
 
 		if (pInput->IsKeyPressed(SGD::Key::Enter))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			switch (hudSelection)
 			{
 			case 0: // Attack
@@ -418,7 +425,7 @@ void CombatPlayer::AttackUpdate(float dt)
 		//	}
 		//else
 		//	{
-
+		GameData::GetInstance()->PlaySelectionChange();
 		Attack(this, pTurn->GetEnemies()[myTarget]);
 		//	}
 		myTarget = 0;
@@ -434,6 +441,7 @@ void CombatPlayer::AttackUpdate(float dt)
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Escape))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
 		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
 		mySelection = none;
@@ -487,24 +495,29 @@ void CombatPlayer::AbilityUpdate(float dt)
 
 	if (pInput->IsKeyPressed(SGD::Key::Up))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 0;
 
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Right))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 2;
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Left))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 1;
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Down))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 3;
 	}
 
 	if (pInput->IsKeyPressed(SGD::Key::Escape))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
 		help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
 		mySelection = none;
@@ -513,6 +526,7 @@ void CombatPlayer::AbilityUpdate(float dt)
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Enter))
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		if (menu[hudSelection]->GetAbility() == nullptr)
 		{
 			return;

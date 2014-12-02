@@ -26,7 +26,7 @@ void OptionsState::Enter()
 	maxindex = 4;
 
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
-	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/menubutton.png", { 255, 255, 255 });
+	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png", { 255, 255, 255 });
 	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
 }
 void const OptionsState::Render()
@@ -75,6 +75,7 @@ void OptionsState::Update(float dt)
 	if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 1))
 	{
 		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 	if (menuindex == 0)
 	{
@@ -82,6 +83,7 @@ void OptionsState::Update(float dt)
 		{
 			bool is = GameData::GetInstance()->GetFont()->IsSpanish();
 			GameData::GetInstance()->GetFont()->SetSpanish(!is);
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 	}
 	if (menuindex == 1)
@@ -89,10 +91,12 @@ void OptionsState::Update(float dt)
 		if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left))
 		{
 			GameData::GetInstance()->SetMusicVolume(GameData::GetInstance()->GetMusicVolume() - 5);
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 		else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right))
 		{
 			GameData::GetInstance()->SetMusicVolume(GameData::GetInstance()->GetMusicVolume() + 5);
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 	}
 	if (menuindex == 2)
@@ -100,25 +104,34 @@ void OptionsState::Update(float dt)
 		if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left))
 		{
 			GameData::GetInstance()->SetEffectVolume(GameData::GetInstance()->GetEffectVolume() - 5);
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 		else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right))
 		{
 			GameData::GetInstance()->SetEffectVolume(GameData::GetInstance()->GetEffectVolume() + 5);
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 	}
 	if (menuindex == 3)
 	{
 		if (input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right))
 		{
+			GameData::GetInstance()->PlaySelectionChange();
 			bool is = GameData::GetInstance()->GetWindowed();
 			GameData::GetInstance()->SetWindowed(!is);
 			SGD::GraphicsManager::GetInstance()->Resize({ GameData::GetInstance()->GetScreenWidth(), GameData::GetInstance()->GetScreenHeight() }, GameData::GetInstance()->GetWindowed());
+			
 		}
 	}
 	if (menuindex == 4)
 	{
 		if (input->IsKeyPressed(SGD::Key::Enter))
+		{
+			GameData::GetInstance()->PlaySelectionChange();
 			GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+			
+		}
+		
 	}
 
 
@@ -132,12 +145,14 @@ void OptionsState::Update(float dt)
 		menuindex--;
 		if (menuindex < 0)
 			menuindex = maxindex;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down))
 	{
 		menuindex++;
 		if (menuindex > maxindex)
 			menuindex = 0;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 }
 void OptionsState::Exit()
@@ -146,4 +161,5 @@ void OptionsState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
 	menuindex = 0;
+
 }

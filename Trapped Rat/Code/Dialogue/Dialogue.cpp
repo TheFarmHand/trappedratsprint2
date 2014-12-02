@@ -41,7 +41,7 @@ void Dialogue::Load(std::string filepath)
 
 				temp.name = _mess->FirstChildElement("Name")->GetText();
 				temp.words = _mess->FirstChildElement("Words")->GetText();
-				temp.imagepath =  _mess->FirstChildElement("Portrait")->GetText();
+				temp.imagepath = _mess->FirstChildElement("Portrait")->GetText();
 
 				messages.push_back(temp);
 
@@ -52,7 +52,7 @@ void Dialogue::Load(std::string filepath)
 
 
 		//now get some images
-		
+
 		for (unsigned int i = 0; i < messages.size(); i++)
 		{
 			paths.push_back("../Trapped Rat/Assets/Textures/" + messages[i].imagepath);
@@ -66,66 +66,67 @@ void Dialogue::Load(std::string filepath)
 		images.push_back(temp);
 	}
 }
-	bool Dialogue::Update(float dt)
+bool Dialogue::Update(float dt)
+{
+	if (messages.size() > 0)
 	{
-		if (messages.size() > 0)
+		//here we take in input and make sure they dont just spam through the whole dialogue
+		timer -= dt;
+
+
+
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && timer <= 0)
 		{
-			//here we take in input and make sure they dont just spam through the whole dialogue
-			timer -= dt;
-
-
-
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && timer <= 0)
-			{
-				messages.erase(messages.begin());
-				SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
-				images.erase(images.begin());
-				timer = 2.0f;
-			}
-			return true;
+			GameData::GetInstance()->PlaySelectionChange();
+			messages.erase(messages.begin());
+			SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
+			images.erase(images.begin());
+			timer = 2.0f;
 		}
-		
-			return false;
-		
-
-
+		return true;
 	}
-	void Dialogue::Render()
+
+	return false;
+
+
+
+}
+void Dialogue::Render()
+{
+	if (messages.size() > 0)
 	{
-		if (messages.size() > 0)
+
+		//render the reactangle at the bottom of the screen
+		//make sure to show the portrait
+		//make sure the rectangle is big enough to read easily
+		//
+
+
+
+		//render the rectangle
+		SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
+
+
+
+		//render the words of the top message in the vector along with the portrait
+		std::string temp = messages.front().words;
+		GameData::GetInstance()->GetFont()->DrawString(temp, 50.0f, 450.0f, { 0, 0, 0 });
+		if (images[0] != SGD::INVALID_HANDLE)
+		{
+			SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { 700.0f, 425.0f });
+		}
+
+
+		//display at the bottom to continue
+		if (timer <= 0)
 		{
 
-			//render the reactangle at the bottom of the screen
-			//make sure to show the portrait
-			//make sure the rectangle is big enough to read easily
-			//
-
-
-
-			//render the rectangle
-			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
-
-
-
-			//render the words of the top message in the vector along with the portrait
-			std::string temp = messages.front().words;
-			GameData::GetInstance()->GetFont()->DrawString(temp, 50.0f, 450.0f, { 0, 0, 0 });
-			if (images[0] != SGD::INVALID_HANDLE)
-			{
-				SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { 700.0f, 425.0f });
-			}
-
-
-			//display at the bottom to continue
-			if (timer <= 0)
-			{
-
-				GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 50.0f, 550.0f, { 0, 0, 0 });
-			}
-
+			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 50.0f, 550.0f, { 0, 0, 0 });
 		}
-		
 
 	}
 
-	
+
+}
+
+
