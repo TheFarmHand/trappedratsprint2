@@ -125,10 +125,10 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	Character* Guard = nullptr;
 
 	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
-	for ( auto iter = owner->GetEffects().begin(); iter != owner->GetEffects().end(); iter++ )
+	for ( auto iter = target->GetEffects().begin(); iter != target->GetEffects().end(); iter++ )
 	{
 		// Check for Dodge abilities
-		if ( ( *iter )->GetName() == "Dodge" )
+		if ( ( *iter )->GetName() == "Dodging" )
 		{
 			// Found dodge!  
 			dodge = true;
@@ -142,12 +142,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 		}
 
-		if ( ( *iter )->GetName() == "Fire Spikes" )
+		if ( ( *iter )->GetName() == "FireSpikes" )
 		{
 			firespike = true;
 		}
 
-		if ( ( *iter )->GetName() == "Counter Claw" )	// Might need refactoring if multiple versions of counter exist
+		if ( ( *iter )->GetName() == "Counter" )	// Might need refactoring if multiple versions of counter exist
 		{
 			counter = true;
 		}
@@ -173,6 +173,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Do some Dodge word magic instead of damage
 		// For now:
 		value = 0;
+		target->TakeDamage(value);
 	}
 
 	if ( guard )
