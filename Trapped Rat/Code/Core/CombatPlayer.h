@@ -30,8 +30,8 @@ public:
 	AnimationSystem* GetAnimations();
 	bool TestAbility;
 
-	void SetMaxBP(int _bp){ maxBP = _bp; }
-	void SetCurrBP(int _bp){ curBP = _bp; }
+	//void SetMaxBP(int _bp){ maxBP = _bp; }
+	//void SetCurrBP(int _bp){ curBP = _bp; }
 
 
 private:
@@ -56,7 +56,7 @@ private:
 	void AllySelectUpdate(float dt);
 	void EnemySelectUpdate(float dt);
 	void SetHomeButtons();
-	int maxBP;
-	int curBP;
+	//int maxBP;
+	//int curBP;
 };
 

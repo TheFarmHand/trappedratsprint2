@@ -22,6 +22,8 @@ protected:
 	int level;
 	int HP;
 	int MaxHP;
+	int BP;
+	int MaxBP;
 	float speed;
 	float progress;
 	int order;
@@ -55,6 +57,8 @@ public:
 	int GetLevel();
 	int GetHP();
 	int GetMaxHP();
+	int GetBP();
+	int GetMaxBP();
 	float GetSpeed();
 	float GetProgress();
 	int GetOrderPosition();
@@ -72,6 +76,8 @@ public:
 	void SetLevel(int _level);
 	void SetHP(int _hp);
 	void SetMaxHP(int _max);
+	void SetBP( int _bp );
+	void SetMaxBP( int _max );
 	void SetSpeed(float _speed);
 	void SetProgress(float _progress);
 	void SetAbility(int index, Ability* _ability);
