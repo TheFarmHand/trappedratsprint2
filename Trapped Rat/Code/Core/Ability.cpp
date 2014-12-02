@@ -28,7 +28,12 @@ Ability::Ability( const char* path )
 	else
 		offensive = false;
 
-	TiXmlElement* affinity = root->FirstChildElement( "Affinity" );
+	TiXmlElement* help = root->FirstChildElement( "Help" );
+	const char* tempHelp = help->Attribute( "Text" );
+	std::string tempH( tempHelp );
+	explination = tempH;
+
+	TiXmlElement* affinity = help->NextSiblingElement( "Affinity" );
 	const char* tempAff = affinity->Attribute( "ElementalType" );
 	std::string tempA( tempAff );
 	if ( tempA == "Wind" )

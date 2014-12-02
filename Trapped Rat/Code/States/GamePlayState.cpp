@@ -102,12 +102,12 @@ void GamePlayState::Enter()
 	p1->SetPosition({ 100, 150 });
 	p1->SetSize({ 64, 64 });
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	//partyAbilities.push_back( MasterAbilityList["Burrow"] );
 	//partyAbilities.push_back( MasterAbilityList["Water Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	//partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	//partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
-	//partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
 	p1->InitializeAbilities( partyAbilities );

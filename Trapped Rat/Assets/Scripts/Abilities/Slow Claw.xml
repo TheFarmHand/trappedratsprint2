@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Slow_Claw Name="Slow Claw" Offensive="true">
+<Help Text="::Physical attack that slows the speed of a single target." />
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="SpeedDown" />
   <AreaOfEffect AOE="false" />

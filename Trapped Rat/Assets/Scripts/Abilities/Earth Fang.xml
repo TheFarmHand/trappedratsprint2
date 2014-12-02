@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Earth_Fang Name="Earth Fang" Offensive="true">
+<Help Text="::Physical attack that deals Earth Elemental damage to a single target." />
   <Affinity ElementalType="Earth" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
