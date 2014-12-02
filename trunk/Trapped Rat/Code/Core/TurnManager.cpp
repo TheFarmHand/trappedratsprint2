@@ -228,7 +228,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 
 			else if ( owner->GetEType( ) == EARTH )
 			{
-				return damage * 1.5f;
+				return (int)( damage * 1.5f );
 			}
 		}
 
@@ -236,7 +236,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 		{
 			if ( owner->GetEType( ) == WIND )
 			{
-				return damage * 1.5f;
+				return (int)(damage * 1.5f);
 			}
 
 			if ( owner->GetEType( ) == EARTH )
@@ -249,7 +249,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 		{
 			if ( owner->GetEType( ) == FIRE )	// Extra Damage
 			{
-				return damage * 1.5f;
+				return (int)( damage * 1.5f );
 			}
 
 			if ( owner->GetEType( ) == WATER )
@@ -267,7 +267,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 
 			if ( owner->GetEType( ) == WATER )
 			{
-				return damage * 1.5f;
+				return (int)( damage * 1.5f );
 			}
 		}
 
