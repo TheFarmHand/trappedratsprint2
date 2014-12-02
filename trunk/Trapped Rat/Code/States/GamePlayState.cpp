@@ -354,6 +354,7 @@ void GamePlayState::Fight()
 			{
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), Party[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 450 + (Party[i]->GetOrderPosition()*50.0f)), Party[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 650, 475 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 0, 255 ), SGD::Point( 0, 0 ) ) );
 			}
 
 
@@ -724,7 +725,7 @@ Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lv
 
 	return temp;
 }
-CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
+CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, int _bp, int _maxbp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
 {
 	CombatPlayer * temp = new CombatPlayer();
 	temp->SetName(name);
@@ -733,6 +734,8 @@ CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats,
 	temp->SetLevel(_lvl);
 	temp->SetHP(_hp);
 	temp->SetMaxHP(_maxhp);
+	temp->SetBP( _bp );
+	temp->SetMaxBP( _maxbp );
 	temp->SetSpeed(_speed);
 	temp->SetProgress(_progress);
 	if (abilityarr != nullptr)
@@ -878,9 +881,9 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 		if (type == "Ally")
 		{
 			//create a player
-			toon = CreateCombatPlayer(name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
+			toon = CreateCombatPlayer(name, stats, level, HP, HP, BP, BP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation);
 			toon->SetMaxBP(BP);
-			toon->SetCurrBP(BP);
+			toon->SetBP(BP);
 		}
 		else if (type == "Enemy")
 		{

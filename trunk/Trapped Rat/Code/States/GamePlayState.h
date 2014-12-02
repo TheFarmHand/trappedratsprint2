@@ -3,7 +3,6 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_MessageManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
-#include "../Core/StatusEffectManager.h"
 #include "../Tile/Layer.h"
 #include "../Tile/TileSystem.h"
 #include "../Core/Definitions.h"
@@ -13,6 +12,7 @@
 #include "../Core/SelectableObject.h"
 #include "../Core/HelpText.h"
 #include "../Core/Ability.h"
+#include "../Core/StatusEffectManager.h"
 
 
 class Player;
@@ -45,7 +45,6 @@ class GamePlayState :
 	int maxindex = 0;
 	int stepcounter = 0;
 	GPStates state = GPStates::Town;
-	GPStates laststate = GPStates::Town;
 	MenuSubStates substate = MenuSubStates::None;
 	std::vector<HUDItem*> m_vhuditems;
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
@@ -60,10 +59,8 @@ class GamePlayState :
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
 
 	std::map<std::string, Ability*> MasterAbilityList;
-	StatusEffectManager *pStatManager = nullptr;
-
+	StatusEffectManager* pStatManager;
 	//items
-	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 0;
 
@@ -83,7 +80,7 @@ public:
 
 	//factory methods
 	Enemy * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );
-	CombatPlayer * CreateCombatPlayer(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "");
+	CombatPlayer * CreateCombatPlayer(std::string, Stats, int, int, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "");
 	CombatPlayer * LoadCombatPlayer(std::string _path); //will only return a combat player if you send in the right path
 	Enemy* LoadEnemy(std::string _path);//will only return a combat player if you send in the right path
 

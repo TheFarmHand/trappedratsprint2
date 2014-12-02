@@ -313,7 +313,6 @@ void CombatPlayer::HomeUpdate( float dt )
 	TurnManager *pTurn = TurnManager::GetInstance();
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
-	unsigned int activeCounter = 0;
 
 	if ( states == 0 )
 	{
@@ -379,10 +378,9 @@ void CombatPlayer::HomeUpdate( float dt )
 					{
 					if ( abilityList[i]->GetUnlocked() )
 						{
-						menu[activeindex]->SetAbility( abilityList[i] );
-						menu[activeindex]->SetObjectType( 1 );
-						menu[activeindex]->SetString( abilityList[i]->GetAbilityName() );
-						activeindex++;
+						menu[i]->SetAbility( abilityList[i] );
+						menu[i]->SetObjectType( 1 );
+						menu[i]->SetString( abilityList[i]->GetAbilityName() );
 						}
 					else
 					{
@@ -550,7 +548,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 		{
 			return;
 		}
-		else if ( menu[ hudSelection ]->GetAbility()->GetBPCost() <= curBP )
+		else if ( menu[ hudSelection ]->GetAbility()->GetBPCost() <= GetBP() )
 		{
 			if ( menu[ hudSelection ]->GetAbility()->GetOffensive() )//Enemy attack
 			{

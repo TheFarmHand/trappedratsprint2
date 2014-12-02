@@ -114,6 +114,14 @@ int Character::GetMaxHP()
 {
 	return MaxHP;
 }
+int Character::GetBP()
+	{
+	return BP;
+	}
+int Character::GetMaxBP()
+	{
+	return MaxBP;
+	}
 float Character::GetSpeed()
 {
 	return speed;
@@ -171,6 +179,14 @@ void Character::SetMaxHP( int _max )
 {
 	MaxHP = _max;
 }
+void Character::SetBP( int _bp )
+	{
+	BP = _bp;
+	}
+void Character::SetMaxBP( int _max )
+	{
+	MaxBP = _max;
+	}
 void Character::SetSpeed( float _speed )
 {
 	speed = _speed;
