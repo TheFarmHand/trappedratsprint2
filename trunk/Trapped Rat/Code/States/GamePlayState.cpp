@@ -113,6 +113,8 @@ void GamePlayState::Enter()
 	p1->InitializeAbilities( partyAbilities );
 	p1->GetAbility( 0 )->SetUnlocked( true );
 	p1->GetAbility( 1 )->SetUnlocked( true );
+	p1->GetAbility( 2 )->SetUnlocked( true );
+	p1->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back(p1);
 	
 
@@ -353,8 +355,8 @@ void GamePlayState::Fight()
 			for (size_t i = 0; i < Party.size(); i++)
 			{
 				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), Party[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 450 + (Party[i]->GetOrderPosition()*50.0f)), Party[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
-				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 650, 475 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 0, 255 ), SGD::Point( 0, 0 ) ) );
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 440 + (Party[i]->GetOrderPosition()*50.0f)), Party[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
 			}
 
 
@@ -660,6 +662,19 @@ void GamePlayState::CombatUpdate(float dt)
 		TurnManager::GetInstance()->Terminate();
 
 	}
+	if ( input->IsKeyPressed( SGD::Key::Eight ) )
+		{
+		Party[0]->SetBP( Party[0]->GetMaxBP() );
+		}
+	if ( input->IsKeyPressed( SGD::Key::One ) )
+		{
+		Party[0]->SetHP( Party[0]->GetMaxHP() );
+		}
+	if ( input->IsKeyPressed( SGD::Key::Zero ) )
+		{
+		Party[0]->SetProgress( 100.0f );
+		}
+
 	if (state == GPStates::Town)
 	{
 		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
@@ -772,10 +787,11 @@ HUDItem * GamePlayState::CreateHudItem(SGD::HTexture _image, SGD::Point _positio
 	return temp;
 }
 
-HUDItem* GamePlayState::CreateBar(SGD::Size _size, SGD::Point _pos, Character * _owner, SGD::Color _color, SGD::Point _offset)
+HUDItem* GamePlayState::CreateBar(SGD::Size _size, SGD::Point _pos, Character * _owner, SGD::Color _color, SGD::Point _offset, bool isHP)
 {
 	Bars * temp = new Bars(_size, _pos, _owner);
 	//temp->SetImage(_image);
+	temp->SetisHP( isHP );
 	temp->SetOffset(_offset);
 	temp->SetActive(true);
 	temp->SetColor(_color);

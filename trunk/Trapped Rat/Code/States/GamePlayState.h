@@ -45,6 +45,7 @@ class GamePlayState :
 	int maxindex = 0;
 	int stepcounter = 0;
 	GPStates state = GPStates::Town;
+	GPStates laststate = GPStates::Town;
 	MenuSubStates substate = MenuSubStates::None;
 	std::vector<HUDItem*> m_vhuditems;
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
@@ -60,7 +61,9 @@ class GamePlayState :
 
 	std::map<std::string, Ability*> MasterAbilityList;
 	StatusEffectManager* pStatManager;
+
 	//items
+	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 0;
 
@@ -87,7 +90,7 @@ public:
 
 	HUDItem * CreateHudItem(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	SelectableObject * CreateSelectableObject(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
-	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset);
+	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset, bool isHP = true);
 
 	void RandomAnimation();
 
