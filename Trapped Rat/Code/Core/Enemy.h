@@ -20,5 +20,7 @@ public:
 
 	void SetAnimations(AnimationSystem*);
 	AnimationSystem* GetAnimations();
+
+	int virtual GetType();
 };
 

@@ -19,7 +19,7 @@ Enemy::~Enemy()
 }
 void Enemy::Update( float dt )
 {
-
+	
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 		progress += speed * dt;
 	else if ( progress < 100.0f )
@@ -82,6 +82,7 @@ void Enemy::UpdateAnimation( float dt )
 	{
 		ansys->Update( dt );
 	}
+	Character::Update(dt);
 }
 void Enemy::Render()
 {
@@ -102,7 +103,7 @@ void Enemy::Render()
 	{
 		SGD::GraphicsManager::GetInstance()->DrawTexture((*iter)->GetIcon(), {position.x, position.y-size.height-5});
 	}
-
+	Character::Render();
 }
 void Enemy::BehaviorAI()
 {
@@ -118,4 +119,8 @@ void Enemy::SetAnimations( AnimationSystem* _an )
 AnimationSystem* Enemy::GetAnimations()
 {
 	return ansys;
+}
+int Enemy::GetType()
+{
+	return type::Enemy;
 }
