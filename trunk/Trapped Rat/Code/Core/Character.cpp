@@ -87,6 +87,17 @@ void Character::TakeDamage( int dmg )
 	}
 }
 
+bool Character::HasEffect( std::string effect )
+{
+	for ( auto iter = GetEffects( ).begin( ); iter != GetEffects( ).end( ); iter++ )
+	{
+		if( (*iter)->GetName() == effect)
+			return true;
+	}
+
+	return false;
+}
+
 void Character::React()
 // Loops through status effects on the unit and calls their React function (for things like dodge and counter)
 {

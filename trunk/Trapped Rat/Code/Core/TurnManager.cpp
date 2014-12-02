@@ -124,6 +124,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	bool counter = false;
 	bool hedge = false;
 	Character* Guard = nullptr; 
+	StatusEffect* to_remove = nullptr;
 
 	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
 	for ( auto iter = target->GetEffects().begin(); iter != target->GetEffects().end(); iter++ )
@@ -151,6 +152,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if ( ( *iter )->GetName() == "Counter" )	
 		{
 			counter = true;
+			to_remove = (*iter);
 		}
 
 		else if( (*iter)->GetName() == "Hedge")
@@ -173,6 +175,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		value = value / 2;
 		target->TakeDamage(value);
 		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
+		to_remove->Clear();
 	}
 
 	if ( dodge )
@@ -225,7 +228,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 
 			else if ( owner->GetEType( ) == EARTH )
 			{
-				return damage * 2;
+				return damage * 1.5;
 			}
 		}
 
@@ -233,7 +236,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 		{
 			if ( owner->GetEType( ) == WIND )
 			{
-				return damage * 2;
+				return damage * 1.5;
 			}
 
 			if ( owner->GetEType( ) == EARTH )
@@ -246,7 +249,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 		{
 			if ( owner->GetEType( ) == FIRE )	// Extra Damage
 			{
-				return damage * 2;
+				return damage * 1.5;
 			}
 
 			if ( owner->GetEType( ) == WATER )
@@ -264,7 +267,7 @@ int TurnManager::ElementalMod( Character* owner, Character* target, int damage, 
 
 			if ( owner->GetEType( ) == WATER )
 			{
-				return damage * 2;
+				return damage * 1.5;
 			}
 		}
 

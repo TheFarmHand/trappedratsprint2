@@ -40,7 +40,7 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 	char a = ' ';
 	std::string name;
 	std::string image;
-	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/BlankParticle.png" );
+	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/TestParticleBlue.png" );
 	while ( !infile.eof() )
 	{
 		

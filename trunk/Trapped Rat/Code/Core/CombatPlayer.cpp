@@ -33,7 +33,9 @@ void CombatPlayer::Update( float dt )
 
 	
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
-		progress += speed * dt;
+	{
+			progress += speed * dt;
+	}
 	else if ( progress < 100.0f )
 	{
 		return;
@@ -46,10 +48,20 @@ void CombatPlayer::Update( float dt )
 		GamePlayState *game = GamePlayState::GetInstance();
 		HelpText *help = game->GetHelpText();
 		if ( TurnManager::GetInstance()->getTimeStop() == false )
+		{
 			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
+			if ( HasEffect( "Stun" ) )
+			{
+				// Lose your turn if stunned
+				StatusTick();
+				progress = 0;
+				return;
+			}
+
+			StatusTick();
+		}
 		TurnManager::GetInstance()->setTimeStop( true );
 		// Here is where targeting happens
-
 
 
 
@@ -544,6 +556,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 		SetHomeButtons();
 
 	}
+
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
