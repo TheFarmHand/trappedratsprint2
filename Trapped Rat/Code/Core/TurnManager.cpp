@@ -116,7 +116,7 @@ void TurnManager::HealTarget( Character* target, int value )
 	target->TakeDamage( -value);
 }
 void TurnManager::AttackTarget( Character* owner, Character* target, int value )
-// Handles status effects React in here
+// Handles status effects React in here, passes along the finalized damage to the target to get murdered
 {
 	bool dodge = false;
 	bool guard = false;
@@ -164,7 +164,8 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	{
 		// Do some damage to attacker
 		value = value / 2;
-		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever
+
+		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
 	}
 
 	if ( dodge )
@@ -182,10 +183,9 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	}
 
 	
-
 	if ( !dodge && !counter && !guard)
 	{
-		target->TakeDamage( value);
+		target->TakeDamage( value );
 
 		// This call places the emitter at the proper location
 		pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
@@ -194,6 +194,82 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		pPartMan->CreateEmitter( "takedamage" );
 	}
 }
+
+void TurnManager::UsingAbility(Character* owner, Character* target, Ability* ability)
+// Calculates and dishes out damage based on an ability
+{
+	// Room here for adding particle effects
+	ability->CalculateFormula(owner, target);
+	ability->CastAbility(owner, target);
+}
+
+int TurnManager::ElementalMod( Character* owner, Character* target, int damage, ETYPE element )
+{
+	// Modifies damage by elemental types
+	{
+		if ( element == FIRE )
+		{
+			if ( owner->GetEType( ) == WIND )	// Resist Damage
+			{
+				return damage / 2;
+			}
+
+			else if ( owner->GetEType( ) == EARTH )
+			{
+				return damage * 2;
+			}
+		}
+
+		else if ( element == WATER )
+		{
+			if ( owner->GetEType( ) == WIND )
+			{
+				return damage * 2;
+			}
+
+			if ( owner->GetEType( ) == EARTH )
+			{
+				return damage / 2;
+			}
+		}
+
+		else if ( element == WIND )
+		{
+			if ( owner->GetEType( ) == FIRE )	// Extra Damage
+			{
+				return damage * 2;
+			}
+
+			if ( owner->GetEType( ) == WATER )
+			{
+				return damage / 2;
+			}
+		}
+
+		else if ( element == EARTH )
+		{
+			if ( owner->GetEType( ) == FIRE )
+			{
+				return damage / 2;
+			}
+
+			if ( owner->GetEType( ) == WATER )
+			{
+				return damage * 2;
+			}
+		}
+
+		else if ( element == MULTI )		// is this still a thing?
+		{
+			// What do I do with this? phys + ele I think
+			return damage;
+		}
+
+		// Physical
+		return damage;
+	}
+}
+
 bool sortByProgress( Character* a, Character* b )
 {
 	return a->GetProgress() > b->GetProgress();
@@ -301,4 +377,4 @@ void TurnManager::ParticleUpdate( float dt )
 {
 	pPartMan->Update( dt );
 }
-//	pPartMan->Update( dt );
+

@@ -21,13 +21,15 @@ private:
 	enum STYPE { DOT, STAT, SPECIAL };
 	STYPE myType;
 
-	int HandleDOT();
-	int ElementalMod(int damage);
+	void virtual HandleDOT( );
+	void virtual HandleSpecial( );
+	void virtual HandleStat( );
+	
 
 public:
 	StatusEffect();
 	virtual ~StatusEffect();
-
+	void virtual Initialize( );
 	void virtual React(Character* attacker, ETYPE ele);
 	void virtual Turntick();
 	void virtual Clear();

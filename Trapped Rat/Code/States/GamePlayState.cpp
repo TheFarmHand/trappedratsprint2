@@ -127,6 +127,8 @@ void GamePlayState::Enter()
 	SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio, true);
 
 	GameData::GetInstance()->UpdateCamera(GameData::GetInstance()->GetOverworldPlayer());
+	pStatManager = StatusEffectManager::GetInstance();
+	pStatManager->Initialize();
 }
 void const GamePlayState::Render()
 {

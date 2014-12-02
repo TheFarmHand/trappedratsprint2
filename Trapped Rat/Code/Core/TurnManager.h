@@ -30,7 +30,9 @@ public:
 	void SetArrow(SGD::HTexture arrow)		{ targetArrow = arrow; }
 
 	void HealTarget(Character* target, int value);
+	int ElementalMod( Character* owner, Character* attacker, int damage, ETYPE element );
 	void AttackTarget(Character* owner, Character* target, int value);
+	void UsingAbility( Character* owner, Character* attacker, Ability* ability );
 
 private:
 	std::vector<Character*> AllCombatUnits;
