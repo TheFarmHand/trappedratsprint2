@@ -45,11 +45,12 @@ public:
 	void virtual Attack( Character* owner, Character * target );
 	void virtual InitializeAbilities( std::vector<Ability*> toSet );
 	
-	void UseAbility();
+	void virtual UseAbility();
 	void virtual StatusTick();
 	void virtual TakeDamage(int dmg);
 	void React();
 
+	bool virtual HasEffect(std::string effect);
 
 	//accessors
 	std::string GetName();

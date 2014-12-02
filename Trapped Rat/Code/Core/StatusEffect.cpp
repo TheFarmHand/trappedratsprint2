@@ -73,7 +73,7 @@ void StatusEffect::HandleSpecial()
 {
 	if(name == "SpeedDown")
 	{
-		stat_value = owner->GetSpeed() * .333;
+		stat_value = owner->GetSpeed() * .333f;
 		owner->SetSpeed(owner->GetSpeed() - stat_value);
 	}
 }
@@ -104,16 +104,21 @@ void StatusEffect::Clear( )
 	{
 		iter++;
 	}
-	Recover((*iter));
+	Recover();
 	owner->GetEffects().erase(iter);
 	delete this;
 }
 
-void StatusEffect::Recover(StatusEffect* status)
+void StatusEffect::Recover()
 {
 	if(name=="SpeedDown")
 	{
-		owner->SetSpeed(owner->GetSpeed() + stat_value;
+		owner->SetSpeed(owner->GetSpeed() + stat_value);
+	}
+
+	if(name=="SpeedUp")
+	{
+		owner->SetSpeed( owner->GetSpeed( ) - stat_value);
 	}
 }
 
