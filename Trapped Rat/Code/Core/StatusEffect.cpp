@@ -15,7 +15,7 @@ StatusEffect::~StatusEffect()
 
 }
 
-void StatusEffect::Initialize( )
+void StatusEffect::Initialize()
 {
 	// Lingering status effects that have immediate reprecussions.
 	switch ( myType )
@@ -25,20 +25,20 @@ void StatusEffect::Initialize( )
 			break;
 
 		case SPECIAL:
-			HandleSpecial( );
+			HandleSpecial();
 
 			break;
 
 		case STAT:
-			HandleStat( );
+			HandleStat();
 			break;
 	}
 }
 
-void  StatusEffect::React(Character* owner, ETYPE ele = PHYS)
+void  StatusEffect::React( Character* owner, ETYPE ele = PHYS )
 {
 	// Happens when unit is struck by an attack
-	
+
 }
 
 void  StatusEffect::Turntick()
@@ -47,8 +47,8 @@ void  StatusEffect::Turntick()
 	// Finite State time!
 	//int deal_damage = dmg_tick;
 	curr_tick++;
-	
-	switch(myType)
+
+	switch ( myType )
 	{
 		case DOT:
 
@@ -58,7 +58,7 @@ void  StatusEffect::Turntick()
 
 		case SPECIAL:
 			//HandleSpecial();
-			
+
 			break;
 
 		case STAT:
@@ -66,15 +66,81 @@ void  StatusEffect::Turntick()
 			break;
 	}
 
-	
+
+}
+
+int StatusEffect::ElementalMod()
+{
+	// Modifies damage by elemental types
+	int damage = dmg_tick;
+	if ( element == FIRE )
+	{
+		if ( owner->GetEType() == WIND )	// Resist Damage
+		{
+			return damage / 2;
+		}
+
+		else if ( owner->GetEType() == EARTH )
+		{
+			return (int)( damage * 1.5f );
+		}
+	}
+
+	else if ( element == WATER )
+	{
+		if ( owner->GetEType() == WIND )
+		{
+			return (int)( damage * 1.5f );
+		}
+
+		if ( owner->GetEType() == EARTH )
+		{
+			return damage / 2;
+		}
+	}
+
+	else if ( element == WIND )
+	{
+		if ( owner->GetEType() == FIRE )	// Extra Damage
+		{
+			return (int)( damage * 1.5f );
+		}
+
+		if ( owner->GetEType() == WATER )
+		{
+			return damage / 2;
+		}
+	}
+
+	else if ( element == EARTH )
+	{
+		if ( owner->GetEType() == FIRE )
+		{
+			return damage / 2;
+		}
+
+		if ( owner->GetEType() == WATER )
+		{
+			return (int)( damage * 1.5f );
+		}
+	}
+
+	else if ( element == MULTI )		// is this still a thing?
+	{
+		// What do I do with this? phys + ele I think
+		return damage;
+	}
+
+	// Physical
+	return damage;
 }
 
 void StatusEffect::HandleSpecial()
 {
-	if(name == "SpeedDown")
+	if ( name == "SpeedDown" )
 	{
 		stat_value = owner->GetSpeed() * .333f;
-		owner->SetSpeed(owner->GetSpeed() - stat_value);
+		owner->SetSpeed( owner->GetSpeed() - stat_value );
 	}
 }
 
@@ -85,40 +151,41 @@ void StatusEffect::HandleStat()
 
 void StatusEffect::HandleDOT()
 {
-	owner->TakeDamage( dmg_tick );
+	owner->TakeDamage( ElementalMod() );
+
 }
 
 
 
-void StatusEffect::Clear( )
+void StatusEffect::Clear()
 // Removes this effect from the player
 {
-	if(owner == NULL)
+	if ( owner == NULL )
 	{
 		// What are you doing?
 		return;
 	}
 
 	std::list<StatusEffect*>::iterator iter = owner->GetEffects().begin();
-	while((*iter) != this)
+	while ( ( *iter ) != this )
 	{
 		iter++;
 	}
 	Recover();
-	owner->GetEffects().erase(iter);
+	owner->GetEffects().erase( iter );
 	delete this;
 }
 
 void StatusEffect::Recover()
 {
-	if(name=="SpeedDown")
+	if ( name == "SpeedDown" )
 	{
-		owner->SetSpeed(owner->GetSpeed() + stat_value);
+		owner->SetSpeed( owner->GetSpeed() + stat_value );
 	}
 
-	if(name=="SpeedUp")
+	if ( name == "SpeedUp" )
 	{
-		owner->SetSpeed( owner->GetSpeed( ) - stat_value);
+		owner->SetSpeed( owner->GetSpeed() - stat_value );
 	}
 }
 
@@ -129,44 +196,44 @@ StatusEffect& StatusEffect::operator=( const StatusEffect& rhs )
 	element = rhs.element;
 	icon = rhs.icon;
 	num_ticks = rhs.num_ticks;
-	curr_tick = rhs.curr_tick ;
+	curr_tick = rhs.curr_tick;
 	dmg_tick = rhs.dmg_tick;
 	element = rhs.element;
 	myType = rhs.myType;
 
 
 	return *this;
-	
+
 }
 
 
 // Access Granted
-Character* StatusEffect::GetOwner( )
+Character* StatusEffect::GetOwner()
 {
 	return owner;
 }
 
-std::string StatusEffect::GetName( )
+std::string StatusEffect::GetName()
 {
 	return name;
 }
 
-ETYPE StatusEffect::GetElement( )
+ETYPE StatusEffect::GetElement()
 {
 	return element;
 }
 
-SGD::HTexture StatusEffect::GetIcon( )
+SGD::HTexture StatusEffect::GetIcon()
 {
 	return icon;
 }
 
-int StatusEffect::GetCurrTick( )
+int StatusEffect::GetCurrTick()
 {
 	return curr_tick;
 }
 
-int StatusEffect::GetNumTicks( )
+int StatusEffect::GetNumTicks()
 {
 	return num_ticks;
 }
@@ -196,5 +263,5 @@ void StatusEffect::SetTick( int tic )
 
 void StatusEffect::SetType( int type )
 {
-	myType = (STYPE) type;
+	myType = (STYPE)type;
 }

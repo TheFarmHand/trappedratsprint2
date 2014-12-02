@@ -46,9 +46,11 @@ void Character::Render()
 		damagenumbers[i]->Render();
 	}
 
+	int offset = 0;
 	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
 	{
-		SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { position.x, position.y - size.height - 5 } );
+		SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { (position.x-size.width/2) + 10*offset, position.y - size.height - 5 } );
+		offset++;
 	}
 }
 void Character::Attack( Character* owner, Character * target )
@@ -57,7 +59,7 @@ void Character::Attack( Character* owner, Character * target )
 }
 
 void Character::UseAbility()
-// 
+// Nothing?  Animations/Particles?
 {
 
 }

@@ -73,6 +73,12 @@ void TurnManager::Render()
 				float progress = AlliedUnits[i]->GetProgress() /100.0f;
 				progress *= 555;
 				SGD::GraphicsManager::GetInstance()->DrawTexture(AlliedUnits[i]->GetTimelineAnimation(), { 95+progress, 87 }, 0, {}, {}, {1.0f,1.0f});
+				int offset = 0;
+				for ( auto iter = AlliedUnits[ i ]->GetEffects( ).begin( ); iter != AlliedUnits[ i ]->GetEffects( ).end( ); iter++ )
+				{
+					SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { ( 95 + progress) + 10 * offset, 87 + 35 } );
+					offset++;
+				}
 			}
 		}
 		for (size_t i = 0; i < EnemyUnits.size(); i++)
@@ -82,15 +88,21 @@ void TurnManager::Render()
 				float progress = EnemyUnits[i]->GetProgress() / 100.0f;
 				progress *= 555;
 				SGD::GraphicsManager::GetInstance()->DrawTexture(EnemyUnits[i]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+				int offset = 0;
+				for ( auto iter = EnemyUnits[ i ]->GetEffects( ).begin( ); iter != EnemyUnits[ i ]->GetEffects( ).end( ); iter++ )
+				{
+					SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { ( 95 + progress) + 10 * offset, 87 + 35 } );
+					offset++;
+				}
 			}
 		}
-		if (AllCombatUnits[0]->GetProgress() >= 100.0f)
+		/*if (AllCombatUnits[0]->GetProgress >= 100.0f)
 		{
 			if (AllCombatUnits[0]->GetPortrait() != SGD::INVALID_HANDLE)
 			{
-				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 650, 20 }, 0, {}, {}, { 1.0f, 1.0f });
+				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
 			}
-		}
+		}*/
 	}
 
 	//*
@@ -258,72 +270,7 @@ void TurnManager::UsingAbility(Character* owner, Character* target, Ability* abi
 	ability->CastAbility(owner, target);
 }
 
-int TurnManager::ElementalMod( Character* owner, Character* target, int damage, ETYPE element )
-{
-	// Modifies damage by elemental types
-	{
-		if ( element == FIRE )
-		{
-			if ( owner->GetEType( ) == WIND )	// Resist Damage
-			{
-				return damage / 2;
-			}
 
-			else if ( owner->GetEType( ) == EARTH )
-			{
-				return (int)( damage * 1.5f );
-			}
-		}
-
-		else if ( element == WATER )
-		{
-			if ( owner->GetEType( ) == WIND )
-			{
-				return (int)(damage * 1.5f);
-			}
-
-			if ( owner->GetEType( ) == EARTH )
-			{
-				return damage / 2;
-			}
-		}
-
-		else if ( element == WIND )
-		{
-			if ( owner->GetEType( ) == FIRE )	// Extra Damage
-			{
-				return (int)( damage * 1.5f );
-			}
-
-			if ( owner->GetEType( ) == WATER )
-			{
-				return damage / 2;
-			}
-		}
-
-		else if ( element == EARTH )
-		{
-			if ( owner->GetEType( ) == FIRE )
-			{
-				return damage / 2;
-			}
-
-			if ( owner->GetEType( ) == WATER )
-			{
-				return (int)( damage * 1.5f );
-			}
-		}
-
-		else if ( element == MULTI )		// is this still a thing?
-		{
-			// What do I do with this? phys + ele I think
-			return damage;
-		}
-
-		// Physical
-		return damage;
-	}
-}
 
 bool sortByProgress( Character* a, Character* b )
 {
