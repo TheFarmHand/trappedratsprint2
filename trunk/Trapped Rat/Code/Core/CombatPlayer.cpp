@@ -18,8 +18,6 @@ CombatPlayer::CombatPlayer()
 	states = 0;
 	hudSelection = 0;
 	menu = GamePlayState::GetInstance()->GetSelectableObjects();
-	//tester.SetOffensive( true );
-	//tester.SetHealing( false );
 
 }
 
@@ -374,7 +372,7 @@ void CombatPlayer::HomeUpdate( float dt )
 					states = 3;
 					for ( size_t i = 0; i < 4; i++ )
 					{
-					if ( abilityList[i]->GetAccess() )
+					if ( abilityList[i]->GetUnlocked() )
 						{
 						menu[i]->SetAbility( abilityList[i] );
 						menu[i]->SetObjectType( 1 );
