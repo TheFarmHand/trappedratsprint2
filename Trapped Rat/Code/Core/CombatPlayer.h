@@ -28,7 +28,7 @@ public:
 
 	void SetAnimations(AnimationSystem*);
 	AnimationSystem* GetAnimations();
-	bool TestAbility;
+	
 
 	//void SetMaxBP(int _bp){ maxBP = _bp; }
 	//void SetCurrBP(int _bp){ curBP = _bp; }

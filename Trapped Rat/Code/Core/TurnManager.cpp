@@ -121,6 +121,8 @@ void TurnManager::Render()
 
 	//*Anything added below will render on top of combat characters
 	pPartMan->Render();
+	if ( GamePlayState::GetInstance()->AbilityUsed )
+		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
 
 }
 void TurnManager::setTimeStop( bool stop )
@@ -343,6 +345,14 @@ void TurnManager::EndCombat()
 }
 void TurnManager::CombatUpdate( float dt )
 {
+if ( GamePlayState::GetInstance()->AbilityUsed)
+	{
+	GamePlayState::GetInstance()->abilityTimer -= dt;
+	if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
+		GamePlayState::GetInstance()->AbilityUsed = false;
+	GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
+	}
+
 	if ( !turnPause )
 	{
 		if ( !timeStop )

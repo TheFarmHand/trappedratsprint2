@@ -7,8 +7,8 @@
   <Healing Heals="false" />
   <UnlockLevel Level="12" />
   <Paths>
-    <AniPath></AniPath>
-    <WavPath></WavPath>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />

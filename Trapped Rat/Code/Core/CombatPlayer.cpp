@@ -665,13 +665,23 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		{
 			for ( size_t i = 0; i < pTurn->GetAllies().size(); i++ )
 			{
-				if ( pTurn->GetAllies()[ i ]->isAlive() )
-					menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ i ] );
+			if ( pTurn->GetAllies()[i]->isAlive() )
+				{
+				menu[hudSelection]->GetAbility()->CastAbility( this, pTurn->GetAllies()[i] );
+				GamePlayState::GetInstance()->AbilityUsed = true;
+				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+				GamePlayState::GetInstance()->abilityTimer = 2.0f;
+				//GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
+				}
 			}
 		}
 		else if ( mySelection == player )
 		{
 			menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ] );
+			GamePlayState::GetInstance()->AbilityUsed = true;
+			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+			GamePlayState::GetInstance()->abilityTimer = 2.0f;
+			//GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 		}
 		myTarget = 0;
 		progress = 0.0f;
@@ -719,6 +729,10 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 				if ( pTurn->GetEnemies()[ i ]->isAlive() )
 				{
 					menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ i ] );
+					GamePlayState::GetInstance()->AbilityUsed = true;
+					GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+					GamePlayState::GetInstance()->abilityTimer = 2.0f;
+					//GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 				}
 			}
 		}
@@ -726,6 +740,10 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		{
 			// Turn Manager will handle the go between for abilities and attacks for consistency and particles
 			TurnManager::GetInstance()->UsingAbility( this, pTurn->GetEnemies()[ myTarget ], menu[ hudSelection ]->GetAbility() );
+			GamePlayState::GetInstance()->AbilityUsed = true;
+			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+			GamePlayState::GetInstance()->abilityTimer = 2.0f;
+			//GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 			//menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ myTarget ] );
 		}
 		myTarget = 0;
