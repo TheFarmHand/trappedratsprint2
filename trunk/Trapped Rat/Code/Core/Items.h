@@ -18,5 +18,7 @@ public:
 
 	void SetPrice(int _price){ price = _price; }
 	int GetPrice(){ return price; }
+
+	bool operator==(Items &rhs);
 };
 

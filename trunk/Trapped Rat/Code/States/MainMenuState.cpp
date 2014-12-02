@@ -25,7 +25,8 @@ void MainMenuState::Enter()
 {
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
-	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png", { 255, 255, 255 });
+	
 
 }
 void MainMenuState::Update(float dt)
@@ -111,7 +112,7 @@ void const MainMenuState::Render()
 
 	//display the cursor
 	//graphics->DrawString("*", { 45.0f, 100.0f + (index * 100) });
-	graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (index * 80) }, { 0, 0, 238, 73 });
+	graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (index * 80) }, { 0, 0, 238, 73 });
 
 	GameData::GetInstance()->GetFont()->DrawString("Play", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
