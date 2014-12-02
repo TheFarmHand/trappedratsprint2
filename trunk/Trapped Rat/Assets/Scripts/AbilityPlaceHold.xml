@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<PEffect>
+  <FlyWeight>
+    <MinLife>1.0</MinLife>
+    <MaxLife>1.0</MaxLife>
+    <ScaleStart>1</ScaleStart>
+    <ScaleEnd>1</ScaleEnd>
+    <VelocityStart>10</VelocityStart>
+    <VelocityEnd>25</VelocityEnd>
+    <RotationStart>0</RotationStart>
+    <RotationEnd>0</RotationEnd>
+    <ROffsetX>8</ROffsetX>
+    <ROffsetY>8</ROffsetY>
+    <ColorSA>255</ColorSA>
+    <ColorSR>0</ColorSR>
+    <ColorSG>255</ColorSG>
+    <ColorSB>0</ColorSB>
+    <ColorEA>255</ColorEA>
+    <ColorER>0</ColorER>
+    <ColorEG>255</ColorEG>
+    <ColorEB>0</ColorEB>
+    <FileName>BlankParticle.png</FileName>
+  </FlyWeight>
+  <Emitter>
+    <Shape>Point</Shape>
+    <Size>0</Size>
+    <SpawnRate>10</SpawnRate>
+    <MinParticles>1</MinParticles>
+    <MaxParticles>20</MaxParticles>
+    <Looping>False</Looping>
+    <PositionX>261</PositionX>
+    <PositionY>281</PositionY>
+    <DirectionX>4</DirectionX>
+    <DirectionY>-7</DirectionY>
+    <RangeX>True</RangeX>
+    <RangeY>False</RangeY>
+  </Emitter>
+</PEffect>
