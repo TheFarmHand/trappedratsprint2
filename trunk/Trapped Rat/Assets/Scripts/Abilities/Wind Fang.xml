@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wind_Fang Name="Wind Fang" Offensive="true">
-  <Help Text="::Physical attack that deals Wind Elemental damage to a single target." />
+  <Help Text="_Physical attack that deals Wind_Elemental damage to a single target." />
   <Affinity ElementalType="Wind" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
