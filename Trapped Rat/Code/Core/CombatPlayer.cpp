@@ -482,7 +482,9 @@ void CombatPlayer::ItemsUpdate( float dt )
 		progress = 0.0f;
 		mySelection = none;
 		states = 0;
+		TurnManager::GetInstance()->setProgressFullReached(false);
 		pTurn->setTimeStop( false );
+		pTurn->setTurnPause(true);
 		hudSelection = 0;
 		help->UpdateSelection( 5 );
 		SetSelection( 0 );
