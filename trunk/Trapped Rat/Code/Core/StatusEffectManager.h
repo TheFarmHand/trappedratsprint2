@@ -3,6 +3,7 @@
 */
 
 #include <map>
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
 
 class StatusEffect;
 
@@ -25,7 +26,7 @@ private:
 	StatusEffectManager& operator=(const StatusEffectManager&) = delete;
 
 	std::map<std::string, StatusEffect*> StatusList;
-
+	SGD::HTexture bp = SGD::INVALID_HANDLE;
 
 	void LoadStatusEffect(std::string filename);
 };
