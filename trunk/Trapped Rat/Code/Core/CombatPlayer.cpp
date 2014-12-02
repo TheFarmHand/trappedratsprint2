@@ -31,6 +31,7 @@ CombatPlayer::~CombatPlayer()
 void CombatPlayer::Update( float dt )
 {
 
+	
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 		progress += speed * dt;
 	else if ( progress < 100.0f )
@@ -91,6 +92,7 @@ void CombatPlayer::UpdateAnimation( float dt )
 	if ( ansys != nullptr )
 	{
 		ansys->Update( dt );
+	Character::Update(dt);
 	}
 }
 void CombatPlayer::Render()
@@ -180,6 +182,8 @@ void CombatPlayer::Render()
 	if ( ansys != nullptr )
 	{
 		ansys->Render( position.x, position.y );
+
+	Character::Render();
 	}
 }
 void CombatPlayer::Attack( Character* owner, Character * target )
@@ -342,6 +346,7 @@ void CombatPlayer::HomeUpdate( float dt )
 
 		if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 		{
+			unsigned int activeindex = 0;
 			GameData::GetInstance()->PlaySelectionChange();
 			switch ( hudSelection )
 			{
@@ -374,11 +379,18 @@ void CombatPlayer::HomeUpdate( float dt )
 					{
 					if ( abilityList[i]->GetUnlocked() )
 						{
-						menu[i]->SetAbility( abilityList[i] );
-						menu[i]->SetObjectType( 1 );
-						menu[i]->SetString( abilityList[i]->GetAbilityName() );
+						menu[activeindex]->SetAbility( abilityList[i] );
+						menu[activeindex]->SetObjectType( 1 );
+						menu[activeindex]->SetString( abilityList[i]->GetAbilityName() );
+						activeindex++;
 						}
+					else
+					{
+						menu[i]->SetString("");
+						menu[i]->SetObjectType(0);
 					}
+					}
+				hudSelection = 0;
 
 					break;
 				case 3: // RUN
@@ -461,6 +473,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		hudSelection = 0;
 		help->UpdateSelection( 5 );
 		SetSelection( 0 );
+		SetHomeButtons();
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
 	{
@@ -469,6 +482,8 @@ void CombatPlayer::ItemsUpdate( float dt )
 		mySelection = none;
 		hudSelection = 0;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
 }
 void CombatPlayer::AbilityUpdate( float dt )
@@ -483,22 +498,38 @@ void CombatPlayer::AbilityUpdate( float dt )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 0;
+		help->UpdateSelection(1, menu[0]);
 
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Right ) )
 	{
-		GameData::GetInstance()->PlaySelectionChange();
-		hudSelection = 2;
+		if (menu[2]->GetObjectType() == 1)
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			hudSelection = 2;
+			help->UpdateSelection(1, menu[2]);
+
+		}
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Left ) )
 	{
-		GameData::GetInstance()->PlaySelectionChange();
-		hudSelection = 1;
+		if (menu[1]->GetObjectType() == 1)
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			hudSelection = 1;
+			help->UpdateSelection(1, menu[1]);
+
+		}
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Down ) )
 	{
-		GameData::GetInstance()->PlaySelectionChange();
-		hudSelection = 3;
+		if (menu[3]->GetObjectType() == 1)
+		{
+			GameData::GetInstance()->PlaySelectionChange();
+			hudSelection = 3;
+			help->UpdateSelection(1, menu[3]);
+
+		}
 	}
 
 	if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
@@ -509,6 +540,8 @@ void CombatPlayer::AbilityUpdate( float dt )
 		mySelection = none;
 		hudSelection = 0;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 	{
@@ -571,6 +604,8 @@ void CombatPlayer::RunUpdate( float dt )
 		mySelection = none;
 		hudSelection = 0;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
 
 
@@ -604,6 +639,8 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		mySelection = none;
 		hudSelection = 0;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 	{
@@ -630,6 +667,8 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
 }
 void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
@@ -651,6 +690,8 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		mySelection = none;
 		hudSelection = 0;
 		SetSelection( 0 );
+		
+		SetHomeButtons();
 	}
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 	{
@@ -681,5 +722,21 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
+		SetHomeButtons();
+
 	}
+}
+void CombatPlayer::SetHomeButtons()
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		menu[i]->SetObjectType(0);
+		menu[i]->SetAbility(nullptr);
+		menu[i]->SetItem(nullptr);
+	}
+	menu[0]->SetString("Attack");
+	menu[1]->SetString("Item");
+	menu[2]->SetString("Ability");
+	menu[3]->SetString("Run");
+
 }

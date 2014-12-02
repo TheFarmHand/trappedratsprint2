@@ -1,6 +1,7 @@
 
 #include "Character.h"
-
+#include "Numbers.h"
+#include <cmath>
 Character::Character()
 {
 
@@ -13,10 +14,18 @@ Character::~Character()
 	{
 		delete ( *iter );
 	}
+	for (size_t i = 0; i < damagenumbers.size(); i++)
+	{
+		delete damagenumbers[i];
+	}
+	damagenumbers.clear();
 }
 void Character::Update( float dt )
 {
-
+	for (size_t i = 0; i < damagenumbers.size(); i++)
+	{
+		damagenumbers[i]->Update(dt);
+	}
 }
 void Character::UpdateAnimation( float dt )
 {
@@ -24,7 +33,10 @@ void Character::UpdateAnimation( float dt )
 }
 void Character::Render()
 {
-
+	for (size_t i = 0; i < damagenumbers.size(); i++)
+	{
+		damagenumbers[i]->Render();
+	}
 }
 void Character::Attack( Character* owner, Character * target )
 {
@@ -39,6 +51,7 @@ void Character::UseAbility()
 
 void Character::TakeDamage( int dmg )
 {
+	
 	HP -= dmg;
 	if ( HP <= 0 )
 	{
@@ -49,7 +62,29 @@ void Character::TakeDamage( int dmg )
 	{
 		HP = MaxHP;
 	}
+	SGD::Point tempoffset;
+	tempoffset.y = 0;
+	if (GetType() == Enemy)
+	{
+		tempoffset.x = -50;
+	}
+	else
+	{
+		tempoffset.x = 50;
+	}
+	if (dmg > 0)
+	{
+		//hurt
+		Numbers* temp = new Numbers(dmg, SGD::Color(180, 0, 0),this,tempoffset);
+		damagenumbers.push_back(temp);
+	}
+	else
+	{
+		//healled
 
+		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0),this,tempoffset);
+		damagenumbers.push_back(temp);
+	}
 }
 
 void Character::React()

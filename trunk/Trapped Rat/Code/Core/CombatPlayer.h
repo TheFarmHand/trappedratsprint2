@@ -55,7 +55,7 @@ private:
 	void RunUpdate(float dt);
 	void AllySelectUpdate(float dt);
 	void EnemySelectUpdate(float dt);
-
+	void SetHomeButtons();
 	int maxBP;
 	int curBP;
 };

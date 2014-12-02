@@ -9,11 +9,13 @@
 #include "StatusEffect.h"
 #include "Ability.h"
 
-
+class Numbers;
 
 class Character :
 	public BaseObject
 {
+private:
+	std::vector<Numbers*> damagenumbers;
 protected:
 	std::string name;
 	Stats stats;
