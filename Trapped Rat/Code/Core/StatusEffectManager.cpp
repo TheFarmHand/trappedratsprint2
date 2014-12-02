@@ -1,7 +1,7 @@
 #include "StatusEffectManager.h"
 #include "StatusEffect.h"
 #include "Ability.h"
-#include "../SGD Wrappers/SGD_GraphicsManager.h"
+
 
 #include <fstream>
 
@@ -28,7 +28,7 @@ void StatusEffectManager::Terminate()
 		temp = (*iter).second;
 		delete temp;
 	}
-
+	SGD::GraphicsManager::GetInstance( )->UnloadTexture(bp);
 }
 
 void StatusEffectManager::LoadStatusEffect( std::string filename )
@@ -83,7 +83,7 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 		temp->SetIcon( SGD::INVALID_HANDLE );	// Load image here later
 		StatusList[ name.c_str() ] = temp;
 	}
-
+	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/BlankParticle.png");
 	infile.close();
 }
 
