@@ -99,10 +99,7 @@ void Enemy::Render()
 		ansys->Render( position.x, position.y );
 	}
 
-	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
-	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture((*iter)->GetIcon(), {position.x, position.y-size.height-5});
-	}
+	
 	Character::Render();
 }
 void Enemy::BehaviorAI()
