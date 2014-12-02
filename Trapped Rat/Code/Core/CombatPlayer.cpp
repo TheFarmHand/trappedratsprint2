@@ -114,6 +114,7 @@ void CombatPlayer::Render()
 	//if ( TestAbility && progress >= 100.0f )
 	//	tester.Render();
 	std::string numbers = std::to_string( HP ) + "/" + std::to_string( MaxHP ) + " HP";
+	std::string bpNumbers = std::to_string( BP ) + "/" + std::to_string( MaxBP ) + " BP";
 	SGD::Point pdraw;
 
 	if ( progress >= 100.0f )
@@ -176,8 +177,10 @@ void CombatPlayer::Render()
 	}
 	if ( numbers <= "0" )
 		numbers = "0";
-	GameData::GetInstance()->GetFont()->DrawString( numbers, 491, 451 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
-	GameData::GetInstance()->GetFont()->DrawString( numbers, 490, 450 + ( order*50.0f ), color, 1.6f );
+	GameData::GetInstance()->GetFont()->DrawString( numbers, 491, 441 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
+	GameData::GetInstance()->GetFont()->DrawString( numbers, 490, 440 + ( order*50.0f ), color, 1.6f );
+	GameData::GetInstance()->GetFont()->DrawString( bpNumbers, 491, 466 + ( order*50.0f ), SGD::Color( 0, 0, 255 ), 1.6f );
+	GameData::GetInstance()->GetFont()->DrawString( bpNumbers, 490, 465 + ( order*50.0f ), SGD::Color(0, 100, 255), 1.6f );
 
 	if ( ansys != nullptr )
 	{

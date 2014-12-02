@@ -47,7 +47,7 @@ void  Bars::Render()
 		}
 		else
 		{
-			//width = (int)((float)size.width * ((float)owner->GetBP() / owner->GetMaxBP()));
+			width = (int)((float)size.width * ((float)owner->GetBP() / owner->GetMaxBP()));
 		}
 	}
 	if (width < 5 && width > 0)

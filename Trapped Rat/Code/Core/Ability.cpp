@@ -127,6 +127,8 @@ void Ability::CastAbility( Character* owner, Character* target )
 		}
 	if ( status )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
+
+	owner->SetBP(owner->GetBP() - bpCost);
 	}
 void Ability::CalculateFormula( Character* owner, Character* target )
 	{
