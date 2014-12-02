@@ -40,6 +40,8 @@ public:
 	int GetBPCost();
 	float GetHPMod();
 	bool GetAOE();
+	bool GetUnlocked();
+	bool GetAccess();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );
 	void SetOffensive( bool offense );
@@ -48,6 +50,8 @@ public:
 	void SetStatusID( int id );
 	void SetAtkDam( float atk );
 	void SetMgcDam( float mgc );
+	void SetUnlocked( bool unlock );
+	void SetAccess( bool combatUse );
 	void virtual Render();
 	void CastAbility(Character* owner, Character* target);
 	void CalculateFormula( Character* owner, Character* target );
