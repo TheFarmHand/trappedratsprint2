@@ -112,7 +112,7 @@ void GamePlayState::Enter()
 
 	dialogue = new Dialogue();
 	dialogue->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
-	state = GPStates::Dia;
+	//state = GPStates::Dia;
 
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/req.xwm" );
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
@@ -283,10 +283,12 @@ void GamePlayState::Fight()
 {
 if ( GameData::GetInstance()->GetOverworldPlayer()->IsMoving() && !GameData::GetInstance()->GetIsInCombat())
 	{
-		int sorandom = rand() % 250;
-		if (!sorandom)
+	stepcounter++;
+		//int sorandom = rand() % 250;
+		//if (!sorandom)
+	if (stepcounter >= 300)
 		{
-
+		stepcounter = rand() % 100;
 			//play animation for entering random combat
 			RandomAnimation();
 		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )

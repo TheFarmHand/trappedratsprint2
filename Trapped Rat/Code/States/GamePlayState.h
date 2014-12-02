@@ -42,6 +42,7 @@ class GamePlayState :
 	Enemy *enemy3;
 	int menuindex = 0;
 	int maxindex = 0;
+	int stepcounter = 0;
 	GPStates state = GPStates::Town;
 	MenuSubStates substate = MenuSubStates::None;
 	std::vector<HUDItem*> m_vhuditems;
