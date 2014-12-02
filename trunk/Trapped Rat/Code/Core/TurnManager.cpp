@@ -84,13 +84,13 @@ void TurnManager::Render()
 				SGD::GraphicsManager::GetInstance()->DrawTexture(EnemyUnits[i]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
 			}
 		}
-		/*if (AllCombatUnits[0]->GetProgress >= 100.0f)
+		if (AllCombatUnits[0]->GetProgress() >= 100.0f)
 		{
 			if (AllCombatUnits[0]->GetPortrait() != SGD::INVALID_HANDLE)
 			{
-				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 650, 20 }, 0, {}, {}, { 1.0f, 1.0f });
 			}
-		}*/
+		}
 	}
 
 	//*
