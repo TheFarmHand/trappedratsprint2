@@ -6,10 +6,6 @@ Poison
 0 3 10 0
 BlankParticle.png
 
-SpeedDown
-0 3 0 2
-BlankParticle.png
-
 Counter
 0 1 0 2
 BlankParticle.png
@@ -34,4 +30,65 @@ Regen
 0 3 15 0
 BlankParticle.png
 
+SpeedDown
+0 3 0 2
+BlankParticle.png
+
+SpeedUp
+0 3 0 2
+BlankParticle.png
+
+AttackUp
+0 3 0 2
+BlankParticle.png
+
+AttackDown
+0 3 0 2
+BlankParticle.png
+
+DefenseUp
+0 3 0 2
+BlankParticle.png
+
+DefenseDown
+0 3 0 2
+BlankParticle.png
+
+MagicUp
+0 3 0 2
+BlankParticle.png
+
+MagicDown
+0 3 0 2
+BlankParticle.png
+
+AvoisionUp
+0 3 0 2
+BlankParticle.png
+
+AvoisionDown
+0 3 0 2
+BlankParticle.png
 *
+
+Stun
+0 1 0 2
+BlankParticle.png
+
+Delerium
+0
+
+Confused
+0
+
+Cover
+0
+
+AdvancedCover
+0
+
+Enfire
+0
+
+Hedge
+0
