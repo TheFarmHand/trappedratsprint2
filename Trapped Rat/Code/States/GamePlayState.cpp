@@ -102,14 +102,19 @@ void GamePlayState::Enter()
 	p1->SetPosition({ 100, 150 });
 	p1->SetSize({ 64, 64 });
 	std::vector<Ability*> partyAbilities;
-	//partyAbilities.push_back( MasterAbilityList["Burrow"] );
-	//partyAbilities.push_back( MasterAbilityList["Water Fang"] );
-	//partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
-	//partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+	for ( unsigned int i = 0; i < partyAbilities.size(); i++ )
+		{
+		partyAbilities[i]->CalcluateBpScaledCost( p1 );
+		}
 	p1->InitializeAbilities( partyAbilities );
 	p1->GetAbility( 0 )->SetUnlocked( true );
 	p1->GetAbility( 1 )->SetUnlocked( true );
@@ -350,6 +355,18 @@ void GamePlayState::Fight()
 			tempEnemy.push_back(enemy1);
 			tempEnemy.push_back(enemy2);
 			tempEnemy.push_back(enemy3);
+
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
 
 			TurnManager::GetInstance()->Initialize(Party, tempEnemy);
 			for (size_t i = 0; i < Party.size(); i++)

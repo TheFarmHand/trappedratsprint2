@@ -31,7 +31,7 @@ Ability::Ability( const char* path )
 	TiXmlElement* help = root->FirstChildElement( "Help" );
 	const char* tempHelp = help->Attribute( "Text" );
 	std::string tempH( tempHelp );
-	explination = tempH;
+	noBPexplination = tempH;
 
 	TiXmlElement* affinity = help->NextSiblingElement( "Affinity" );
 	const char* tempAff = affinity->Attribute( "ElementalType" );
@@ -187,6 +187,13 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 		formulaTotal *= 0.5f;
 	else if ( strong )
 		formulaTotal *= 1.5f;
+	}
+void Ability::CalcluateBpScaledCost( Character* owner )
+	{
+	bpCost += (int)(owner->GetLevel() * 0.5f);
+	std::string temp = std::to_string( bpCost );
+	temp += " BP cost" + noBPexplination;
+	explination = temp;
 	}
 std::string Ability::GetAbilityName()
 	{

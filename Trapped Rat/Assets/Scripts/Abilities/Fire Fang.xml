@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Fire_Fang Name="Fire Fang" Offensive="true">
-<Help Text="::Physical attack that deals Fire Elemental damage to a single target." />
+<Help Text="_Physical attack that deals Fire_Elemental damage to a single target." />
   <Affinity ElementalType="Fire" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />

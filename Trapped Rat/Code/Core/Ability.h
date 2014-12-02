@@ -9,6 +9,7 @@ class Ability
 {
 private:
 	std::string explination;
+	std::string noBPexplination;
 	std::string abilityName;
 	std::string statusName;
 	int elementType;
@@ -55,5 +56,6 @@ public:
 	void virtual Render();
 	void CastAbility(Character* owner, Character* target);
 	void CalculateFormula( Character* owner, Character* target );
+	void CalcluateBpScaledCost( Character* owner );
 };
 
