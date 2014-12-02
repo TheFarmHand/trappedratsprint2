@@ -356,7 +356,7 @@ void CombatPlayer::HomeUpdate(float dt)
 			case 2: // Ability
 				help->UpdateSelection(1);
 				states = 3;
-				for (size_t i = 0; i < abilityList.size(); i++)
+				for (size_t i = 0; i < 4; i++)
 				{
 					menu[i]->SetAbility(abilityList[i]);
 					menu[i]->SetObjectType(1);

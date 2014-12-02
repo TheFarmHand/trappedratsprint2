@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Squirt Name="Squirt" Offensive="true">
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="None" />
+<Counter_Claw Name="Counter Claw" Offensive="false">
+  <Affinity ElementalType="Physical" />
+  <StatusEffect Effect="Counter" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
+  <UnlockLevel Level="12" />
   <Paths>
     <AniPath></AniPath>
     <WavPath></WavPath>
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.2" />
-    <BaseBP bp="2" />
+    <MagicMod mgcMod="0.0" />
+    <BaseBP bp="3" />
     <HPMod />
   </DamageInfo>
-</Squirt>
+</Counter_Claw>

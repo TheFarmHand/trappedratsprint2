@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Flood Name="Flood" Offensive="true">
+<Splash Name="Splash" Offensive="true">
   <Affinity ElementalType="Water" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="true" />
@@ -10,8 +10,8 @@
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.3" />
-    <BaseBP bp="6" />
+    <MagicMod mgcMod="0.8" />
+    <BaseBP bp="4" />
     <HPMod />
   </DamageInfo>
-</Flood>
+</Splash>

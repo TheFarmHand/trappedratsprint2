@@ -191,3 +191,10 @@ void Character::AddStatus( StatusEffect *status )
 	temp->SetOwner(this);
 	effects.push_back( temp );
 }
+void Character::InitializeAbilities( std::vector<Ability*> toSet )
+	{
+	for ( unsigned int i = 0; i < toSet.size(); ++i )
+		{
+		abilityList.push_back( toSet[i] );
+		}
+	}

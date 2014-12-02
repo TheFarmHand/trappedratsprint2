@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Squirt Name="Squirt" Offensive="true">
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="None" />
+<Burrow Name="Burrow" Offensive="false">
+  <Affinity ElementalType="Physical" />
+  <StatusEffect Effect="Dodging" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
+  <UnlockLevel Level="0" />
   <Paths>
     <AniPath></AniPath>
     <WavPath></WavPath>
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="1.2" />
+    <MagicMod mgcMod="0.0" />
     <BaseBP bp="2" />
     <HPMod />
   </DamageInfo>
-</Squirt>
+</Burrow>

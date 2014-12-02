@@ -1,3 +1,9 @@
-2
-Flood
-Squirt
+8
+Fire Fang
+Water Fang
+Earth Fang
+Wind Fang
+Poison Fang
+Burrow
+Counter Claw
+Slow Claw
