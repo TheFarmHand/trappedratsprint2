@@ -41,6 +41,10 @@ private:
 	int effect_volume = 100;
 	int music_volume = 100;
 	bool is_windowed = true;
+
+	//some sounds
+	SGD::HAudio selection_sound = SGD::INVALID_HANDLE;
+	
 public:
 	static GameData * GetInstance();
 	void SetRunning(bool _run);
@@ -63,6 +67,7 @@ public:
 	int GetMusicVolume(){ return music_volume; }
 	bool GetWindowed(){ return is_windowed; }
 	int GetSaveFile(){ return save_file; }
+	void PlaySelectionChange();
 	//mutators
 	void SetCamera(SGD::Point point){ CameraPos = point; }
 	void UpdateCamera(BaseObject* obj);

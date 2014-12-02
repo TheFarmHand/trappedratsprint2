@@ -62,6 +62,9 @@ bool GameData::Initialize()
 	font = new Font();
 	font->LoadFont("Assets/Textures/testpng.png", "Assets/Scripts/BitMapFont.txt", { 0, 0, 0 });
 
+	//load in some sound
+	selection_sound = audio->LoadAudio("../Trapped Rat/Assets/Sounds/selectionchange.wav");
+
 
 	//load in the options
 	//read in the options based on which save file it is
@@ -142,7 +145,10 @@ void GameData::Terminate()
 	OManager->Clean();
 	delete OManager;
 	//delete Party
-	
+
+
+	//get rid of the sound
+	SGD::AudioManager::GetInstance()->UnloadAudio(selection_sound);
 
 
 	//terminate all wrappers
@@ -216,17 +222,17 @@ void GameData::UpdateCamera(BaseObject* obj)
 	float ypos = pos.y - screenheight / 2;
 	if (xpos < 0)
 		xpos = 0;
-	else if (xpos+screenwidth > TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width)
+	else if (xpos + screenwidth > TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width)
 	{
-		xpos = ((float)TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width)-screenwidth;
+		xpos = ((float)TileSystem::GetInstance()->GetLayerWidth() * TileSystem::GetInstance()->GetTileSize().width) - screenwidth;
 	}
 
 
 	if (ypos < 0)
 		ypos = 0;
-	else if (ypos+screenheight > TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height)
+	else if (ypos + screenheight > TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height)
 	{
-		ypos = ((float)TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height)-screenheight;
+		ypos = ((float)TileSystem::GetInstance()->GetLayerHeight() * TileSystem::GetInstance()->GetTileSize().height) - screenheight;
 	}
 
 	//CameraPos = SGD::Point(pos.x - screenwidth / 2, pos.y - screenheight / 2);
@@ -264,7 +270,7 @@ void GameData::SetMusicVolume(int _music)
 
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, music_volume);
 
-	
+
 }
 
 void GameData::LoadSave()
@@ -306,4 +312,9 @@ void GameData::AltTab()
 	{
 		GamePlayState::GetInstance()->SetState(GPStates::Menu);
 	}
+}
+void GameData::PlaySelectionChange()
+{
+	if (selection_sound != SGD::INVALID_HANDLE)
+		SGD::AudioManager::GetInstance()->PlayAudio(selection_sound);
 }

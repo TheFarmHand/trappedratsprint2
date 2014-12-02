@@ -24,9 +24,9 @@ MainMenuState * MainMenuState::GetInstance()
 void MainMenuState::Enter()
 {
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
-	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/menubutton.png", { 255, 255, 255 });
+	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
 	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cursor.png", { 255, 255, 255 });
-	
+
 }
 void MainMenuState::Update(float dt)
 {
@@ -36,59 +36,64 @@ void MainMenuState::Update(float dt)
 
 	/*if (input->IsKeyPressed(SGD::Key::F))
 	{
-		GameData::GetInstance()->SwapState(FontTestState::GetInstance());
+	GameData::GetInstance()->SwapState(FontTestState::GetInstance());
 	}
 	if ( input->IsKeyPressed( SGD::Key::D ) )
-		{
-		GameData::GetInstance()->SwapState( TileDebugState::GetInstance() );
-		}
+	{
+	GameData::GetInstance()->SwapState( TileDebugState::GetInstance() );
+	}
 	if (input->IsKeyPressed(SGD::Key::A))
 	{
-		GameData::GetInstance()->SwapState(AnimTestState::GetInstance());
+	GameData::GetInstance()->SwapState(AnimTestState::GetInstance());
 	}*/
 
 
-	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,0))
+	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0, 0))
 	{
 
 		switch (index)
 		{
 		case 0:
-			{
+		{
+				  GameData::GetInstance()->PlaySelectionChange();
 				  GameData::GetInstance()->SwapState(GamePlayState::GetInstance());
 				  break;
-			}
-			
+		}
+
 		case 1:
-			{
+		{
+				  GameData::GetInstance()->PlaySelectionChange();
 				  GameData::GetInstance()->SwapState(OptionsState::GetInstance());
 				  break;
-			}
+		}
 		case 2:
 		{
+				  GameData::GetInstance()->PlaySelectionChange();
 				  GameData::GetInstance()->SwapState(CreditsState::GetInstance());
 				  break;
 		}
 		case 3:
 		{
-				 
+				  GameData::GetInstance()->PlaySelectionChange();
 				  GameData::GetInstance()->SetRunning(false);
 				  break;
 		}
 		}
 	}
 
-	if (input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0,SGD::DPad::Up))
+	if (input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up))
 	{
 		index--;
 		if (index < 0)
 			index = 3;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down))
 	{
 		index++;
 		if (index > 3)
 			index = 0;
+		GameData::GetInstance()->PlaySelectionChange();
 	}
 }
 void const MainMenuState::Render()
@@ -98,15 +103,15 @@ void const MainMenuState::Render()
 	//display the menu items
 	//graphics->DrawString("Play", { 50.0, 100.0 });
 	//display the button
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, {15.0f,5.0f,240.0f,70.0f});
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, {15.0f,5.0f,240.0f,70.0f});
-	
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+
 
 	//display the cursor
 	//graphics->DrawString("*", { 45.0f, 100.0f + (index * 100) });
-	graphics->DrawTextureSection(cursor,{ 45.0f, 95.0f + (index * 80) }, { 0, 0, 238,73 });
+	graphics->DrawTextureSection(cursor, { 45.0f, 95.0f + (index * 80) }, { 0, 0, 238, 73 });
 
 	GameData::GetInstance()->GetFont()->DrawString("Play", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
