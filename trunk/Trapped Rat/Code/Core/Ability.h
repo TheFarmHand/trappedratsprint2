@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "../Animation/AnimationSystem.h"
 
 class Character;
 
@@ -12,6 +13,8 @@ private:
 	std::string noBPexplination;
 	std::string abilityName;
 	std::string statusName;
+	std::string animationPath;
+	std::string wavSoundPath;
 	int elementType;
 	bool status;
 	bool offensive;
@@ -25,6 +28,7 @@ private:
 	int unlockLevel;
 	bool unlocked;
 	bool access;
+	AnimationSystem* animate;
 
 public:
 	Ability( const char* path );
@@ -43,6 +47,7 @@ public:
 	bool GetAOE();
 	bool GetUnlocked();
 	bool GetAccess();
+	AnimationSystem* GetAnimate();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );
 	void SetOffensive( bool offense );
@@ -54,6 +59,7 @@ public:
 	void SetUnlocked( bool unlock );
 	void SetAccess( bool combatUse );
 	void virtual Render();
+	void virtual Update( float dt );
 	void CastAbility(Character* owner, Character* target);
 	void CalculateFormula( Character* owner, Character* target );
 	void CalcluateBpScaledCost( Character* owner );

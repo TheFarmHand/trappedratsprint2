@@ -33,7 +33,6 @@ public:
 	int ElementalMod( Character* owner, Character* attacker, int damage, ETYPE element );
 	void AttackTarget(Character* owner, Character* target, int value);
 	void UsingAbility( Character* owner, Character* attacker, Ability* ability );
-
 private:
 	std::vector<Character*> AllCombatUnits;
 	std::vector<Character*> AlliedUnits;
@@ -45,6 +44,7 @@ private:
 	bool fullProgressReached;
 	bool turnPause;
 	float pauseTime;
+	
 
 	TurnManager() = default;
 	virtual ~TurnManager() = default;

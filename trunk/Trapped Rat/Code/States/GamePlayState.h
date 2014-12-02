@@ -66,8 +66,12 @@ class GamePlayState :
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 0;
+	
 
 public:
+	bool AbilityUsed;
+	float abilityTimer;
+	Ability* CurrentAbilityUsed;
 	bool is_test_message = false;
 	static void Test();
 	//function for randomly activating combat

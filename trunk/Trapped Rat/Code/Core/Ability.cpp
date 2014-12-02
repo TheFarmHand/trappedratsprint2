@@ -77,7 +77,13 @@ Ability::Ability( const char* path )
 
 	TiXmlElement* paths = unlock->NextSiblingElement( "Paths" );
 	TiXmlElement* aniPath = paths->FirstChildElement( "AniPath" );
+	const char* tempAni = aniPath->Attribute( "Path" );
+	std::string tempAnimation( tempAni );
+	animationPath = tempAnimation;
 	TiXmlElement* wavPath = aniPath->NextSiblingElement( "WavPath" );
+	const char* tempWav = wavPath->Attribute( "Path" );
+	std::string tempWavS( tempWav );
+	wavSoundPath = "../Trapped Rat/Assets/Sounds/" + tempWavS;
 
 	TiXmlElement* damage = paths->NextSiblingElement( "DamageInfo" );
 	double tempValue;
@@ -95,6 +101,8 @@ Ability::Ability( const char* path )
 
 	access = false;
 	unlocked = false;
+	animate = new AnimationSystem();
+	animate->Load( animationPath );
 	}
 
 
@@ -117,6 +125,11 @@ void Ability::Render()
 		//abilityName = "Healing Light";
 		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
 		}
+	animate->Render(100.0f, 100.0f);
+	}
+void Ability::Update( float dt )
+	{
+	animate->Update( dt );
 	}
 void Ability::CastAbility( Character* owner, Character* target )
 	{
@@ -242,6 +255,10 @@ bool Ability::GetUnlocked()
 bool Ability::GetAccess()
 	{
 	return access;
+	}
+AnimationSystem* Ability::GetAnimate()
+	{
+	return animate;
 	}
 void Ability::SetAbilityName( std::string name )
 	{
