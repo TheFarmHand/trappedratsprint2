@@ -36,6 +36,7 @@ void StatusEffect::Initialize()
 }
 
 void  StatusEffect::React( Character* owner, ETYPE ele = PHYS )
+// Dilapidated function I think
 {
 	// Happens when unit is struck by an attack
 
@@ -136,22 +137,91 @@ int StatusEffect::ElementalMod()
 }
 
 void StatusEffect::HandleSpecial()
+// Does things as soon as status is applied
 {
-	if ( name == "SpeedDown" )
-	{
-		stat_value = owner->GetSpeed() * .333f;
-		owner->SetSpeed( owner->GetSpeed() - stat_value );
-	}
+	// Delerium
+
+
+	// Cover
+
+	// Advanced Cover
+
+	// Counter
+
+	// Enfire
+
+	// Hedge
 }
 
 void StatusEffect::HandleStat()
 {
+	if ( name == "SpeedDown" )
+	{
+		stat_value = owner->GetSpeed( ) * .333f;
+		owner->SetSpeed( owner->GetSpeed( ) - stat_value );
+	}
 
+	else if ( name == "SpeedUp" )
+	{
+		stat_value = owner->GetSpeed( ) * .333f;
+		owner->SetSpeed( owner->GetSpeed( ) + stat_value );
+	}
+
+	else if ( name == "AttackUp" )
+	{
+		stat_value = owner->GetStats( ).attack * .333f;
+		owner->SetSpeed( owner->GetStats( ).attack + stat_value );
+	}
+
+	else if ( name == "AttackDown" )
+	{
+		stat_value = owner->GetStats( ).attack * .333f;
+		owner->SetSpeed( owner->GetStats( ).attack - stat_value );
+	}
+
+	else if ( name == "DefenseUp" )
+	{
+		stat_value = owner->GetStats( ).defense * .333f;
+		owner->SetSpeed( owner->GetStats( ).defense + stat_value );
+	}
+
+	else if ( name == "DefenseDown" )
+	{
+		stat_value = owner->GetStats( ).defense * .333f;
+		owner->SetSpeed( owner->GetStats( ).defense - stat_value );
+	}
+
+	else if ( name == "MagicUp" )
+	{
+		stat_value = owner->GetStats( ).magic * .333f;
+		owner->SetSpeed( owner->GetStats( ).magic + stat_value );
+	}
+
+	else if ( name == "MagicDown" )
+	{
+		stat_value = owner->GetStats( ).magic * .333f;
+		owner->SetSpeed( owner->GetStats( ).magic - stat_value );
+	}
+
+	else if ( name == "AvoisionUp" )
+	{
+		stat_value = owner->GetStats( ).avoision * .333f;
+		owner->SetSpeed( owner->GetStats( ).avoision + stat_value );
+	}
+
+	else if ( name == "AvoisionDown" )
+	{
+		stat_value = owner->GetStats( ).avoision * .333f;
+		owner->SetSpeed( owner->GetStats( ).avoision - stat_value );
+	}
 }
 
 void StatusEffect::HandleDOT()
 {
-	owner->TakeDamage( ElementalMod() );
+	if(name == "Regen")
+		owner->TakeDamage(-dmg_tick);
+	else
+		owner->TakeDamage( ElementalMod() );
 
 }
 
@@ -187,6 +257,46 @@ void StatusEffect::Recover()
 	{
 		owner->SetSpeed( owner->GetSpeed() - stat_value );
 	}
+
+	else if ( name == "AttackUp" )
+	{
+		owner->SetSpeed( owner->GetStats( ).attack - stat_value );
+	}
+
+	else if ( name == "AttackDown" )
+	{
+		owner->SetSpeed( owner->GetStats( ).attack + stat_value );
+	}
+
+	else if ( name == "DefenseUp" )
+	{
+		owner->SetSpeed( owner->GetStats( ).defense - stat_value );
+	}
+
+	else if ( name == "DefenseDown" )
+	{
+		owner->SetSpeed( owner->GetStats( ).defense + stat_value );
+	}
+
+	else if ( name == "MagicUp" )
+	{
+		owner->SetSpeed( owner->GetStats( ).magic - stat_value );
+	}
+
+	else if ( name == "MagicDown" )
+	{
+		owner->SetSpeed( owner->GetStats( ).magic + stat_value );
+	}
+
+	else if ( name == "AvoisionUp" )
+	{
+		owner->SetSpeed( owner->GetStats( ).avoision - stat_value );
+	}
+
+	else if ( name == "AvoisionDown" )
+	{
+		owner->SetSpeed( owner->GetStats( ).avoision + stat_value );
+	}
 }
 
 StatusEffect& StatusEffect::operator=( const StatusEffect& rhs )
@@ -200,10 +310,11 @@ StatusEffect& StatusEffect::operator=( const StatusEffect& rhs )
 	dmg_tick = rhs.dmg_tick;
 	element = rhs.element;
 	myType = rhs.myType;
+	guard_caster = rhs.guard_caster;
+	stat_value = rhs.stat_value;
 
 
 	return *this;
-
 }
 
 

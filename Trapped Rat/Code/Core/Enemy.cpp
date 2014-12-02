@@ -19,9 +19,12 @@ Enemy::~Enemy()
 }
 void Enemy::Update( float dt )
 {
-	
+
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
+	{
 		progress += speed * dt;
+	}
+
 	else if ( progress < 100.0f )
 	{
 		return;
@@ -31,12 +34,39 @@ void Enemy::Update( float dt )
 	{
 		if ( !TurnManager::GetInstance()->getProgressFullReached() )
 		{
-			StatusTick();
-			if ( !alive )
-				{
+			if ( HasEffect( "Stun" ) )
+			{
+				// Lose your turn if stunned
+				StatusTick( );
 				progress = 0.0f;
 				return;
-				}
+			}
+
+			if ( HasEffect( "Confused" ) )
+			{
+				StatusTick();
+
+				// Do Confused Action (attack random target, anyone)
+				int targets = TurnManager::GetInstance()->GetAll().size();
+				int hit_this_guy = rand()%targets;
+				
+				Attack( this, TurnManager::GetInstance( )->GetAll( )[hit_this_guy]);
+				
+				TurnManager::GetInstance( )->setProgressFullReached( false );
+				TurnManager::GetInstance( )->setTimeStop( false );
+				TurnManager::GetInstance( )->setTurnPause( true );
+
+				progress = 0.0f;
+				return;
+			}
+
+			StatusTick();
+
+			if ( !alive )
+			{
+				progress = 0.0f;
+				return;
+			}
 			TurnManager::GetInstance()->setProgressFullReached( true );
 			TurnManager::GetInstance()->setTimeStop( true );
 			return;
@@ -82,7 +112,7 @@ void Enemy::UpdateAnimation( float dt )
 	{
 		ansys->Update( dt );
 	}
-	Character::Update(dt);
+	Character::Update( dt );
 }
 void Enemy::Render()
 {
@@ -99,7 +129,7 @@ void Enemy::Render()
 		ansys->Render( position.x, position.y );
 	}
 
-	
+
 	Character::Render();
 }
 void Enemy::BehaviorAI()

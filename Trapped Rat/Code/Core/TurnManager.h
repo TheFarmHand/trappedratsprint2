@@ -25,6 +25,7 @@ public:
 
 	std::vector<Character*> GetEnemies()		{ return EnemyUnits; }
 	std::vector<Character*> GetAllies()			{ return AlliedUnits; }
+	std::vector<Character*> GetAll()			{ return AllCombatUnits; }
 	SGD::HTexture GetArrow()					{ return targetArrow; }
 	
 	void SetArrow(SGD::HTexture arrow)		{ targetArrow = arrow; }

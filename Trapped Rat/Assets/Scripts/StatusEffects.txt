@@ -31,55 +31,61 @@ Regen
 TestParticleBlue.png
 
 SpeedDown
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 SpeedUp
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 AttackUp
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 AttackDown
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 DefenseUp
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 DefenseDown
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 MagicUp
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 MagicDown
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 AvoisionUp
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
 
 AvoisionDown
-0 3 0 2
+0 3 0 1
 TestParticleBlue.png
-*
+
+Confused
+0 2 0 2
+TestParticleBlue.png
 
 Stun
 0 1 0 2
 TestParticleBlue.png
 
+Cover
+
+
+*
+
 Delerium
 0
 
-Confused
-0
 
 Cover
 0
