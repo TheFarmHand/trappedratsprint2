@@ -374,11 +374,12 @@ void CombatPlayer::HomeUpdate( float dt )
 					states = 3;
 					for ( size_t i = 0; i < 4; i++ )
 					{
-						menu[ i ]->SetAbility( abilityList[ i ] );
-						menu[ i ]->SetObjectType( 1 );
-						menu[ i ]->SetString( abilityList[ i ]->GetAbilityName() );
-						if ( i > 3 )
-							break;
+					if ( abilityList[i]->GetAccess() )
+						{
+						menu[i]->SetAbility( abilityList[i] );
+						menu[i]->SetObjectType( 1 );
+						menu[i]->SetString( abilityList[i]->GetAbilityName() );
+						}
 					}
 
 					break;
@@ -412,28 +413,6 @@ void CombatPlayer::AttackUpdate( float dt )
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
 	{
-		// Here is where we decide Attack, or Ability etc
-		//if ( TestAbility )
-		//	{
-		//	if ( tester.GetOffensive() )
-		//		{
-		//		//TargetUnit( pTurn->GetEnemies() );
-		//		tester.CalculateFormula( this, pTurn->GetEnemies()[myTarget] );
-		//		tester.CastAbility( this, pTurn->GetEnemies()[myTarget] );
-		//		tester.SetHealing( true );
-		//		tester.SetOffensive( false );
-		//		}
-		//	else if ( tester.GetHealing() )
-		//		{
-		//		//TargetUnit( pTurn->GetAllies() );
-		//		tester.CalculateFormula( this, pTurn->GetAllies()[myTarget] );
-		//		tester.CastAbility( this, pTurn->GetAllies()[myTarget] );
-		//		tester.SetHealing( false );
-		//		tester.SetOffensive( true );
-		//		}
-		//	}
-		//else
-		//	{
 		GameData::GetInstance()->PlaySelectionChange();
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
 		//	}
