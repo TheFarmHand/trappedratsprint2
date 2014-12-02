@@ -647,10 +647,11 @@ void GamePlayState::MenuRender()
 
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-	GameData::GetInstance()->GetFont()->DrawString("Pause", 5.0f, 5.0f, { 0, 0, 0 });
+	
 	switch (substate)
 	{
 	case None:
+		GameData::GetInstance()->GetFont()->DrawString("Pause Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
@@ -667,6 +668,7 @@ void GamePlayState::MenuRender()
 	case Options:
 	{
 					SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
+					GameData::GetInstance()->GetFont()->DrawString("Options Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
 					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 					SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
@@ -753,6 +755,7 @@ void GamePlayState::MenuRender()
 	}
 		break;
 	case MenuSubStates::Party:
+		GameData::GetInstance()->GetFont()->DrawString("Party Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 50.0f, 50.0f }, { 0, 0, 300, 540 });
 		for (unsigned int i = 0; i < Party.size(); i++)
 		{

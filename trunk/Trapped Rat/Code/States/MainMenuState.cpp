@@ -25,7 +25,9 @@ void MainMenuState::Enter()
 {
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
-	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png", { 255, 255, 255 });
+	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
+	logo = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/logo.png");
+
 	
 
 }
@@ -101,6 +103,7 @@ void const MainMenuState::Render()
 {
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
+	graphics->DrawTextureSection(logo, { 300.0f, 95.0f }, { 0.0f, 0.0f, 500.0f, 326.0f });
 	//display the menu items
 	//graphics->DrawString("Play", { 50.0, 100.0 });
 	//display the button
@@ -124,4 +127,5 @@ void MainMenuState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(logo);
 }
