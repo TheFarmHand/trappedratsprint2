@@ -175,6 +175,14 @@ bool Ability::GetAOE()
 {
 	return areaOfEffect;
 }
+bool Ability::GetUnlocked()
+	{
+	return unlocked;
+	}
+bool Ability::GetAccess()
+	{
+	return access;
+	}
 void Ability::SetAbilityName( std::string name )
 {
 	abilityName = name;
@@ -203,3 +211,11 @@ void Ability::SetMgcDam( float mgc )
 {
 	mgcMod = mgc;
 }
+void Ability::SetUnlocked( bool unlock )
+	{
+	unlocked = unlock;
+	}
+void Ability::SetAccess( bool combatUse )
+	{
+	access = combatUse;
+	}

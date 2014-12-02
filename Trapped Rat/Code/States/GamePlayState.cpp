@@ -111,6 +111,8 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
 	p1->InitializeAbilities( partyAbilities );
+	p1->GetAbility( 0 )->SetUnlocked( true );
+	p1->GetAbility( 1 )->SetUnlocked( true );
 	Party.push_back(p1);
 	
 

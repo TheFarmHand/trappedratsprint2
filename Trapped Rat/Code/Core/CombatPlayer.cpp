@@ -305,6 +305,7 @@ void CombatPlayer::HomeUpdate(float dt)
 	TurnManager *pTurn = TurnManager::GetInstance();
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
+	unsigned int activeCounter = 0;
 
 	if (states == 0)
 	{
@@ -363,13 +364,15 @@ void CombatPlayer::HomeUpdate(float dt)
 			case 2: // Ability
 				help->UpdateSelection(1);
 				states = 3;
+				
 				for (size_t i = 0; i < 4; i++)
 				{
-					menu[i]->SetAbility(abilityList[i]);
-					menu[i]->SetObjectType(1);
-					menu[i]->SetString(abilityList[i]->GetAbilityName());
-					if (i > 3)
-						break;
+				if ( abilityList[i]->GetUnlocked() )
+					{
+					menu[i]->SetAbility( abilityList[i] );
+					menu[i]->SetObjectType( 1 );
+					menu[i]->SetString( abilityList[i]->GetAbilityName() );
+					}
 				}
 
 				break;
