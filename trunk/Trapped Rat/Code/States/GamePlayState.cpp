@@ -270,6 +270,9 @@ void GamePlayState::Exit()
 	}
 	MasterAbilityList.clear();
 
+	pStatManager->Terminate();
+	pStatManager = nullptr;
+
 }
 
 void GamePlayState::MessageProc(const SGD::Message * mess)

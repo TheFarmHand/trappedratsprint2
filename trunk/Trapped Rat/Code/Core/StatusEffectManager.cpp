@@ -40,6 +40,7 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 	char a = ' ';
 	std::string name;
 	std::string image;
+	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/BlankParticle.png" );
 	while ( !infile.eof() )
 	{
 		
@@ -80,10 +81,10 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 			infile.get(a);
 		}
 
-		temp->SetIcon( SGD::INVALID_HANDLE );	// Load image here later
+		temp->SetIcon( bp );	// Load image here later
 		StatusList[ name.c_str() ] = temp;
 	}
-	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/BlankParticle.png");
+	
 	infile.close();
 }
 
