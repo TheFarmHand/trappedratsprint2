@@ -98,17 +98,20 @@ void GamePlayState::Enter()
 
 	}
 
+	SGD::Point characterOrderPosition;
 	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
 	CombatPlayer* p1 = nullptr;
 	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
-	p1->SetOrderPosition(0);
-	p1->SetPosition({ 100, 150 });
+	p1->SetOrderPosition(1);
+	characterOrderPosition.x = 100.0f;
+	characterOrderPosition.y = (float)( p1->GetOrderPosition() * 100 + 150);
+	p1->SetPosition(characterOrderPosition);
 	p1->SetSize({ 64, 64 });
 	std::vector<Ability*> partyAbilities;
-	//partyAbilities.push_back( MasterAbilityList["Burrow"] );
-	//partyAbilities.push_back( MasterAbilityList["Water Fang"] );
-	//partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
-	//partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
@@ -119,6 +122,32 @@ void GamePlayState::Enter()
 	p1->GetAbility( 2 )->SetUnlocked( true );
 	p1->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back(p1);
+
+	partyAbilities.clear();
+
+	CombatPlayer* p2 = nullptr;
+	p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterSlippy.xml" ) );
+	p2->SetOrderPosition( 0 );
+	characterOrderPosition.x = 100.0f;
+	characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150);
+	p2->SetPosition( characterOrderPosition );
+	p2->SetSize( { 64, 64 } );
+	partyAbilities.push_back( MasterAbilityList["Puddle"] );
+	partyAbilities.push_back( MasterAbilityList["Squirt"] );
+	partyAbilities.push_back( MasterAbilityList["Dissolve"] );
+	partyAbilities.push_back( MasterAbilityList["Splash"] );
+	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
+	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
+	partyAbilities.push_back( MasterAbilityList["Torrent"] );
+	partyAbilities.push_back( MasterAbilityList["Flood"] );
+	p2->InitializeAbilities( partyAbilities );
+	p2->GetAbility( 0 )->SetUnlocked( true );
+	p2->GetAbility( 1 )->SetUnlocked( true );
+	p2->GetAbility( 2 )->SetUnlocked( true );
+	p2->GetAbility( 3 )->SetUnlocked( true );
+	Party.push_back( p2 );
+
+	partyAbilities.clear();
 
 
 
@@ -358,7 +387,17 @@ void GamePlayState::Fight()
 			tempEnemy.push_back(enemy1);
 			tempEnemy.push_back(enemy2);
 			tempEnemy.push_back(enemy3);
-
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost(Party[i]);
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
 			TurnManager::GetInstance()->Initialize(Party, tempEnemy);
 			for (size_t i = 0; i < Party.size(); i++)
 			{

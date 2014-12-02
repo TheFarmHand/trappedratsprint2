@@ -672,7 +672,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			{
 			if ( pTurn->GetAllies()[i]->isAlive() )
 				{
-				menu[hudSelection]->GetAbility()->CastAbility( this, pTurn->GetAllies()[i] );
+				menu[hudSelection]->GetAbility()->CastAbility( this, pTurn->GetAllies()[i], i);
 				GamePlayState::GetInstance()->AbilityUsed = true;
 				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
 				GamePlayState::GetInstance()->abilityTimer = 2.0f;
@@ -682,7 +682,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		}
 		else if ( mySelection == player )
 		{
-			menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ] );
+			menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ]);
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
 			GamePlayState::GetInstance()->abilityTimer = 2.0f;
@@ -733,7 +733,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			{
 				if ( pTurn->GetEnemies()[ i ]->isAlive() )
 				{
-					menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ i ] );
+					menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ i ], i );
 					GamePlayState::GetInstance()->AbilityUsed = true;
 					GamePlayState::GetInstance()->CurrentAbilityUsed = menu[hudSelection]->GetAbility();
 					GamePlayState::GetInstance()->abilityTimer = 2.0f;

@@ -299,7 +299,7 @@ void TurnManager::SetupAllyParty( std::vector<CombatPlayer*> playerParty )
 		{
 			AlliedUnits[ playerParty[ i ]->GetOrderPosition() ] = playerParty[ i ];
 			AllCombatUnits.push_back( playerParty[ i ] );
-			dynamic_cast<CombatPlayer*>( AlliedUnits[ i ] )->Reset();
+			dynamic_cast<CombatPlayer*>( AlliedUnits[playerParty[i]->GetOrderPosition()] )->Reset();
 		}
 	}
 }
