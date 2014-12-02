@@ -102,18 +102,14 @@ void GamePlayState::Enter()
 	p1->SetPosition({ 100, 150 });
 	p1->SetSize({ 64, 64 });
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList["Burrow"] );
-	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
-	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+	//partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	//partyAbilities.push_back( MasterAbilityList["Water Fang"] );
+	//partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	//partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
-	for ( unsigned int i = 0; i < partyAbilities.size(); i++ )
-		{
-		partyAbilities[i]->CalcluateBpScaledCost( p1 );
-		}
 	p1->InitializeAbilities( partyAbilities );
 	p1->GetAbility( 0 )->SetUnlocked( true );
 	p1->GetAbility( 1 )->SetUnlocked( true );
@@ -354,18 +350,6 @@ void GamePlayState::Fight()
 			tempEnemy.push_back(enemy1);
 			tempEnemy.push_back(enemy2);
 			tempEnemy.push_back(enemy3);
-
-			for ( unsigned int i = 0; i < Party.size(); i++ )
-				{
-				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
-				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
-				}
 
 			TurnManager::GetInstance()->Initialize(Party, tempEnemy);
 			for (size_t i = 0; i < Party.size(); i++)
@@ -754,6 +738,11 @@ Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lv
 
 	temp->SetAnimations(tempanimsys);
 
+	if (temp->GetName() == "Dog")
+	{
+		temp->SetTimelineAnimation(SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/DogTimeline.png"));
+	}
+
 	return temp;
 }
 CombatPlayer * GamePlayState::CreateCombatPlayer(std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, int _bp, int _maxbp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename)
@@ -952,6 +941,15 @@ CombatPlayer * GamePlayState::LoadCombatPlayer(std::string _path)
 			{
 			toon->SetEtype( ETYPE::MULTI );
 			}
+
+	}
+	if (toon->GetName() == "Ratsputin")
+	{
+		toon->SetTimelineAnimation(SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/RatTimeline.png"));
+	}
+	if (toon->GetName() == "Ratsputin")
+	{
+		toon->SetPortrait(SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Bowie.png"));
 
 	}
 	return toon;
