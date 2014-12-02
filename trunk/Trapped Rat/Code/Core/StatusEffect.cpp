@@ -15,6 +15,26 @@ StatusEffect::~StatusEffect()
 
 }
 
+void StatusEffect::Initialize( )
+{
+	// Lingering status effects that have immediate reprecussions.
+	switch ( myType )
+	{
+		case DOT:
+
+			break;
+
+		case SPECIAL:
+			HandleSpecial( );
+
+			break;
+
+		case STAT:
+			HandleStat( );
+			break;
+	}
+}
+
 void  StatusEffect::React(Character* owner, ETYPE ele = PHYS)
 {
 	// Happens when unit is struck by an attack
@@ -32,88 +52,39 @@ void  StatusEffect::Turntick()
 	{
 		case DOT:
 
-			// Turnmanager Attack/DoDamage to player call instead
-			owner->TakeDamage(dmg_tick);
-
-			//HandleDOT();
+			// Turnmanager Attack/DoDamage to player call instead?
+			HandleDOT();
 			break;
 
 		case SPECIAL:
+			//HandleSpecial();
 			
 			break;
 
 		case STAT:
-
+			//HandleStat();
 			break;
 	}
 
-	// owner->TakeDamage(dmg_tick, NULL);
+	
 }
 
-int StatusEffect::ElementalMod(int damage)
-// Modifies damage by elemental types
+void StatusEffect::HandleSpecial()
 {
-	if(element == FIRE)
-	{
-		if(owner->GetEType() == WIND)	// Resist Damage
-		{
-			return damage / 2;
-		}
-
-		else if(owner->GetEType() == EARTH)
-		{
-			return damage * 2;
-		}
-	}
-
-	else if(element == WATER)
-	{
-		if ( owner->GetEType() == WIND )
-		{
-			return damage * 2;
-		}
-
-		if(owner->GetEType() == EARTH)
-		{
-			return damage / 2;
-		}
-	}
-
-	else if(element == WIND)
-	{
-		if ( owner->GetEType( ) == FIRE )	// Extra Damage
-		{
-			return damage * 2;
-		}
-
-		if ( owner->GetEType() == WATER )
-		{
-			return damage / 2;
-		}
-	}
-
-	else if(element == EARTH)
-	{
-		if(owner->GetEType() == FIRE)
-		{
-			return damage / 2;
-		}
-
-		if(owner->GetEType() == WATER)
-		{
-			return damage * 2;
-		}
-	}
-
-	else if(element == MULTI)		// is this still a thing?
-	{
-		// What do I do with this? phys + ele I think
-		return damage;
-	}
-
-	  // Physical
-	return damage;
+	
 }
+
+void StatusEffect::HandleStat()
+{
+
+}
+
+void StatusEffect::HandleDOT()
+{
+	owner->TakeDamage( dmg_tick );
+}
+
+
 
 void StatusEffect::Clear( )
 // Removes this effect from the player

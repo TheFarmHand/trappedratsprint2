@@ -28,16 +28,16 @@ void Character::Render()
 }
 void Character::Attack( Character* owner, Character * target )
 {
-	
+
 }
 
 void Character::UseAbility()
 // 
 {
-	
+
 }
 
-void Character::TakeDamage( int dmg)	
+void Character::TakeDamage( int dmg )
 {
 	HP -= dmg;
 	if ( HP <= 0 )
@@ -51,10 +51,11 @@ void Character::TakeDamage( int dmg)
 	}
 
 }
+
 void Character::React()
 // Loops through status effects on the unit and calls their React function (for things like dodge and counter)
 {
-	
+
 }
 
 //accessors
@@ -170,35 +171,37 @@ void Character::StatusTick()
 	for ( auto iter = effects.begin(); iter != effects.end(); iter++ )
 	{
 		( *iter )->Turntick();
-		if((*iter)->GetCurrTick() == (*iter)->GetNumTicks())
+		if ( ( *iter )->GetCurrTick() == ( *iter )->GetNumTicks() )
 		{
 
 			//(*iter)->Clear();
 			std::list<StatusEffect*>::iterator temp = iter;
-			todel.push_back((temp));
+			todel.push_back( ( temp ) );
 
 		}
 	}
 
-	for (unsigned int i = 0; i<todel.size( ); i++ )
+	for ( unsigned int i = 0; i < todel.size(); i++ )
 	{
-		( *todel[ i ] )->Clear( );
+		( *todel[ i ] )->Clear();
 	}
 }
 
 void Character::AddStatus( StatusEffect *status )
 // Needs access to attacker for damage calculations
+// Probably done in TM
 {
 	StatusEffect* temp = new StatusEffect();
 	// Setup damage values
 	*temp = *status;
-	temp->SetOwner(this);
+	temp->SetOwner( this );
 	effects.push_back( temp );
+	temp->Initialize();
 }
 void Character::InitializeAbilities( std::vector<Ability*> toSet )
-	{
+{
 	for ( unsigned int i = 0; i < toSet.size(); ++i )
-		{
-		abilityList.push_back( toSet[i] );
-		}
+	{
+		abilityList.push_back( toSet[ i ] );
 	}
+}

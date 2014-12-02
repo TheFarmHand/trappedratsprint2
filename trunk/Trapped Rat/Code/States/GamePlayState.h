@@ -3,6 +3,7 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_MessageManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
+#include "../Core/StatusEffectManager.h"
 #include "../Tile/Layer.h"
 #include "../Tile/TileSystem.h"
 #include "../Core/Definitions.h"
@@ -59,6 +60,7 @@ class GamePlayState :
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
 
 	std::map<std::string, Ability*> MasterAbilityList;
+	StatusEffectManager *pStatManager = nullptr;
 
 	//items
 	std::vector<Items> shopinv;
