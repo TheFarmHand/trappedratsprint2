@@ -37,6 +37,11 @@ void Character::Render()
 	{
 		damagenumbers[i]->Render();
 	}
+
+	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
+	{
+		SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { position.x, position.y - size.height - 5 } );
+	}
 }
 void Character::Attack( Character* owner, Character * target )
 {
