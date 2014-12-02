@@ -20,6 +20,7 @@ private:
 	Character* owner;
 	enum STYPE { DOT, STAT, SPECIAL };
 	STYPE myType;
+	float stat_value = 0;
 
 	void virtual HandleDOT( );
 	void virtual HandleSpecial( );
@@ -33,6 +34,7 @@ public:
 	void virtual React(Character* attacker, ETYPE ele);
 	void virtual Turntick();
 	void virtual Clear();
+	void virtual Recover();	// For Statup/down
 
 	// Access Granted
 	virtual Character* GetOwner();

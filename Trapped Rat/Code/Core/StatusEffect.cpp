@@ -71,7 +71,11 @@ void  StatusEffect::Turntick()
 
 void StatusEffect::HandleSpecial()
 {
-	
+	if(name == "SpeedDown")
+	{
+		stat_value = owner->GetSpeed() * .333;
+		owner->SetSpeed(owner->GetSpeed() - stat_value);
+	}
 }
 
 void StatusEffect::HandleStat()
@@ -100,11 +104,18 @@ void StatusEffect::Clear( )
 	{
 		iter++;
 	}
-
+	Recover((*iter));
 	owner->GetEffects().erase(iter);
 	delete this;
 }
 
+void StatusEffect::Recover(StatusEffect* status)
+{
+	if(name=="SpeedDown")
+	{
+		owner->SetSpeed(owner->GetSpeed() + stat_value;
+	}
+}
 
 StatusEffect& StatusEffect::operator=( const StatusEffect& rhs )
 {

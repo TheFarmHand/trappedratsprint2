@@ -119,10 +119,11 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 // Handles status effects React in here, passes along the finalized damage to the target to get murdered
 {
 	bool dodge = false;
-	bool guard = false;
+	bool guard = false; // Cover
 	bool firespike = false;
 	bool counter = false;
-	Character* Guard = nullptr;
+	bool hedge = false;
+	Character* Guard = nullptr; 
 
 	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
 	for ( auto iter = target->GetEffects().begin(); iter != target->GetEffects().end(); iter++ )
@@ -134,7 +135,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			dodge = true;
 		}
 
-		if ( ( *iter )->GetName() == "Guard" )
+		else if ( ( *iter )->GetName() == "Cover" )
 		{
 			// Found guard!
 			guard = true;
@@ -142,29 +143,35 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 		}
 
-		if ( ( *iter )->GetName() == "FireSpikes" )
+		else if ( ( *iter )->GetName() == "FireSpikes" )
 		{
 			firespike = true;
 		}
 
-		if ( ( *iter )->GetName() == "Counter" )	// Might need refactoring if multiple versions of counter exist
+		else if ( ( *iter )->GetName() == "Counter" )	
 		{
 			counter = true;
+		}
+
+		else if( (*iter)->GetName() == "Hedge")
+		{
+			// Hedge Guard reaction
+			hedge = true;
 		}
 	}
 
 	if ( firespike )
 	{
 		// Slap for a little damage
-		// 
+		
 		owner->TakeDamage((int)(target->GetStats().magic * 0.2f));
 	}
 
 	if ( counter )
 	{
-		// Do some damage to attacker
+		// Reduce incoming damage, attack the attacker
 		value = value / 2;
-
+		target->TakeDamage(value);
 		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
 	}
 
@@ -194,6 +201,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// This call creates a new instance of the emitter
 		pPartMan->CreateEmitter( "takedamage" );
 	}
+
 }
 
 void TurnManager::UsingAbility(Character* owner, Character* target, Ability* ability)
