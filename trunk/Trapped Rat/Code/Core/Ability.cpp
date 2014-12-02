@@ -108,6 +108,7 @@ Ability::Ability( const char* path )
 
 Ability::~Ability()
 	{
+	delete animate;
 	}
 
 void Ability::Render()
@@ -125,7 +126,7 @@ void Ability::Render()
 		//abilityName = "Healing Light";
 		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
 		}
-	animate->Render(100.0f, 100.0f);
+	animate->Render(Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
 	}
 void Ability::Update( float dt )
 	{
@@ -133,7 +134,8 @@ void Ability::Update( float dt )
 	}
 void Ability::CastAbility( Character* owner, Character* target )
 	{
-
+	Abilowner = owner;
+	Abiltarget = target;
 	CalculateFormula( owner, target );
 	if ( offensive )
 		{

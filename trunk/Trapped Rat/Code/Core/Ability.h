@@ -29,6 +29,8 @@ private:
 	bool unlocked;
 	bool access;
 	AnimationSystem* animate;
+	Character* Abilowner;
+	Character* Abiltarget;
 
 public:
 	Ability( const char* path );
@@ -58,7 +60,7 @@ public:
 	void SetMgcDam( float mgc );
 	void SetUnlocked( bool unlock );
 	void SetAccess( bool combatUse );
-	void virtual Render();
+	void virtual Render( );
 	void virtual Update( float dt );
 	void CastAbility(Character* owner, Character* target);
 	void CalculateFormula( Character* owner, Character* target );
