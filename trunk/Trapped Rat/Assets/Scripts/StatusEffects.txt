@@ -77,6 +77,7 @@ TestParticleBlue.png
 Stun
 0 1 0 2
 TestParticleBlue.png
+*
 
 Cover
 
