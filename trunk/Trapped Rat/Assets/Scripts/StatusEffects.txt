@@ -1,79 +1,79 @@
 Burn
 2 3 10 0
-BlankParticle.png
+TestParticleBlue.png
 
 Poison
 0 3 10 0
-BlankParticle.png
+TestParticleBlue.png
 
 Counter
 0 1 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 Dodging
 0 1 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 Drown
 4 3 10 0
-BlankParticle.png
+TestParticleBlue.png
 
 Muck
 3 3 10 0
-BlankParticle.png
+TestParticleBlue.png
 
 Wisp
 1 3 10 0
-BlankParticle.png
+TestParticleBlue.png
 
 Regen
 0 3 15 0
-BlankParticle.png
+TestParticleBlue.png
 
 SpeedDown
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 SpeedUp
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 AttackUp
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 AttackDown
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 DefenseUp
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 DefenseDown
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 MagicUp
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 MagicDown
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 AvoisionUp
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 AvoisionDown
 0 3 0 2
-BlankParticle.png
+TestParticleBlue.png
 *
 
 Stun
 0 1 0 2
-BlankParticle.png
+TestParticleBlue.png
 
 Delerium
 0
