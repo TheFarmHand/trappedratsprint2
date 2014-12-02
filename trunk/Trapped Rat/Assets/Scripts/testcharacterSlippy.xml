@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Slippy</Name>
+  <Side>Ally</Side>
+  <Element>Water</Element>
+  <Type>Ally</Type>
+  <IsRandom>false</IsRandom>
+  <Stats>
+    <HitPoints>
+      <Base>40</Base>
+      <Scale>0.5</Scale>
+    </HitPoints>
+    <BattlePoints>
+      <Base>10</Base>
+      <Scale>0.5</Scale>
+    </BattlePoints>
+    <Attack>
+      <Base>15</Base>
+      <Scale>0.5</Scale>
+    </Attack>
+    <Magic>
+      <Base>20</Base>
+      <Scale>0.5</Scale>
+    </Magic>
+    <Defense>
+      <Base>5</Base>
+      <Scale>0.5</Scale>
+    </Defense>
+    <Speed>
+      <Base>30</Base>
+      <Scale>0.5</Scale>
+    </Speed>
+    <Avoision>
+      <Base>5</Base>
+      <Scale>0.5</Scale>
+    </Avoision>
+  </Stats>
+  <Level>1</Level>
+  <Sound>
+    <Hurt>null</Hurt>
+    <Attack>null</Attack>
+    <Death>null</Death>
+  </Sound>
+  <Animation>RatAnimBattle.xml</Animation>
+</Character>

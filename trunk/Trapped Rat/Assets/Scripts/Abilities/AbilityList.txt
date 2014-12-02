@@ -1,4 +1,4 @@
-8
+16
 Fire Fang
 Water Fang
 Earth Fang
@@ -7,3 +7,11 @@ Poison Fang
 Burrow
 Counter Claw
 Slow Claw
+Puddle
+Dissolve
+Whirlpool
+Acid Rain
+Torrent
+Flood
+Splash
+Squirt

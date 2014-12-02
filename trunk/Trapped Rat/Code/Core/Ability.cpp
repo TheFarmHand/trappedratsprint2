@@ -132,7 +132,7 @@ void Ability::Update( float dt )
 	{
 	animate->Update( dt );
 	}
-void Ability::CastAbility( Character* owner, Character* target )
+void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
 	{
 	Abilowner = owner;
 	Abiltarget = target;
@@ -148,7 +148,8 @@ void Ability::CastAbility( Character* owner, Character* target )
 	if ( status )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
 
-	owner->SetBP(owner->GetBP() - bpCost);
+	if ( AoeCounter == 0 )
+		owner->SetBP(owner->GetBP() - bpCost);
 	}
 void Ability::CalculateFormula( Character* owner, Character* target )
 	{
