@@ -77,25 +77,24 @@ TestParticleBlue.png
 Stun
 0 1 0 2
 TestParticleBlue.png
-*
-
-Cover
-
-
-*
-
-Delerium
-0
-
-
-Cover
-0
-
-AdvancedCover
-0
 
 Enfire
-0
+2 3 0 2
+TestParticleBlue.png
+
+Delerium
+0 1 0 2
+TestParticleBlue.png
+
+Cover
+0 2 0 2
+TestParticleBlue.png
+
+AdvancedCover
+0 2 0 2
+TestParticleBlue.png
 
 Hedge
-0
+0 1 0 2
+TestParticleBlue.png
+*
