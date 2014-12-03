@@ -219,7 +219,7 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 
 void CombatPlayer::UseItem( Character * target, Items item )
 {
-
+	//here we take in the item check what it does, then send the effects to the target
 }
 bool CombatPlayer::GetActive()
 {
