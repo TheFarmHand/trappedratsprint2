@@ -194,6 +194,8 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 	if ( offensive )
 		{
 		formulaTotal = ( atkMod * owner->GetStats().attack + mgcMod * owner->GetStats().magic ) - ( 0.25f * target->GetStats().defense + 0.25f * target->GetStats().magic );
+		if ( formulaTotal <= 0.0f )
+			formulaTotal = 0.0f;
 		}
 	else if ( healing )
 		{

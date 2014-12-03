@@ -1,4 +1,4 @@
-16
+40
 Fire Fang
 Water Fang
 Earth Fang
@@ -15,3 +15,27 @@ Torrent
 Flood
 Splash
 Squirt
+Collapse
+Ignite
+Scorch
+Rib-a-Rang
+Emblazon
+Firefall
+Fire Spikes
+Incinerate
+Leaf on the Wind
+Tailwind
+Wind Vale
+Zephyr
+Whispering Wind
+Second Wind
+Tornado
+Tempest
+Hedge Guard
+Cover
+Rampart
+Rock Spike
+Geo Crush
+Tremor
+Quake
+Pinch

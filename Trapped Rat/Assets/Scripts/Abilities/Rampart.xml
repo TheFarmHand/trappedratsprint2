@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dissolve Name="Dissolve" Offensive="true">
-<Help Text="_Lowers the defense of a_single target." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="DefenseDown" />
-  <AreaOfEffect AOE="false" />
+<Rampart Name="Rampart" Offensive="false">
+<Help Text="_Raises the defense of the entire party." />
+  <Affinity ElementalType="Earth" />
+  <StatusEffect Effect="DefenseUp" />
+  <AreaOfEffect AOE="true" />
   <Healing Heals="false" />
-  <UnlockLevel Level="4" />
+  <UnlockLevel Level="0" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
@@ -13,7 +13,7 @@
   <DamageInfo>
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="0.0" />
-    <BaseBP bp="2" />
+    <BaseBP bp="3" />
     <HPMod />
   </DamageInfo>
-</Dissolve>
+</Rampart>

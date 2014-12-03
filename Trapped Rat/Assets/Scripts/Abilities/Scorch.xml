@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dissolve Name="Dissolve" Offensive="true">
-<Help Text="_Lowers the defense of a_single target." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="DefenseDown" />
+<Scorch Name="Scorch" Offensive="true">
+<Help Text="_Lowers the attack of a single target." />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="AttackDown" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="4" />
@@ -16,4 +16,4 @@
     <BaseBP bp="2" />
     <HPMod />
   </DamageInfo>
-</Dissolve>
+</Scorch>

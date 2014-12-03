@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dissolve Name="Dissolve" Offensive="true">
-<Help Text="_Lowers the defense of a_single target." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="DefenseDown" />
+<Fire_Spikes Name="Fire Spikes" Offensive="false">
+<Help Text="_Fire spikes form along Jeeves' body_dealing Fire damage to attackers." />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="FireSpikes" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="4" />
+  <UnlockLevel Level="12" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
@@ -13,7 +13,7 @@
   <DamageInfo>
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="0.0" />
-    <BaseBP bp="2" />
+    <BaseBP bp="3" />
     <HPMod />
   </DamageInfo>
-</Dissolve>
+</Fire_Spikes>

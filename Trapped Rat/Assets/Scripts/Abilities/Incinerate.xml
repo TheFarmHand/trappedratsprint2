@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Incinerate Name="Incinerate" Offensive="true">
+<Help Text="_Fire Elemental attack that deals_high damage to a single target." />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="14" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="1.3" />
+    <BaseBP bp="2" />
+    <HPMod />
+  </DamageInfo>
+</Incinerate>
