@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Puddle Name="Puddle" Offensive="false">
-<Help Text="_Dodge all incoming attacks until_the next turn." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="Dodging" />
+<Zephyr Name="Zephyr" Offensive="false">
+<Help Text="_Restores a portion of a single_ally's health." />
+  <Affinity ElementalType="Wind" />
+  <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
-  <Healing Heals="false" />
+  <Healing Heals="true" />
   <UnlockLevel Level="0" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
@@ -12,8 +12,8 @@
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="0.0" />
+    <MagicMod mgcMod="1.0" />
     <BaseBP bp="2" />
-    <HPMod />
+    <HPMod>20</HPMod>
   </DamageInfo>
-</Puddle>
+</Zephyr>

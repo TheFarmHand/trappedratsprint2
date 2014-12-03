@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Puddle Name="Puddle" Offensive="false">
-<Help Text="_Dodge all incoming attacks until_the next turn." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="Dodging" />
-  <AreaOfEffect AOE="false" />
+<Tremor Name="Tremor" Offensive="true">
+<Help Text="_Earth Elemental attack that deals_low damage to all enemies." />
+  <Affinity ElementalType="Earth" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="true" />
   <Healing Heals="false" />
   <UnlockLevel Level="0" />
   <Paths>
@@ -12,8 +12,8 @@
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="0.0" />
-    <BaseBP bp="2" />
+    <MagicMod mgcMod="0.3" />
+    <BaseBP bp="3" />
     <HPMod />
   </DamageInfo>
-</Puddle>
+</Tremor>

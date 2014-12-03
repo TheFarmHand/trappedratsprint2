@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Whispering_Wind Name="Whispering Wind" Offensive="false">
+<Help Text="_Restores a portion of the entire_party's health." />
+  <Affinity ElementalType="Wind" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="true" />
+  <Healing Heals="true" />
+  <UnlockLevel Level="0" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0.0" />
+    <MagicMod mgcMod="0.5" />
+    <BaseBP bp="4" />
+    <HPMod>15</HPMod>
+  </DamageInfo>
+</Whispering_Wind>

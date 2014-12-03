@@ -149,7 +149,27 @@ void GamePlayState::Enter()
 
 	partyAbilities.clear();
 
-
+	CombatPlayer* p3 = nullptr;
+	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
+	p3->SetOrderPosition( 2 );
+	characterOrderPosition.x = 100.0f;
+	characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
+	p3->SetPosition( characterOrderPosition );
+	p3->SetSize( { 64, 64 } );
+	partyAbilities.push_back( MasterAbilityList["Collapse"] );
+	partyAbilities.push_back( MasterAbilityList["Ignite"] );
+	partyAbilities.push_back( MasterAbilityList["Scorch"] );
+	partyAbilities.push_back( MasterAbilityList["Emblazon"] );
+	partyAbilities.push_back( MasterAbilityList["Firefall"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
+	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
+	partyAbilities.push_back( MasterAbilityList["Rib-a-Rang"] );
+	p3->InitializeAbilities( partyAbilities );
+	p3->GetAbility( 0 )->SetUnlocked( true );
+	p3->GetAbility( 1 )->SetUnlocked( true );
+	p3->GetAbility( 2 )->SetUnlocked( true );
+	p3->GetAbility( 3 )->SetUnlocked( true );
+	Party.push_back( p3 );
 
 	dialogue = new Dialogue();
 	dialogue->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
@@ -374,14 +394,17 @@ void GamePlayState::Fight()
 
 			Character* en1 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 39.0f, 0.0f, nullptr, SGD::Point(600, 160), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy1 = dynamic_cast<Enemy*>(en1);
+			enemy1->SetEtype( WIND );
 			enemy1->SetOrderPosition(0);
 
 			Character* en2 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 40.0f, 0.0f, nullptr, SGD::Point(600, 260), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy2 = dynamic_cast<Enemy*>(en2);
+			enemy2->SetEtype( WATER );
 			enemy2->SetOrderPosition(1);
 
 			Character* en3 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 42.0f, 0.0f, nullptr, SGD::Point(600, 360), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy3 = dynamic_cast<Enemy*>(en3);
+			enemy3->SetEtype( EARTH );
 			enemy3->SetOrderPosition(2);
 
 			tempEnemy.push_back(enemy1);
@@ -882,7 +905,7 @@ Enemy * GamePlayState::CreateCommonEnemy(std::string name, Stats _stats, int _lv
 	temp->SetMaxHP(_maxhp);
 	temp->SetSpeed(_speed);
 	temp->SetProgress(_progress);
-	temp->SetEtype(WIND);
+	//temp->SetEtype(WIND);
 	if (abilityarr != nullptr)
 	{
 		for (int i = 0; i < 4; i++)

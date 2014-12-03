@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Second_Wind Name="Second Wind" Offensive="false">
+<Help Text="_Revives a fallen ally and restores_10% of their max health." />
+  <Affinity ElementalType="Wind" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="true" />
+  <UnlockLevel Level="0" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0.0" />
+    <MagicMod mgcMod="1.0" />
+    <BaseBP bp="6" />
+    <HPMod>10</HPMod>
+  </DamageInfo>
+</Second_Wind>

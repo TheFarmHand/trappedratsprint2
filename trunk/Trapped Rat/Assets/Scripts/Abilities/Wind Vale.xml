@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dissolve Name="Dissolve" Offensive="true">
-<Help Text="_Lowers the defense of a_single target." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="DefenseDown" />
+<Wind_Vale Name="Wind Vale" Offensive="false">
+<Help Text="_Increases the Avoision of an ally." />
+  <Affinity ElementalType="Wind" />
+  <StatusEffect Effect="AvoisionUp" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="4" />
+  <UnlockLevel Level="0" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
@@ -16,4 +16,4 @@
     <BaseBP bp="2" />
     <HPMod />
   </DamageInfo>
-</Dissolve>
+</Wind_Vale>

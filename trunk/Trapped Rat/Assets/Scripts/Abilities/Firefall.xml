@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Firefall Name="Firefall" Offensive="true">
+<Help Text="_A double attack that deals Fire_Elemental damage to a single target." />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="10" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="2.0" />
+    <MagicMod mgcMod="0.3" />
+    <BaseBP bp="4" />
+    <HPMod />
+  </DamageInfo>
+</Firefall>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Ignite Name="Ignite" Offensive="true">
+<Help Text="_Fire Elemental attack that deals_low damage to a single target." />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="2" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="0.7" />
+    <BaseBP bp="1" />
+    <HPMod />
+  </DamageInfo>
+</Ignite>

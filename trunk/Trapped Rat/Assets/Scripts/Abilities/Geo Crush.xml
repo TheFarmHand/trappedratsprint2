@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dissolve Name="Dissolve" Offensive="true">
-<Help Text="_Lowers the defense of a_single target." />
-  <Affinity ElementalType="Water" />
-  <StatusEffect Effect="DefenseDown" />
+<Geo_Crush Name="Geo Crush" Offensive="true">
+<Help Text="_Earth Elemental attack that deals_low damage to a single target." />
+  <Affinity ElementalType="Earth" />
+  <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="4" />
+  <UnlockLevel Level="0" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="0.0" />
-    <BaseBP bp="2" />
+    <MagicMod mgcMod="1.0" />
+    <BaseBP bp="4" />
     <HPMod />
   </DamageInfo>
-</Dissolve>
+</Geo_Crush>
