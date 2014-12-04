@@ -323,6 +323,7 @@ void GamePlayState::Update( float dt )
 	}
 void GamePlayState::Exit()
 	{
+	Loading("Dumping...");
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
 		{
 		delete m_vhuditems[i];
@@ -1453,8 +1454,8 @@ void GamePlayState::Loading(std::string _loading)
 	//
 	//SGD::GraphicsManager::GetInstance()->Update();
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 520.0f, 400.0f }, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
-	GameData::GetInstance()->GetFont()->DrawString(_loading, 250.0f, 450.0f, { 0, 0, 0 },2.0f);
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 520.0f, 200.0f }, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
+	GameData::GetInstance()->GetFont()->DrawString(_loading, 250.0f, 250.0f, { 0, 0, 0 },2.0f);
 	SGD::GraphicsManager::GetInstance()->Update();
 	Sleep(250);
 	
