@@ -119,19 +119,32 @@ void CombatPlayer::Update(float dt)
 	void CombatPlayer::Render()
 	
 	{
-		SGD::GraphicsManager *pGraphics = SGD::GraphicsManager::GetInstance();
-		TurnManager *pTurn = TurnManager::GetInstance();
-		std::ostringstream ss;
-		ss << "Speed: " << speed;
-		SGD::GraphicsManager::GetInstance()->DrawString(name.c_str(), { position.x + 50, position.y }, SGD::Color(255, 255, 0, 0));
-		GameData::GetInstance()->GetFont()->DrawString(ss.str(), position.x + 50, position.y + 30, { 0, 255, 0 });
-		std::ostringstream sp;
-		sp << "Progress: " << progress;
-		GameData::GetInstance()->GetFont()->DrawString(sp.str(), position.x + 50, position.y + 50, { 0, 255, 255 });
+	SGD::GraphicsManager *pGraphics = SGD::GraphicsManager::GetInstance();
+	TurnManager *pTurn = TurnManager::GetInstance();
+	
+	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
+	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 50, position.y - 30, { 200, 0, 255 }, 1.6f );
+	std::ostringstream sp;
+	sp << "Progress: " << progress;
+	GameData::GetInstance()->GetFont()->DrawString( sp.str(), position.x + 50, position.y - 10, { 255, 0, 0 } );
+	std::ostringstream sa;
+	sa << "Attack: " << stats.attack;
+	GameData::GetInstance()->GetFont()->DrawString( sa.str(), position.x + 50, position.y + 5, { 0, 0, 0 } );
+	std::ostringstream sd;
+	sd << "Defense: " << stats.defense;
+	GameData::GetInstance()->GetFont()->DrawString( sd.str(), position.x + 50, position.y + 15, { 0, 0, 0 } );
+	std::ostringstream sm;
+	sm << "Magic: " << stats.magic;
+	GameData::GetInstance()->GetFont()->DrawString( sm.str(), position.x + 50, position.y + 25, { 0, 0, 0 } );
+	std::ostringstream sav;
+	sav << "Defense: " << stats.avoision;
+	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
+	std::ostringstream ss;
+	ss << "Speed: " << speed;
+	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
 
 		GameData::GetInstance()->GetFont()->DrawString(name.c_str(), 301, 451 + (order*50.0f), { 0, 0, 0 }, 1.6f);
 		GameData::GetInstance()->GetFont()->DrawString(name.c_str(), 300, 450 + (order*50.0f), { 255, 0, 0 }, 1.6f);
-
 
 		//if ( TestAbility && progress >= 100.0f )
 		//	tester.Render();
