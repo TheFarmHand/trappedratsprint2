@@ -270,7 +270,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	if ( guard )
 	{
 		// Redirect attack to Guard
-		owner->Attack(owner, Guard->GetGuard());
+		int dmg = owner->GetStats().attack;
+		dmg += rand()%(dmg/3);
+		dmg -= Guard->GetGuard()->GetStats().defense/2;
+		Guard->GetGuard()->TakeDamage(dmg);
+		
+		//owner->Attack(owner, Guard->GetGuard());
 		
 	}
 

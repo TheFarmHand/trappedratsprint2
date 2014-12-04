@@ -23,7 +23,7 @@ public:
 	void virtual Render();
 	void virtual Attack( Character* owner, Character * target );
 	void UseItem(Character * target, Items item);
-
+	void TernaryBlast(float dt);
 	
 
 	bool GetActive();
@@ -65,6 +65,8 @@ private:
 	void SetHomeButtons();
 	//int maxBP;
 	//int curBP;
+
+	
 };
 
 

@@ -1,3 +1,5 @@
+#pragma once
+
 /* 
 	This class stores StatusEffects to be pointed to by other things
 */

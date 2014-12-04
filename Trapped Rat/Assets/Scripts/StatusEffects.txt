@@ -75,7 +75,7 @@ Confused
 TestParticleBlue.png
 
 Stun
-0 1 0 2
+0 2 0 2
 TestParticleBlue.png
 
 Enfire
@@ -95,7 +95,7 @@ AdvancedCover
 TestParticleBlue.png
 
 Hedge
-0 1 0 2
+0 1 0 0
 TestParticleBlue.png
 
 FireSpikes

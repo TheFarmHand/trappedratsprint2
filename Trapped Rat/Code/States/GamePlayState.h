@@ -14,6 +14,7 @@
 #include "../Core/Ability.h"
 #include "../Core/StatusEffectManager.h"
 
+#define MAXTG 250
 
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia,Cuts };
@@ -71,6 +72,8 @@ class GamePlayState :
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 50;
+	int ternary_gauge = 0;
+	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	
 public:
 	bool AbilityUsed;
@@ -116,6 +119,16 @@ public:
 	//This Function returns the selectable objects in the order of Top Left Right Bottom
 	std::vector<SelectableObject*> GetSelectableObjects();
 	HelpText* GetHelpText();
+	int GetGauge();
+	int GetMaxGauge();
+	bool usingTernary();
+	void ClearTernary();
+	void AddTarget( );
+	
+	
+	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
+	void AddToTB( Ability* abi, Character* target );
+	TernaryTargets myTernTargets;
 	std::vector<Items> * GetInventory();
 
 	//Mutators
@@ -124,5 +137,8 @@ public:
 	void SetHelpText(HelpText* help);
 	void SetState(GPStates _state){ state = _state; }
 	void PauseGame();
+	void AddToGauge(int val);
+	void SetGauge(int val);
+	void SetTernary(bool buul);
 };
 

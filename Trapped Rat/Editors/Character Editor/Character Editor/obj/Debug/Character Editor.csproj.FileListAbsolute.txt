@@ -10,3 +10,12 @@ C:\Users\fullsail\Desktop\Character Editor\Character Editor\obj\Debug\Character_
 C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\bin\Debug\Character Editor.exe.config
 C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\obj\Debug\Character Editor.exe
 C:\Users\fullsail\Desktop\SGP1\Character Editor\Character Editor\obj\Debug\Character Editor.pdb
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\bin\Debug\Character Editor.exe.config
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character Editor.exe
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character Editor.pdb
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\bin\Debug\Character Editor.exe
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\bin\Debug\Character Editor.pdb
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character Editor.csprojResolveAssemblyReference.cache
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character_Editor.CharacterEditor.resources
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character_Editor.Properties.Resources.resources
+G:\SGP2 Project\Trapped Rat\Editors\Character Editor\Character Editor\obj\Debug\Character Editor.csproj.GenerateResource.Cache

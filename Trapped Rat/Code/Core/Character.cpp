@@ -54,10 +54,14 @@ void Character::Render()
 		offset++;
 	}
 }
+
 void Character::Attack( Character* owner, Character * target )
 {
 	int atk = target->GetStats( ).attack;
-	int dmg = rand( ) % atk + 3;
+	int dmg;
+	dmg = atk - ( atk / 3 ); 
+	dmg += rand( ) % ( atk / 3 );
+	
 	TurnManager::GetInstance( )->AttackTarget(owner, target, dmg);
 }
 
@@ -118,6 +122,7 @@ bool Character::HasEffect( std::string effect )
 
 void Character::React()
 // Loops through status effects on the unit and calls their React function (for things like dodge and counter)
+// Actually this was handled in TurnManager I think
 {
 
 }
@@ -272,7 +277,6 @@ void Character::StatusTick()
 			//(*iter)->Clear();
 			std::list<StatusEffect*>::iterator temp = iter;
 			todel.push_back( ( temp ) );
-
 		}
 	}
 
