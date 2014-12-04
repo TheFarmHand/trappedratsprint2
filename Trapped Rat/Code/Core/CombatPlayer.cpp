@@ -238,7 +238,7 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 	{
 		int atk = target->GetStats().attack;
 		int dmg = rand() % atk + atk;
-		dmg -= .025 * target->GetStats().defense;
+		dmg -= (int)(0.25f * target->GetStats().defense);
 		if ( dmg <= 0 )
 			dmg = 0;
 		TurnManager::GetInstance()->AttackTarget( owner, target, dmg );

@@ -59,7 +59,7 @@ void Character::Attack( Character* owner, Character * target )
 {
 	int atk = target->GetStats( ).attack;
 	int dmg = rand() % atk + atk;
-	dmg -= 0.25 * target->GetStats().defense;
+	dmg -= (int)(0.25f * target->GetStats().defense);
 	if ( dmg <= 0 )
 		dmg = 0;
 	TurnManager::GetInstance( )->AttackTarget(owner, target, dmg);
@@ -71,7 +71,7 @@ void Character::UseAbility()
 
 }
 
-void Character::TakeDamage( int dmg )
+void Character::TakeDamage( int dmg , bool firefall)
 {
 	
 	HP -= dmg;
@@ -94,19 +94,26 @@ void Character::TakeDamage( int dmg )
 	{
 		tempoffset.x = 50;
 	}
-	if (dmg > 0)
+	if (dmg > 0 && !firefall)
 	{
 		//hurt
 		Numbers* temp = new Numbers(dmg, SGD::Color(180, 0, 0),this,tempoffset);
 		damagenumbers.push_back(temp);
 	}
-	else
+	else if (!firefall )
 	{
 		//healled
 
 		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0),this,tempoffset);
 		damagenumbers.push_back(temp);
 	}
+	if ( firefall )
+		{
+		tempoffset.x -= 30;
+		tempoffset.y += 10;
+		Numbers* temp = new Numbers( dmg, SGD::Color( 180, 0, 0 ), this, tempoffset );
+		damagenumbers.push_back( temp );
+		}
 }
 
 bool Character::HasEffect( std::string effect )
