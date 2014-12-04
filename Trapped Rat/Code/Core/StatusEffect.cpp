@@ -154,8 +154,8 @@ void StatusEffect::HandleSpecial()
 	// Hedge
 	if(name == "Hedge")
 	{
-		owner->AddStatus(SEM->GetStatus("Regen"));
-		owner->AddStatus(SEM->GetStatus("DefenseUp"));
+		owner->AddStatus(&SEM->GetStatus("Regen"));
+		owner->AddStatus(&SEM->GetStatus("DefenseUp"));
 	}
 
 }
