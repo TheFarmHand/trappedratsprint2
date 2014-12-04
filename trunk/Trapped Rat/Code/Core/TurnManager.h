@@ -43,9 +43,11 @@ private:
 	SGD::HTexture allytargetArrow = SGD::INVALID_HANDLE;
 	SGD::HTexture enemytargetArrow = SGD::INVALID_HANDLE;
 	SGD::HTexture timelineImage = SGD::INVALID_HANDLE;
+	SGD::HTexture elementalImage = SGD::INVALID_HANDLE;
 	bool timeStop;
 	bool fullProgressReached;
 	bool turnPause;
+	bool elementalgraphicactive;
 	float pauseTime;
 
 	bool testCover;
