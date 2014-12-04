@@ -67,7 +67,6 @@ void  StatusEffect::Turntick()
 			break;
 	}
 
-
 }
 
 int StatusEffect::ElementalMod()
@@ -170,49 +169,49 @@ void StatusEffect::HandleStat()
 	else if ( name == "AttackUp" )
 	{
 		stat_value = owner->GetStats( ).attack * .333f;
-		owner->SetSpeed( owner->GetStats( ).attack + stat_value );
+		owner->GetStats( ).attack += (int)stat_value;
 	}
 
 	else if ( name == "AttackDown" )
 	{
 		stat_value = owner->GetStats( ).attack * .333f;
-		owner->SetSpeed( owner->GetStats( ).attack - stat_value );
+		owner->GetStats( ).attack -= (int)stat_value ;
 	}
 
 	else if ( name == "DefenseUp" )
 	{
 		stat_value = owner->GetStats( ).defense * .333f;
-		owner->SetSpeed( owner->GetStats( ).defense + stat_value );
+		owner->GetStats().defense += (int)stat_value;
 	}
 
 	else if ( name == "DefenseDown" )
 	{
 		stat_value = owner->GetStats( ).defense * .333f;
-		owner->SetSpeed( owner->GetStats( ).defense - stat_value );
+		owner->GetStats( ).defense -= (int)stat_value;
 	}
 
 	else if ( name == "MagicUp" )
 	{
 		stat_value = owner->GetStats( ).magic * .333f;
-		owner->SetSpeed( owner->GetStats( ).magic + stat_value );
+		owner->GetStats( ).magic += (int)stat_value;
 	}
 
 	else if ( name == "MagicDown" )
 	{
 		stat_value = owner->GetStats( ).magic * .333f;
-		owner->SetSpeed( owner->GetStats( ).magic - stat_value );
+		owner->GetStats( ).magic -= (int)stat_value;
 	}
 
 	else if ( name == "AvoisionUp" )
 	{
 		stat_value = owner->GetStats( ).avoision * .333f;
-		owner->SetSpeed( owner->GetStats( ).avoision + stat_value );
+		owner->GetStats( ).avoision += (int)stat_value;
 	}
 
 	else if ( name == "AvoisionDown" )
 	{
 		stat_value = owner->GetStats( ).avoision * .333f;
-		owner->SetSpeed( owner->GetStats( ).avoision - stat_value );
+		owner->GetStats( ).avoision -= (int)stat_value;
 	}
 }
 
@@ -221,7 +220,7 @@ void StatusEffect::HandleDOT()
 	if(name == "Regen")
 		owner->TakeDamage(-dmg_tick);
 	else
-		owner->TakeDamage( ElementalMod() );
+		owner->TakeDamage( ElementalMod() );	// Tweaks numbers according to Elemental affinities
 
 }
 
@@ -260,42 +259,42 @@ void StatusEffect::Recover()
 
 	else if ( name == "AttackUp" )
 	{
-		owner->SetSpeed( owner->GetStats( ).attack - stat_value );
+		owner->GetStats( ).attack -= (int)stat_value;
 	}
 
 	else if ( name == "AttackDown" )
 	{
-		owner->SetSpeed( owner->GetStats( ).attack + stat_value );
+		owner->GetStats( ).attack += (int)stat_value;
 	}
 
 	else if ( name == "DefenseUp" )
 	{
-		owner->SetSpeed( owner->GetStats( ).defense - stat_value );
+		owner->GetStats( ).defense -= (int)stat_value;
 	}
 
 	else if ( name == "DefenseDown" )
 	{
-		owner->SetSpeed( owner->GetStats( ).defense + stat_value );
+		owner->GetStats( ).defense += (int)stat_value;
 	}
 
 	else if ( name == "MagicUp" )
 	{
-		owner->SetSpeed( owner->GetStats( ).magic - stat_value );
+		owner->GetStats( ).magic -= (int)stat_value;
 	}
 
 	else if ( name == "MagicDown" )
 	{
-		owner->SetSpeed( owner->GetStats( ).magic + stat_value );
+		owner->GetStats( ).magic += (int)stat_value;
 	}
 
 	else if ( name == "AvoisionUp" )
 	{
-		owner->SetSpeed( owner->GetStats( ).avoision - stat_value );
+		owner->GetStats().avoision -= (int)stat_value;
 	}
 
 	else if ( name == "AvoisionDown" )
 	{
-		owner->SetSpeed( owner->GetStats( ).avoision + stat_value );
+		owner->GetStats( ).avoision += (int)stat_value;
 	}
 }
 
