@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>biggs.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="20" y="47" />
+      <DrawRect left="2" top="45" right="40" bottom="82" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="57" y="49" />
+      <DrawRect left="39" top="45" right="74" bottom="84" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="92" y="48" />
+      <DrawRect left="73" top="44" right="112" bottom="86" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="129" y="48" />
+      <DrawRect left="112" top="45" right="147" bottom="84" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

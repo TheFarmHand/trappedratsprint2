@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Biggs</Name>
+  <Side>Ally</Side>
+  <Element>Wind</Element>
+  <Type>Ally</Type>
+  <IsRandom>false</IsRandom>
+  <Stats>
+    <HitPoints>
+      <Base>15</Base>
+      <Scale>1</Scale>
+    </HitPoints>
+    <BattlePoints>
+      <Base>20</Base>
+      <Scale>2</Scale>
+    </BattlePoints>
+    <Attack>
+      <Base>5</Base>
+      <Scale>0.3</Scale>
+    </Attack>
+    <Magic>
+      <Base>9</Base>
+      <Scale>0.5</Scale>
+    </Magic>
+    <Defense>
+      <Base>5</Base>
+      <Scale>0.2</Scale>
+    </Defense>
+    <Speed>
+      <Base>8</Base>
+      <Scale>0.5</Scale>
+    </Speed>
+    <Avoision>
+      <Base>5</Base>
+      <Scale>0.4</Scale>
+    </Avoision>
+  </Stats>
+  <Level>1</Level>
+  <Sound>
+    <Hurt>null</Hurt>
+    <Attack>null</Attack>
+    <Death>null</Death>
+  </Sound>
+  <Animation>biggsAnimBattle.xml</Animation>
+</Character>

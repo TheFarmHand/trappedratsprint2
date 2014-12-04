@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>checkers.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="1">
+      <AnchorPoint x="51" y="16" />
+      <DrawRect left="37" top="12" right="69" bottom="40" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1">
+      <AnchorPoint x="87" y="15" />
+      <DrawRect left="72" top="12" right="106" bottom="40" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
