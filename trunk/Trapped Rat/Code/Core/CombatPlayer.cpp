@@ -654,7 +654,14 @@ void CombatPlayer::AbilityUpdate( float dt )
 				else
 					{
 					mySelection = player;
-					myTarget = 0;
+					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+						{
+						if ( this->GetName() == TurnManager::GetInstance()->GetAllies()[i]->GetName() )
+							{
+							myTarget = i;
+							break;
+							}
+						}
 					}
 				states = 5;
 				}
