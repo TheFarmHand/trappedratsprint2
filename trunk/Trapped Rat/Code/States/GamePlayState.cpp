@@ -872,6 +872,7 @@ void GamePlayState::CombatUpdate(float dt)
 		TurnManager::GetInstance()->Terminate();
 
 	}
+
 	if ( input->IsKeyPressed( SGD::Key::Eight ) )
 		{
 		Party[0]->SetBP( Party[0]->GetMaxBP() );
@@ -887,6 +888,11 @@ void GamePlayState::CombatUpdate(float dt)
 	if( input->IsKeyPressed(SGD::Key::L) )
 	{
 		Party[0]->AddStatus(&pStatManager->GetStatus("Regen"));
+	}
+
+	if(input->IsKeyPressed(SGD::Key::Nine))
+	{
+		ternary_gauge = MAXTG;
 	}
 
 	if (state == GPStates::Town)
@@ -1304,14 +1310,77 @@ void GamePlayState::RandomAnimation()
 void GamePlayState::PauseGame()
 {
 	state = GPStates::Menu;
-}std::vector<Items> * GamePlayState::GetInventory()
+}
+
+std::vector<Items> * GamePlayState::GetInventory()
 {
 	return &inventory;
 }
+
+
+// Grant Added This Stuff for Ternary
+void GamePlayState::AddToGauge( int val )
+{
+	ternary_gauge += val;
+}
+
+void GamePlayState::SetGauge( int val )
+{
+	ternary_gauge = val;
+}
+
+int GamePlayState::GetGauge()
+{
+	return ternary_gauge;
+}
+
+int GamePlayState::GetMaxGauge()
+{
+	return MAXTG;
+}
+
+bool GamePlayState::usingTernary()
+{
+	return ternary;
+}
+
+void GamePlayState::SetTernary(bool buul)
+{
+	ternary = buul;
+}
+
+void GamePlayState::AddToTB( Ability* abi, Character* target )
+{
+	// Don't do this so many times
+	if ( myTernTargets.num_targets >= 3 ) return;
+
+	myTernTargets.targets.push_back( target );
+	myTernTargets.abilities.push_back( abi );
+	//myTernTargets.num_targets++;
+}
+
+void GamePlayState::AddTarget( )
+{
+	myTernTargets.num_targets++;
+}
+
+void GamePlayState::ClearTernary( )
+{
+	myTernTargets.abilities.clear( );
+	myTernTargets.targets.clear( );
+	myTernTargets.num_targets = 0;
+}
+
+//std::vector<Items> * GamePlayState::GetInventory()
+//{
+//	return &inventory;
+//}
+
 void GamePlayState::CutsceneUpdate(float dt)
 {
-	CutsceneManager::GetInstance()->Update(dt);
+	CutsceneManager::GetInstance( )->Update(dt );
 }
+
 void GamePlayState::CutsceneRender()
 {
 	CutsceneManager::GetInstance()->Render();
