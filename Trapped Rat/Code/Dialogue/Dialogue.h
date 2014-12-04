@@ -1,3 +1,4 @@
+#pragma once
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 
 #include <string>

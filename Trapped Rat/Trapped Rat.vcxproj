@@ -113,6 +113,8 @@
     <ClCompile Include="Code\Core\StatusEffectManager.cpp" />
     <ClCompile Include="Code\Core\TurnManager.cpp" />
     <ClCompile Include="Code\Core\WorldObject.cpp" />
+    <ClCompile Include="Code\Cutscenes\Cutscene.cpp" />
+    <ClCompile Include="Code\Cutscenes\CutsceneManager.cpp" />
     <ClCompile Include="Code\Dialogue\Dialogue.cpp" />
     <ClCompile Include="Code\Font\Font.cpp" />
     <ClCompile Include="Code\Font\FontTestState.cpp" />
@@ -186,6 +188,8 @@
     <ClInclude Include="Code\Core\StatusEffectManager.h" />
     <ClInclude Include="Code\Core\TurnManager.h" />
     <ClInclude Include="Code\Core\WorldObject.h" />
+    <ClInclude Include="Code\Cutscenes\Cutscene.h" />
+    <ClInclude Include="Code\Cutscenes\CutsceneManager.h" />
     <ClInclude Include="Code\Dialogue\Dialogue.h" />
     <ClInclude Include="Code\Font\Font.h" />
     <ClInclude Include="Code\Font\FontTestState.h" />

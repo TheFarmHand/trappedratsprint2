@@ -17,6 +17,7 @@
 #include "../tinyxml/tinyxml.h"
 #include <Windows.h>
 #include <fstream>
+#include "../Cutscenes/CutsceneManager.h"
 
 GamePlayState* GamePlayState::GetInstance()
 {
@@ -173,7 +174,7 @@ void GamePlayState::Enter()
 
 	dialogue = new Dialogue();
 	dialogue->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
-	state = GPStates::Dia;
+	//state = GPStates::Dia;
 
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/req.xwm");
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm");
@@ -185,6 +186,11 @@ void GamePlayState::Enter()
 	GameData::GetInstance()->UpdateCamera(GameData::GetInstance()->GetOverworldPlayer());
 	pStatManager = StatusEffectManager::GetInstance();
 	pStatManager->Initialize();
+
+	CutsceneManager::GetInstance()->Initialize();
+	state = GPStates::Cuts;
+	CutsceneManager::GetInstance()->Play(0);
+
 }
 void const GamePlayState::Render()
 {
@@ -203,6 +209,9 @@ void const GamePlayState::Render()
 		break;
 	case GPStates::Dia:
 		DialogueRender();
+		break;
+	case GPStates::Cuts:
+		CutsceneRender();
 		break;
 	default:
 		break;
@@ -241,6 +250,9 @@ void GamePlayState::Update(float dt)
 		break;
 	case GPStates::Dia:
 		DialogueUpdate(dt);
+		break;
+	case GPStates::Cuts:
+		CutsceneUpdate(dt);
 		break;
 	default:
 		break;
@@ -311,7 +323,7 @@ void GamePlayState::Exit()
 	if (buttonimg != SGD::INVALID_HANDLE)
 		SGD::GraphicsManager::GetInstance()->UnloadTexture(buttonimg);
 
-
+	CutsceneManager::GetInstance()->Terminate();
 
 	SGD::MessageManager::GetInstance()->Terminate();
 	SGD::MessageManager::GetInstance()->DeleteInstance();
@@ -1279,8 +1291,15 @@ void GamePlayState::RandomAnimation()
 void GamePlayState::PauseGame()
 {
 	state = GPStates::Menu;
-}
-std::vector<Items> * GamePlayState::GetInventory()
+}std::vector<Items> * GamePlayState::GetInventory()
 {
 	return &inventory;
+}
+void GamePlayState::CutsceneUpdate(float dt)
+{
+	CutsceneManager::GetInstance()->Update(dt);
+}
+void GamePlayState::CutsceneRender()
+{
+	CutsceneManager::GetInstance()->Render();
 }

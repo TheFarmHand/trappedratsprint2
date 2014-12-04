@@ -46,6 +46,9 @@
     <Filter Include="Core\Status Effects">
       <UniqueIdentifier>{23b4f6cd-d50f-4950-ba3a-1f3ff7fcf49d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cutscenes">
+      <UniqueIdentifier>{33cf0c4e-d9c9-495d-937f-602b258a575e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Animation\Animation.cpp">
@@ -257,6 +260,12 @@
     </ClCompile>
     <ClCompile Include="Code\Core\StatusEffectManager.cpp">
       <Filter>Core\Status Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Cutscenes\Cutscene.cpp">
+      <Filter>Cutscenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Cutscenes\CutsceneManager.cpp">
+      <Filter>Cutscenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,6 +499,12 @@
     </ClInclude>
     <ClInclude Include="Code\Core\StatusEffectManager.h">
       <Filter>Core\Status Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Cutscenes\Cutscene.h">
+      <Filter>Cutscenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Cutscenes\CutsceneManager.h">
+      <Filter>Cutscenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
