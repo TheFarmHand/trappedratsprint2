@@ -27,17 +27,21 @@ GamePlayState* GamePlayState::GetInstance()
 }
 void GamePlayState::Enter()
 {
+	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
+	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
+	Loading("Loading Tiles...");
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
 	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+	Loading("Loading Images...");
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/tempcombathud.png");
 	enemytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/enemytargeticon.png" );
 	allytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/allytargeticon.png" );
 	buttonimg = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/button.png" );
 	combatback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/CombatTownBack.png");
-	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
+	
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
 	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
-	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
+	
 	trapcursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/RatTrap.png");
 	cheesecursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
 
@@ -50,6 +54,8 @@ void GamePlayState::Enter()
 
 
 	TurnManager::GetInstance()->SetArrow(allytargeting, enemytargeting);
+
+	Loading("Loading Text...");
 
 	SelectableObject* ob = CreateSelectableObject(buttonimg, { 70, 445 }, { 64, 64 }, "Attack");
 	ob->SetSelected(true);
@@ -74,6 +80,8 @@ void GamePlayState::Enter()
 
 
 	std::fstream fin;
+
+	Loading("Loading Abilities...");
 
 	fin.open("Assets/Scripts/Abilities/AbilityList.txt");
 	if (fin.is_open())
@@ -100,10 +108,11 @@ void GamePlayState::Enter()
 
 	}
 
+	Loading("Loading Characters...");
 	SGD::Point characterOrderPosition;
 	//Ability* temp = new Ability( "Assets/Scripts/Abilities/Flood.xml" );
 	CombatPlayer* p1 = nullptr;
-	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacter.xml"));
+	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
 	p1->SetOrderPosition(1);
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p1->GetOrderPosition() * 100 + 150);
@@ -128,7 +137,7 @@ void GamePlayState::Enter()
 	partyAbilities.clear();
 
 	CombatPlayer* p2 = nullptr;
-	p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterSlippy.xml" ) );
+	p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Slippy.xml" ) );
 	p2->SetOrderPosition( 0 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150);
@@ -152,7 +161,7 @@ void GamePlayState::Enter()
 	partyAbilities.clear();
 
 	CombatPlayer* p3 = nullptr;
-	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterCheckers.xml" ) );
+	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Checkers.xml" ) );
 	p3->SetOrderPosition( 2 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
@@ -177,7 +186,7 @@ void GamePlayState::Enter()
 	dialogue = new Dialogue();
 	dialogue->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
 	//state = GPStates::Dia;
-
+	Loading("Loading Sounds...");
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/req.xwm");
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm");
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/entercombat.wav");
@@ -192,7 +201,7 @@ void GamePlayState::Enter()
 	CutsceneManager::GetInstance()->Initialize();
 	state = GPStates::Cuts;
 	CutsceneManager::GetInstance()->Play(0);
-
+	Loading("Time to Play.......");
 }
 void const GamePlayState::Render()
 {
@@ -1384,4 +1393,18 @@ void GamePlayState::CutsceneUpdate(float dt)
 void GamePlayState::CutsceneRender()
 {
 	CutsceneManager::GetInstance()->Render();
+}
+void GamePlayState::Loading(std::string _loading)
+{
+	//here we..
+	//clear the screen
+	//display _loading
+	//
+	//SGD::GraphicsManager::GetInstance()->Update();
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 520.0f, 400.0f }, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
+	GameData::GetInstance()->GetFont()->DrawString(_loading, 250.0f, 450.0f, { 0, 0, 0 },2.0f);
+	SGD::GraphicsManager::GetInstance()->Update();
+	Sleep(250);
+	
 }

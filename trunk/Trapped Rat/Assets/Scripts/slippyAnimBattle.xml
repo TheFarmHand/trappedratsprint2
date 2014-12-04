@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>slippy.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="1">
+      <AnchorPoint x="24" y="5" />
+      <DrawRect left="1" top="2" right="42" bottom="34" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1">
+      <AnchorPoint x="66" y="5" />
+      <DrawRect left="43" top="4" right="87" bottom="37" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

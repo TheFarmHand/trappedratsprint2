@@ -1073,6 +1073,16 @@ void CombatPlayer::SelectingItems( float dt )
 			states = 5;
 
 		}
+		if (chosen.GetName() == "nothing")
+		{
+			delete item_choose;
+			item_choose = nullptr;
+			GameData::GetInstance()->PlaySelectionChange();
+			states = 0;
+			help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+			mySelection = none;
+			SetSelection(0);
+		}
 
 	}
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Escape ) )
@@ -1085,6 +1095,7 @@ void CombatPlayer::SelectingItems( float dt )
 		mySelection = none;
 		SetSelection( 0 );
 	}
+	
 
 }
 

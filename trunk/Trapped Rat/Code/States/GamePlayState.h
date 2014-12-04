@@ -106,6 +106,7 @@ public:
 	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset, bool isHP = true);
 
 	void RandomAnimation();
+	void Loading(std::string _loading);
 
 	//basic functions
 	static GamePlayState* GetInstance();
