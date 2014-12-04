@@ -15,6 +15,6 @@
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="0.5" />
     <BaseBP bp="4" />
-    <HPMod>15</HPMod>
+    <HPMod hp="15" />
   </DamageInfo>
 </Whispering_Wind>

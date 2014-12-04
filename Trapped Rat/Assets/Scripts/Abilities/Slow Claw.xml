@@ -15,6 +15,6 @@
     <AttackMod atkMod="0.8" />
     <MagicMod mgcMod="0.0" />
     <BaseBP bp="3" />
-    <HPMod />
+    <HPMod hp="0" />
   </DamageInfo>
 </Slow_Claw>

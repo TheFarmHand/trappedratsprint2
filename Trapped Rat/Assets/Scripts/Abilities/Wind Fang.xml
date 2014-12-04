@@ -15,6 +15,6 @@
     <AttackMod atkMod="1.0" />
     <MagicMod mgcMod="0.5" />
     <BaseBP bp="4" />
-    <HPMod />
+    <HPMod hp="0" />
   </DamageInfo>
 </Wind_Fang>

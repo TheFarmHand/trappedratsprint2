@@ -15,6 +15,6 @@
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="1.0" />
     <BaseBP bp="2" />
-    <HPMod>20</HPMod>
+    <HPMod hp="20" />
   </DamageInfo>
 </Zephyr>

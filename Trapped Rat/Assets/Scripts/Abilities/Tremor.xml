@@ -15,6 +15,6 @@
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="0.6" />
     <BaseBP bp="3" />
-    <HPMod />
+    <HPMod hp="0" />
   </DamageInfo>
 </Tremor>
