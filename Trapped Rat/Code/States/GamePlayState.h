@@ -114,6 +114,7 @@ public:
 	//This Function returns the selectable objects in the order of Top Left Right Bottom
 	std::vector<SelectableObject*> GetSelectableObjects();
 	HelpText* GetHelpText();
+	std::vector<Items> * GetInventory();
 
 	//Mutators
 	void SetSelectableObject(std::vector<SelectableObject*>_vec);

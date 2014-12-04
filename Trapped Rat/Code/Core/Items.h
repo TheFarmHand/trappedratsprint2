@@ -20,5 +20,7 @@ public:
 	int GetPrice(){ return price; }
 
 	bool operator==(Items &rhs);
+	bool operator<(const Items &rhs);
+	//bool operator>(Items)
 };
 

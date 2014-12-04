@@ -2,9 +2,12 @@
 #include "Character.h"
 #include "Items.h"
 #include <vector>
+#include <map>
+#include<unordered_map>
 #include "SelectableObject.h"
 #include "Ability.h"
 
+struct ItemSelection;
 class AnimationSystem;
 class CombatPlayer :
 	public Character
@@ -35,11 +38,12 @@ public:
 
 
 private:
+	
 	bool active;
 	int myTarget = 0;
 	int states;	// 0-Home 1-Attack 2-Items 3-Ability 4-Run 5-AllySelect 6-EnemySelect
 	int hudSelection;
-
+	ItemSelection * item_choose = nullptr;
 	std::vector<SelectableObject*> menu;
 	//Character* myTarget;
 	AnimationSystem* ansys = nullptr;
@@ -51,6 +55,7 @@ private:
 	void HomeUpdate(float dt);
 	void AttackUpdate(float dt);
 	void ItemsUpdate(float dt);
+	bool SelectingItems(float dt);
 	void AbilityUpdate(float dt);
 	void RunUpdate(float dt);
 	void AllySelectUpdate(float dt);
@@ -58,5 +63,25 @@ private:
 	void SetHomeButtons();
 	//int maxBP;
 	//int curBP;
+};
+
+struct ItemSelection
+{
+	
+	bool item_selected = false;
+	int item_cursor = 0;
+	int max_index = 0;
+	std::vector<Items> * inventory = nullptr;
+	std::vector<std::string> uniquenames;
+	std::vector<int> uniquecounts;
+
+	SGD::HTexture scroll = SGD::INVALID_HANDLE;
+	
+	ItemSelection();
+	~ItemSelection();
+	void PopulateUniqueItems();
+	bool Update(float dt);
+	void Render();
+
 };
 

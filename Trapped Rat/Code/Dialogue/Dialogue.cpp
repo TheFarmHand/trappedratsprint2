@@ -7,7 +7,8 @@
 #include "../tinyxml/tinyxml.h"
 Dialogue::Dialogue()
 {
-
+	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
+	pborder = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/portraitborder.png", {255,255,255});
 }
 Dialogue::~Dialogue()
 {
@@ -15,6 +16,9 @@ Dialogue::~Dialogue()
 	{
 		SGD::GraphicsManager::GetInstance()->UnloadTexture(images[i]);
 	}
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(scroll);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(pborder);
+	
 }
 void Dialogue::Load(std::string filepath)
 {
@@ -75,13 +79,21 @@ bool Dialogue::Update(float dt)
 
 
 
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && timer <= 0)
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
 		{
-			GameData::GetInstance()->PlaySelectionChange();
-			messages.erase(messages.begin());
-			SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
-			images.erase(images.begin());
-			timer = 2.0f;
+			if (timer <= 0)
+			{
+
+				GameData::GetInstance()->PlaySelectionChange();
+				messages.erase(messages.begin());
+				SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
+				images.erase(images.begin());
+				timer = 2.0f;
+			}
+			else
+			{
+				timer = 0.0f;
+			}
 		}
 		return true;
 	}
@@ -104,16 +116,21 @@ void Dialogue::Render()
 
 
 		//render the rectangle
-		SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
+		//SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
+		//lets render a scroll sideways, its gonna be rad
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 520.0f, 400.0f }, { 0, 0, 300, 540 }, SGD::PI / 2, {112.5f,27.5f});
 
 
 
 		//render the words of the top message in the vector along with the portrait
 		std::string temp = messages.front().words;
-		GameData::GetInstance()->GetFont()->DrawString(temp, 50.0f, 450.0f, { 0, 0, 0 });
+		GameData::GetInstance()->GetFont()->DrawString(temp, 250.0f, 450.0f, { 0, 0, 0 });
 		if (images[0] != SGD::INVALID_HANDLE)
 		{
-			SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { 700.0f, 425.0f });
+			SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { 250.0f, 375.0f });
+			//draw the border for the portrait
+			SGD::GraphicsManager::GetInstance()->DrawTexture(pborder, { 250.0f, 375.0f });
+
 		}
 
 
@@ -121,7 +138,7 @@ void Dialogue::Render()
 		if (timer <= 0)
 		{
 
-			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 50.0f, 550.0f, { 0, 0, 0 });
+			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 250.0f, 550.0f, { 0, 0, 0 });
 		}
 
 	}

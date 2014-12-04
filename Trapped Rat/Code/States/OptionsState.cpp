@@ -34,7 +34,7 @@ void const OptionsState::Render()
 	
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-	GameData::GetInstance()->GetFont()->DrawString("Pause Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Options Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f);
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
