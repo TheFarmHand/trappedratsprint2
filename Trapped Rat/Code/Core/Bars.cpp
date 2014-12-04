@@ -57,10 +57,18 @@ void  Bars::Render()
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, SGD::Point(owner->GetPosition().x + m_offset.x, owner->GetPosition().y + m_offset.y), SGD::Rectangle(0, 0, (float)width, size.height), 0, {},color);
 		SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, SGD::Point(owner->GetPosition().x + m_offset.x,owner->GetPosition().y + m_offset.y));
 	}
+	else if (owner && (m_offset.x != 0 || m_offset.y != 0) && width <= 0)
+	{
+		//SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, SGD::Point(owner->GetPosition().x + m_offset.x, owner->GetPosition().y + m_offset.y));
+	}
 	else if (width > 0)
 	{
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, position, SGD::Rectangle(0, 0, (float)width, size.height), 0, {}, color, {2.0f,1.0f});
 		SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, position, 0, {}, {}, {2.0f,1.0f});
+	}
+	else if (width <= 0)
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, position, 0, {}, {}, { 2.0f, 1.0f });
 	}
 	else
 	{
