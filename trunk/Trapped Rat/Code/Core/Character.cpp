@@ -58,10 +58,10 @@ void Character::Render()
 void Character::Attack( Character* owner, Character * target )
 {
 	int atk = target->GetStats( ).attack;
-	int dmg;
-	dmg = atk - ( atk / 3 ); 
-	dmg += rand( ) % ( atk / 3 );
-	
+	int dmg = rand() % atk + atk;
+	dmg -= 0.25 * target->GetStats().defense;
+	if ( dmg <= 0 )
+		dmg = 0;
 	TurnManager::GetInstance( )->AttackTarget(owner, target, dmg);
 }
 

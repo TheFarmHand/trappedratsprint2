@@ -140,7 +140,7 @@ void CombatPlayer::Render()
 	sm << "Magic: " << stats.magic;
 	GameData::GetInstance()->GetFont()->DrawString( sm.str(), position.x + 50, position.y + 25, { 0, 0, 0 } );
 	std::ostringstream sav;
-	sav << "Defense: " << stats.avoision;
+	sav << "Avoision: " << stats.avoision;
 	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
 	std::ostringstream ss;
 	ss << "Speed: " << speed;
@@ -237,7 +237,10 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 	if ( target != nullptr )
 	{
 		int atk = target->GetStats().attack;
-		int dmg = rand() % atk + 3;
+		int dmg = rand() % atk + atk;
+		dmg -= .025 * target->GetStats().defense;
+		if ( dmg <= 0 )
+			dmg = 0;
 		TurnManager::GetInstance()->AttackTarget( owner, target, dmg );
 		//owner->TakeDamage( 100, target );
 	}

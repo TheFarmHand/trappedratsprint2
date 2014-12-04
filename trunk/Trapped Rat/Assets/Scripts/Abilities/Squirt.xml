@@ -15,6 +15,6 @@
     <AttackMod atkMod="0.0" />
     <MagicMod mgcMod="1.2" />
     <BaseBP bp="2" />
-    <HPMod />
+    <HPMod hp="0" />
   </DamageInfo>
 </Squirt>

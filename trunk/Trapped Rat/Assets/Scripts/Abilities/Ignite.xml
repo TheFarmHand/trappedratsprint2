@@ -15,6 +15,6 @@
     <AttackMod atkMod="0" />
     <MagicMod mgcMod="0.7" />
     <BaseBP bp="1" />
-    <HPMod />
+    <HPMod hp="0" />
   </DamageInfo>
 </Ignite>

@@ -135,7 +135,7 @@ void TurnManager::Render()
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
 	if (testCover)
-		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[2]->GetPosition().x + 50, AlliedUnits[2]->GetPosition().y + 32 ) );
+		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[2]->GetPosition().x + 150, AlliedUnits[2]->GetPosition().y + 32 ), SGD::Color(255, 100, 0) );
 
 	//Render Elemental Chart if Needed
 	
@@ -317,7 +317,7 @@ void TurnManager::SetupAllyParty( std::vector<CombatPlayer*> playerParty )
 	{
 		AlliedUnits.resize( 2 );
 	}
-	else if ( playerParty.size() == 3 )
+	else if ( playerParty.size() >= 3 )
 	{
 		AlliedUnits.resize( 3 );
 	}
@@ -408,6 +408,7 @@ if ( GamePlayState::GetInstance()->AbilityUsed)
 	{
 		//AllCombatUnits[0]->SetProgress(0.0f);
 		turnPause = false;
+		testCover = false;
 	}
 }
 void TurnManager::AnimationUpdate( float dt )

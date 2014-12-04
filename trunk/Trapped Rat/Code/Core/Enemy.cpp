@@ -95,7 +95,7 @@ void Enemy::Update( float dt )
 				return;
 				}
 
-			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[living[pool]], 8 );
+			Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
 			//Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
 			progress = 0.0f;
 			TurnManager::GetInstance()->setProgressFullReached( false );
@@ -129,7 +129,7 @@ void Enemy::Render()
 	sm << "Magic: " << stats.magic;
 	GameData::GetInstance()->GetFont()->DrawString( sm.str(), position.x + 50, position.y + 25, { 0, 0, 0 } );
 	std::ostringstream sav;
-	sav << "Defense: " << stats.avoision;
+	sav << "Avoision: " << stats.avoision;
 	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
 	std::ostringstream ss;
 	ss << "Speed: " << speed;
