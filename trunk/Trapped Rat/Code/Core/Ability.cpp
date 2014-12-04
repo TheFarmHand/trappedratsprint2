@@ -64,10 +64,18 @@ Ability::Ability( const char* path )
 	else
 		areaOfEffect = false;
 
-	TiXmlElement* heals = aoe->NextSiblingElement( "Healing" );
+	TiXmlElement* self = aoe->NextSiblingElement( "Self" );
+	const char* tempSelf = self->Attribute( "selfTarget" );
+	std::string tempS( tempSelf );
+	if ( tempS == "true" )
+		selfTarget = true;
+	else
+		selfTarget = false;
+
+	TiXmlElement* heals = self->NextSiblingElement( "Healing" );
 	const char* tempHeal = heals->Attribute( "Heals" );
 	std::string tempHealing( tempHeal );
-	if ( tempHeal == "true" )
+	if ( tempHealing == "true" )
 		healing = true;
 	else
 		healing = false;
@@ -137,6 +145,10 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
 	Abilowner = owner;
 	Abiltarget = target;
 	CalculateFormula( owner, target );
+	if ( abilityName == "Second Wind" )
+		{
+		target->SetLiving( true );
+		}
 	if ( offensive )
 		{
 		target->TakeDamage( (int)formulaTotal );
@@ -148,6 +160,8 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
 	if ( status )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
 
+	if ( abilityName == "Rib-a-Rang" )
+		owner->SetHP( owner->GetHP() - (int)(( owner->GetHP() * 0.20f )) );
 	if ( AoeCounter == 0 )
 		owner->SetBP(owner->GetBP() - bpCost);
 	}
@@ -191,6 +205,7 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 			strong = false;
 			break;
 		}
+
 	if ( offensive )
 		{
 		formulaTotal = ( atkMod * owner->GetStats().attack + mgcMod * owner->GetStats().magic ) - ( 0.25f * target->GetStats().defense + 0.25f * target->GetStats().magic );
@@ -260,6 +275,10 @@ bool Ability::GetUnlocked()
 bool Ability::GetAccess()
 	{
 	return access;
+	}
+bool Ability::GetSelfTarget()
+	{
+	return selfTarget;
 	}
 AnimationSystem* Ability::GetAnimate()
 	{

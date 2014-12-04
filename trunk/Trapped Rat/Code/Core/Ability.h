@@ -28,6 +28,7 @@ private:
 	int unlockLevel;
 	bool unlocked;
 	bool access;
+	bool selfTarget;
 	AnimationSystem* animate;
 	Character* Abilowner;
 	Character* Abiltarget;
@@ -49,6 +50,7 @@ public:
 	bool GetAOE();
 	bool GetUnlocked();
 	bool GetAccess();
+	bool GetSelfTarget();
 	AnimationSystem* GetAnimate();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );

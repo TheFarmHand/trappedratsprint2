@@ -4,6 +4,7 @@
   <Affinity ElementalType="Fire" />
   <StatusEffect Effect="Enfire" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="true" />
   <Healing Heals="false" />
   <UnlockLevel Level="8" />
   <Paths>

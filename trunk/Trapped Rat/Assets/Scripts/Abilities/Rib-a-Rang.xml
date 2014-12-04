@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Rib-a-Rang Name="Rib-a-Rang" Offensive="true">
-<Help Text="_High damage Physical attack to a single target_that drains 20% of Jeeves' health." />
+<Help Text="_High damage Physical attack to a_single target, costing 20% health." />
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="6" />
   <Paths>

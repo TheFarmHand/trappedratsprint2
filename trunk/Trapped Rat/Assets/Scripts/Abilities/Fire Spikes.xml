@@ -4,6 +4,7 @@
   <Affinity ElementalType="Fire" />
   <StatusEffect Effect="FireSpikes" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="true" />
   <Healing Heals="false" />
   <UnlockLevel Level="12" />
   <Paths>

@@ -4,6 +4,7 @@
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="SpeedDown" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="4" />
   <Paths>

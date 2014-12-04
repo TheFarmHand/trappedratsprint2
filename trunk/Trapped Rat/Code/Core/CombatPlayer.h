@@ -15,7 +15,7 @@ class CombatPlayer :
 public:
 	CombatPlayer();
 	~CombatPlayer();
-	enum TARGET_SELECT { none, enemy, player, self, allAlly, allEnemy };
+	enum TARGET_SELECT { none, enemy, player, self, allAlly, allEnemy, deadAlly };
 
 	void virtual Update(float dt);
 	void virtual UpdateAnimation( float dt );

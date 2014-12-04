@@ -4,6 +4,7 @@
   <Affinity ElementalType="Wind" />
   <StatusEffect Effect="Dodging" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="true" />
   <Healing Heals="false" />
   <UnlockLevel Level="0" />
   <Paths>

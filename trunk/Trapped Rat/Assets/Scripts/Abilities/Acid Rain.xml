@@ -4,6 +4,7 @@
   <Affinity ElementalType="Water" />
   <StatusEffect Effect="Poison" />
   <AreaOfEffect AOE="true" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="8" />
   <Paths>
