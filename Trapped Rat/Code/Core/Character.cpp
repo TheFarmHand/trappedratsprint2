@@ -3,6 +3,8 @@
 #include "Numbers.h"
 #include "TurnManager.h"
 #include <cmath>
+#include "OwnedHUD.h"
+
 Character::Character()
 {
 
@@ -28,6 +30,12 @@ Character::~Character()
 	{
 		SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineanimation);
 	}
+	if (TurnIndicator != nullptr)
+	{
+		delete TurnIndicator;
+		TurnIndicator = nullptr;
+	}
+
 }
 void Character::Update( float dt )
 {
@@ -46,7 +54,13 @@ void Character::Render()
 	{
 		damagenumbers[i]->Render();
 	}
-
+	if (progress >= 100.0f || (TurnManager::GetInstance()->getTurnPause() && progress == 0.0f) || stepforward || stepbackward)
+	{
+		if (TurnIndicator != nullptr)
+		{
+			TurnIndicator->Render();
+		}
+	}
 	int offset = 0;
 	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
 	{
@@ -311,4 +325,9 @@ void Character::InitializeAbilities( std::vector<Ability*> toSet )
 	{
 		abilityList.push_back( toSet[ i ] );
 	}
+}
+
+void Character::SetTurnIndicator(OwnedHUD* _indicator)
+{
+	TurnIndicator = _indicator;
 }

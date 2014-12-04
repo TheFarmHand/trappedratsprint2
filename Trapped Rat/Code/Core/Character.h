@@ -10,7 +10,7 @@
 #include "Ability.h"
 
 class Numbers;
-
+class OwnedHUD;
 class Character :
 	public BaseObject
 {
@@ -27,6 +27,8 @@ protected:
 	float speed;
 	float progress;
 	int order;
+	bool stepforward = false;
+	bool stepbackward = false;
 	SGD::HAudio hurt = SGD::INVALID_HANDLE;
 	SGD::HAudio death = SGD::INVALID_HANDLE;
 	std::list<StatusEffect*> effects;
@@ -37,6 +39,7 @@ protected:
 	SGD::HTexture portrait = SGD::INVALID_HANDLE;
 	SGD::HTexture timelineanimation = SGD::INVALID_HANDLE;
 	
+	OwnedHUD* TurnIndicator = nullptr;
 public:
 	Character();
 	virtual ~Character();
@@ -91,7 +94,7 @@ public:
 	void SetOrderPosition( int index );
 	void SetLiving( bool buul );
 	void AddStatus( StatusEffect *status, Character* theOwner = nullptr);
-
+	void SetTurnIndicator(OwnedHUD* _indicator);
 	void SetPortrait(SGD::HTexture _port);
 	void SetTimelineAnimation(SGD::HTexture _timeline);
 
