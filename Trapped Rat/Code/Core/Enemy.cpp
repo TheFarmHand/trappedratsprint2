@@ -34,32 +34,6 @@ void Enemy::Update( float dt )
 	{
 		if ( !TurnManager::GetInstance()->getProgressFullReached() )
 		{
-			if ( HasEffect( "Stun" ) )
-			{
-				// Lose your turn if stunned
-				StatusTick( );
-				progress = 0.0f;
-				return;
-			}
-
-			if ( HasEffect( "Confused" ) )
-			{
-				StatusTick();
-
-				// Do Confused Action (attack random target, anyone)
-				int targets = TurnManager::GetInstance()->GetAll().size();
-				int hit_this_guy = rand()%targets;
-				
-				Attack( this, TurnManager::GetInstance( )->GetAll( )[hit_this_guy]);
-				
-				TurnManager::GetInstance( )->setProgressFullReached( false );
-				TurnManager::GetInstance( )->setTimeStop( false );
-				TurnManager::GetInstance( )->setTurnPause( true );
-
-				progress = 0.0f;
-				return;
-			}
-
 			StatusTick();
 
 			if ( !alive )
@@ -69,6 +43,30 @@ void Enemy::Update( float dt )
 			}
 			TurnManager::GetInstance()->setProgressFullReached( true );
 			TurnManager::GetInstance()->setTimeStop( true );
+			return;
+		}
+
+		if ( HasEffect( "Stun" ) )
+		{
+			// Lose your turn if stunned
+			progress = 0.0f;
+			return;
+		}
+
+		if ( HasEffect( "Confused" ) )
+		{
+
+			// Do Confused Action (attack random target, anyone)
+			int targets = TurnManager::GetInstance( )->GetAll( ).size( );
+			int hit_this_guy = rand( ) % targets;
+
+			Attack( this, TurnManager::GetInstance( )->GetAll( )[ hit_this_guy ] );
+
+			TurnManager::GetInstance( )->setProgressFullReached( false );
+			TurnManager::GetInstance( )->setTimeStop( false );
+			TurnManager::GetInstance( )->setTurnPause( true );
+
+			progress = 0.0f;
 			return;
 		}
 
