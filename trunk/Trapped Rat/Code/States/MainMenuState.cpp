@@ -117,8 +117,8 @@ void const MainMenuState::Render()
 	//graphics->DrawString("*", { 45.0f, 100.0f + (index * 100) });
 	graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (index * 80) }, { 0, 0, 238, 73 });
 
-	GameData::GetInstance()->GetFont()->DrawString("Play-", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
-	GameData::GetInstance()->GetFont()->DrawString("Op-tions", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Play", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Credits", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
 }
