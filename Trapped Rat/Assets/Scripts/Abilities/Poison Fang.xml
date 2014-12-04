@@ -4,6 +4,7 @@
   <Affinity ElementalType="Physical" />
   <StatusEffect Effect="Poison" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="8" />
   <Paths>

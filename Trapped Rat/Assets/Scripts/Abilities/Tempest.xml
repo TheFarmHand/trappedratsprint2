@@ -4,8 +4,9 @@
   <Affinity ElementalType="Wind" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="true" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="0" />
+  <UnlockLevel Level="14" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>

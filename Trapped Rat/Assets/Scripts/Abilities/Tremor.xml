@@ -4,6 +4,7 @@
   <Affinity ElementalType="Earth" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="true" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="0" />
   <Paths>

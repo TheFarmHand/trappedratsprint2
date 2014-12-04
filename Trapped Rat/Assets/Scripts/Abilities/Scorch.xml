@@ -4,6 +4,7 @@
   <Affinity ElementalType="Fire" />
   <StatusEffect Effect="AttackDown" />
   <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
   <Healing Heals="false" />
   <UnlockLevel Level="4" />
   <Paths>
