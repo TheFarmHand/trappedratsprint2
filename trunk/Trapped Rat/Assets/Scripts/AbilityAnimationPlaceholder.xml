@@ -1,21 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="1">
   <Animation>
-    <Image numFrames="2">
-      <Path>rat.png</Path>
+    <Image numFrames="4">
+      <Path>ClawSpriteSheet.png</Path>
     </Image>
     <Looping>False</Looping>
-    <Name>PlaceholderAbility</Name>
-    <NextName>Idle</NextName>
-    <Frame delay="1.00">
-      <AnchorPoint x="24" y="244" />
-      <DrawRect left="1" top="197" right="46" bottom="251" />
+    <Name>Claw</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="9" y="96" />
+      <DrawRect left="1" top="76" right="49" bottom="158" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.55">
-      <AnchorPoint x="59" y="242" />
-      <DrawRect left="46" top="196" right="121" bottom="257" />
+    <Frame delay="0.1">
+      <AnchorPoint x="94" y="97" />
+      <DrawRect left="76" top="78" right="149" bottom="154" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.2">
+      <AnchorPoint x="190" y="92" />
+      <DrawRect left="169" top="81" right="259" bottom="166" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.25">
+      <AnchorPoint x="102" y="188" />
+      <DrawRect left="86" top="181" right="110" bottom="198" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

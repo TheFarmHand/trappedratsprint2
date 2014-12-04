@@ -16,7 +16,7 @@
 
 
 class Player;
-enum GPStates { Map, Town, Combat, Menu,Dia };
+enum GPStates { Map, Town, Combat, Menu,Dia,Cuts };
 enum MenuSubStates{ None, Options, HowTo, Party, Shop };
 
 class HUDItem;
@@ -71,7 +71,6 @@ class GamePlayState :
 	std::vector<Items> inventory;
 	int gold = 50;
 	
-
 public:
 	bool AbilityUsed;
 	float abilityTimer;
@@ -88,6 +87,8 @@ public:
 	void CombatRender();
 	void DialogueUpdate(float dt);
 	void DialogueRender();
+	void CutsceneUpdate(float dt);
+	void CutsceneRender();
 
 	//factory methods
 	Enemy * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );
