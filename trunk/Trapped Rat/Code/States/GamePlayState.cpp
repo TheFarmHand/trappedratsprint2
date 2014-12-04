@@ -407,20 +407,30 @@ void GamePlayState::Fight()
 			sts.avoision = 10;
 			sts.magic = 10;
 
+			SGD::Point characterOrderPosition;
 			Character* en1 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 39.0f, 0.0f, nullptr, SGD::Point(600, 160), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy1 = dynamic_cast<Enemy*>(en1);
 			enemy1->SetEtype( WIND );
 			enemy1->SetOrderPosition(0);
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( enemy1->GetOrderPosition() * 100 + 150 + 16);
+			enemy1->SetPosition( characterOrderPosition );
 
 			Character* en2 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 40.0f, 0.0f, nullptr, SGD::Point(600, 260), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy2 = dynamic_cast<Enemy*>(en2);
 			enemy2->SetEtype( WATER );
 			enemy2->SetOrderPosition(1);
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( enemy2->GetOrderPosition() * 100 + 150 + 16 );
+			enemy2->SetPosition( characterOrderPosition );
 
 			Character* en3 = CreateCommonEnemy("Dog", sts, 1, 50, 50, 42.0f, 0.0f, nullptr, SGD::Point(600, 360), SGD::Size(64, 64), "DogAnimBattle.xml");
 			enemy3 = dynamic_cast<Enemy*>(en3);
 			enemy3->SetEtype( EARTH );
 			enemy3->SetOrderPosition(2);
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( enemy3->GetOrderPosition() * 100 + 150 + 16 );
+			enemy3->SetPosition( characterOrderPosition );
 
 			tempEnemy.push_back(enemy1);
 			tempEnemy.push_back(enemy2);
