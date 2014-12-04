@@ -3,8 +3,8 @@
 class Items
 {
 private:
-	std::string explination;
-	std::string name;
+	std::string explination = "nothing";
+	std::string name = "nothing";
 	int price = 0;
 public:
 	Items();
