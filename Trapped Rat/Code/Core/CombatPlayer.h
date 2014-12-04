@@ -6,6 +6,7 @@
 #include<unordered_map>
 #include "SelectableObject.h"
 #include "Ability.h"
+#include "ItemSelection.h"
 
 struct ItemSelection;
 class AnimationSystem;
@@ -49,13 +50,14 @@ private:
 	AnimationSystem* ansys = nullptr;
 	TARGET_SELECT mySelection = none;
 	void SetSelection( int selected );
+	Items chosen;
 
 	void TargetUnit(std::vector<Character*> &targets);
 
 	void HomeUpdate(float dt);
 	void AttackUpdate(float dt);
 	void ItemsUpdate(float dt);
-	bool SelectingItems(float dt);
+	void SelectingItems(float dt);
 	void AbilityUpdate(float dt);
 	void RunUpdate(float dt);
 	void AllySelectUpdate(float dt);
@@ -65,23 +67,5 @@ private:
 	//int curBP;
 };
 
-struct ItemSelection
-{
-	
-	bool item_selected = false;
-	int item_cursor = 0;
-	int max_index = 0;
-	std::vector<Items> * inventory = nullptr;
-	std::vector<std::string> uniquenames;
-	std::vector<int> uniquecounts;
 
-	SGD::HTexture scroll = SGD::INVALID_HANDLE;
-	
-	ItemSelection();
-	~ItemSelection();
-	void PopulateUniqueItems();
-	bool Update(float dt);
-	void Render();
-
-};
 
