@@ -7,6 +7,7 @@
 #include "../States/GameOverLoseState.h"
 #include "../Particle/ParticleManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
+#include "../SGD Wrappers/SGD_InputManager.h"
 
 TurnManager* TurnManager::GetInstance()
 {
@@ -24,6 +25,9 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	testCover = false;
 	//Safe to add code here
 
+	//ElementalChartLoad
+	elementalImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/eletable.png");
+	elementalgraphicactive = false;
 	//TimelineImageload
 	timelineImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/timeline.png");
 
@@ -47,13 +51,19 @@ void TurnManager::Update( float dt )
 		return;
 	}
 
-
+	//Check to see if elemental table display input
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
+	{
+		elementalgraphicactive = !elementalgraphicactive;
+	}
 	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
 	//can modify order if needed, should not break
-	CombatUpdate( dt );
-	AnimationUpdate( dt );
-	ParticleUpdate( dt );
-
+	if (!elementalgraphicactive)
+	{
+		CombatUpdate(dt);
+		AnimationUpdate(dt);
+		ParticleUpdate(dt);
+	}
 }
 void TurnManager::Render()
 {
@@ -127,6 +137,14 @@ void TurnManager::Render()
 	if (testCover)
 		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[2]->GetPosition().x + 50, AlliedUnits[2]->GetPosition().y + 32 ) );
 
+	//Render Elemental Chart if Needed
+	
+		if (elementalgraphicactive)
+		{
+			SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
+		}
+	
+
 }
 void TurnManager::setTimeStop( bool stop )
 {
@@ -167,9 +185,12 @@ void TurnManager::Terminate()
 		pPartMan = nullptr;
 	}
 
-	//Unload timeline image
+	//Unload timeline image and elemental image
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineImage);
 	timelineImage = SGD::INVALID_HANDLE;
+
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(elementalImage);
+	elementalImage = SGD::INVALID_HANDLE;
 }
 void TurnManager::HealTarget( Character* target, int value )
 {
