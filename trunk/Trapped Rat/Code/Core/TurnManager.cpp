@@ -250,6 +250,10 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		owner->TakeDamage((int)(target->GetStats().magic * 0.2f));
 	}
 
+	if ( owner->HasEffect( "Enfire" ))
+		{
+		target->TakeDamage( (int)(owner->GetStats().magic * 0.3f ), true);
+		}
 	if ( counter )
 	{
 		// Reduce incoming damage, attack the attacker
