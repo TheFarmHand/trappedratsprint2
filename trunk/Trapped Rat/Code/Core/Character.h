@@ -50,7 +50,7 @@ public:
 	
 	void virtual UseAbility();
 	void virtual StatusTick();
-	void virtual TakeDamage(int dmg);
+	void virtual TakeDamage(int dmg, bool firefall = false);
 	void React();
 
 	bool virtual HasEffect(std::string effect);
