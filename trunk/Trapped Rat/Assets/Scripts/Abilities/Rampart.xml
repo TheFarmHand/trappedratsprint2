@@ -6,7 +6,7 @@
   <AreaOfEffect AOE="true" />
   <Self selfTarget="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="0" />
+  <UnlockLevel Level="4" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>

@@ -90,7 +90,7 @@ public:
 	void SetAbility(int index, Ability* _ability);
 	void SetOrderPosition( int index );
 	void SetLiving( bool buul );
-	void AddStatus(StatusEffect *status);
+	void AddStatus( StatusEffect *status, Character* theOwner = nullptr);
 
 	void SetPortrait(SGD::HTexture _port);
 	void SetTimelineAnimation(SGD::HTexture _timeline);

@@ -55,7 +55,8 @@ class GamePlayState :
 	SGD::HAudio m_overAudio;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
 
-	SGD::HTexture targeting = SGD::INVALID_HANDLE;
+	SGD::HTexture enemytargeting = SGD::INVALID_HANDLE;
+	SGD::HTexture allytargeting = SGD::INVALID_HANDLE;
 	SGD::HTexture buttonimg = SGD::INVALID_HANDLE;
 	SGD::HTexture scroll = SGD::INVALID_HANDLE;
 	SGD::HTexture trapcursor = SGD::INVALID_HANDLE;

@@ -26,9 +26,10 @@ public:
 	std::vector<Character*> GetEnemies()		{ return EnemyUnits; }
 	std::vector<Character*> GetAllies()			{ return AlliedUnits; }
 	std::vector<Character*> GetAll()			{ return AllCombatUnits; }
-	SGD::HTexture GetArrow()					{ return targetArrow; }
-	
-	void SetArrow(SGD::HTexture arrow)		{ targetArrow = arrow; }
+	SGD::HTexture GetAllyArrow() { return allytargetArrow; }
+	SGD::HTexture GetEnemyArrow() { return enemytargetArrow; }
+
+	void SetArrow( SGD::HTexture allyarrow, SGD::HTexture enemyarrow ) { allytargetArrow = allyarrow; enemytargetArrow = enemyarrow; }
 
 	void HealTarget(Character* target, int value);
 	int ElementalMod( Character* owner, Character* attacker, int damage, ETYPE element );
@@ -39,12 +40,15 @@ private:
 	std::vector<Character*> AlliedUnits;
 	std::vector<Character*> EnemyUnits;
 
-	SGD::HTexture targetArrow = SGD::INVALID_HANDLE;
+	SGD::HTexture allytargetArrow = SGD::INVALID_HANDLE;
+	SGD::HTexture enemytargetArrow = SGD::INVALID_HANDLE;
 	SGD::HTexture timelineImage = SGD::INVALID_HANDLE;
 	bool timeStop;
 	bool fullProgressReached;
 	bool turnPause;
 	float pauseTime;
+
+	bool testCover;
 	
 
 	TurnManager() = default;

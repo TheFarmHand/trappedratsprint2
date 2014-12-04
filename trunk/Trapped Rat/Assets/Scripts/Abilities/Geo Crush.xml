@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Geo_Crush Name="Geo Crush" Offensive="true">
-<Help Text="_Earth Elemental attack that deals_low damage to a single target." />
+<Help Text="_Earth Elemental attack that deals_high damage to a single target." />
   <Affinity ElementalType="Earth" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
   <Self selfTarget="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="0" />
+  <UnlockLevel Level="6" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
