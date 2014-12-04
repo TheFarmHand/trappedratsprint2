@@ -30,8 +30,9 @@ void GamePlayState::Enter()
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
 	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/tempcombathud.png");
-	targeting = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/targeticon.png");
-	buttonimg = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
+	enemytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/enemytargeticon.png" );
+	allytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/allytargeticon.png" );
+	buttonimg = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/button.png" );
 	combatback = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/CombatTownBack.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
@@ -48,7 +49,7 @@ void GamePlayState::Enter()
 
 
 
-	TurnManager::GetInstance()->SetArrow(targeting);
+	TurnManager::GetInstance()->SetArrow(allytargeting, enemytargeting);
 
 	SelectableObject* ob = CreateSelectableObject(buttonimg, { 70, 445 }, { 64, 64 }, "Attack");
 	ob->SetSelected(true);
@@ -151,20 +152,21 @@ void GamePlayState::Enter()
 	partyAbilities.clear();
 
 	CombatPlayer* p3 = nullptr;
-	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterBiggs.xml" ) );
+	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterCheckers.xml" ) );
 	p3->SetOrderPosition( 2 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
 	p3->SetPosition( characterOrderPosition );
 	p3->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Zephyr"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
-	partyAbilities.push_back( MasterAbilityList["Second Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Tailwind"] );
-	partyAbilities.push_back( MasterAbilityList["Tornado"] );
-	partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Tempest"] );
+	partyAbilities.push_back( MasterAbilityList["Cover"] );
+	partyAbilities.push_back( MasterAbilityList["Tremor"] );
+	partyAbilities.push_back( MasterAbilityList["Pinch"] );
+	partyAbilities.push_back( MasterAbilityList["Quake"] );
+	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
+	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
+	partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
+	
 	p3->InitializeAbilities( partyAbilities );
 	p3->GetAbility( 0 )->SetUnlocked( true );
 	p3->GetAbility( 1 )->SetUnlocked( true );
@@ -319,8 +321,9 @@ void GamePlayState::Exit()
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(helpback);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(combathud);
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(targeting);
-	if (buttonimg != SGD::INVALID_HANDLE)
+	SGD::GraphicsManager::GetInstance()->UnloadTexture( allytargeting );
+	SGD::GraphicsManager::GetInstance()->UnloadTexture( enemytargeting );
+	if ( buttonimg != SGD::INVALID_HANDLE )
 		SGD::GraphicsManager::GetInstance()->UnloadTexture(buttonimg);
 
 	CutsceneManager::GetInstance()->Terminate();

@@ -282,7 +282,7 @@ void Character::StatusTick()
 	}
 }
 
-void Character::AddStatus( StatusEffect *status )
+void Character::AddStatus( StatusEffect *status , Character* theGuard)
 // Needs access to attacker for damage calculations
 // Probably done in TM
 {
@@ -290,6 +290,7 @@ void Character::AddStatus( StatusEffect *status )
 	// Setup damage values
 	*temp = *status;
 	temp->SetOwner( this );
+	temp->SetGuard( theGuard );
 	effects.push_back( temp );
 	temp->Initialize();
 }

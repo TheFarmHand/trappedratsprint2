@@ -105,7 +105,7 @@ Ability::Ability( const char* path )
 	bp->Attribute( "bp", &bpCost );
 	TiXmlElement* hp = bp->NextSiblingElement( "HPMod" );
 	hp->Attribute( "hp", &tempValue );
-	hpMod = (float)tempValue;
+	hpMod = (float)(tempValue / 100);
 
 	access = false;
 	unlocked = false;
@@ -157,11 +157,13 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
 		{
 		target->TakeDamage( (int)-formulaTotal );
 		}
-	if ( status )
+	if ( status && statusName == "Cover")
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner );
+	else if ( status )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
 
 	if ( abilityName == "Rib-a-Rang" )
-		owner->SetHP( owner->GetHP() - (int)(( owner->GetHP() * 0.20f )) );
+		owner->SetHP( owner->GetHP() - (int)(( owner->GetHP() * hpMod )) );
 	if ( AoeCounter == 0 )
 		owner->SetBP(owner->GetBP() - bpCost);
 	}
@@ -214,7 +216,8 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 		}
 	else if ( healing )
 		{
-		formulaTotal = ( owner->GetMaxHP() * 0.1f ) + ( mgcMod * owner->GetStats().magic );
+		formulaTotal = ( owner->GetMaxHP() * hpMod ) + ( mgcMod * owner->GetStats().magic );
+		return;
 		}
 	if ( weak )
 		formulaTotal *= 0.5f;

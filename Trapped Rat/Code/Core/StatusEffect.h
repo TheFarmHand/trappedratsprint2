@@ -18,7 +18,7 @@ private:
 	int curr_tick = 0;
 	int dmg_tick;
 	Character* owner;
-	Character* guard_caster;
+	Character* guard_caster = nullptr;
 	enum STYPE { DOT, STAT, SPECIAL };
 	STYPE myType;
 	float stat_value = 0;
@@ -40,6 +40,7 @@ public:
 
 	// Access Granted
 	virtual Character* GetOwner();
+	virtual Character* GetGuard() { return guard_caster; }
 	virtual std::string GetName();
 	virtual ETYPE GetElement();
 	virtual SGD::HTexture GetIcon();
@@ -50,6 +51,7 @@ public:
 
 	// Mutates
 	void virtual SetOwner(Character* own);
+	void virtual SetGuard( Character* gua )	{ guard_caster = gua; }
 	void virtual SetName(std::string name);
 	void virtual SetElement( ETYPE ele );
 	void virtual SetIcon(SGD::HTexture ico);

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Checkers</Name>
+  <Side>Ally</Side>
+  <Element>Earth</Element>
+  <Type>Ally</Type>
+  <IsRandom>false</IsRandom>
+  <Stats>
+    <HitPoints>
+      <Base>55</Base>
+      <Scale>0.5</Scale>
+    </HitPoints>
+    <BattlePoints>
+      <Base>24</Base>
+      <Scale>0.5</Scale>
+    </BattlePoints>
+    <Attack>
+      <Base>12</Base>
+      <Scale>0.5</Scale>
+    </Attack>
+    <Magic>
+      <Base>18</Base>
+      <Scale>0.5</Scale>
+    </Magic>
+    <Defense>
+      <Base>17</Base>
+      <Scale>0.5</Scale>
+    </Defense>
+    <Speed>
+      <Base>48</Base>
+      <Scale>0.5</Scale>
+    </Speed>
+    <Avoision>
+      <Base>5</Base>
+      <Scale>0.5</Scale>
+    </Avoision>
+  </Stats>
+  <Level>1</Level>
+  <Sound>
+    <Hurt>null</Hurt>
+    <Attack>null</Attack>
+    <Death>null</Death>
+  </Sound>
+  <Animation>RatAnimBattle.xml</Animation>
+</Character>

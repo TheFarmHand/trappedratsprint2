@@ -6,14 +6,14 @@
   <AreaOfEffect AOE="true" />
   <Self selfTarget="false" />
   <Healing Heals="false" />
-  <UnlockLevel Level="0" />
+  <UnlockLevel Level="10" />
   <Paths>
     <AniPath Path="AbilityAnimationPlaceholder.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0.0" />
-    <MagicMod mgcMod="0.3" />
+    <MagicMod mgcMod="0.6" />
     <BaseBP bp="3" />
     <HPMod />
   </DamageInfo>

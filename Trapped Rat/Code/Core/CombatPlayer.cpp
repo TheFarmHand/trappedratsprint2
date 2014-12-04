@@ -144,8 +144,7 @@ void CombatPlayer::Render()
 			pdraw = pTurn->GetEnemies()[myTarget]->GetPosition();
 			pdraw.x -= pTurn->GetEnemies()[myTarget]->GetSize().width + 20;
 			pdraw.y -= pTurn->GetEnemies()[myTarget]->GetSize().height / 2;
-			pGraphics->DrawTexture( pTurn->GetArrow(),
-									pdraw );
+			pGraphics->DrawTexture( pTurn->GetEnemyArrow(), pdraw );
 			}
 
 		else if ( mySelection == player || mySelection == self || mySelection == deadAlly)
@@ -154,7 +153,7 @@ void CombatPlayer::Render()
 			pdraw = pTurn->GetAllies()[myTarget]->GetPosition();
 			pdraw.x += pTurn->GetAllies()[myTarget]->GetSize().width + 20;
 			pdraw.y -= pTurn->GetAllies()[myTarget]->GetSize().height / 2;
-			pGraphics->DrawTexture( pTurn->GetArrow(), pdraw );
+			pGraphics->DrawTexture( pTurn->GetAllyArrow(), pdraw );
 			}
 		else if ( mySelection == allEnemy )
 			{
@@ -163,7 +162,7 @@ void CombatPlayer::Render()
 				pdraw = pTurn->GetEnemies()[i]->GetPosition();
 				pdraw.x -= pTurn->GetEnemies()[i]->GetSize().width + 20;
 				pdraw.y -= pTurn->GetEnemies()[i]->GetSize().height / 2;
-				pGraphics->DrawTexture( pTurn->GetArrow(), pdraw );
+				pGraphics->DrawTexture( pTurn->GetEnemyArrow(), pdraw );
 				}
 			}
 		else if ( mySelection == allAlly )
@@ -173,7 +172,7 @@ void CombatPlayer::Render()
 				pdraw = pTurn->GetAllies()[i]->GetPosition();
 				pdraw.x += pTurn->GetAllies()[i]->GetSize().width + 20;
 				pdraw.y -= pTurn->GetAllies()[i]->GetSize().height / 2;
-				pGraphics->DrawTexture( pTurn->GetArrow(), pdraw );
+				pGraphics->DrawTexture( pTurn->GetAllyArrow(), pdraw );
 				}
 			}
 
@@ -453,10 +452,7 @@ void CombatPlayer::AttackUpdate( float dt )
 	TurnManager *pTurn = TurnManager::GetInstance();
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
-	//
-	//if (TestAbility && tester.GetHealing())
-	//	TargetUnit( pTurn->GetAllies() );
-	//else
+	
 	TargetUnit( pTurn->GetEnemies() );
 
 
@@ -498,6 +494,14 @@ void CombatPlayer::ItemsUpdate( float dt )
 	// Factored it out into a function already, to cut back on work later
 
 	// Do player selection
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( this->GetName() == TurnManager::GetInstance()->GetAllies()[i]->GetName() )
+			{
+			myTarget = i;
+			break;
+			}
+		}
 
 	TargetUnit( pTurn->GetAllies() );		// this is pretty sweet
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )

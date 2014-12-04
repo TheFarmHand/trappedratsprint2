@@ -6,6 +6,7 @@
 #include "../States/GamePlayState.h"
 #include "../States/GameOverLoseState.h"
 #include "../Particle/ParticleManager.h"
+#include "../SGD Wrappers/SGD_Geometry.h"
 
 TurnManager* TurnManager::GetInstance()
 {
@@ -20,7 +21,7 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	SetupEnemyParty( enemyParty );
 	timeStop = false;
 	fullProgressReached = false;
-
+	testCover = false;
 	//Safe to add code here
 
 	//TimelineImageload
@@ -118,11 +119,13 @@ void TurnManager::Render()
 		EnemyUnits[ i ]->Render();
 	}
 	//*
-
+	
 	//*Anything added below will render on top of combat characters
 	pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
+	if (testCover)
+		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[2]->GetPosition().x + 50, AlliedUnits[2]->GetPosition().y + 32 ) );
 
 }
 void TurnManager::setTimeStop( bool stop )
@@ -180,7 +183,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	bool firespike = false;
 	bool counter = false;
 	bool hedge = false;
-	Character* Guard = nullptr; 
+	StatusEffect* Guard = nullptr; 
 	StatusEffect* to_remove = nullptr;
 
 	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
@@ -197,8 +200,8 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		{
 			// Found guard!
 			guard = true;
-			Guard = (*iter)->GetOwner();
-
+			Guard = ( *iter );
+			testCover = true;
 		}
 
 		else if ( ( *iter )->GetName() == "FireSpikes" )
@@ -246,7 +249,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	if ( guard )
 	{
 		// Redirect attack to Guard
-		owner->Attack(owner, Guard);
+		owner->Attack(owner, Guard->GetGuard());
 		
 	}
 
