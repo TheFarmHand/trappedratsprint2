@@ -62,7 +62,7 @@ class GamePlayState :
 	SGD::HTexture scroll = SGD::INVALID_HANDLE;
 	SGD::HTexture trapcursor = SGD::INVALID_HANDLE;
 	SGD::HTexture cheesecursor = SGD::INVALID_HANDLE;
-
+	SGD::HTexture TurnIndicator = SGD::INVALID_HANDLE;
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
 
 	std::map<std::string, Ability*> MasterAbilityList;

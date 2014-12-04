@@ -42,6 +42,7 @@ void GamePlayState::Enter()
 	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/cheese.png" );
 	trapcursor = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/RatTrap.png" );
 	cheesecursor = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/cheese.png" );
+	TurnIndicator = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/playerSelect.png");
 	Stats sts;
 	sts.attack = 10;
 	sts.defense = 10;
@@ -217,7 +218,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Ignite"] );
 	partyAbilities.push_back( MasterAbilityList["Scorch"] );
 	partyAbilities.push_back( MasterAbilityList["Rib-a-Rang"] );
-	partyAbilities.push_back( MasterAbilityList["Emblazon"] );
+	partyAbilities.push_back(MasterAbilityList["Emblazon"]);
 	partyAbilities.push_back( MasterAbilityList["Firefall"] );
 	partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
 	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
@@ -376,7 +377,7 @@ void GamePlayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( scroll );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( trapcursor );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( cheesecursor );
-
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(TurnIndicator);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( helpback );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combathud );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( allytargeting );
@@ -990,6 +991,14 @@ void GamePlayState::CombatRender()
 Enemy * GamePlayState::CreateCommonEnemy( std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename )
 	{
 	CommonEnemy * temp = new CommonEnemy();
+	
+	OwnedHUD* turnindicator = new OwnedHUD;
+	turnindicator->SetActive(true);
+	turnindicator->SetImage(TurnIndicator);
+	turnindicator->SetOwner(temp);
+	turnindicator->SetOffset(SGD::Point(-10, -64));
+	temp->SetTurnIndicator(turnindicator);
+
 	temp->SetName( name );
 	temp->SetStats( _stats );
 	temp->SetLevel( _lvl );
@@ -1029,6 +1038,14 @@ Enemy * GamePlayState::CreateCommonEnemy( std::string name, Stats _stats, int _l
 CombatPlayer * GamePlayState::CreateCombatPlayer( std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, int _bp, int _maxbp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename )
 	{
 	CombatPlayer * temp = new CombatPlayer();
+
+	OwnedHUD* turnindicator = new OwnedHUD;
+	turnindicator->SetActive(true);
+	turnindicator->SetImage(TurnIndicator);
+	turnindicator->SetOwner(temp);
+	turnindicator->SetOffset(SGD::Point(-10, -42));
+	temp->SetTurnIndicator(turnindicator);
+
 	temp->SetName( name );
 	temp->SetActive( true );
 	temp->SetStats( _stats );
