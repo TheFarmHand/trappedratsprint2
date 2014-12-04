@@ -2,6 +2,7 @@
 #include "StatusEffect.h"
 #include "Ability.h"
 #include "Character.h"
+#include "StatusEffectManager.h"
 
 
 StatusEffect::StatusEffect()
@@ -138,6 +139,7 @@ int StatusEffect::ElementalMod()
 void StatusEffect::HandleSpecial()
 // Does things as soon as status is applied
 {
+	StatusEffectManager* SEM = StatusEffectManager::GetInstance( );
 	// Delerium
 
 
@@ -150,6 +152,12 @@ void StatusEffect::HandleSpecial()
 	// Enfire
 
 	// Hedge
+	if(name == "Hedge")
+	{
+		owner->AddStatus(SEM->GetStatus("Regen"));
+		owner->AddStatus(SEM->GetStatus("DefenseUp"));
+	}
+
 }
 
 void StatusEffect::HandleStat()
