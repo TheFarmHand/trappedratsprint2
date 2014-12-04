@@ -127,7 +127,7 @@ std::string Character::GetName()
 {
 	return name;
 }
-Stats Character::GetStats()
+Stats& Character::GetStats()
 {
 	return stats;
 }

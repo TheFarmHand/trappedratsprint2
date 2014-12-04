@@ -57,7 +57,7 @@ public:
 
 	//accessors
 	std::string GetName();
-	Stats GetStats();
+	Stats& GetStats();
 	int GetLevel();
 	int GetHP();
 	int GetMaxHP();
