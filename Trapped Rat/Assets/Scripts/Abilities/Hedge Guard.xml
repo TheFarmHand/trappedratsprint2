@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Hedge_Guard Name="Hedge Guard" Offensive="false">
-<Help Text="_Reduces the damage taken until the next turn_and regenerates health." />
+<Help Text="_Reduces damage taken until the next_turn and regenerates health." />
   <Affinity ElementalType="Earth" />
   <StatusEffect Effect="Hedge" />
   <AreaOfEffect AOE="false" />

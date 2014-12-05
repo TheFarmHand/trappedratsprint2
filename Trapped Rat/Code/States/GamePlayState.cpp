@@ -124,11 +124,8 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
+	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
-	p1->GetAbility( 0 )->SetUnlocked( true );
-	p1->GetAbility( 1 )->SetUnlocked( true );
-	p1->GetAbility( 2 )->SetUnlocked( true );
-	p1->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back( p1 );
 
 	partyAbilities.clear();
@@ -142,18 +139,14 @@ void GamePlayState::Enter()
 	p2->SetSize( { 64, 64 } );
 	partyAbilities.push_back( MasterAbilityList["Puddle"] );
 	partyAbilities.push_back( MasterAbilityList["Squirt"] );
-	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 	partyAbilities.push_back( MasterAbilityList["Dissolve"] );
 	partyAbilities.push_back( MasterAbilityList["Splash"] );
 	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
+	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 	partyAbilities.push_back( MasterAbilityList["Torrent"] );
 	partyAbilities.push_back( MasterAbilityList["Flood"] );
-	p2->SetActive( false );
+	p2->SetActive( true );
 	p2->InitializeAbilities( partyAbilities );
-	p2->GetAbility( 0 )->SetUnlocked( true );
-	p2->GetAbility( 1 )->SetUnlocked( true );
-	p2->GetAbility( 2 )->SetUnlocked( true );
-	p2->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back( p2 );
 
 	partyAbilities.clear();
@@ -168,16 +161,13 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
 	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
 	partyAbilities.push_back( MasterAbilityList["Rampart"] );
-	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
-	partyAbilities.push_back( MasterAbilityList["Cover"] );
 	partyAbilities.push_back( MasterAbilityList["Tremor"] );
+	partyAbilities.push_back( MasterAbilityList["Cover"] );
+	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
 	partyAbilities.push_back( MasterAbilityList["Pinch"] );
 	partyAbilities.push_back( MasterAbilityList["Quake"] );
+	p3->SetActive( true );
 	p3->InitializeAbilities( partyAbilities );
-	p3->GetAbility( 0 )->SetUnlocked( true );
-	p3->GetAbility( 1 )->SetUnlocked( true );
-	p3->GetAbility( 2 )->SetUnlocked( true );
-	p3->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back( p3 );
 
 	partyAbilities.clear();
@@ -199,10 +189,6 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Tempest"] );
 	p4->InitializeAbilities( partyAbilities );
 	p4->SetActive( false );
-	p4->GetAbility( 0 )->SetUnlocked( true );
-	p4->GetAbility( 1 )->SetUnlocked( true );
-	p4->GetAbility( 2 )->SetUnlocked( true );
-	p4->GetAbility( 3 )->SetUnlocked( true );
 	Party.push_back( p4 );
 
 	partyAbilities.clear();
@@ -223,14 +209,13 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
 	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
 	p5->InitializeAbilities( partyAbilities );
-	p5->SetActive( true );
-	p5->GetAbility( 0 )->SetUnlocked( true );
-	p5->GetAbility( 1 )->SetUnlocked( true );
-	p5->GetAbility( 2 )->SetUnlocked( true );
-	p5->GetAbility( 3 )->SetUnlocked( true );
+	p5->SetActive( false );
 	Party.push_back( p5 );
 
 	partyAbilities.clear();
+
+	//Sets the abilities to unlocked if level is high enough (new game will only unlock the first ability)
+	CheckAbilityUnlocked();
 
 	dialogue = new Dialogue();
 	dialogue->Load( "../Trapped Rat/Assets/Scripts/testdialogue.xml" );
@@ -467,33 +452,62 @@ void GamePlayState::Fight()
 			sts.magic = 10;
 
 			SGD::Point characterOrderPosition;
-			Character* en1 = CreateCommonEnemy( "Dog", sts, 1, 50, 50, 7.0f, 0.0f, nullptr, SGD::Point( 600, 160 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
-			enemy1 = dynamic_cast<Enemy*>( en1 );
-			enemy1->SetEtype( WIND );
-			enemy1->SetOrderPosition( 0 );
-			characterOrderPosition.x = 600.0f;
-			characterOrderPosition.y = (float)( enemy1->GetOrderPosition() * 100 + 150 + 16 );
-			enemy1->SetPosition( characterOrderPosition );
+			int randomEnemyIndex;
+			int randomEnemyParySize;
 
-			Character* en2 = CreateCommonEnemy( "Dog", sts, 1, 50, 50, 8.0f, 0.0f, nullptr, SGD::Point( 600, 260 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
-			enemy2 = dynamic_cast<Enemy*>( en2 );
-			enemy2->SetEtype( WATER );
-			enemy2->SetOrderPosition( 1 );
-			characterOrderPosition.x = 600.0f;
-			characterOrderPosition.y = (float)( enemy2->GetOrderPosition() * 100 + 150 + 16 );
-			enemy2->SetPosition( characterOrderPosition );
+			randomEnemyParySize = rand() % 3 + 1;
+			Enemy* tempRandomEnemy;
 
-			Character* en3 = CreateCommonEnemy( "Dog", sts, 1, 50, 50, 7.0f, 0.0f, nullptr, SGD::Point( 600, 360 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
-			enemy3 = dynamic_cast<Enemy*>( en3 );
-			enemy3->SetEtype( EARTH );
-			enemy3->SetOrderPosition( 2 );
-			characterOrderPosition.x = 600.0f;
-			characterOrderPosition.y = (float)( enemy3->GetOrderPosition() * 100 + 150 + 16 );
-			enemy3->SetPosition( characterOrderPosition );
+			for ( int i = 0; i < randomEnemyParySize; i++ )
+				{
+				randomEnemyIndex = rand() % 2;
 
-			tempEnemy.push_back( enemy1 );
-			tempEnemy.push_back( enemy2 );
-			tempEnemy.push_back( enemy3 );
+				switch ( randomEnemyIndex )
+					{
+					case 0:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
+						break;
+					case 1:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cat.xml" );
+						break;
+					default:
+						break;
+					}
+				tempRandomEnemy->SetOrderPosition( i );
+				characterOrderPosition.x = 600.0f;
+				characterOrderPosition.y = (float)( tempRandomEnemy->GetOrderPosition() * 100 + 150 + 16 );
+				tempRandomEnemy->SetPosition( characterOrderPosition );
+				tempEnemy.push_back( tempRandomEnemy );
+				}
+			//Character* en1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
+			////Character* en1 = CreateCommonEnemy( "Dog", sts, 1, 50, 50, 7.0f, 0.0f, nullptr, SGD::Point( 600, 160 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
+			//enemy1 = dynamic_cast<Enemy*>( en1 );
+			////enemy1->SetEtype( WIND );
+			//enemy1->SetOrderPosition( 0 );
+			//characterOrderPosition.x = 600.0f;
+			//characterOrderPosition.y = (float)( enemy1->GetOrderPosition() * 100 + 150 + 16 );
+			//enemy1->SetPosition( characterOrderPosition );
+
+			//Character* en2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cat.xml" );
+			//	//CreateCommonEnemy( "Dog", sts, 1, 50, 50, 8.0f, 0.0f, nullptr, SGD::Point( 600, 260 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
+			//enemy2 = dynamic_cast<Enemy*>( en2 );
+			////enemy2->SetEtype( WATER );
+			//enemy2->SetOrderPosition( 1 );
+			//characterOrderPosition.x = 600.0f;
+			//characterOrderPosition.y = (float)( enemy2->GetOrderPosition() * 100 + 150 + 16 );
+			//enemy2->SetPosition( characterOrderPosition );
+
+			//Character* en3 = CreateCommonEnemy( "Dog", sts, 1, 50, 50, 7.0f, 0.0f, nullptr, SGD::Point( 600, 360 ), SGD::Size( 64, 64 ), "DogAnimBattle.xml" );
+			//enemy3 = dynamic_cast<Enemy*>( en3 );
+			//enemy3->SetEtype( EARTH );
+			//enemy3->SetOrderPosition( 2 );
+			//characterOrderPosition.x = 600.0f;
+			//characterOrderPosition.y = (float)( enemy3->GetOrderPosition() * 100 + 150 + 16 );
+			//enemy3->SetPosition( characterOrderPosition );
+
+			//tempEnemy.push_back( enemy1 );
+			//tempEnemy.push_back( enemy2 );
+			//tempEnemy.push_back( enemy3 );
 			for ( unsigned int i = 0; i < Party.size(); i++ )
 				{
 				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
@@ -535,6 +549,7 @@ void GamePlayState::TownUpdate( float dt )
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if ( input->IsKeyPressed( SGD::Key::Escape ) )
 		{
+		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 		}
 	}
@@ -1320,8 +1335,8 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		level = std::stoi( root->FirstChildElement( "Level" )->GetText() );
 
 		std::string hurt = root->FirstChildElement( "Sound" )->FirstChildElement( "Hurt" )->GetText();
-		std::string attack = root->FirstChildElement( "Attack" )->FirstChildElement( "Attack" )->GetText();
-		std::string death = root->FirstChildElement( "Death" )->FirstChildElement( "Death" )->GetText();
+		std::string attack = root->FirstChildElement( "Sound" )->FirstChildElement( "Attack" )->GetText();
+		std::string death = root->FirstChildElement( "Sound" )->FirstChildElement( "Death" )->GetText();
 
 		std::string animation = root->FirstChildElement( "Animation" )->GetText();
 
@@ -1334,7 +1349,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		else if ( type == "Enemy" )
 			{
 			//create a enemy
-			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation );
+			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 64.0f, 64.0f }, animation );
 
 			}
 		else if ( type == "Guard" )
@@ -1477,3 +1492,21 @@ void GamePlayState::Loading(std::string _loading)
 	Sleep(250);
 	
 }
+
+void GamePlayState::CheckAbilityUnlocked(bool EOC)
+	{
+	for ( unsigned int i = 0; i < Party.size(); i++ )
+		{
+		for ( unsigned int k = 0; k < 8; k++ )
+			{
+			if ( !Party[i]->GetAbility( k )->GetUnlocked() && Party[i]->GetLevel() >= Party[i]->GetAbility( k )->GetUnlockLevel() )
+				{
+				Party[i]->GetAbility( k )->SetUnlocked( true );
+				if ( EOC )
+					{
+					//Enter code to notify loot/exp screen that a new ability was unlocked(i.e. level gained...show stat gains and new ability unlocked)
+					}
+				}
+			}
+		}
+	}

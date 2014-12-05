@@ -41,6 +41,8 @@ void TurnManager::Update( float dt )
 	if ( CheckWin() )
 	{
 		// End of Combat, enemies have died
+	//Need to do exp gain and level increase calculations prior to this check
+	GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		EndCombat();
 		return;
 	}
