@@ -125,6 +125,7 @@ public:
 	bool usingTernary();
 	void ClearTernary();
 	void AddTarget( );
+	void CheckAbilityUnlocked( bool EOC = false );
 	
 	
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };

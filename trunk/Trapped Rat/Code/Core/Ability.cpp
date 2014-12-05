@@ -289,6 +289,10 @@ bool Ability::GetUnlocked()
 	{
 	return unlocked;
 	}
+int Ability::GetUnlockLevel()
+	{
+	return unlockLevel;
+	}
 bool Ability::GetAccess()
 	{
 	return access;

@@ -49,6 +49,7 @@ public:
 	float GetHPMod();
 	bool GetAOE();
 	bool GetUnlocked();
+	int GetUnlockLevel();
 	bool GetAccess();
 	bool GetSelfTarget();
 	AnimationSystem* GetAnimate();

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Rampart Name="Rampart" Offensive="false">
-<Help Text="_Raises the defense of the entire party." />
+<Help Text="_Raises the defense of the_entire party." />
   <Affinity ElementalType="Earth" />
   <StatusEffect Effect="DefenseUp" />
   <AreaOfEffect AOE="true" />
