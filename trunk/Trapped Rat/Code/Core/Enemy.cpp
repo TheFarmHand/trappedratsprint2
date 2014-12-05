@@ -27,82 +27,119 @@ void Enemy::Update( float dt )
 
 	else if ( progress < 100.0f )
 		{
+		if (stepbackward == true && stepforward == false)
+		{
+			stepTime -= dt;
+			SGD::Point pos = GetPosition();
+			pos.x += stepvelocity*dt;
+			SetPosition(pos);
+			if (stepTime <= 0.0f)
+				stepbackward = false;
+		}
+		if (stepbackward == false && stepforward == false)
+		{
+			TurnManager::GetInstance()->setProgressFullReached(false);
+			TurnManager::GetInstance()->setTimeStop(false);
+		}
 		return;
 		}
 
-	if ( progress >= 100.0f )
+	if (progress >= 100.0f)
+	{
+		if (!TurnManager::GetInstance()->getProgressFullReached())
 		{
-		if ( !TurnManager::GetInstance()->getProgressFullReached() )
-			{
 			StatusTick();
 
-			if ( !alive )
-				{
+			if (!alive)
+			{
 				progress = 0.0f;
 				return;
-				}
-			TurnManager::GetInstance()->setProgressFullReached( true );
-			TurnManager::GetInstance()->setTimeStop( true );
-			return;
 			}
+			TurnManager::GetInstance()->setProgressFullReached(true);
+			TurnManager::GetInstance()->setTimeStop(true);
+			return;
+		}
 
-		if ( HasEffect( "Stun" ) )
-			{
+		if (HasEffect("Stun"))
+		{
 			// Lose your turn if stunned
 			progress = 0.0f;
 			return;
-			}
+		}
 
-		if ( HasEffect( "Confused" ) )
-			{
+		if (HasEffect("Confused"))
+		{
 
 			// Do Confused Action (attack random target, anyone)
 			int targets = TurnManager::GetInstance()->GetAll().size();
 			int hit_this_guy = rand() % targets;
 
-			Attack( this, TurnManager::GetInstance()->GetAll()[hit_this_guy] );
+			Attack(this, TurnManager::GetInstance()->GetAll()[hit_this_guy]);
 
-			TurnManager::GetInstance()->setProgressFullReached( false );
-			TurnManager::GetInstance()->setTimeStop( false );
-			TurnManager::GetInstance()->setTurnPause( true );
+			TurnManager::GetInstance()->setProgressFullReached(false);
+			TurnManager::GetInstance()->setTimeStop(false);
+			TurnManager::GetInstance()->setTurnPause(true);
 
 			progress = 0.0f;
 			return;
+		}
+
+		if (stepforward == false && stepbackward == false)
+		{
+			stepforward = true;
+			stepTime = 2.0f;
+		}
+		if (stepforward == true && stepbackward == false)
+		{
+			stepTime -= dt;
+			SGD::Point pos = GetPosition();
+			pos.x -= stepvelocity*dt;
+			SetPosition(pos);
+			if (stepTime <= 0.0f)
+				stepforward = false;
+		}
+
+		if (stepbackward == false && stepforward == false)
+		{
+			// Enemy Select Player
+			int pool = TurnManager::GetInstance()->GetAllies().size();
+			std::vector<int> living;
+
+			for (int i = 0; i < pool; i++)
+			{
+				if (TurnManager::GetInstance()->GetAllies()[i]->isAlive())
+					living.push_back(i);
 			}
 
-		// Enemy Select Player
-		int pool = TurnManager::GetInstance()->GetAllies().size();
-		std::vector<int> living;
+			if (living.size() > 0)
+				pool = rand() % (living.size());
+			else
+				pool = -1;
 
-		for ( int i = 0; i < pool; i++ )
+
+			//if ( SGD::InputManager::GetInstance( )->IsKeyPressed( SGD::Key::Enter ) )
 			{
-			if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
-				living.push_back( i );
-			}
-
-		if ( living.size() > 0 )
-			pool = rand() % ( living.size() );
-		else
-			pool = -1;
-
-
-		//if ( SGD::InputManager::GetInstance( )->IsKeyPressed( SGD::Key::Enter ) )
-			{
-			if ( pool == -1 ) // Hack job to prevent enemies from murdering dead players/breaking code
+				if (pool == -1) // Hack job to prevent enemies from murdering dead players/breaking code
 				{
-				progress = 0.0f;
-				TurnManager::GetInstance()->setTimeStop( false );
-				return;
+					progress = 0.0f;
+					TurnManager::GetInstance()->setTimeStop(false);
+					return;
 				}
 
-			Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
-			//Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
-			progress = 0.0f;
-			TurnManager::GetInstance()->setProgressFullReached( false );
-			TurnManager::GetInstance()->setTimeStop( false );
-			TurnManager::GetInstance()->setTurnPause( true );
+				Attack(this, TurnManager::GetInstance()->GetAllies()[living[pool]]);
+				if (stepbackward == false && stepforward == false && progress != 0.0f)
+				{
+					stepbackward = true;
+					stepTime = 2.0f;
+					progress = 0.0f;
+				}
+				//Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
+				progress = 0.0f;
+				TurnManager::GetInstance()->setProgressFullReached(false);
+				TurnManager::GetInstance()->setTurnPause(true);
 			}
 		}
+	}
 	}
 void Enemy::UpdateAnimation( float dt )
 	{
