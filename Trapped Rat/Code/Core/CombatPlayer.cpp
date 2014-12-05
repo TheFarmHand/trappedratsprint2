@@ -38,6 +38,21 @@ void CombatPlayer::Update( float dt )
 	}
 	else if ( progress < 100.0f )
 	{
+		if (stepbackward == true && stepforward == false)
+		{
+			stepTime -= dt;
+			SGD::Point pos = GetPosition();
+			pos.x -= stepvelocity*dt;
+			SetPosition(pos);
+			if (stepTime <= 0.0f)
+				stepbackward = false;
+		}
+		if (stepbackward == false && stepforward == false)
+		{
+			TurnManager::GetInstance()->setProgressFullReached(false);
+			TurnManager::GetInstance()->setTimeStop(false);
+		}
+
 		return;
 	}
 
@@ -69,44 +84,64 @@ void CombatPlayer::Update( float dt )
 		TurnManager::GetInstance()->setTimeStop( true );
 		// Here is where targeting happens
 
-
-		if ( states == 0 )
+		if (stepforward == false && stepbackward == false && stepTime != 0.0f)
 		{
-			HomeUpdate( dt );
+			stepforward = true;
+			stepTime = 2.0f;
+		}
+		if (stepforward == true && stepbackward == false)
+		{
+			stepTime -= dt;
+			SGD::Point pos = GetPosition();
+			pos.x += stepvelocity*dt;
+			SetPosition(pos);
+			if (stepTime <= 0.0f)
+			{
+				stepTime = 0.0f;
+				stepforward = false;
+			}
 		}
 
-		else if ( states == 1 )		// Attacking; Target selection is "enemy"
+		if (stepbackward == false && stepforward == false)
 		{
-			AttackUpdate( dt );
-		}
+			if (states == 0)
+			{
+				HomeUpdate(dt);
+			}
 
-		else if ( states == 2 ) // Item Selection
-		{
-			if ( item_choose == nullptr )
-				ItemsUpdate( dt );
-			else
-				SelectingItems( dt );
+			else if (states == 1)		// Attacking; Target selection is "enemy"
+			{
+				AttackUpdate(dt);
+			}
 
-		}
-		else if ( states == 3 )// Ability Selection
-		{
-			AbilityUpdate( dt );
-		}
-		else if ( states == 4 ) // Run update
-		{
-			RunUpdate( dt );
-		}
-		else if ( states == 5 )//Defensive Ability update
-		{
-			AllySelectUpdate( dt );
-		}
-		else if ( states == 6 ) // Offensive ability update
-		{
-			EnemySelectUpdate( dt );
-		}
-		else if ( states == 7 ) // Ternary Blast stuff
-		{
-			TernaryBlast( dt );
+			else if (states == 2) // Item Selection
+			{
+				if (item_choose == nullptr)
+					ItemsUpdate(dt);
+				else
+					SelectingItems(dt);
+
+			}
+			else if (states == 3)// Ability Selection
+			{
+				AbilityUpdate(dt);
+			}
+			else if (states == 4) // Run update
+			{
+				RunUpdate(dt);
+			}
+			else if (states == 5)//Defensive Ability update
+			{
+				AllySelectUpdate(dt);
+			}
+			else if (states == 6) // Offensive ability update
+			{
+				EnemySelectUpdate(dt);
+			}
+			else if (states == 7) // Ternary Blast stuff
+			{
+				TernaryBlast(dt);
+			}
 		}
 	}
 }
@@ -222,9 +257,9 @@ void CombatPlayer::Render()
 	if ( ansys != nullptr )
 	{
 		ansys->Render( position.x, position.y );
-
-		Character::Render();
 	}
+
+	Character::Render();
 
 	if ( item_choose != nullptr )
 		item_choose->Render();
@@ -524,10 +559,15 @@ void CombatPlayer::AttackUpdate( float dt )
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
 		//	}
 		myTarget = 0;
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
-		TurnManager::GetInstance()->setTimeStop( false );
+		//TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
 		help->UpdateSelection( 5 );
 		states = 0;
@@ -568,11 +608,16 @@ void CombatPlayer::ItemsUpdate( float dt )
 
 	if ( chosen.GetName() == "nothing" )
 	{
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		mySelection = none;
 		states = 0;
 		TurnManager::GetInstance()->setProgressFullReached( false );
-		pTurn->setTimeStop( false );
+		//pTurn->setTimeStop( false );
 		pTurn->setTurnPause( true );
 		hudSelection = 0;
 		help->UpdateSelection( 5 );
@@ -621,11 +666,16 @@ void CombatPlayer::ItemsUpdate( float dt )
 		chosen = Items();
 
 		// These three lines could be factored out to an EndTurn type function
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		mySelection = none;
 		states = 0;
 		TurnManager::GetInstance()->setProgressFullReached( false );
-		pTurn->setTimeStop( false );
+		//pTurn->setTimeStop( false );
 		pTurn->setTurnPause( true );
 		hudSelection = 0;
 		help->UpdateSelection( 5 );
@@ -908,10 +958,15 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			}
 		}
 		myTarget = 0;
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
-		TurnManager::GetInstance()->setTimeStop( false );
+	//	TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
 		help->UpdateSelection( 5 );
 		states = 0;
@@ -1008,10 +1063,15 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		}
 
 		myTarget = 0;
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
-		TurnManager::GetInstance()->setTimeStop( false );
+		//TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
 		help->UpdateSelection( 5 );
 		states = 0;
@@ -1126,10 +1186,15 @@ void CombatPlayer::TernaryBlast( float dt )
 
 		GamePlayState::GetInstance()->ClearTernary();
 		myTarget = 0;
-		progress = 0.0f;
+		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		{
+			stepbackward = true;
+			stepTime = 2.0f;
+			progress = 0.0f;
+		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
-		TurnManager::GetInstance()->setTimeStop( false );
+		//TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
 		GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
 		states = 0;
