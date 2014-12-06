@@ -32,9 +32,9 @@ public:
 	void SetArrow( SGD::HTexture allyarrow, SGD::HTexture enemyarrow ) { allytargetArrow = allyarrow; enemytargetArrow = enemyarrow; }
 
 	void HealTarget(Character* target, int value);
-	int ElementalMod( Character* owner, Character* attacker, int damage, ETYPE element );
+	int ElementalMod( Character* target, int damage, ETYPE element );
 	void AttackTarget(Character* owner, Character* target, int value);
-	void UsingAbility( Character* owner, Character* attacker, Ability* ability );
+	void UsingAbility( Character* owner, Character* attacker, Ability* ability, bool ternary = false );
 private:
 	std::vector<Character*> AllCombatUnits;
 	std::vector<Character*> AlliedUnits;

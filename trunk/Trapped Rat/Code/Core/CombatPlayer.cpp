@@ -877,10 +877,11 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	if ( mySelection == player || mySelection == deadAlly )
+	if ( mySelection == player || mySelection == deadAlly || mySelection == self)
 	{
 		TargetUnit( pTurn->GetAllies() );
 	}
+
 	if ( chosen.GetName() != "nothing" )
 	{
 		ItemsUpdate( dt );
@@ -897,6 +898,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		GamePlayState::GetInstance()->ClearTernary();
 
 	}
+
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
 	{
 		//Input Ability Use Here
@@ -951,7 +953,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			else
 			{
 				menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ] );
-
+				//TurnManager::GetInstance( )->UsingAbility( this, pTurn->GetAllies( )[ myTarget ], menu[ hudSelection ]->GetAbility( ) );
 				GamePlayState::GetInstance()->AbilityUsed = true;
 				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
 				GamePlayState::GetInstance()->abilityTimer = 2.0f;
@@ -1178,7 +1180,10 @@ void CombatPlayer::TernaryBlast( float dt )
 			TurnManager::GetInstance()->UsingAbility(
 				this,
 				GamePlayState::GetInstance()->myTernTargets.targets[ i ],
-				GamePlayState::GetInstance()->myTernTargets.abilities[ i ] );
+				GamePlayState::GetInstance()->myTernTargets.abilities[ i ],
+				true);	// true for ternary stuff	
+			ApplyTernary( GamePlayState::GetInstance( )->myTernTargets.abilities[ i ]->GetAbilityName(),
+						  GamePlayState::GetInstance( )->myTernTargets.targets[ i ]);
 
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
@@ -1207,3 +1212,168 @@ void CombatPlayer::TernaryBlast( float dt )
 	}
 }
 
+//int CombatPlayer::GetXP( )
+//{
+//	return XP;
+//}
+//
+//int CombatPlayer::GetLevel( )
+//{
+//	return level;
+//}
+//
+//int CombatPlayer::GetNextlvl( )
+//{
+//	return nextlvl;
+//}
+//
+//void CombatPlayer::AddXP( int xp )
+//{
+//	XP += xp;
+//	if(XP > nextlvl)
+//	{
+//		LevelUp();
+//	}
+//}
+//
+//void CombatPlayer::LevelUp( )
+//{
+//	
+//	level++;
+//	XP -= nextlvl;
+//	nextlvl = level * 150 + 100;
+//	// Add new Abilities if relevant
+//	if(level%2)
+//		AddAbility();
+//}
+
+
+
+// Do Ternary Blast Specials
+void CombatPlayer::ApplyTernary(std::string abil, Character* target)
+{
+	if(abil == "Fire Fang")
+	{
+		target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("Burn"));
+	}
+
+	else if(abil == "Water Fang")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Drown" ) );
+	}
+
+	else if(abil == "Earth Fang")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Muck" ) );
+	}
+
+	else if(abil == "Wind Fang")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Wisp" ) );
+	}
+
+	else if(abil == "Poison Fang")
+	{
+		// add delerium once it works
+	}
+
+	else if(abil == "Slow Claw")
+	{
+		// Knock them back on the timeline
+		float prog = target->GetProgress();
+		prog -= 33;
+		if(prog < 0) prog = 0.0f;
+		target->SetProgress(prog);
+	}
+
+	else if(abil == "Splash")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "SpeedDown" ) );
+	}
+
+	else if(abil == "Flood")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AvoisionDown" ) );
+	}
+
+	else if(abil == "Squirt")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Stun" ) );
+	}
+
+	else if(abil == "Torrent")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackDown" ) );
+	}
+
+	else if(abil == "Puddle")
+	{
+		this->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "DefenseUp" ) );
+	}
+	
+	else if(abil == "Disolve")
+	{
+		this->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackUp" ) );
+	}
+
+	else if(abil == "Ignite")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Burn" ) );
+	}
+
+	else if(abil == "Incinerate")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Burn" ) );
+	}
+
+	else if(abil == "Scorch")
+	{
+		for(unsigned int i=0; i<TurnManager::GetInstance()->GetAllies().size(); i++)
+		{
+			if(TurnManager::GetInstance( )->GetAllies( )[i]->isAlive())
+			{
+				TurnManager::GetInstance( )->GetAllies( )[i]->AddStatus(
+					&StatusEffectManager::GetInstance()->GetStatus("AttackUp"));
+			}
+		}
+	}
+
+	else if(abil == "Tornado")
+	{
+		target->SetProgress(0.0f);
+	}
+
+	else if(abil == "Tempest")
+	{
+		target->SetProgress(0.0f);
+	}
+
+	else if(abil == "Zephyr")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Regen" ) );
+	}
+
+	else if(abil == "Rock Spike")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "MagicDown" ) );
+	}
+
+	else if(abil == "Geo Crush")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "SpeedDown" ) );
+	}
+
+	else if(abil == "Tremor")
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "DefenseDown" ) );
+	}
+
+	else if(abil == "Quake")
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackDown" ) );
+
+	else if(abil == "Pinch")
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Muck" ) );
+
+	else if(abil == "Rampart")
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "MagicUp" ) );
+}

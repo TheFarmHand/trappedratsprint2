@@ -24,6 +24,7 @@ public:
 	void virtual Attack( Character* owner, Character * target );
 	void UseItem(Character * target, Items item);
 	void TernaryBlast(float dt);
+	void ApplyTernary( std::string abil, Character* target );
 	
 
 	bool GetActive();
@@ -37,12 +38,23 @@ public:
 	//void SetMaxBP(int _bp){ maxBP = _bp; }
 	//void SetCurrBP(int _bp){ curBP = _bp; }
 
+	// XP functions
+
+	/*int GetXP( );
+	int GetLevel( );
+	int GetNextlvl( );
+
+	void AddXP( int xp );
+	void AddAbility( );
+	void LevelUp( );*/
+
+	// End XP Functions
 
 private:
 	
 	bool active;
 	int myTarget = 0;
-	int states;	// 0-Home 1-Attack 2-Items 3-Ability 4-Run 5-AllySelect 6-EnemySelect
+	int states;	// 0-Home 1-Attack 2-Items 3-Ability 4-Run 5-AllySelect 6-EnemySelect 7-TernaryBlast
 	int hudSelection;
 	ItemSelection * item_choose = nullptr;
 	std::vector<SelectableObject*> menu;
@@ -51,6 +63,21 @@ private:
 	TARGET_SELECT mySelection = none;
 	void SetSelection( int selected );
 	Items chosen;
+
+	// Leveling Stuff
+
+	//int XP;
+	//int level;
+	//int nextlvl;
+
+				
+
+	// Increases XP by the value, handling level up and carry over XP
+	// increase 1
+	// Changes the amount of xp needed to the next level
+	
+
+	// End Leveling Stuff
 
 	void TargetUnit(std::vector<Character*> &targets);
 

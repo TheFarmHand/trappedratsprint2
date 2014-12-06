@@ -6,6 +6,9 @@ class Enemy :
 {
 private:
 	AnimationSystem* ansys = nullptr;
+	int xp_value;
+	//int level;
+	
 protected:
 	float pausetimer;
 public:
@@ -22,5 +25,14 @@ public:
 	AnimationSystem* GetAnimations();
 
 	int virtual GetType();
+
+	// XP Stuffs
+	int GetXPValue();
+	int GetLevel();
+
+	void SetLevel(int lev);
+	void SetXPVal(int val);
 };
+
+
 

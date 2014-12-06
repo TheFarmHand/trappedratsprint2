@@ -22,6 +22,7 @@ private:
 	enum STYPE { DOT, STAT, SPECIAL };
 	STYPE myType;
 	float stat_value = 0;
+	bool ternary_effect = false;
 
 	void virtual HandleDOT( );
 	void virtual HandleSpecial( );
@@ -47,6 +48,7 @@ public:
 	virtual int GetCurrTick();
 	virtual int GetNumTicks();
 	virtual int GetTickDmg()	{ return dmg_tick; }
+	virtual bool GetTernEffect() { return ternary_effect; }
 
 
 	// Mutates
@@ -58,7 +60,7 @@ public:
 	void virtual SetTick(int tic);
 	void virtual SetTickDmg(int dmg)	{ dmg_tick = dmg; }
 	void virtual SetType(int type);
-
+	void virtual SetTernEffect(bool buul) { ternary_effect = buul; }
 	StatusEffect& operator=(const StatusEffect& rhs);
 };
 

@@ -11,7 +11,7 @@
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>12</Base>
+      <Base>52</Base>
       <Scale>3</Scale>
     </BattlePoints>
     <Attack>
@@ -27,7 +27,7 @@
       <Scale>0.3</Scale>
     </Defense>
     <Speed>
-      <Base>80</Base>
+      <Base>50</Base>
       <Scale>0.5</Scale>
     </Speed>
     <Avoision>
@@ -35,7 +35,7 @@
       <Scale>0.4</Scale>
     </Avoision>
   </Stats>
-  <Level>1</Level>
+  <Level>8</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>

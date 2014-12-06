@@ -51,7 +51,6 @@ void GamePlayState::Enter()
 	sts.magic = 10;
 
 
-
 	TurnManager::GetInstance()->SetArrow( allytargeting, enemytargeting );
 
 	Loading("Loading Text...");
@@ -806,7 +805,7 @@ void GamePlayState::MenuUpdate( float dt )
 					selecting_ability = true;
 					character_index = menuindex;
 					menuindex = 0;
-				}
+					}
 				else if (selecting_ability && !select_new)
 				{
 					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked())
