@@ -92,6 +92,7 @@ public:
 	bool AbilityUsed;
 	float abilityTimer;
 	Ability* CurrentAbilityUsed;
+	bool testFinalFight;
 	bool is_test_message = false;
 	static void Test();
 	//function for randomly activating combat
@@ -106,6 +107,7 @@ public:
 	void DialogueRender();
 	void CutsceneUpdate(float dt);
 	void CutsceneRender();
+	SGD::HTexture getTurnInd() {return TurnIndicator;};
 
 	//factory methods
 	Enemy * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );

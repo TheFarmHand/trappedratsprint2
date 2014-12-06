@@ -18,6 +18,7 @@
 #include <Windows.h>
 #include <fstream>
 #include "../Cutscenes/CutsceneManager.h"
+#include "../Core/Boss.h"
 
 GamePlayState* GamePlayState::GetInstance()
 	{
@@ -28,6 +29,7 @@ GamePlayState* GamePlayState::GetInstance()
 void GamePlayState::Enter()
 {
 	is_tutorial = true;
+	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -215,6 +217,62 @@ void GamePlayState::Enter()
 	partyAbilities.clear();
 
 	//if this is a tutorial, we load in the stuff for it
+	if ( testFinalFight )
+		{
+		std::vector<Enemy*> bosses;
+		//Boss* cecilFinal = new Boss( "Cecil" );
+		//Boss* janeFinal = new Boss( "Jane" );
+		//Boss* johnFinal = new Boss( "John" );
+		Enemy* cecilFinal = nullptr;
+		cecilFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Cecil.xml" );
+		cecilFinal->SetOrderPosition( 1 );
+		characterOrderPosition.x = 600.0f;
+		characterOrderPosition.y = (float)( cecilFinal->GetOrderPosition() * 100 + 150 + 16 );
+		cecilFinal->SetPosition( characterOrderPosition );
+
+		Enemy* janeFinal = nullptr;
+		janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
+		janeFinal->SetOrderPosition( 0 );
+		characterOrderPosition.x = 600.0f;
+		characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
+		janeFinal->SetPosition( characterOrderPosition );
+
+		Enemy* johnFinal = nullptr;
+		johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
+		johnFinal->SetOrderPosition( 2 );
+		characterOrderPosition.x = 600.0f;
+		characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
+		johnFinal->SetPosition( characterOrderPosition );
+
+		bosses.push_back( janeFinal );
+		bosses.push_back( cecilFinal );
+		bosses.push_back( johnFinal );
+
+
+		for ( unsigned int i = 0; i < Party.size(); i++ )
+			{
+			Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+			}
+		TurnManager::GetInstance()->Initialize( Party, bosses );
+		for ( size_t i = 0; i < Party.size(); i++ )
+			{
+			if ( Party[i]->GetActive() )
+				{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+				}
+			}
+
+		for ( size_t i = 0; i < bosses.size(); i++ )
+			{
+			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+			}
+		GameData::GetInstance()->SetIsInCombat( true );
+		state = Combat;
+		laststate = Combat;
+
+		}
 	if (is_tutorial)
 	{
 		std::vector<Enemy*> tempEnemy;
@@ -812,15 +870,15 @@ void GamePlayState::MenuUpdate( float dt )
 					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked())
 						return;
 					select_new = true;
-					Party[character_index]->GetAbility(menuindex)->SetUnlocked(false);
+					//Party[character_index]->GetAbility(menuindex)->SetUnlocked(false);
 					oldindex = menuindex;
 
 				}
 				else if (select_new)
 				{
-					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked() && Party[character_index]->GetLevel() >= Party[character_index]->GetAbility(menuindex)->GetUnlockLevel())
+					if (Party[character_index]->GetAbility(menuindex)->GetUnlocked() )
 					{
-						Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
+						//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
 						Ability* temp = Party[character_index]->GetAbility(menuindex);
 						Ability *temp2 = Party[character_index]->GetAbility(oldindex);
 						Party[character_index]->SetAbility(menuindex, temp2);
@@ -1521,7 +1579,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 
 			return nullptr;
 			}
-		else if ( type == "Enemy" )
+		else if ( type == "Enemy" || type == "Boss")
 			{
 			//create a enemy
 			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 64.0f, 64.0f }, animation );

@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Checkers</Name>
-  <Side>Ally</Side>
-  <Element>Wind</Element>
-  <Type>Ally</Type>
+  <Name>Wise Water Wizard</Name>
+  <Side>Mini Boss</Side>
+  <Element>Water</Element>
+  <Type>Mini Boss</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
@@ -11,15 +11,15 @@
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>120</Base>
-      <Scale>1</Scale>
+      <Base>20</Base>
+      <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>8</Base>
+      <Base>6</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
-      <Base>7</Base>
+      <Base>8</Base>
       <Scale>0.3</Scale>
     </Magic>
     <Defense>
@@ -27,19 +27,19 @@
       <Scale>0.7</Scale>
     </Defense>
     <Speed>
-      <Base>80</Base>
+      <Base>9</Base>
       <Scale>0.5</Scale>
     </Speed>
     <Avoision>
-      <Base>5</Base>
+      <Base>7</Base>
       <Scale>0.2</Scale>
     </Avoision>
   </Stats>
-  <Level>20</Level>
+  <Level>1</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>checkersAnimBattle.xml</Animation>
+  <Animation>biggsAnimBattle.xml</Animation>
 </Character>
