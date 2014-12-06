@@ -88,9 +88,9 @@ void Character::UseAbility()
 
 void Character::TakeDamage( int dmg , bool firefall)
 {
+	SetHP(HP - dmg);
 	
-	HP -= dmg;
-	if ( HP <= 0 )
+	/*if ( HP <= 0 )
 	{
 		HP = 0;
 		alive = false;
@@ -98,7 +98,7 @@ void Character::TakeDamage( int dmg , bool firefall)
 	if ( HP > GetMaxHP() )
 	{
 		HP = GetMaxHP();
-	}
+	}*/
 	SGD::Point tempoffset;
 	tempoffset.y = 0;
 	if (GetType() == Enemy)
@@ -269,9 +269,10 @@ void Character::SetLevel( int _level )
 void Character::SetHP( int _hp )
 {
 	HP = _hp;
-	if ( HP == 0 )
+	if ( HP < 0 )
 	{
 		HP = 0;
+		alive = false;
 	}
 
 	if(HP > GetMaxHP())
