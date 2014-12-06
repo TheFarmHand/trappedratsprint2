@@ -81,6 +81,7 @@ void Character::Attack( Character* owner, Character * target )
 
 void Character::UseAbility()
 // Nothing?  Animations/Particles?
+//lol
 {
 
 }
@@ -116,7 +117,7 @@ void Character::TakeDamage( int dmg , bool firefall)
 	}
 	else if (!firefall )
 	{
-		//healled
+		//healed
 
 		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0),this,tempoffset);
 		damagenumbers.push_back(temp);
@@ -163,23 +164,23 @@ int Character::GetLevel()
 }
 int Character::GetHP()
 {
-	return HP;
+	return HP ;
 }
 int Character::GetMaxHP()
 {
-	return MaxHP;
+	return MaxHP + (int)(stats.hp_scale * level);
 }
 int Character::GetBP()
 	{
-	return BP;
+	return BP ;
 	}
 int Character::GetMaxBP()
 	{
-	return MaxBP;
+	return MaxBP + (int)(stats.bp_scale * level);
 	}
 float Character::GetSpeed()
 {
-	return speed;
+	return speed + (stats.speed_scale * level);
 }
 float Character::GetProgress()
 {
@@ -330,4 +331,8 @@ void Character::InitializeAbilities( std::vector<Ability*> toSet )
 void Character::SetTurnIndicator(OwnedHUD* _indicator)
 {
 	TurnIndicator = _indicator;
+}
+int Character::GetAbilitiesSize()
+{
+	return abilityList.size();
 }
