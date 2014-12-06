@@ -27,7 +27,7 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
-	//is_tutorial = true;
+	is_tutorial = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -219,13 +219,13 @@ void GamePlayState::Enter()
 	{
 		std::vector<Enemy*> tempEnemy;
 		std::vector<CombatPlayer*> tempParty;
-		CombatPlayer* p4 = nullptr;
-		p4 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
-		p4->SetOrderPosition(0);
+		CombatPlayer* p6 = nullptr;
+		p6 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p6->SetOrderPosition(0);
 		characterOrderPosition.x = 100.0f;
-		characterOrderPosition.y = (float)(p4->GetOrderPosition() * 100 + 150);
-		p4->SetPosition(characterOrderPosition);
-		p4->SetSize({ 64, 64 });
+		characterOrderPosition.y = (float)(p6->GetOrderPosition() * 100 + 150);
+		p6->SetPosition(characterOrderPosition);
+		p6->SetSize({ 64, 64 });
 		partyAbilities.push_back(MasterAbilityList["Burrow"]);
 		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
 		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
@@ -234,19 +234,19 @@ void GamePlayState::Enter()
 		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
 		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
 		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
-		p4->InitializeAbilities(partyAbilities);
-		p4->SetActive(true);
-		tempParty.push_back(p4);
+		p6->InitializeAbilities(partyAbilities);
+		p6->SetActive(true);
+		tempParty.push_back(p6);
 
 		partyAbilities.clear();
 
-		CombatPlayer* p5 = nullptr;
-		p5 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
-		p5->SetOrderPosition(1);
+		CombatPlayer* p7 = nullptr;
+		p7 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p7->SetOrderPosition(1);
 		characterOrderPosition.x = 100.0f;
-		characterOrderPosition.y = (float)(p5->GetOrderPosition() * 100 + 150);
-		p5->SetPosition(characterOrderPosition);
-		p5->SetSize({ 64, 64 });
+		characterOrderPosition.y = (float)(p7->GetOrderPosition() * 100 + 150);
+		p7->SetPosition(characterOrderPosition);
+		p7->SetSize({ 64, 64 });
 		partyAbilities.push_back(MasterAbilityList["Burrow"]);
 		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
 		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
@@ -255,9 +255,9 @@ void GamePlayState::Enter()
 		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
 		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
 		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
-		p5->InitializeAbilities(partyAbilities);
-		p5->SetActive(true);
-		tempParty.push_back(p5);
+		p7->InitializeAbilities(partyAbilities);
+		p7->SetActive(true);
+		tempParty.push_back(p7);
 
 		Enemy* cecil = nullptr;
 		cecil = LoadEnemy("../Trapped Rat/Assets/Scripts/Cecil.xml");
@@ -267,7 +267,7 @@ void GamePlayState::Enter()
 		cecil->SetPosition(characterOrderPosition);
 		tempEnemy.push_back(cecil);
 
-		for (unsigned int i = 0; i < Party.size(); i++)
+		for (unsigned int i = 0; i < tempParty.size(); i++)
 		{
 			Party[i]->GetAbility(0)->CalcluateBpScaledCost(Party[i]);
 		}
@@ -289,6 +289,7 @@ void GamePlayState::Enter()
 		}
 		state = Combat;
 		laststate = Combat;
+		GameData::GetInstance()->SetIsInCombat(true);
 	}
 
 	//Sets the abilities to unlocked if level is high enough (new game will only unlock the first ability)
@@ -935,8 +936,6 @@ void GamePlayState::TownRender()
 	TileSystem::GetInstance()->Render();
 
 	GameData::GetInstance()->GetOverworldPlayer()->Render();
-	if ( is_test_message )
-		GameData::GetInstance()->GetFont()->DrawString( "This is a message", 250.0, 50.0, { 155, 255, 155 } );
 	}
 void GamePlayState::MenuRender()
 	{
@@ -1100,6 +1099,13 @@ void GamePlayState::MenuRender()
 void GamePlayState::CombatUpdate( float dt )
 	{
 
+	if (is_tutorial)
+	{
+		dialogue->Load("Assets/Scripts/tutorialdialogue.xml");
+		state = Dia;
+		is_tutorial = false;
+		ignore_game_over = true;
+	}
 	laststate = GPStates::Combat;
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 
@@ -1284,13 +1290,19 @@ void GamePlayState::DialogueUpdate( float dt )
 	{
 	if ( !dialogue->Update( dt ) )
 		{
-		state = GPStates::Town;
+		state = laststate;
 		}
 	}
 void GamePlayState::DialogueRender()
 	{
-	TileSystem::GetInstance()->Render();
-	GameData::GetInstance()->GetOverworldPlayer()->Render();
+	if (laststate == Combat)
+	{
+		CombatRender();
+	}
+	else
+	{
+		TownRender();
+	}
 	dialogue->Render();
 	}
 SelectableObject * GamePlayState::CreateSelectableObject( SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string _string )
