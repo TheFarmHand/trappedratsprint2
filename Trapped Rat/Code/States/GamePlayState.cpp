@@ -28,6 +28,20 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
+
+	townpoints[0] = SGD::Point(600, 400);
+	townpoints[1] = SGD::Point(360, 130);
+	townpoints[2] = SGD::Point(120, 345);
+	townpoints[3] = SGD::Point(375, 490);
+	townpoints[4] = SGD::Point(370, 317);
+
+	WorldMapAnsys = new AnimationSystem();
+	WorldMapAnsys->Load("RatAnimOverworld.xml");
+	WorldMapAnsys->Play(0);
+	WorldMap = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/world.png");
+	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/padlock.png");
+
+
 	//is_tutorial = true;
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
@@ -370,9 +384,12 @@ void GamePlayState::Enter()
 	pStatManager->Initialize();
 
 	CutsceneManager::GetInstance()->Initialize();
-	state = GPStates::Cuts;
-	CutsceneManager::GetInstance()->Play( 0 );
+	/*state = GPStates::Cuts;
+	CutsceneManager::GetInstance()->Play( 0 );*/
 	Loading("Time to Play.......");
+
+	SGD::InputManager::GetInstance()->Update();
+	state = Map;
 	}
 void const GamePlayState::Render()
 	{
@@ -388,6 +405,7 @@ void const GamePlayState::Render()
 			MenuRender();
 			break;
 		case GPStates::Map:
+			MapRender();
 			break;
 		case GPStates::Dia:
 			DialogueRender();
@@ -429,6 +447,7 @@ void GamePlayState::Update( float dt )
 			MenuUpdate( dt );
 			break;
 		case GPStates::Map:
+			MapUpdate(dt);
 			break;
 		case GPStates::Dia:
 			DialogueUpdate( dt );
@@ -493,12 +512,15 @@ void GamePlayState::Exit()
 	}
 	
 	Party.clear();
-
+	delete WorldMapAnsys;
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combatback );
 
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_Audio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( entercombat );
+
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(WorldMap);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(PadLock);
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( background );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( button );
@@ -1759,3 +1781,95 @@ void GamePlayState::CheckAbilityUnlocked(bool EOC)
 			}
 		}
 	}
+
+void GamePlayState::MapUpdate(float dt)
+{
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Six))
+	{
+		if (unlockedTowns >= 1)
+		{
+			unlockedTowns--;
+		}
+	}
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Seven))
+	{
+		if (unlockedTowns <= 3)
+		{
+			unlockedTowns++;
+		}
+	}
+
+	if (WorldMapAnsys != nullptr)
+	{
+		GameData::GetInstance()->SetCamera({ 0, 0 });
+		WorldMapAnsys->Update(dt);
+	}
+	if (unlockedTowns == 4)
+	{
+		SelectedTown = 4;
+	}
+	else
+	{
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right))
+		{
+			SelectedTown = 0;
+		}
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up))
+		{
+			if (unlockedTowns >= 1)
+				SelectedTown = 1;
+		}
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left))
+		{
+			if (unlockedTowns >= 2)
+				SelectedTown = 2;
+		}
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down))
+		{
+			if (unlockedTowns >= 3)
+				SelectedTown = 3;
+		}
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+	{
+		switch (SelectedTown)
+		{
+		case 0: //Wind
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		case 1://Fire
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		case 2://Earth
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		case 3://Water
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		case 4://Final Town
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		default:
+			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			break;
+		}
+		state = Town;
+	}
+}
+
+void GamePlayState::MapRender()
+{
+	if (WorldMap != SGD::INVALID_HANDLE)
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTexture(WorldMap, { 0, 0 });
+	}
+	int i = unlockedTowns + 1;
+	for (; i < 5; i++)
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTexture(PadLock, townpoints[i]);
+	}
+	if (WorldMapAnsys != nullptr)
+	{
+		WorldMapAnsys->Render(townpoints[SelectedTown].x + 32, townpoints[SelectedTown].y + 32);
+	}
+}

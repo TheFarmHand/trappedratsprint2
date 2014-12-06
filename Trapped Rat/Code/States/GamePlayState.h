@@ -64,6 +64,13 @@ class GamePlayState :
 	SGD::HTexture cheesecursor = SGD::INVALID_HANDLE;
 	SGD::HTexture TurnIndicator = SGD::INVALID_HANDLE;
 	std::vector<SelectableObject*> m_vSelectableItems; //For Combat Use   0Top 1Left 2Right 3Bottom
+	SGD::HTexture WorldMap = SGD::INVALID_HANDLE;
+	SGD::HTexture PadLock = SGD::INVALID_HANDLE;
+	int SelectedTown = 0; //0-4
+	AnimationSystem* WorldMapAnsys = nullptr;
+	int unlockedTowns = 0;//0-4 based on how many towns are cleared
+	SGD::Point townpoints[5];
+
 
 	std::map<std::string, Ability*> MasterAbilityList;
 	StatusEffectManager* pStatManager;
@@ -107,6 +114,9 @@ public:
 	void DialogueRender();
 	void CutsceneUpdate(float dt);
 	void CutsceneRender();
+
+	void MapUpdate(float dt);
+	void MapRender();
 	SGD::HTexture getTurnInd() {return TurnIndicator;};
 
 	//factory methods

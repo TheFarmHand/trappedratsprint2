@@ -3,7 +3,7 @@
 class Items
 {
 private:
-	std::string explination = "nothing";
+	std::string explination = "You have no Available Items";
 	std::string name = "nothing";
 	int price = 0;
 public:

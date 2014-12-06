@@ -128,7 +128,7 @@ void ItemSelection::CollectItem(int _index)
 }
 std::string ItemSelection::GetCurrentExplanation()
 {
-	std::string temp = "nothing";
+	std::string temp = "You have no Available Items";
 	for (unsigned int i = 0; i < inventory->size(); i++)
 	{
 		if (uniquenames[item_cursor] == (*inventory)[i].GetName())
