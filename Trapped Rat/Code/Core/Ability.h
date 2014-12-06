@@ -68,5 +68,7 @@ public:
 	void CastAbility( Character* owner, Character* target, int AoeCounter = 0, bool ternary = false );
 	void CalculateFormula( Character* owner, Character* target );
 	void CalcluateBpScaledCost( Character* owner );
+
+	void RenderAnimation();
 };
 
