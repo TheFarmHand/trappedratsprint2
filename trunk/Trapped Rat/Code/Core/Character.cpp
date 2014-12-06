@@ -71,7 +71,7 @@ void Character::Render()
 
 void Character::Attack( Character* owner, Character * target )
 {
-	int atk = target->GetAttack();
+	int atk = owner->GetAttack();
 	int dmg = rand() % atk + atk;
 	dmg -= (int)(0.25f * target->GetDefense());
 	if ( dmg <= 0 )

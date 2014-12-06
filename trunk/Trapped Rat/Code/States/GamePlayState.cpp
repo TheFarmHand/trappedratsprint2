@@ -28,8 +28,8 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
-	//is_tutorial = true;
-	testFinalFight = true;
+	is_tutorial = true;
+	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -295,7 +295,7 @@ void GamePlayState::Enter()
 		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
 		p6->InitializeAbilities(partyAbilities);
 		p6->SetActive(true);
-		tempParty.push_back(p6);
+		Parents.push_back(p6);
 
 		partyAbilities.clear();
 
@@ -316,7 +316,7 @@ void GamePlayState::Enter()
 		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
 		p7->InitializeAbilities(partyAbilities);
 		p7->SetActive(true);
-		tempParty.push_back(p7);
+		Parents.push_back(p7);
 
 		Enemy* cecil = nullptr;
 		cecil = LoadEnemy("../Trapped Rat/Assets/Scripts/Cecil.xml");
@@ -324,13 +324,13 @@ void GamePlayState::Enter()
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)(cecil->GetOrderPosition() * 100 + 150 + 16);
 		cecil->SetPosition(characterOrderPosition);
-		tempEnemy.push_back(cecil);
+		tutorialenemy.push_back(cecil);
 
 		for (unsigned int i = 0; i < tempParty.size(); i++)
 		{
 			Party[i]->GetAbility(0)->CalcluateBpScaledCost(Party[i]);
 		}
-		TurnManager::GetInstance()->Initialize(tempParty, tempEnemy);
+		TurnManager::GetInstance()->Initialize(Parents, tutorialenemy);
 		for (size_t i = 0; i < tempParty.size(); i++)
 		{
 			if (tempParty[i]->GetActive())
@@ -485,6 +485,13 @@ void GamePlayState::Exit()
 		delete Party[i];
 		Party[i] = nullptr;
 		}
+	for (unsigned int i = 0; i < Parents.size(); i++)
+	{
+		delete Parents[i];
+		Parents[i] = nullptr;
+
+	}
+	
 	Party.clear();
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combatback );
@@ -796,16 +803,14 @@ void GamePlayState::MenuUpdate( float dt )
 						Items revive;
 						revive.SetName( "Revive" );
 						revive.SetPrice( 40 );
-						Items maxrevive;
-						maxrevive.SetName( "Max Revive" );
-						maxrevive.SetPrice( 100 );
+	
 
 						shopinv.push_back( smallheal );
 						shopinv.push_back( largeheal );
 						shopinv.push_back( smallbp );
 						shopinv.push_back( largebp );
 						shopinv.push_back( revive );
-						shopinv.push_back( maxrevive );
+					
 						break;
 						}
 					case 1:
