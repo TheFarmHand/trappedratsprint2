@@ -118,8 +118,10 @@ void Font::DrawString(std::string text, float x, float y, SGD::Color color, floa
 		{
 			//draw this out
 			//add to the x based on letter width
+		
 			Letter temp = Characters[text[i]];
 			
+
 			graphics->DrawTextureSection(image, { currx + temp.xoffset * scale, curry + temp.yoffset * scale }, { temp.X, temp.Y, temp.X + temp.Width, temp.Y + temp.Height }, 0.0f, {}, color, { scale,scale });
 			currx += (temp.Width + temp.xadvance) * scale;
 		}

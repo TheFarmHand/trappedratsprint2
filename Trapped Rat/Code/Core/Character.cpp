@@ -142,6 +142,15 @@ bool Character::HasEffect( std::string effect )
 	return false;
 }
 
+void Character::RemoveEffect( std::string effect )
+{
+	for ( auto iter = GetEffects( ).begin( ); iter != GetEffects( ).end( ); iter++ )
+	{
+		if ( ( *iter )->GetName( ) == effect )
+			(*iter)->Clear( );
+	}
+}
+
 void Character::React()
 // Loops through status effects on the unit and calls their React function (for things like dodge and counter)
 // Actually this was handled in TurnManager I think
@@ -308,15 +317,15 @@ void Character::StatusTick()
 	}
 }
 
-void Character::AddStatus( StatusEffect *status , Character* theGuard)
+void Character::AddStatus( StatusEffect *status , Character* theGuard, bool ternary)
 // Needs access to attacker for damage calculations
-// Probably done in TM
 {
 	StatusEffect* temp = new StatusEffect();
 	// Setup damage values
 	*temp = *status;
 	temp->SetOwner( this );
 	temp->SetGuard( theGuard );
+	temp->SetTernEffect(ternary);
 	effects.push_back( temp );
 	temp->Initialize();
 }

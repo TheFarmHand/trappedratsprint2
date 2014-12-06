@@ -189,7 +189,7 @@ void TurnManager::Terminate()
 	{
 		pPartMan->UnloadEmitter( "takedamage" );
 		pPartMan->ClearAll();
-		pPartMan = nullptr;
+		pPartMan = nullptr;		
 	}
 
 	//Unload timeline image and elemental image
@@ -203,6 +203,71 @@ void TurnManager::HealTarget( Character* target, int value )
 {
 	target->TakeDamage( -value);
 }
+
+int TurnManager::ElementalMod( Character* target, int damage, ETYPE element )
+{
+	if ( element == FIRE )
+	{
+		if ( target->GetEType( ) == WIND )	// Resist Damage
+		{
+			return damage / 2;
+		}
+
+		else if ( target->GetEType( ) == EARTH )
+		{
+			return (int)( damage * 1.5f );
+		}
+	}
+
+	else if ( element == WATER )
+	{
+		if ( target->GetEType( ) == WIND )
+		{
+			return (int)( damage * 1.5f );
+		}
+
+		if ( target->GetEType( ) == EARTH )
+		{
+			return damage / 2;
+		}
+	}
+
+	else if ( element == WIND )
+	{
+		if ( target->GetEType( ) == FIRE )	// Extra Damage
+		{
+			return (int)( damage * 1.5f );
+		}
+
+		if ( target->GetEType( ) == WATER )
+		{
+			return damage / 2;
+		}
+	}
+
+	else if ( element == EARTH )
+	{
+		if ( target->GetEType( ) == FIRE )
+		{
+			return damage / 2;
+		}
+
+		if ( target->GetEType( ) == WATER )
+		{
+			return (int)( damage * 1.5f );
+		}
+	}
+
+	else if ( element == MULTI )		// is this still a thing?
+	{
+		// What do I do with this? phys + ele I think
+		return damage;
+	}
+
+	// Physical
+	return damage;
+}
+
 void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 // Handles status effects React in here, passes along the finalized damage to the target to get murdered
 {
@@ -211,16 +276,34 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	bool firespike = false;
 	bool counter = false;
 	bool hedge = false;
+	bool enfire = false;
 	StatusEffect* Guard = nullptr; 
 	StatusEffect* to_remove = nullptr;
 
-	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be hanled after loop
+	for ( auto iter = owner->GetEffects( ).begin( ); iter != owner->GetEffects( ).end( ); iter++ )
+	{
+		if((*iter)->GetName() == "Enfire")
+		{
+			if((*iter)->GetTernEffect()) enfire = true;
+			
+		}
+	}
+
+	// Iterate status effect loops and look for special cases, setting appropriate bool to true to be handled after loop
 	for ( auto iter = target->GetEffects().begin(); iter != target->GetEffects().end(); iter++ )
 	{
 		// Check for Dodge abilities
 		if ( ( *iter )->GetName() == "Dodging" )
 		{
 			// Found dodge!  
+			if((*iter)->GetTernEffect())
+				if((*iter)->GetOwner()->GetName() ==  "Ratsputin")
+					target->SetProgress(100.0f);
+				else if((*iter)->GetOwner()->GetName() == "Jeeves")
+					owner->TakeDamage(10);
+				else if((*iter)->GetOwner()->GetName() == "Biggs")
+					target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("SpeedUp"));
+
 			dodge = true;
 		}
 
@@ -235,6 +318,11 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if ( ( *iter )->GetName() == "FireSpikes" )
 		{
 			firespike = true;
+			int dmg = (int)( target->GetStats( ).magic * 0.2f );
+			owner->TakeDamage( dmg );
+			
+			if((*iter)->GetTernEffect())
+				target->TakeDamage(-dmg);
 		}
 
 		else if ( ( *iter )->GetName() == "Counter" )	
@@ -246,25 +334,37 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if( (*iter)->GetName() == "Hedge")
 		{
 			// Hedge Guard reaction
-			hedge = true;
+			int atk = owner->GetStats( ).attack;
+			int dmg = rand( ) % atk + atk;
+			dmg -= (int)( 0.25f * target->GetStats( ).defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			else
+				dmg /= 2;
+			if((*iter)->GetTernEffect())
+				dmg = 0;
+			target->TakeDamage(dmg);
 		}
 	}
 
 	if ( firespike )
 	{
-		// Slap for a little damage
-		
-		owner->TakeDamage((int)(target->GetStats().magic * 0.2f));
+		// Should no longer be useful		
 	}
 
 	if ( owner->HasEffect( "Enfire" ))
 		{
-		target->TakeDamage( (int)(owner->GetStats().magic * 0.3f ), true);
+		int dmg = (int)( owner->GetStats( ).magic * 0.3f );
+		if(enfire) dmg = (int)(dmg * 1.75f);
+		target->TakeDamage(dmg , true);
 		}
 	if ( counter )
 	{
 		// Reduce incoming damage, attack the attacker
-		value = value / 2;
+		if(to_remove->GetTernEffect())
+			value = 0;
+		else
+			value = value / 2;
 		target->TakeDamage(value);
 		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
 		to_remove->Clear();
@@ -281,13 +381,16 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	if ( guard )
 	{
 		// Redirect attack to Guard
+		
+
 		int dmg = owner->GetStats().attack;
 		dmg += rand()%(dmg/3);
 		dmg -= Guard->GetGuard()->GetStats().defense/2;
-		Guard->GetGuard()->TakeDamage(dmg);
 		
-		//owner->Attack(owner, Guard->GetGuard());
-		
+		if ( Guard->GetTernEffect( ) )
+			owner->TakeDamage(dmg);
+		else
+			Guard->GetGuard()->TakeDamage(dmg);		
 	}
 
 	
@@ -304,12 +407,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 }
 
-void TurnManager::UsingAbility(Character* owner, Character* target, Ability* ability)
+void TurnManager::UsingAbility(Character* owner, Character* target, Ability* ability, bool ternary)
 // Calculates and dishes out damage based on an ability
 {
 	// Room here for adding particle effects
 	ability->CalculateFormula(owner, target);
-	ability->CastAbility(owner, target);
+	ability->CastAbility(owner, target, 0, ternary);
 }
 
 

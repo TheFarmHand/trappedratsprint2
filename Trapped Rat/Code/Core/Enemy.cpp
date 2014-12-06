@@ -199,3 +199,24 @@ int Enemy::GetType()
 	{
 	return type::Enemy;
 	}
+
+
+int Enemy::GetXPValue( )
+{
+	return xp_value;
+}
+
+int Enemy::GetLevel( )
+{
+	return level;
+}
+
+void Enemy::SetLevel( int lev )
+{
+	level = lev;
+}
+
+void Enemy::SetXPVal( int val )
+{
+	xp_value = val;
+}

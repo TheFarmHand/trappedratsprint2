@@ -65,7 +65,7 @@ public:
 	void SetAccess( bool combatUse );
 	void virtual Render( );
 	void virtual Update( float dt );
-	void CastAbility( Character* owner, Character* target, int AoeCounter = 0 );
+	void CastAbility( Character* owner, Character* target, int AoeCounter = 0, bool ternary = false );
 	void CalculateFormula( Character* owner, Character* target );
 	void CalcluateBpScaledCost( Character* owner );
 };

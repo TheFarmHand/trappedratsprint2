@@ -141,7 +141,7 @@ void Ability::Update( float dt )
 	{
 	animate->Update( dt );
 	}
-void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
+void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, bool ternary )
 	{
 	int tempFirefall = 0;
 	Abilowner = owner;
@@ -164,16 +164,42 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter )
 		}
 	if ( healing )
 		{
-		target->TakeDamage( (int)-formulaTotal );
+		int dmg = (int)-formulaTotal;
+		if(abilityName == "Whispering Wind")
+			{
+			if(ternary) dmg = (int)(dmg * 1.75f);
+			target->TakeDamage( dmg );
+			}
+		else if (abilityName == "Second Wind")
+			{
+			dmg*= 2;
+			}
 		}
 	if ( status && statusName == "Cover" )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner );
+	{
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner, ternary );
+		owner->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Guarding" ), target, ternary);
+	}
+
+	else if (status && abilityName == "Acid Rain" )
+	{
+		float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus("Poison").GetTickDmg();
+		tickdmg *= (mgcMod * owner->GetStats().magic);
+		tickdmg *= 3;
+		tickdmg -= ( 0.25f * target->GetStats( ).defense + 0.25f * target->GetStats( ).magic );
+		target->TakeDamage((int)tickdmg);
+	}
+
 	else if ( status )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
 
 	if ( abilityName == "Rib-a-Rang" )
-		owner->SetHP( owner->GetHP() - (int)( ( owner->GetHP() * hpMod ) ) );
-	if ( AoeCounter == 0 )
+		if(!ternary)
+			owner->SetHP( owner->GetHP() - (int)( ( owner->GetHP() * hpMod ) ) );
+	
+	
+	
+	if ( AoeCounter == 0 ) 
 		{
 		if ( GamePlayState::GetInstance()->usingTernary() )
 			owner->SetBP( owner->GetBP() - bpCost / 2 );

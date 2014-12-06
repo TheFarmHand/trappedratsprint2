@@ -59,12 +59,17 @@ void  StatusEffect::Turntick()
 			break;
 
 		case SPECIAL:
-			//HandleSpecial();
+			if(name=="Cover")
+				curr_tick--;
+			else if(name=="Guarding")
+			{
+				// Remove from targeting unit
+			}
 
 			break;
 
 		case STAT:
-			//HandleStat();
+			
 			break;
 	}
 
@@ -141,9 +146,16 @@ void StatusEffect::HandleSpecial()
 {
 	StatusEffectManager* SEM = StatusEffectManager::GetInstance( );
 	// Delerium
+	if(name == "Delerium")
+	{
+		// Start a timer, but how to save it?
+	}
 
-
-	// Cover
+	if(name == "Confused")
+	{
+		if(ternary_effect)
+			num_ticks += 2;
+	}
 
 	// Advanced Cover
 
@@ -165,12 +177,14 @@ void StatusEffect::HandleStat()
 	if ( name == "SpeedDown" )
 	{
 		stat_value = owner->GetSpeed( ) * .333f;
+		
 		owner->SetSpeed( owner->GetSpeed( ) - stat_value );
 	}
 
 	else if ( name == "SpeedUp" )
 	{
 		stat_value = owner->GetSpeed( ) * .333f;
+		if ( ternary_effect ) stat_value *= 2;
 		owner->SetSpeed( owner->GetSpeed( ) + stat_value );
 	}
 
@@ -214,6 +228,7 @@ void StatusEffect::HandleStat()
 	{
 		stat_value = owner->GetStats( ).avoision * .333f;
 		owner->GetStats( ).avoision += (int)stat_value;
+		if ( ternary_effect ) owner->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("DefenseUp"));
 	}
 
 	else if ( name == "AvoisionDown" )
@@ -248,8 +263,15 @@ void StatusEffect::Clear()
 	{
 		iter++;
 	}
-	Recover();
-	owner->GetEffects().erase( iter );
+	if(name=="Guarding")
+	{
+		guard_caster->RemoveEffect("Cover");
+	}
+	else
+	{
+		Recover();	// Stats
+		owner->GetEffects().erase( iter );
+	}
 	delete this;
 }
 
@@ -303,6 +325,11 @@ void StatusEffect::Recover()
 	else if ( name == "AvoisionDown" )
 	{
 		owner->GetStats( ).avoision += (int)stat_value;
+	}
+
+	else if ( name == "Guarding" )
+	{
+
 	}
 }
 

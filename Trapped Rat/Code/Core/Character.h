@@ -57,6 +57,7 @@ public:
 	void virtual StatusTick();
 	void virtual TakeDamage(int dmg, bool firefall = false);
 	void React();
+	void RemoveEffect(std::string effect);
 
 	bool virtual HasEffect(std::string effect);
 
@@ -96,7 +97,7 @@ public:
 	void SetAbility(int index, Ability* _ability);
 	void SetOrderPosition( int index );
 	void SetLiving( bool buul );
-	void AddStatus( StatusEffect *status, Character* theOwner = nullptr);
+	void AddStatus( StatusEffect *status, Character* theOwner = nullptr, bool ternary = false);
 	void SetTurnIndicator(OwnedHUD* _indicator);
 	void SetPortrait(SGD::HTexture _port);
 	void SetTimelineAnimation(SGD::HTexture _timeline);
