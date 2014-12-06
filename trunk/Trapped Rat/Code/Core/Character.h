@@ -22,6 +22,7 @@ protected:
 	int level;
 	int HP;
 	int MaxHP;
+	int BaseHP;
 	int BP;
 	int MaxBP;
 	float speed;
@@ -67,6 +68,7 @@ public:
 	int GetLevel();
 	int GetHP();
 	int GetMaxHP();
+	int GetBaseHP();
 	int GetBP();
 	int GetMaxBP();
 	float GetSpeed();
@@ -90,6 +92,7 @@ public:
 	void SetLevel(int _level);
 	void SetHP(int _hp);
 	void SetMaxHP(int _max);
+	void SetBaseBP( int _base );
 	void SetBP( int _bp );
 	void SetMaxBP( int _max );
 	void SetSpeed(float _speed);

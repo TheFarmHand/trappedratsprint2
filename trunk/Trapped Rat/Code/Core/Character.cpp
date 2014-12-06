@@ -173,7 +173,7 @@ int Character::GetLevel()
 }
 int Character::GetHP()
 {
-	return HP ;
+return HP ;
 }
 int Character::GetMaxHP()
 {

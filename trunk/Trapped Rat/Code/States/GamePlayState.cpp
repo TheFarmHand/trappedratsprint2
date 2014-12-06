@@ -28,8 +28,8 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
-	is_tutorial = true;
-	//testFinalFight = true;
+	//is_tutorial = true;
+	testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -1292,10 +1292,10 @@ CombatPlayer * GamePlayState::CreateCombatPlayer( std::string name, Stats _stats
 	temp->SetActive( true );
 	temp->SetStats( _stats );
 	temp->SetLevel( _lvl );
-	temp->SetHP( _hp );
 	temp->SetMaxHP( _maxhp );
-	temp->SetBP( _bp );
+	temp->SetHP( temp->GetMaxHP() );
 	temp->SetMaxBP( _maxbp );
+	temp->SetBP( temp->GetMaxBP() );
 	temp->SetSpeed( _speed );
 	temp->SetProgress( _progress );
 	if ( abilityarr != nullptr )
@@ -1450,8 +1450,6 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 			{
 			//create a player
 			toon = CreateCombatPlayer( name, stats, level, HP, HP, BP, BP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation );
-			toon->SetMaxBP( BP );
-			toon->SetBP( BP );
 			if ( element == "Wind" )
 				{
 				toon->SetEtype( ETYPE::WIND );
