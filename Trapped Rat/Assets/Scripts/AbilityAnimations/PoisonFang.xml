@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>PoisonFangsSpriteSheet.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Poison Fang</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.35">
+      <AnchorPoint x="49" y="106" />
+      <DrawRect left="26" top="79" right="76" bottom="134" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="123" y="105" />
+      <DrawRect left="92" top="76" right="154" bottom="134" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.05">
+      <AnchorPoint x="209" y="108" />
+      <DrawRect left="175" top="70" right="253" bottom="139" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="469" y="208" />
+      <DrawRect left="379" top="124" right="584" bottom="284" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

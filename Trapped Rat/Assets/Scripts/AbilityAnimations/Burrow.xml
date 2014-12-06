@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>BurrowSpriteSheet.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Burrow</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="36" y="52" />
+      <DrawRect left="8" top="35" right="74" bottom="99" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="110" y="52" />
+      <DrawRect left="73" top="34" right="146" bottom="98" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="181" y="52" />
+      <DrawRect left="146" top="32" right="213" bottom="100" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="248" y="52" />
+      <DrawRect left="212" top="32" right="282" bottom="103" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.10">
+      <AnchorPoint x="316" y="52" />
+      <DrawRect left="281" top="32" right="354" bottom="102" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

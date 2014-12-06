@@ -8,7 +8,7 @@
   <Healing Heals="false" />
   <UnlockLevel Level="6" />
   <Paths>
-    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <AniPath Path="AbilityAnimations/EarthFang.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>
