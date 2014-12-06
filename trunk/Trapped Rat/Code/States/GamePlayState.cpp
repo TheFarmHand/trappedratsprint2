@@ -28,7 +28,7 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
-	is_tutorial = true;
+	//is_tutorial = true;
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
@@ -370,8 +370,8 @@ void GamePlayState::Enter()
 	pStatManager->Initialize();
 
 	CutsceneManager::GetInstance()->Initialize();
-	/*state = GPStates::Cuts;
-	CutsceneManager::GetInstance()->Play( 0 );*/
+	state = GPStates::Cuts;
+	CutsceneManager::GetInstance()->Play( 0 );
 	Loading("Time to Play.......");
 	}
 void const GamePlayState::Render()
@@ -791,18 +791,23 @@ void GamePlayState::MenuUpdate( float dt )
 						Items smallheal;
 						smallheal.SetName( "Small Heal" );
 						smallheal.SetPrice( 10 );
+						smallheal.SetExplination("Heals the Target for_a Small Amount");
 						Items largeheal;
 						largeheal.SetName( "Large Heal" );
 						largeheal.SetPrice( 20 );
+						largeheal.SetExplination("Heals the Target for_a Large Amount");
 						Items smallbp;
 						smallbp.SetName( "Small BP Restore" );
 						smallbp.SetPrice( 10 );
+						smallbp.SetExplination("Restores a Small Amount of BP");
 						Items largebp;
 						largebp.SetName( "Large BP Restore" );
 						largebp.SetPrice( 20 );
+						largebp.SetExplination("Restores a Large Amount of BP");
 						Items revive;
 						revive.SetName( "Revive" );
 						revive.SetPrice( 40 );
+						revive.SetExplination("Brings the target Back_from the Dead");
 	
 
 						shopinv.push_back( smallheal );
