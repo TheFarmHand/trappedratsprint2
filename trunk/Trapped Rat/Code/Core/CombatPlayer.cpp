@@ -507,6 +507,7 @@ void CombatPlayer::HomeUpdate( float dt )
 					states = 2;
 					mySelection = none;
 					help->UpdateSelection( 4 );
+					item_choose = new ItemSelection();
 					break;
 				case 2: // Ability
 					help->UpdateSelection( 1 );

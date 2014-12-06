@@ -377,6 +377,7 @@ void TurnManager::EndCombat()
 	GameData::GetInstance()->SetIsInCombat( false );
 	TurnManager::GetInstance()->Terminate();
 	GamePlayState::GetInstance()->SetState( GPStates::Town );
+	GamePlayState::GetInstance()->SetLastState(GPStates::Town);
 }
 void TurnManager::CombatUpdate( float dt )
 {

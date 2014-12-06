@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>cecil.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.5">
+      <AnchorPoint x="24" y="30" />
+      <DrawRect left="1" top="20" right="63" bottom="99" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.5">
+      <AnchorPoint x="85" y="29" />
+      <DrawRect left="63" top="20" right="131" bottom="96" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -27,6 +27,7 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
+	//is_tutorial = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -173,7 +174,7 @@ void GamePlayState::Enter()
 	partyAbilities.clear();
 
 	CombatPlayer* p4 = nullptr;
-	p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterBiggs.xml" ) );
+	p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
 	p4->SetOrderPosition( 0 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
@@ -214,11 +215,88 @@ void GamePlayState::Enter()
 
 	partyAbilities.clear();
 
+	//if this is a tutorial, we load in the stuff for it
+	if (is_tutorial)
+	{
+		std::vector<Enemy*> tempEnemy;
+		std::vector<CombatPlayer*> tempParty;
+		CombatPlayer* p4 = nullptr;
+		p4 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p4->SetOrderPosition(0);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(p4->GetOrderPosition() * 100 + 150);
+		p4->SetPosition(characterOrderPosition);
+		p4->SetSize({ 64, 64 });
+		partyAbilities.push_back(MasterAbilityList["Burrow"]);
+		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
+		partyAbilities.push_back(MasterAbilityList["Earth Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Poison Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
+		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
+		p4->InitializeAbilities(partyAbilities);
+		p4->SetActive(true);
+		tempParty.push_back(p4);
+
+		partyAbilities.clear();
+
+		CombatPlayer* p5 = nullptr;
+		p5 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p5->SetOrderPosition(1);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(p5->GetOrderPosition() * 100 + 150);
+		p5->SetPosition(characterOrderPosition);
+		p5->SetSize({ 64, 64 });
+		partyAbilities.push_back(MasterAbilityList["Burrow"]);
+		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
+		partyAbilities.push_back(MasterAbilityList["Earth Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Poison Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
+		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
+		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
+		p5->InitializeAbilities(partyAbilities);
+		p5->SetActive(true);
+		tempParty.push_back(p5);
+
+		Enemy* cecil = nullptr;
+		cecil = LoadEnemy("../Trapped Rat/Assets/Scripts/Cecil.xml");
+		cecil->SetOrderPosition(0);
+		characterOrderPosition.x = 600.0f;
+		characterOrderPosition.y = (float)(cecil->GetOrderPosition() * 100 + 150 + 16);
+		cecil->SetPosition(characterOrderPosition);
+		tempEnemy.push_back(cecil);
+
+		for (unsigned int i = 0; i < Party.size(); i++)
+		{
+			Party[i]->GetAbility(0)->CalcluateBpScaledCost(Party[i]);
+		}
+		TurnManager::GetInstance()->Initialize(tempParty, tempEnemy);
+		for (size_t i = 0; i < tempParty.size(); i++)
+		{
+			if (tempParty[i]->GetActive())
+			{
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempParty[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 440 + (tempParty[i]->GetOrderPosition()*50.0f)), tempParty[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 465 + (tempParty[i]->GetOrderPosition()*50.0f)), tempParty[i], SGD::Color(0, 100, 255), SGD::Point(0, 0), false));
+			}
+		}
+
+
+		for (size_t i = 0; i < tempEnemy.size(); i++)
+		{
+			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempEnemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
+		}
+		state = Combat;
+		laststate = Combat;
+	}
+
 	//Sets the abilities to unlocked if level is high enough (new game will only unlock the first ability)
 	CheckAbilityUnlocked();
 
 	dialogue = new Dialogue();
-	dialogue->Load( "../Trapped Rat/Assets/Scripts/testdialogue.xml" );
+	//dialogue->Load( "../Trapped Rat/Assets/Scripts/testdialogue.xml" );
 	//state = GPStates::Dia;
 	Loading("Loading Sounds...");
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/req.xwm" );
@@ -233,8 +311,8 @@ void GamePlayState::Enter()
 	pStatManager->Initialize();
 
 	CutsceneManager::GetInstance()->Initialize();
-	state = GPStates::Cuts;
-	CutsceneManager::GetInstance()->Play( 0 );
+	/*state = GPStates::Cuts;
+	CutsceneManager::GetInstance()->Play( 0 );*/
 	Loading("Time to Play.......");
 	}
 void const GamePlayState::Render()
@@ -611,6 +689,9 @@ void GamePlayState::MenuUpdate( float dt )
 		case HowTo:
 			break;
 		case MenuSubStates::Party:
+			maxindex = Party.size() - 1;
+			if (selecting_ability)
+				maxindex = Party[character_index]->GetAbilitiesSize() - 1;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) )
 				{
 				GameData::GetInstance()->PlaySelectionChange();
@@ -711,14 +792,48 @@ void GamePlayState::MenuUpdate( float dt )
 					}
 				break;
 			case Shop:
-				if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
-					{
+				
 					if ( shopinv[menuindex].GetPrice() <= gold )
 						{
 						inventory.push_back( shopinv[menuindex] );
 						gold -= shopinv[menuindex].GetPrice();
 						}
+					
+				break;
+			case MenuSubStates::Party:
+				if (selecting_ability == false)
+				{
+					selecting_ability = true;
+					character_index = menuindex;
+					menuindex = 0;
+				}
+				else if (selecting_ability && !select_new)
+				{
+					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked())
+						return;
+					select_new = true;
+					Party[character_index]->GetAbility(menuindex)->SetUnlocked(false);
+					oldindex = menuindex;
+
+				}
+				else if (select_new)
+				{
+					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked() && Party[character_index]->GetLevel() >= Party[character_index]->GetAbility(menuindex)->GetUnlockLevel())
+					{
+						Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
+						Ability* temp = Party[character_index]->GetAbility(menuindex);
+						Ability *temp2 = Party[character_index]->GetAbility(oldindex);
+						Party[character_index]->SetAbility(menuindex, temp2);
+						Party[character_index]->SetAbility(oldindex, temp);
 					}
+					else
+						return;
+
+					select_new = false;
+					selecting_ability = false;
+					menuindex = character_index;
+					oldindex = 0;
+				}
 				break;
 			default:
 				break;
@@ -946,6 +1061,37 @@ void GamePlayState::MenuRender()
 				info << "HP: " << Party[i]->GetHP() << "/" << Party[i]->GetMaxHP() << "  BP: " << Party[i]->GetBP() << "/" << Party[i]->GetMaxBP();
 				GameData::GetInstance()->GetFont()->DrawString( info.str(), 100.0f, 200.0f + ( i * 55 ), { 0, 0, 0 }, 1.5f );
 				}
+			
+			if (selecting_ability)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
+				for (int i = 0; i < Party[character_index]->GetAbilitiesSize(); i++)
+				{
+
+					std::string name = Party[character_index]->GetAbility(i)->GetAbilityName();
+					if (Party[character_index]->GetAbility(i)->GetUnlocked())
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155, 155, 155 }, 1.5f);
+					else
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+					
+				}
+				graphics->DrawTextureSection(cursor, { 400.0f, 160.0f + (menuindex * 35) }, { 0, 0, 238, 73 });
+			}
+			else
+			{
+				
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
+				for (int i = 0; i < Party[menuindex]->GetAbilitiesSize(); i++)
+				{
+
+					std::string name = Party[menuindex]->GetAbility(i)->GetAbilityName();
+					if (Party[menuindex]->GetAbility(i)->GetUnlocked())
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155,155,155 }, 1.5f);
+					else
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+				}
+				graphics->DrawTextureSection(cursor, { 10.0f, 165.0f + (menuindex * 55) }, { 0, 0, 238, 73 });
+			}
 			break;
 		default:
 			break;
@@ -1005,7 +1151,7 @@ void GamePlayState::CombatRender()
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTexture( combatback, { 0, 0 } );
 	graphics->DrawTextureSection( combathud, { -0.1f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
-	GameData::GetInstance()->GetFont()->DrawString( "You are in Combat", 50.0, 50.0, { 155, 255, 155 } );
+	//GameData::GetInstance()->GetFont()->DrawString( "You are in Combat", 50.0, 50.0, { 155, 255, 155 } );
 	TurnManager::GetInstance()->Render();
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
 		{

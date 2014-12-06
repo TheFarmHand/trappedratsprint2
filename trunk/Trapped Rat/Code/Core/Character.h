@@ -72,6 +72,7 @@ public:
 	float GetProgress();
 	int GetOrderPosition();
 	Ability* GetAbility(int index);
+	int GetAbilitiesSize();
 	bool virtual isAlive( );
 	ETYPE GetEType();
 	void SetEtype(ETYPE _type);

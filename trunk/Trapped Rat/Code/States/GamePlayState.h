@@ -75,6 +75,17 @@ class GamePlayState :
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	
+
+	//party & ability selection
+	bool selecting_ability = false;
+	int character_index = 0;
+	bool select_new = false;
+
+
+	//tutorial stuff
+	bool is_tutorial = false;
+	std::vector<CombatPlayer*> Parents;
+	int oldindex = 0;
 public:
 	bool AbilityUsed;
 	float abilityTimer;
@@ -138,6 +149,7 @@ public:
 	void SetSelectableObject(SelectableObject* _obj, int _index);
 	void SetHelpText(HelpText* help);
 	void SetState(GPStates _state){ state = _state; }
+	void SetLastState(GPStates _state){ laststate = _state; }
 	void PauseGame();
 	void AddToGauge(int val);
 	void SetGauge(int val);
