@@ -157,19 +157,19 @@ void Enemy::Render()
 	sp << "Progress: " << progress;
 	GameData::GetInstance()->GetFont()->DrawString( sp.str(), position.x + 50, position.y - 10, { 255, 0, 0 } );
 	std::ostringstream sa;
-	sa << "Attack: " << stats.attack;
+	sa << "Attack: " << GetAttack();
 	GameData::GetInstance()->GetFont()->DrawString( sa.str(), position.x + 50, position.y + 5, { 0, 0, 0 } );
 	std::ostringstream sd;
-	sd << "Defense: " << stats.defense;
+	sd << "Defense: " << GetDefense();
 	GameData::GetInstance()->GetFont()->DrawString( sd.str(), position.x + 50, position.y + 15, { 0, 0, 0 } );
 	std::ostringstream sm;
-	sm << "Magic: " << stats.magic;
+	sm << "Magic: " << GetMagic();
 	GameData::GetInstance()->GetFont()->DrawString( sm.str(), position.x + 50, position.y + 25, { 0, 0, 0 } );
 	std::ostringstream sav;
-	sav << "Avoision: " << stats.avoision;
+	sav << "Avoision: " << GetAvoision();
 	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
 	std::ostringstream ss;
-	ss << "Speed: " << speed;
+	ss << "Speed: " << GetSpeed();
 	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
 
 	if ( ansys != nullptr )
@@ -204,11 +204,6 @@ int Enemy::GetType()
 int Enemy::GetXPValue( )
 {
 	return xp_value;
-}
-
-int Enemy::GetLevel( )
-{
-	return level;
 }
 
 void Enemy::SetLevel( int lev )

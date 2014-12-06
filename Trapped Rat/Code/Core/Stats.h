@@ -18,6 +18,5 @@ public:
 	float hp_scale;
 	float bp_scale;
 	float speed_scale;
-
 };
 

@@ -190,50 +190,50 @@ void StatusEffect::HandleStat()
 
 	else if ( name == "AttackUp" )
 	{
-		stat_value = owner->GetStats( ).attack * .333f;
+		stat_value = owner->GetAttack() * .333f;
 		owner->GetStats( ).attack += (int)stat_value;
 	}
 
 	else if ( name == "AttackDown" )
 	{
-		stat_value = owner->GetStats( ).attack * .333f;
+		stat_value = owner->GetAttack() * .333f;
 		owner->GetStats( ).attack -= (int)stat_value ;
 	}
 
 	else if ( name == "DefenseUp" )
 	{
-		stat_value = owner->GetStats( ).defense * .333f;
+		stat_value = owner->GetDefense() * .333f;
 		owner->GetStats().defense += (int)stat_value;
 	}
 
 	else if ( name == "DefenseDown" )
 	{
-		stat_value = owner->GetStats( ).defense * .333f;
+		stat_value = owner->GetDefense() * .333f;
 		owner->GetStats( ).defense -= (int)stat_value;
 	}
 
 	else if ( name == "MagicUp" )
 	{
-		stat_value = owner->GetStats( ).magic * .333f;
+		stat_value = owner->GetMagic() * .333f;
 		owner->GetStats( ).magic += (int)stat_value;
 	}
 
 	else if ( name == "MagicDown" )
 	{
-		stat_value = owner->GetStats( ).magic * .333f;
+		stat_value = owner->GetMagic() * .333f;
 		owner->GetStats( ).magic -= (int)stat_value;
 	}
 
 	else if ( name == "AvoisionUp" )
 	{
-		stat_value = owner->GetStats( ).avoision * .333f;
+		stat_value = owner->GetAvoision() * .333f;
 		owner->GetStats( ).avoision += (int)stat_value;
 		if ( ternary_effect ) owner->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("DefenseUp"));
 	}
 
 	else if ( name == "AvoisionDown" )
 	{
-		stat_value = owner->GetStats( ).avoision * .333f;
+		stat_value = owner->GetAvoision() * .333f;
 		owner->GetStats( ).avoision -= (int)stat_value;
 	}
 }

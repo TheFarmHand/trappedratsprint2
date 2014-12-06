@@ -42,24 +42,24 @@ void TurnManager::Update( float dt )
 	{
 		if (CheckWin())
 		{
-			// End of Combat, enemies have died
+		// End of Combat, enemies have died
 			//Need to do exp gain and level increase calculations prior to this check
-			GamePlayState::GetInstance()->CheckAbilityUnlocked();
-			EndCombat();
-			return;
-		}
+	GamePlayState::GetInstance()->CheckAbilityUnlocked();
+		EndCombat();
+		return;
+	}
 		if (CheckLose())
+	{
+		EndCombat();
+		if (GamePlayState::GetInstance()->ignore_game_over)
 		{
-			EndCombat();
-			if (GamePlayState::GetInstance()->ignore_game_over)
-			{
-				GamePlayState::GetInstance()->ignore_game_over = false;
-				return;
-			}
-			else
-				GameData::GetInstance()->SwapState(GameOverLoseState::GetInstance());
+			GamePlayState::GetInstance()->ignore_game_over = false;
 			return;
 		}
+		else
+				GameData::GetInstance()->SwapState(GameOverLoseState::GetInstance());
+		return;
+	}
 	}
 
 	//Check to see if elemental table display input
@@ -327,7 +327,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if ( ( *iter )->GetName() == "FireSpikes" )
 		{
 			firespike = true;
-			int dmg = (int)( target->GetStats( ).magic * 0.2f );
+			int dmg = (int)( target->GetMagic() * 0.2f );
 			owner->TakeDamage( dmg );
 			
 			if((*iter)->GetTernEffect())
@@ -343,9 +343,9 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if( (*iter)->GetName() == "Hedge")
 		{
 			// Hedge Guard reaction
-			int atk = owner->GetStats( ).attack;
+			int atk = owner->GetAttack();
 			int dmg = rand( ) % atk + atk;
-			dmg -= (int)( 0.25f * target->GetStats( ).defense );
+			dmg -= (int)( 0.25f * target->GetDefense() );
 			if ( dmg <= 0 )
 				dmg = 0;
 			else
@@ -363,8 +363,8 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 	if ( owner->HasEffect( "Enfire" ))
 		{
-		int dmg = (int)( owner->GetStats( ).magic * 0.3f );
-		if(enfire) dmg = (int)(dmg * 1.75f);
+		int dmg = (int)( owner->GetMagic() * 0.3f );
+		if(enfire) dmg = (int)(dmg * 1.75f);		// Ternary Blast style
 		target->TakeDamage(dmg , true);
 		}
 	if ( counter )
@@ -392,9 +392,9 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Redirect attack to Guard
 		
 
-		int dmg = owner->GetStats().attack;
+		int dmg = owner->GetAttack();
 		dmg += rand()%(dmg/3);
-		dmg -= Guard->GetGuard()->GetStats().defense/2;
+		dmg -= Guard->GetGuard()->GetDefense()/2;
 		
 		if ( Guard->GetTernEffect( ) )
 			owner->TakeDamage(dmg);
@@ -476,6 +476,7 @@ bool TurnManager::CheckWin()
 			enemiesDead = false;
 	}
 
+	
 	return enemiesDead;
 }
 bool TurnManager::CheckLose()
@@ -492,9 +493,9 @@ bool TurnManager::CheckLose()
 void TurnManager::EndCombat()
 {
 	GameData::GetInstance()->SetIsInCombat( false );
-	TurnManager::GetInstance()->Terminate();
 	GamePlayState::GetInstance()->SetState( GPStates::Town );
 	GamePlayState::GetInstance()->SetLastState(GPStates::Town);
+	TurnManager::GetInstance( )->Terminate( );
 }
 void TurnManager::CombatUpdate( float dt )
 {
