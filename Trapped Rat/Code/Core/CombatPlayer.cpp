@@ -18,6 +18,8 @@ CombatPlayer::CombatPlayer()
 	states = 0;
 	hudSelection = 0;
 	menu = GamePlayState::GetInstance()->GetSelectableObjects();
+	tempitem = new Items();
+	helpobject = new SelectableObject();
 
 }
 
@@ -26,6 +28,8 @@ CombatPlayer::~CombatPlayer()
 {
 	if ( ansys != nullptr )
 		delete ansys;
+	delete tempitem;
+	delete helpobject;
 }
 
 void CombatPlayer::Update( float dt )
@@ -1107,8 +1111,11 @@ void CombatPlayer::SelectingItems( float dt )
 {
 	HelpText *help = GamePlayState::GetInstance()->GetHelpText();
 
-
-	if ( item_choose->Update( dt ) && item_choose != nullptr )
+	bool selected = item_choose->Update(dt);
+	tempitem->SetExplination(item_choose->GetCurrentExplanation());
+	helpobject->SetItem(tempitem);
+	help->UpdateSelection(2, helpobject);
+	if (selected && item_choose != nullptr )
 	{
 		chosen = item_choose->chosen;
 		delete item_choose;

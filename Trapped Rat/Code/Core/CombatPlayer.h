@@ -63,7 +63,8 @@ private:
 	TARGET_SELECT mySelection = none;
 	void SetSelection( int selected );
 	Items chosen;
-
+	Items * tempitem = nullptr;
+	SelectableObject* helpobject = nullptr;
 	// Leveling Stuff
 
 	int XP;

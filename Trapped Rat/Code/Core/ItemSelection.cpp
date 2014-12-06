@@ -113,17 +113,29 @@ void ItemSelection::CollectItem(int _index)
 	else
 	{
 
-		for (unsigned int i = 0; i < uniquenames.size(); i++)
-		{
-			for (unsigned int j = 0; j < inventory->size(); j++)
+		
+			for (unsigned int i = 0; i < inventory->size(); i++)
 			{
-				if (uniquenames[i] == (*inventory)[j].GetName())
+				if (uniquenames[_index] == (*inventory)[i].GetName())
 				{
-					chosen = (*inventory)[j];
-					inventory->erase(inventory->begin() + j);
+					chosen = (*inventory)[i];
+					inventory->erase(inventory->begin() + i);
 					return;
 				}
 			}
+		
+	}
+}
+std::string ItemSelection::GetCurrentExplanation()
+{
+	std::string temp = "nothing";
+	for (unsigned int i = 0; i < inventory->size(); i++)
+	{
+		if (uniquenames[item_cursor] == (*inventory)[i].GetName())
+		{
+			temp = (*inventory)[i].GetExplination();
+			return temp;
 		}
 	}
+	return temp;
 }
