@@ -82,6 +82,8 @@ void CombatPlayer::Update( float dt )
 
 		}
 		TurnManager::GetInstance()->setTimeStop( true );
+		if ( !TurnManager::GetInstance()->getProgressFullReached() )
+			TurnManager::GetInstance()->setProgressFullReached( true );
 		// Here is where targeting happens
 
 		if (stepforward == false && stepbackward == false && stepTime != 0.0f)
@@ -192,8 +194,6 @@ void CombatPlayer::Render()
 
 	if ( progress >= 100.0f )
 	{
-		if ( !TurnManager::GetInstance()->getProgressFullReached() )
-			TurnManager::GetInstance()->setProgressFullReached( true );
 		if ( mySelection == enemy )
 		{
 			pdraw = pTurn->GetEnemies()[ myTarget ]->GetPosition();

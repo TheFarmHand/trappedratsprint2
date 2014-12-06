@@ -13,7 +13,7 @@
   </Paths>
   <DamageInfo>
     <AttackMod atkMod="0" />
-    <MagicMod mgcMod=0" />
+    <MagicMod mgcMod="0" />
     <BaseBP bp="0" />
     <HPMod hp="0" />
   </DamageInfo>

@@ -176,6 +176,11 @@ void TurnManager::Terminate()
 {
 	timeStop = false;
 	AlliedUnits.clear();
+	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
+		{
+		delete EnemyUnits[i];
+		}
+
 	EnemyUnits.clear();
 	AllCombatUnits.clear();
 
@@ -399,6 +404,7 @@ if ( GamePlayState::GetInstance()->AbilityUsed)
 				AllCombatUnits[ i ]->Update( dt );
 				if ( fullProgressReached || turnPause )
 				{
+				timeStop = true;
 					break;
 				}
 			}
