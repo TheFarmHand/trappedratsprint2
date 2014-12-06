@@ -42,19 +42,19 @@ void CombatPlayer::Update( float dt )
 	}
 	else if ( progress < 100.0f )
 	{
-		if (stepbackward == true && stepforward == false)
+		if ( stepbackward == true && stepforward == false )
 		{
 			stepTime -= dt;
 			SGD::Point pos = GetPosition();
 			pos.x -= stepvelocity*dt;
-			SetPosition(pos);
-			if (stepTime <= 0.0f)
+			SetPosition( pos );
+			if ( stepTime <= 0.0f )
 				stepbackward = false;
 		}
-		if (stepbackward == false && stepforward == false)
+		if ( stepbackward == false && stepforward == false )
 		{
-			TurnManager::GetInstance()->setProgressFullReached(false);
-			TurnManager::GetInstance()->setTimeStop(false);
+			TurnManager::GetInstance()->setProgressFullReached( false );
+			TurnManager::GetInstance()->setTimeStop( false );
 		}
 
 		return;
@@ -90,63 +90,65 @@ void CombatPlayer::Update( float dt )
 			TurnManager::GetInstance()->setProgressFullReached( true );
 		// Here is where targeting happens
 
-		if (stepforward == false && stepbackward == false && stepTime != 0.0f)
+		if ( stepforward == false && stepbackward == false && stepTime != 0.0f )
 		{
 			stepforward = true;
 			stepTime = 2.0f;
 		}
-		if (stepforward == true && stepbackward == false)
+		if ( stepforward == true && stepbackward == false )
 		{
 			stepTime -= dt;
 			SGD::Point pos = GetPosition();
 			pos.x += stepvelocity*dt;
-			SetPosition(pos);
-			if (stepTime <= 0.0f)
+			SetPosition( pos );
+			if ( stepTime <= 0.0f )
 			{
 				stepTime = 0.0f;
 				stepforward = false;
+
+				// Stun Goes here
 			}
 		}
 
-		if (stepbackward == false && stepforward == false)
+		if ( stepbackward == false && stepforward == false )
 		{
-			if (states == 0)
+			if ( states == 0 )
 			{
-				HomeUpdate(dt);
+				HomeUpdate( dt );
 			}
 
-			else if (states == 1)		// Attacking; Target selection is "enemy"
+			else if ( states == 1 )		// Attacking; Target selection is "enemy"
 			{
-				AttackUpdate(dt);
+				AttackUpdate( dt );
 			}
 
-			else if (states == 2) // Item Selection
+			else if ( states == 2 ) // Item Selection
 			{
-				if (item_choose == nullptr)
-					ItemsUpdate(dt);
+				if ( item_choose == nullptr )
+					ItemsUpdate( dt );
 				else
-					SelectingItems(dt);
+					SelectingItems( dt );
 
 			}
-			else if (states == 3)// Ability Selection
+			else if ( states == 3 )// Ability Selection
 			{
-				AbilityUpdate(dt);
+				AbilityUpdate( dt );
 			}
-			else if (states == 4) // Run update
+			else if ( states == 4 ) // Run update
 			{
-				RunUpdate(dt);
+				RunUpdate( dt );
 			}
-			else if (states == 5)//Defensive Ability update
+			else if ( states == 5 )//Defensive Ability update
 			{
-				AllySelectUpdate(dt);
+				AllySelectUpdate( dt );
 			}
-			else if (states == 6) // Offensive ability update
+			else if ( states == 6 ) // Offensive ability update
 			{
-				EnemySelectUpdate(dt);
+				EnemySelectUpdate( dt );
 			}
-			else if (states == 7) // Ternary Blast stuff
+			else if ( states == 7 ) // Ternary Blast stuff
 			{
-				TernaryBlast(dt);
+				TernaryBlast( dt );
 			}
 		}
 	}
@@ -165,7 +167,7 @@ void CombatPlayer::Render()
 {
 	SGD::GraphicsManager *pGraphics = SGD::GraphicsManager::GetInstance();
 	TurnManager *pTurn = TurnManager::GetInstance();
-	
+
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 50, position.y - 30, { 200, 0, 255 }, 1.6f );
 	std::ostringstream sp;
@@ -218,27 +220,33 @@ void CombatPlayer::Render()
 		{
 			for ( size_t i = 0; i < pTurn->GetEnemies().size(); i++ )
 			{
-				pdraw = pTurn->GetEnemies()[ i ]->GetPosition();
-				pdraw.x -= pTurn->GetEnemies()[ i ]->GetSize().width + 20;
-				pdraw.y -= pTurn->GetEnemies()[ i ]->GetSize().height / 2;
-				pGraphics->DrawTexture( pTurn->GetEnemyArrow(), pdraw );
+				if ( pTurn->GetEnemies()[ i ]->isAlive() )
+				{
+					pdraw = pTurn->GetEnemies()[ i ]->GetPosition();
+					pdraw.x -= pTurn->GetEnemies()[ i ]->GetSize().width + 20;
+					pdraw.y -= pTurn->GetEnemies()[ i ]->GetSize().height / 2;
+					pGraphics->DrawTexture( pTurn->GetEnemyArrow(), pdraw );
+				}
 			}
 		}
 		else if ( mySelection == allAlly )
 		{
 			for ( size_t i = 0; i < pTurn->GetAllies().size(); i++ )
 			{
-				pdraw = pTurn->GetAllies()[ i ]->GetPosition();
-				pdraw.x += pTurn->GetAllies()[ i ]->GetSize().width + 20;
-				pdraw.y -= pTurn->GetAllies()[ i ]->GetSize().height / 2;
-				pGraphics->DrawTexture( pTurn->GetAllyArrow(), pdraw );
+				if ( pTurn->GetAllies()[ i ]->isAlive() )
+				{
+					pdraw = pTurn->GetAllies()[ i ]->GetPosition();
+					pdraw.x += pTurn->GetAllies()[ i ]->GetSize().width + 20;
+					pdraw.y -= pTurn->GetAllies()[ i ]->GetSize().height / 2;
+					pGraphics->DrawTexture( pTurn->GetAllyArrow(), pdraw );
+				}
 			}
 		}
 
 	}
 
 	SGD::Color color;
-	float hppercentage = GetHP() / (float)(GetMaxHP() );
+	float hppercentage = GetHP() / (float)( GetMaxHP() );
 	if ( hppercentage < .25f )
 	{
 		color = SGD::Color( 155, 0, 0 );
@@ -277,7 +285,7 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 	{
 		int atk = owner->GetAttack();
 		int dmg = rand() % atk + atk;
-		dmg -= (int)(0.25f * target->GetStats().defense);
+		dmg -= (int)( 0.25f * target->GetStats().defense );
 		if ( dmg <= 0 )
 			dmg = 0;
 		TurnManager::GetInstance()->AttackTarget( owner, target, dmg );
@@ -564,7 +572,7 @@ void CombatPlayer::AttackUpdate( float dt )
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
 		//	}
 		myTarget = 0;
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -613,7 +621,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 
 	if ( chosen.GetName() == "nothing" )
 	{
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -671,7 +679,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		chosen = Items();
 
 		// These three lines could be factored out to an EndTurn type function
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -778,10 +786,10 @@ void CombatPlayer::AbilityUpdate( float dt )
 				{
 					mySelection = enemy;
 					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
-						{
-						if ( TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
+					{
+						if ( TurnManager::GetInstance()->GetEnemies()[ i ]->isAlive() )
 							myTarget = i;
-						}
+					}
 				}
 				states = 6;
 			}
@@ -885,7 +893,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	if ( mySelection == player || mySelection == deadAlly || mySelection == self)
+	if ( mySelection == player || mySelection == deadAlly || mySelection == self )
 	{
 		TargetUnit( pTurn->GetAllies() );
 	}
@@ -936,7 +944,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			// After adding all the aoe casts to the Ternary vectors
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
-				GamePlayState::GetInstance( )->AddTarget( );
+				GamePlayState::GetInstance()->AddTarget();
 				//GamePlayState::GetInstance()->myTernTargets.num_targets -= ( numAlive - 1 );	// Should adjust for AOE
 				// Reset certain targety things
 				myTarget = 0;
@@ -951,7 +959,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			{
 				// Add selection to vector
 				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ myTarget ] );
-				GamePlayState::GetInstance( )->AddTarget( );
+				GamePlayState::GetInstance()->AddTarget();
 				// Reset certain targety things
 				myTarget = 0;
 				mySelection = none;
@@ -971,7 +979,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			}
 		}
 		myTarget = 0;
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -979,7 +987,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
-	//	TurnManager::GetInstance()->setTimeStop( false );
+		//	TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
 		help->UpdateSelection( 5 );
 		states = 0;
@@ -1010,7 +1018,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		SetSelection( 0 );
 
 		SetHomeButtons();
-		GamePlayState::GetInstance( )->ClearTernary( );
+		GamePlayState::GetInstance()->ClearTernary();
 	}
 
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
@@ -1021,7 +1029,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			for ( size_t i = 0; i < pTurn->GetEnemies().size(); i++ )
 			{
 				if ( pTurn->GetEnemies()[ i ]->isAlive() )
-				{	
+				{
 					if ( GamePlayState::GetInstance()->usingTernary() )
 					{
 						// Add selection to vector
@@ -1042,7 +1050,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
-				GamePlayState::GetInstance( )->AddTarget( );
+				GamePlayState::GetInstance()->AddTarget();
 				//GamePlayState::GetInstance()->myTernTargets.num_targets -= ( numAlive - 1 );	// Should adjust for AOE
 				myTarget = 0;
 				mySelection = none;
@@ -1057,7 +1065,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			{
 				// Add selection to vector
 				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ myTarget ] );
-				GamePlayState::GetInstance( )->AddTarget( );
+				GamePlayState::GetInstance()->AddTarget();
 				// Reset certain targety things
 				myTarget = 0;
 				mySelection = none;
@@ -1078,7 +1086,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		}
 
 		myTarget = 0;
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -1115,13 +1123,13 @@ void CombatPlayer::SelectingItems( float dt )
 {
 	HelpText *help = GamePlayState::GetInstance()->GetHelpText();
 
-	bool selected = item_choose->Update(dt);
-	tempitem->SetExplination(item_choose->GetCurrentExplanation());
-	helpobject->SetItem(tempitem);
-	help->UpdateSelection(2, helpobject);
-	if (selected && item_choose != nullptr )
+	bool selected = item_choose->Update( dt );
+	tempitem->SetExplination( item_choose->GetCurrentExplanation() );
+	helpobject->SetItem( tempitem );
+	help->UpdateSelection( 2, helpobject );
+	if ( selected && item_choose != nullptr )
 	{
-		help->UpdateSelection(4);
+		help->UpdateSelection( 4 );
 		chosen = item_choose->chosen;
 		delete item_choose;
 		item_choose = nullptr;
@@ -1152,15 +1160,15 @@ void CombatPlayer::SelectingItems( float dt )
 			states = 5;
 
 		}
-		if (chosen.GetName() == "nothing")
+		if ( chosen.GetName() == "nothing" )
 		{
 			delete item_choose;
 			item_choose = nullptr;
 			GameData::GetInstance()->PlaySelectionChange();
 			states = 0;
-			help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 			mySelection = none;
-			SetSelection(0);
+			SetSelection( 0 );
 		}
 
 	}
@@ -1171,15 +1179,15 @@ void CombatPlayer::SelectingItems( float dt )
 		GameData::GetInstance()->PlaySelectionChange();
 		mySelection = none;
 		states = 0;
-		TurnManager::GetInstance()->setProgressFullReached(false);
+		TurnManager::GetInstance()->setProgressFullReached( false );
 		//pTurn->setTimeStop( false );
-		TurnManager::GetInstance()->setTurnPause(true);
+		TurnManager::GetInstance()->setTurnPause( true );
 		hudSelection = 0;
-		help->UpdateSelection(5);
-		SetSelection(0);
+		help->UpdateSelection( 5 );
+		SetSelection( 0 );
 		SetHomeButtons();
 	}
-	
+
 
 }
 
@@ -1189,7 +1197,7 @@ void CombatPlayer::TernaryBlast( float dt )
 {
 	// Ability Selection 3 times without ending turn or executing ability
 	// Make sure Escape works correctly while selecting in here
-	int tar = GamePlayState::GetInstance( )->myTernTargets.num_targets;
+	int tar = GamePlayState::GetInstance()->myTernTargets.num_targets;
 	if ( tar < 3 )
 		AbilityUpdate( dt );
 	else
@@ -1202,9 +1210,9 @@ void CombatPlayer::TernaryBlast( float dt )
 				this,
 				GamePlayState::GetInstance()->myTernTargets.targets[ i ],
 				GamePlayState::GetInstance()->myTernTargets.abilities[ i ],
-				true);	// true for ternary stuff	
-			ApplyTernary( GamePlayState::GetInstance( )->myTernTargets.abilities[ i ]->GetAbilityName(),
-						  GamePlayState::GetInstance( )->myTernTargets.targets[ i ]);
+				true );	// true for ternary stuff	
+			ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[ i ]->GetAbilityName(),
+						  GamePlayState::GetInstance()->myTernTargets.targets[ i ] );
 
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
@@ -1213,7 +1221,7 @@ void CombatPlayer::TernaryBlast( float dt )
 
 		GamePlayState::GetInstance()->ClearTernary();
 		myTarget = 0;
-		if (stepbackward == false && stepforward == false && progress != 0.0f)
+		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
 			stepTime = 2.0f;
@@ -1233,12 +1241,12 @@ void CombatPlayer::TernaryBlast( float dt )
 	}
 }
 
-int CombatPlayer::GetXP( )
+int CombatPlayer::GetXP()
 {
 	return XP;
 }
 
-int CombatPlayer::GetLevel( )
+int CombatPlayer::GetLevel()
 {
 	return level;
 }
@@ -1251,13 +1259,13 @@ int CombatPlayer::GetLevel( )
 void CombatPlayer::AddXP( int xp )
 {
 	XP += xp;
-	if(XP >= nextlvl)
+	if ( XP >= nextlvl )
 	{
 		LevelUp();
 	}
 }
 
-void CombatPlayer::LevelUp( )
+void CombatPlayer::LevelUp()
 {
 	level++;
 	XP -= nextlvl;
@@ -1267,130 +1275,130 @@ void CombatPlayer::LevelUp( )
 
 
 // Do Ternary Blast Specials
-void CombatPlayer::ApplyTernary(std::string abil, Character* target)
+void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 {
-	if(abil == "Fire Fang")
+	if ( abil == "Fire Fang" )
 	{
-		target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("Burn"));
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
-	else if(abil == "Water Fang")
+	else if ( abil == "Water Fang" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Drown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Drown" ) );
 	}
 
-	else if(abil == "Earth Fang")
+	else if ( abil == "Earth Fang" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Muck" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
 	}
 
-	else if(abil == "Wind Fang")
+	else if ( abil == "Wind Fang" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Wisp" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Wisp" ) );
 	}
 
-	else if(abil == "Poison Fang")
+	else if ( abil == "Poison Fang" )
 	{
 		// add delerium once it works
 	}
 
-	else if(abil == "Slow Claw")
+	else if ( abil == "Slow Claw" )
 	{
 		// Knock them back on the timeline
 		float prog = target->GetProgress();
 		prog -= 33;
-		if(prog < 0) prog = 0.0f;
-		target->SetProgress(prog);
+		if ( prog < 0 ) prog = 0.0f;
+		target->SetProgress( prog );
 	}
 
-	else if(abil == "Splash")
+	else if ( abil == "Splash" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "SpeedDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
-	else if(abil == "Flood")
+	else if ( abil == "Flood" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AvoisionDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AvoisionDown" ) );
 	}
 
-	else if(abil == "Squirt")
+	else if ( abil == "Squirt" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Stun" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Stun" ) );
 	}
 
-	else if(abil == "Torrent")
+	else if ( abil == "Torrent" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
 	}
 
-	else if(abil == "Puddle")
+	else if ( abil == "Puddle" )
 	{
-		this->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "DefenseUp" ) );
-	}
-	
-	else if(abil == "Disolve")
-	{
-		this->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackUp" ) );
+		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseUp" ) );
 	}
 
-	else if(abil == "Ignite")
+	else if ( abil == "Disolve" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Burn" ) );
+		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 	}
 
-	else if(abil == "Incinerate")
+	else if ( abil == "Ignite" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Burn" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
-	else if(abil == "Scorch")
+	else if ( abil == "Incinerate" )
 	{
-		for(unsigned int i=0; i<TurnManager::GetInstance()->GetAllies().size(); i++)
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
+	}
+
+	else if ( abil == "Scorch" )
+	{
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-			if(TurnManager::GetInstance( )->GetAllies( )[i]->isAlive())
+			if ( TurnManager::GetInstance()->GetAllies()[ i ]->isAlive() )
 			{
-				TurnManager::GetInstance( )->GetAllies( )[i]->AddStatus(
-					&StatusEffectManager::GetInstance()->GetStatus("AttackUp"));
+				TurnManager::GetInstance()->GetAllies()[ i ]->AddStatus(
+					&StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 			}
 		}
 	}
 
-	else if(abil == "Tornado")
+	else if ( abil == "Tornado" )
 	{
-		target->SetProgress(0.0f);
+		target->SetProgress( 0.0f );
 	}
 
-	else if(abil == "Tempest")
+	else if ( abil == "Tempest" )
 	{
-		target->SetProgress(0.0f);
+		target->SetProgress( 0.0f );
 	}
 
-	else if(abil == "Zephyr")
+	else if ( abil == "Zephyr" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Regen" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Regen" ) );
 	}
 
-	else if(abil == "Rock Spike")
+	else if ( abil == "Rock Spike" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "MagicDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicDown" ) );
 	}
 
-	else if(abil == "Geo Crush")
+	else if ( abil == "Geo Crush" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "SpeedDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
-	else if(abil == "Tremor")
+	else if ( abil == "Tremor" )
 	{
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "DefenseDown" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseDown" ) );
 	}
 
-	else if(abil == "Quake")
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "AttackDown" ) );
+	else if ( abil == "Quake" )
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
 
-	else if(abil == "Pinch")
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Muck" ) );
+	else if ( abil == "Pinch" )
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
 
-	else if(abil == "Rampart")
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "MagicUp" ) );
+	else if ( abil == "Rampart" )
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
 }
