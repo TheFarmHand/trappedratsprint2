@@ -58,7 +58,7 @@ void Cutscene::LoadCutscene(int _index)
 		//tempobj->m_vWaypoints.push_back(point);
 		point.x += 200;
 		tempobj->m_vWaypoints.push_back(point);
-		point.y += 200;
+		point.y += 400;
 		tempobj->m_vWaypoints.push_back(point);
 		point.x += 400;
 		tempobj->m_vWaypoints.push_back(point);

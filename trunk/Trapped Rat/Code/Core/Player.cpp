@@ -23,6 +23,10 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent( "House2" );
 	Listener::RegisterForEvent( "World3" );
 	Listener::RegisterForEvent( "House3" );
+	Listener::RegisterForEvent("World4");
+	Listener::RegisterForEvent("House4");
+	Listener::RegisterForEvent("World5");
+	Listener::RegisterForEvent("House5");
 }
 
 
@@ -174,4 +178,28 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance()->GetTileSize().height;
 		}
+	else if (pEvent->GetEventID() == "World4")
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
+		position.x = dest->x + (size.width / 2);
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+	}
+	else if (pEvent->GetEventID() == "House4")
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+	}
+	else if (pEvent->GetEventID() == "World5")
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
+		position.x = dest->x + (size.width / 2);
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+	}
+	else if (pEvent->GetEventID() == "House5")
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+	}
 	}
