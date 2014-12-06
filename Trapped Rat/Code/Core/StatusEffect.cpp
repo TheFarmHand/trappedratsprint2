@@ -59,17 +59,18 @@ void  StatusEffect::Turntick()
 			break;
 
 		case SPECIAL:
-			if(name=="Cover")
+			if ( name == "Cover" )
 				curr_tick--;
-			else if(name=="Guarding")
+			/*else if ( name == "Guarding" )
 			{
-				// Remove from targeting unit
-			}
+				if ( guard_caster->HasEffect( "Cover" ) )
+					guard_caster->RemoveEffect( "Cover" );
+			}*/
 
 			break;
 
 		case STAT:
-			
+
 			break;
 	}
 
@@ -144,16 +145,16 @@ int StatusEffect::ElementalMod()
 void StatusEffect::HandleSpecial()
 // Does things as soon as status is applied
 {
-	StatusEffectManager* SEM = StatusEffectManager::GetInstance( );
+	StatusEffectManager* SEM = StatusEffectManager::GetInstance();
 	// Delerium
-	if(name == "Delerium")
+	if ( name == "Delerium" )
 	{
 		// Start a timer, but how to save it?
 	}
 
-	if(name == "Confused")
+	if ( name == "Confused" )
 	{
-		if(ternary_effect)
+		if ( ternary_effect )
 			num_ticks += 2;
 	}
 
@@ -164,10 +165,10 @@ void StatusEffect::HandleSpecial()
 	// Enfire
 
 	// Hedge
-	if(name == "Hedge")
+	if ( name == "Hedge" )
 	{
-		owner->AddStatus(&SEM->GetStatus("Regen"));
-		owner->AddStatus(&SEM->GetStatus("DefenseUp"));
+		owner->AddStatus( &SEM->GetStatus( "Regen" ) );
+		owner->AddStatus( &SEM->GetStatus( "DefenseUp" ) );
 	}
 
 }
@@ -176,28 +177,28 @@ void StatusEffect::HandleStat()
 {
 	if ( name == "SpeedDown" )
 	{
-		stat_value = owner->GetSpeed( ) * .333f;
-		
-		owner->SetSpeed( owner->GetSpeed( ) - stat_value );
+		stat_value = owner->GetSpeed() * .333f;
+
+		owner->SetSpeed( owner->GetSpeed() - stat_value );
 	}
 
 	else if ( name == "SpeedUp" )
 	{
-		stat_value = owner->GetSpeed( ) * .333f;
+		stat_value = owner->GetSpeed() * .333f;
 		if ( ternary_effect ) stat_value *= 2;
-		owner->SetSpeed( owner->GetSpeed( ) + stat_value );
+		owner->SetSpeed( owner->GetSpeed() + stat_value );
 	}
 
 	else if ( name == "AttackUp" )
 	{
 		stat_value = owner->GetAttack() * .333f;
-		owner->GetStats( ).attack += (int)stat_value;
+		owner->GetStats().attack += (int)stat_value;
 	}
 
 	else if ( name == "AttackDown" )
 	{
 		stat_value = owner->GetAttack() * .333f;
-		owner->GetStats( ).attack -= (int)stat_value ;
+		owner->GetStats().attack -= (int)stat_value;
 	}
 
 	else if ( name == "DefenseUp" )
@@ -209,39 +210,39 @@ void StatusEffect::HandleStat()
 	else if ( name == "DefenseDown" )
 	{
 		stat_value = owner->GetDefense() * .333f;
-		owner->GetStats( ).defense -= (int)stat_value;
+		owner->GetStats().defense -= (int)stat_value;
 	}
 
 	else if ( name == "MagicUp" )
 	{
 		stat_value = owner->GetMagic() * .333f;
-		owner->GetStats( ).magic += (int)stat_value;
+		owner->GetStats().magic += (int)stat_value;
 	}
 
 	else if ( name == "MagicDown" )
 	{
 		stat_value = owner->GetMagic() * .333f;
-		owner->GetStats( ).magic -= (int)stat_value;
+		owner->GetStats().magic -= (int)stat_value;
 	}
 
 	else if ( name == "AvoisionUp" )
 	{
 		stat_value = owner->GetAvoision() * .333f;
-		owner->GetStats( ).avoision += (int)stat_value;
-		if ( ternary_effect ) owner->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("DefenseUp"));
+		owner->GetStats().avoision += (int)stat_value;
+		if ( ternary_effect ) owner->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseUp" ) );
 	}
 
 	else if ( name == "AvoisionDown" )
 	{
 		stat_value = owner->GetAvoision() * .333f;
-		owner->GetStats( ).avoision -= (int)stat_value;
+		owner->GetStats().avoision -= (int)stat_value;
 	}
 }
 
 void StatusEffect::HandleDOT()
 {
-	if(name == "Regen")
-		owner->TakeDamage(-dmg_tick);
+	if ( name == "Regen" )
+		owner->TakeDamage( -dmg_tick );
 	else
 		owner->TakeDamage( ElementalMod() );	// Tweaks numbers according to Elemental affinities
 
@@ -263,15 +264,11 @@ void StatusEffect::Clear()
 	{
 		iter++;
 	}
-	if(name=="Guarding")
-	{
-		guard_caster->RemoveEffect("Guarding");
-	}
-	else
-	{
-		Recover();	// Stats
-		owner->GetEffects().erase( iter );
-	}
+
+	
+	Recover();	// Stats
+	owner->GetEffects().erase( iter );
+	
 	delete this;
 }
 
@@ -289,32 +286,32 @@ void StatusEffect::Recover()
 
 	else if ( name == "AttackUp" )
 	{
-		owner->GetStats( ).attack -= (int)stat_value;
+		owner->GetStats().attack -= (int)stat_value;
 	}
 
 	else if ( name == "AttackDown" )
 	{
-		owner->GetStats( ).attack += (int)stat_value;
+		owner->GetStats().attack += (int)stat_value;
 	}
 
 	else if ( name == "DefenseUp" )
 	{
-		owner->GetStats( ).defense -= (int)stat_value;
+		owner->GetStats().defense -= (int)stat_value;
 	}
 
 	else if ( name == "DefenseDown" )
 	{
-		owner->GetStats( ).defense += (int)stat_value;
+		owner->GetStats().defense += (int)stat_value;
 	}
 
 	else if ( name == "MagicUp" )
 	{
-		owner->GetStats( ).magic -= (int)stat_value;
+		owner->GetStats().magic -= (int)stat_value;
 	}
 
 	else if ( name == "MagicDown" )
 	{
-		owner->GetStats( ).magic += (int)stat_value;
+		owner->GetStats().magic += (int)stat_value;
 	}
 
 	else if ( name == "AvoisionUp" )
@@ -324,12 +321,13 @@ void StatusEffect::Recover()
 
 	else if ( name == "AvoisionDown" )
 	{
-		owner->GetStats( ).avoision += (int)stat_value;
+		owner->GetStats().avoision += (int)stat_value;
 	}
 
 	else if ( name == "Guarding" )
 	{
-
+		if(guard_caster->HasEffect("Cover") )
+			guard_caster->RemoveEffect( "Cover" );
 	}
 }
 

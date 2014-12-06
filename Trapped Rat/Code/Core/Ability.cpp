@@ -152,7 +152,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		{
 		target->SetLiving( true );
 		}
-	if ( offensive )
+	if ( offensive && !status )
 		{
 		if ( abilityName == "Firefall" )
 			{
@@ -186,11 +186,16 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 
 	else if (status && abilityName == "Acid Rain" )
 	{
-		float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus("Poison").GetTickDmg();
-		tickdmg *= (mgcMod * owner->GetMagic());
-		tickdmg *= 3;
-		tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic());
-		target->TakeDamage((int)tickdmg);
+		if(ternary)
+		{
+			float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus("Poison").GetTickDmg();
+			tickdmg += (0.35f * owner->GetMagic());
+			tickdmg *= 3;
+			tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic());
+			target->TakeDamage((int)tickdmg);
+		}
+		else
+			target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("Poison"));
 	}
 
 	else if ( status )
