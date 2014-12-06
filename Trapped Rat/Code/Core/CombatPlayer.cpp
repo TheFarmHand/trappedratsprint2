@@ -777,7 +777,11 @@ void CombatPlayer::AbilityUpdate( float dt )
 				else
 				{
 					mySelection = enemy;
-					myTarget = 0;
+					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+						{
+						if ( TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
+							myTarget = i;
+						}
 				}
 				states = 6;
 			}

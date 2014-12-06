@@ -54,7 +54,7 @@ void Character::Render()
 	{
 		damagenumbers[i]->Render();
 	}
-	if (progress >= 100.0f || (TurnManager::GetInstance()->getTurnPause() && progress == 0.0f) || stepforward || stepbackward)
+	if (progress >= 100.0f || stepforward || stepbackward)
 	{
 		if (TurnIndicator != nullptr)
 		{
@@ -89,6 +89,10 @@ void Character::UseAbility()
 void Character::TakeDamage( int dmg , bool firefall)
 {
 	SetHP(HP - dmg);
+	if ( name == "Jane" && alive == true )
+		++JaneHit;
+	else if ( name == "John" && alive == true )
+		++JohnHit;
 	
 	/*if ( HP <= 0 )
 	{
@@ -269,7 +273,15 @@ void Character::SetLevel( int _level )
 void Character::SetHP( int _hp )
 {
 	HP = _hp;
-	if ( HP < 0 )
+	if ( HP / (float)(GetMaxHP()) < 0.1f && name == "Cecil")
+		{
+		if ( CecilPhase == 1 || CecilPhase == 2 )
+			{
+			HP = (int)(GetMaxHP() * 0.1f);
+			progress = 100.0f;
+			}
+		}
+	else if ( HP < 0 )
 	{
 		HP = 0;
 		alive = false;
