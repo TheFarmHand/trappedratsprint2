@@ -63,6 +63,12 @@ void HelpText::AbilityDisplay()
 		return;
 	if (m_selectedObj->GetAbility() == nullptr)
 		return;
+	GameData::GetInstance()->GetFont()->DrawString(std::to_string(m_selectedObj->GetAbility()->GetBPCost()), 216, 16, { 0, 0, 0 }, 1.45f);
+	GameData::GetInstance()->GetFont()->DrawString(std::to_string(m_selectedObj->GetAbility()->GetBPCost()), 215, 15, { 0, 0, 100 }, 1.45f);
+
+	GameData::GetInstance()->GetFont()->DrawString("BP cost", 246, 16, { 0, 0, 0 }, 1.45f);
+	GameData::GetInstance()->GetFont()->DrawString("BP cost", 245, 15, { 0, 0, 100 }, 1.45f);
+
 	GameData::GetInstance()->GetFont()->DrawString(m_selectedObj->GetAbility()->GetExplination(), 216, 16, { 0, 0, 0 }, 1.45f);
 	GameData::GetInstance()->GetFont()->DrawString(m_selectedObj->GetAbility()->GetExplination(), 215, 15, { 0, 0, 100 }, 1.45f);
 }
