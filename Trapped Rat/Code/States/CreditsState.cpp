@@ -32,7 +32,7 @@
 	 font->DrawString("Associate Producers...", 50.0f, 140.0f, { 155, 155, 155 });
 	 font->DrawString("Shawn Paris, Robert Martinez", 100.0f, 170.0f, { 155, 155, 155 });
 	 font->DrawString("Artists...", 50.0f, 200.0f, { 155, 155, 155 });
-	 font->DrawString("Gregory Bey, Caris Frazier", 100.0f, 230.0f, { 155, 155, 155 });
+	 font->DrawString("Gregory Bey, Caris Frazier, Erich Jaeger", 100.0f, 230.0f, { 155, 155, 155 });
 	 font->DrawString("Developers...", 50.0f, 260.0f, { 155, 155, 155 });
 	 font->DrawString("Riley Wood, Joe Thompson, Matthew Zanini, Grant Taylor", 100.0f, 290.0f, { 155, 155, 155 });
 	 font->DrawString("Press Escape to Exit", 50.0f, 500.0f, { 155, 155, 155 });
