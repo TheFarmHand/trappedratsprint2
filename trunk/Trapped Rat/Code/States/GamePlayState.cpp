@@ -1244,8 +1244,8 @@ Enemy * GamePlayState::CreateCommonEnemy( std::string name, Stats _stats, int _l
 	temp->SetName( name );
 	temp->SetStats( _stats );
 	temp->SetLevel( _lvl );
-	temp->SetHP( _hp );
 	temp->SetMaxHP( _maxhp );
+	temp->SetHP( temp->GetMaxHP() );
 	temp->SetSpeed( _speed );
 	temp->SetProgress( _progress );
 	//temp->SetEtype(WIND);

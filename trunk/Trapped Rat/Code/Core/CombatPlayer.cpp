@@ -657,7 +657,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( chosen.GetName() == "Revive" )
 		{
 			pTurn->GetAllies()[ myTarget ]->SetLiving( true );
-			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], (int)( pTurn->GetAllies()[ myTarget ]->GetHP() + 0.25 * MaxHP ) );
+			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], (int)( pTurn->GetAllies()[ myTarget ]->GetHP() + 0.25 * GetMaxHP() ) );
 
 		}
 
