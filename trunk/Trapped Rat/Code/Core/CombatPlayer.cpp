@@ -919,6 +919,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 						GamePlayState::GetInstance()->AbilityUsed = true;
 						GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
 						GamePlayState::GetInstance()->abilityTimer = 2.0f;
+						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
 						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 					}
 				}
@@ -957,6 +958,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 				GamePlayState::GetInstance()->AbilityUsed = true;
 				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
 				GamePlayState::GetInstance()->abilityTimer = 2.0f;
+				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
 				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 			}
 		}
@@ -1024,6 +1026,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 						GamePlayState::GetInstance()->AbilityUsed = true;
 						GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
 						GamePlayState::GetInstance()->abilityTimer = 2.0f;
+						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
 						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 					}
 				}
@@ -1061,6 +1064,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 				GamePlayState::GetInstance()->AbilityUsed = true;
 				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
 				GamePlayState::GetInstance()->abilityTimer = 2.0f;
+				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
 				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
 			}
 		}

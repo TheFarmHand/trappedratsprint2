@@ -1,45 +1,45 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Ratsputin</Name>
-  <Side>Ally</Side>
-  <Element>Wind</Element>
-  <Type>Ally</Type>
+  <NameSturdy Earth Monk</Name>
+  <Side>Mini Boss</Side>
+  <Element>Earth</Element>
+  <Type>Mini Boss</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>70</Base>
+      <Base>35</Base>
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>120</Base>
-      <Scale>3</Scale>
+      <Base>20</Base>
+      <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>8</Base>
+      <Base>9</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
-      <Base>7</Base>
-      <Scale>0.5</Scale>
+      <Base>8</Base>
+      <Scale>0.3</Scale>
     </Magic>
     <Defense>
-      <Base>7</Base>
-      <Scale>0.3</Scale>
+      <Base>8</Base>
+      <Scale>0.7</Scale>
     </Defense>
     <Speed>
-      <Base>80</Base>
+      <Base>8</Base>
       <Scale>0.5</Scale>
     </Speed>
     <Avoision>
       <Base>5</Base>
-      <Scale>0.4</Scale>
+      <Scale>0.2</Scale>
     </Avoision>
   </Stats>
-  <Level>20</Level>
+  <Level>1</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>RatAnimBattle.xml</Animation>
+  <Animation>biggsAnimBattle.xml</Animation>
 </Character>
