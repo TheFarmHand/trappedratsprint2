@@ -38,25 +38,28 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 void TurnManager::Update( float dt )
 {
 	//*Should be checked first each update, try not to add code here or before
-	if ( CheckWin() )
+	if (getTimeStop() == false)
 	{
-		// End of Combat, enemies have died
-	//Need to do exp gain and level increase calculations prior to this check
-	GamePlayState::GetInstance()->CheckAbilityUnlocked();
-		EndCombat();
-		return;
-	}
-	if ( CheckLose() )
-	{
-		EndCombat();
-		if (GamePlayState::GetInstance()->ignore_game_over)
+		if (CheckWin())
 		{
-			GamePlayState::GetInstance()->ignore_game_over = false;
+			// End of Combat, enemies have died
+			//Need to do exp gain and level increase calculations prior to this check
+			GamePlayState::GetInstance()->CheckAbilityUnlocked();
+			EndCombat();
 			return;
 		}
-		else
-			GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
-		return;
+		if (CheckLose())
+		{
+			EndCombat();
+			if (GamePlayState::GetInstance()->ignore_game_over)
+			{
+				GamePlayState::GetInstance()->ignore_game_over = false;
+				return;
+			}
+			else
+				GameData::GetInstance()->SwapState(GameOverLoseState::GetInstance());
+			return;
+		}
 	}
 
 	//Check to see if elemental table display input
