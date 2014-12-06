@@ -188,8 +188,8 @@ void CombatPlayer::Render()
 
 	//if ( TestAbility && progress >= 100.0f )
 	//	tester.Render();
-	std::string numbers = std::to_string( HP ) + "/" + std::to_string( MaxHP ) + " HP";
-	std::string bpNumbers = std::to_string( BP ) + "/" + std::to_string( MaxBP ) + " BP";
+	std::string numbers = std::to_string( HP ) + "/" + std::to_string( GetMaxHP() ) + " HP";
+	std::string bpNumbers = std::to_string( BP ) + "/" + std::to_string( GetMaxBP() ) + " BP";
 	SGD::Point pdraw;
 
 	if ( progress >= 100.0f )
@@ -234,7 +234,7 @@ void CombatPlayer::Render()
 	}
 
 	SGD::Color color;
-	float hppercentage = HP / (float)MaxHP;
+	float hppercentage = GetHP() / (float)(GetMaxHP() );
 	if ( hppercentage < .25f )
 	{
 		color = SGD::Color( 155, 0, 0 );
