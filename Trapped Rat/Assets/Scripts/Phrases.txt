@@ -210,13 +210,94 @@ Off
 Apagado
 On
 Sobre
-
-
-
-
-
-
-
-
-
+BP cost
+BP costo
+_Deals no initial damage,_Poisons all enemies.
+_Ofertas ningun dolor _inicial , venenos todos_ los enemigos
+_Dodge all incoming attacks until_the next turn.
+_Esquivar todos los ataques _entrantes hasta el_ siguiente turno.
+_Counter an attack directed at you_reducing the damage taken by half.
+_Contrarrestar un ataque dirigido a_ ti con la reduccion_ del dano recibido por medio .
+_Protects an ally, taking all_damage in place of the ally.
+_Protege un aliado, teniendo todo_ el dano en lugar del aliado.
+_Lowers the defense of a_single target.
+_Disminuye la defensa de_un solo objetivo.
+_Physical attack that deals Earth_Elemental damage to a single target.
+_El ataque fisico que inflige dano_elemental de la tierra a un solo objetivo .
+_Grants Fire Elemental damage to_basic attacks.
+_Otorga dano de Fuego Elemental_de ataques basicos.
+_Physical attack that deals Fire_Elemental damage to a single target.
+_El ataque fisico que inflige dano_ elemental de fuego a un solo objetivo.
+_Fire spikes form along Jeeves' body_dealing Fire damage to attackers.
+_Picos de incendios forman a lo largo_ del cuerpo Jeeves' inflige_ dano de Fuego a los atacantes.
+_A double attack that deals Fire_Elemental damage to a single target.
+_Un doble ataque que inflige dano_ elemental de fuego a_ un solo objetivo.
+_Water Elemental attack that deals_high damage to all enemies.
+_Agua ataque elemental que se ocupa_mucho dano a todos los enemigos.
+_Earth Elemental attack that deals_high damage to a single target.
+_Ataque elemental de la tierra que_ ocupa gran dano a un solo objetivo .
+_Reduces damage taken until the next_turn and regenerates health.
+_Reduce el dano recibido hasta la_proxima vez, y regenera la salud.
+_Fire Elemental attack that deals_low damage to a single target.
+_Fuego ataque elemental que se ocupa_poco dano a un solo objetivo.
+_Fire Elemental attack that deals_high damage to a single target.
+_Fuego ataque elemental que se ocupa de_alto dano a un solo objetivo.
+_Physical attack that deals_high damage to a single target.
+_Ataque fisico que ocupa gran dano_a un solo objetivo .
+_Physical attack that poisons_a single target.
+_Ataque fisico que envenena_un solo objetivo.
+_Dodge all incoming attacks until_the next turn.
+_Esquivar todos los ataques _entrantes hasta el siguiente turno.
+_Earth Elemental attack that deals_high damage to all enemies.
+_Ataque elemental de la tierra_que ocupa gran dano a_todos los enemigos.
+_Raises the defense of the_entire party.
+_Aumenta la defensa de_todo el grupo .
+_High damage Physical attack to a_single target, costing 20% health.
+_Alta dano de ataque fisico a un solo objetivo , que cuesta 20 % de salud.
+_Earth Elemental attack that deals_low damage to a single target.
+_Ataque elemental de la tierra que_ se ocupa poco dano a un solo objetivo .
+_Lowers the attack of a single target.
+_Disminuye el ataque de un solo objetivo.
+_Revives a fallen ally and restores_10% of their max health.
+_Revive un aliado caido y restaura_ 10 % de su salud maxima .
+_Physical attack that slows the_speed of a single target.
+_Ataque fisico que ralentiza la_velocidad de un solo objetivo.
+_Water Elemental attack that deals_low damage to all enemies.
+_Agua ataque elemental que se ocupa_poco dano a todos los enemigos .
+_Water Elemental attack that deals_low damage to a single target.
+_Agua ataque elemental que se ocupa_poco dano a un solo objetivo.
+_Increases the Speed of a single ally.
+_Aumenta la velocidad de un solo aliado.
+_Wind Elemental attack that deals_high damage to all enemies.
+_Viento ataque elemental que se_ ocupa de alto dano a todos los enemigos .
+_Wind Elemental attack that deals_high damage to a single target.
+_Viento ataque elemental que se ocupa_de alto dano a un solo objetivo.
+_Water Elemental attack that deals_high damage to a single target.
+_Agua ataque elemental que se ocupa_de alto dano a un solo objetivo.
+_Earth Elemental attack that deals_low damage to all enemies.
+_Ataque elemental de la tierra que_se ocupa poco dano a todos los enemigos .
+_Physical attack that deals Water_Elemental damage to a single target.
+_El ataque fisico que inflige dano_elemental de agua a un solo objetivo. 
+_Confuses a single target, causing_them to attack their party.
+_Confunde un solo objetivo, haciendo_que atacan su partido.
+_Restores a portion of the entire_party's health.
+_Restaura una parte de la salud_de todo el partido.
+_Physical attack that deals Wind_Elemental damage to a single target.
+_El ataque fisico que inflige dano_de viento Elemental a un solo objetivo .
+_Increases the Avoision of an ally.
+_Aumenta el Avoision de un aliado.
+_Restores a portion of a single_ally's health.
+_Restaura una parte de la salud_de un solo aliado.
+You have no Available Items
+No tiene articulos disponibles
+Heals the Target for_a Small Amount
+Sana al objetivo para a Cantidad pequena
+Heals the Target for_a Large Amount
+Sana al objetivo para una gran cantidad
+Restores a Small Amount of BP
+Restaura una pequena cantidad de BP
+Restores a Large Amount of BP
+Restaura una cantidad grande de BP
+Brings the target Back_from the Dead
+Trae el objetivo de entre los muertos
 
