@@ -135,7 +135,8 @@ void Ability::Render()
 		//abilityName = "Healing Light";
 		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
 		}
-	animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
+	//animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
+	RenderAnimation();
 	}
 void Ability::Update( float dt )
 	{
@@ -269,7 +270,8 @@ void Ability::CalcluateBpScaledCost( Character* owner )
 	bpCost += (int)( owner->GetLevel() * 0.5f );
 	std::string temp = std::to_string( bpCost );
 	temp += " BP cost" + noBPexplination;
-	explination = temp;
+	//explination = temp;
+	explination = noBPexplination;
 	}
 std::string Ability::GetAbilityName()
 	{
@@ -367,3 +369,33 @@ void Ability::SetAccess( bool combatUse )
 	{
 	access = combatUse;
 	}
+void Ability::RenderAnimation()
+{
+	//This Function is called in Render
+
+	//On Top Of Target
+	if (abilityName == "Burrow" || abilityName == "Earth Fang" || abilityName == "Water Fang" || abilityName == "Fire Fang" || abilityName == "Wind Fang" || abilityName == "Poison Fang")
+	{
+		animate->Render(Abiltarget->GetPosition().x, Abiltarget->GetPosition().y);
+	}
+	//Adjusted Up and Left
+	else if (abilityName == "Slow Claw")
+	{
+		animate->Render(Abiltarget->GetPosition().x - 32, Abiltarget->GetPosition().y - 32);
+	}
+	//At Left of Target
+	else if (abilityName == "Earth Fang" || abilityName == "Water Fang")
+	{
+		animate->Render(Abiltarget->GetPosition().x - 100, Abiltarget->GetPosition().y);
+	}
+	//Right of Target
+	else if (abilityName == "Counter Claw")
+	{
+		animate->Render(Abiltarget->GetPosition().x + 100, Abiltarget->GetPosition().y);
+	}
+	else
+	{
+		animate->Render(Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y);
+
+	}
+}
