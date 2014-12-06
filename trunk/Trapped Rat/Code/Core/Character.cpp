@@ -151,7 +151,10 @@ void Character::RemoveEffect( std::string effect )
 	for ( auto iter = GetEffects( ).begin( ); iter != GetEffects( ).end( ); iter++ )
 	{
 		if ( ( *iter )->GetName( ) == effect )
+		{
 			(*iter)->Clear( );
+			break;
+		}
 	}
 }
 
@@ -274,7 +277,7 @@ void Character::SetHP( int _hp )
 {
 	HP = _hp;
 	if ( HP / (float)(GetMaxHP()) < 0.1f && name == "Cecil")
-		{
+	{
 		if ( CecilPhase == 1 || CecilPhase == 2 )
 			{
 			HP = (int)(GetMaxHP() * 0.1f);

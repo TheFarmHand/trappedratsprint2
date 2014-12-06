@@ -43,7 +43,7 @@ void GamePlayState::Enter()
 
 
 	//is_tutorial = true;
-	testFinalFight = true;
+	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -182,6 +182,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
 	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
 	partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	partyAbilities.push_back( MasterAbilityList["Cover"] );
 	partyAbilities.push_back( MasterAbilityList["Tremor"] );
 	
 	p3->SetActive( false );
@@ -409,7 +410,7 @@ void GamePlayState::Enter()
 	Loading("Time to Play.......");
 
 	SGD::InputManager::GetInstance()->Update();
-	//state = Map;
+	state = Map;
 	}
 void const GamePlayState::Render()
 	{
@@ -677,6 +678,8 @@ void GamePlayState::Fight()
 					default:
 						break;
 					}
+				tempRandomEnemy->SetLevel(12);
+				tempRandomEnemy->SetHP(tempRandomEnemy->GetMaxHP());
 				tempRandomEnemy->SetOrderPosition( i );
 				characterOrderPosition.x = 600.0f;
 				characterOrderPosition.y = (float)( tempRandomEnemy->GetOrderPosition() * 100 + 150 + 16 );
@@ -1711,10 +1714,6 @@ std::vector<Items> * GamePlayState::GetInventory()
 
 
 // Grant Added This Stuff for Ternary
-void GamePlayState::AddToGauge( int val )
-{
-	ternary_gauge += val;
-}
 
 void GamePlayState::SetGauge( int val )
 {
@@ -1761,6 +1760,19 @@ void GamePlayState::ClearTernary( )
 	myTernTargets.abilities.clear( );
 	myTernTargets.targets.clear( );
 	myTernTargets.num_targets = 0;
+}
+
+bool GamePlayState::AddToGauge(int val)
+// Adds value to the gauge
+// returns true if gauge has been filled
+{
+	ternary_gauge += val;
+	if(ternary_gauge >= MAXTG)
+	{
+		ternary_gauge = MAXTG;
+		return true;
+	}
+	return false;
 }
 
 //std::vector<Items> * GamePlayState::GetInventory()
@@ -1905,4 +1917,13 @@ void GamePlayState::MapRender()
 	{
 		WorldMapAnsys->Render(townpoints[SelectedTown].x + 32, townpoints[SelectedTown].y + 32);
 	}
+}	
+
+void GamePlayState::AddItem( ItemType it )
+{
+	/*if(it == MaxRevive && inventory[it].item_count < MAXREV)
+		inventory[it].item_count++;
+	else if(inventory[i].item_count < MAXITEM)
+		inventory[it].item_count++;*/
+
 }

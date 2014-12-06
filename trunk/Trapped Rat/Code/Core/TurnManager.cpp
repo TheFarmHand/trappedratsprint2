@@ -35,6 +35,52 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	pPartMan = ParticleManager::GetInstance();
 	pPartMan->LoadEmitter( "../Trapped Rat/Assets/Scripts/bloodparticle.xml", "takedamage" );
 }
+
+void TurnManager::CombatLoot()
+{
+	GamePlayState* pGPS = GamePlayState::GetInstance();
+	int num_items = 0;
+	for ( int i = 0; i<EnemyUnits.size( ); i++ )
+	{
+		if ( rand( ) % 100 < 25 ) num_items++;
+	}
+
+	for(int i=0; i<num_items; i++)
+	{
+		// Roll for stuff!
+		int item = rand()%1000;
+
+		if(item < 300)	// Small HP
+		{
+			pGPS->AddItem(SmallHP);
+		}
+
+		else if (item < 600)	// Small BP
+		{
+			pGPS->AddItem(SmallBP);
+		}
+
+		else if (item < 700)	// Large HP
+		{
+			pGPS->AddItem(LargeHP);
+		}
+
+		else if (item < 800)	// Large BP
+		{
+			pGPS->AddItem(LargeBP);
+		}
+
+		else if (item < 950)	// Revive
+		{
+			pGPS->AddItem(Revive);
+		}
+		else if (item < 1000)	// Max Revive
+		{
+			pGPS->AddItem(MaxRevive);
+		}
+	}
+}
+
 void TurnManager::Update( float dt )
 {
 	//*Should be checked first each update, try not to add code here or before
@@ -42,9 +88,17 @@ void TurnManager::Update( float dt )
 	{
 		if (CheckWin())
 		{
-		// End of Combat, enemies have died
-			//Need to do exp gain and level increase calculations prior to this check
-	GamePlayState::GetInstance()->CheckAbilityUnlocked();
+			// End of Combat, enemies have died
+			// Need to do exp gain and level increase here
+
+			// Gain XP
+
+			// Gain Items
+			CombatLoot();
+			
+
+
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		EndCombat();
 		return;
 	}
@@ -185,6 +239,17 @@ bool TurnManager::getTurnPause()
 void TurnManager::Terminate()
 {
 	timeStop = false;
+	for(int i=0; i<AlliedUnits.size(); i++)
+	{
+		// Empty out active status effects on party
+		
+		while(AlliedUnits[i]->GetEffects().size() > 0)
+		{
+			auto iter = AlliedUnits[ i ]->GetEffects( ).begin( );
+			if((*iter) != nullptr)
+				(*iter)->Clear();
+		}
+	}
 	AlliedUnits.clear();
 	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
 		{

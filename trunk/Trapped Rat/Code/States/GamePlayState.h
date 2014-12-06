@@ -15,10 +15,19 @@
 #include "../Core/StatusEffectManager.h"
 
 #define MAXTG 250
+#define MAXITEM 10
+#define MAXREV 1
 
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia,Cuts };
 enum MenuSubStates{ None, Options, HowTo, Party, Shop };
+enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive } ;
+
+struct PlayerInventory
+{
+	Items item;
+	int item_count = 0;
+};
 
 class HUDItem;
 class GamePlayState :
@@ -76,6 +85,7 @@ class GamePlayState :
 	StatusEffectManager* pStatManager;
 
 	//items
+	
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	int gold = 50;
@@ -152,6 +162,8 @@ public:
 	void AddTarget( );
 	void CheckAbilityUnlocked( bool EOC = false );
 	
+	// Items
+	void AddItem( ItemType it );
 	
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
 	void AddToTB( Ability* abi, Character* target );
@@ -165,7 +177,7 @@ public:
 	void SetState(GPStates _state){ state = _state; }
 	void SetLastState(GPStates _state){ laststate = _state; }
 	void PauseGame();
-	void AddToGauge(int val);
+	bool AddToGauge(int val);
 	void SetGauge(int val);
 	void SetTernary(bool buul);
 };
