@@ -49,7 +49,13 @@ void TurnManager::Update( float dt )
 	if ( CheckLose() )
 	{
 		EndCombat();
-		GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
+		if (GamePlayState::GetInstance()->ignore_game_over)
+		{
+			GamePlayState::GetInstance()->ignore_game_over = false;
+			return;
+		}
+		else
+			GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
 		return;
 	}
 
