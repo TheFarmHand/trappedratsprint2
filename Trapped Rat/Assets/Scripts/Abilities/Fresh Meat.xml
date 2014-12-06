@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Fresh_Meat Name="Fresh Meat" Offensive="true">
+<Help Text="" />
+  <Affinity ElementalType="Fire" />
+  <StatusEffect Effect="AttackDown" />
+  <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="0" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="0" />
+    <BaseBP bp="0" />
+    <HPMod hp="0" />
+  </DamageInfo>
+</Fresh_Meat>

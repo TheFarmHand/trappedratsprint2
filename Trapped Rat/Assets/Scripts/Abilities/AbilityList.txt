@@ -1,4 +1,4 @@
-40
+48
 Fire Fang
 Water Fang
 Earth Fang
@@ -39,3 +39,11 @@ Geo Crush
 Tremor
 Quake
 Pinch
+Scratch
+Feral Bite
+Feathered Flurry
+Fresh Meat
+Bellows Blast
+Elemental Poison
+Stitch in Time
+Healing Light
