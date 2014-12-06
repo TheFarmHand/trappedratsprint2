@@ -71,9 +71,9 @@ void Character::Render()
 
 void Character::Attack( Character* owner, Character * target )
 {
-	int atk = target->GetStats( ).attack;
+	int atk = target->GetAttack();
 	int dmg = rand() % atk + atk;
-	dmg -= (int)(0.25f * target->GetStats().defense);
+	dmg -= (int)(0.25f * target->GetDefense());
 	if ( dmg <= 0 )
 		dmg = 0;
 	TurnManager::GetInstance( )->AttackTarget(owner, target, dmg);
@@ -95,9 +95,9 @@ void Character::TakeDamage( int dmg , bool firefall)
 		HP = 0;
 		alive = false;
 	}
-	if ( HP > MaxHP )
+	if ( HP > GetMaxHP() )
 	{
-		HP = MaxHP;
+		HP = GetMaxHP();
 	}
 	SGD::Point tempoffset;
 	tempoffset.y = 0;
@@ -158,6 +158,11 @@ void Character::React()
 
 }
 
+void Character::UpdateToLevel( )
+{
+	
+}
+
 //accessors
 std::string Character::GetName()
 {
@@ -167,6 +172,27 @@ Stats& Character::GetStats()
 {
 	return stats;
 }
+
+int Character::GetAttack()
+{
+	return stats.attack + ( int )( stats.attack_scale * level );
+}
+
+int Character::GetDefense( )
+{
+	return stats.defense + ( int )( stats.defense_scale * level );
+}
+
+int Character::GetMagic( )
+{
+	return stats.magic +(int)( stats.magic_scale * level );
+}
+
+int Character::GetAvoision( )
+{
+	return stats.avoision + ( int )( stats.avoision_scale * level );
+}
+
 int Character::GetLevel()
 {
 	return level;
@@ -245,8 +271,11 @@ void Character::SetHP( int _hp )
 	HP = _hp;
 	if ( HP == 0 )
 	{
-		// Set to dead
+		HP = 0;
 	}
+
+	if(HP > GetMaxHP())
+		HP = GetMaxHP();
 }
 void Character::SetMaxHP( int _max )
 {
@@ -255,6 +284,9 @@ void Character::SetMaxHP( int _max )
 void Character::SetBP( int _bp )
 	{
 	BP = _bp;
+	if(BP<0) BP = 0;
+	if(BP>GetMaxBP()) BP = GetMaxBP();
+	
 	}
 void Character::SetMaxBP( int _max )
 	{

@@ -185,9 +185,9 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 	else if (status && abilityName == "Acid Rain" )
 	{
 		float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus("Poison").GetTickDmg();
-		tickdmg *= (mgcMod * owner->GetStats().magic);
+		tickdmg *= (mgcMod * owner->GetMagic());
 		tickdmg *= 3;
-		tickdmg -= ( 0.25f * target->GetStats( ).defense + 0.25f * target->GetStats( ).magic );
+		tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic());
 		target->TakeDamage((int)tickdmg);
 	}
 
@@ -251,13 +251,13 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 
 	if ( offensive )
 		{
-		formulaTotal = ( atkMod * owner->GetStats().attack + mgcMod * owner->GetStats().magic ) - ( 0.25f * target->GetStats().defense + 0.25f * target->GetStats().magic );
+		formulaTotal = ( atkMod * owner->GetAttack() + mgcMod * owner->GetMagic() ) - ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic() );
 		if ( formulaTotal <= 0.0f )
 			formulaTotal = 0.0f;
 		}
 	else if ( healing )
 		{
-		formulaTotal = ( owner->GetMaxHP() * hpMod ) + ( mgcMod * owner->GetStats().magic );
+		formulaTotal = ( owner->GetMaxHP() * hpMod ) + ( mgcMod * owner->GetMagic());
 		return;
 		}
 	if ( weak )

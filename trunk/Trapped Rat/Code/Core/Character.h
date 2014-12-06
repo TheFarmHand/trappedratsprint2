@@ -61,10 +61,15 @@ public:
 	void RemoveEffect(std::string effect);
 
 	bool virtual HasEffect(std::string effect);
+	void virtual UpdateToLevel();	// Sets current stats to appropriate stats according to their level
 
 	//accessors
 	std::string GetName();
 	Stats& GetStats();
+	int GetAttack();
+	int GetDefense();
+	int GetAvoision();
+	int GetMagic();
 	int GetLevel();
 	int GetHP();
 	int GetMaxHP();

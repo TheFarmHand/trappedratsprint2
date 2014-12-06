@@ -168,19 +168,19 @@ void CombatPlayer::Render()
 	sp << "Progress: " << progress;
 	GameData::GetInstance()->GetFont()->DrawString( sp.str(), position.x + 50, position.y - 10, { 255, 0, 0 } );
 	std::ostringstream sa;
-	sa << "Attack: " << stats.attack;
+	sa << "Attack: " << GetAttack();
 	GameData::GetInstance()->GetFont()->DrawString( sa.str(), position.x + 50, position.y + 5, { 0, 0, 0 } );
 	std::ostringstream sd;
-	sd << "Defense: " << stats.defense;
+	sd << "Defense: " << GetDefense();
 	GameData::GetInstance()->GetFont()->DrawString( sd.str(), position.x + 50, position.y + 15, { 0, 0, 0 } );
 	std::ostringstream sm;
-	sm << "Magic: " << stats.magic;
+	sm << "Magic: " << GetMagic();
 	GameData::GetInstance()->GetFont()->DrawString( sm.str(), position.x + 50, position.y + 25, { 0, 0, 0 } );
 	std::ostringstream sav;
-	sav << "Avoision: " << stats.avoision;
+	sav << "Avoision: " << GetAvoision();
 	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
 	std::ostringstream ss;
-	ss << "Speed: " << speed;
+	ss << "Speed: " << GetSpeed();
 	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
 
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 301, 451 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
@@ -271,7 +271,7 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 {
 	if ( target != nullptr )
 	{
-		int atk = target->GetStats().attack;
+		int atk = target->GetAttack();
 		int dmg = rand() % atk + atk;
 		dmg -= (int)(0.25f * target->GetStats().defense);
 		if ( dmg <= 0 )
@@ -1221,40 +1221,36 @@ void CombatPlayer::TernaryBlast( float dt )
 	}
 }
 
-//int CombatPlayer::GetXP( )
-//{
-//	return XP;
-//}
-//
-//int CombatPlayer::GetLevel( )
-//{
-//	return level;
-//}
-//
+int CombatPlayer::GetXP( )
+{
+	return XP;
+}
+
+int CombatPlayer::GetLevel( )
+{
+	return level;
+}
+
 //int CombatPlayer::GetNextlvl( )
 //{
 //	return nextlvl;
 //}
-//
-//void CombatPlayer::AddXP( int xp )
-//{
-//	XP += xp;
-//	if(XP > nextlvl)
-//	{
-//		LevelUp();
-//	}
-//}
-//
-//void CombatPlayer::LevelUp( )
-//{
-//	
-//	level++;
-//	XP -= nextlvl;
-//	nextlvl = level * 150 + 100;
-//	// Add new Abilities if relevant
-//	if(level%2)
-//		AddAbility();
-//}
+
+void CombatPlayer::AddXP( int xp )
+{
+	XP += xp;
+	if(XP >= nextlvl)
+	{
+		LevelUp();
+	}
+}
+
+void CombatPlayer::LevelUp( )
+{
+	level++;
+	XP -= nextlvl;
+	nextlvl = level * 150 + 100;
+}
 
 
 

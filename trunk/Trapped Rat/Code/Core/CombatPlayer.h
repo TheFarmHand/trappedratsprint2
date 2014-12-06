@@ -40,13 +40,13 @@ public:
 
 	// XP functions
 
-	/*int GetXP( );
+	int GetXP( );
 	int GetLevel( );
 	int GetNextlvl( );
 
 	void AddXP( int xp );
 	void AddAbility( );
-	void LevelUp( );*/
+	void LevelUp( );
 
 	// End XP Functions
 
@@ -66,14 +66,9 @@ private:
 
 	// Leveling Stuff
 
-	//int XP;
-	//int level;
-	//int nextlvl;
-
-				
-
+	int XP;
+	int nextlvl;
 	// Increases XP by the value, handling level up and carry over XP
-	// increase 1
 	// Changes the amount of xp needed to the next level
 	
 
