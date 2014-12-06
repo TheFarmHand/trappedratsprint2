@@ -8,6 +8,8 @@ private:
 	AnimationSystem* ansys = nullptr;
 	int xp_value;
 	//int level;
+
+	
 	
 protected:
 	float pausetimer;
@@ -32,6 +34,15 @@ public:
 
 	void SetLevel(int lev);
 	void SetXPVal(int val);
+
+	//Final boss fight
+	void CecilAI( int phase );
+	void CecilPhaseOne();
+	void CecilPhaseTwo();
+	void CecilPhaseThree();
+	void JaneAI();
+	void JohnAI();
+
 };
 
 

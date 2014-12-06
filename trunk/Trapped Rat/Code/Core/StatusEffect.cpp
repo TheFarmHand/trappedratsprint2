@@ -265,7 +265,7 @@ void StatusEffect::Clear()
 	}
 	if(name=="Guarding")
 	{
-		guard_caster->RemoveEffect("Cover");
+		guard_caster->RemoveEffect("Guarding");
 	}
 	else
 	{

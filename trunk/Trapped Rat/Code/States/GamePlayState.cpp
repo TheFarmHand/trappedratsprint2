@@ -43,7 +43,7 @@ void GamePlayState::Enter()
 
 
 	//is_tutorial = true;
-	//testFinalFight = true;
+	testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -133,14 +133,14 @@ void GamePlayState::Enter()
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
 	partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
-	p1->SetActive( true );
+	p1->SetActive( false );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
 
@@ -154,14 +154,14 @@ void GamePlayState::Enter()
 	p2->SetPosition( characterOrderPosition );
 	p2->SetSize( { 64, 64 } );
 	partyAbilities.push_back( MasterAbilityList["Puddle"] );
+	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
+	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
+	partyAbilities.push_back( MasterAbilityList["Torrent"] );
+	partyAbilities.push_back( MasterAbilityList["Flood"] );
 	partyAbilities.push_back( MasterAbilityList["Squirt"] );
 	partyAbilities.push_back( MasterAbilityList["Dissolve"] );
 	partyAbilities.push_back( MasterAbilityList["Splash"] );
-	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
-	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 
-	partyAbilities.push_back( MasterAbilityList["Torrent"] );
-	partyAbilities.push_back( MasterAbilityList["Flood"] );
 	p2->SetActive( true );
 	p2->InitializeAbilities( partyAbilities );
 	Party.push_back( p2 );
@@ -175,15 +175,16 @@ void GamePlayState::Enter()
 	characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
 	p3->SetPosition( characterOrderPosition );
 	p3->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
-	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
-	partyAbilities.push_back( MasterAbilityList["Rampart"] );
-	partyAbilities.push_back( MasterAbilityList["Tremor"] );
 	partyAbilities.push_back( MasterAbilityList["Cover"] );
 	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
 	partyAbilities.push_back( MasterAbilityList["Pinch"] );
 	partyAbilities.push_back( MasterAbilityList["Quake"] );
-	p3->SetActive( true );
+	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
+	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
+	partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	partyAbilities.push_back( MasterAbilityList["Tremor"] );
+	
+	p3->SetActive( false );
 	p3->InitializeAbilities( partyAbilities );
 	Party.push_back( p3 );
 
@@ -191,42 +192,43 @@ void GamePlayState::Enter()
 
 	CombatPlayer* p4 = nullptr;
 	p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
-	p4->SetOrderPosition( 0 );
+	p4->SetOrderPosition( 1 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
 	p4->SetPosition( characterOrderPosition );
 	p4->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
 	partyAbilities.push_back( MasterAbilityList["Zephyr"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
+	partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
 	partyAbilities.push_back( MasterAbilityList["Second Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Tailwind"] );
-	partyAbilities.push_back( MasterAbilityList["Tornado"] );
 	partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
+	partyAbilities.push_back( MasterAbilityList["Tailwind"] );
 	partyAbilities.push_back( MasterAbilityList["Tempest"] );
+	partyAbilities.push_back( MasterAbilityList["Tornado"] );
+	partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
 	p4->InitializeAbilities( partyAbilities );
-	p4->SetActive( false );
+	p4->SetActive( true );
 	Party.push_back( p4 );
 
 	partyAbilities.clear();
 
 	CombatPlayer* p5 = nullptr;
 	p5 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
-	p5->SetOrderPosition( 0 );
+	p5->SetOrderPosition( 2 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p5->GetOrderPosition() * 100 + 150 );
 	p5->SetPosition( characterOrderPosition );
 	p5->SetSize( { 64, 64 } );
 	partyAbilities.push_back( MasterAbilityList["Collapse"] );
+	partyAbilities.push_back( MasterAbilityList["Emblazon"] );
+	partyAbilities.push_back( MasterAbilityList["Firefall"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
 	partyAbilities.push_back( MasterAbilityList["Ignite"] );
 	partyAbilities.push_back( MasterAbilityList["Scorch"] );
 	partyAbilities.push_back( MasterAbilityList["Rib-a-Rang"] );
-	partyAbilities.push_back(MasterAbilityList["Emblazon"]);
-	partyAbilities.push_back( MasterAbilityList["Firefall"] );
-	partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
+	
 	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
 	p5->InitializeAbilities( partyAbilities );
-	p5->SetActive( false );
+	p5->SetActive( true );
 	Party.push_back( p5 );
 
 	partyAbilities.clear();
@@ -248,6 +250,8 @@ void GamePlayState::Enter()
 		Enemy* janeFinal = nullptr;
 		janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
 		janeFinal->SetOrderPosition( 0 );
+		janeFinal->SetLiving( false );
+		janeFinal->SetHP( 0 );
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
 		janeFinal->SetPosition( characterOrderPosition );
@@ -255,6 +259,8 @@ void GamePlayState::Enter()
 		Enemy* johnFinal = nullptr;
 		johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
 		johnFinal->SetOrderPosition( 2 );
+		johnFinal->SetLiving( false );
+		johnFinal->SetHP( 0 );
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
 		johnFinal->SetPosition( characterOrderPosition );
@@ -267,6 +273,13 @@ void GamePlayState::Enter()
 		for ( unsigned int i = 0; i < Party.size(); i++ )
 			{
 			Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+			Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
 			}
 		TurnManager::GetInstance()->Initialize( Party, bosses );
 		for ( size_t i = 0; i < Party.size(); i++ )
@@ -342,7 +355,14 @@ void GamePlayState::Enter()
 
 		for (unsigned int i = 0; i < tempParty.size(); i++)
 		{
-			Party[i]->GetAbility(0)->CalcluateBpScaledCost(Party[i]);
+		Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+		Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
 		}
 		TurnManager::GetInstance()->Initialize(Parents, tutorialenemy);
 		for (size_t i = 0; i < tempParty.size(); i++)
@@ -384,12 +404,12 @@ void GamePlayState::Enter()
 	pStatManager->Initialize();
 
 	CutsceneManager::GetInstance()->Initialize();
-	/*state = GPStates::Cuts;
-	CutsceneManager::GetInstance()->Play( 0 );*/
+	//state = GPStates::Cuts;
+	//CutsceneManager::GetInstance()->Play( 0 );
 	Loading("Time to Play.......");
 
 	SGD::InputManager::GetInstance()->Update();
-	state = Map;
+	//state = Map;
 	}
 void const GamePlayState::Render()
 	{
@@ -1225,9 +1245,17 @@ void GamePlayState::CombatUpdate( float dt )
 		{
 		Party[0]->SetHP( Party[0]->GetMaxHP() );
 		}
-	if ( input->IsKeyPressed( SGD::Key::Zero ) )
+	if ( input->IsKeyPressed( SGD::Key::Z ) )
 		{
 		Party[0]->SetProgress( 100.0f );
+		}
+	if ( input->IsKeyPressed( SGD::Key::X ) )
+		{
+		Party[1]->SetProgress( 100.0f );
+		}
+	if ( input->IsKeyPressed( SGD::Key::C ) )
+		{
+		Party[2]->SetProgress( 100.0f );
 		}
 	if ( input->IsKeyPressed( SGD::Key::L ) )
 		{

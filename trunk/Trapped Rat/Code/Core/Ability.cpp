@@ -168,13 +168,15 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		int dmg = (int)-formulaTotal;
 		if(abilityName == "Whispering Wind")
 			{
-			if(ternary) dmg = (int)(dmg * 1.75f);
-			target->TakeDamage( dmg );
+			if ( ternary )
+				dmg = (int)( dmg * 1.75f );
 			}
-		else if (abilityName == "Second Wind")
+		else if ( abilityName == "Second Wind" )
 			{
-			dmg*= 2;
+			if (ternary)
+				dmg *= 2;
 			}
+			target->TakeDamage( dmg );
 		}
 	if ( status && statusName == "Cover" )
 	{

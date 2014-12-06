@@ -22,7 +22,6 @@ protected:
 	int level;
 	int HP;
 	int MaxHP;
-	int BaseHP;
 	int BP;
 	int MaxBP;
 	float speed;
@@ -61,19 +60,18 @@ public:
 	void RemoveEffect(std::string effect);
 
 	bool virtual HasEffect(std::string effect);
-	void virtual UpdateToLevel();	// Sets current stats to appropriate stats according to their level
+	void UpdateToLevel();
 
 	//accessors
 	std::string GetName();
 	Stats& GetStats();
 	int GetAttack();
 	int GetDefense();
-	int GetAvoision();
 	int GetMagic();
+	int GetAvoision();
 	int GetLevel();
 	int GetHP();
 	int GetMaxHP();
-	int GetBaseHP();
 	int GetBP();
 	int GetMaxBP();
 	float GetSpeed();
@@ -97,7 +95,6 @@ public:
 	void SetLevel(int _level);
 	void SetHP(int _hp);
 	void SetMaxHP(int _max);
-	void SetBaseBP( int _base );
 	void SetBP( int _bp );
 	void SetMaxBP( int _max );
 	void SetSpeed(float _speed);
@@ -110,7 +107,9 @@ public:
 	void SetPortrait(SGD::HTexture _port);
 	void SetTimelineAnimation(SGD::HTexture _timeline);
 
-
-
+	//Cecil fight variables
+	int CecilPhase = 1;
+	int JaneHit = 0;
+	int JohnHit = 0;
 };
 

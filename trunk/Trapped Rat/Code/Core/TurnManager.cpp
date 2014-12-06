@@ -137,7 +137,8 @@ void TurnManager::Render()
 	}
 	for ( unsigned int i = 0; i < EnemyUnits.size(); ++i )
 	{
-		EnemyUnits[ i ]->Render();
+		if ( EnemyUnits[i]->isAlive() )
+			EnemyUnits[ i ]->Render();
 	}
 	//*
 	
@@ -152,7 +153,7 @@ void TurnManager::Render()
 	
 		if (elementalgraphicactive)
 		{
-			SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
+			//SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
 		}
 	
 
