@@ -275,7 +275,7 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 {
 	if ( target != nullptr )
 	{
-		int atk = target->GetAttack();
+		int atk = owner->GetAttack();
 		int dmg = rand() % atk + atk;
 		dmg -= (int)(0.25f * target->GetStats().defense);
 		if ( dmg <= 0 )
@@ -1117,6 +1117,7 @@ void CombatPlayer::SelectingItems( float dt )
 	help->UpdateSelection(2, helpobject);
 	if (selected && item_choose != nullptr )
 	{
+		help->UpdateSelection(4);
 		chosen = item_choose->chosen;
 		delete item_choose;
 		item_choose = nullptr;

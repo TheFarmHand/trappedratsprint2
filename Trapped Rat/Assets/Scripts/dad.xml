@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Cecil</Name>
-  <Side>Enemy</Side>
+  <Name>Dad</Name>
+  <Side>Ally</Side>
   <Element>Wind</Element>
-  <Type>Enemy</Type>
+  <Type>Ally</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>150</Base>
+      <Base>20</Base>
       <Scale>0</Scale>
     </HitPoints>
     <BattlePoints>
@@ -15,7 +15,7 @@
       <Scale>0</Scale>
     </BattlePoints>
     <Attack>
-      <Base>20</Base>
+      <Base>1</Base>
       <Scale>0</Scale>
     </Attack>
     <Magic>
@@ -35,11 +35,11 @@
       <Scale>0</Scale>
     </Avoision>
   </Stats>
-  <Level>1</Level>
+  <Level>0</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>CecilBattle.xml</Animation>
+  <Animation>RatAnimBattle.xml</Animation>
 </Character>

@@ -84,7 +84,7 @@ class GamePlayState :
 
 	//tutorial stuff
 	bool is_tutorial = false;
-	
+	std::vector<Enemy*> tutorialenemy;
 	std::vector<CombatPlayer*> Parents;
 	int oldindex = -1;
 public:
