@@ -460,7 +460,7 @@ void GamePlayState::Fight()
 
 			for ( int i = 0; i < randomEnemyParySize; i++ )
 				{
-				randomEnemyIndex = rand() % 2;
+				randomEnemyIndex = rand() % 7;
 
 				switch ( randomEnemyIndex )
 					{
@@ -469,6 +469,24 @@ void GamePlayState::Fight()
 						break;
 					case 1:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cat.xml" );
+						break;
+					case 2:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Raven.xml" );
+						break;
+					case 3:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Chef.xml" );
+						break;
+					case 4:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Blacksmith.xml" );
+						break;
+					case 5:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Shopkeeper.xml" );
+						break;
+					case 6:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Tailor.xml" );
+						break;
+					case 7:
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priest.xml" );
 						break;
 					default:
 						break;

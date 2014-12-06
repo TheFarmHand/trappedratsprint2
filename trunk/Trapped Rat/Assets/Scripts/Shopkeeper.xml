@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Dog</Name>
+  <Name>Shopkeeper</Name>
   <Side>Common</Side>
-  <Element>Wind</Element>
+  <Element>Water</Element>
   <Type>Enemy</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>17</Base>
-      <Scale>3</Scale>
+      <Base>15</Base>
+      <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
       <Base>0</Base>
-      <Scale>0</Scale>
+      <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>6</Base>
+      <Base>8</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
-      <Base>5</Base>
+      <Base>7</Base>
       <Scale>0.3</Scale>
     </Magic>
     <Defense>
-      <Base>5</Base>
+      <Base>9</Base>
       <Scale>0.7</Scale>
     </Defense>
     <Speed>
