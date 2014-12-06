@@ -48,7 +48,7 @@ void GamePlayState::Enter()
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
-	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+	//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	Loading("Loading Images...");
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/tempcombathud.png");
 	enemytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/enemytargeticon.png" );
@@ -1835,19 +1835,24 @@ void GamePlayState::MapUpdate(float dt)
 		switch (SelectedTown)
 		{
 		case 0: //Wind
-			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			Loading("Loading Map");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\WindTown.xml");
 			break;
 		case 1://Fire
-			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			Loading("Loading Map");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\firetown.xml");
 			break;
 		case 2://Earth
-			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			Loading("Loading Map");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\EarthTown.xml");
 			break;
 		case 3://Water
-			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			Loading("Loading Map");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\WaterTown.xml");
 			break;
 		case 4://Final Town
-			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+			Loading("Loading Map");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\herotown.xml");
 			break;
 		default:
 			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
