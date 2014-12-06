@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Mom and Dad are in a 
+_fight with a lowly adventurer!
+
+</Words>
+  </Message>
+  <Message>
+    <Name>Help Text</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>At the top of the screen you will see a 
+_box that will explain things 
+_to you as you navigate!</Words>
+  </Message>
+  <Message>
+    <Name>Action</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>To perfom an action navigate 
+_the menu to the left of the screen!</Words>
+  </Message>
+  <Message>
+    <Name>Abilities</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Each character has a set of 
+_8 unique abilities that you unlock 
+_as you level up!
+_Each Ability draws from your 
+_Battle Point Pool!
+_So be careful!</Words>
+  </Message>
+  <Message>
+    <Name>Items</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>You can use Items in you turn to 
+_help your chances to survive.
+_Items can be found while you 
+_adventure or can be bought from the shop!</Words>
+  </Message>
+  <Message>
+    <Name>Run</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>If  you feel that you are not up to 
+_complete a fight...
+you can select run 
+_and attempt to escape!</Words>
+  </Message>
+  <Message>
+    <Name>Finish</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Now finish this fight! 
+_Ratsputin is probably wondering
+_where his parents are!</Words>
+  </Message>
+</Dialogue>

@@ -1153,10 +1153,15 @@ void CombatPlayer::SelectingItems( float dt )
 		delete item_choose;
 		item_choose = nullptr;
 		GameData::GetInstance()->PlaySelectionChange();
-		states = 0;
-		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
-		SetSelection( 0 );
+		states = 0;
+		TurnManager::GetInstance()->setProgressFullReached(false);
+		//pTurn->setTimeStop( false );
+		TurnManager::GetInstance()->setTurnPause(true);
+		hudSelection = 0;
+		help->UpdateSelection(5);
+		SetSelection(0);
+		SetHomeButtons();
 	}
 	
 

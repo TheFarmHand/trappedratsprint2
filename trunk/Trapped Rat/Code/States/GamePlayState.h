@@ -84,9 +84,11 @@ class GamePlayState :
 
 	//tutorial stuff
 	bool is_tutorial = false;
+	
 	std::vector<CombatPlayer*> Parents;
 	int oldindex = 0;
 public:
+	bool ignore_game_over = false;
 	bool AbilityUsed;
 	float abilityTimer;
 	Ability* CurrentAbilityUsed;
