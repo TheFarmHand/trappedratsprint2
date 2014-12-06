@@ -27,5 +27,6 @@ struct ItemSelection
 	bool Update(float dt);
 	void Render();
 	void CollectItem(int _index);
+	std::string GetCurrentExplanation();
 
 };

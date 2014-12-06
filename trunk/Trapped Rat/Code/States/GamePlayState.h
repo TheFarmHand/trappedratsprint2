@@ -86,7 +86,7 @@ class GamePlayState :
 	bool is_tutorial = false;
 	
 	std::vector<CombatPlayer*> Parents;
-	int oldindex = 0;
+	int oldindex = -1;
 public:
 	bool ignore_game_over = false;
 	bool AbilityUsed;

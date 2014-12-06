@@ -145,6 +145,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Splash"] );
 	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
 	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
+
 	partyAbilities.push_back( MasterAbilityList["Torrent"] );
 	partyAbilities.push_back( MasterAbilityList["Flood"] );
 	p2->SetActive( true );
@@ -278,7 +279,7 @@ void GamePlayState::Enter()
 		std::vector<Enemy*> tempEnemy;
 		std::vector<CombatPlayer*> tempParty;
 		CombatPlayer* p6 = nullptr;
-		p6 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p6 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/mom.xml"));
 		p6->SetOrderPosition(0);
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(p6->GetOrderPosition() * 100 + 150);
@@ -299,7 +300,7 @@ void GamePlayState::Enter()
 		partyAbilities.clear();
 
 		CombatPlayer* p7 = nullptr;
-		p7 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
+		p7 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/dad.xml"));
 		p7->SetOrderPosition(1);
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(p7->GetOrderPosition() * 100 + 150);
@@ -876,21 +877,18 @@ void GamePlayState::MenuUpdate( float dt )
 				}
 				else if (select_new)
 				{
-					if (Party[character_index]->GetAbility(menuindex)->GetUnlocked() )
-					{
+					
 						//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
 						Ability* temp = Party[character_index]->GetAbility(menuindex);
 						Ability *temp2 = Party[character_index]->GetAbility(oldindex);
 						Party[character_index]->SetAbility(menuindex, temp2);
 						Party[character_index]->SetAbility(oldindex, temp);
-					}
-					else
-						return;
+					
 
 					select_new = false;
 					selecting_ability = false;
 					menuindex = character_index;
-					oldindex = 0;
+					oldindex = -1;
 				}
 				break;
 			default:
@@ -1125,13 +1123,22 @@ void GamePlayState::MenuRender()
 				{
 
 					std::string name = Party[character_index]->GetAbility(i)->GetAbilityName();
-					if (Party[character_index]->GetAbility(i)->GetUnlocked())
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155, 155, 155 }, 1.5f);
-					else
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+			if (oldindex == i)
+			{
+				GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155, 155, 155 }, 1.5f);
+			}
+			else
+			{
+				GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+			}
+					
+						
+					
 					
 				}
 				graphics->DrawTextureSection(cursor, { 400.0f, 160.0f + (menuindex * 35) }, { 0, 0, 238, 73 });
+				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);
+				
 			}
 			else
 			{
@@ -1141,12 +1148,12 @@ void GamePlayState::MenuRender()
 				{
 
 					std::string name = Party[menuindex]->GetAbility(i)->GetAbilityName();
-					if (Party[menuindex]->GetAbility(i)->GetUnlocked())
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155,155,155 }, 1.5f);
-					else
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+					
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0,0,0 }, 1.5f);
+					
 				}
 				graphics->DrawTextureSection(cursor, { 10.0f, 165.0f + (menuindex * 55) }, { 0, 0, 238, 73 });
+				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);
 			}
 			break;
 		default:
@@ -1154,6 +1161,7 @@ void GamePlayState::MenuRender()
 		}
 
 	}
+	
 void GamePlayState::CombatUpdate( float dt )
 	{
 
