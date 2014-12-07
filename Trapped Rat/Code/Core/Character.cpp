@@ -315,12 +315,12 @@ void Character::SetHP( int _hp )
 	{
 		HP = 0;
 		alive = false;
-		if ( name == "Jane" )
+		if ( name == "Jane" && isAlive())
 			{
 			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
 			JaneDead = true;
 			}
-		else if ( name == "John" )
+		else if ( name == "John" && isAlive())
 			{
 			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
 			JohnDead = true;

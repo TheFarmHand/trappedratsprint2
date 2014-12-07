@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Feathered_Flurry Name="Flame Spout" Offensive="false">
+<Feathered_Flurry Name="Flame Spout" Offensive="true">
 <Help Text="" />
-  <Affinity ElementalType="MagicalReflect" />
+  <Affinity ElementalType="Fire" />
   <StatusEffect Effect="None" />
   <AreaOfEffect AOE="false" />
   <Self selfTarget="false" />
