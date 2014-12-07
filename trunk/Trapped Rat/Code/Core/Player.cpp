@@ -348,7 +348,8 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Firefall"]);
 		partyAbilities.push_back(MasterAbilityList["Fire Spikes"]);
 		partyAbilities.push_back(MasterAbilityList["Incinerate"]);
-		jeeves->InitializeAbilities(partyAbilities);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
+		jeeves->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			jeeves->SetActive(false);
 		else
@@ -378,12 +379,12 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 		partyAbilities.push_back(MasterAbilityList["Torrent"]);
 		partyAbilities.push_back(MasterAbilityList["Flood"]);
-
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
+		slippy->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			slippy->SetActive(false);
 		else
 			slippy->SetActive(true);
-		slippy->InitializeAbilities(partyAbilities);
 		GamePlayState::GetInstance()->AddToParty(slippy);
 		UnregisterFromEvent("GainSlippy");
 	}
@@ -408,11 +409,12 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Geo Crush"]);
 		partyAbilities.push_back(MasterAbilityList["Pinch"]);
 		partyAbilities.push_back(MasterAbilityList["Quake"]);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
+		checkers->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			checkers->SetActive(false);
 		else
 			checkers->SetActive(true);
-		checkers->InitializeAbilities(partyAbilities);
 		GamePlayState::GetInstance()->AddToParty(checkers);
 		UnregisterFromEvent("GainCheckers");
 	}
@@ -437,6 +439,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back( MasterAbilityList["Tornado"] );
 		partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
 		partyAbilities.push_back(MasterAbilityList["Tempest"]);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		biggs->InitializeAbilities(partyAbilities);
 		if (GamePlayState::GetInstance()->GetPartySize() > 3)
 			biggs->SetActive(false);

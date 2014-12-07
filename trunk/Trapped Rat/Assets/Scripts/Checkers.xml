@@ -11,15 +11,15 @@
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>120</Base>
+      <Base>12</Base>
       <Scale>1</Scale>
     </BattlePoints>
     <Attack>
-      <Base>100</Base>
+      <Base>8</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
-      <Base>17</Base>
+      <Base>7</Base>
       <Scale>0.3</Scale>
     </Magic>
     <Defense>
@@ -27,7 +27,7 @@
       <Scale>0.7</Scale>
     </Defense>
     <Speed>
-      <Base>50</Base>
+      <Base>8</Base>
       <Scale>0.5</Scale>
     </Speed>
     <Avoision>
@@ -35,7 +35,7 @@
       <Scale>0.2</Scale>
     </Avoision>
   </Stats>
-  <Level>14</Level>
+  <Level>1</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>
