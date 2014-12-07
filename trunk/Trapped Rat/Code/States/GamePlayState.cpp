@@ -2170,12 +2170,6 @@ void GamePlayState::SummaryUpdate(float dt)
 			}
 			guards.clear();
 
-			for (size_t i = 0; i < m_vhuditems.size(); i++)
-			{
-				delete m_vhuditems[i];
-			}
-			m_vhuditems.clear();
-
 
 			TileSystem::GetInstance()->Exit();
 
@@ -2204,6 +2198,11 @@ void GamePlayState::SummaryUpdate(float dt)
 		{
 			// Open the keep code goes here
 		}
+		for (size_t i = 0; i < m_vhuditems.size(); i++)
+		{
+			delete m_vhuditems[i];
+		}
+		m_vhuditems.clear();
 	}
 
 }
