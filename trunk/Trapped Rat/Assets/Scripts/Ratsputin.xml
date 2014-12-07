@@ -27,8 +27,8 @@
       <Scale>0.3</Scale>
     </Defense>
     <Speed>
-      <Base>90</Base>
-      <Scale>0.5</Scale>
+      <Base>32</Base>
+      <Scale>0.25</Scale>
     </Speed>
     <Avoision>
       <Base>5</Base>

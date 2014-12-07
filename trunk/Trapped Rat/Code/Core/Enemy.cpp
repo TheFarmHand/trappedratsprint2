@@ -167,7 +167,12 @@ void Enemy::Update( float dt )
 						return;
 						}
 
-					Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
+					int atk = GetAttack();
+					int dmg = rand() % atk + atk;
+					dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[living[pool]]->GetDefense() );
+					if ( dmg <= 0 )
+						dmg = 0;
+					TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[living[pool]], dmg);
 					}
 				}
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
