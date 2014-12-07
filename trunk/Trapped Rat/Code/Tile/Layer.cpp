@@ -4,6 +4,8 @@
 #include "..\SGD Wrappers\SGD_GraphicsManager.h"
 #include "..\Core\GameData.h"
 #include "..\tinyxml\tinyxml.h"
+#include "../Core/Guard.h"
+#include "../States/GamePlayState.h"
 
 void Layer::Initialize( const char* path)
 	{
@@ -36,11 +38,9 @@ void Layer::Initialize( const char* path)
 	TiXmlElement* tileSize = tileset->NextSiblingElement( "tilesize" );
 	tileSize->Attribute( "height", &tileHeight );
 	tileSize->Attribute( "width", &tileWidth );
-
 	TiXmlElement* player = tileSize->NextSiblingElement( "player" );
 	int x, y;
 	SGD::Point position;
-
 	player->Attribute( "startX", &x );
 	player->Attribute( "startY", &y );
 	position.x = (float)x + GameData::GetInstance()->GetOverworldPlayer()->GetSize().width / 2;
@@ -56,12 +56,19 @@ void Layer::Initialize( const char* path)
 		position.y = (float)y;
 
 		//Change to guard objects
-		//playa = new Player();
-		//playa->SetPosition( position );
+		Guard * temp = new Guard();
+		temp->SetPosition(position);
 
 		//Read in waypoints for each guard
-		//while(waypoint != nullptr)
-
+		TiXmlElement * waypoint = guard->FirstChildElement("waypoint");
+		while(waypoint != nullptr)
+		{
+			int way = 0;
+			waypoint->Attribute("tilePoint", &way);
+			temp->AddWayPoint(way);
+			waypoint = waypoint->NextSiblingElement();
+		}
+		GamePlayState::GetInstance()->AddGuard(temp);
 		guard = guard->NextSiblingElement( "guard" );
 		}
 

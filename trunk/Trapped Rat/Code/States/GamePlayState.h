@@ -14,6 +14,7 @@
 #include "../Core/Ability.h"
 #include "../Core/Bars.h"
 #include "../Core/StatusEffectManager.h"
+#include "../Core/Guard.h"
 
 #define MAXTG 250
 #define MAXITEM 10
@@ -55,7 +56,7 @@ class GamePlayState :
 	std::vector<HUDItem*> m_vhuditems;
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
 	Dialogue * dialogue = nullptr;
-
+	std::vector<Guard*> guards;
 	SGD::HAudio m_Audio;
 	SGD::HAudio m_overAudio;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
@@ -185,5 +186,6 @@ public:
 	bool AddToGauge(int val);
 	void SetGauge(int val);
 	void SetTernary(bool buul);
+	void AddGuard(Guard* _guard){ guards.push_back(_guard); }
 };
 

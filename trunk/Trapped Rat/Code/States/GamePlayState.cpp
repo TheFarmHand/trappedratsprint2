@@ -127,7 +127,7 @@ void GamePlayState::Enter()
 	CombatPlayer* p1 = nullptr;
 	
 	p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
-	p1->SetOrderPosition(1);
+	p1->SetOrderPosition(0);
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p1->GetOrderPosition() * 100 + 150 );
 	p1->SetPosition( characterOrderPosition );
@@ -149,7 +149,7 @@ void GamePlayState::Enter()
 
 	CombatPlayer* p2 = nullptr;
 	p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Slippy.xml" ) );
-	p2->SetOrderPosition( 0 );
+	p2->SetOrderPosition( 1 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150 );
 	p2->SetPosition( characterOrderPosition );
@@ -194,7 +194,7 @@ void GamePlayState::Enter()
 
 	CombatPlayer* p4 = nullptr;
 	p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
-	p4->SetOrderPosition( 1 );
+	p4->SetOrderPosition( 3 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
 	p4->SetPosition( characterOrderPosition );
@@ -215,7 +215,7 @@ void GamePlayState::Enter()
 
 	CombatPlayer* p5 = nullptr;
 	p5 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
-	p5->SetOrderPosition( 2 );
+	p5->SetOrderPosition( 4 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p5->GetOrderPosition() * 100 + 150 );
 	p5->SetPosition( characterOrderPosition );
@@ -230,7 +230,7 @@ void GamePlayState::Enter()
 	
 	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
 	p5->InitializeAbilities( partyAbilities );
-	p5->SetActive( false );
+	p5->SetActive(false);
 	Party.push_back( p5 );
 
 	partyAbilities.clear();
@@ -287,7 +287,7 @@ void GamePlayState::Enter()
 
 		Enemy* johnFinal = nullptr;
 		johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
-		johnFinal->SetOrderPosition( 2 );
+		johnFinal->SetOrderPosition( 1 );
 		johnFinal->SetLiving( false );
 		johnFinal->SetHP( 0 );
 		characterOrderPosition.x = 600.0f;
@@ -560,6 +560,11 @@ void GamePlayState::Exit()
 		Parents[i] = nullptr;
 
 	}
+	for (unsigned int i = 0; i < guards.size(); i++)
+	{
+		delete guards[i];
+		guards[i] = nullptr;
+	}
 	
 	Party.clear();
 	delete WorldMapAnsys;
@@ -788,6 +793,10 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 		}
+	for (unsigned int i = 0; i < guards.size(); i++)
+	{
+		guards[i]->Update(dt);
+	}
 	}
 void GamePlayState::MenuUpdate( float dt )
 	{
@@ -1109,6 +1118,12 @@ void GamePlayState::TownRender()
 	TileSystem::GetInstance()->Render();
 
 	GameData::GetInstance()->GetOverworldPlayer()->Render();
+	for (unsigned int i = 0; i < guards.size(); i++)
+	{
+		guards[i]->Render();
+		SGD::Point xy = guards[i]->GetPosition();
+		int x = 0;
+	}
 	}
 void GamePlayState::MenuRender()
 	{

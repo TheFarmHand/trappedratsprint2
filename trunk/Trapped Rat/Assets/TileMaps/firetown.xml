@@ -4,17 +4,19 @@
   <tileset height="12" width="16" />
   <tilesize height="32" width="32" />
   <player name="Player" startX="0" startY="352" />
-  <guard name="Guard" startX="1056" startY="672">
-    <waypoint />
-  </guard>
-  <guard name="Guard" startX="1280" startY="384">
-    <waypoint />
-  </guard>
-  <guard name="Guard" startX="1536" startY="1184">
-    <waypoint />
-  </guard>
+  <guard name="Guard" startX="1056" startY="672" />
+  <guard name="Guard" startX="1280" startY="384" />
+  <guard name="Guard" startX="1536" startY="1184" />
   <guard name="Guard" startX="96" startY="64">
-    <waypoint />
+    <waypoint tilePoint="405" />
+    <waypoint tilePoint="604" />
+    <waypoint tilePoint="706" />
+    <waypoint tilePoint="607" />
+    <waypoint tilePoint="507" />
+    <waypoint tilePoint="407" />
+    <waypoint tilePoint="506" />
+    <waypoint tilePoint="810" />
+    <waypoint tilePoint="511" />
   </guard>
   <tiles id="147" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="147" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
