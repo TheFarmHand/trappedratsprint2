@@ -22,11 +22,12 @@ public:
 	int GetLayerWidth();
 	int GetLayerHeight();
 	SGD::Point GetTilePosition( int TiD );
+	int GetTileIndex( float x, float y );
 
 private:
 	Layer layers;
 	SGD::Point destination;
 	SGD::Size tileSize;
-	int GetTileIndex( float x, float y );
+	
 };
 

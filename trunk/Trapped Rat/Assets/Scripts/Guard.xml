@@ -1,45 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Ratsputin</Name>
-  <Side>Ally</Side>
-  <Element>Wind</Element>
-  <Type>Ally</Type>
+  <Name>Guard</Name>
+  <Side>Common</Side>
+  <Element>Water</Element>
+  <Type>Enemy</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>70</Base>
+      <Base>35</Base>
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>120</Base>
-      <Scale>3</Scale>
+      <Base>0</Base>
+      <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>100</Base>
+      <Base>12</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
-      <Base>17</Base>
-      <Scale>0.5</Scale>
+      <Base>7</Base>
+      <Scale>0.4</Scale>
     </Magic>
     <Defense>
-      <Base>7</Base>
-      <Scale>0.3</Scale>
+      <Base>10</Base>
+      <Scale>0.8</Scale>
     </Defense>
     <Speed>
-      <Base>50</Base>
-      <Scale>0.5</Scale>
+      <Base>8</Base>
+      <Scale>0.7</Scale>
     </Speed>
     <Avoision>
       <Base>5</Base>
-      <Scale>0.4</Scale>
+      <Scale>0.2</Scale>
     </Avoision>
   </Stats>
-  <Level>10</Level>
+  <Level>5</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>RatAnimBattle.xml</Animation>
+  <Animation>DogAnimBattle.xml</Animation>
 </Character>

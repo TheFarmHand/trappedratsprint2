@@ -3,6 +3,7 @@
 #include "../Core/GameData.h"
 
 
+
 Guard::Guard()
 {
 	ansys = new AnimationSystem();

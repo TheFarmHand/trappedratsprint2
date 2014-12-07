@@ -741,6 +741,7 @@ void GamePlayState::Fight()
 					}
 				tempRandomEnemy->SetLevel(12);
 				tempRandomEnemy->SetHP(tempRandomEnemy->GetMaxHP());
+
 				tempRandomEnemy->SetOrderPosition( i );
 				characterOrderPosition.x = 600.0f;
 				characterOrderPosition.y = (float)( tempRandomEnemy->GetOrderPosition() * 100 + 150 + 16 );
@@ -787,6 +788,7 @@ void GamePlayState::Fight()
 				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
 				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
 				}
+			
 			TurnManager::GetInstance()->Initialize( Party, tempEnemy );
 			for ( size_t i = 0; i < Party.size(); i++ )
 				{
@@ -820,11 +822,51 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 		}
+
 	for (unsigned int i = 0; i < guards.size(); i++)
 	{
 		guards[i]->Update(dt);
+		
+		//if(guards[i]->GetRect().IsIntersecting(GameData::GetInstance()->GetOverworldPlayer()->GetRect()))
+		if(TileSystem::GetInstance()->GetTileIndex(guards[i]->GetPosition().x, guards[i]->GetPosition().y)
+			== TileSystem::GetInstance()->GetTileIndex(
+			 GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition().x,
+			 GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition( ).y))
+
+		{
+			Enemy* temp;
+			guard_index = i;
+			
+			temp = LoadEnemy( "../Trapped Rat/Assets/Scripts/Guard.xml" );
+			SGD::Point characterOrderPosition;
+			temp->SetOrderPosition( 1 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( temp->GetOrderPosition( ) * 100 + 150 + 16 );
+			temp->SetPosition( characterOrderPosition );
+			std::vector<Enemy*> moreguards;
+			moreguards.push_back(temp);
+
+			GameData::GetInstance( )->SetIsInCombat( true );
+			state = GPStates::Combat;
+			TurnManager::GetInstance( )->Initialize( Party, moreguards );
+			for ( size_t i = 0; i < Party.size( ); i++ )
+			{
+				if ( Party[ i ]->GetActive( ) )
+				{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( ), Party[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[ i ]->GetOrderPosition( )*50.0f ) ), Party[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[ i ]->GetOrderPosition( )*50.0f ) ), Party[ i ], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+				}
+			}
+
+
+			for ( size_t i = 0; i < moreguards.size( ); i++ )
+			{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( ), moreguards[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+			}
+		}
 	}
-	}
+}
 void GamePlayState::MenuUpdate( float dt )
 	{
 	//set the maxindex based on what menu we are in
@@ -2093,6 +2135,16 @@ void GamePlayState::SummaryUpdate(float dt)
 		loot.clear();
 		loot_xp = 0;
 		loot_gold = 0;
+
+		// Guard Code
+		if(guard_index != -1)
+		{
+			auto iter = guards.begin();
+			while((*iter) != guards[guard_index]) iter++;
+			guards.erase(iter);
+
+			guard_index = -1;
+		}
 	}
 }
 void GamePlayState::SummaryRender()
@@ -2128,4 +2180,9 @@ void GamePlayState::AddToParty(CombatPlayer*_player)
 std::map<std::string, Ability*> GamePlayState::GetMasterList()
 {
 	return MasterAbilityList;
+}
+
+void GamePlayState::SetLootXP( int val )
+{
+	loot_xp = val;
 }

@@ -94,6 +94,8 @@ void TurnManager::CombatXP()
 		xp += dynamic_cast<Enemy*>( EnemyUnits[ i ] )->GetXPValue();
 	}
 
+	GamePlayState::GetInstance()->SetLootXP(xp);
+
 	for ( unsigned int i = 0; i < AlliedUnits.size(); i++ )
 	{
 		if ( AlliedUnits[ i ]->isAlive() )

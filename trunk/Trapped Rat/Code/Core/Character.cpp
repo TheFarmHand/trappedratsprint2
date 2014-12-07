@@ -4,6 +4,7 @@
 #include "TurnManager.h"
 #include <cmath>
 #include "OwnedHUD.h"
+#include "../States/GamePlayState.h"
 
 Character::Character()
 {
@@ -89,15 +90,16 @@ void Character::UseAbility()
 void Character::TakeDamage( int dmg , bool firefall)
 {
 if ( name == "Cecil" && CecilPhase == 3 )
-	{
-	damageDealt += dmg;
+		{
+		damageDealt += dmg;
 	dmg = 5;
-	}
+		}
 if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 	{
 	dmg = 0;
 	}
 	SetHP(HP - dmg);
+	GamePlayState::GetInstance()->AddToGauge(dmg);
 	if ( name == "Jane" && alive == true )
 		++JaneHit;
 	else if ( name == "John" && alive == true )
@@ -291,7 +293,7 @@ void Character::SetHP( int _hp )
 			{
 			HP = (int)(GetMaxHP() * 0.1f);
 			if (CecilPhase == 1 )
-				progress = 100.0f;
+			progress = 100.0f;
 			}
 		}
 	else if ( HP < 0 )
