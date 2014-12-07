@@ -61,11 +61,6 @@ void  StatusEffect::Turntick()
 		case SPECIAL:
 			if ( name == "Cover" )
 				curr_tick--;
-			/*else if ( name == "Guarding" )
-			{
-				if ( guard_caster->HasEffect( "Cover" ) )
-					guard_caster->RemoveEffect( "Cover" );
-			}*/
 
 			break;
 
