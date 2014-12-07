@@ -76,5 +76,6 @@ public:
 	void SetMusicVolume(int _music);
 	void SetWindowed(bool _window){ is_windowed = _window; }
 	void SetSaveFile(int _save){ save_file = _save; }
+	void ResetPlayer();
 };
 

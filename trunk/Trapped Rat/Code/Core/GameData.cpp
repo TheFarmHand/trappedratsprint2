@@ -317,3 +317,9 @@ void GameData::PlaySelectionChange()
 	if (selection_sound != SGD::INVALID_HANDLE)
 		SGD::AudioManager::GetInstance()->PlayAudio(selection_sound);
 }
+void GameData::ResetPlayer()
+{
+	delete overworldPlayer;
+	overworldPlayer = nullptr;
+	overworldPlayer = new Player();
+}

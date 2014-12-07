@@ -31,6 +31,7 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
+	GameData::GetInstance()->ResetPlayer();
 	run_succeed = false;
 	MinibossFight = false;
 	FinalBossFight = false;
