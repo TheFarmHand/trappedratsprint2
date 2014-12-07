@@ -829,6 +829,8 @@ void GamePlayState::MenuUpdate( float dt )
 			break;
 		case MenuSubStates::Party:
 			maxindex = Party.size() - 1;
+			if (select_first && selecting_party == false)
+				maxindex = 1;
 			if (selecting_ability)
 				maxindex = Party[character_index]->GetAbilitiesSize() - 1;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) )
@@ -836,7 +838,6 @@ void GamePlayState::MenuUpdate( float dt )
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::None;
-
 
 				}
 			break;
@@ -867,6 +868,10 @@ void GamePlayState::MenuUpdate( float dt )
 					case 1:
 
 						menuindex = 0;
+						selecting_ability = false;
+						selecting_party = false;
+						select_first = false;
+						select_new = false;
 						substate = MenuSubStates::Party;
 						GameData::GetInstance()->PlaySelectionChange();
 
@@ -916,12 +921,33 @@ void GamePlayState::MenuUpdate( float dt )
 					
 				break;
 			case MenuSubStates::Party:
-				if (selecting_ability == false)
+
+				if (selecting_ability == false && selecting_party == false && select_first == false)
+				{
+					select_first = true;
+					character_index = menuindex;
+					menuindex = 0;
+					maxindex = 2;
+				}
+				else if (selecting_ability == false && selecting_party == false && select_first == true)
+				{
+					if (menuindex == 0)
+					{
+						//Hovering over Swap character
+						selecting_party = true;
+					}
+					if (menuindex == 1)
+					{
+						//Hovering Over Swap Ability
+						selecting_ability = true;
+					}
+				}
+				/*else if (selecting_ability == false)
 				{
 					selecting_ability = true;
 					character_index = menuindex;
 					menuindex = 0;
-					}
+					}*/
 				else if (selecting_ability && !select_new)
 				{
 					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked())
@@ -931,7 +957,7 @@ void GamePlayState::MenuUpdate( float dt )
 					oldindex = menuindex;
 
 				}
-				else if (select_new)
+				else if (select_new && selecting_ability)
 				{
 					
 						//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
@@ -943,8 +969,42 @@ void GamePlayState::MenuUpdate( float dt )
 
 					select_new = false;
 					selecting_ability = false;
+					select_first = false;
 					menuindex = character_index;
 					oldindex = -1;
+				}
+				else if (selecting_party && !select_new)
+				{
+					/*select_new = true;
+					oldindex = menuindex;*/
+					//Actually Move stuff
+					CombatPlayer* temp = Party[character_index];
+					Party[character_index] = Party[menuindex];
+					Party[menuindex] = temp;
+					for (unsigned int i = 0; i < Party.size(); i++)
+					{
+						if (i <= 2)
+						{
+							Party[i]->SetActive(true);
+						}
+						else
+						{
+							Party[i]->SetActive(false);
+						}
+						Party[i]->SetOrderPosition(i);
+
+						SGD::Point characterOrderPosition;
+						characterOrderPosition.x = 100.0f;
+						characterOrderPosition.y = (float)(Party[i]->GetOrderPosition() * 100 + 150);
+						Party[i]->SetPosition(characterOrderPosition);
+					}
+
+					select_new = false;
+					selecting_party = false;
+					select_first = false;
+					menuindex = character_index;
+					oldindex = -1;
+
 				}
 				break;
 			default:
@@ -1177,36 +1237,40 @@ void GamePlayState::MenuRender()
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
 				for (int i = 0; i < Party[character_index]->GetAbilitiesSize(); i++)
 				{
-
 					std::string name = Party[character_index]->GetAbility(i)->GetAbilityName();
-			if (oldindex == i)
-			{
-				GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155, 155, 155 }, 1.5f);
-			}
-			else
-			{
-				GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
-			}
-					
-						
-					
-					
+					if (oldindex == i)
+					{
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 155, 155, 155 }, 1.5f);
+					}
+					else
+					{
+						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+					}
 				}
 				graphics->DrawTextureSection(cursor, { 400.0f, 160.0f + (menuindex * 35) }, { 0, 0, 238, 73 });
-				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);
-				
+				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);	
+			}
+			else if (selecting_party)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 240 });
+				GameData::GetInstance()->GetFont()->DrawString("Swap Position_With Who?", 490.0f, 185.0f, { 0, 0, 0 }, 1.5f);
+				graphics->DrawTextureSection(cursor, { 10.0f, 165.0f + (menuindex * 55) }, { 0, 0, 238, 73 });
+			}
+			else if (select_first)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 240 });
+				GameData::GetInstance()->GetFont()->DrawString("Swap Character", 490.0f, 185.0f , { 0, 0, 0 }, 1.5f);
+				GameData::GetInstance()->GetFont()->DrawString("Swap Ability", 490.0f, 220.0f , { 0, 0, 0 }, 1.5f);
+				graphics->DrawTextureSection(cursor, { 400.0f, 160.0f + (menuindex * 35) }, { 0, 0, 238, 73 });
+
 			}
 			else
 			{
-				
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
 				for (int i = 0; i < Party[menuindex]->GetAbilitiesSize(); i++)
 				{
-
 					std::string name = Party[menuindex]->GetAbility(i)->GetAbilityName();
-					
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0,0,0 }, 1.5f);
-					
+					GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0,0,0 }, 1.5f);
 				}
 				graphics->DrawTextureSection(cursor, { 10.0f, 165.0f + (menuindex * 55) }, { 0, 0, 238, 73 });
 				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);
