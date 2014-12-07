@@ -685,12 +685,12 @@ void Enemy::FFWAI()
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
-	if ( GetHP() / (float)( GetMaxHP() ) < 0.25f )
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.35f )
 		{
 		if ( !FlameSpout )
 			{
 			FlameSpout = true;
-			FSCountdown = 4;
+			FSCountdown = 2;
 			}
 		else if ( FSCountdown > 0 )
 			{
@@ -734,13 +734,19 @@ void Enemy::SEMAI()
 			break;
 			}
 		}
-	if ( rand() % 10 >= 5 )
+	if ( !EarthShield )
 		{
+		EarthShield = true;
+		EarthWard = false;
 		abilityList[0]->CastAbility( this, this );
+		return;
 		}
 	else
 		{
+		EarthShield = false;
+		EarthWard = true;
 		abilityList[1]->CastAbility( this, this );
+		return;
 		}
 	int dmg = rand() % GetAttack() + GetAttack();
 	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
@@ -989,7 +995,7 @@ void Enemy::CecilPhaseThree()
 	if ( !HolyFlare )
 		{
 		HolyFlare = true;
-		HFCountdown = 10;
+		HFCountdown = 5;
 		damageDealt = 0.0f;
 		//Dialogue for casting/countdown
 		}

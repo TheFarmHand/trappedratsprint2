@@ -121,6 +121,8 @@ public:
 	float damageDealt;
 	bool HolyMace = false;
 	bool HolyShield = false;
+	bool EarthShield = false;
+	bool EarthWard = false;
 	bool critHealth = false;
 	bool JaneDead = false;
 	bool JohnDead = false;
