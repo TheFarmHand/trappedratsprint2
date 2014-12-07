@@ -36,7 +36,7 @@ private:
 public:
 	Ability( const char* path );
 	virtual ~Ability();
-
+	
 	std::string GetExplination(){ return explination; }
 	std::string GetAbilityName();
 	bool GetOffensive();
@@ -70,5 +70,7 @@ public:
 	void CalcluateBpScaledCost( Character* owner );
 
 	void RenderAnimation();
+
+	int baseBP;
 };
 
