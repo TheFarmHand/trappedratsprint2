@@ -304,7 +304,7 @@ void Enemy::RavenAI()
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
 	int elementalTarget;
-	if ( rand() % 5 > 3 )
+	if ( rand() % 5 > 3 || TurnManager::GetInstance()->GetAllies().size() < 2)
 		{
 		int atk = GetAttack();
 		int dmg = rand() % atk + atk;
@@ -580,7 +580,7 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.2f 
+		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.4f 
 			 && TurnManager::GetInstance()->GetEnemies()[i]->isAlive())
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
@@ -589,7 +589,7 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.2f 
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.4f 
 			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
