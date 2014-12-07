@@ -35,11 +35,11 @@ CombatPlayer::~CombatPlayer()
 void CombatPlayer::Update( float dt )
 {
 
-
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 	{
 		progress += speed * dt;
 	}
+
 	else if ( progress < 100.0f )
 	{
 		if ( stepbackward == true && stepforward == false )

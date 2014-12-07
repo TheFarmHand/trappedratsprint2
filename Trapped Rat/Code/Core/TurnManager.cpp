@@ -26,10 +26,10 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	//Safe to add code here
 
 	//ElementalChartLoad
-	elementalImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/eletable.png");
+	elementalImage = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/eletable.png" );
 	elementalgraphicactive = false;
 	//TimelineImageload
-	timelineImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/timeline.png");
+	timelineImage = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/timeline.png" );
 
 	// Particle Manager pointer assignment
 	pPartMan = ParticleManager::GetInstance();
@@ -40,94 +40,116 @@ void TurnManager::CombatLoot()
 {
 	GamePlayState* pGPS = GamePlayState::GetInstance();
 	int num_items = 0;
-	for ( int i = 0; i<EnemyUnits.size( ); i++ )
+	int gold = 0;
+	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
 	{
-		if ( rand( ) % 100 < 25 ) num_items++;
+		int test = rand() % 100;
+		if ( test < 35 ) num_items++;
+		gold += rand() % 15;
 	}
 
-	for(int i=0; i<num_items; i++)
+	pGPS->AddGold( gold );
+
+	for ( int i = 0; i < num_items; i++ )
 	{
 		// Roll for stuff!
-		int item = rand()%1000;
+		int item = rand() % 1000;
 
-		if(item < 300)	// Small HP
+		if ( item < 300 )	// Small HP
 		{
-			pGPS->AddItem(SmallHP);
-		}
-
-		else if (item < 600)	// Small BP
-		{
-			pGPS->AddItem(SmallBP);
+			pGPS->AddItem( SmallHP );
 		}
 
-		else if (item < 700)	// Large HP
+		else if ( item < 600 )	// Small BP
 		{
-			pGPS->AddItem(LargeHP);
+			pGPS->AddItem( SmallBP );
 		}
 
-		else if (item < 800)	// Large BP
+		else if ( item < 725 )	// Large HP
 		{
-			pGPS->AddItem(LargeBP);
+			pGPS->AddItem( LargeHP );
 		}
 
-		else if (item < 950)	// Revive
+		else if ( item < 825 )	// Large BP
 		{
-			pGPS->AddItem(Revive);
+			pGPS->AddItem( LargeBP );
 		}
-		else if (item < 1000)	// Max Revive
+
+		else if ( item < 950 )	// Revive
 		{
-			pGPS->AddItem(MaxRevive);
+			pGPS->AddItem( Revive );
 		}
+		else if ( item < 1000 )	// Max Revive (not a real thing right now)
+		{
+			pGPS->AddItem( Revive );
+		}
+	}
+}
+
+void TurnManager::CombatXP()
+{
+	int xp = 0;
+	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
+	{
+		xp += dynamic_cast<Enemy*>( EnemyUnits[ i ] )->GetXPValue();
+	}
+
+	for ( unsigned int i = 0; i < AlliedUnits.size(); i++ )
+	{
+		if ( AlliedUnits[ i ]->isAlive() )
+			dynamic_cast<CombatPlayer*>( AlliedUnits[ i ] )->AddXP( xp );
 	}
 }
 
 void TurnManager::Update( float dt )
 {
 	//*Should be checked first each update, try not to add code here or before
-	if (getTimeStop() == false)
+	if ( getTimeStop() == false )
 	{
-		if (CheckWin())
+		if ( CheckWin() )
 		{
 			// End of Combat, enemies have died
-			// Need to do exp gain and level increase here
 
 			// Gain XP
+			CombatXP();
 
 			// Gain Items
 			CombatLoot();
-			
 
+			// Abilities Unlocked?  This will become redundant I'm sure
+			//GamePlayState::GetInstance()->CheckAbilityUnlocked(true);
 
-		GamePlayState::GetInstance()->CheckAbilityUnlocked();
-		EndCombat();
-		return;
-	}
-		if (CheckLose())
-	{
-		EndCombat();
-		if (GamePlayState::GetInstance()->ignore_game_over)
-		{
-			GamePlayState::GetInstance()->ignore_game_over = false;
+			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
+			EndCombat();
 			return;
 		}
-		else
-				GameData::GetInstance()->SwapState(GameOverLoseState::GetInstance());
-		return;
-	}
+
+		if ( CheckLose() )
+		{
+			EndCombat();
+			if ( GamePlayState::GetInstance()->ignore_game_over )
+			{
+				GamePlayState::GetInstance()->ignore_game_over = false;
+				return;
+			}
+			else
+				GameData::GetInstance()->SwapState( GameOverLoseState::GetInstance() );
+			return;
+		}
 	}
 
 	//Check to see if elemental table display input
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
+	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::E ) )
 	{
 		elementalgraphicactive = !elementalgraphicactive;
 	}
 	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
 	//can modify order if needed, should not break
-	if (!elementalgraphicactive)
+	if ( !elementalgraphicactive )
 	{
-		CombatUpdate(dt);
-		AnimationUpdate(dt);
-		ParticleUpdate(dt);
+		CombatUpdate( dt );
+		AnimationUpdate( dt );
+		ParticleUpdate( dt );
 	}
 }
 void TurnManager::Render()
@@ -135,49 +157,49 @@ void TurnManager::Render()
 	//*Anything added below will render underneath of combat character
 
 	//Timelinerendering
-	if (timelineImage != SGD::INVALID_HANDLE)
+	if ( timelineImage != SGD::INVALID_HANDLE )
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture(timelineImage, { 0, 70 }, 0.0f, {}, {}, {1.0f,.5f});
-		for (unsigned int i = 0; i < AlliedUnits.size(); ++i)
+		SGD::GraphicsManager::GetInstance()->DrawTexture( timelineImage, { 0, 70 }, 0.0f, { }, { }, { 1.0f, .5f } );
+		for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
 		{
-			if (AlliedUnits[i]->GetTimelineAnimation() != SGD::INVALID_HANDLE)
+			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE )
 			{
 				//87 = y
 				//95 = start x
 				//650 = end x
 				//555
-				float progress = AlliedUnits[i]->GetProgress() /100.0f;
+				float progress = AlliedUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
-				SGD::GraphicsManager::GetInstance()->DrawTexture(AlliedUnits[i]->GetTimelineAnimation(), { 95+progress, 87 }, 0, {}, {}, {1.0f,1.0f});
+				SGD::GraphicsManager::GetInstance()->DrawTexture( AlliedUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
 				int offset = 0;
-				for ( auto iter = AlliedUnits[ i ]->GetEffects( ).begin( ); iter != AlliedUnits[ i ]->GetEffects( ).end( ); iter++ )
+				for ( auto iter = AlliedUnits[ i ]->GetEffects().begin(); iter != AlliedUnits[ i ]->GetEffects().end(); iter++ )
 				{
-					SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { ( 95 + progress) + 10 * offset, 87 + 35 } );
+					SGD::GraphicsManager::GetInstance()->DrawTexture( ( *iter )->GetIcon(), { ( 95 + progress ) + 10 * offset, 87 + 35 } );
 					offset++;
 				}
 			}
 		}
-		for (size_t i = 0; i < EnemyUnits.size(); i++)
+		for ( size_t i = 0; i < EnemyUnits.size(); i++ )
 		{
-			if (EnemyUnits[i]->GetTimelineAnimation() != SGD::INVALID_HANDLE)
+			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE )
 			{
-				float progress = EnemyUnits[i]->GetProgress() / 100.0f;
+				float progress = EnemyUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
-				SGD::GraphicsManager::GetInstance()->DrawTexture(EnemyUnits[i]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+				SGD::GraphicsManager::GetInstance()->DrawTexture( EnemyUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
 				int offset = 0;
-				for ( auto iter = EnemyUnits[ i ]->GetEffects( ).begin( ); iter != EnemyUnits[ i ]->GetEffects( ).end( ); iter++ )
+				for ( auto iter = EnemyUnits[ i ]->GetEffects().begin(); iter != EnemyUnits[ i ]->GetEffects().end(); iter++ )
 				{
-					SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { ( 95 + progress) + 10 * offset, 87 + 35 } );
+					SGD::GraphicsManager::GetInstance()->DrawTexture( ( *iter )->GetIcon(), { ( 95 + progress ) + 10 * offset, 87 + 35 } );
 					offset++;
 				}
 			}
 		}
 		/*if (AllCombatUnits[0]->GetProgress >= 100.0f)
 		{
-			if (AllCombatUnits[0]->GetPortrait() != SGD::INVALID_HANDLE)
-			{
-				SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
-			}
+		if (AllCombatUnits[0]->GetPortrait() != SGD::INVALID_HANDLE)
+		{
+		SGD::GraphicsManager::GetInstance()->DrawTexture(AllCombatUnits[0]->GetPortrait(), { 95 + progress, 87 }, 0, {}, {}, { 1.0f, 1.0f });
+		}
 		}*/
 	}
 
@@ -191,25 +213,25 @@ void TurnManager::Render()
 	}
 	for ( unsigned int i = 0; i < EnemyUnits.size(); ++i )
 	{
-		if ( EnemyUnits[i]->isAlive() )
+		if ( EnemyUnits[ i ]->isAlive() )
 			EnemyUnits[ i ]->Render();
 	}
 	//*
-	
+
 	//*Anything added below will render on top of combat characters
 	pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
-	if (testCover)
-		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[2]->GetPosition().x + 150, AlliedUnits[2]->GetPosition().y + 32 ), SGD::Color(255, 100, 0) );
+	if ( testCover )
+		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 2 ]->GetPosition().x + 150, AlliedUnits[ 2 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
 
 	//Render Elemental Chart if Needed
-	
-		if (elementalgraphicactive)
-		{
-			//SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
-		}
-	
+
+	if ( elementalgraphicactive )
+	{
+		//SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
+	}
+
 
 }
 void TurnManager::setTimeStop( bool stop )
@@ -239,22 +261,22 @@ bool TurnManager::getTurnPause()
 void TurnManager::Terminate()
 {
 	timeStop = false;
-	for(int i=0; i<AlliedUnits.size(); i++)
+	for ( unsigned int i = 0; i<AlliedUnits.size(); i++ )
 	{
 		// Empty out active status effects on party
-		
-		while(AlliedUnits[i]->GetEffects().size() > 0)
+
+		while ( AlliedUnits[ i ]->GetEffects().size() > 0 )
 		{
-			auto iter = AlliedUnits[ i ]->GetEffects( ).begin( );
-			if((*iter) != nullptr)
-				(*iter)->Clear();
+			auto iter = AlliedUnits[ i ]->GetEffects().begin();
+			if ( ( *iter ) != nullptr )
+				( *iter )->Clear();
 		}
 	}
 	AlliedUnits.clear();
 	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
-		{
-		delete EnemyUnits[i];
-		}
+	{
+		delete EnemyUnits[ i ];
+	}
 
 	EnemyUnits.clear();
 	AllCombatUnits.clear();
@@ -264,31 +286,31 @@ void TurnManager::Terminate()
 	{
 		pPartMan->UnloadEmitter( "takedamage" );
 		pPartMan->ClearAll();
-		pPartMan = nullptr;		
+		pPartMan = nullptr;
 	}
 
 	//Unload timeline image and elemental image
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture( timelineImage );
 	timelineImage = SGD::INVALID_HANDLE;
 
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(elementalImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture( elementalImage );
 	elementalImage = SGD::INVALID_HANDLE;
 }
 void TurnManager::HealTarget( Character* target, int value )
 {
-	target->TakeDamage( -value);
+	target->TakeDamage( -value );
 }
 
 int TurnManager::ElementalMod( Character* target, int damage, ETYPE element )
 {
 	if ( element == FIRE )
 	{
-		if ( target->GetEType( ) == WIND )	// Resist Damage
+		if ( target->GetEType() == WIND )	// Resist Damage
 		{
 			return damage / 2;
 		}
 
-		else if ( target->GetEType( ) == EARTH )
+		else if ( target->GetEType() == EARTH )
 		{
 			return (int)( damage * 1.5f );
 		}
@@ -296,12 +318,12 @@ int TurnManager::ElementalMod( Character* target, int damage, ETYPE element )
 
 	else if ( element == WATER )
 	{
-		if ( target->GetEType( ) == WIND )
+		if ( target->GetEType() == WIND )
 		{
 			return (int)( damage * 1.5f );
 		}
 
-		if ( target->GetEType( ) == EARTH )
+		if ( target->GetEType() == EARTH )
 		{
 			return damage / 2;
 		}
@@ -309,12 +331,12 @@ int TurnManager::ElementalMod( Character* target, int damage, ETYPE element )
 
 	else if ( element == WIND )
 	{
-		if ( target->GetEType( ) == FIRE )	// Extra Damage
+		if ( target->GetEType() == FIRE )	// Extra Damage
 		{
 			return (int)( damage * 1.5f );
 		}
 
-		if ( target->GetEType( ) == WATER )
+		if ( target->GetEType() == WATER )
 		{
 			return damage / 2;
 		}
@@ -322,12 +344,12 @@ int TurnManager::ElementalMod( Character* target, int damage, ETYPE element )
 
 	else if ( element == EARTH )
 	{
-		if ( target->GetEType( ) == FIRE )
+		if ( target->GetEType() == FIRE )
 		{
 			return damage / 2;
 		}
 
-		if ( target->GetEType( ) == WATER )
+		if ( target->GetEType() == WATER )
 		{
 			return (int)( damage * 1.5f );
 		}
@@ -352,15 +374,15 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	bool counter = false;
 	bool hedge = false;
 	bool enfire = false;
-	StatusEffect* Guard = nullptr; 
+	StatusEffect* Guard = nullptr;
 	StatusEffect* to_remove = nullptr;
 
-	for ( auto iter = owner->GetEffects( ).begin( ); iter != owner->GetEffects( ).end( ); iter++ )
+	for ( auto iter = owner->GetEffects().begin(); iter != owner->GetEffects().end(); iter++ )
 	{
-		if((*iter)->GetName() == "Enfire")
+		if ( ( *iter )->GetName() == "Enfire" )
 		{
-			if((*iter)->GetTernEffect()) enfire = true;
-			
+			if ( ( *iter )->GetTernEffect() ) enfire = true;
+
 		}
 	}
 
@@ -371,14 +393,21 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		if ( ( *iter )->GetName() == "Dodging" )
 		{
 			// Found dodge!  
-			if((*iter)->GetTernEffect())
-				if((*iter)->GetOwner()->GetName() ==  "Ratsputin")
-					target->SetProgress(100.0f);
-				else if((*iter)->GetOwner()->GetName() == "Jeeves")
-					owner->TakeDamage(10);
-				else if((*iter)->GetOwner()->GetName() == "Biggs")
-					target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("SpeedUp"));
+			if ( ( *iter )->GetTernEffect() )
+			{
+				if ( ( *iter )->GetOwner()->GetName() == "Ratsputin" )
+					target->SetProgress( 100.0f );
+				else if ( ( *iter )->GetOwner()->GetName() == "Jeeves" )
+					owner->TakeDamage( 10 );
+				else if ( ( *iter )->GetOwner()->GetName() == "Biggs" )
+					target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedUp" ) );
+				else if((*iter)->GetOwner()->GetName() == "Slippy") 
+					// what
+				{
 
+				}
+
+			}
 			dodge = true;
 		}
 
@@ -395,30 +424,30 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			firespike = true;
 			int dmg = (int)( target->GetMagic() * 0.2f );
 			owner->TakeDamage( dmg );
-			
-			if((*iter)->GetTernEffect())
-				target->TakeDamage(-dmg);
+
+			if ( ( *iter )->GetTernEffect() )
+				target->TakeDamage( -dmg );
 		}
 
-		else if ( ( *iter )->GetName() == "Counter" )	
+		else if ( ( *iter )->GetName() == "Counter" )
 		{
 			counter = true;
-			to_remove = (*iter);
+			to_remove = ( *iter );
 		}
 
-		else if( (*iter)->GetName() == "Hedge")
+		else if ( ( *iter )->GetName() == "Hedge" )
 		{
 			// Hedge Guard reaction
 			int atk = owner->GetAttack();
-			int dmg = rand( ) % atk + atk;
+			int dmg = rand() % atk + atk;
 			dmg -= (int)( 0.25f * target->GetDefense() );
 			if ( dmg <= 0 )
 				dmg = 0;
 			else
 				dmg /= 2;
-			if((*iter)->GetTernEffect())
+			if ( ( *iter )->GetTernEffect() )
 				dmg = 0;
-			target->TakeDamage(dmg);
+			target->TakeDamage( dmg );
 		}
 	}
 
@@ -427,20 +456,20 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Should no longer be useful		
 	}
 
-	if ( owner->HasEffect( "Enfire" ))
-		{
+	if ( owner->HasEffect( "Enfire" ) )
+	{
 		int dmg = (int)( owner->GetMagic() * 0.3f );
-		if(enfire) dmg = (int)(dmg * 1.75f);		// Ternary Blast style
-		target->TakeDamage(dmg , true);
-		}
+		if ( enfire ) dmg = (int)( dmg * 1.75f );		// Ternary Blast style
+		target->TakeDamage( dmg, true );
+	}
 	if ( counter )
 	{
 		// Reduce incoming damage, attack the attacker
-		if(to_remove->GetTernEffect())
+		if ( to_remove->GetTernEffect() )
 			value = 0;
 		else
 			value = value / 2;
-		target->TakeDamage(value);
+		target->TakeDamage( value );
 		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
 		to_remove->Clear();
 	}
@@ -450,26 +479,26 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Do some Dodge word magic instead of damage
 		// For now:
 		value = 0;
-		target->TakeDamage(value);
+		target->TakeDamage( value );
 	}
 
 	if ( guard )
 	{
 		// Redirect attack to Guard
-		
+
 
 		int dmg = owner->GetAttack();
-		dmg += rand()%(dmg/3);
-		dmg -= Guard->GetGuard()->GetDefense()/2;
-		
-		if ( Guard->GetTernEffect( ) )
-			owner->TakeDamage(dmg);
+		dmg += rand() % ( dmg / 3 );
+		dmg -= Guard->GetGuard()->GetDefense() / 2;
+
+		if ( Guard->GetTernEffect() )
+			owner->TakeDamage( dmg );
 		else
-			Guard->GetGuard()->TakeDamage(dmg);		
+			Guard->GetGuard()->TakeDamage( dmg );
 	}
 
-	
-	if ( !dodge && !counter && !guard)
+
+	if ( !dodge && !counter && !guard )
 	{
 		target->TakeDamage( value );
 
@@ -482,12 +511,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 }
 
-void TurnManager::UsingAbility(Character* owner, Character* target, Ability* ability, bool ternary)
+void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ability, bool ternary )
 // Calculates and dishes out damage based on an ability
 {
 	// Room here for adding particle effects
-	ability->CalculateFormula(owner, target);
-	ability->CastAbility(owner, target, 0, ternary);
+	ability->CalculateFormula( owner, target );
+	ability->CastAbility( owner, target, 0, ternary );
 }
 
 
@@ -517,7 +546,7 @@ void TurnManager::SetupAllyParty( std::vector<CombatPlayer*> playerParty )
 		{
 			AlliedUnits[ playerParty[ i ]->GetOrderPosition() ] = playerParty[ i ];
 			AllCombatUnits.push_back( playerParty[ i ] );
-			dynamic_cast<CombatPlayer*>( AlliedUnits[playerParty[i]->GetOrderPosition()] )->Reset();
+			dynamic_cast<CombatPlayer*>( AlliedUnits[ playerParty[ i ]->GetOrderPosition() ] )->Reset();
 		}
 	}
 }
@@ -542,7 +571,7 @@ bool TurnManager::CheckWin()
 			enemiesDead = false;
 	}
 
-	
+
 	return enemiesDead;
 }
 bool TurnManager::CheckLose()
@@ -560,17 +589,17 @@ void TurnManager::EndCombat()
 {
 	GameData::GetInstance()->SetIsInCombat( false );
 	GamePlayState::GetInstance()->SetState( GPStates::Town );
-	GamePlayState::GetInstance()->SetLastState(GPStates::Town);
-	TurnManager::GetInstance( )->Terminate( );
+	GamePlayState::GetInstance()->SetLastState( GPStates::Town );
+	TurnManager::GetInstance()->Terminate();
 }
 void TurnManager::CombatUpdate( float dt )
 {
-if ( GamePlayState::GetInstance()->AbilityUsed)
+	if ( GamePlayState::GetInstance()->AbilityUsed )
 	{
-	GamePlayState::GetInstance()->abilityTimer -= dt;
-	if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
-		GamePlayState::GetInstance()->AbilityUsed = false;
-	GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
+		GamePlayState::GetInstance()->abilityTimer -= dt;
+		if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
+			GamePlayState::GetInstance()->AbilityUsed = false;
+		GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
 	}
 
 	if ( !turnPause )
@@ -583,20 +612,20 @@ if ( GamePlayState::GetInstance()->AbilityUsed)
 				AllCombatUnits[ i ]->Update( dt );
 				if ( fullProgressReached || turnPause )
 				{
-				timeStop = true;
+					timeStop = true;
 					break;
 				}
 			}
 		}
 		else
 		{
-		AllCombatUnits[0]->Update( dt );
-		pauseTime = 2.0f;
+			AllCombatUnits[ 0 ]->Update( dt );
+			pauseTime = 2.0f;
 		}
 	}
 	else
 		pauseTime -= dt;
-	if (pauseTime <= 0.0f)
+	if ( pauseTime <= 0.0f )
 	{
 		//AllCombatUnits[0]->SetProgress(0.0f);
 		turnPause = false;

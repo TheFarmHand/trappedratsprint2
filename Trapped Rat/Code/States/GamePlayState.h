@@ -23,12 +23,6 @@ enum GPStates { Map, Town, Combat, Menu,Dia,Cuts };
 enum MenuSubStates{ None, Options, HowTo, Party, Shop };
 enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive } ;
 
-struct PlayerInventory
-{
-	Items item;
-	int item_count = 0;
-};
-
 class HUDItem;
 class GamePlayState :
 	public GameState
@@ -88,7 +82,10 @@ class GamePlayState :
 	
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
+	std::vector<ItemType> loot;
+
 	int gold = 50;
+	int loot_gold = 0;
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	
@@ -164,6 +161,8 @@ public:
 	
 	// Items
 	void AddItem( ItemType it );
+	void AddGold( int val );
+	int	GetGold(void) const;
 	
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
 	void AddToTB( Ability* abi, Character* target );

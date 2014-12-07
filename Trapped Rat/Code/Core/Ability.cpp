@@ -205,8 +205,6 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		if(!ternary)
 			owner->SetHP( owner->GetHP() - (int)( ( owner->GetHP() * hpMod ) ) );
 	
-	
-	
 	if ( AoeCounter == 0 ) 
 		{
 		if ( GamePlayState::GetInstance()->usingTernary() )
