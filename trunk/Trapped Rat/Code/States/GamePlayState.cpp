@@ -1407,7 +1407,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>(ternary_bar)->SetPercentage((float)ternary_gauge/MAXTG);
 
 
-	if ( input->IsKeyPressed( SGD::Key::Backspace ) || run_succeed)
+	if (run_succeed )// || input->IsKeyPressed( SGD::Key::Backspace ) )
 		{
 		state = GPStates::Town;
 		laststate = state;
@@ -1417,7 +1417,7 @@ void GamePlayState::CombatUpdate( float dt )
 
 		}
 
-	if ( input->IsKeyPressed( SGD::Key::Eight ) )
+	/*if ( input->IsKeyPressed( SGD::Key::Eight ) )
 		{
 		Party[0]->SetBP( Party[0]->GetMaxBP() );
 		}
@@ -1440,7 +1440,7 @@ void GamePlayState::CombatUpdate( float dt )
 	if ( input->IsKeyPressed( SGD::Key::L ) )
 		{
 		Party[0]->AddStatus( &pStatManager->GetStatus( "Regen" ) );
-		}
+		}*/
 
 	if(input->IsKeyPressed(SGD::Key::Nine))
 	{
@@ -1453,16 +1453,6 @@ void GamePlayState::CombatUpdate( float dt )
 			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
 		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
 	}
-
-	/*if ( run_succeed )
-	{
-		state = GPStates::Town;
-		laststate = state;
-		GameData::GetInstance( )->SetIsInCombat( false );
-		TurnManager::GetInstance( )->Terminate( );
-		run_succeed = false;
-
-	}*/
 
 	TurnManager::GetInstance()->Update( dt );
 	
@@ -2183,6 +2173,7 @@ void GamePlayState::SummaryUpdate(float dt)
 
 		// Guard Code
 		if(guard_index != -1)
+			// We killed a guard, guard_index is the index of the array
 		{
 			auto iter = guards.begin();
 			while((*iter) != guards[guard_index])
