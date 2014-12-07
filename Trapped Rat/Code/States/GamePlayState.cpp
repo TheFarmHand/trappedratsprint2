@@ -130,30 +130,21 @@ void GamePlayState::Enter()
 	SGD::Point characterOrderPosition;
 	CombatPlayer* p1 = nullptr;
 	
-	//p1 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Ratsputin.xml" ) );
-	p1 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Checkers.xml" ) );
+	p1 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Ratsputin.xml" ) );
 	p1->SetOrderPosition( 0 );
 	characterOrderPosition.x = 100.0f;
 	characterOrderPosition.y = (float)( p1->GetOrderPosition() * 100 + 150 );
 	p1->SetPosition( characterOrderPosition );
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
-	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
-	partyAbilities.push_back( MasterAbilityList["Rampart"] );
-	partyAbilities.push_back( MasterAbilityList["Tremor"] );
-	partyAbilities.push_back( MasterAbilityList["Cover"] );
-	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
-	partyAbilities.push_back( MasterAbilityList["Pinch"] );
-	partyAbilities.push_back( MasterAbilityList["Quake"] );
-	/*partyAbilities.push_back( MasterAbilityList["Burrow"] );
+	partyAbilities.push_back( MasterAbilityList["Burrow"] );
 	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );*/
+	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
 	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
