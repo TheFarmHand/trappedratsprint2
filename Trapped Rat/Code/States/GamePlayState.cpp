@@ -2092,6 +2092,7 @@ void GamePlayState::MapUpdate(float dt)
 			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 			break;
 		}
+		laststate = Town;
 		state = Town;
 	}
 }
