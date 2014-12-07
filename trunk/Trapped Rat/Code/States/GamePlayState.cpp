@@ -455,6 +455,7 @@ void GamePlayState::Enter()
 
 	SGD::InputManager::GetInstance()->Update();
 	state = Map;
+	//state = BattleSummary;
 	}
 void const GamePlayState::Render()
 	{
@@ -477,6 +478,9 @@ void const GamePlayState::Render()
 			break;
 		case GPStates::Cuts:
 			CutsceneRender();
+			break;
+		case GPStates::BattleSummary:
+			SummaryRender();
 			break;
 		default:
 			break;
@@ -519,6 +523,9 @@ void GamePlayState::Update( float dt )
 			break;
 		case GPStates::Cuts:
 			CutsceneUpdate( dt );
+			break;
+		case GPStates::BattleSummary:
+			SummaryUpdate(dt);
 			break;
 		default:
 			break;
@@ -1004,14 +1011,24 @@ void GamePlayState::MenuUpdate( float dt )
 					/*select_new = true;
 					oldindex = menuindex;*/
 					//Actually Move stuff
+					bool ratactive = false;
+					int ratindex = 0;
 					CombatPlayer* temp = Party[character_index];
 					Party[character_index] = Party[menuindex];
 					Party[menuindex] = temp;
 					for (unsigned int i = 0; i < Party.size(); i++)
 					{
+						if (Party[i]->GetName() == "Ratsputin")
+						{
+							ratindex = i;
+						}
 						if (i <= 2)
 						{
 							Party[i]->SetActive(true);
+							if (Party[i]->GetName() == "Ratsputin")
+							{
+								ratactive = true;
+							}
 						}
 						else
 						{
@@ -1023,6 +1040,15 @@ void GamePlayState::MenuUpdate( float dt )
 						characterOrderPosition.x = 100.0f;
 						characterOrderPosition.y = (float)(Party[i]->GetOrderPosition() * 100 + 150);
 						Party[i]->SetPosition(characterOrderPosition);
+					}
+					if (!ratactive)
+					{
+						CombatPlayer* temp2 = Party[ratindex];
+						Party[ratindex] = Party[1];
+						Party[1] = temp2;
+						Party[1]->SetActive(true);
+						Party[1]->SetOrderPosition(1);
+						Party[ratindex]->SetActive(false);
 					}
 
 					select_new = false;
@@ -2039,4 +2065,53 @@ void GamePlayState::AddGold(int val)
 int GamePlayState::GetGold(void) const
 {
 	return gold;
+}
+
+void GamePlayState::SummaryUpdate(float dt)
+{
+	GameData::GetInstance()->SetCamera({ 0, 0 });
+	for (size_t i = 0; i < Party.size(); i++)
+	{
+		Party[i]->UpdateAnimation(dt);
+	}
+
+	//if (loot.size() == 0)
+	//{
+	//	loot.push_back(ItemType::SmallHP);
+	//	loot.push_back(ItemType::SmallBP);
+	//	loot_xp = 100;
+	//	loot_gold = 5;
+	//}
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+	{
+		state = Town;
+		loot.clear();
+		loot_xp = 0;
+		loot_gold = 0;
+	}
+}
+void GamePlayState::SummaryRender()
+{
+	SGD::GraphicsManager::GetInstance()->DrawTexture(background, { 0, 0 });
+	std::vector<CombatPlayer*> tempparty;
+	for (unsigned int i = 0; i < Party.size(); i++)
+	{
+		tempparty.push_back(Party[i]);
+		tempparty[i]->SetPosition({ 150.0f + (100.0f * i), 200.0f });
+		tempparty[i]->Render();
+
+		SGD::Point characterOrderPosition;
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(Party[i]->GetOrderPosition() * 100 + 150);
+		tempparty[i]->SetPosition(characterOrderPosition);
+	}
+	SGD::GraphicsManager::GetInstance()->DrawTexture(scroll, { 800, 310 }, SGD::PI / 2, {}, {}, {1.0f,1.4f});
+	std::string str = "Experience Gained:  " + std::to_string(loot_xp) +"_Gold Gained:  "+std::to_string(loot_gold)+"_Items Gained:  _  ";
+	for (size_t i = 0; i < loot.size(); i++)
+	{
+		str += shopinv[loot[i]].GetName() + " _  ";
+	}
+	GameData::GetInstance()->GetFont()->DrawString(str, 250, 350, { 20, 0, 20 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Press Enter to Continue", 250, 300, { 50, 50, 50 }, 2.0f);
 }

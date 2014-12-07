@@ -630,7 +630,7 @@ bool TurnManager::CheckLose()
 void TurnManager::EndCombat()
 {
 	GameData::GetInstance()->SetIsInCombat( false );
-	GamePlayState::GetInstance()->SetState( GPStates::Town );
+	GamePlayState::GetInstance()->SetState( GPStates::BattleSummary );
 	GamePlayState::GetInstance()->SetLastState( GPStates::Town );
 	TurnManager::GetInstance()->Terminate();
 }
