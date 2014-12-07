@@ -113,6 +113,8 @@ class GamePlayState :
 	std::vector<CombatPlayer*> Parents;
 
 public:
+	bool MinibossFight = false;
+	bool FinalBossFight = false;
 	bool ignore_game_over = false;
 	bool AbilityUsed;
 	float abilityTimer;
