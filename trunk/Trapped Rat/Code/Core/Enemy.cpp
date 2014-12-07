@@ -299,7 +299,7 @@ void Enemy::RavenAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -358,7 +358,7 @@ void Enemy::DogAI()
 			if ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 				{
 				dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
-				while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+				while ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 					{
 					dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
 					}
@@ -388,7 +388,7 @@ void Enemy::DogAI()
 		if ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 			{
 			dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
-			while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+			while ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 				{
 				dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
 				}
@@ -415,7 +415,7 @@ void Enemy::DogAI()
 	else
 		{
 		dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
-		while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+		while ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 			{
 			dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
 			}
@@ -618,7 +618,7 @@ void Enemy::GuardAI()
 		if ( !TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
 			++guardTally;
 		}
-	if ( (unsigned int)(guardTally) >= ( TurnManager::GetInstance()->GetEnemies().size() - 1 ) )
+	if ( guardTally == 1 )
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		return;
@@ -643,7 +643,7 @@ void Enemy::BWRAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -676,7 +676,7 @@ void Enemy::FFWAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -716,7 +716,7 @@ void Enemy::SEMAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -1046,7 +1046,7 @@ void Enemy::JaneAI()
 				}
 			}
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
-		while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 			{
 			target = rand() % TurnManager::GetInstance()->GetAllies().size();
 			}
