@@ -166,7 +166,7 @@ void TurnManager::Render()
 		SGD::GraphicsManager::GetInstance()->DrawTexture( timelineImage, { 0, 70 }, 0.0f, { }, { }, { 1.0f, .5f } );
 		for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
 		{
-			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE )
+			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE  && AlliedUnits[i]->isAlive())
 			{
 				//87 = y
 				//95 = start x
@@ -185,7 +185,7 @@ void TurnManager::Render()
 		}
 		for ( size_t i = 0; i < EnemyUnits.size(); i++ )
 		{
-			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE )
+			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE && EnemyUnits[i]->isAlive())
 			{
 				float progress = EnemyUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;

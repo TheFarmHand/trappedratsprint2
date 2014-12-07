@@ -457,9 +457,13 @@ void GamePlayState::Enter()
 	//CutsceneManager::GetInstance()->Play( 0 );
 	Loading("Time to Play.......");
 
+	MinibossFight = false;
+	FinalBossFight = false;
 	SGD::InputManager::GetInstance()->Update();
 	state = Map;
 	laststate = Map;
+
+
 	//state = BattleSummary;
 	}
 void const GamePlayState::Render()
@@ -1516,7 +1520,7 @@ Enemy * GamePlayState::CreateCommonEnemy( std::string name, Stats _stats, int _l
 
 	temp->SetAnimations( tempanimsys );
 
-	if ( temp->GetName() == "Dog" )
+//	if ( temp->GetName() == "Dog" )
 		{
 		temp->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
 		}
@@ -1754,11 +1758,11 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 			}
 
 		}
-	if ( toon->GetName() == "Ratsputin" )
+	//if ( toon->GetName() == "Ratsputin" )
 		{
 		toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/RatTimeline.png" ) );
 		}
-	if ( toon->GetName() == "Ratsputin" )
+	//if ( toon->GetName() == "Ratsputin" )
 		{
 		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/Bowie.png" ) );
 
@@ -2132,6 +2136,17 @@ void GamePlayState::SummaryUpdate(float dt)
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
 	{
+		if (MinibossFight)
+		{
+			MinibossFight = false;
+			if (unlockedTowns == SelectedTown )
+				unlockedTowns++;
+		}
+		if (FinalBossFight)
+		{
+			//Trigger Ending Cutscene or Dialouge
+			FinalBossFight = false;
+		}
 		state = Town;
 		loot.clear();
 		loot_xp = 0;
@@ -2188,6 +2203,8 @@ std::map<std::string, Ability*> GamePlayState::GetMasterList()
 
 void GamePlayState::CreateFinalFight()
 {
+
+	FinalBossFight = true;
 SGD::Point characterOrderPosition;
 std::vector<Enemy*> bosses;
 std::vector<Ability*> partyAbilities;
@@ -2272,6 +2289,7 @@ laststate = Combat;
 	state = Dia;
 	laststate = Combat;
 	dialogue->Load("Assets/Scripts/bossdialogue.xml");
+	FinalBossFight = true;
 }
 
 void GamePlayState::SetLootXP( int val )
@@ -2284,13 +2302,14 @@ void GamePlayState::SetLootXP( int val )
 void GamePlayState::CreateMinibossFight()
 {
 	//Stub
+	MinibossFight = true;
 SGD::Point characterOrderPosition;
 std::vector<Enemy*> bosses;
 std::vector<Ability*> partyAbilities;
 
 	switch (SelectedTown)  //NOTE FOR JOE****Make sure to increment "unlockedTowns" after you win the fight against these Minibosses
 	{
-		case 0: //Wind <---
+	case 0: //Wind <---
 			{
 			Enemy* BWR1 = nullptr;
 			BWR1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Benevolent Wind Rogue.xml" );
@@ -2350,9 +2369,9 @@ std::vector<Ability*> partyAbilities;
 			state = Dia;
 			laststate = Combat;
 			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
-			break;
+		break;
 			}
-		case 1: //Fire <----
+	case 1: //Fire <----
 			{
 			Enemy* FFW1 = nullptr;
 			FFW1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Ferocious Fire Warrior.xml" );
@@ -2412,9 +2431,9 @@ std::vector<Ability*> partyAbilities;
 			state = Dia;
 			laststate = Combat;
 			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
-			break;
+		break;
 			}
-		case 2: //Earth <---
+	case 2: //Earth <---
 			{
 			Enemy* SEM1 = nullptr;
 			SEM1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Sturdy Earth Monk.xml" );
@@ -2476,9 +2495,9 @@ std::vector<Ability*> partyAbilities;
 			state = Dia;
 			laststate = Combat;
 			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
-			break;
+		break;
 			}
-		case 3: //Water <----
+	case 3: //Water <----
 			{
 			Enemy* WWW1 = nullptr;
 			WWW1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Wise Water Wizard.xml" );
@@ -2538,7 +2557,7 @@ std::vector<Ability*> partyAbilities;
 			state = Dia;
 			laststate = Combat;
 			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
-			break;
+		break;
 			}
 	case 4://Cecils HomeTown **Should Not Be Used because no miniboss in that town
 		break;
