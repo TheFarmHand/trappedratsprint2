@@ -449,7 +449,18 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 				dmg = 0;
 			target->TakeDamage( dmg );
 		}
+
+		// Primarily (only) Cecil fight
+		else if ( ( ( *iter )->GetName() ==  "PhysicalReflect"))
+			// Do your damage to yourself
+		{
+			int dmg = value;
+			dmg -= (int)( 0.25f * target->GetDefense( ) );
+			owner->TakeDamage(value);
+			return;	// Don't allow other settings to fire
+		}
 	}
+
 
 	if ( firespike )
 	{
@@ -499,6 +510,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 
 	if ( !dodge && !counter && !guard )
+		// I think this value needs Defense modification
 	{
 		target->TakeDamage( value );
 
@@ -514,9 +526,15 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ability, bool ternary )
 // Calculates and dishes out damage based on an ability
 {
-	// Room here for adding particle effects
+	// Room here for adding particle effects && Cecil!
 	ability->CalculateFormula( owner, target );
-	ability->CastAbility( owner, target, 0, ternary );
+	// Reflect ability damage back to caster if MacialReflect exists
+	if(target->HasEffect("MagicalReflect"))
+	{
+		ability->CastAbility(target, owner);
+	}
+	else
+		ability->CastAbility( owner, target, 0, ternary );
 }
 
 
