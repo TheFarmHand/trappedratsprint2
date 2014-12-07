@@ -248,56 +248,57 @@ void Enemy::CecilAI( int phase )
 	}
 }
 void Enemy::CecilPhaseOne()
-{
-	if ( progress >= 100.0f )
 	{
-	TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
-	TurnManager::GetInstance()->GetEnemies()[2]->JohnDead = false;
 	if ( progress >= 100.0f )
 		{
-		float tenthHealth = HP / (float)( GetMaxHP() );
-		bool below30 = false;
-		int target;
-		if ( tenthHealth > 0.1f )
-		{
-			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
+		TurnManager::GetInstance()->GetEnemies()[2]->JohnDead = false;
+		if ( progress >= 100.0f )
 			{
-				if ( TurnManager::GetInstance()->GetAllies()[ i ]->GetHP() / TurnManager::GetInstance()->GetAllies()[ i ]->GetMaxHP() < 0.3f )
+			float tenthHealth = HP / (float)( GetMaxHP() );
+			bool below30 = false;
+			int target;
+			if ( tenthHealth > 0.1f )
 				{
-					below30 = true;
-					target = i;
-					break;
+				for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+					{
+					if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() < 0.3f )
+						{
+						below30 = true;
+						target = i;
+						break;
+						}
+					}
+				if ( !below30 )
+					{
+					target = rand() % TurnManager::GetInstance()->GetAllies().size();
+					}
+				int atk = GetStats().attack;
+				int dmg = rand() % atk + atk;
+				dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+				if ( dmg <= 0 )
+					dmg = 0;
+				TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+				}
+			else
+				{
+				CecilPhase = 2;
+				SetHP( GetMaxHP() + 100 );
+				stats.attack += 5;
+				stats.avoision += 5;
+				stats.defense += 10;
+				stats.magic += 5;
+
+				TurnManager::GetInstance()->GetEnemies()[0]->SetLiving( true );
+				TurnManager::GetInstance()->GetEnemies()[0]->SetHP( TurnManager::GetInstance()->GetEnemies()[0]->GetMaxHP() );
+				TurnManager::GetInstance()->GetEnemies()[0]->SetProgress( 0.0f );
+				TurnManager::GetInstance()->GetEnemies()[2]->SetLiving( true );
+				TurnManager::GetInstance()->GetEnemies()[2]->SetHP( TurnManager::GetInstance()->GetEnemies()[2]->GetMaxHP() );
+				TurnManager::GetInstance()->GetEnemies()[2]->SetProgress( 0.0f );
 				}
 			}
-			if ( !below30 )
-			{
-				target = rand() % TurnManager::GetInstance()->GetAllies().size();
-				}
-			int atk = GetStats().attack;
-			int dmg = rand() % atk + atk;
-			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[ target ]->GetStats().defense );
-			if ( dmg <= 0 )
-				dmg = 0;
-			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[ target ], dmg );
-		}
-		else
-		{
-			CecilPhase = 2;
-			SetHP( GetMaxHP() + 100 );
-			stats.attack += 5;
-			stats.avoision += 5;
-			stats.defense += 10;
-			stats.magic += 5;
-
-			TurnManager::GetInstance()->GetEnemies()[ 0 ]->SetLiving( true );
-			TurnManager::GetInstance()->GetEnemies()[ 0 ]->SetHP( TurnManager::GetInstance()->GetEnemies()[ 0 ]->GetMaxHP() );
-			TurnManager::GetInstance()->GetEnemies()[ 0 ]->SetProgress( 0.0f );
-			TurnManager::GetInstance()->GetEnemies()[ 2 ]->SetLiving( true );
-			TurnManager::GetInstance()->GetEnemies()[ 2 ]->SetHP( TurnManager::GetInstance()->GetEnemies()[ 2 ]->GetMaxHP() );
-			TurnManager::GetInstance()->GetEnemies()[ 2 ]->SetProgress( 0.0f );
 		}
 	}
-}
 void Enemy::CecilPhaseTwo()
 {
 	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneDead )

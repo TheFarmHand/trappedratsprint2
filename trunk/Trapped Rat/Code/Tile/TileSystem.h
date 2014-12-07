@@ -21,6 +21,7 @@ public:
 	void TileEvent( SGD::Point pos );
 	int GetLayerWidth();
 	int GetLayerHeight();
+	SGD::Point GetTilePosition( int TiD );
 
 private:
 	Layer layers;
