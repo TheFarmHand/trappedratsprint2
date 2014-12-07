@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Victory</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Cecil has been Defeated!!!</Words>
+  </Message>
+</Dialogue>
