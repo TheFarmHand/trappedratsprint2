@@ -8,6 +8,7 @@ Guard::Guard()
 {
 	ansys = new AnimationSystem();
 	ansys->Load("GuardOverWorld.xml");
+	ansys->Play(0);
 }
 
 
