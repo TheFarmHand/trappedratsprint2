@@ -20,7 +20,7 @@
 #include "../Cutscenes/CutsceneManager.h"
 #include "../Core/Boss.h"
 #include "../SGD Wrappers/SGD_Event.h"
-
+#include "GameOverWinState.h"
 
 
 GamePlayState* GamePlayState::GetInstance()
@@ -1414,7 +1414,6 @@ void GamePlayState::CombatUpdate( float dt )
 		GameData::GetInstance()->SetIsInCombat( false );
 		TurnManager::GetInstance()->Terminate();
 		run_succeed = false;
-
 		}
 
 	/*if ( input->IsKeyPressed( SGD::Key::Eight ) )
@@ -1602,6 +1601,13 @@ void GamePlayState::DialogueUpdate( float dt )
 	if ( !dialogue->Update( dt ) )
 		{
 		state = laststate;
+		if (FinalBossFight && laststate == BattleSummary)
+		{
+			GameData::GetInstance()->SwapState(GameOverWinState::GetInstance());
+			FinalBossFight = false;
+			laststate = Town;
+			state = Town;
+		}
 		}
 	}
 void GamePlayState::DialogueRender()
@@ -2168,7 +2174,11 @@ void GamePlayState::SummaryUpdate(float dt)
 		if (FinalBossFight)
 		{
 			//Trigger Ending Cutscene or Dialouge
-			FinalBossFight = false;
+			//for now we will have to just do dialogue
+			dialogue->Load("../Trapped Rat/Assets/Scripts/cecildefeateddialogue.xml");
+			state = Dia;
+			laststate = Town;
+			//FinalBossFight = false;
 		}
 
 		// Guard Code
@@ -2317,8 +2327,9 @@ for ( size_t i = 0; i < bosses.size(); i++ )
 	m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
 	}
 GameData::GetInstance()->SetIsInCombat( true );
-state = Combat;
-laststate = Combat;
+	state = Combat;
+	laststate = Combat;
+
 
 	state = Dia;
 	laststate = Combat;
