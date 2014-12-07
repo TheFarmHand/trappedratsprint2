@@ -598,7 +598,7 @@ void GamePlayState::Exit()
 		guards[i] = nullptr;
 	}
 	guards.clear();
-	
+	shopinv.clear();
 	Party.clear();
 	delete WorldMapAnsys;
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combatback );
@@ -892,6 +892,8 @@ void GamePlayState::MenuUpdate( float dt )
 		{
 		case None:
 			maxindex = 4;
+			if (laststate == Combat)
+				maxindex = 2;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) )
 				{
 				GameData::GetInstance()->PlaySelectionChange();
@@ -949,52 +951,72 @@ void GamePlayState::MenuUpdate( float dt )
 		{
 		switch ( substate )
 			{
-			case None:
+		case None:
+		{
 
-				switch ( menuindex )
-					{
-					case 0:
-						{
-						GameData::GetInstance()->PlaySelectionChange();
-						substate = MenuSubStates::Shop;
-						
-					
-						break;
-						}
-					case 1:
-
-						menuindex = 0;
-						selecting_ability = false;
-						selecting_party = false;
-						select_first = false;
-						select_new = false;
-						substate = MenuSubStates::Party;
-						GameData::GetInstance()->PlaySelectionChange();
-
-						break;
-					case 2:
-						GameData::GetInstance()->SwapState( MainMenuState::GetInstance() );
-						state = GPStates::Town;
-						laststate = state;
-						substate = MenuSubStates::None;
-						menuindex = 0;
+					 
+					 switch (menuindex)
+					 {
+					 case 0:
+					 {
+							   GameData::GetInstance()->PlaySelectionChange();
+							   if (laststate == Combat)
+							   {
+								   GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+								   state = GPStates::Town;
+								   laststate = state;
+								   substate = MenuSubStates::None;
+								   menuindex = 0;
+							   }
+							   else
+								substate = MenuSubStates::Shop;
 
 
-						break;
-					case 3:
+							   break;
+					 }
+					 case 1:
+						 if (laststate == Combat)
+						 {
+							 GameData::GetInstance()->PlaySelectionChange();
+							 menuindex = 0;
+							 substate = MenuSubStates::Options;
+						 }
+						 else
+						 {
+							 menuindex = 0;
+							 selecting_ability = false;
+							 selecting_party = false;
+							 select_first = false;
+							 select_new = false;
+							 substate = MenuSubStates::Party;
+							 GameData::GetInstance()->PlaySelectionChange();
+						 }
 
-						GameData::GetInstance()->PlaySelectionChange();
-						menuindex = 0;
-						substate = MenuSubStates::Options;
-						break;
-					case 4:
-						GameData::GetInstance()->PlaySelectionChange();
-						state = laststate;
-						break;
-					default:
-						break;
-					}
-				break;
+						 break;
+					 case 2:
+						 GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+						 state = GPStates::Town;
+						 laststate = state;
+						 substate = MenuSubStates::None;
+						 menuindex = 0;
+
+
+						 break;
+					 case 3:
+
+						 GameData::GetInstance()->PlaySelectionChange();
+						 menuindex = 0;
+						 substate = MenuSubStates::Options;
+						 break;
+					 case 4:
+						 GameData::GetInstance()->PlaySelectionChange();
+						 state = laststate;
+						 break;
+					 default:
+						 break;
+					 }
+					 break;
+		}
 			case Options:
 				switch ( menuindex )
 					{
@@ -1055,15 +1077,18 @@ void GamePlayState::MenuUpdate( float dt )
 				}
 				else if (select_new && selecting_ability)
 				{
-					if ( !Party[character_index]->GetAbility( menuindex )->GetUnlocked() )
+					if (!Party[character_index]->GetAbility(menuindex)->GetUnlocked())
 						return;
-						//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
+					//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
+					if (Party[character_index]->GetLevel() >= Party[character_index]->GetAbility(menuindex)->GetUnlockLevel())
+					{
+
 						Ability* temp = Party[character_index]->GetAbility(menuindex);
 						Ability *temp2 = Party[character_index]->GetAbility(oldindex);
 						Party[character_index]->SetAbility(menuindex, temp2);
 						Party[character_index]->SetAbility(oldindex, temp);
+					}
 					
-
 					select_new = false;
 					selecting_ability = false;
 					select_first = false;
@@ -1244,14 +1269,28 @@ void GamePlayState::MenuRender()
 			SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
 			SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
 			SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
+			if (laststate != Combat)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+			}
 			graphics->DrawTextureSection( cursor, { 10.0f, 95.0f + ( menuindex * 80 ) }, { 0, 0, 238, 73 } );
-			GameData::GetInstance()->GetFont()->DrawString( "Shop", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f );
-			GameData::GetInstance()->GetFont()->DrawString( "Party", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f );
-			GameData::GetInstance()->GetFont()->DrawString( "Main Menu", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f );
-			GameData::GetInstance()->GetFont()->DrawString( "Options", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f );
-			GameData::GetInstance()->GetFont()->DrawString( "Exit", 100.0f, 440.0f, { 0, 0, 0 }, 2.0f );
+			if (laststate == Combat)
+			{
+				
+				GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+			}
+			else
+			{
+				GameData::GetInstance()->GetFont()->DrawString("Shop", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Party", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Main Menu", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 440.0f, { 0, 0, 0 }, 2.0f);
+			}
+
 
 			break;
 		case Options:
@@ -1366,7 +1405,13 @@ void GamePlayState::MenuRender()
 					}
 					else
 					{
-						GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+						if (Party[character_index]->GetAbility(i)->GetUnlocked() && i <= 3)
+							GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 255, 0 }, 1.5f);
+						else if (!Party[character_index]->GetAbility(i)->GetUnlocked())
+							GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 255,0,0 }, 1.5f);
+						else
+							GameData::GetInstance()->GetFont()->DrawString(name, 490.0f, 185.0f + (i * 35), { 0, 0, 0 }, 1.5f);
+
 					}
 				}
 				graphics->DrawTextureSection(cursor, { 400.0f, 160.0f + (menuindex * 35) }, { 0, 0, 238, 73 });
@@ -1615,10 +1660,11 @@ void GamePlayState::DialogueUpdate( float dt )
 		state = laststate;
 		if (FinalBossFight && laststate == BattleSummary)
 		{
-			GameData::GetInstance()->SwapState(GameOverWinState::GetInstance());
+			
 			FinalBossFight = false;
 			laststate = Town;
 			state = Town;
+			GameData::GetInstance()->SwapState(GameOverWinState::GetInstance());
 		}
 		}
 	}
