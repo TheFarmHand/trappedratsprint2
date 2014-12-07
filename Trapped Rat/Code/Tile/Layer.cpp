@@ -140,7 +140,9 @@ void Layer::Render()
 
 void Layer::Exit()
 	{
-	delete[] tileMap;
+	if (tileMap !=  nullptr )
+		delete[] tileMap;
+	tileMap = nullptr;
 	//Change to guard
 	//Here
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( tileSet );
