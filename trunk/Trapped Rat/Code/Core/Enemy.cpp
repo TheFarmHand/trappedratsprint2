@@ -8,84 +8,84 @@
 
 
 Enemy::Enemy()
-{
-}
+	{
+	}
 
 
 Enemy::~Enemy()
-{
+	{
 	if ( ansys != nullptr )
 		delete ansys;
-}
+	}
 void Enemy::Update( float dt )
-{
+	{
 
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
-	{
+		{
 		progress += speed * dt;
-	}
+		}
 
 	else if ( progress < 100.0f )
-	{
-		if ( stepbackward == true && stepforward == false )
 		{
+		if ( stepbackward == true && stepforward == false )
+			{
 			stepTime -= dt;
 			SGD::Point pos = GetPosition();
 			pos.x += stepvelocity*dt;
 			SetPosition( pos );
 			if ( stepTime <= 0.0f )
 				stepbackward = false;
-		}
+			}
 		if ( stepbackward == false && stepforward == false )
-		{
+			{
 			TurnManager::GetInstance()->setProgressFullReached( false );
 			TurnManager::GetInstance()->setTimeStop( false );
-		}
+			}
 		return;
-	}
+		}
 
 	if ( progress >= 100.0f )
-	{
-		if ( !TurnManager::GetInstance()->getProgressFullReached() )
 		{
+		if ( !TurnManager::GetInstance()->getProgressFullReached() )
+			{
 			StatusTick();
 
 			if ( !alive )
-			{
+				{
 				progress = 0.0f;
 				return;
-			}
+				}
 			TurnManager::GetInstance()->setProgressFullReached( true );
 			TurnManager::GetInstance()->setTimeStop( true );
 			return;
-		}
+			}
 
 		if ( HasEffect( "Stun" ) )
-		{
+			{
 			// Lose your turn if stunned
 			progress = 0.0f;
 			return;
-		}
+			}
 
 
 
 		if ( stepforward == false && stepbackward == false )
-		{
+			{
 			stepforward = true;
 			stepTime = 2.0f;
-		}
+			}
 		if ( stepforward == true && stepbackward == false )
-		{
+			{
 			stepTime -= dt;
 			SGD::Point pos = GetPosition();
 			pos.x -= stepvelocity*dt;
 			SetPosition( pos );
 			if ( stepTime <= 0.0f )
 				stepforward = false;
-		}
+			}
 
 		if ( stepbackward == false && stepforward == false )
-		{
+			{
 			// Enemy Select Player
 			if ( name == "Cecil" )
 				CecilAI( CecilPhase );
@@ -94,37 +94,37 @@ void Enemy::Update( float dt )
 			else if ( name == "John" )
 				JohnAI();
 			else
-			{
-				if ( HasEffect( "Confused" ) )
 				{
+				if ( HasEffect( "Confused" ) )
+					{
 
 					// Do Confused Action (attack random target, anyone)
 					int targets = TurnManager::GetInstance()->GetAll().size();
 					int hit_this_guy = rand() % targets;
 
-					Attack( this, TurnManager::GetInstance()->GetAll()[ hit_this_guy ] );
+					Attack( this, TurnManager::GetInstance()->GetAll()[hit_this_guy] );
 
 					if ( stepbackward == false && stepforward == false && progress != 0.0f )
-					{
+						{
 						stepbackward = true;
 						stepTime = 2.0f;
 						progress = 0.0f;
-					}
+						}
 					progress = 0.0f;
-					TurnManager::GetInstance( )->setProgressFullReached( false );
-					TurnManager::GetInstance( )->setTurnPause( true );
-				}
+					TurnManager::GetInstance()->setProgressFullReached( false );
+					TurnManager::GetInstance()->setTurnPause( true );
+					}
 
 				else
-				{
+					{
 					int pool = TurnManager::GetInstance()->GetAllies().size();
 					std::vector<int> living;
 
 					for ( int i = 0; i < pool; i++ )
-					{
-						if ( TurnManager::GetInstance()->GetAllies()[ i ]->isAlive() )
+						{
+						if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 							living.push_back( i );
-					}
+						}
 
 					if ( living.size() > 0 )
 						pool = rand() % ( living.size() );
@@ -134,38 +134,38 @@ void Enemy::Update( float dt )
 
 					//if ( SGD::InputManager::GetInstance( )->IsKeyPressed( SGD::Key::Enter ) )
 					if ( pool == -1 ) // Hack job to prevent enemies from murdering dead players/breaking code
-					{
+						{
 						progress = 0.0f;
 						TurnManager::GetInstance()->setTimeStop( false );
 						return;
+						}
+
+					Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
 					}
-				
-				Attack( this, TurnManager::GetInstance()->GetAllies()[ living[ pool ] ] );
 				}
-			}
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
-			{
+				{
 				stepbackward = true;
 				stepTime = 2.0f;
 				progress = 0.0f;
-			}
+				}
 			//Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );
 			progress = 0.0f;
 			TurnManager::GetInstance()->setProgressFullReached( false );
 			TurnManager::GetInstance()->setTurnPause( true );
+			}
 		}
 	}
-}
 void Enemy::UpdateAnimation( float dt )
-{
-	if ( ansys != nullptr )
 	{
+	if ( ansys != nullptr )
+		{
 		ansys->Update( dt );
-	}
+		}
 	Character::Update( dt );
-}
+	}
 void Enemy::Render()
-{
+	{
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 50, position.y - 30, { 200, 0, 0 }, 1.6f );
 	std::ostringstream sp;
@@ -188,54 +188,54 @@ void Enemy::Render()
 	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
 
 	if ( ansys != nullptr )
-	{
+		{
 		ansys->Render( position.x, position.y );
-	}
+		}
 
 
 	Character::Render();
-}
+	}
 void Enemy::BehaviorAI()
-{
+	{
 
-}
+	}
 
 void Enemy::SetAnimations( AnimationSystem* _an )
-{
+	{
 	if ( ansys != nullptr )
 		delete ansys;
 	ansys = _an;
-}
+	}
 AnimationSystem* Enemy::GetAnimations()
-{
+	{
 	return ansys;
-}
+	}
 int Enemy::GetType()
-{
+	{
 	return type::Enemy;
-}
+	}
 
 
 int Enemy::GetXPValue()
-{
+	{
 	return xp_value;
-}
+	}
 
 void Enemy::SetLevel( int lev )
-{
+	{
 	level = lev;
-}
+	}
 
 void Enemy::SetXPVal( int val )
-{
+	{
 	xp_value = val;
-}
+	}
 
 //Cecil Fight
 void Enemy::CecilAI( int phase )
-{
-	switch ( phase )
 	{
+	switch ( phase )
+		{
 		case 1:
 			CecilPhaseOne();
 			break;
@@ -245,8 +245,8 @@ void Enemy::CecilAI( int phase )
 		case 3:
 			CecilPhaseThree();
 			break;
+		}
 	}
-}
 void Enemy::CecilPhaseOne()
 	{
 	if ( progress >= 100.0f )
@@ -262,7 +262,8 @@ void Enemy::CecilPhaseOne()
 				{
 				for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 					{
-					if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() < 0.3f )
+					if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.3f
+						 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 						{
 						below30 = true;
 						target = i;
@@ -272,6 +273,10 @@ void Enemy::CecilPhaseOne()
 				if ( !below30 )
 					{
 					target = rand() % TurnManager::GetInstance()->GetAllies().size();
+					while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+						{
+						target = rand() % TurnManager::GetInstance()->GetAllies().size();
+						}
 					}
 				int atk = GetStats().attack;
 				int dmg = rand() % atk + atk;
@@ -300,7 +305,8 @@ void Enemy::CecilPhaseOne()
 		}
 	}
 void Enemy::CecilPhaseTwo()
-{
+	{
+	int tempAtk;
 	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneDead )
 		{
 		TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
@@ -311,10 +317,36 @@ void Enemy::CecilPhaseTwo()
 			//Cast Super Retribution(wipes companions, weakens ratsputin
 			//Wipe Dodging
 			//Wipe Guarding
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Guarding" );
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Dodging" );
+				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
+					{
+					tempAtk = GetAttack();
+					GetStats().attack = 2;
+					}
+				else
+					{
+					tempAtk = GetAttack();
+					GetStats().attack = 9999;
+					}
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					{
+					abilityList[3]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i], i );
+					}
+				GetStats().attack = tempAtk;
+				}
 			}
 		else
 			//Cast Retribution
-
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Guarding" );
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Dodging" );
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					abilityList[3]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i], i );
+				}
 		return;
 		}
 	if ( TurnManager::GetInstance()->GetEnemies()[2]->JohnDead )
@@ -328,29 +360,58 @@ void Enemy::CecilPhaseTwo()
 			//Cast Super Retribution(wipes companions, weakens ratsputin
 			//Wipe Dodging
 			//Wipe Guarding
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Guarding" );
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Dodging" );
+				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
+					{
+					tempAtk = GetAttack();
+					GetStats().attack = 2;
+					}
+				else
+					{
+					tempAtk = GetAttack();
+					GetStats().attack = 9999;
+					}
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					{
+					abilityList[3]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i], i );
+					}
+				GetStats().attack = tempAtk;
+				}
 			}
 		else
 			//Cast Retribution
-
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Guarding" );
+				TurnManager::GetInstance()->GetAllies()[i]->RemoveEffect( "Dodging" );
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					abilityList[3]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i], i );
+				}
 		return;
 		}
-	if ( JaneHit % 3 == 0 )
+	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
 		{
 		//cover code of Jane
+		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[0] );
 		return;
 		}
-	else if ( JohnHit % 3 == 0 )
-	{
+	else if ( TurnManager::GetInstance()->GetEnemies()[0]->JohnHit % 3 == 0 )
+		{
 		//cover code of John
+		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[2] );
 		return;
 		}
 	else
-	{
+		{
 		if ( !HolyMace )
 			{
 			HolyMace = true;
 			HolyShield = false;
 			//cast Holy Mace
+			abilityList[1]->CastAbility( this, this );
 			return;
 			}
 		else
@@ -358,12 +419,13 @@ void Enemy::CecilPhaseTwo()
 			HolyMace = false;
 			HolyShield = true;
 			//cast Holy Shield
+			abilityList[0]->CastAbility( this, this );
 			return;
 			}
+		}
 	}
-}
 void Enemy::CecilPhaseThree()
-{
+	{
 	if ( !HolyFlare )
 		{
 		HolyFlare = true;
@@ -379,36 +441,54 @@ void Enemy::CecilPhaseThree()
 		}
 	else
 		{
-
-		//Cast Holy Flare
+		if ( damageDealt >= 400 )
+			{
+			//Cast weak Holy Flare
+			TakeDamage( 9999 );
+			}
+		else
+			{
+			//Cast strong Holy Flare
+			TakeDamage( 1 );
+			}
 		}
 
 	}
 void Enemy::JaneAI()
-{
+	{
 	int target;
 	if ( !HasEffect( "DefenseUp" ) )
 		{
 		//cast protect
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+			{
+			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
+			}
 		}
 	else
 		{
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 			{
-			if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.6f )
+			if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.6f
+				 && TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
 				{
 				//cast healing light
+				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
 				return;
 				}
+			}
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+			{
+			target = rand() % TurnManager::GetInstance()->GetAllies().size();
 			}
 		if ( rand() % 10 > 8 )
 			{
 			//cast Dia
+			abilityList[1]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[target] );
 			}
 		else
 			{
-			target = rand() % TurnManager::GetInstance()->GetAllies().size();
-			
 			int atk = TurnManager::GetInstance()->GetAllies()[target]->GetStats().attack;
 			int dmg = rand() % atk + atk;
 			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
@@ -417,9 +497,9 @@ void Enemy::JaneAI()
 			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
 			}
 		}
-}
+	}
 void Enemy::JohnAI()
-{
+	{
 	int target;
 	int lowestHP = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
 	float ratPartyAvgHealth = 0.0f;
@@ -427,21 +507,31 @@ void Enemy::JohnAI()
 	if ( !HasEffect( "SpeedUp" ) )
 		{
 		//cast Haste
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+			{
+			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
+			}
 		}
 	else
 		{
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 			{
-			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.5f )
+			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.5f
+				 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 				{
 				//cast Sure Shot
+				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				return;
 				}
 			}
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 			{
-			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHP )
+			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHP
+				 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+				{
+				lowestHP = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 				target = i;
+				}
 			ratPartyAvgHealth += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 			}
 		ratPartyAvgHealth /= TurnManager::GetInstance()->GetAllies().size();
@@ -449,6 +539,11 @@ void Enemy::JohnAI()
 		if ( ratPartyAvgHealth > 0.75f )
 			{
 			//cast Barrage
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					abilityList[1]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i], i );
+				}
 			return;
 			}
 		else

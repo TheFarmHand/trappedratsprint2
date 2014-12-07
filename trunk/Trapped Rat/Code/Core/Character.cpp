@@ -88,11 +88,16 @@ void Character::UseAbility()
 
 void Character::TakeDamage( int dmg , bool firefall)
 {
+if ( name == "Cecil" && CecilPhase == 3 )
+	{
+	damageDealt += dmg;
+	dmg = 5;
+	}
+if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
+	{
+	dmg = 0;
+	}
 	SetHP(HP - dmg);
-	if ( name == "Cecil" && CecilPhase == 3 )
-		{
-		damageDealt += dmg;
-		}
 	if ( name == "Jane" && alive == true )
 		++JaneHit;
 	else if ( name == "John" && alive == true )
@@ -285,12 +290,9 @@ void Character::SetHP( int _hp )
 		if ( CecilPhase == 1 || CecilPhase == 2 )
 			{
 			HP = (int)(GetMaxHP() * 0.1f);
-			progress = 100.0f;
+			if (CecilPhase == 1 )
+				progress = 100.0f;
 			}
-		}
-	else if ( name == "Cecil" && CecilPhase == 3 )
-		{
-		HP = (int)( GetMaxHP() * 0.1f );
 		}
 	else if ( HP < 0 )
 	{

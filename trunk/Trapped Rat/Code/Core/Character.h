@@ -118,7 +118,7 @@ public:
 	bool critHealth = false;
 	bool JaneDead = false;
 	bool JohnDead = false;
-	int JaneHit = 0;
-	int JohnHit = 0;
+	int JaneHit = -2;
+	int JohnHit = -2;
 };
 
