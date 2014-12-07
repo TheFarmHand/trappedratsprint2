@@ -113,4 +113,8 @@ TestParticleBlue.png
 PhysicalReflect
 0 1 0 2
 TestParticleBlue.png
+
+WaterWall
+0 100 200 2
+TestParticleBlue.png
 *

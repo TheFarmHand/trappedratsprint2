@@ -463,6 +463,16 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			owner->TakeDamage( value );
 			return;	// Don't allow other settings to fire
 		}
+
+		else if ((*iter)->GetName() == "WaterWall")
+		{
+			(*iter)->SetTickDmg((*iter)->GetTickDmg() - value);
+			if((*iter)->GetTickDmg() <= 0)
+			{
+				// Clear it
+				to_remove = (*iter);
+			}
+		}
 	}
 
 
@@ -510,15 +520,21 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else
 			value = value / 2;
 		target->TakeDamage( value );
-		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
+		target->Attack( target, owner );	
 		to_remove->Clear();
+		to_remove = nullptr;
 	}
 
+	if(to_remove != nullptr)
+	{
+		to_remove->Clear();
+		return;
+	}
 
 	if ( !dodge && !counter && !guard )
 		// I think this value needs Defense modification
 	{
-		target->TakeDamage( value );
+		target->TakeDamage( value - target->GetDefense()/4 );
 
 		// This call places the emitter at the proper location
 		pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
