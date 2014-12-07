@@ -4,6 +4,28 @@
   <tileset height="12" width="16" />
   <tilesize height="32" width="32" />
   <player name="Player" startX="32" startY="256" />
+  <guard name="Guard" startX="2912" startY="256">
+    <waypoint tilePoint="885" />
+    <waypoint tilePoint="785" />
+    <waypoint tilePoint="790" />
+    <waypoint tilePoint="990" />
+    <waypoint tilePoint="985" />
+  </guard>
+  <guard name="Guard" startX="800" startY="3008">
+    <waypoint tilePoint="8925" />
+    <waypoint tilePoint="8928" />
+    <waypoint tilePoint="9428" />
+    <waypoint tilePoint="9426" />
+    <waypoint tilePoint="9325" />
+  </guard>
+  <guard name="Guard" startX="1248" startY="2912">
+    <waypoint tilePoint="9143" />
+    <waypoint tilePoint="8743" />
+    <waypoint tilePoint="8739" />
+    <waypoint tilePoint="9039" />
+    <waypoint tilePoint="9140" />
+    <waypoint tilePoint="8548" />
+  </guard>
   <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -895,7 +917,7 @@
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="0" event="none" onfire="none" objectID="g" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -3612,7 +3634,7 @@
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="49" collision="0" event="Miniboss" onfire="" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -9143,107 +9165,7 @@
   <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="54" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="55" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="55" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="54" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="g" objectNumber="2" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -9430,6 +9352,106 @@
   <tiles id="55" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="55" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="153" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="55" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="156" collision="0" event="none" onfire="none" objectID="g" objectNumber="1" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
