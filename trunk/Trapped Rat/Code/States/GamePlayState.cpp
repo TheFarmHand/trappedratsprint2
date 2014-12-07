@@ -138,13 +138,13 @@ void GamePlayState::Enter()
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
 	partyAbilities.push_back( MasterAbilityList["Burrow"] );
-	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
 	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
@@ -1044,7 +1044,8 @@ void GamePlayState::MenuUpdate( float dt )
 				}
 				else if (select_new && selecting_ability)
 				{
-					
+					if ( !Party[character_index]->GetAbility( menuindex )->GetUnlocked() )
+						return;
 						//Party[character_index]->GetAbility(menuindex)->SetUnlocked(true);
 						Ability* temp = Party[character_index]->GetAbility(menuindex);
 						Ability *temp2 = Party[character_index]->GetAbility(oldindex);
