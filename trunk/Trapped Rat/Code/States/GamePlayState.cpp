@@ -2215,6 +2215,12 @@ void GamePlayState::SummaryUpdate(float dt)
 		ignore_game_over = false;
 		state = Map;
 		laststate = Map;
+		for (unsigned int i = 0; i < m_vhuditems.size(); i++)
+		{
+			delete m_vhuditems[i];
+			m_vhuditems[i] = nullptr;
+		}
+		m_vhuditems.clear();
 	}
 	GameData::GetInstance()->SetCamera({ 0, 0 });
 	for (size_t i = 0; i < Party.size(); i++)
