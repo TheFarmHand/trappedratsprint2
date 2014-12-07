@@ -94,13 +94,16 @@ class GamePlayState :
 	bool selecting_ability = false;
 	int character_index = 0;
 	bool select_new = false;
+	bool selecting_party = false;
+	int oldindex = -1;
+	bool select_first = false;
 
 
 	//tutorial stuff
 	bool is_tutorial = false;
 	std::vector<Enemy*> tutorialenemy;
 	std::vector<CombatPlayer*> Parents;
-	int oldindex = -1;
+
 public:
 	bool ignore_game_over = false;
 	bool AbilityUsed;
