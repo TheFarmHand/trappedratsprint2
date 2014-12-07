@@ -103,7 +103,7 @@ Ability::Ability( const char* path )
 	magic->Attribute( "mgcMod", &tempValue );
 	mgcMod = (float)tempValue;
 	TiXmlElement* bp = magic->NextSiblingElement( "BaseBP" );
-	bp->Attribute( "bp", &bpCost );
+	bp->Attribute( "bp", &baseBP );
 	TiXmlElement* hp = bp->NextSiblingElement( "HPMod" );
 	hp->Attribute( "hp", &tempValue );
 	hpMod = (float)( tempValue / 100 );
@@ -282,9 +282,7 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 	}
 void Ability::CalcluateBpScaledCost( Character* owner )
 	{
-	int tempCost = bpCost;
-	tempCost = bpCost + (int)( owner->GetLevel() * 0.5f );
-	bpCost = tempCost;
+	bpCost = baseBP + (int)( owner->GetLevel() * 0.5f );
 	std::string temp = std::to_string( bpCost );
 	temp += " BP cost" + noBPexplination;
 	//explination = temp;
