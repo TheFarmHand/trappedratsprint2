@@ -178,6 +178,16 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 			}
 			target->TakeDamage( dmg );
 		}
+	if ( abilityName == "Wind Split" )
+		{
+		owner->WRsplit = true;
+		TurnManager::GetInstance()->GetEnemies()[1]->SetLiving( true );
+		TurnManager::GetInstance()->GetEnemies()[1]->SetMaxHP( owner->GetMaxHP() / 2 );
+		TurnManager::GetInstance()->GetEnemies()[1]->SetHP( TurnManager::GetInstance()->GetEnemies()[1]->GetMaxHP() );
+		TurnManager::GetInstance()->GetEnemies()[1]->WRsplit = true;
+		owner->SetMaxHP( owner->GetMaxHP() / 2 );
+		owner->SetHP( owner->GetMaxHP() );
+		}
 	if ( status && statusName == "Cover" )
 	{
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner, ternary );

@@ -8,6 +8,10 @@ private:
 	AnimationSystem* ansys = nullptr;
 	int xp_value = 100;
 	//int level;
+	bool 1below25 = false;
+	bool 1below50 = false;
+	bool 1below75 = false;
+	
 
 	//Common Enemy
 	void CatAI();
@@ -19,7 +23,11 @@ private:
 	void TailorAI();
 	void PriestAI();
 	//Mini Boss
-
+	void GuardAI();
+	void BWRAI();
+	void FFWAI();
+	void SEMAI();
+	void WWWAI();
 	//Final Boss
 	void CecilAI( int phase );
 	void CecilPhaseOne();
@@ -50,7 +58,6 @@ public:
 
 	void SetLevel(int lev);
 	void SetXPVal(int val);
-
 
 };
 
