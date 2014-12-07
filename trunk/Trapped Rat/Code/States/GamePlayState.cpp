@@ -2270,7 +2270,7 @@ state = Combat;
 laststate = Combat;
 
 	state = Dia;
-	laststate = Town;
+	laststate = Combat;
 	dialogue->Load("Assets/Scripts/bossdialogue.xml");
 }
 
@@ -2284,16 +2284,262 @@ void GamePlayState::SetLootXP( int val )
 void GamePlayState::CreateMinibossFight()
 {
 	//Stub
+SGD::Point characterOrderPosition;
+std::vector<Enemy*> bosses;
+std::vector<Ability*> partyAbilities;
+
 	switch (SelectedTown)  //NOTE FOR JOE****Make sure to increment "unlockedTowns" after you win the fight against these Minibosses
 	{
-	case 0: //Wind <---
-		break;
-	case 1: //Fire <----
-		break;
-	case 2: //Earth <---
-		break;
-	case 3: //Water <----
-		break;
+		case 0: //Wind <---
+			{
+			Enemy* BWR1 = nullptr;
+			BWR1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Benevolent Wind Rogue.xml" );
+			BWR1->SetOrderPosition( 1 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( BWR1->GetOrderPosition() * 100 + 150 + 16 );
+			BWR1->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Wind Split"] );
+			BWR1->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			Enemy* BWR2 = nullptr;
+			BWR2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Benevolent Wind Rogue.xml" );
+			BWR2->SetOrderPosition( 0 );
+			BWR2->SetLiving( false );
+			BWR2->SetHP( 0 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( BWR2->GetOrderPosition() * 100 + 150 + 16 );
+			BWR2->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Wind Split"] );
+			BWR2->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			bosses.push_back( BWR1 );
+			bosses.push_back( BWR2 );
+
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
+			TurnManager::GetInstance()->Initialize( Party, bosses );
+			for ( size_t i = 0; i < Party.size(); i++ )
+				{
+				if ( Party[i]->GetActive() )
+					{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+					}
+				}
+
+			for ( size_t i = 0; i < bosses.size(); i++ )
+				{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+				}
+			GameData::GetInstance()->SetIsInCombat( true );
+			state = Combat;
+			laststate = Combat;
+
+			state = Dia;
+			laststate = Combat;
+			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+			break;
+			}
+		case 1: //Fire <----
+			{
+			Enemy* FFW1 = nullptr;
+			FFW1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Ferocious Fire Warrior.xml" );
+			FFW1->SetOrderPosition( 1 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( FFW1->GetOrderPosition() * 100 + 150 + 16 );
+			FFW1->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Flame Spout"] );
+			FFW1->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			Enemy* FFW2 = nullptr;
+			FFW2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Ferocious Fire Warrior.xml" );
+			FFW2->SetOrderPosition( 0 );
+			FFW2->SetLiving( false );
+			FFW2->SetHP( 0 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( FFW2->GetOrderPosition() * 100 + 150 + 16 );
+			FFW2->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Flame Spout"] );
+			FFW2->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			bosses.push_back( FFW1 );
+			bosses.push_back( FFW2 );
+
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
+			TurnManager::GetInstance()->Initialize( Party, bosses );
+			for ( size_t i = 0; i < Party.size(); i++ )
+				{
+				if ( Party[i]->GetActive() )
+					{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+					}
+				}
+
+			for ( size_t i = 0; i < bosses.size(); i++ )
+				{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+				}
+			GameData::GetInstance()->SetIsInCombat( true );
+			state = Combat;
+			laststate = Combat;
+
+			state = Dia;
+			laststate = Combat;
+			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+			break;
+			}
+		case 2: //Earth <---
+			{
+			Enemy* SEM1 = nullptr;
+			SEM1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Sturdy Earth Monk.xml" );
+			SEM1->SetOrderPosition( 1 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( SEM1->GetOrderPosition() * 100 + 150 + 16 );
+			SEM1->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Earthen Shield"] );
+			partyAbilities.push_back( MasterAbilityList["Earthen Ward"] );
+			SEM1->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			Enemy* SEM2 = nullptr;
+			SEM2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Sturdy Earth Monk.xml" );
+			SEM2->SetOrderPosition( 0 );
+			SEM2->SetLiving( false );
+			SEM2->SetHP( 0 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( SEM2->GetOrderPosition() * 100 + 150 + 16 );
+			SEM2->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Earthen Shield"] );
+			partyAbilities.push_back( MasterAbilityList["Earthen Ward"] );
+			SEM2->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			bosses.push_back( SEM1 );
+			bosses.push_back( SEM2 );
+
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
+			TurnManager::GetInstance()->Initialize( Party, bosses );
+			for ( size_t i = 0; i < Party.size(); i++ )
+				{
+				if ( Party[i]->GetActive() )
+					{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+					}
+				}
+
+			for ( size_t i = 0; i < bosses.size(); i++ )
+				{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+				}
+			GameData::GetInstance()->SetIsInCombat( true );
+			state = Combat;
+			laststate = Combat;
+
+			state = Dia;
+			laststate = Combat;
+			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+			break;
+			}
+		case 3: //Water <----
+			{
+			Enemy* WWW1 = nullptr;
+			WWW1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Wise Water Wizard.xml" );
+			WWW1->SetOrderPosition( 1 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( WWW1->GetOrderPosition() * 100 + 150 + 16 );
+			WWW1->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Water Wall"] );
+			WWW1->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			Enemy* WWW2 = nullptr;
+			WWW2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Wise Water Wizard.xml" );
+			WWW2->SetOrderPosition( 0 );
+			WWW2->SetLiving( false );
+			WWW2->SetHP( 0 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( WWW2->GetOrderPosition() * 100 + 150 + 16 );
+			WWW2->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList["Water Wall"] );
+			WWW2->InitializeAbilities( partyAbilities );
+			partyAbilities.clear();
+
+			bosses.push_back( WWW1 );
+			bosses.push_back( WWW2 );
+
+			for ( unsigned int i = 0; i < Party.size(); i++ )
+				{
+				Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+				Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+				}
+			TurnManager::GetInstance()->Initialize( Party, bosses );
+			for ( size_t i = 0; i < Party.size(); i++ )
+				{
+				if ( Party[i]->GetActive() )
+					{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+					}
+				}
+
+			for ( size_t i = 0; i < bosses.size(); i++ )
+				{
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+				}
+			GameData::GetInstance()->SetIsInCombat( true );
+			state = Combat;
+			laststate = Combat;
+
+			state = Dia;
+			laststate = Combat;
+			dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+			break;
+			}
 	case 4://Cecils HomeTown **Should Not Be Used because no miniboss in that town
 		break;
 	}
