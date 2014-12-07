@@ -739,14 +739,12 @@ void Enemy::SEMAI()
 		EarthShield = true;
 		EarthWard = false;
 		abilityList[0]->CastAbility( this, this );
-		return;
 		}
 	else
 		{
 		EarthShield = false;
 		EarthWard = true;
 		abilityList[1]->CastAbility( this, this );
-		return;
 		}
 	int dmg = rand() % GetAttack() + GetAttack();
 	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
