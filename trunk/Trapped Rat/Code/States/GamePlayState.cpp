@@ -233,7 +233,34 @@ void GamePlayState::Enter()
 	Party.push_back( p5 );
 
 	partyAbilities.clear();
+	//build the shop inventory
+	Items smallheal;
+	smallheal.SetName("Small Heal");
+	smallheal.SetPrice(10);
+	smallheal.SetExplination("Heals the Target for_a Small Amount");
+	Items largeheal;
+	largeheal.SetName("Large Heal");
+	largeheal.SetPrice(20);
+	largeheal.SetExplination("Heals the Target for_a Large Amount");
+	Items smallbp;
+	smallbp.SetName("Small BP Restore");
+	smallbp.SetPrice(10);
+	smallbp.SetExplination("Restores a Small Amount of BP");
+	Items largebp;
+	largebp.SetName("Large BP Restore");
+	largebp.SetPrice(20);
+	largebp.SetExplination("Restores a Large Amount of BP");
+	Items revive;
+	revive.SetName("Revive");
+	revive.SetPrice(40);
+	revive.SetExplination("Brings the target Back_from the Dead");
 
+
+	shopinv.push_back(smallheal);
+	shopinv.push_back(largeheal);
+	shopinv.push_back(smallbp);
+	shopinv.push_back(largebp);
+	shopinv.push_back(revive);
 	//if this is a tutorial, we load in the stuff for it
 	if ( testFinalFight )
 		{
@@ -354,7 +381,7 @@ void GamePlayState::Enter()
 		cecil->SetPosition(characterOrderPosition);
 		tutorialenemy.push_back(cecil);
 
-		for (unsigned int i = 0; i < tempParty.size(); i++)
+		for (unsigned int i = 0; i < Parents.size(); i++)
 		{
 		Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
 		Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
@@ -366,20 +393,20 @@ void GamePlayState::Enter()
 		Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
 		}
 		TurnManager::GetInstance()->Initialize(Parents, tutorialenemy);
-		for (size_t i = 0; i < tempParty.size(); i++)
+		for (size_t i = 0; i < Parents.size(); i++)
 		{
-			if (tempParty[i]->GetActive())
+			if (Parents[i]->GetActive())
 			{
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempParty[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 440 + (tempParty[i]->GetOrderPosition()*50.0f)), tempParty[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 465 + (tempParty[i]->GetOrderPosition()*50.0f)), tempParty[i], SGD::Color(0, 100, 255), SGD::Point(0, 0), false));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), Parents[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 440 + (Parents[i]->GetOrderPosition()*50.0f)), Parents[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
+				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 465 + (Parents[i]->GetOrderPosition()*50.0f)), Parents[i], SGD::Color(0, 100, 255), SGD::Point(0, 0), false));
 			}
 		}
 
 
-		for (size_t i = 0; i < tempEnemy.size(); i++)
+		for (size_t i = 0; i < tutorialenemy.size(); i++)
 		{
-			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tempEnemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
+			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tutorialenemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
 		}
 		state = Combat;
 		laststate = Combat;
@@ -832,34 +859,7 @@ void GamePlayState::MenuUpdate( float dt )
 						{
 						GameData::GetInstance()->PlaySelectionChange();
 						substate = MenuSubStates::Shop;
-						//build the shop inventory
-						Items smallheal;
-						smallheal.SetName( "Small Heal" );
-						smallheal.SetPrice( 10 );
-						smallheal.SetExplination("Heals the Target for_a Small Amount");
-						Items largeheal;
-						largeheal.SetName( "Large Heal" );
-						largeheal.SetPrice( 20 );
-						largeheal.SetExplination("Heals the Target for_a Large Amount");
-						Items smallbp;
-						smallbp.SetName( "Small BP Restore" );
-						smallbp.SetPrice( 10 );
-						smallbp.SetExplination("Restores a Small Amount of BP");
-						Items largebp;
-						largebp.SetName( "Large BP Restore" );
-						largebp.SetPrice( 20 );
-						largebp.SetExplination("Restores a Large Amount of BP");
-						Items revive;
-						revive.SetName( "Revive" );
-						revive.SetPrice( 40 );
-						revive.SetExplination("Brings the target Back_from the Dead");
-	
-
-						shopinv.push_back( smallheal );
-						shopinv.push_back( largeheal );
-						shopinv.push_back( smallbp );
-						shopinv.push_back( largebp );
-						shopinv.push_back( revive );
+						
 					
 						break;
 						}
