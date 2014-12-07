@@ -311,7 +311,7 @@ void Character::SetHP( int _hp )
 	else
 		alive = false;
 		}
-	else if ( HP < 0 )
+	else if ( HP <= 0 )
 	{
 		HP = 0;
 		alive = false;

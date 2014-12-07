@@ -227,8 +227,8 @@ void TurnManager::Render()
 		pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
-	//if ( testCover )
-		//SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 2 ]->GetPosition().x + 150, AlliedUnits[ 2 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
+	if ( testCover )
+		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
 
 	//Render Elemental Chart if Needed
 
@@ -506,7 +506,8 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		int dmg = owner->GetAttack();
 		dmg += rand() % ( dmg / 3 );
 		dmg -= Guard->GetGuard()->GetDefense() / 2;
-
+		if ( dmg <= 0 )
+			dmg = 0;
 		if ( Guard->GetTernEffect() )
 			owner->TakeDamage( dmg );
 		else
