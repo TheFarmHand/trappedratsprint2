@@ -2149,21 +2149,35 @@ void GamePlayState::SummaryUpdate(float dt)
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
 	{
+		
+		state = Town;
+		loot.clear();
+		loot_xp = 0;
+		loot_gold = 0;
+
 		if (MinibossFight)
 		{
 			MinibossFight = false;
-			if (unlockedTowns == SelectedTown )
+			if (unlockedTowns == SelectedTown)
 				unlockedTowns++;
+
+
+			for (unsigned int i = 0; i < guards.size(); i++)
+			{
+				delete guards[i];
+				guards[i] = nullptr;
+			}
+			guards.clear();
+
+			TileSystem::GetInstance()->Exit();
+
+			state = Map;
 		}
 		if (FinalBossFight)
 		{
 			//Trigger Ending Cutscene or Dialouge
 			FinalBossFight = false;
 		}
-		state = Town;
-		loot.clear();
-		loot_xp = 0;
-		loot_gold = 0;
 
 		// Guard Code
 		if(guard_index != -1)
