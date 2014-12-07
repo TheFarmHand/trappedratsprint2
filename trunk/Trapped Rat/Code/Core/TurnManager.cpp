@@ -121,6 +121,7 @@ void TurnManager::Update( float dt )
 			//GamePlayState::GetInstance()->EndOfCombatScreen();
 
 			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
+			GamePlayState::GetInstance()->SetState(GPStates::BattleSummary);
 			EndCombat();
 			return;
 		}
@@ -630,7 +631,6 @@ bool TurnManager::CheckLose()
 void TurnManager::EndCombat()
 {
 	GameData::GetInstance()->SetIsInCombat( false );
-	GamePlayState::GetInstance()->SetState( GPStates::BattleSummary );
 	GamePlayState::GetInstance()->SetLastState( GPStates::Town );
 	TurnManager::GetInstance()->Terminate();
 }
