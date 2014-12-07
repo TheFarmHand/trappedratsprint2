@@ -105,4 +105,12 @@ TestParticleBlue.png
 Guarding
 0 1 0 2
 TestParticleBlue.png
+
+MagicalReflect
+0 1 0 2
+TestParticleBlue.png
+
+PhysicalReflect
+0 1 0 2
+TestParticleBlue.png
 *

@@ -546,6 +546,7 @@ void GamePlayState::Exit()
 	if ( helptextbox != nullptr )
 		delete helptextbox;
 
+	TurnManager::GetInstance( )->Terminate( );
 
 	for ( unsigned int i = 0; i < Party.size(); i++ )
 		{
@@ -593,7 +594,7 @@ void GamePlayState::Exit()
 
 	// Double Check ParticleManager in TurnManager (Particles need to be a singleton, blah)
 	// Cleans up those leaks
-	TurnManager::GetInstance()->Terminate();
+	
 
 	auto iterAbil = MasterAbilityList.begin();
 	for ( ; iterAbil != MasterAbilityList.end(); ++iterAbil )
@@ -1815,7 +1816,8 @@ void GamePlayState::CheckAbilityUnlocked(bool EOC)
 				Party[i]->GetAbility( k )->SetUnlocked( true );
 				if ( EOC )
 					{
-					//Enter code to notify loot/exp screen that a new ability was unlocked(i.e. level gained...show stat gains and new ability unlocked)
+						//Enter code to notify loot/exp screen that a new ability was unlocked(i.e. level gained...show stat gains and new ability unlocked)
+						// Print to Window Screen the details
 					}
 				}
 			}
@@ -1921,9 +1923,18 @@ void GamePlayState::MapRender()
 
 void GamePlayState::AddItem( ItemType it )
 {
-	/*if(it == MaxRevive && inventory[it].item_count < MAXREV)
-		inventory[it].item_count++;
-	else if(inventory[i].item_count < MAXITEM)
-		inventory[it].item_count++;*/
+	inventory.push_back(shopinv[it]);
+	loot.push_back(it);
 
+}
+
+void GamePlayState::AddGold(int val)
+{
+	gold += val;
+	loot_gold = val;
+}
+
+int GamePlayState::GetGold(void) const
+{
+	return gold;
 }

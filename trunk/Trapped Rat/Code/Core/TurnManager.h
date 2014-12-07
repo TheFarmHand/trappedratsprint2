@@ -67,7 +67,9 @@ private:
 	void CombatUpdate(float dt);
 	void AnimationUpdate( float dt );
 	void ParticleUpdate( float dt );
+
 	void CombatLoot();
+	void CombatXP();
 
 	ParticleManager *pPartMan;
 
