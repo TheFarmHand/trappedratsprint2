@@ -31,7 +31,10 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
-	
+	run_succeed = false;
+	MinibossFight = false;
+	FinalBossFight = false;
+	ignore_game_over = false;
 
 	townpoints[0] = SGD::Point(600, 400);
 	townpoints[1] = SGD::Point(360, 130);
@@ -597,9 +600,11 @@ void GamePlayState::Exit()
 		delete guards[i];
 		guards[i] = nullptr;
 	}
+	tutorialenemy.clear();
 	guards.clear();
 	shopinv.clear();
 	Party.clear();
+	Parents.clear();
 	delete WorldMapAnsys;
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combatback );
 
