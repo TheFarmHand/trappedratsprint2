@@ -274,6 +274,13 @@ void GamePlayState::Enter()
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)( cecilFinal->GetOrderPosition() * 100 + 150 + 16 );
 		cecilFinal->SetPosition( characterOrderPosition );
+		partyAbilities.push_back( MasterAbilityList["Holy Shield"] );
+		partyAbilities.push_back( MasterAbilityList["Holy Mace"] );
+		partyAbilities.push_back( MasterAbilityList["Holy Flare"] );
+		partyAbilities.push_back( MasterAbilityList["Retribution"] );
+		partyAbilities.push_back( MasterAbilityList["Cover"] );
+		cecilFinal->InitializeAbilities( partyAbilities );
+		partyAbilities.clear();
 
 		Enemy* janeFinal = nullptr;
 		janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
@@ -283,6 +290,11 @@ void GamePlayState::Enter()
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
 		janeFinal->SetPosition( characterOrderPosition );
+		partyAbilities.push_back( MasterAbilityList["Healing Light"] );
+		partyAbilities.push_back( MasterAbilityList["Dia"] );
+		partyAbilities.push_back( MasterAbilityList["Protect"] );
+		janeFinal->InitializeAbilities( partyAbilities );
+		partyAbilities.clear();
 
 		Enemy* johnFinal = nullptr;
 		johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
@@ -292,6 +304,11 @@ void GamePlayState::Enter()
 		characterOrderPosition.x = 600.0f;
 		characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
 		johnFinal->SetPosition( characterOrderPosition );
+		partyAbilities.push_back( MasterAbilityList["Sure Shot"] );
+		partyAbilities.push_back( MasterAbilityList["Barrage"] );
+		partyAbilities.push_back( MasterAbilityList["Haste"] );
+		johnFinal->InitializeAbilities( partyAbilities );
+		partyAbilities.clear();
 
 		bosses.push_back( janeFinal );
 		bosses.push_back( cecilFinal );
@@ -1583,14 +1600,14 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 		stats.magic = std::stoi( Stat->FirstChildElement( "Magic" )->FirstChildElement( "Base" )->GetText() );
 		stats.magic_scale = std::stof( Stat->FirstChildElement( "Magic" )->FirstChildElement( "Scale" )->GetText() );
 
-		stats.defense = std::stoi( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Base" )->GetText() );
-		stats.defense_scale = std::stof( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Scale" )->GetText() );
+		stats.defense = std::stoi( Stat->FirstChildElement( "Defense" )->FirstChildElement( "Base" )->GetText() );
+		stats.defense_scale = std::stof( Stat->FirstChildElement( "Defense" )->FirstChildElement( "Scale" )->GetText() );
 
 		speed = std::stof( Stat->FirstChildElement( "Speed" )->FirstChildElement( "Base" )->GetText() );
 		stats.speed_scale = std::stof( Stat->FirstChildElement( "Speed" )->FirstChildElement( "Scale" )->GetText() );
 
-		stats.avoision = std::stoi( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Base" )->GetText() );
-		stats.avoision_scale = std::stof( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Scale" )->GetText() );
+		stats.avoision = std::stoi( Stat->FirstChildElement( "Avoision" )->FirstChildElement( "Base" )->GetText() );
+		stats.avoision_scale = std::stof( Stat->FirstChildElement( "Avoision" )->FirstChildElement( "Scale" )->GetText() );
 
 		level = std::stoi( root->FirstChildElement( "Level" )->GetText() );
 

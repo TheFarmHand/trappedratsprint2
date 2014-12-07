@@ -1,4 +1,4 @@
-56
+57
 Fire Fang
 Water Fang
 Earth Fang
@@ -51,6 +51,7 @@ Dia
 Protect
 Sure Shot
 Barrage
+Haste
 Holy Shield
 Holy Mace
 Retribution
