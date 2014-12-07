@@ -104,6 +104,16 @@ void Enemy::Update( float dt )
 				TailorAI();
 			else if ( name == "Priest" )
 				PriestAI();
+			else if ( name == "Guard" )
+				GuardAI();
+			else if ( name == "Benevolent Wind Rogue" )
+				BWRAI();
+			else if ( name == "Ferocious Fire Warrior" )
+				FFWAI();
+			else if ( name == "Sturdy Earth Monk" )
+				SEMAI();
+			else if ( name == "Wise Water Wizard" )
+				WWWAI();
 			else if ( name == "Cecil" )
 				CecilAI( CecilPhase );
 			else if ( name == "Jane" )
@@ -811,7 +821,7 @@ void Enemy::CecilPhaseOne()
 				if ( !below30 )
 					{
 					target = rand() % TurnManager::GetInstance()->GetAllies().size();
-					while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+					while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 						{
 						target = rand() % TurnManager::GetInstance()->GetAllies().size();
 						}
