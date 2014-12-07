@@ -580,7 +580,8 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.2f )
+		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.2f 
+			 && TurnManager::GetInstance()->GetEnemies()[i]->isAlive())
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
 			return;
@@ -588,7 +589,8 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.2f )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.2f 
+			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			return;
@@ -606,7 +608,7 @@ void Enemy::GuardAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -623,7 +625,8 @@ void Enemy::GuardAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetAttack() > GetAttack() )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetAttack() > GetAttack() 
+			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			target = i;
 			break;
@@ -655,7 +658,8 @@ void Enemy::BWRAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetSpeed() > GetSpeed() )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetSpeed() > GetSpeed() 
+			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			target = i;
 			break;
@@ -718,7 +722,8 @@ void Enemy::SEMAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) 
+			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			target = i;
 			break;
@@ -761,12 +766,14 @@ void Enemy::WWWAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetMagic() > GetMagic() )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetMagic() > GetMagic() 
+			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			target = i;
 			break;
 			}
-		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHealth )
+		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHealth 
+				  && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			lowestHealth = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 			target = i;

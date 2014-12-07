@@ -209,7 +209,11 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 	}
 
 	else if ( status )
+		{
+		if (atkMod > 0 || mgcMod > 0)
+			target->TakeDamage( (int)formulaTotal );
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
+		}
 
 	if ( abilityName == "Rib-a-Rang" )
 		if(!ternary)
