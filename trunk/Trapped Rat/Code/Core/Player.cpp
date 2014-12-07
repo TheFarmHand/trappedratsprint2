@@ -33,8 +33,8 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("fireworld2");
 	Listener::RegisterForEvent("firehouse3");
 	Listener::RegisterForEvent("fireworld3");
-	Listener::RegisterForEvent("herokeep");
-	Listener::RegisterForEvent("herokeepworld");
+	Listener::RegisterForEvent("firekeep");
+	Listener::RegisterForEvent("firekeepworld");
 	Listener::RegisterForEvent("herohouse1");
 	Listener::RegisterForEvent("heroworld1");
 	Listener::RegisterForEvent("herohouse2");
@@ -43,6 +43,8 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("heroworld3");
 	Listener::RegisterForEvent("herokeep");
 	Listener::RegisterForEvent("herokeepworld");
+	Listener::RegisterForEvent("GainJeeves");
+
 }
 
 
@@ -313,5 +315,117 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
 		position.y = dest->y + size.height / 2;
+	}
+	else if (pEvent->GetEventID() == "herokeep")
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
+		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
+		position.y = dest->y + size.height / 2;
+	}
+	else if (pEvent->GetEventID() == "GainJeeves")
+	{
+		//here we create jeeves and push him into the the vector
+		SGD::Point characterOrderPosition;
+		std::vector<Ability*> partyAbilities;
+		CombatPlayer* jeeves = nullptr;
+		jeeves = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml"));
+		jeeves->SetOrderPosition(4);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(jeeves->GetOrderPosition() * 100 + 150);
+		jeeves->SetPosition(characterOrderPosition);
+		jeeves->SetSize({ 64, 64 });
+		std::map<std::string, Ability*> MasterAbilityList;
+		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
+		partyAbilities.push_back(MasterAbilityList["Collapse"]);
+		partyAbilities.push_back(MasterAbilityList["Emblazon"]);
+		partyAbilities.push_back(MasterAbilityList["Firefall"]);
+		partyAbilities.push_back(MasterAbilityList["Fire Spikes"]);
+		partyAbilities.push_back(MasterAbilityList["Ignite"]);
+		partyAbilities.push_back(MasterAbilityList["Scorch"]);
+		partyAbilities.push_back(MasterAbilityList["Rib-a-Rang"]);
+
+		partyAbilities.push_back(MasterAbilityList["Incinerate"]);
+		jeeves->InitializeAbilities(partyAbilities);
+		jeeves->SetActive(false);
+		GamePlayState::GetInstance()->AddToParty(jeeves);
+	}
+	else if (pEvent->GetEventID() == "GainSlippy")
+	{
+		//here we create jeeves and push him into the the vector
+		SGD::Point characterOrderPosition;
+		std::vector<Ability*> partyAbilities;
+		CombatPlayer* slippy = nullptr;
+		slippy = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Slippy.xml"));
+		slippy->SetOrderPosition(1);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(slippy->GetOrderPosition() * 100 + 150);
+		slippy->SetPosition(characterOrderPosition);
+		slippy->SetSize({ 64, 64 });
+		std::map<std::string, Ability*> MasterAbilityList;
+		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
+		partyAbilities.push_back(MasterAbilityList["Puddle"]);
+		partyAbilities.push_back(MasterAbilityList["Whirlpool"]);
+		partyAbilities.push_back(MasterAbilityList["Acid Rain"]);
+		partyAbilities.push_back(MasterAbilityList["Torrent"]);
+		partyAbilities.push_back(MasterAbilityList["Flood"]);
+		partyAbilities.push_back(MasterAbilityList["Squirt"]);
+		partyAbilities.push_back(MasterAbilityList["Dissolve"]);
+		partyAbilities.push_back(MasterAbilityList["Splash"]);
+
+		slippy->SetActive(false);
+		slippy->InitializeAbilities(partyAbilities);
+		GamePlayState::GetInstance()->AddToParty(slippy);
+	}
+	else if (pEvent->GetEventID() == "GainCheckers")
+	{
+		SGD::Point characterOrderPosition;
+		std::vector<Ability*> partyAbilities;
+		CombatPlayer* checkers = nullptr;
+		checkers = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Checkers.xml"));
+		checkers->SetOrderPosition(2);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(checkers->GetOrderPosition() * 100 + 150);
+		checkers->SetPosition(characterOrderPosition);
+		checkers->SetSize({ 64, 64 });
+		std::map<std::string, Ability*> MasterAbilityList;
+		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
+		partyAbilities.push_back(MasterAbilityList["Cover"]);
+		partyAbilities.push_back(MasterAbilityList["Geo Crush"]);
+		partyAbilities.push_back(MasterAbilityList["Pinch"]);
+		partyAbilities.push_back(MasterAbilityList["Quake"]);
+		partyAbilities.push_back(MasterAbilityList["Hedge Guard"]);
+		partyAbilities.push_back(MasterAbilityList["Rock Spike"]);
+		partyAbilities.push_back(MasterAbilityList["Rampart"]);
+		partyAbilities.push_back(MasterAbilityList["Tremor"]);
+
+		checkers->SetActive(false);
+		checkers->InitializeAbilities(partyAbilities);
+		
+		GamePlayState::GetInstance()->AddToParty(checkers);
+	}
+	else if (pEvent->GetEventID() == "GainBiggs")
+	{
+		SGD::Point characterOrderPosition;
+		std::vector<Ability*> partyAbilities;
+		CombatPlayer* biggs = nullptr;
+		biggs = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Biggs.xml"));
+		biggs->SetOrderPosition(3);
+		characterOrderPosition.x = 100.0f;
+		characterOrderPosition.y = (float)(biggs->GetOrderPosition() * 100 + 150);
+		biggs->SetPosition(characterOrderPosition);
+		biggs->SetSize({ 64, 64 });
+		std::map<std::string, Ability*> MasterAbilityList;
+		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
+		partyAbilities.push_back(MasterAbilityList["Zephyr"]);
+		partyAbilities.push_back(MasterAbilityList["Leaf on the Wind"]);
+		partyAbilities.push_back(MasterAbilityList["Second Wind"]);
+		partyAbilities.push_back(MasterAbilityList["Whispering Wind"]);
+		partyAbilities.push_back(MasterAbilityList["Tailwind"]);
+		partyAbilities.push_back(MasterAbilityList["Tempest"]);
+		partyAbilities.push_back(MasterAbilityList["Tornado"]);
+		partyAbilities.push_back(MasterAbilityList["Wind Vale"]);
+		biggs->InitializeAbilities(partyAbilities);
+		biggs->SetActive(false);
+		GamePlayState::GetInstance()->AddToParty(biggs);
 	}
 	}
