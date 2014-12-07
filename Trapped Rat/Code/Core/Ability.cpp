@@ -152,7 +152,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		{
 		target->SetLiving( true );
 		}
-	if ( offensive && !status )
+	if ( offensive && !status)
 		{
 		if ( abilityName == "Firefall" )
 			{
