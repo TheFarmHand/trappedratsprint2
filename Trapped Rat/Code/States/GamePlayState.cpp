@@ -459,6 +459,7 @@ void GamePlayState::Enter()
 
 	SGD::InputManager::GetInstance()->Update();
 	state = Map;
+	laststate = Map;
 	//state = BattleSummary;
 	}
 void const GamePlayState::Render()
@@ -2190,4 +2191,25 @@ void GamePlayState::CreateFinalFight()
 void GamePlayState::SetLootXP( int val )
 {
 	loot_xp = val;
+}
+
+
+
+void GamePlayState::CreateMinibossFight()
+{
+	//Stub
+	switch (SelectedTown)  //NOTE FOR JOE****Make sure to increment "unlockedTowns" after you win the fight against these Minibosses
+	{
+	case 0: //Wind <---
+		break;
+	case 1: //Fire <----
+		break;
+	case 2: //Earth <---
+		break;
+	case 3: //Water <----
+		break;
+	case 4://Cecils HomeTown **Should Not Be Used because no miniboss in that town
+		break;
+	}
+
 }

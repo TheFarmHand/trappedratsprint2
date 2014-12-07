@@ -48,7 +48,7 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("GainBiggs");
 	Listener::RegisterForEvent("GainCheckers");
 	Listener::RegisterForEvent("CecilFight");
-
+	Listener::RegisterForEvent("Miniboss");
 }
 
 
@@ -450,5 +450,10 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	{
 		GamePlayState::GetInstance()->CreateFinalFight();
 		UnregisterFromEvent("CecilFight");
+	}
+	else if (pEvent->GetEventID() == "Miniboss")
+	{ 
+		position.y -= 32;
+		GamePlayState::GetInstance()->CreateMinibossFight();
 	}
 	}
