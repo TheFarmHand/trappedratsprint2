@@ -43,7 +43,7 @@ void GamePlayState::Enter()
 
 
 	//is_tutorial = true;
-	//testFinalFight = true;
+	testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 	Loading("Loading Tiles...");
@@ -437,7 +437,7 @@ void GamePlayState::Enter()
 	Loading("Time to Play.......");
 
 	SGD::InputManager::GetInstance()->Update();
-	state = Map;
+	//state = Map;
 	}
 void const GamePlayState::Render()
 	{

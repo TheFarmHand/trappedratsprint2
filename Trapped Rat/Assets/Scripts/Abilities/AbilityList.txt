@@ -1,4 +1,4 @@
-48
+56
 Fire Fang
 Water Fang
 Earth Fang
@@ -47,3 +47,11 @@ Bellows Blast
 Elemental Poison
 Stitch in Time
 Healing Light
+Dia
+Protect
+Sure Shot
+Barrage
+Holy Shield
+Holy Mace
+Retribution
+Holy Flare
