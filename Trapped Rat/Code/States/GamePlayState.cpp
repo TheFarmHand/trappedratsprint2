@@ -852,6 +852,7 @@ void GamePlayState::TownUpdate( float dt )
 		{
 			Enemy* temp;
 			guard_index = i;
+			std::vector<Ability*> partyAbilities;
 			
 			temp = LoadEnemy( "../Trapped Rat/Assets/Scripts/Guard.xml" );
 			SGD::Point characterOrderPosition;
@@ -860,7 +861,10 @@ void GamePlayState::TownUpdate( float dt )
 			characterOrderPosition.y = (float)( temp->GetOrderPosition( ) * 100 + 150 + 16 );
 			temp->SetPosition( characterOrderPosition );
 			std::vector<Enemy*> moreguards;
+			partyAbilities.push_back( MasterAbilityList["Rush"] );
+			temp->InitializeAbilities( partyAbilities );
 			moreguards.push_back(temp);
+			partyAbilities.clear();
 
 			GameData::GetInstance( )->SetIsInCombat( true );
 			state = GPStates::Combat;
