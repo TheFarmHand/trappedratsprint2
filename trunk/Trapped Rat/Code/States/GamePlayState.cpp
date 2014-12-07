@@ -754,7 +754,6 @@ void GamePlayState::Fight()
 					default:
 						break;
 					}
-				tempRandomEnemy->SetLevel(12);
 				tempRandomEnemy->SetHP(tempRandomEnemy->GetMaxHP());
 
 				tempRandomEnemy->SetOrderPosition( i );
@@ -1871,14 +1870,14 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		stats.magic = std::stoi( Stat->FirstChildElement( "Magic" )->FirstChildElement( "Base" )->GetText() );
 		stats.magic_scale = std::stof( Stat->FirstChildElement( "Magic" )->FirstChildElement( "Scale" )->GetText() );
 
-		stats.defense = std::stoi( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Base" )->GetText() );
-		stats.defense_scale = std::stof( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Scale" )->GetText() );
+		stats.defense = std::stoi( Stat->FirstChildElement( "Defense" )->FirstChildElement( "Base" )->GetText() );
+		stats.defense_scale = std::stof( Stat->FirstChildElement( "Defense" )->FirstChildElement( "Scale" )->GetText() );
 
 		speed = std::stof( Stat->FirstChildElement( "Speed" )->FirstChildElement( "Base" )->GetText() );
 		stats.speed_scale = std::stof( Stat->FirstChildElement( "Speed" )->FirstChildElement( "Scale" )->GetText() );
 
-		stats.avoision = std::stoi( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Base" )->GetText() );
-		stats.avoision_scale = std::stof( Stat->FirstChildElement( "Attack" )->FirstChildElement( "Scale" )->GetText() );
+		stats.avoision = std::stoi( Stat->FirstChildElement( "Avoision" )->FirstChildElement( "Base" )->GetText() );
+		stats.avoision_scale = std::stof( Stat->FirstChildElement( "Avoision" )->FirstChildElement( "Scale" )->GetText() );
 
 		level = std::stoi( root->FirstChildElement( "Level" )->GetText() );
 
