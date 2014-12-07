@@ -117,7 +117,7 @@ void TurnManager::Update( float dt )
 			CombatLoot();
 
 			// Abilities Unlocked?  This will become redundant I'm sure
-			GamePlayState::GetInstance()->CheckAbilityUnlocked(true);
+			GamePlayState::GetInstance()->CheckAbilityUnlocked( true );
 			//GamePlayState::GetInstance()->EndOfCombatScreen();
 
 			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
@@ -402,7 +402,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 					owner->TakeDamage( 10 );
 				else if ( ( *iter )->GetOwner()->GetName() == "Biggs" )
 					target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedUp" ) );
-				else if((*iter)->GetOwner()->GetName() == "Slippy") 
+				else if ( ( *iter )->GetOwner()->GetName() == "Slippy" )
 					// what
 				{
 
@@ -452,12 +452,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		}
 
 		// Primarily (only) Cecil fight
-		else if ( ( ( *iter )->GetName() ==  "PhysicalReflect"))
+		else if ( ( ( *iter )->GetName() == "PhysicalReflect" ) )
 			// Do your damage to yourself
 		{
 			int dmg = value;
-			dmg -= (int)( 0.25f * target->GetDefense( ) );
-			owner->TakeDamage(value);
+			dmg -= (int)( 0.25f * target->GetDefense() );
+			owner->TakeDamage( value );
 			return;	// Don't allow other settings to fire
 		}
 	}
@@ -474,17 +474,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		if ( enfire ) dmg = (int)( dmg * 1.75f );		// Ternary Blast style
 		target->TakeDamage( dmg, true );
 	}
-	if ( counter )
-	{
-		// Reduce incoming damage, attack the attacker
-		if ( to_remove->GetTernEffect() )
-			value = 0;
-		else
-			value = value / 2;
-		target->TakeDamage( value );
-		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
-		to_remove->Clear();
-	}
+
 
 	if ( dodge )
 	{
@@ -509,6 +499,18 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			Guard->GetGuard()->TakeDamage( dmg );
 	}
 
+	if ( counter && !guard )
+	{
+		// Reduce incoming damage, attack the attacker
+		if ( to_remove->GetTernEffect() )
+			value = 0;
+		else
+			value = value / 2;
+		target->TakeDamage( value );
+		target->Attack( target, owner );	// Oh, that's bad; circular counter attacks forever (actually should be fine, can't be countering on your turn)
+		to_remove->Clear();
+	}
+
 
 	if ( !dodge && !counter && !guard )
 		// I think this value needs Defense modification
@@ -528,14 +530,35 @@ void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ab
 // Calculates and dishes out damage based on an ability
 {
 	// Room here for adding particle effects && Cecil!
-	ability->CalculateFormula( owner, target );
-	// Reflect ability damage back to caster if MacialReflect exists
-	if(target->HasEffect("MagicalReflect"))
+
+
+	if ( target->HasEffect( "Cover" ) )
 	{
-		ability->CastAbility(target, owner);
+		if ( ability->GetOffensive() )
+		{
+			for ( auto iter = target->GetEffects().begin(); iter != target->GetEffects().end(); iter++ )
+			{
+				if ( ( *iter )->GetName() == "Cover" )
+				{
+					ability->CalculateFormula( owner, ( *iter )->GetGuard() );
+					ability->CastAbility( owner, ( *iter )->GetGuard() );
+					break;
+				}
+			}
+		}
 	}
+
 	else
-		ability->CastAbility( owner, target, 0, ternary );
+	{
+		ability->CalculateFormula( owner, target );
+		// Reflect ability damage back to caster if MacialReflect exists
+		if ( target->HasEffect( "MagicalReflect" ) && ability->GetOffensive() )
+		{
+			ability->CastAbility( target, owner );
+		}
+		else
+			ability->CastAbility( owner, target, 0, ternary );
+	}
 }
 
 

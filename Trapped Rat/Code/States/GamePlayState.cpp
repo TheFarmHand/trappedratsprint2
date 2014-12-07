@@ -92,7 +92,7 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/HelpTextBox.png" );
 	helptextbox->SetImage( helpback );
 
-	ternary_bar = CreateBar({156,32}, {200,400}, nullptr, {255,255,0}, {0,0}, false);
+	ternary_bar = CreateBar({64,16}, {250,380}, nullptr, {255,255,0}, {0,0}, false);
 
 	std::fstream fin;
 
@@ -183,7 +183,6 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
 	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
 	partyAbilities.push_back( MasterAbilityList["Rampart"] );
-	partyAbilities.push_back( MasterAbilityList["Cover"] );
 	partyAbilities.push_back( MasterAbilityList["Tremor"] );
 	
 	p3->SetActive( true );
