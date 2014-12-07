@@ -1399,11 +1399,19 @@ void GamePlayState::MenuRender()
 			GameData::GetInstance()->GetFont()->DrawString( "Party Menu", 60.0f, 40.0f, { 0, 0, 0 }, 2.0f );
 			SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 50.0f, 50.0f }, { 0, 0, 300, 540 } );
 			for ( unsigned int i = 0; i < Party.size(); i++ )
+			{ 
+				if (i < 3)
 				{
-				GameData::GetInstance()->GetFont()->DrawString( Party[i]->GetName(), 100.0f, 185.0f + ( i * 55 ), { 0, 0, 0 }, 1.5f );
+					GameData::GetInstance()->GetFont()->DrawString(Party[i]->GetName(), 100.0f, 185.0f + (i * 55), { 0, 150, 0 }, 1.5f);
+				}
+				else
+				{
+					GameData::GetInstance()->GetFont()->DrawString(Party[i]->GetName(), 100.0f, 185.0f + (i * 55), { 150, 0, 0 }, 1.5f);
+				}
 				std::ostringstream info;
 				info << "HP: " << Party[i]->GetHP() << "/" << Party[i]->GetMaxHP() << "  BP: " << Party[i]->GetBP() << "/" << Party[i]->GetMaxBP();
 				GameData::GetInstance()->GetFont()->DrawString( info.str(), 100.0f, 200.0f + ( i * 55 ), { 0, 0, 0 }, 1.5f );
+				SGD::GraphicsManager::GetInstance()->DrawRectangle({ 80.0f, 180.0f, 320.0f, 330.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2);
 				}
 			
 			if (selecting_ability)
@@ -1477,7 +1485,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>(ternary_bar)->SetPercentage((float)ternary_gauge/MAXTG);
 
 
-	if (run_succeed )// || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if (run_succeed  || input->IsKeyPressed( SGD::Key::Backspace ) )
 		{
 		state = GPStates::Town;
 		laststate = state;
