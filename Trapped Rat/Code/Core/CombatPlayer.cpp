@@ -879,6 +879,12 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if( pInput->IsKeyPressed(SGD::Key::Enter) )
 	{
+		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight)
+		{
+			// You can't run away
+			states = 0;
+			return;
+		}
 		int chance = rand()%1000;
 		if(chance < GetAvoision() * 250)
 		{
@@ -1338,6 +1344,7 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 	else if ( abil == "Poison Fang" )
 	{
 		// add delerium once it works
+		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Confused" ) );
 	}
 
 	else if ( abil == "Slow Claw" )
