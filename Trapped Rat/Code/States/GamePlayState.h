@@ -12,6 +12,7 @@
 #include "../Core/SelectableObject.h"
 #include "../Core/HelpText.h"
 #include "../Core/Ability.h"
+#include "../Core/Bars.h"
 #include "../Core/StatusEffectManager.h"
 
 #define MAXTG 250
@@ -85,9 +86,11 @@ class GamePlayState :
 	std::vector<ItemType> loot;
 
 	int gold = 50;
-	int loot_gold = 0;
+	int loot_gold = 0;			// Updates whenever gold is added to your stack; (at end of combat primarily); use this for End of Combat window
+	int loot_xp = 0;			// This is also the XP value earned after combat 
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
+	HUDItem* ternary_bar;
 	
 
 	//party & ability selection

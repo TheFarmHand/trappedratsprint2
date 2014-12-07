@@ -6,7 +6,7 @@ class Enemy :
 {
 private:
 	AnimationSystem* ansys = nullptr;
-	int xp_value;
+	int xp_value = 100;
 	//int level;
 	
 	

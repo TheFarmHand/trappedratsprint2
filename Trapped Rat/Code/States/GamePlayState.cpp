@@ -7,7 +7,7 @@
 #include "../Font/Font.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "../Core/CommonEnemy.h"
-#include "../Core/Bars.h"
+
 #include "../Messages/TestMessage.h"
 #include "../Animation/AnimationSystem.h"
 #include "../States/MainMenuState.h"
@@ -92,6 +92,7 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/HelpTextBox.png" );
 	helptextbox->SetImage( helpback );
 
+	ternary_bar = CreateBar({156,32}, {200,400}, nullptr, {255,255,0}, {0,0}, false);
 
 	std::fstream fin;
 
@@ -547,7 +548,7 @@ void GamePlayState::Exit()
 		delete helptextbox;
 
 	TurnManager::GetInstance( )->Terminate( );
-
+	delete ternary_bar;
 	for ( unsigned int i = 0; i < Party.size(); i++ )
 		{
 		delete Party[i];
@@ -821,7 +822,7 @@ void GamePlayState::MenuUpdate( float dt )
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
 				substate = MenuSubStates::None;
-				shopinv.clear();
+				//shopinv.clear();
 
 				}
 			break;
@@ -1294,6 +1295,7 @@ void GamePlayState::CombatUpdate( float dt )
 	}
 	laststate = GPStates::Combat;
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
+	dynamic_cast<Bars*>(ternary_bar)->SetPercentage((float)ternary_gauge/MAXTG);
 
 
 	if ( input->IsKeyPressed( SGD::Key::Backspace ) )
@@ -1363,6 +1365,10 @@ void GamePlayState::CombatRender()
 			m_vSelectableItems[i]->Render();
 		}
 	helptextbox->Render();
+
+	// Let's put the ternary bar here
+	ternary_bar->Render();
+	
 	}
 
 
@@ -1880,6 +1886,7 @@ void GamePlayState::CheckAbilityUnlocked(bool EOC)
 				Party[i]->GetAbility( k )->SetUnlocked( true );
 				if ( EOC )
 					{
+
 						//Enter code to notify loot/exp screen that a new ability was unlocked(i.e. level gained...show stat gains and new ability unlocked)
 						// Print to Window Screen the details
 					}
