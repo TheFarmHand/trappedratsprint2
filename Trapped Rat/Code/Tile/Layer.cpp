@@ -55,10 +55,11 @@ void Layer::Initialize( const char* path)
 		position.x = (float)x;
 		position.y = (float)y;
 
+		std::vector<Ability*> partyAbilities;
 		//Change to guard objects
 		Guard * temp = new Guard();
 		temp->SetPosition(position);
-
+		partyAbilities.push_back( GamePlayState::GetInstance()->GetMasterList()["Rush"] );
 		//Read in waypoints for each guard
 		TiXmlElement * waypoint = guard->FirstChildElement("waypoint");
 		while(waypoint != nullptr)
