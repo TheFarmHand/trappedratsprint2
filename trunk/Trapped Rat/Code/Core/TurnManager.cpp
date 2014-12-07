@@ -536,7 +536,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 	if ( !dodge && !counter && !guard )
 		// I think this value needs Defense modification
 	{
-		target->TakeDamage( value - target->GetDefense()/4 );
+		target->TakeDamage( value );
 
 		// This call places the emitter at the proper location
 		pPartMan->GetEmitter( "takedamage" )->SetPosition( target->GetPosition().x, target->GetPosition().y );
