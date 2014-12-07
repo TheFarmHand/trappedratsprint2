@@ -4,6 +4,31 @@
   <tileset height="12" width="16" />
   <tilesize height="32" width="32" />
   <player name="Player" startX="32" startY="256" />
+  <guard name="Guard" startX="608" startY="2304">
+    <waypoint tilePoint="7216" />
+    <waypoint tilePoint="7218" />
+  </guard>
+  <guard name="Guard" startX="2112" startY="2528">
+    <waypoint tilePoint="7972" />
+    <waypoint tilePoint="8472" />
+    <waypoint tilePoint="8466" />
+    <waypoint tilePoint="7967" />
+    <waypoint tilePoint="8066" />
+  </guard>
+  <guard name="Guard" startX="1536" startY="2208">
+    <waypoint tilePoint="7248" />
+    <waypoint tilePoint="7251" />
+    <waypoint tilePoint="6951" />
+    <waypoint tilePoint="6949" />
+    <waypoint tilePoint="7048" />
+  </guard>
+  <guard name="Guard" startX="1376" startY="864">
+    <waypoint tilePoint="3843" />
+    <waypoint tilePoint="3855" />
+    <waypoint tilePoint="2755" />
+    <waypoint tilePoint="2744" />
+    <waypoint tilePoint="2843" />
+  </guard>
   <guard name="Guard" startX="480" startY="1472">
     <waypoint tilePoint="4215" />
     <waypoint tilePoint="4218" />
@@ -8768,7 +8793,7 @@
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="49" collision="0" event="Miniboss" onfire="" objectID="0" objectNumber="0" />
+  <tiles id="49" collision="0" event="Miniboss" onfire="Miniboss" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="156" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
