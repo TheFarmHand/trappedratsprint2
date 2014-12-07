@@ -879,7 +879,7 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if( pInput->IsKeyPressed(SGD::Key::Enter) )
 	{
-		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight)
+		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight ||GamePlayState::GetInstance()->ignore_game_over)
 		{
 			// You can't run away
 			states = 0;
