@@ -721,7 +721,7 @@ void GamePlayState::Fight()
 					{
 					case 0:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
-						partyAbilities.push_back( MasterAbilityList["Bark"] );
+						partyAbilities.push_back( MasterAbilityList["Feral Bite"] );
 						break;
 					case 1:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cat.xml" );
