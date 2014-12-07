@@ -2170,6 +2170,13 @@ void GamePlayState::SummaryUpdate(float dt)
 			}
 			guards.clear();
 
+			for (size_t i = 0; i < m_vhuditems.size(); i++)
+			{
+				delete m_vhuditems[i];
+			}
+			m_vhuditems.clear();
+
+
 			TileSystem::GetInstance()->Exit();
 
 			state = Map;
