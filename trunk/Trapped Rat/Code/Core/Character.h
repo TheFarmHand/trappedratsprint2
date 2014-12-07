@@ -30,7 +30,7 @@ protected:
 	bool stepforward = false;
 	bool stepbackward = false;
 	float stepTime = 2.0f;
-	float stepvelocity = 50.0f;
+	float stepvelocity = 100.0f;
 	SGD::HAudio hurt = SGD::INVALID_HANDLE;
 	SGD::HAudio death = SGD::INVALID_HANDLE;
 	std::list<StatusEffect*> effects;

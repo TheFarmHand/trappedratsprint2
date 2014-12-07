@@ -113,6 +113,7 @@ class GamePlayState :
 	std::vector<CombatPlayer*> Parents;
 
 public:
+	bool run_succeed = false;
 	bool MinibossFight = false;
 	bool FinalBossFight = false;
 	bool ignore_game_over = false;

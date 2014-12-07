@@ -69,6 +69,7 @@ private:
 
 	int XP;
 	int nextlvl;
+	bool runaway = false;
 	// Increases XP by the value, handling level up and carry over XP
 	// Changes the amount of xp needed to the next level
 	
