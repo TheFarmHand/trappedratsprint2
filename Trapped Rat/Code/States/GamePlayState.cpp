@@ -936,11 +936,21 @@ void GamePlayState::MenuUpdate( float dt )
 				maxindex = Party[character_index]->GetAbilitiesSize() - 1;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) )
 				{
-				GameData::GetInstance()->PlaySelectionChange();
-				menuindex = 0;
-				substate = MenuSubStates::None;
-
+				if (selecting_ability || selecting_party || select_first)
+				{
+					selecting_ability = false;
+					selecting_party = false;
+					select_first = false;
+					select_new = false;
 				}
+				else
+				{
+					GameData::GetInstance()->PlaySelectionChange();
+					menuindex = 0;
+					substate = MenuSubStates::None;
+				}
+				}
+			
 			break;
 		default:
 			break;
