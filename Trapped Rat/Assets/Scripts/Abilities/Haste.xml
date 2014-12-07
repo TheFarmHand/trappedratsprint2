@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feathered_Flurry Name="Haste" Offensive="false">
+<Help Text="" />
+  <Affinity ElementalType="Physical" />
+  <StatusEffect Effect="SpeedUp" />
+  <AreaOfEffect AOE="true" />
+  <Self selfTarget="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="0" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="0" />
+    <MagicMod mgcMod="0" />
+    <BaseBP bp="0" />
+    <HPMod hp="0" />
+  </DamageInfo>
+</Feathered_Flurry>
