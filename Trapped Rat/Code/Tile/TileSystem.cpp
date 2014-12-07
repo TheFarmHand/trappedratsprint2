@@ -109,6 +109,19 @@ void TileSystem::TileEvent( SGD::Point pos )
 		}
 	}
 
+SGD::Point TileSystem::GetTilePosition( int TiD )
+	{
+	int x, y, pixX, pixY;
+	SGD::Point destination;
+	x = TiD % layers.GetLayerWidth();
+	y = TiD / layers.GetLayerWidth();
+	pixX = x * layers.GetTileWidth();
+	pixY = y * layers.GetTileHeight();
+	destination.x = (float)pixX;
+	destination.y = (float)pixY;
+
+	return destination;
+	}
 int TileSystem::GetTileIndex( float x, float y )
 	{
 	int tileX, tileY, tileIndex;
