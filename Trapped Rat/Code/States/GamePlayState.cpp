@@ -1503,7 +1503,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>(ternary_bar)->SetPercentage((float)ternary_gauge/MAXTG);
 
 
-	if (run_succeed  || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if (run_succeed )// || input->IsKeyPressed( SGD::Key::Backspace ) )
 		{
 		state = GPStates::Town;
 		laststate = state;
@@ -1537,10 +1537,10 @@ void GamePlayState::CombatUpdate( float dt )
 		Party[0]->AddStatus( &pStatManager->GetStatus( "Regen" ) );
 		}*/
 
-	if(input->IsKeyPressed(SGD::Key::Nine))
+	/*if(input->IsKeyPressed(SGD::Key::Nine))
 	{
 		ternary_gauge = MAXTG;
-	}
+	}*/
 
 	if (state == GPStates::Town)
 	{
