@@ -398,6 +398,11 @@ void Ability::RenderAnimation()
 	{
 		animate->Render(Abiltarget->GetPosition().x + 100, Abiltarget->GetPosition().y);
 	}
+	//Top of Enemy Side
+	else if (abilityName == "Acid Rain")
+	{
+		animate->Render(Abiltarget->GetPosition().x - 50.0f, 100.0f);
+	}
 	else
 	{
 		animate->Render(Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y);

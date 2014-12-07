@@ -27,13 +27,13 @@
     <Looping>True</Looping>
     <Name>Up</Name>
     <NextName>none</NextName>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="184" y="38" />
       <DrawRect left="173" top="27" right="198" bottom="51" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="208" y="38" />
       <DrawRect left="199" top="27" right="222" bottom="52" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
@@ -47,13 +47,13 @@
     <Looping>True</Looping>
     <Name>Left</Name>
     <NextName>none</NextName>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="212" y="64" />
       <DrawRect left="200" top="51" right="222" bottom="78" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="188" y="63" />
       <DrawRect left="177" top="53" right="199" bottom="77" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
@@ -67,13 +67,13 @@
     <Looping>True</Looping>
     <Name>Right</Name>
     <NextName>none</NextName>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="189" y="114" />
       <DrawRect left="177" top="100" right="199" bottom="127" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.5">
+    <Frame delay="0.25">
       <AnchorPoint x="209" y="114" />
       <DrawRect left="198" top="100" right="220" bottom="127" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
