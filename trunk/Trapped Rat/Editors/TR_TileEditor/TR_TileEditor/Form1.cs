@@ -797,8 +797,11 @@ namespace TR_TileEditor
         }
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TM.UnloadTexture(0);
-            --tileSetID;
+            if (tileSetID > 0)
+            {
+                TM.UnloadTexture(0);
+                --tileSetID;
+            }
 
             toolTileSetWidth.SelectedIndex = 3;
             toolTileSetHeight.SelectedIndex = 1;
@@ -818,7 +821,7 @@ namespace TR_TileEditor
             lstObjects.Items.Clear();
             lstWaypoints.Items.Clear();
 
-            Tile temp = new Tile();
+            Tile temp = new Tile(0, 0);
             temp.TileID = 0;
             temp.CollisionID = 0;
             temp.EventID = "none";
@@ -1015,8 +1018,11 @@ namespace TR_TileEditor
                     IEnumerable<XElement> waypoints = guard.Elements("waypoint");
                     foreach (XElement way in waypoints)
                     {
-                        XAttribute point = way.Attribute("tilePoint");
-                        tempObjects.WaypointTiles.Add(int.Parse(point.Value));
+                        if (way.Attribute("tilePoint") != null)
+                        {
+                            XAttribute point = way.Attribute("tilePoint");
+                            tempObjects.WaypointTiles.Add(int.Parse(point.Value));
+                        }
                     }
                     levelObjects.Add(tempObjects);
                     lstObjects.Items.Add(levelObjects[objIndex].Name);

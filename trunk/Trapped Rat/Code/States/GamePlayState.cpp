@@ -140,7 +140,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
-	p1->SetActive( false );
+	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
 
@@ -185,7 +185,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Cover"] );
 	partyAbilities.push_back( MasterAbilityList["Tremor"] );
 	
-	p3->SetActive( false );
+	p3->SetActive( true );
 	p3->InitializeAbilities( partyAbilities );
 	Party.push_back( p3 );
 
@@ -207,7 +207,7 @@ void GamePlayState::Enter()
 	partyAbilities.push_back( MasterAbilityList["Tornado"] );
 	partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
 	p4->InitializeAbilities( partyAbilities );
-	p4->SetActive( true );
+	p4->SetActive( false );
 	Party.push_back( p4 );
 
 	partyAbilities.clear();
@@ -229,7 +229,7 @@ void GamePlayState::Enter()
 	
 	partyAbilities.push_back( MasterAbilityList["Incinerate"] );
 	p5->InitializeAbilities( partyAbilities );
-	p5->SetActive( true );
+	p5->SetActive( false );
 	Party.push_back( p5 );
 
 	partyAbilities.clear();

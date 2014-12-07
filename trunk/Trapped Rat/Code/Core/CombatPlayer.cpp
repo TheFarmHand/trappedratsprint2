@@ -37,7 +37,7 @@ void CombatPlayer::Update( float dt )
 
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 	{
-		progress += speed * dt;
+		progress += GetSpeed() * dt;
 	}
 
 	else if ( progress < 100.0f )
