@@ -10,7 +10,7 @@ private:
 	bool is_HP;
 public:
 	Bars();
-	Bars(SGD::Size sz, SGD::Point pos,Character * _owner);
+	Bars(SGD::Size sz, SGD::Point pos, Character * _owner);
 	virtual ~Bars();
 
 	void virtual Update(float dt);

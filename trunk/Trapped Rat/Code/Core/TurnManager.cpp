@@ -117,7 +117,8 @@ void TurnManager::Update( float dt )
 			CombatLoot();
 
 			// Abilities Unlocked?  This will become redundant I'm sure
-			//GamePlayState::GetInstance()->CheckAbilityUnlocked(true);
+			GamePlayState::GetInstance()->CheckAbilityUnlocked(true);
+			//GamePlayState::GetInstance()->EndOfCombatScreen();
 
 			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
 			EndCombat();

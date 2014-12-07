@@ -63,8 +63,16 @@ void  Bars::Render()
 	}
 	else if (width > 0)
 	{
+		if(owner)
+		{
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, position, SGD::Rectangle(0, 0, (float)width, size.height), 0, {}, color, {2.0f,1.0f});
 		SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, position, 0, {}, {}, {2.0f,1.0f});
+		}
+		else
+		{
+			SGD::GraphicsManager::GetInstance( )->DrawTextureSection( image, position, SGD::Rectangle( 0, 0, (float)width, size.height ), 0, { }, color, { 2.0f, 1.0f } );
+			SGD::GraphicsManager::GetInstance( )->DrawTexture( outlineimage, position, 0, { }, { }, { 4.0f, 2.0f } );
+		}
 	}
 	else if (width <= 0)
 	{
