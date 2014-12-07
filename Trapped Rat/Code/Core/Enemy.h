@@ -8,7 +8,6 @@ private:
 	AnimationSystem* ansys = nullptr;
 	int xp_value;
 	//int level;
-
 	
 	
 protected:

@@ -251,6 +251,10 @@ void Enemy::CecilPhaseOne()
 {
 	if ( progress >= 100.0f )
 	{
+	TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
+	TurnManager::GetInstance()->GetEnemies()[2]->JohnDead = false;
+	if ( progress >= 100.0f )
+		{
 		float tenthHealth = HP / (float)( GetMaxHP() );
 		bool below30 = false;
 		int target;
@@ -268,8 +272,8 @@ void Enemy::CecilPhaseOne()
 			if ( !below30 )
 			{
 				target = rand() % TurnManager::GetInstance()->GetAllies().size();
-			}
-			int atk = TurnManager::GetInstance()->GetAllies()[ target ]->GetStats().attack;
+				}
+			int atk = GetStats().attack;
 			int dmg = rand() % atk + atk;
 			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[ target ]->GetStats().defense );
 			if ( dmg <= 0 )
@@ -296,28 +300,164 @@ void Enemy::CecilPhaseOne()
 }
 void Enemy::CecilPhaseTwo()
 {
+	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneDead )
+		{
+		TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
+		if ( !TurnManager::GetInstance()->GetEnemies()[0]->isAlive() && !TurnManager::GetInstance()->GetEnemies()[2]->isAlive() )
+			{
+			CecilPhase = 3;
+			phase3 = true;
+			//Cast Super Retribution(wipes companions, weakens ratsputin
+			//Wipe Dodging
+			//Wipe Guarding
+			}
+		else
+			//Cast Retribution
+
+		return;
+		}
+	if ( TurnManager::GetInstance()->GetEnemies()[2]->JohnDead )
+		{
+		TurnManager::GetInstance()->GetEnemies()[2]->JohnDead = false;
+		//Cast Retribution
+		if ( !TurnManager::GetInstance()->GetEnemies()[0]->isAlive() && !TurnManager::GetInstance()->GetEnemies()[2]->isAlive() )
+			{
+			CecilPhase = 3;
+			phase3 = true;
+			//Cast Super Retribution(wipes companions, weakens ratsputin
+			//Wipe Dodging
+			//Wipe Guarding
+			}
+		else
+			//Cast Retribution
+
+		return;
+		}
 	if ( JaneHit % 3 == 0 )
-	{
+		{
 		//cover code of Jane
-	}
+		return;
+		}
 	else if ( JohnHit % 3 == 0 )
 	{
 		//cover code of John
-	}
+		return;
+		}
 	else
 	{
-
+		if ( !HolyMace )
+			{
+			HolyMace = true;
+			HolyShield = false;
+			//cast Holy Mace
+			return;
+			}
+		else
+			{
+			HolyMace = false;
+			HolyShield = true;
+			//cast Holy Shield
+			return;
+			}
 	}
 }
 void Enemy::CecilPhaseThree()
 {
+	if ( !HolyFlare )
+		{
+		HolyFlare = true;
+		HFCountdown = 10;
+		damageDealt = 0.0f;
+		//Dialogue for casting/countdown
+		}
+	if ( HFCountdown > 0 )
+		{
+		--HFCountdown;
+		//Dialogue for countdown
+		return;
+		}
+	else
+		{
 
-}
+		//Cast Holy Flare
+		}
+
+	}
 void Enemy::JaneAI()
 {
-
+	int target;
+	if ( !HasEffect( "DefenseUp" ) )
+		{
+		//cast protect
+		}
+	else
+		{
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+			{
+			if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.6f )
+				{
+				//cast healing light
+				return;
+				}
+			}
+		if ( rand() % 10 > 8 )
+			{
+			//cast Dia
+			}
+		else
+			{
+			target = rand() % TurnManager::GetInstance()->GetAllies().size();
+			
+			int atk = TurnManager::GetInstance()->GetAllies()[target]->GetStats().attack;
+			int dmg = rand() % atk + atk;
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+			}
+		}
 }
 void Enemy::JohnAI()
 {
+	int target;
+	int lowestHP = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	float ratPartyAvgHealth = 0.0f;
 
-}
+	if ( !HasEffect( "SpeedUp" ) )
+		{
+		//cast Haste
+		}
+	else
+		{
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+			{
+			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.5f )
+				{
+				//cast Sure Shot
+				return;
+				}
+			}
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+			{
+			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHP )
+				target = i;
+			ratPartyAvgHealth += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+			}
+		ratPartyAvgHealth /= TurnManager::GetInstance()->GetAllies().size();
+
+		if ( ratPartyAvgHealth > 0.75f )
+			{
+			//cast Barrage
+			return;
+			}
+		else
+			{
+			int atk = TurnManager::GetInstance()->GetAllies()[target]->GetStats().attack;
+			int dmg = rand() % atk + atk;
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+			}
+		}
+	}

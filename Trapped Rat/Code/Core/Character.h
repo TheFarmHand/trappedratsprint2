@@ -109,6 +109,15 @@ public:
 
 	//Cecil fight variables
 	int CecilPhase = 1;
+	bool phase3 = false;
+	bool HolyFlare = false;
+	int HFCountdown;
+	float damageDealt;
+	bool HolyMace = false;
+	bool HolyShield = false;
+	bool critHealth = false;
+	bool JaneDead = false;
+	bool JohnDead = false;
 	int JaneHit = 0;
 	int JohnHit = 0;
 };

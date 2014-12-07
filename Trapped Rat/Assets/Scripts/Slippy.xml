@@ -15,7 +15,7 @@
       <Scale>0.5</Scale>
     </BattlePoints>
     <Attack>
-      <Base>16</Base>
+      <Base>180</Base>
       <Scale>0.3</Scale>
     </Attack>
     <Magic>

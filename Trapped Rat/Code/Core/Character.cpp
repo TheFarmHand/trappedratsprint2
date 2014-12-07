@@ -89,6 +89,10 @@ void Character::UseAbility()
 void Character::TakeDamage( int dmg , bool firefall)
 {
 	SetHP(HP - dmg);
+	if ( name == "Cecil" && CecilPhase == 3 )
+		{
+		damageDealt += dmg;
+		}
 	if ( name == "Jane" && alive == true )
 		++JaneHit;
 	else if ( name == "John" && alive == true )
@@ -284,10 +288,24 @@ void Character::SetHP( int _hp )
 			progress = 100.0f;
 			}
 		}
+	else if ( name == "Cecil" && CecilPhase == 3 )
+		{
+		HP = (int)( GetMaxHP() * 0.1f );
+		}
 	else if ( HP < 0 )
 	{
 		HP = 0;
 		alive = false;
+		if ( name == "Jane" )
+			{
+			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
+			JaneDead = true;
+			}
+		else if ( name == "John" )
+			{
+			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
+			JohnDead = true;
+			}
 	}
 
 	if(HP > GetMaxHP())
