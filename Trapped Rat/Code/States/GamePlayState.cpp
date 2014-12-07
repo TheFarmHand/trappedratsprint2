@@ -2219,6 +2219,12 @@ int GamePlayState::GetGold(void) const
 
 void GamePlayState::SummaryUpdate(float dt)
 {
+	if (ignore_game_over)
+	{
+		ignore_game_over = false;
+		state = Map;
+		laststate = Map;
+	}
 	GameData::GetInstance()->SetCamera({ 0, 0 });
 	for (size_t i = 0; i < Party.size(); i++)
 	{
@@ -2240,12 +2246,7 @@ void GamePlayState::SummaryUpdate(float dt)
 		loot.clear();
 		loot_xp = 0;
 		loot_gold = 0;
-		if (ignore_game_over)
-		{
-			ignore_game_over = false;
-			state = Map;
-			laststate = Map;
-		}
+		
 		if (MinibossFight)
 		{
 			MinibossFight = false;
