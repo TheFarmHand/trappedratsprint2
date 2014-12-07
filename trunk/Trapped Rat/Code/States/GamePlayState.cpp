@@ -266,90 +266,90 @@ void GamePlayState::Enter()
 	shopinv.push_back(largebp);
 	shopinv.push_back(revive);
 	//if this is a tutorial, we load in the stuff for it
-	if ( testFinalFight )
-		{
-		std::vector<Enemy*> bosses;
-		//Boss* cecilFinal = new Boss( "Cecil" );
-		//Boss* janeFinal = new Boss( "Jane" );
-		//Boss* johnFinal = new Boss( "John" );
-		Enemy* cecilFinal = nullptr;
-		cecilFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Cecil.xml" );
-		cecilFinal->SetOrderPosition( 1 );
-		characterOrderPosition.x = 600.0f;
-		characterOrderPosition.y = (float)( cecilFinal->GetOrderPosition() * 100 + 150 + 16 );
-		cecilFinal->SetPosition( characterOrderPosition );
-		partyAbilities.push_back( MasterAbilityList["Holy Shield"] );
-		partyAbilities.push_back( MasterAbilityList["Holy Mace"] );
-		partyAbilities.push_back( MasterAbilityList["Holy Flare"] );
-		partyAbilities.push_back( MasterAbilityList["Retribution"] );
-		partyAbilities.push_back( MasterAbilityList["Cover"] );
-		cecilFinal->InitializeAbilities( partyAbilities );
-		partyAbilities.clear();
+	//if ( testFinalFight )
+	//	{
+	//	std::vector<Enemy*> bosses;
+	//	//Boss* cecilFinal = new Boss( "Cecil" );
+	//	//Boss* janeFinal = new Boss( "Jane" );
+	//	//Boss* johnFinal = new Boss( "John" );
+	//	Enemy* cecilFinal = nullptr;
+	//	cecilFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Cecil.xml" );
+	//	cecilFinal->SetOrderPosition( 1 );
+	//	characterOrderPosition.x = 600.0f;
+	//	characterOrderPosition.y = (float)( cecilFinal->GetOrderPosition() * 100 + 150 + 16 );
+	//	cecilFinal->SetPosition( characterOrderPosition );
+	//	partyAbilities.push_back( MasterAbilityList["Holy Shield"] );
+	//	partyAbilities.push_back( MasterAbilityList["Holy Mace"] );
+	//	partyAbilities.push_back( MasterAbilityList["Holy Flare"] );
+	//	partyAbilities.push_back( MasterAbilityList["Retribution"] );
+	//	partyAbilities.push_back( MasterAbilityList["Cover"] );
+	//	cecilFinal->InitializeAbilities( partyAbilities );
+	//	partyAbilities.clear();
 
-		Enemy* janeFinal = nullptr;
-		janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
-		janeFinal->SetOrderPosition( 0 );
-		janeFinal->SetLiving( false );
-		janeFinal->SetHP( 0 );
-		characterOrderPosition.x = 600.0f;
-		characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
-		janeFinal->SetPosition( characterOrderPosition );
-		partyAbilities.push_back( MasterAbilityList["Healing Light"] );
-		partyAbilities.push_back( MasterAbilityList["Dia"] );
-		partyAbilities.push_back( MasterAbilityList["Protect"] );
-		janeFinal->InitializeAbilities( partyAbilities );
-		partyAbilities.clear();
+	//	Enemy* janeFinal = nullptr;
+	//	janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
+	//	janeFinal->SetOrderPosition( 0 );
+	//	janeFinal->SetLiving( false );
+	//	janeFinal->SetHP( 0 );
+	//	characterOrderPosition.x = 600.0f;
+	//	characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
+	//	janeFinal->SetPosition( characterOrderPosition );
+	//	partyAbilities.push_back( MasterAbilityList["Healing Light"] );
+	//	partyAbilities.push_back( MasterAbilityList["Dia"] );
+	//	partyAbilities.push_back( MasterAbilityList["Protect"] );
+	//	janeFinal->InitializeAbilities( partyAbilities );
+	//	partyAbilities.clear();
 
-		Enemy* johnFinal = nullptr;
-		johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
-		johnFinal->SetOrderPosition( 2 );
-		johnFinal->SetLiving( false );
-		johnFinal->SetHP( 0 );
-		characterOrderPosition.x = 600.0f;
-		characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
-		johnFinal->SetPosition( characterOrderPosition );
-		partyAbilities.push_back( MasterAbilityList["Sure Shot"] );
-		partyAbilities.push_back( MasterAbilityList["Barrage"] );
-		partyAbilities.push_back( MasterAbilityList["Haste"] );
-		johnFinal->InitializeAbilities( partyAbilities );
-		partyAbilities.clear();
+	//	Enemy* johnFinal = nullptr;
+	//	johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
+	//	johnFinal->SetOrderPosition( 2 );
+	//	johnFinal->SetLiving( false );
+	//	johnFinal->SetHP( 0 );
+	//	characterOrderPosition.x = 600.0f;
+	//	characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
+	//	johnFinal->SetPosition( characterOrderPosition );
+	//	partyAbilities.push_back( MasterAbilityList["Sure Shot"] );
+	//	partyAbilities.push_back( MasterAbilityList["Barrage"] );
+	//	partyAbilities.push_back( MasterAbilityList["Haste"] );
+	//	johnFinal->InitializeAbilities( partyAbilities );
+	//	partyAbilities.clear();
 
-		bosses.push_back( janeFinal );
-		bosses.push_back( cecilFinal );
-		bosses.push_back( johnFinal );
+	//	bosses.push_back( janeFinal );
+	//	bosses.push_back( cecilFinal );
+	//	bosses.push_back( johnFinal );
 
 
-		for ( unsigned int i = 0; i < Party.size(); i++ )
-			{
-			Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
-			Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
-			}
-		TurnManager::GetInstance()->Initialize( Party, bosses );
-		for ( size_t i = 0; i < Party.size(); i++ )
-			{
-			if ( Party[i]->GetActive() )
-				{
-				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
-				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
-				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
-				}
-			}
+	//	for ( unsigned int i = 0; i < Party.size(); i++ )
+	//		{
+	//		Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+	//		Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+	//		}
+	//	TurnManager::GetInstance()->Initialize( Party, bosses );
+	//	for ( size_t i = 0; i < Party.size(); i++ )
+	//		{
+	//		if ( Party[i]->GetActive() )
+	//			{
+	//			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+	//			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+	//			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+	//			}
+	//		}
 
-		for ( size_t i = 0; i < bosses.size(); i++ )
-			{
-			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
-			}
-		GameData::GetInstance()->SetIsInCombat( true );
-		state = Combat;
-		laststate = Combat;
+	//	for ( size_t i = 0; i < bosses.size(); i++ )
+	//		{
+	//		m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+	//		}
+	//	GameData::GetInstance()->SetIsInCombat( true );
+	//	state = Combat;
+	//	laststate = Combat;
 
-		}
+	//	}
 	if (is_tutorial)
 	{
 		std::vector<Enemy*> tempEnemy;
@@ -2188,7 +2188,87 @@ std::map<std::string, Ability*> GamePlayState::GetMasterList()
 
 void GamePlayState::CreateFinalFight()
 {
-	//stub
+SGD::Point characterOrderPosition;
+std::vector<Enemy*> bosses;
+std::vector<Ability*> partyAbilities;
+
+Enemy* cecilFinal = nullptr;
+cecilFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Cecil.xml" );
+cecilFinal->SetOrderPosition( 1 );
+characterOrderPosition.x = 600.0f;
+characterOrderPosition.y = (float)( cecilFinal->GetOrderPosition() * 100 + 150 + 16 );
+cecilFinal->SetPosition( characterOrderPosition );
+partyAbilities.push_back( MasterAbilityList["Holy Shield"] );
+partyAbilities.push_back( MasterAbilityList["Holy Mace"] );
+partyAbilities.push_back( MasterAbilityList["Holy Flare"] );
+partyAbilities.push_back( MasterAbilityList["Retribution"] );
+partyAbilities.push_back( MasterAbilityList["Cover"] );
+cecilFinal->InitializeAbilities( partyAbilities );
+partyAbilities.clear();
+
+Enemy* janeFinal = nullptr;
+janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
+janeFinal->SetOrderPosition( 0 );
+janeFinal->SetLiving( false );
+janeFinal->SetHP( 0 );
+characterOrderPosition.x = 600.0f;
+characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
+janeFinal->SetPosition( characterOrderPosition );
+partyAbilities.push_back( MasterAbilityList["Healing Light"] );
+partyAbilities.push_back( MasterAbilityList["Dia"] );
+partyAbilities.push_back( MasterAbilityList["Protect"] );
+janeFinal->InitializeAbilities( partyAbilities );
+partyAbilities.clear();
+
+Enemy* johnFinal = nullptr;
+johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
+johnFinal->SetOrderPosition( 2 );
+johnFinal->SetLiving( false );
+johnFinal->SetHP( 0 );
+characterOrderPosition.x = 600.0f;
+characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
+johnFinal->SetPosition( characterOrderPosition );
+partyAbilities.push_back( MasterAbilityList["Sure Shot"] );
+partyAbilities.push_back( MasterAbilityList["Barrage"] );
+partyAbilities.push_back( MasterAbilityList["Haste"] );
+johnFinal->InitializeAbilities( partyAbilities );
+partyAbilities.clear();
+
+bosses.push_back( janeFinal );
+bosses.push_back( cecilFinal );
+bosses.push_back( johnFinal );
+
+
+for ( unsigned int i = 0; i < Party.size(); i++ )
+	{
+	Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
+	Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+	}
+TurnManager::GetInstance()->Initialize( Party, bosses );
+for ( size_t i = 0; i < Party.size(); i++ )
+	{
+	if ( Party[i]->GetActive() )
+		{
+		m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+		m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+		m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+		}
+	}
+
+for ( size_t i = 0; i < bosses.size(); i++ )
+	{
+	m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), bosses[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+	}
+GameData::GetInstance()->SetIsInCombat( true );
+state = Combat;
+laststate = Combat;
+
 	state = Dia;
 	laststate = Town;
 	dialogue->Load("Assets/Scripts/bossdialogue.xml");
