@@ -998,6 +998,7 @@ void Enemy::CecilPhaseThree()
 				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
 					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				}
+			CecilPhase = -1;
 			TakeDamage( 9999 );
 			}
 		else
@@ -1008,6 +1009,7 @@ void Enemy::CecilPhaseThree()
 				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
 					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				}
+			CecilPhase = -1;
 			TakeDamage( 1 );
 			}
 		}

@@ -300,12 +300,14 @@ void Character::SetHP( int _hp )
 	HP = _hp;
 	if ( HP / (float)(GetMaxHP()) < 0.1f && name == "Cecil")
 	{
-		if ( CecilPhase == 1 || CecilPhase == 2 )
-			{
-			HP = (int)(GetMaxHP() * 0.1f);
-			if (CecilPhase == 1 )
+	if ( CecilPhase == 1 || CecilPhase == 2 )
+		{
+		HP = (int)( GetMaxHP() * 0.1f );
+		if ( CecilPhase == 1 )
 			progress = 100.0f;
-			}
+		}
+	else
+		alive = false;
 		}
 	else if ( HP < 0 )
 	{
