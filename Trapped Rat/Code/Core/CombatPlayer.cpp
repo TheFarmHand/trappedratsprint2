@@ -1194,7 +1194,16 @@ void CombatPlayer::SelectingItems( float dt )
 			}
 			if ( !anyAllyDead )
 			{
+				GameData::GetInstance()->PlaySelectionChange();
 				mySelection = none;
+				states = 0;
+				TurnManager::GetInstance()->setProgressFullReached(false);
+				//pTurn->setTimeStop( false );
+				TurnManager::GetInstance()->setTurnPause(true);
+				hudSelection = 0;
+				help->UpdateSelection(5);
+				SetSelection(0);
+				SetHomeButtons();
 				return;
 			}
 		}
