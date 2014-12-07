@@ -104,6 +104,17 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 		++JaneHit;
 	else if ( name == "John" && alive == true )
 		++JohnHit;
+	else if ( name == "Shopkeeper" && alive == true )
+		{
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+			{
+			if ( TurnManager::GetInstance()->GetAllies()[i]->GetProgress() >= 100.0f )
+				{
+				lastAttacker = i;
+				break;
+				}
+			}
+		}
 	
 	/*if ( HP <= 0 )
 	{
