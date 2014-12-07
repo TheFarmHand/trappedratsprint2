@@ -711,6 +711,7 @@ void GamePlayState::Fight()
 
 			randomEnemyParySize = rand() % 3 + 1;
 			Enemy* tempRandomEnemy;
+			std::vector<Ability*> partyAbilities;
 
 			for ( int i = 0; i < randomEnemyParySize; i++ )
 				{
@@ -720,27 +721,35 @@ void GamePlayState::Fight()
 					{
 					case 0:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
+						partyAbilities.push_back( MasterAbilityList["Bark"] );
 						break;
 					case 1:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cat.xml" );
+						partyAbilities.push_back( MasterAbilityList["Scratch"] );
 						break;
 					case 2:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Raven.xml" );
+						partyAbilities.push_back( MasterAbilityList["Feathered Flurry"] );
 						break;
 					case 3:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Chef.xml" );
+						partyAbilities.push_back( MasterAbilityList["Fresh Meat"] );
 						break;
 					case 4:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Blacksmith.xml" );
+						partyAbilities.push_back( MasterAbilityList["Bellows Blast"] );
 						break;
 					case 5:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Shopkeeper.xml" );
+						partyAbilities.push_back( MasterAbilityList["Elemental Poison"] );
 						break;
 					case 6:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Tailor.xml" );
+						partyAbilities.push_back( MasterAbilityList["Stitch in Time"] );
 						break;
 					case 7:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priest.xml" );
+						partyAbilities.push_back( MasterAbilityList["Healing Light"] );
 						break;
 					default:
 						break;
@@ -752,6 +761,8 @@ void GamePlayState::Fight()
 				characterOrderPosition.x = 600.0f;
 				characterOrderPosition.y = (float)( tempRandomEnemy->GetOrderPosition() * 100 + 150 + 16 );
 				tempRandomEnemy->SetPosition( characterOrderPosition );
+				tempRandomEnemy->InitializeAbilities( partyAbilities );
+				partyAbilities.clear();
 				tempEnemy.push_back( tempRandomEnemy );
 				}
 			//Character* en1 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
