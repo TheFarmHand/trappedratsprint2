@@ -430,7 +430,7 @@ void GamePlayState::Enter()
 			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tutorialenemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
 		}
 		state = Combat;
-		laststate = Map;
+		laststate =Combat;
 		GameData::GetInstance()->SetIsInCombat(true);
 	}
 
@@ -460,8 +460,8 @@ void GamePlayState::Enter()
 	MinibossFight = false;
 	FinalBossFight = false;
 	SGD::InputManager::GetInstance()->Update();
-	/*state = Map;
-	laststate = Map;*/
+	state = Combat;
+	laststate = Combat;
 
 
 	//state = BattleSummary;
@@ -1008,11 +1008,22 @@ void GamePlayState::MenuUpdate( float dt )
 
 						break;
 					case 2:
-						 GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
-						state = GPStates::Town;
-						laststate = state;
-						substate = MenuSubStates::None;
-						menuindex = 0;
+						if (laststate == Combat)
+						{
+							GameData::GetInstance()->PlaySelectionChange();
+							state = laststate;
+							substate = MenuSubStates::None;
+							menuindex = 0;
+						}
+						else
+						{
+							GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+							state = GPStates::Town;
+							laststate = state;
+							substate = MenuSubStates::None;
+							menuindex = 0;
+						}
+						
 
 
 						break;
