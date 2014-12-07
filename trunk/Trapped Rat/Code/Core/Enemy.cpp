@@ -761,16 +761,19 @@ void Enemy::WWWAI()
 	if ( health < 0.25f && !firstBelowQuarter )
 		{
 		abilityList[0]->CastAbility( this, this );
+		firstBelowQuarter = true;
 		return;
 		}
 	else if ( health < 0.5f && !firstBelowHalf )
 		{
 		abilityList[0]->CastAbility( this, this );
+		firstBelowHalf = true;
 		return;
 		}
 	else if ( health < 0.75f && !firstBelow3Quarter )
 		{
 		abilityList[0]->CastAbility( this, this );
+		firstBelow3Quarter = true;
 		return;
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
