@@ -432,7 +432,7 @@ void Enemy::ChefAI()
 	float healthRange;
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -467,7 +467,7 @@ void Enemy::BlacksmithAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -501,7 +501,7 @@ void Enemy::ShopkeeperAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -539,7 +539,7 @@ void Enemy::TailorAI()
 	int target;
 	float healthRange;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
@@ -574,7 +574,7 @@ void Enemy::PriestAI()
 	{
 	int target;
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
-	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}

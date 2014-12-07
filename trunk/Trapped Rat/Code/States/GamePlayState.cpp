@@ -714,7 +714,7 @@ void GamePlayState::Fight()
 
 			for ( int i = 0; i < randomEnemyParySize; i++ )
 				{
-				randomEnemyIndex = rand() % 7;
+				randomEnemyIndex = rand() % 8;
 
 				switch ( randomEnemyIndex )
 					{
