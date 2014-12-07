@@ -659,14 +659,14 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Small BP Restore" )
 		{
-			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 3;
+			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 10;
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
 		}
 		if ( chosen.GetName() == "Large BP Restore" )
 		{
-			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 5;
+			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 15;
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
