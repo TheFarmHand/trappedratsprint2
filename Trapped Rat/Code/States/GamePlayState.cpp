@@ -597,6 +597,7 @@ void GamePlayState::Exit()
 		delete guards[i];
 		guards[i] = nullptr;
 	}
+	guards.clear();
 	
 	Party.clear();
 	delete WorldMapAnsys;
