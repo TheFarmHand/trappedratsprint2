@@ -107,6 +107,9 @@ public:
 	void SetPortrait(SGD::HTexture _port);
 	void SetTimelineAnimation(SGD::HTexture _timeline);
 
+	int dogTarget = -1;
+	int lastAttacker = -1;
+
 	//Cecil fight variables
 	int CecilPhase = 1;
 	bool phase3 = false;

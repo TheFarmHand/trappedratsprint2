@@ -194,5 +194,6 @@ public:
 	void SetLootXP(int val);
 	void AddGuard(Guard* _guard){ guards.push_back(_guard); }
 	void AddToParty(CombatPlayer*_player);
+	int GetTownSelected() { return SelectedTown; }
 };
 

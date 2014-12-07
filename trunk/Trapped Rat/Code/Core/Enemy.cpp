@@ -5,6 +5,7 @@
 #include <sstream>
 #include "../Font/Font.h"
 #include "GameData.h"
+#include "../States/GamePlayState.h"
 
 
 Enemy::Enemy()
@@ -87,7 +88,23 @@ void Enemy::Update( float dt )
 		if ( stepbackward == false && stepforward == false )
 			{
 			// Enemy Select Player
-			if ( name == "Cecil" )
+			if ( name == "Cat" )
+				CatAI();
+			else if ( name == "Raven" )
+				RavenAI();
+			else if ( name == "Dog" )
+				DogAI();
+			else if ( name == "Chef" )
+				ChefAI();
+			else if ( name == "Blacksmith")
+				BlacksmithAI();
+			else if ( name == "Shopkeeper" )
+				ShopkeeperAI();
+			else if ( name == "Tailor" )
+				TailorAI();
+			else if ( name == "Priest" )
+				PriestAI();
+			else if ( name == "Cecil" )
 				CecilAI( CecilPhase );
 			else if ( name == "Jane" )
 				JaneAI();
@@ -231,7 +248,352 @@ void Enemy::SetXPVal( int val )
 	xp_value = val;
 	}
 
-//Cecil Fight
+//Common Enemy
+void Enemy::CatAI()
+	{
+	int lowestHp = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	int target = 0;
+	int tempAtk = (int)( GetAttack() * 1.3f );
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHp )
+			{
+			target = i;
+			}
+		}
+	if ( lowestHp / TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP() < 0.4f
+		 && TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
+		{
+		int dmg = rand() % tempAtk + tempAtk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		}
+	else if ( lowestHp / TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP() < 0.6f
+			  && TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
+		{
+		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
+		}
+	else if ( TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
+		{
+		int atk = GetAttack();
+		int dmg = rand() % atk + atk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		}
+	}
+void Enemy::RavenAI()
+	{
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	int elementalTarget;
+	if ( rand() % 5 > 3 )
+		{
+		int atk = GetAttack();
+		int dmg = rand() % atk + atk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		}
+	else
+		{
+		if ( GamePlayState::GetInstance()->GetTownSelected() == 0 )
+			elementalTarget = 1;
+		else if ( GamePlayState::GetInstance()->GetTownSelected() == 1 )
+			elementalTarget = 2;
+		else if ( GamePlayState::GetInstance()->GetTownSelected() == 2 )
+			elementalTarget = 3;
+		else if ( GamePlayState::GetInstance()->GetTownSelected() == 3 )
+			elementalTarget = 0;
+
+		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+			{
+			if ( elementalTarget == TurnManager::GetInstance()->GetAllies()[i]->GetEType() )
+				{
+				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+				return;
+				}
+			}
+		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
+		}
+	}
+void Enemy::DogAI()
+	{
+	bool pack = false;
+	int packMate;
+	float enemyPartyAvg = 0.0f;
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetName() == "Dog" &&
+			 i != GetOrderPosition() )
+			{
+			pack = true;
+			packMate = i;
+			break;
+			}
+		}
+	if ( pack )
+		{
+		if ( TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget >= 0 )
+			{
+			dogTarget = TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget;
+			if ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
+				{
+				dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+				while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+					{
+					dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+					}
+				}
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					enemyPartyAvg += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+				}
+			enemyPartyAvg /= TurnManager::GetInstance()->GetAllies().size();
+
+			if ( enemyPartyAvg > 0.7f )
+				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[dogTarget] );
+			else
+				{
+				int atk = GetAttack();
+				int dmg = rand() % atk + atk;
+				dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[dogTarget]->GetDefense() );
+				if ( dmg <= 0 )
+					dmg = 0;
+				TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[dogTarget], dmg );
+				}
+			}
+		}
+	else if (dogTarget > -1 )
+		{
+		if ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
+			{
+			dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+			while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+				{
+				dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+				}
+			}
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					enemyPartyAvg += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+				}
+			enemyPartyAvg /= TurnManager::GetInstance()->GetAllies().size();
+
+			if ( enemyPartyAvg > 0.7f )
+				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[dogTarget] );
+			else
+				{
+				int atk = GetAttack();
+				int dmg = rand() % atk + atk;
+				dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[dogTarget]->GetDefense() );
+				if ( dmg <= 0 )
+					dmg = 0;
+				TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[dogTarget], dmg );
+				}
+		}
+	else
+		{
+		dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+		while ( !TurnManager::GetInstance()->GetEnemies()[dogTarget]->isAlive() )
+			{
+			dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
+			}
+		int atk = GetAttack();
+		int dmg = rand() % atk + atk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[dogTarget]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[dogTarget], dmg );
+		}
+	}
+void Enemy::ChefAI()
+	{
+	float healthRange;
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	int tempAtk = (int)(GetAttack() * 1.25f);
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.75f )
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+			return;
+			}
+		}
+	healthRange = GetHP() / (float)( GetMaxHP() );
+	if ( healthRange < 0.75f && healthRange > 0.25f )
+		{
+		int dmg = rand() % tempAtk + tempAtk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		}
+	else
+		{
+		int dmg = rand() % GetAttack() + GetAttack();
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		}
+	}
+void Enemy::BlacksmithAI()
+	{
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	int tempAtk = (int)( GetAttack() * 1.25f );
+
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetDefense() > GetDefense() )
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+			return;
+			}
+		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.25f )
+			{
+			int dmg = rand() % tempAtk + tempAtk;
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[i]->GetStats().defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[i], dmg );
+			return;
+			}
+		}
+			int dmg = rand() % GetAttack() + GetAttack();
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+			return;
+	}
+void Enemy::ShopkeeperAI()
+	{
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	int tempAtk = (int)( GetAttack() * 1.25f );
+	if ( GetHP() / (float)( GetMaxHP() ) > 0.5f )
+		{
+		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
+		return;
+		}
+	if ( lastAttacker >= 0 && TurnManager::GetInstance()->GetAllies()[lastAttacker]->isAlive() )
+		{
+		target = lastAttacker;
+		}
+	if ( (rand() % 20) % 3 == 0 )
+		{
+		int dmg = rand() % tempAtk + tempAtk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		return;
+		}
+	else
+		{
+		int dmg = rand() % GetAttack() + GetAttack();
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		return;
+		}
+	}
+void Enemy::TailorAI()
+	{
+	int target;
+	float healthRange;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	int tempAtk = (int)( GetAttack() * 1.25f );
+
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		healthRange = TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() );
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetSpeed() > GetSpeed() )
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+			return;
+			}
+		else if ( healthRange < 0.75f && healthRange > 0.25f )
+			{
+			int dmg = rand() % tempAtk + tempAtk;
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[i]->GetStats().defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[i], dmg );
+			return;
+			}
+		}
+	int dmg = rand() % GetAttack() + GetAttack();
+	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+	if ( dmg <= 0 )
+		dmg = 0;
+	TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+	return;
+	}
+void Enemy::PriestAI()
+	{
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.2f )
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
+			return;
+			}
+		}
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.2f )
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+			return;
+			}
+		}
+	int dmg = rand() % GetAttack() + GetAttack();
+	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+	if ( dmg <= 0 )
+		dmg = 0;
+	TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+	return;
+	}
+//Mini Boss
+
+//Final Boss
 void Enemy::CecilAI( int phase )
 	{
 	switch ( phase )
@@ -444,11 +806,22 @@ void Enemy::CecilPhaseThree()
 		if ( damageDealt >= 400 )
 			{
 			//Cast weak Holy Flare
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				GetStats().magic = 0;
+				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
+					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+				}
 			TakeDamage( 9999 );
 			}
 		else
 			{
 			//Cast strong Holy Flare
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( TurnManager::GetInstance()->GetAllies()[i]->GetName() == "Ratsputin" )
+					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+				}
 			TakeDamage( 1 );
 			}
 		}
