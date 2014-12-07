@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
 class GameOverLoseState :
 	public GameState
 {
@@ -7,6 +8,10 @@ class GameOverLoseState :
 	virtual ~GameOverLoseState();
 	GameOverLoseState& operator=(GameOverLoseState& rhs) = delete;
 	GameOverLoseState(GameOverLoseState& rhs) = delete;
+
+	SGD::HTexture background = SGD::INVALID_HANDLE;
+
+
 public:
 	static GameOverLoseState* GetInstance();
 	void virtual Enter();

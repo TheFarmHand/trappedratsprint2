@@ -133,7 +133,7 @@ void TurnManager::Update( float dt )
 			EndCombat();
 			if ( GamePlayState::GetInstance()->ignore_game_over )
 			{
-				GamePlayState::GetInstance()->ignore_game_over = false;
+				
 				return;
 			}
 			else
@@ -223,7 +223,8 @@ void TurnManager::Render()
 	//*
 
 	//*Anything added below will render on top of combat characters
-	pPartMan->Render();
+	if (pPartMan!=nullptr)
+		pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
 	//if ( testCover )

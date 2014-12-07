@@ -46,7 +46,7 @@ void GamePlayState::Enter()
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/padlock.png");
 
 
-	//is_tutorial = true;
+	is_tutorial = true;
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/Scroll.png");
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
@@ -404,14 +404,14 @@ void GamePlayState::Enter()
 
 		for (unsigned int i = 0; i < Parents.size(); i++)
 		{
-		Party[i]->GetAbility( 0 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 1 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 2 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 3 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 4 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 5 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 6 )->CalcluateBpScaledCost( Party[i] );
-		Party[i]->GetAbility( 7 )->CalcluateBpScaledCost( Party[i] );
+		Parents[i]->GetAbility( 0 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 1 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 2 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 3 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 4 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 5 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 6 )->CalcluateBpScaledCost( Parents[i] );
+		Parents[i]->GetAbility( 7 )->CalcluateBpScaledCost( Parents[i] );
 		}
 		TurnManager::GetInstance()->Initialize(Parents, tutorialenemy);
 		for (size_t i = 0; i < Parents.size(); i++)
@@ -430,7 +430,7 @@ void GamePlayState::Enter()
 			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tutorialenemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
 		}
 		state = Combat;
-		laststate = Combat;
+		laststate = Map;
 		GameData::GetInstance()->SetIsInCombat(true);
 	}
 
@@ -460,8 +460,8 @@ void GamePlayState::Enter()
 	MinibossFight = false;
 	FinalBossFight = false;
 	SGD::InputManager::GetInstance()->Update();
-	state = Map;
-	laststate = Map;
+	/*state = Map;
+	laststate = Map;*/
 
 
 	//state = BattleSummary;
@@ -900,7 +900,6 @@ void GamePlayState::MenuUpdate( float dt )
 			if ( input->IsKeyPressed( SGD::Key::Escape ) )
 				{
 				GameData::GetInstance()->PlaySelectionChange();
-
 				menuindex = 0;
 				state = laststate;
 				}
@@ -942,6 +941,8 @@ void GamePlayState::MenuUpdate( float dt )
 					selecting_party = false;
 					select_first = false;
 					select_new = false;
+					menuindex = 0;
+					oldindex = -1;
 				}
 				else
 				{
@@ -2230,7 +2231,12 @@ void GamePlayState::SummaryUpdate(float dt)
 		loot.clear();
 		loot_xp = 0;
 		loot_gold = 0;
-
+		if (ignore_game_over)
+		{
+			ignore_game_over = false;
+			state = Map;
+			laststate = Map;
+		}
 		if (MinibossFight)
 		{
 			MinibossFight = false;
@@ -2256,7 +2262,7 @@ void GamePlayState::SummaryUpdate(float dt)
 			//for now we will have to just do dialogue
 			dialogue->Load("../Trapped Rat/Assets/Scripts/cecildefeateddialogue.xml");
 			state = Dia;
-			laststate = Town;
+			laststate = BattleSummary;
 			//FinalBossFight = false;
 		}
 

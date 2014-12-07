@@ -23,7 +23,7 @@ GameOverLoseState::~GameOverLoseState()
 }
 void  GameOverLoseState::Enter()
 {
-
+	background = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/MenuBackground.png");
 }
 
 
@@ -36,13 +36,13 @@ void  GameOverLoseState::Update(float dt)
 }
 void const GameOverLoseState::Render()
 {
-	Font * font = GameData::GetInstance()->GetFont();
-	font->DrawString("YOU HAVE LOST!", 50.0f, 50.0f, { 155, 155, 155 }, 3.0f);
-	font->DrawString("Hit Escape to Exit",50.0f, 200.0f, { 155, 155, 155 });
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
+	GameData::GetInstance()->GetFont()->DrawString("You Have Defeated Cecil_and_Avenged your parents!", 50.0f, 200.0f, { 0, 0, 0 }, 3.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Hit Escape to Exit", 200.0f, 500.0f, { 0, 0, 0 }, 1.0f);
 
 
 }
 void  GameOverLoseState::Exit()
 {
-	
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
 }
