@@ -468,10 +468,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if ((*iter)->GetName() == "WaterWall")
 		{
 			(*iter)->SetTickDmg((*iter)->GetTickDmg() - value);
+
 			if((*iter)->GetTickDmg() <= 0)
 			{
 				// Clear it
 				to_remove = (*iter);
+
 			}
 			return;
 		}
@@ -504,15 +506,15 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Redirect attack to Guard
 
 
-		int dmg = owner->GetAttack();
+		/*int dmg = owner->GetAttack();
 		dmg += rand() % ( dmg / 3 );
-		dmg -= Guard->GetGuard()->GetDefense() / 2;
-		if ( dmg <= 0 )
-			dmg = 0;
+		dmg -= Guard->GetGuard()->GetDefense() / 2;*/
+		/*if ( dmg <= 0 )
+			dmg = 0;*/
 		if ( Guard->GetTernEffect() )
-			owner->TakeDamage( dmg );
+			owner->TakeDamage( value );
 		else
-			Guard->GetGuard()->TakeDamage( dmg );
+			Guard->GetGuard()->TakeDamage( value );
 	}
 
 	if ( counter && !guard )

@@ -1,5 +1,7 @@
 
 #include "Bars.h"
+#include "GameData.h"
+#include "../Font/Font.h"
 
 
 Bars::Bars()
@@ -72,6 +74,16 @@ void  Bars::Render()
 		{
 			SGD::GraphicsManager::GetInstance( )->DrawTextureSection( image, position, SGD::Rectangle( 0, 0, (float)width, size.height ), 0, { }, color, { 4.0f, 2.0f } );
 			SGD::GraphicsManager::GetInstance( )->DrawTexture( outlineimage, position, 0, { }, { }, { 4.0f, 2.0f } );
+			if(width >= (int)size.width)
+			{
+				// I think this means you have a full bar
+				GameData::GetInstance()->GetFont()->DrawString("Ternary Blast Ready!  Press O", position.x + 20, position.y + 10, { 255,0,150}, 1.1f);	
+			}
+			else
+			{
+				GameData::GetInstance( )->GetFont( )->DrawString( "Charging Ternary Blast!", position.x + 30, position.y + 10, { 255, 0, 150 }, 1.1f );
+			}
+
 		}
 	}
 	else if (width <= 0)
