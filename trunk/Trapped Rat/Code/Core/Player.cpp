@@ -348,13 +348,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Firefall"]);
 		partyAbilities.push_back(MasterAbilityList["Fire Spikes"]);
 		partyAbilities.push_back(MasterAbilityList["Incinerate"]);
-		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		jeeves->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			jeeves->SetActive(false);
 		else
 			jeeves->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(jeeves);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainJeeves");
 	}
 	else if (pEvent->GetEventID() == "GainSlippy")
@@ -379,13 +379,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 		partyAbilities.push_back(MasterAbilityList["Torrent"]);
 		partyAbilities.push_back(MasterAbilityList["Flood"]);
-		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		slippy->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			slippy->SetActive(false);
 		else
 			slippy->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(slippy);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainSlippy");
 	}
 	else if (pEvent->GetEventID() == "GainCheckers")
@@ -409,13 +409,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Geo Crush"]);
 		partyAbilities.push_back(MasterAbilityList["Pinch"]);
 		partyAbilities.push_back(MasterAbilityList["Quake"]);
-		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		checkers->InitializeAbilities( partyAbilities );
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			checkers->SetActive(false);
 		else
 			checkers->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(checkers);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainCheckers");
 	}
 	else if (pEvent->GetEventID() == "GainBiggs")
@@ -439,13 +439,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back( MasterAbilityList["Tornado"] );
 		partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
 		partyAbilities.push_back(MasterAbilityList["Tempest"]);
-		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		biggs->InitializeAbilities(partyAbilities);
 		if (GamePlayState::GetInstance()->GetPartySize() > 3)
 			biggs->SetActive(false);
 		else
 			biggs->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(biggs);
+		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainBiggs");
 	}
 	else if (pEvent->GetEventID() == "CecilFight")

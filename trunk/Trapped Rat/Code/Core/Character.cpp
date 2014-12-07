@@ -99,7 +99,9 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 	dmg = 0;
 	}
 	SetHP(HP - dmg);
-	GamePlayState::GetInstance()->AddToGauge(dmg);
+
+	if(dmg>0)
+		GamePlayState::GetInstance()->AddToGauge(dmg);
 	if ( name == "Jane" && alive == true )
 		++JaneHit;
 	else if ( name == "John" && alive == true )
