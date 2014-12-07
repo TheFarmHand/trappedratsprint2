@@ -341,13 +341,12 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::map<std::string, Ability*> MasterAbilityList;
 		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
 		partyAbilities.push_back(MasterAbilityList["Collapse"]);
-		partyAbilities.push_back(MasterAbilityList["Emblazon"]);
+		partyAbilities.push_back( MasterAbilityList["Ignite"] );
+		partyAbilities.push_back( MasterAbilityList["Scorch"] );
+		partyAbilities.push_back( MasterAbilityList["Rib-a-Rang"] );
+		partyAbilities.push_back( MasterAbilityList["Emblazon"] );
 		partyAbilities.push_back(MasterAbilityList["Firefall"]);
 		partyAbilities.push_back(MasterAbilityList["Fire Spikes"]);
-		partyAbilities.push_back(MasterAbilityList["Ignite"]);
-		partyAbilities.push_back(MasterAbilityList["Scorch"]);
-		partyAbilities.push_back(MasterAbilityList["Rib-a-Rang"]);
-
 		partyAbilities.push_back(MasterAbilityList["Incinerate"]);
 		jeeves->InitializeAbilities(partyAbilities);
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
@@ -372,13 +371,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::map<std::string, Ability*> MasterAbilityList;
 		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
 		partyAbilities.push_back(MasterAbilityList["Puddle"]);
-		partyAbilities.push_back(MasterAbilityList["Whirlpool"]);
-		partyAbilities.push_back(MasterAbilityList["Acid Rain"]);
+		partyAbilities.push_back( MasterAbilityList["Squirt"] );
+		partyAbilities.push_back( MasterAbilityList["Dissolve"] );
+		partyAbilities.push_back( MasterAbilityList["Splash"] );
+		partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
+		partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
 		partyAbilities.push_back(MasterAbilityList["Torrent"]);
 		partyAbilities.push_back(MasterAbilityList["Flood"]);
-		partyAbilities.push_back(MasterAbilityList["Squirt"]);
-		partyAbilities.push_back(MasterAbilityList["Dissolve"]);
-		partyAbilities.push_back(MasterAbilityList["Splash"]);
 
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			slippy->SetActive(false);
@@ -401,14 +400,14 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		checkers->SetSize({ 64, 64 });
 		std::map<std::string, Ability*> MasterAbilityList;
 		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
-		partyAbilities.push_back(MasterAbilityList["Cover"]);
+		partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
+		partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
+		partyAbilities.push_back( MasterAbilityList["Rampart"] );
+		partyAbilities.push_back( MasterAbilityList["Tremor"] );
+		partyAbilities.push_back( MasterAbilityList["Cover"] );
 		partyAbilities.push_back(MasterAbilityList["Geo Crush"]);
 		partyAbilities.push_back(MasterAbilityList["Pinch"]);
 		partyAbilities.push_back(MasterAbilityList["Quake"]);
-		partyAbilities.push_back(MasterAbilityList["Hedge Guard"]);
-		partyAbilities.push_back(MasterAbilityList["Rock Spike"]);
-		partyAbilities.push_back(MasterAbilityList["Rampart"]);
-		partyAbilities.push_back(MasterAbilityList["Tremor"]);
 		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
 			checkers->SetActive(false);
 		else
@@ -430,14 +429,14 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		biggs->SetSize({ 64, 64 });
 		std::map<std::string, Ability*> MasterAbilityList;
 		MasterAbilityList = GamePlayState::GetInstance()->GetMasterList();
-		partyAbilities.push_back(MasterAbilityList["Zephyr"]);
-		partyAbilities.push_back(MasterAbilityList["Leaf on the Wind"]);
-		partyAbilities.push_back(MasterAbilityList["Second Wind"]);
-		partyAbilities.push_back(MasterAbilityList["Whispering Wind"]);
-		partyAbilities.push_back(MasterAbilityList["Tailwind"]);
+		partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
+		partyAbilities.push_back( MasterAbilityList["Zephyr"] );
+		partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
+		partyAbilities.push_back( MasterAbilityList["Second Wind"] );
+		partyAbilities.push_back( MasterAbilityList["Tailwind"] );
+		partyAbilities.push_back( MasterAbilityList["Tornado"] );
+		partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
 		partyAbilities.push_back(MasterAbilityList["Tempest"]);
-		partyAbilities.push_back(MasterAbilityList["Tornado"]);
-		partyAbilities.push_back(MasterAbilityList["Wind Vale"]);
 		biggs->InitializeAbilities(partyAbilities);
 		if (GamePlayState::GetInstance()->GetPartySize() > 3)
 			biggs->SetActive(false);
