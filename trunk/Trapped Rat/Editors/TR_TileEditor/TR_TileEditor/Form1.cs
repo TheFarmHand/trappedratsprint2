@@ -910,6 +910,7 @@ namespace TR_TileEditor
                             grandchildWaypoint.Add(waypointP);
                             childGuard.Add(grandchildWaypoint);
                             grandchildWaypoint = new XElement("waypoint");
+                            
                         }
                        
                         root.Add(childGuard);
