@@ -882,7 +882,16 @@ void CombatPlayer::RunUpdate( float dt )
 		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight ||GamePlayState::GetInstance()->ignore_game_over)
 		{
 			// You can't run away
+			GameData::GetInstance()->PlaySelectionChange();
+			mySelection = none;
 			states = 0;
+			TurnManager::GetInstance()->setProgressFullReached(false);
+			//pTurn->setTimeStop( false );
+			TurnManager::GetInstance()->setTurnPause(true);
+			hudSelection = 0;
+			help->UpdateSelection(5);
+			SetSelection(0);
+			SetHomeButtons();
 			return;
 		}
 		int chance = rand()%1000;
