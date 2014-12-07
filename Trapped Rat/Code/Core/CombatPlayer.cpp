@@ -1228,9 +1228,11 @@ void CombatPlayer::SelectingItems( float dt )
 			item_choose = nullptr;
 			GameData::GetInstance()->PlaySelectionChange();
 			states = 0;
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
+			help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
 			mySelection = none;
-			SetSelection( 0 );
+			hudSelection = 0;
+			SetSelection(0);
+			SetHomeButtons();
 		}
 
 	}
