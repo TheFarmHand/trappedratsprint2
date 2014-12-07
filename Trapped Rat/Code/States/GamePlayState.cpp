@@ -19,6 +19,9 @@
 #include <fstream>
 #include "../Cutscenes/CutsceneManager.h"
 #include "../Core/Boss.h"
+#include "../SGD Wrappers/SGD_Event.h"
+
+
 
 GamePlayState* GamePlayState::GetInstance()
 	{
@@ -28,6 +31,7 @@ GamePlayState* GamePlayState::GetInstance()
 	}
 void GamePlayState::Enter()
 {
+	
 
 	townpoints[0] = SGD::Point(600, 400);
 	townpoints[1] = SGD::Point(360, 130);
@@ -212,7 +216,7 @@ void GamePlayState::Enter()
 
 	partyAbilities.clear();
 
-	CombatPlayer* p5 = nullptr;
+	/*CombatPlayer* p5 = nullptr;
 	p5 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
 	p5->SetOrderPosition( 4 );
 	characterOrderPosition.x = 100.0f;
@@ -232,7 +236,7 @@ void GamePlayState::Enter()
 	p5->SetActive(false);
 	Party.push_back( p5 );
 
-	partyAbilities.clear();
+	partyAbilities.clear();*/
 	//build the shop inventory
 	Items smallheal;
 	smallheal.SetName("Small Heal");
@@ -2114,4 +2118,14 @@ void GamePlayState::SummaryRender()
 	}
 	GameData::GetInstance()->GetFont()->DrawString(str, 250, 350, { 20, 0, 20 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Press Enter to Continue", 250, 300, { 50, 50, 50 }, 2.0f);
+}
+
+void GamePlayState::AddToParty(CombatPlayer*_player)
+{
+	Party.push_back(_player);
+}
+
+std::map<std::string, Ability*> GamePlayState::GetMasterList()
+{
+	return MasterAbilityList;
 }

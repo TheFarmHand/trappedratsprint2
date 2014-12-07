@@ -15,6 +15,7 @@
 #include "../Core/Bars.h"
 #include "../Core/StatusEffectManager.h"
 #include "../Core/Guard.h"
+#include "../SGD Wrappers/SGD_Listener.h"
 
 #define MAXTG 250
 #define MAXITEM 10
@@ -28,8 +29,8 @@ enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive } ;
 class HUDItem;
 class GamePlayState :
 	public GameState
-{
 	
+{
 	GamePlayState() = default;
 	virtual ~GamePlayState() = default;
 	GamePlayState(GamePlayState& rhs) = delete;
@@ -166,7 +167,7 @@ public:
 	void ClearTernary();
 	void AddTarget( );
 	void CheckAbilityUnlocked( bool EOC = false );
-	
+	std::map<std::string, Ability*> GetMasterList();
 	// Items
 	void AddItem( ItemType it );
 	void AddGold( int val );
@@ -188,5 +189,6 @@ public:
 	void SetGauge(int val);
 	void SetTernary(bool buul);
 	void AddGuard(Guard* _guard){ guards.push_back(_guard); }
+	void AddToParty(CombatPlayer*_player);
 };
 
