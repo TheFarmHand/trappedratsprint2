@@ -21,7 +21,7 @@
 #define MAXREV 1
 
 class Player;
-enum GPStates { Map, Town, Combat, Menu,Dia,Cuts };
+enum GPStates { Map, Town, Combat, Menu,Dia,Cuts, BattleSummary };
 enum MenuSubStates{ None, Options, HowTo, Party, Shop };
 enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive } ;
 
@@ -128,7 +128,8 @@ public:
 	void DialogueRender();
 	void CutsceneUpdate(float dt);
 	void CutsceneRender();
-
+	void SummaryUpdate(float dt);
+	void SummaryRender();
 	void MapUpdate(float dt);
 	void MapRender();
 	SGD::HTexture getTurnInd() {return TurnIndicator;};
