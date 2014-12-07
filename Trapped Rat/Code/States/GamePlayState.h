@@ -175,6 +175,7 @@ public:
 	void AddItem( ItemType it );
 	void AddGold( int val );
 	int	GetGold(void) const;
+	int GetPartySize(){ return Party.size(); }
 	
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
 	void AddToTB( Ability* abi, Character* target );
@@ -195,5 +196,6 @@ public:
 	void AddGuard(Guard* _guard){ guards.push_back(_guard); }
 	void AddToParty(CombatPlayer*_player);
 	int GetTownSelected() { return SelectedTown; }
+	void CreateFinalFight();
 };
 

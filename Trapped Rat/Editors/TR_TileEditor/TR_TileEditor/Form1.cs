@@ -908,9 +908,10 @@ namespace TR_TileEditor
                         {
                             XAttribute waypointP = new XAttribute("tilePoint", levelObjects[i].WaypointTiles[k]);
                             grandchildWaypoint.Add(waypointP);
+                            childGuard.Add(grandchildWaypoint);
                             grandchildWaypoint = new XElement("waypoint");
                         }
-                        childGuard.Add(grandchildWaypoint);
+                       
                         root.Add(childGuard);
                         childGuard = new XElement("guard");
                     }
@@ -1016,6 +1017,7 @@ namespace TR_TileEditor
                     tempIndex = tempY * mapSize.Width + tempX;
                     tempObjects.WaypointTiles.Add(tempIndex);
                     IEnumerable<XElement> waypoints = guard.Elements("waypoint");
+                    
                     foreach (XElement way in waypoints)
                     {
                         if (way.Attribute("tilePoint") != null)

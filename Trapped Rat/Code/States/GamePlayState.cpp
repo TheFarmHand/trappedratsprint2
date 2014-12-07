@@ -151,70 +151,70 @@ void GamePlayState::Enter()
 
 	partyAbilities.clear();
 
-	CombatPlayer* p2 = nullptr;
-	p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Slippy.xml" ) );
-	p2->SetOrderPosition( 1 );
-	characterOrderPosition.x = 100.0f;
-	characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150 );
-	p2->SetPosition( characterOrderPosition );
-	p2->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Puddle"] );
-	partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
-	partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
-	partyAbilities.push_back( MasterAbilityList["Torrent"] );
-	partyAbilities.push_back( MasterAbilityList["Flood"] );
-	partyAbilities.push_back( MasterAbilityList["Squirt"] );
-	partyAbilities.push_back( MasterAbilityList["Dissolve"] );
-	partyAbilities.push_back( MasterAbilityList["Splash"] );
+	//CombatPlayer* p2 = nullptr;
+	//p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Slippy.xml" ) );
+	//p2->SetOrderPosition( 1 );
+	//characterOrderPosition.x = 100.0f;
+	//characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150 );
+	//p2->SetPosition( characterOrderPosition );
+	//p2->SetSize( { 64, 64 } );
+	//partyAbilities.push_back( MasterAbilityList["Puddle"] );
+	//partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
+	//partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
+	//partyAbilities.push_back( MasterAbilityList["Torrent"] );
+	//partyAbilities.push_back( MasterAbilityList["Flood"] );
+	//partyAbilities.push_back( MasterAbilityList["Squirt"] );
+	//partyAbilities.push_back( MasterAbilityList["Dissolve"] );
+	//partyAbilities.push_back( MasterAbilityList["Splash"] );
 
-	p2->SetActive( true );
-	p2->InitializeAbilities( partyAbilities );
-	Party.push_back( p2 );
+	//p2->SetActive( true );
+	//p2->InitializeAbilities( partyAbilities );
+	//Party.push_back( p2 );
 
-	partyAbilities.clear();
+	//partyAbilities.clear();
 
-	CombatPlayer* p3 = nullptr;
-	p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Checkers.xml" ) );
-	p3->SetOrderPosition( 2 );
-	characterOrderPosition.x = 100.0f;
-	characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
-	p3->SetPosition( characterOrderPosition );
-	p3->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Cover"] );
-	partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
-	partyAbilities.push_back( MasterAbilityList["Pinch"] );
-	partyAbilities.push_back( MasterAbilityList["Quake"] );
-	partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
-	partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
-	partyAbilities.push_back( MasterAbilityList["Rampart"] );
-	partyAbilities.push_back( MasterAbilityList["Tremor"] );
-	
-	p3->SetActive( true );
-	p3->InitializeAbilities( partyAbilities );
-	Party.push_back( p3 );
+	//CombatPlayer* p3 = nullptr;
+	//p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Checkers.xml" ) );
+	//p3->SetOrderPosition( 2 );
+	//characterOrderPosition.x = 100.0f;
+	//characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
+	//p3->SetPosition( characterOrderPosition );
+	//p3->SetSize( { 64, 64 } );
+	//partyAbilities.push_back( MasterAbilityList["Cover"] );
+	//partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
+	//partyAbilities.push_back( MasterAbilityList["Pinch"] );
+	//partyAbilities.push_back( MasterAbilityList["Quake"] );
+	//partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
+	//partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
+	//partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	//partyAbilities.push_back( MasterAbilityList["Tremor"] );
+	//
+	//p3->SetActive( true );
+	//p3->InitializeAbilities( partyAbilities );
+	//Party.push_back( p3 );
 
-	partyAbilities.clear();
+	//partyAbilities.clear();
 
-	CombatPlayer* p4 = nullptr;
-	p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
-	p4->SetOrderPosition( 3 );
-	characterOrderPosition.x = 100.0f;
-	characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
-	p4->SetPosition( characterOrderPosition );
-	p4->SetSize( { 64, 64 } );
-	partyAbilities.push_back( MasterAbilityList["Zephyr"] );
-	partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Second Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
-	partyAbilities.push_back( MasterAbilityList["Tailwind"] );
-	partyAbilities.push_back( MasterAbilityList["Tempest"] );
-	partyAbilities.push_back( MasterAbilityList["Tornado"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
-	p4->InitializeAbilities( partyAbilities );
-	p4->SetActive( false );
-	Party.push_back( p4 );
+	//CombatPlayer* p4 = nullptr;
+	//p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
+	//p4->SetOrderPosition( 3 );
+	//characterOrderPosition.x = 100.0f;
+	//characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
+	//p4->SetPosition( characterOrderPosition );
+	//p4->SetSize( { 64, 64 } );
+	//partyAbilities.push_back( MasterAbilityList["Zephyr"] );
+	//partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
+	//partyAbilities.push_back( MasterAbilityList["Second Wind"] );
+	//partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
+	//partyAbilities.push_back( MasterAbilityList["Tailwind"] );
+	//partyAbilities.push_back( MasterAbilityList["Tempest"] );
+	//partyAbilities.push_back( MasterAbilityList["Tornado"] );
+	//partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
+	//p4->InitializeAbilities( partyAbilities );
+	//p4->SetActive( false );
+	//Party.push_back( p4 );
 
-	partyAbilities.clear();
+	//partyAbilities.clear();
 
 	/*CombatPlayer* p5 = nullptr;
 	p5 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
@@ -2180,6 +2180,11 @@ void GamePlayState::AddToParty(CombatPlayer*_player)
 std::map<std::string, Ability*> GamePlayState::GetMasterList()
 {
 	return MasterAbilityList;
+}
+
+void GamePlayState::CreateFinalFight()
+{
+	//stub
 }
 
 void GamePlayState::SetLootXP( int val )

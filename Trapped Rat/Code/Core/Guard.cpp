@@ -17,7 +17,7 @@ Guard::~Guard()
 }
 void Guard::Update(float dt)
 {
-	ansys->ResetAll();
+	//ansys->ResetAll();
 	
 	if (velocity.x > 0.0f)
 	{
