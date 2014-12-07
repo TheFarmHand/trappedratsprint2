@@ -2176,6 +2176,9 @@ void GamePlayState::SummaryRender()
 void GamePlayState::AddToParty(CombatPlayer*_player)
 {
 	Party.push_back(_player);
+	state = Dia;
+	laststate = Town;
+	dialogue->Load("Assets/Scripts/gainedcompanion.xml");
 }
 
 std::map<std::string, Ability*> GamePlayState::GetMasterList()
@@ -2186,6 +2189,9 @@ std::map<std::string, Ability*> GamePlayState::GetMasterList()
 void GamePlayState::CreateFinalFight()
 {
 	//stub
+	state = Dia;
+	laststate = Town;
+	dialogue->Load("Assets/Scripts/bossdialogue.xml");
 }
 
 void GamePlayState::SetLootXP( int val )
