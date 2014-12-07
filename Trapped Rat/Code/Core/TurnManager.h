@@ -22,7 +22,7 @@ public:
 	bool getProgressFullReached();
 	void setTurnPause( bool pause );
 	bool getTurnPause();
-
+	
 	std::vector<Character*> GetEnemies()		{ return EnemyUnits; }
 	std::vector<Character*> GetAllies()			{ return AlliedUnits; }
 	std::vector<Character*> GetAll()			{ return AllCombatUnits; }
@@ -63,7 +63,7 @@ private:
 	void SetupEnemyParty( std::vector<Enemy*> enemyParty );
 	bool CheckWin();
 	bool CheckLose();
-	void EndCombat();
+	void EndCombat( );
 	void CombatUpdate(float dt);
 	void AnimationUpdate( float dt );
 	void ParticleUpdate( float dt );

@@ -55,6 +55,11 @@ void CombatPlayer::Update( float dt )
 		{
 			TurnManager::GetInstance()->setProgressFullReached( false );
 			TurnManager::GetInstance()->setTimeStop( false );
+			if(runaway)
+			{
+				GamePlayState::GetInstance()->run_succeed = true;
+				runaway = false;
+			}
 		}
 
 		return;
@@ -93,7 +98,7 @@ void CombatPlayer::Update( float dt )
 		if ( stepforward == false && stepbackward == false && stepTime != 0.0f )
 		{
 			stepforward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 		}
 		if ( stepforward == true && stepbackward == false )
 		{
@@ -575,7 +580,7 @@ void CombatPlayer::AttackUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -624,7 +629,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		mySelection = none;
@@ -682,7 +687,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		mySelection = none;
@@ -872,17 +877,50 @@ void CombatPlayer::RunUpdate( float dt )
 
 	}
 
+	if( pInput->IsKeyPressed(SGD::Key::Enter) )
+	{
+		int chance = rand()%1000;
+		if(chance < GetAvoision() * 250)
+		{
+			//GamePlayState::GetInstance()->run_succeed = true;
+			runaway = true;
 
+			myTarget = 0;
+			if ( stepbackward == false && stepforward == false && progress != 0.0f )
+			{
+				stepbackward = true;
+				stepTime = 1.0f;
+				progress = 0.0f;
+			}
 
+			TurnManager::GetInstance( )->setProgressFullReached( false );
+			hudSelection = 0;
+			//TurnManager::GetInstance()->setTimeStop( false );
+			TurnManager::GetInstance( )->setTurnPause( true );
+			help->UpdateSelection( 5 );
+			states = 0;
+			mySelection = none;
+			SetSelection( 0 );
+		}
 
-	//if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
-	//{
-	//	// Here is where we decide Attack, or Ability etc
-	//	Attack( pTurn->GetEnemies()[ myTarget ] );
-	//	myTarget = 0;
-	//	progress = 0.0f;
-	//	TurnManager::GetInstance()->setTimeStop( false );
-	//}
+		else
+		{
+			if ( stepbackward == false && stepforward == false && progress != 0.0f )
+			{
+				stepbackward = true;
+				stepTime = 1.0f;
+				progress = 0.0f;
+			}
+			myTarget = 0;
+			hudSelection = 0;
+			SetSelection( 0 );
+			SetHomeButtons( );
+
+			Reset();
+			
+		}
+	}
+
 }
 void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 {
@@ -982,7 +1020,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -1089,7 +1127,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -1224,7 +1262,7 @@ void CombatPlayer::TernaryBlast( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 2.0f;
+			stepTime = 1.0f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );

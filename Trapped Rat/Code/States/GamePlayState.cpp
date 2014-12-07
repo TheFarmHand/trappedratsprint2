@@ -1389,7 +1389,6 @@ void GamePlayState::MenuRender()
 		default:
 			break;
 		}
-
 	}
 	
 void GamePlayState::CombatUpdate( float dt )
@@ -1402,17 +1401,19 @@ void GamePlayState::CombatUpdate( float dt )
 		is_tutorial = false;
 		ignore_game_over = true;
 	}
+	//run_succeed = false;
 	laststate = GPStates::Combat;
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	dynamic_cast<Bars*>(ternary_bar)->SetPercentage((float)ternary_gauge/MAXTG);
 
 
-	if ( input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( input->IsKeyPressed( SGD::Key::Backspace ) || run_succeed)
 		{
 		state = GPStates::Town;
 		laststate = state;
 		GameData::GetInstance()->SetIsInCombat( false );
 		TurnManager::GetInstance()->Terminate();
+		run_succeed = false;
 
 		}
 
@@ -1453,7 +1454,18 @@ void GamePlayState::CombatUpdate( float dt )
 		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
 	}
 
+	/*if ( run_succeed )
+	{
+		state = GPStates::Town;
+		laststate = state;
+		GameData::GetInstance( )->SetIsInCombat( false );
+		TurnManager::GetInstance( )->Terminate( );
+		run_succeed = false;
+
+	}*/
+
 	TurnManager::GetInstance()->Update( dt );
+	
 
 	}
 void GamePlayState::CombatRender()
@@ -2157,12 +2169,21 @@ void GamePlayState::SummaryUpdate(float dt)
 		if(guard_index != -1)
 		{
 			auto iter = guards.begin();
-			while((*iter) != guards[guard_index]) iter++;
+			while((*iter) != guards[guard_index])
+				iter++;
+			
+			delete (*iter);
 			guards.erase(iter);
 
 			guard_index = -1;
 		}
+
+		if ( guards.size( ) == 0 )
+		{
+			// Open the keep code goes here
+		}
 	}
+
 }
 void GamePlayState::SummaryRender()
 {

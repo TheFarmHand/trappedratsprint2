@@ -12,7 +12,7 @@
     </HitPoints>
     <BattlePoints>
       <Base>120</Base>
-      <Scale>3</Scale>
+      <Scale>.5</Scale>
     </BattlePoints>
     <Attack>
       <Base>100</Base>
