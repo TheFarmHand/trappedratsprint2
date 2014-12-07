@@ -1,4 +1,4 @@
-57
+63
 Fire Fang
 Water Fang
 Earth Fang
@@ -56,3 +56,9 @@ Holy Shield
 Holy Mace
 Retribution
 Holy Flare
+Rush
+Wind Split
+Water Wall
+Earthen Shield
+Earthen Ward
+Flame Spout

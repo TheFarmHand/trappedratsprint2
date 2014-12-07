@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feathered_Flurry Name="Flame Spout" Offensive="false">
+<Help Text="" />
+  <Affinity ElementalType="MagicalReflect" />
+  <StatusEffect Effect="None" />
+  <AreaOfEffect AOE="false" />
+  <Self selfTarget="false" />
+  <Healing Heals="false" />
+  <UnlockLevel Level="0" />
+  <Paths>
+    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <WavPath Path="AbilityWavPlaceholder.wav"/>
+  </Paths>
+  <DamageInfo>
+    <AttackMod atkMod="1.15" />
+    <MagicMod mgcMod="1.15" />
+    <BaseBP bp="0" />
+    <HPMod hp="0" />
+  </DamageInfo>
+</Feathered_Flurry>
