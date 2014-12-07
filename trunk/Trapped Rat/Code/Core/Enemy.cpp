@@ -606,7 +606,7 @@ void Enemy::GuardAI()
 		if ( !TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
 			++guardTally;
 		}
-	if ( guardTally >= ( TurnManager::GetInstance()->GetEnemies().size() - 1 ) )
+	if ( (unsigned int)(guardTally) >= ( TurnManager::GetInstance()->GetEnemies().size() - 1 ) )
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		return;
@@ -634,8 +634,8 @@ void Enemy::BWRAI()
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
-	float lowestHealth = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
-	if ( GetHP / (float)( GetMaxHP() ) < 0.5f )
+	int lowestHealth = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.5f )
 		{
 		if ( !WRsplit )
 			{
@@ -660,19 +660,114 @@ void Enemy::BWRAI()
 	}
 void Enemy::FFWAI()
 	{
-
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.25f )
+		{
+		if ( !FlameSpout )
+			{
+			FlameSpout = true;
+			FSCountdown = 4;
+			}
+		else if ( FSCountdown > 0 )
+			{
+			--FSCountdown;
+			return;
+			}
+		else
+			{
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+					abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
+				}
+			FlameSpout = false;
+			}
+		}
+	else
+		{
+		int dmg = rand() % GetAttack() + GetAttack();
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+		return;
+		}
 	}
 void Enemy::SEMAI()
 	{
-
+	int target;
+	target = rand() % TurnManager::GetInstance()->GetAllies().size();
+	while ( !TurnManager::GetInstance()->GetEnemies()[target]->isAlive() )
+		{
+		target = rand() % TurnManager::GetInstance()->GetAllies().size();
+		}
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) )
+			{
+			target = i;
+			break;
+			}
+		}
+	if ( rand() % 10 >= 5 )
+		{
+		abilityList[0]->CastAbility( this, this );
+		}
+	else
+		{
+		abilityList[1]->CastAbility( this, this );
+		}
+	int dmg = rand() % GetAttack() + GetAttack();
+	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+	if ( dmg <= 0 )
+		dmg = 0;
+	TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+	return;
 	}
 void Enemy::WWWAI()
 	{
-	float health = GetHP() / (float)( GetMaxHP );
-	if ( health < 0.25f && !1below25 )
+	int target;
+	int lowestHealth = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	float health = GetHP() / (float)( GetMaxHP() );
+	if ( health < 0.25f && !firstBelowQuarter )
 		{
-		//if ( )
+		abilityList[0]->CastAbility( this, this );
+		return;
 		}
+	else if ( health < 0.5f && !firstBelowHalf )
+		{
+		abilityList[0]->CastAbility( this, this );
+		return;
+		}
+	else if ( health < 0.75f && !firstBelow3Quarter )
+		{
+		abilityList[0]->CastAbility( this, this );
+		return;
+		}
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetMagic() > GetMagic() )
+			{
+			target = i;
+			break;
+			}
+		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHealth )
+			{
+			lowestHealth = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+			target = i;
+			}
+		}
+	int dmg = rand() % GetAttack() + GetAttack();
+	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+	if ( dmg <= 0 )
+		dmg = 0;
+	TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+	return;
 	}
 //Final Boss
 void Enemy::CecilAI( int phase )

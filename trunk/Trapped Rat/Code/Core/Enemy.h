@@ -8,9 +8,9 @@ private:
 	AnimationSystem* ansys = nullptr;
 	int xp_value = 100;
 	//int level;
-	bool 1below25 = false;
-	bool 1below50 = false;
-	bool 1below75 = false;
+	bool firstBelowQuarter = false;
+	bool firstBelowHalf = false;
+	bool firstBelow3Quarter = false;
 	
 
 	//Common Enemy
