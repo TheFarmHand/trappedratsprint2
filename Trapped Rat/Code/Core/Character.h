@@ -110,7 +110,8 @@ public:
 	int dogTarget = -1;
 	int lastAttacker = -1;
 	bool WRsplit = false;
-
+	bool FlameSpout = false;
+	int FSCountdown;
 
 	//Cecil fight variables
 	int CecilPhase = 1;
