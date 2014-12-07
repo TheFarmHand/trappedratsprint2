@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Cecil</Name>
+  <Name>Young Cecil</Name>
   <Side>Enemy</Side>
   <Element>Wind</Element>
   <Type>Enemy</Type>
@@ -27,7 +27,7 @@
       <Scale>0</Scale>
     </Defense>
     <Speed>
-      <Base>10</Base>
+      <Base>40</Base>
       <Scale>0</Scale>
     </Speed>
     <Avoision>
