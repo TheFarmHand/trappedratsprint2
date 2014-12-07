@@ -3,7 +3,7 @@
   <layer height="100" width="100" />
   <tileset height="12" width="16" />
   <tilesize height="32" width="32" />
-  <player name="Player" startX="32" startY="480" />
+  <player name="Player" startX="32" startY="256" />
   <tiles id="18" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="3" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="3" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1516,7 +1516,7 @@
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="100" collision="0" event="GainBiggs" onfire="GainBiggs" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />

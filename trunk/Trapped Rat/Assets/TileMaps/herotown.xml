@@ -3,10 +3,8 @@
   <layer height="100" width="100" />
   <tileset height="12" width="16" />
   <tilesize height="32" width="32" />
-  <player name="Player" startX="32" startY="416" />
-  <guard name="Guard" startX="384" startY="384">
-    <waypoint />
-  </guard>
+  <player name="Player" startX="32" startY="256" />
+  <guard name="Guard" startX="384" startY="384" />
   <tiles id="58" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="58" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="58" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -310,7 +308,7 @@
   <tiles id="59" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="55" collision="0" event="CecilFight" onfire="CecilFight" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="55" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -2783,8 +2781,8 @@
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="0" event="CecilFight" onfire="" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="0" event="CecilFight" onfire="CecilFight" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -2883,8 +2881,8 @@
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="0" event="CecilFight" onfire="CecilFight" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="0" event="CecilFight" onfire="CecilFight" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="61" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />

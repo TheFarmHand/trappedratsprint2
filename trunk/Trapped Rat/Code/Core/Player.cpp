@@ -44,6 +44,10 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("herokeep");
 	Listener::RegisterForEvent("herokeepworld");
 	Listener::RegisterForEvent("GainJeeves");
+	Listener::RegisterForEvent("GainSlippy");
+	Listener::RegisterForEvent("GainBiggs");
+	Listener::RegisterForEvent("GainCheckers");
+	Listener::RegisterForEvent("CecilFight");
 
 }
 
@@ -329,7 +333,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<Ability*> partyAbilities;
 		CombatPlayer* jeeves = nullptr;
 		jeeves = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml"));
-		jeeves->SetOrderPosition(4);
+		jeeves->SetOrderPosition(GamePlayState::GetInstance()->GetPartySize());
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(jeeves->GetOrderPosition() * 100 + 150);
 		jeeves->SetPosition(characterOrderPosition);
@@ -346,8 +350,12 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 
 		partyAbilities.push_back(MasterAbilityList["Incinerate"]);
 		jeeves->InitializeAbilities(partyAbilities);
-		jeeves->SetActive(false);
+		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
+			jeeves->SetActive(false);
+		else
+			jeeves->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(jeeves);
+		UnregisterFromEvent("GainJeeves");
 	}
 	else if (pEvent->GetEventID() == "GainSlippy")
 	{
@@ -356,7 +364,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<Ability*> partyAbilities;
 		CombatPlayer* slippy = nullptr;
 		slippy = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Slippy.xml"));
-		slippy->SetOrderPosition(1);
+		slippy->SetOrderPosition(GamePlayState::GetInstance()->GetPartySize());
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(slippy->GetOrderPosition() * 100 + 150);
 		slippy->SetPosition(characterOrderPosition);
@@ -372,9 +380,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Dissolve"]);
 		partyAbilities.push_back(MasterAbilityList["Splash"]);
 
-		slippy->SetActive(false);
+		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
+			slippy->SetActive(false);
+		else
+			slippy->SetActive(true);
 		slippy->InitializeAbilities(partyAbilities);
 		GamePlayState::GetInstance()->AddToParty(slippy);
+		UnregisterFromEvent("GainSlippy");
 	}
 	else if (pEvent->GetEventID() == "GainCheckers")
 	{
@@ -382,7 +394,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<Ability*> partyAbilities;
 		CombatPlayer* checkers = nullptr;
 		checkers = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Checkers.xml"));
-		checkers->SetOrderPosition(2);
+		checkers->SetOrderPosition(GamePlayState::GetInstance()->GetPartySize());
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(checkers->GetOrderPosition() * 100 + 150);
 		checkers->SetPosition(characterOrderPosition);
@@ -397,11 +409,13 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Rock Spike"]);
 		partyAbilities.push_back(MasterAbilityList["Rampart"]);
 		partyAbilities.push_back(MasterAbilityList["Tremor"]);
-
-		checkers->SetActive(false);
+		if (GamePlayState::GetInstance()->GetPartySize() >= 3)
+			checkers->SetActive(false);
+		else
+			checkers->SetActive(true);
 		checkers->InitializeAbilities(partyAbilities);
-		
 		GamePlayState::GetInstance()->AddToParty(checkers);
+		UnregisterFromEvent("GainCheckers");
 	}
 	else if (pEvent->GetEventID() == "GainBiggs")
 	{
@@ -409,7 +423,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<Ability*> partyAbilities;
 		CombatPlayer* biggs = nullptr;
 		biggs = (GamePlayState::GetInstance()->LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Biggs.xml"));
-		biggs->SetOrderPosition(3);
+		biggs->SetOrderPosition(GamePlayState::GetInstance()->GetPartySize());
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)(biggs->GetOrderPosition() * 100 + 150);
 		biggs->SetPosition(characterOrderPosition);
@@ -425,7 +439,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		partyAbilities.push_back(MasterAbilityList["Tornado"]);
 		partyAbilities.push_back(MasterAbilityList["Wind Vale"]);
 		biggs->InitializeAbilities(partyAbilities);
-		biggs->SetActive(false);
+		if (GamePlayState::GetInstance()->GetPartySize() > 3)
+			biggs->SetActive(false);
+		else
+			biggs->SetActive(true);
 		GamePlayState::GetInstance()->AddToParty(biggs);
+		UnregisterFromEvent("GainBiggs");
+	}
+	else if (pEvent->GetEventID() == "CecilFight")
+	{
+		GamePlayState::GetInstance()->CreateFinalFight();
+		UnregisterFromEvent("CecilFight");
 	}
 	}
