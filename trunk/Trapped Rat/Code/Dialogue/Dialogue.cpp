@@ -79,7 +79,7 @@ bool Dialogue::Update(float dt)
 
 
 
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || SGD::InputManager::GetInstance()->IsButtonPressed(0,1))
 		{
 			if (timer <= 0)
 			{

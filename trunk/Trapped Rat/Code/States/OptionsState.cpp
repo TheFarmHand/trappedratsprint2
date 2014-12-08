@@ -74,7 +74,7 @@ void OptionsState::Update(float dt)
 	if (dt <= 0.0)
 		return;
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 1))
+	if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 	{
 		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 		GameData::GetInstance()->PlaySelectionChange();
@@ -116,7 +116,7 @@ void OptionsState::Update(float dt)
 	}
 	if (menuindex == 3)
 	{
-		if (input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right))
+		if (input->IsKeyPressed(SGD::Key::Enter)||input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right) || input->IsButtonPressed(0, 1))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			bool is = GameData::GetInstance()->GetWindowed();
@@ -127,7 +127,7 @@ void OptionsState::Update(float dt)
 	}
 	if (menuindex == 4)
 	{
-		if (input->IsKeyPressed(SGD::Key::Enter))
+		if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			GameData::GetInstance()->SwapState(MainMenuState::GetInstance());

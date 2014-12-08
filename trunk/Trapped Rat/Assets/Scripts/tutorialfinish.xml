@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Avenger</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Your parents have been killed by 
+_Cecil the adventurer!
+_You must avenger their deaths!
+</Words>
+  </Message>
+</Dialogue>

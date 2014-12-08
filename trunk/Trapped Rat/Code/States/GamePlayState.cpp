@@ -838,7 +838,7 @@ void GamePlayState::TownUpdate( float dt )
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	if ( input->IsKeyPressed( SGD::Key::Escape ) )
+	if ( input->IsKeyPressed( SGD::Key::Escape ) ||input->IsButtonPressed(0,2) )
 		{
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
@@ -855,6 +855,7 @@ void GamePlayState::TownUpdate( float dt )
 			 GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition( ).y))
 
 		{
+			GuardAnimation();
 			Enemy* temp;
 			guard_index = i;
 			std::vector<Ability*> partyAbilities;
@@ -902,7 +903,7 @@ void GamePlayState::MenuUpdate( float dt )
 			maxindex = 4;
 			if (laststate == Combat)
 				maxindex = 2;
-			if ( input->IsKeyPressed( SGD::Key::Escape ) )
+			if ( input->IsKeyPressed( SGD::Key::Escape ) ||input->IsButtonPressed(0,2))
 				{
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
@@ -911,7 +912,7 @@ void GamePlayState::MenuUpdate( float dt )
 			break;
 		case Options:
 			maxindex = 4;
-			if ( input->IsKeyPressed( SGD::Key::Escape ) )
+			if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 				{
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
@@ -921,7 +922,7 @@ void GamePlayState::MenuUpdate( float dt )
 			break;
 		case Shop:
 			maxindex = (int)shopinv.size() - 1;
-			if ( input->IsKeyPressed( SGD::Key::Escape ) )
+			if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 				{
 				GameData::GetInstance()->PlaySelectionChange();
 				menuindex = 0;
@@ -938,7 +939,7 @@ void GamePlayState::MenuUpdate( float dt )
 				maxindex = 1;
 			if (selecting_ability)
 				maxindex = Party[character_index]->GetAbilitiesSize() - 1;
-			if ( input->IsKeyPressed( SGD::Key::Escape ) )
+			if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 				{
 				if (selecting_ability || selecting_party || select_first)
 				{
@@ -966,7 +967,7 @@ void GamePlayState::MenuUpdate( float dt )
 
 
 	//if they select a menu item
-	if ( input->IsKeyPressed( SGD::Key::Enter ) )
+	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0, 1))
 		{
 		switch ( substate )
 			{
@@ -1189,7 +1190,7 @@ void GamePlayState::MenuUpdate( float dt )
 	//changing the values for language
 
 
-	if ( input->IsKeyPressed( SGD::Key::Left ) || input->IsKeyPressed( SGD::Key::Right ) )
+		if (input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0,SGD::DPad::Left) || input->IsDPadPressed(0,SGD::DPad::Right))
 		{
 		switch ( substate )
 			{
@@ -1217,11 +1218,11 @@ void GamePlayState::MenuUpdate( float dt )
 					case 1:
 						{
 
-						if ( input->IsKeyPressed( SGD::Key::Left ) )
+							  if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0,SGD::DPad::Left))
 							{
 							GameData::GetInstance()->SetMusicVolume( GameData::GetInstance()->GetMusicVolume() - 5 );
 							}
-						else if ( input->IsKeyPressed( SGD::Key::Right ) )
+							  else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0,SGD::DPad::Right))
 							{
 							GameData::GetInstance()->SetMusicVolume( GameData::GetInstance()->GetMusicVolume() + 5 );
 							}
@@ -1230,11 +1231,11 @@ void GamePlayState::MenuUpdate( float dt )
 						}
 					case 2:
 						{
-						if ( input->IsKeyPressed( SGD::Key::Left ) )
+							  if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0,SGD::DPad::Left))
 							{
 							GameData::GetInstance()->SetEffectVolume( GameData::GetInstance()->GetEffectVolume() - 5 );
 							}
-						else if ( input->IsKeyPressed( SGD::Key::Right ) )
+							  else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0,SGD::DPad::Right))
 							{
 							GameData::GetInstance()->SetEffectVolume( GameData::GetInstance()->GetEffectVolume() + 5 );
 							}
@@ -1259,14 +1260,14 @@ void GamePlayState::MenuUpdate( float dt )
 		}
 
 	//navigating menu
-	if ( input->IsKeyPressed( SGD::Key::Up ) )
+		if (input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0,SGD::DPad::Up))
 		{
 		menuindex--;
 		if ( menuindex < 0 )
 			menuindex = maxindex;
 		GameData::GetInstance()->PlaySelectionChange();
 		}
-	if ( input->IsKeyPressed( SGD::Key::Down ) )
+		if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0,SGD::DPad::Down))
 		{
 		menuindex++;
 		if ( menuindex > maxindex )
@@ -2113,6 +2114,7 @@ void GamePlayState::CheckAbilityUnlocked(bool EOC)
 
 void GamePlayState::MapUpdate(float dt)
 {
+	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Six))
 	{
 		if (unlockedTowns >= 1)
@@ -2139,27 +2141,27 @@ void GamePlayState::MapUpdate(float dt)
 	}
 	else
 	{
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0,SGD::DPad::Right))
 		{
 			SelectedTown = 0;
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up))
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0,SGD::DPad::Up))
 		{
 			if (unlockedTowns >= 1)
 				SelectedTown = 1;
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left))
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0,SGD::DPad::Left))
 		{
 			if (unlockedTowns >= 2)
 				SelectedTown = 2;
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down))
+		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0,SGD::DPad::Down))
 		{
 			if (unlockedTowns >= 3)
 				SelectedTown = 3;
 		}
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 	{
 		switch (SelectedTown)
 		{
@@ -2242,7 +2244,8 @@ void GamePlayState::SummaryUpdate(float dt)
 	if (ignore_game_over)
 	{
 		ignore_game_over = false;
-		state = Map;
+		dialogue->Load("Assets/Scripts/tutorialfinish.xml");
+		state = Dia;
 		laststate = Map;
 		for (unsigned int i = 0; i < m_vhuditems.size(); i++)
 		{
@@ -2265,7 +2268,7 @@ void GamePlayState::SummaryUpdate(float dt)
 	//	loot_gold = 5;
 	//}
 
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter)||SGD::InputManager::GetInstance()->IsButtonPressed(0,1))
 	{
 		
 		state = Town;
@@ -2497,7 +2500,7 @@ void GamePlayState::CreateMinibossFight()
 SGD::Point characterOrderPosition;
 std::vector<Enemy*> bosses;
 std::vector<Ability*> partyAbilities;
-
+	BossAnimation();
 	switch (SelectedTown)  //NOTE FOR JOE****Make sure to increment "unlockedTowns" after you win the fight against these Minibosses
 	{
 	case 0: //Wind <---
@@ -2764,3 +2767,36 @@ void GamePlayState::HoldOntoAbility(Ability* used)
 	CurrentAbilityUsed->GetAnimate()->ResetAll();
 	CurrentAbilityUsed->GetAnimate()->Play( 0 );
 	}
+
+void GamePlayState::GuardAnimation()
+{
+	SGD::AudioManager::GetInstance()->PlayAudio(entercombat);
+	for (int i = 0; i < 50; i++)
+	{
+		Sleep(1);
+		TownRender();
+		int x = rand() % 100;
+		int y = rand() % 100;
+		SGD::Rectangle rect;
+		rect.left = (float)x * 8;
+		rect.top = (float)y * 6;
+		rect.right = rect.left + 40;
+		rect.bottom = rect.top + 40;
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, {0,0,0 });
+		SGD::GraphicsManager::GetInstance()->Update();
+	}
+}
+void GamePlayState::BossAnimation()
+{
+	SGD::AudioManager::GetInstance()->PlayAudio(entercombat);
+	for (int i = 0; i < 8; i++)
+	{
+		Sleep(100);
+		if (i % 2 == 0)
+			TownRender();
+		else
+			SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0, 0, 800, 600 }, { 0, 0, 0 });
+
+		SGD::GraphicsManager::GetInstance()->Update();
+	}
+}
