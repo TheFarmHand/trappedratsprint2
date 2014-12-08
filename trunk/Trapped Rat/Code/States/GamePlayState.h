@@ -200,7 +200,7 @@ public:
 	void AddToParty(CombatPlayer*_player);
 	int GetTownSelected() { return SelectedTown; }
 	void CreateFinalFight();
-	void HoldOntoAbility();
+	void HoldOntoAbility( Ability* used );
 
 
 	void CreateMinibossFight();

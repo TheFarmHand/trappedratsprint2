@@ -1617,11 +1617,6 @@ Enemy * GamePlayState::CreateCommonEnemy( std::string name, Stats _stats, int _l
 
 	temp->SetAnimations( tempanimsys );
 
-//	if ( temp->GetName() == "Dog" )
-		{
-		temp->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
-		}
-
 	return temp;
 	}
 CombatPlayer * GamePlayState::CreateCombatPlayer( std::string name, Stats _stats, int _lvl, int _hp, int _maxhp, int _bp, int _maxbp, float _speed, float _progress, Ability* abilityarr[], SGD::Point _position, SGD::Size _size, std::string _animfilename )
@@ -1803,7 +1798,10 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 
 		std::string animation = root->FirstChildElement( "Animation" )->GetText();
 
-
+		std::string tempStr = root->FirstChildElement( "Portrait" )->GetText();
+		std::string charPortrait = "../Trapped Rat/Assets/Textures/" + tempStr;
+		tempStr = root->FirstChildElement( "Timeline" )->GetText();
+		std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
 
 		if ( type == "Ally" )
 			{
@@ -1867,14 +1865,8 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 			toon->SetEtype( ETYPE::MULTI );
 			}
 
-		}
-	//if ( toon->GetName() == "Ratsputin" )
-		{
-		toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/RatTimeline.png" ) );
-		}
-	//if ( toon->GetName() == "Ratsputin" )
-		{
-		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/Bowie.png" ) );
+			toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture(timeLine.c_str()) );
+			toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 
 		}
 	return toon;
@@ -1930,14 +1922,17 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		std::string death = root->FirstChildElement( "Sound" )->FirstChildElement( "Death" )->GetText();
 
 		std::string animation = root->FirstChildElement( "Animation" )->GetText();
-
+		std::string tempStr = root->FirstChildElement( "Portrait" )->GetText();
+		std::string charPortrait = "../Trapped Rat/Assets/Textures/" + tempStr;
+		tempStr = root->FirstChildElement( "Timeline" )->GetText();
+		std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
 
 		if ( type == "Ally" )
 			{
 
 			return nullptr;
 			}
-		else if ( type == "Enemy" || type == "Boss" || type == "Mini Boss")
+		else if ( type == "Enemy" || type == "Boss" || type == "Mini Boss" )
 			{
 			//create a enemy
 			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 64.0f, 64.0f }, animation );
@@ -1971,6 +1966,9 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 			{
 			toon->SetEtype( ETYPE::MULTI );
 			}
+
+		toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( timeLine.c_str() ) );
+		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 		}
 	return toon;
 	}
@@ -2758,10 +2756,10 @@ std::vector<Ability*> partyAbilities;
 
 }
 
-void GamePlayState::HoldOntoAbility()
+void GamePlayState::HoldOntoAbility(Ability* used)
 	{
 	AbilityUsed = true;
-	//CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+	CurrentAbilityUsed = used;
 	abilityTimer = 2.0f;
 	CurrentAbilityUsed->GetAnimate()->ResetAll();
 	CurrentAbilityUsed->GetAnimate()->Play( 0 );
