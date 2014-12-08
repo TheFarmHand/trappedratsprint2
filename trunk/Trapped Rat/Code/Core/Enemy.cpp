@@ -289,6 +289,9 @@ void Enemy::CatAI()
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	else if ( TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
@@ -335,11 +338,17 @@ void Enemy::RavenAI()
 				{
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 				return;
 				}
 			}
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	}
 void Enemy::DogAI()
@@ -381,6 +390,9 @@ void Enemy::DogAI()
 				{
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[dogTarget] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 				}
 			else
 				{
@@ -414,6 +426,9 @@ void Enemy::DogAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[dogTarget] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		else
 			{
@@ -456,6 +471,9 @@ void Enemy::ChefAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		}
@@ -493,6 +511,9 @@ void Enemy::BlacksmithAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.25f )
@@ -525,6 +546,9 @@ void Enemy::ShopkeeperAI()
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	if ( lastAttacker >= 0 && TurnManager::GetInstance()->GetAllies()[lastAttacker]->isAlive() )
@@ -568,6 +592,9 @@ void Enemy::TailorAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		else if ( healthRange < 0.75f && healthRange > 0.25f )
@@ -602,6 +629,9 @@ void Enemy::PriestAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		}
@@ -612,6 +642,9 @@ void Enemy::PriestAI()
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		}
@@ -641,6 +674,9 @@ void Enemy::GuardAI()
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
@@ -674,6 +710,9 @@ void Enemy::BWRAI()
 			{
 			abilityList[0]->CastAbility( this, this );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		}
@@ -721,6 +760,9 @@ void Enemy::FFWAI()
 					abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				}
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			FlameSpout = false;
 			}
 		}
@@ -757,6 +799,9 @@ void Enemy::SEMAI()
 		EarthWard = false;
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	else
 		{
@@ -764,6 +809,9 @@ void Enemy::SEMAI()
 		EarthWard = true;
 		abilityList[1]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[1] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	int dmg = rand() % GetAttack() + GetAttack();
 	dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
@@ -781,6 +829,9 @@ void Enemy::WWWAI()
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		firstBelowQuarter = true;
 		return;
 		}
@@ -788,6 +839,9 @@ void Enemy::WWWAI()
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		firstBelowHalf = true;
 		return;
 		}
@@ -795,6 +849,9 @@ void Enemy::WWWAI()
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		firstBelow3Quarter = true;
 		return;
 		}
@@ -927,6 +984,9 @@ void Enemy::CecilPhaseTwo()
 				GetStats().attack = tempAtk;
 				}
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[3] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		else
 			//Cast Retribution
@@ -940,6 +1000,9 @@ void Enemy::CecilPhaseTwo()
 					}
 				}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[3] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	if ( TurnManager::GetInstance()->GetEnemies()[2]->JohnDead )
@@ -974,6 +1037,9 @@ void Enemy::CecilPhaseTwo()
 				GetStats().attack = tempAtk;
 				}
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[3] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		else
 			//Cast Retribution
@@ -987,6 +1053,9 @@ void Enemy::CecilPhaseTwo()
 					}
 				}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[3] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
@@ -994,6 +1063,9 @@ void Enemy::CecilPhaseTwo()
 		//cover code of Jane
 		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[0] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[4] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	else if ( TurnManager::GetInstance()->GetEnemies()[0]->JohnHit % 3 == 0 )
@@ -1001,6 +1073,9 @@ void Enemy::CecilPhaseTwo()
 		//cover code of John
 		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[2] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[4] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	else
@@ -1012,6 +1087,9 @@ void Enemy::CecilPhaseTwo()
 			//cast Holy Mace
 			abilityList[1]->CastAbility( this, this );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[1] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		else
@@ -1021,23 +1099,31 @@ void Enemy::CecilPhaseTwo()
 			//cast Holy Shield
 			abilityList[0]->CastAbility( this, this );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		}
 	}
 void Enemy::CecilPhaseThree()
 	{
+	std::ostringstream usingAbility;
 	if ( !HolyFlare )
 		{
 		HolyFlare = true;
 		HFCountdown = 5;
 		damageDealt = 0.0f;
 		//Dialogue for casting/countdown
+		usingAbility << name << " starts casting Holy Flare";
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	if ( HFCountdown > 0 )
 		{
 		--HFCountdown;
 		//Dialogue for countdown
+		usingAbility << HFCountdown << "...";
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
 	else
@@ -1052,6 +1138,8 @@ void Enemy::CecilPhaseThree()
 					{
 					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 					GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
+					usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+					GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 					break;
 					}
 				}
@@ -1067,6 +1155,8 @@ void Enemy::CecilPhaseThree()
 					{
 					abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 					GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
+					usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+					GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 					break;
 					}
 				}
@@ -1087,6 +1177,9 @@ void Enemy::JaneAI()
 			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
 			}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	else
 		{
@@ -1098,6 +1191,9 @@ void Enemy::JaneAI()
 				//cast healing light
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 				return;
 				}
 			}
@@ -1111,6 +1207,9 @@ void Enemy::JaneAI()
 			//cast Dia
 			abilityList[1]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[target] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[1] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		else
 			{
@@ -1137,6 +1236,9 @@ void Enemy::JohnAI()
 			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
 			}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
+		std::ostringstream usingAbility;
+		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
 	else
 		{
@@ -1148,6 +1250,9 @@ void Enemy::JohnAI()
 				//cast Sure Shot
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 				return;
 				}
 			}
@@ -1174,6 +1279,9 @@ void Enemy::JohnAI()
 					}
 				}
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[1] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		else

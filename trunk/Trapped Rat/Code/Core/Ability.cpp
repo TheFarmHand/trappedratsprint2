@@ -352,6 +352,10 @@ AnimationSystem* Ability::GetAnimate()
 	{
 	return animate;
 	}
+Character* Ability::GetOwner()
+	{
+	return Abilowner;
+	}
 void Ability::SetAbilityName( std::string name )
 	{
 	abilityName = name;
