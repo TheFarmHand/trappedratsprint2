@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Welcome to Hero's Landing!
+_This is the culmination of everything
+_you have learned this far!
+_Be Careful!</Words>
+  </Message>
+</Dialogue>

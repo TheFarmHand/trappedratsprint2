@@ -32,6 +32,7 @@ GamePlayState* GamePlayState::GetInstance()
 void GamePlayState::Enter()
 {
 	GameData::GetInstance()->ResetPlayer();
+	dialogue = new Dialogue();
 	run_succeed = false;
 	MinibossFight = false;
 	FinalBossFight = false;
@@ -441,9 +442,7 @@ void GamePlayState::Enter()
 	//Sets the abilities to unlocked if level is high enough (new game will only unlock the first ability)
 	CheckAbilityUnlocked();
 
-	dialogue = new Dialogue();
-	//dialogue->Load( "../Trapped Rat/Assets/Scripts/testdialogue.xml" );
-	//state = GPStates::Dia;
+	
 	Loading("Loading Sounds...");
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/req.xwm" );
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
@@ -1713,6 +1712,10 @@ void GamePlayState::DialogueRender()
 	{
 		CombatRender();
 	}
+	else if (laststate == Map)
+	{
+		MapRender();
+	}
 	else
 	{
 		TownRender();
@@ -2165,29 +2168,39 @@ void GamePlayState::MapUpdate(float dt)
 		case 0: //Wind
 			Loading("Loading Map");
 			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\WindTown.xml");
+			//here we load in the dialogue
+			dialogue->Load("Assets/Scripts/windywoods_enter.xml");
 			break;
 		case 1://Fire
 			Loading("Loading Map");
 			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\firetown.xml");
+			//here we load in the dialogue
+			dialogue->Load("Assets/Scripts/magmafalls_enter.xml");
 			break;
 		case 2://Earth
 			Loading("Loading Map");
 			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\EarthTown.xml");
+			//here we load in the dialogue
+			dialogue->Load("Assets/Scripts/earthytown_enter.xml");
 			break;
 		case 3://Water
 			Loading("Loading Map");
 			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\WaterTown.xml");
+			//here we load in the dialogue
+			dialogue->Load("Assets/Scripts/newwatercity_enter.xml");
 			break;
 		case 4://Final Town
 			Loading("Loading Map");
 			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\herotown.xml");
+			//here we load in the dialogue
+			dialogue->Load("Assets/Scripts/heroslanding_enter.xml");
 			break;
 		default:
 			//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 			break;
 		}
 		laststate = Town;
-		state = Town;
+		state = Dia;
 	}
 }
 
@@ -2277,9 +2290,34 @@ void GamePlayState::SummaryUpdate(float dt)
 			guards.clear();
 
 
-			TileSystem::GetInstance()->Exit();
+			switch (SelectedTown)
+			{
+			case 0: //Wind
+				//here we load in the dialogue
+				dialogue->Load("Assets/Scripts/windywoods_exit.xml");
+				break;
+			case 1://Fire
+				//here we load in the dialogue
+				dialogue->Load("Assets/Scripts/magmafalls_exit.xml");
+				break;
+			case 2://Earth				
+				//here we load in the dialogue
+				dialogue->Load("Assets/Scripts/earthytown_exit.xml");
+				break;
+			case 3://Water
+				//here we load in the dialogue
+				dialogue->Load("Assets/Scripts/newwatercity_exit.xml");
+				break;
+			default:
+				
+				break;
+			}
 
-			state = Map;
+
+			TileSystem::GetInstance()->Exit();
+			//here we load in the correct dialogue for which town we are exiting
+			state = Dia;
+			laststate = Map;
 		}
 		if (FinalBossFight)
 		{

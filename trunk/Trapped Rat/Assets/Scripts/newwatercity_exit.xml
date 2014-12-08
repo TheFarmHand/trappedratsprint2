@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Bye</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>You have completed New Water City!
+_Move on to defeat Cecil!</Words>
+  </Message>
+</Dialogue>
