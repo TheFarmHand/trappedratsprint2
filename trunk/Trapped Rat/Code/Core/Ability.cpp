@@ -397,7 +397,16 @@ void Ability::RenderAnimation()
 	//This Function is called in Render
 
 	//On Top Of Target
-	if (abilityName == "Burrow" || abilityName == "Earth Fang" || abilityName == "Water Fang" || abilityName == "Fire Fang" || abilityName == "Wind Fang" || abilityName == "Poison Fang")
+	if (abilityName == "Burrow" || abilityName == "Earth Fang" || abilityName == "Water Fang" || abilityName == "Fire Fang" 
+		|| abilityName == "Wind Fang" || abilityName == "Poison Fang" || abilityName == "Puddle"
+		|| abilityName == "Whirlpool"
+		|| abilityName == "Collapse" || abilityName == "Ignite" || abilityName == "Scorch"
+		|| abilityName == "Rib-a-Rang" || abilityName == "Emblazon" || abilityName == "Firefall" ||abilityName == "Fire Spikes"
+		|| abilityName == "Incinerate" || abilityName == "Leaf on the Wind" || abilityName == "Tailwind" || abilityName =="Wind Vale"
+		|| abilityName == "Zephyr" || abilityName == "Whispering Wind" || abilityName == "Second Wind" || abilityName == "Tornado"
+		|| abilityName == "Tempest" || abilityName == "Hedge Guard" || abilityName =="Cover" || abilityName == "Rampart"
+		|| abilityName == "Rock Spike" || abilityName == "Geo Crush" || abilityName == "Tremor" || abilityName == "Quake"
+		|| abilityName == "Pinch" )
 	{
 		animate->Render(Abiltarget->GetPosition().x, Abiltarget->GetPosition().y);
 	}
@@ -407,7 +416,7 @@ void Ability::RenderAnimation()
 		animate->Render(Abiltarget->GetPosition().x - 32, Abiltarget->GetPosition().y - 32);
 	}
 	//At Left of Target
-	else if (abilityName == "Earth Fang" || abilityName == "Water Fang")
+	else if (abilityName == "left")
 	{
 		animate->Render(Abiltarget->GetPosition().x - 100, Abiltarget->GetPosition().y);
 	}
@@ -419,8 +428,48 @@ void Ability::RenderAnimation()
 	//Top of Enemy Side
 	else if (abilityName == "Acid Rain")
 	{
-		animate->Render(Abiltarget->GetPosition().x - 50.0f, 100.0f);
+		animate->Render(Abiltarget->GetPosition().x - 50.0f, 180.0f);
 	}
+	//Projectile Rendering from ally to enemy
+	else if (abilityName == "Dissolve" || abilityName == "Squirt" || abilityName == "Torrent")
+	{
+		//This Code Only Works for allies 
+		float xDistance = Abiltarget->GetPosition().x - Abilowner->GetPosition().x;
+		float yDistance = Abiltarget->GetPosition().y - Abilowner->GetPosition().y;
+		float percentage = (2.0f -GamePlayState::GetInstance()->abilityTimer) / 1.0f;
+		if (percentage > 1.0f)
+		{
+			percentage = 1.0f;
+		}
+		xDistance *= percentage;
+		yDistance *= percentage;
+		float xpos = Abilowner->GetPosition().x + xDistance;
+		float ypos = Abilowner->GetPosition().y + yDistance;
+		animate->Render(xpos, ypos);
+	}
+	//Projectile Rendering for AOE's that Go Across Whole Screen
+	else if (abilityName == "Flood")
+	{
+		//float xDistance = Abiltarget->GetPosition().x - Abilowner->GetPosition().x;
+		float percentage = (2.0f - GamePlayState::GetInstance()->abilityTimer) / 1.0f;
+		//xDistance *= percentage;
+		float xpos = Abilowner->GetPosition().x * percentage;
+		animate->Render(xpos, 200);
+	}
+	//Render on Top of all Enemies
+	else if (abilityName == "Splash")
+	{
+		animate->Render(Abiltarget->GetPosition().x, 130);
+		animate->Render(Abiltarget->GetPosition().x, 230);
+		animate->Render(Abiltarget->GetPosition().x, 300);
+
+	}
+	//AOE RENDERING NEEDS TO BE HARDCODDEDDDD
+	else if (abilityName == "AOE")
+	{
+		animate->Render(Abiltarget->GetPosition().x, 200);
+	}
+	//Original Default
 	else
 	{
 		animate->Render(Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y);

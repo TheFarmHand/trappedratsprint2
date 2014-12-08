@@ -275,7 +275,7 @@ void CombatPlayer::Render()
 	{
 		if (GamePlayState::GetInstance()->AbilityUsed)
 		{
-			if (GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle")
+			if ((GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle") && GamePlayState::GetInstance()->CurrentAbilityUsed->GetOwner() == this)
 			{
 
 			}

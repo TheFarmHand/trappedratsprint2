@@ -25,7 +25,7 @@
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="1.0">
       <AnchorPoint x="301" y="136" />
       <DrawRect left="229" top="82" right="413" bottom="217" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
