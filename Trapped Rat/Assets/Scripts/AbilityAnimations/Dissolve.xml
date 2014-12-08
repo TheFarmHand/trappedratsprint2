@@ -7,37 +7,37 @@
     <Looping>False</Looping>
     <Name>Dissolve</Name>
     <NextName>none</NextName>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="39" y="91" />
       <DrawRect left="7" top="48" right="69" bottom="118" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="112" y="96" />
       <DrawRect left="72" top="49" right="131" bottom="116" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="176" y="89" />
       <DrawRect left="138" top="59" right="205" bottom="113" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="235" y="85" />
       <DrawRect left="196" top="58" right="259" bottom="115" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="300" y="91" />
       <DrawRect left="258" top="55" right="326" bottom="117" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.15">
       <AnchorPoint x="364" y="99" />
       <DrawRect left="320" top="51" right="393" bottom="116" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
@@ -55,7 +55,7 @@
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
+    <Frame delay="0.40">
       <AnchorPoint x="571" y="256" />
       <DrawRect left="481" top="199" right="659" bottom="284" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
