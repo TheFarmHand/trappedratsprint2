@@ -1,21 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="1">
   <Animation>
-    <Image numFrames="2">
-      <Path>slippy.png</Path>
+    <Image numFrames="3">
+      <Path>SlippySpriteSheet.png</Path>
     </Image>
     <Looping>True</Looping>
-    <Name>Name</Name>
-    <NextName>None</NextName>
-    <Frame delay="1">
-      <AnchorPoint x="24" y="5" />
-      <DrawRect left="1" top="2" right="42" bottom="34" />
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="457" y="15" />
+      <DrawRect left="429" top="2" right="490" bottom="54" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="1">
-      <AnchorPoint x="66" y="5" />
-      <DrawRect left="43" top="4" right="87" bottom="37" />
+    <Frame delay="0.25">
+      <AnchorPoint x="385" y="15" />
+      <DrawRect left="357" top="0" right="417" bottom="58" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="306" y="11" />
+      <DrawRect left="276" top="0" right="341" bottom="59" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

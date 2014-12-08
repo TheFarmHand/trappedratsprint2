@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="1">
+      <Path>Wave.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Flood</Name>
+    <NextName>none</NextName>
+    <Frame delay="1.55">
+      <AnchorPoint x="315" y="251" />
+      <DrawRect left="21" top="91" right="518" bottom="453" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
