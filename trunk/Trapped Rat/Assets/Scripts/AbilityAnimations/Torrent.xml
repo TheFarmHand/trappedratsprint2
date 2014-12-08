@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>TorrentSpriteSheet.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Torrent</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="41" y="193" />
+      <DrawRect left="5" top="174" right="101" bottom="214" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="20" y="131" />
+      <DrawRect left="3" top="113" right="111" bottom="154" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.55">
+      <AnchorPoint x="2" y="62" />
+      <DrawRect left="2" top="46" right="128" bottom="82" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="301" y="136" />
+      <DrawRect left="229" top="82" right="413" bottom="217" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

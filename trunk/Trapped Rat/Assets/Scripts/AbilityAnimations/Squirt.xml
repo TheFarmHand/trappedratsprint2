@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>SquirtSpriteSheet.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Squirt</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="27" y="26" />
+      <DrawRect left="3" top="6" right="67" bottom="44" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="75" y="28" />
+      <DrawRect left="68" top="6" right="133" bottom="49" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="143" y="31" />
+      <DrawRect left="132" top="4" right="200" bottom="61" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="210" y="29" />
+      <DrawRect left="197" top="1" right="264" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.05">
+      <AnchorPoint x="323" y="257" />
+      <DrawRect left="258" top="152" right="597" bottom="296" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

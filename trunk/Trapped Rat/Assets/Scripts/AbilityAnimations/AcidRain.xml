@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="7">
+      <Path>AcidRainSprite.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Acid Rain</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="100" />
+      <DrawRect left="85" top="69" right="213" bottom="325" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="90" />
+      <DrawRect left="84" top="59" right="212" bottom="315" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="80" />
+      <DrawRect left="85" top="49" right="213" bottom="305" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="70" />
+      <DrawRect left="82" top="39" right="214" bottom="295" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="60" />
+      <DrawRect left="82" top="29" right="214" bottom="285" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="50" />
+      <DrawRect left="81" top="19" right="212" bottom="275" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="130" y="40" />
+      <DrawRect left="81" top="9" right="212" bottom="265" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>SplashSprites.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Splash</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="49" y="59" />
+      <DrawRect left="2" top="4" right="87" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="130" y="28" />
+      <DrawRect left="103" top="0" right="176" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="220" y="7" />
+      <DrawRect left="194" top="1" right="263" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="398" y="170" />
+      <DrawRect left="293" top="96" right="522" bottom="228" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
