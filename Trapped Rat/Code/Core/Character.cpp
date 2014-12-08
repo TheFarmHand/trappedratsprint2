@@ -273,11 +273,18 @@ ETYPE Character::GetEType()
 {
 	return element;
 }
+std::string Character::GetAlliance()
+	{
+	return alliance;
+	}
 void Character::SetEtype(ETYPE _type)
 {
 	element = _type;
 }
-
+void Character::SetAlliance( std::string type )
+	{
+	alliance = type;
+	}
 std::list<StatusEffect*>& Character::GetEffects()
 {
 	return effects;

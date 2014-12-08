@@ -1806,6 +1806,7 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 			{
 			//create a player
 			toon = CreateCombatPlayer( name, stats, level, HP, HP, BP, BP, speed, 0, nullptr, { 0.0f, 0.0f }, { 0.0f, 0.0f }, animation );
+			toon->SetAlliance( type );
 			if ( element == "Wind" )
 				{
 				toon->SetEtype( ETYPE::WIND );
@@ -1937,7 +1938,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 			{
 			//create a enemy
 			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 64.0f, 64.0f }, animation );
-
+			toon->SetAlliance( type );
 			}
 		else if ( type == "Guard" )
 			{
@@ -2718,3 +2719,12 @@ std::vector<Ability*> partyAbilities;
 	}
 
 }
+
+void GamePlayState::HoldOntoAbility()
+	{
+	AbilityUsed = true;
+	//CurrentAbilityUsed = menu[hudSelection]->GetAbility();
+	abilityTimer = 2.0f;
+	CurrentAbilityUsed->GetAnimate()->ResetAll();
+	CurrentAbilityUsed->GetAnimate()->Play( 0 );
+	}
