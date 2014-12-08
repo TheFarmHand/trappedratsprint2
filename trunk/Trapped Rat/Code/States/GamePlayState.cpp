@@ -853,7 +853,7 @@ void GamePlayState::TownUpdate( float dt )
 
 			// Just Trigger Combat on a %
 			int x = rand() % 1000;
-			if ( x < 325 )
+			if ( x < 900 )
 			{
 				trap_combat = true;
 
@@ -966,10 +966,8 @@ void GamePlayState::TownUpdate( float dt )
 						AddItem( stupidcode );
 					}
 				}
-				RemoveTrap( tripped_trap );
-
 			}
-
+			RemoveTrap( tripped_trap );
 			// Riley Code for popup inserts here
 		}
 	}
@@ -1026,7 +1024,9 @@ void GamePlayState::TownUpdate( float dt )
 
 void GamePlayState::RemoveTrap( int index )
 {
-	if(index < (int)traps.size()) // safety check
+	// Safety first kids
+	if(index == -1) return;
+	if(index < (int)traps.size()) 
 	{
 		for ( auto iter = traps.begin( ); iter != traps.end( ); iter++ )
 		{
@@ -1038,6 +1038,7 @@ void GamePlayState::RemoveTrap( int index )
 		
 	}
 		tripped_trap = -1;
+		trap_combat = false;
 }
 
 void GamePlayState::MenuUpdate( float dt )
