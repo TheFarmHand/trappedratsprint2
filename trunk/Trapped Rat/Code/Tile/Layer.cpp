@@ -83,6 +83,20 @@ void Layer::Initialize( const char* path)
 		std::string tF( tempFire );
 		std::string tE( tempEvent );
 
+		// if te == trap -> make the trap
+		if(tE == "Trap")
+		{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = tileID % layerWidth;
+			y = tileID / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX;
+			destination.y = (float)pixY;
+
+			GamePlayState::GetInstance()->AddTrap(tF, destination);
+		}
 
 		tiles = tiles->NextSiblingElement( "tiles" );
 		

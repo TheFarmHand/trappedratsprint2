@@ -25,6 +25,7 @@ public:
 	SGD::Size GetSize() { return size; }
 	SGD::Vector GetVelocity(){ return velocity; }
 	int virtual GetType();
+
 	//mutators
 	void SetPosition(SGD::Point point){ position = point; }
 	void SetSize(SGD::Size _size){ size = _size; }

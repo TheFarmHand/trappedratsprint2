@@ -270,6 +270,9 @@
     <ClCompile Include="Code\Cutscenes\CutsceneManager.cpp">
       <Filter>Cutscenes</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Core\RatTrap.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Animation\Animation.h">
@@ -479,9 +482,6 @@
     <ClInclude Include="Code\Core\CombatPlayer.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Code\States\TestStateP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Animation\AnimTestBase.h">
       <Filter>Animation</Filter>
     </ClInclude>
@@ -511,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="Code\Cutscenes\CutsceneManager.h">
       <Filter>Cutscenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\RatTrap.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

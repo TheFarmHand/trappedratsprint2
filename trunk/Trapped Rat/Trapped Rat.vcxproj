@@ -108,6 +108,7 @@
     <ClCompile Include="Code\Core\OtherStatus.cpp" />
     <ClCompile Include="Code\Core\OwnedHUD.cpp" />
     <ClCompile Include="Code\Core\Player.cpp" />
+    <ClCompile Include="Code\Core\RatTrap.cpp" />
     <ClCompile Include="Code\Core\SelectableObject.cpp" />
     <ClCompile Include="Code\Core\Stats.cpp" />
     <ClCompile Include="Code\Core\StatusEffect.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Code\Core\OtherStatus.h" />
     <ClInclude Include="Code\Core\OwnedHUD.h" />
     <ClInclude Include="Code\Core\Player.h" />
+    <ClInclude Include="Code\Core\RatTrap.h" />
     <ClInclude Include="Code\Core\SelectableObject.h" />
     <ClInclude Include="Code\Core\Stats.h" />
     <ClInclude Include="Code\Core\StatusEffect.h" />
@@ -225,7 +227,6 @@
     <ClInclude Include="Code\States\MainMenuState.h" />
     <ClInclude Include="Code\States\OptionsState.h" />
     <ClInclude Include="Code\States\SplashState.h" />
-    <ClInclude Include="Code\States\TestStateP.h" />
     <ClInclude Include="Code\States\TileDebugState.h" />
     <ClInclude Include="Code\Tile\Layer.h" />
     <ClInclude Include="Code\Tile\Tile.h" />

@@ -16,9 +16,10 @@
 #include "../Core/StatusEffectManager.h"
 #include "../Core/Guard.h"
 #include "../SGD Wrappers/SGD_Listener.h"
+#include "../Core/RatTrap.h"
 
 #define MAXTG 250
-#define MAXITEM 10
+#define MAXITEM 5
 #define MAXREV 1
 
 class Player;
@@ -62,6 +63,7 @@ class GamePlayState :
 	SGD::HAudio m_overAudio;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
 
+	SGD::HTexture rattrap = SGD::INVALID_HANDLE;
 	SGD::HTexture enemytargeting = SGD::INVALID_HANDLE;
 	SGD::HTexture allytargeting = SGD::INVALID_HANDLE;
 	SGD::HTexture buttonimg = SGD::INVALID_HANDLE;
@@ -86,17 +88,18 @@ class GamePlayState :
 	std::vector<Items> shopinv;
 	std::vector<Items> inventory;
 	std::vector<ItemType> loot;
+	std::vector<RatTrap*> traps;
 
 	int guard_index = -1;
-
+public:
 	int gold = 50;
 	int loot_gold = 0;			// Updates whenever gold is added to your stack; (at end of combat primarily); use this for End of Combat window
 	int loot_xp = 0;			// This is also the XP value earned after combat 
-
+	int tripped_trap = -1;		// Set this to -1 (false) otherwise it is the index of the trap we will be tripping
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	HUDItem* ternary_bar;
-	
+private:
 
 	//party & ability selection
 	bool selecting_ability = false;
@@ -140,13 +143,14 @@ public:
 	void MapUpdate(float dt);
 	void MapRender();
 	SGD::HTexture getTurnInd() {return TurnIndicator;};
-
+	void AddTrap(std::string loot, SGD::Point pos);
 	//factory methods
 	Enemy * CreateCommonEnemy(std::string, Stats, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "" );
 	CombatPlayer * CreateCombatPlayer(std::string, Stats, int, int, int, int, int, float, float, Ability*[],  SGD::Point , SGD::Size, std::string = "");
 	CombatPlayer * LoadCombatPlayer(std::string _path); //will only return a combat player if you send in the right path
 	Enemy* LoadEnemy(std::string _path);//will only return a combat player if you send in the right path
 
+	RatTrap * CreateRatTrap( SGD::Point, int item1, int item2 =-1, int item3 = -1, int gold = 0);
 
 	HUDItem * CreateHudItem(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	SelectableObject * CreateSelectableObject(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
@@ -181,6 +185,7 @@ public:
 	void AddGold( int val );
 	int	GetGold(void) const;
 	int GetPartySize(){ return Party.size(); }
+	const std::vector<RatTrap*>& GetTraps() const { return traps; }
 	
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
 	void AddToTB( Ability* abi, Character* target );

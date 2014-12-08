@@ -48,8 +48,6 @@ void TurnManager::CombatLoot()
 		gold += rand() % 15;
 	}
 
-	pGPS->AddGold( gold );
-
 	for ( int i = 0; i < num_items; i++ )
 	{
 		// Roll for stuff!
@@ -84,6 +82,24 @@ void TurnManager::CombatLoot()
 			pGPS->AddItem( Revive );
 		}
 	}
+
+
+	int i = pGPS->tripped_trap;
+	if ( i != -1 )
+	{
+		gold += pGPS->GetTraps()[ i ]->gold;
+		pGPS->AddGold( gold );
+
+		for ( int its = 0; its < 3; its++ )
+		{
+			if ( pGPS->GetTraps()[ i ]->items[ its ] < 6 && pGPS->GetTraps()[ i ]->items[ its ] >= 0 ) // proper item types
+			{
+				ItemType stupidcode = (ItemType)pGPS->GetTraps()[ i ]->items[ its ];
+				pGPS->AddItem( stupidcode );
+			}
+		}
+		pGPS->tripped_trap = -1;
+	}
 }
 
 void TurnManager::CombatXP()
@@ -94,7 +110,7 @@ void TurnManager::CombatXP()
 		xp += dynamic_cast<Enemy*>( EnemyUnits[ i ] )->GetXPValue();
 	}
 
-	GamePlayState::GetInstance()->SetLootXP(xp);
+	GamePlayState::GetInstance()->SetLootXP( xp );
 
 	for ( unsigned int i = 0; i < AlliedUnits.size(); i++ )
 	{
@@ -123,7 +139,7 @@ void TurnManager::Update( float dt )
 			//GamePlayState::GetInstance()->EndOfCombatScreen();
 
 			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
-			GamePlayState::GetInstance()->SetState(GPStates::BattleSummary);
+			GamePlayState::GetInstance()->SetState( GPStates::BattleSummary );
 			EndCombat();
 			return;
 		}
@@ -133,7 +149,7 @@ void TurnManager::Update( float dt )
 			EndCombat();
 			if ( GamePlayState::GetInstance()->ignore_game_over )
 			{
-				
+
 				return;
 			}
 			else
@@ -166,7 +182,7 @@ void TurnManager::Render()
 		SGD::GraphicsManager::GetInstance()->DrawTexture( timelineImage, { 0, 70 }, 0.0f, { }, { }, { 1.0f, .5f } );
 		for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
 		{
-			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE  && AlliedUnits[i]->isAlive())
+			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE  && AlliedUnits[ i ]->isAlive() )
 			{
 				//87 = y
 				//95 = start x
@@ -185,7 +201,7 @@ void TurnManager::Render()
 		}
 		for ( size_t i = 0; i < EnemyUnits.size(); i++ )
 		{
-			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE && EnemyUnits[i]->isAlive())
+			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE && EnemyUnits[ i ]->isAlive() )
 			{
 				float progress = EnemyUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
@@ -223,18 +239,18 @@ void TurnManager::Render()
 	//*
 
 	//*Anything added below will render on top of combat characters
-	if (pPartMan!=nullptr)
+	if ( pPartMan != nullptr )
 		pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
 	//if ( testCover )
-		//SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
+	//SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
 
 	//Render Elemental Chart if Needed
 
 	if ( elementalgraphicactive )
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture(elementalImage, {10,200});
+		SGD::GraphicsManager::GetInstance()->DrawTexture( elementalImage, { 10, 200 } );
 	}
 
 
@@ -465,14 +481,14 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			return;	// Don't allow other settings to fire
 		}
 
-		else if ((*iter)->GetName() == "WaterWall")
+		else if ( ( *iter )->GetName() == "WaterWall" )
 		{
-			(*iter)->SetTickDmg((*iter)->GetTickDmg() - value);
+			( *iter )->SetTickDmg( ( *iter )->GetTickDmg() - value );
 
-			if((*iter)->GetTickDmg() <= 0)
+			if ( ( *iter )->GetTickDmg() <= 0 )
 			{
 				// Clear it
-				to_remove = (*iter);
+				to_remove = ( *iter );
 
 			}
 			return;
@@ -525,12 +541,12 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else
 			value = value / 2;
 		target->TakeDamage( value );
-		target->Attack( target, owner );	
+		target->Attack( target, owner );
 		to_remove->Clear();
 		to_remove = nullptr;
 	}
 
-	if(to_remove != nullptr)
+	if ( to_remove != nullptr )
 	{
 		to_remove->Clear();
 		return;
@@ -663,10 +679,10 @@ void TurnManager::CombatUpdate( float dt )
 	{
 		GamePlayState::GetInstance()->abilityTimer -= dt;
 		if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
-			{
+		{
 			GamePlayState::GetInstance()->AbilityUsed = false;
 			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
-			}
+		}
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
 	}
 
