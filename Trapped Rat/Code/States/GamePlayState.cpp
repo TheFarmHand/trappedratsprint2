@@ -960,7 +960,7 @@ void GamePlayState::TownUpdate( float dt )
 
 				for ( int its = 0; its < 3; its++ )
 				{
-					if ( traps[ tripped_trap ]->items[ its ] < 6 && traps[ tripped_trap ]->items[ its ] >= 0 ) // proper item types
+					if ( traps[ tripped_trap ]->items[ its ] < 5 && traps[ tripped_trap ]->items[ its ] >= 0 ) // proper item types
 					{
 						ItemType stupidcode = (ItemType)traps[ tripped_trap ]->items[ its ];
 						AddItem( stupidcode );
