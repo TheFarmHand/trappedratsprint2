@@ -53,6 +53,7 @@ public:
 	bool GetAccess();
 	bool GetSelfTarget();
 	AnimationSystem* GetAnimate();
+	Character* GetOwner();
 	void SetExplination(std::string str){ explination = str; }
 	void SetAbilityName( std::string name );
 	void SetOffensive( bool offense );
