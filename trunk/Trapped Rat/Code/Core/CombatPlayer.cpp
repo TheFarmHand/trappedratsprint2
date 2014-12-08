@@ -273,7 +273,22 @@ void CombatPlayer::Render()
 
 	if ( ansys != nullptr )
 	{
-		ansys->Render( position.x, position.y );
+		if (GamePlayState::GetInstance()->AbilityUsed)
+		{
+			if (GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle")
+			{
+
+			}
+			else
+			{
+				ansys->Render(position.x, position.y);
+			}
+		}
+		else
+		{
+			ansys->Render(position.x, position.y);
+		}
+		
 	}
 
 	Character::Render();
