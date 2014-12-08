@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Welcome to Earthy Town!
+_This town is full of earthy enemies!
+_Be Careful!</Words>
+  </Message>
+</Dialogue>

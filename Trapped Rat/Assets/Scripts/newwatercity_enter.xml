@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Welcome to New Water City
+_This town is full of watery enemies!
+_Be Careful!</Words>
+  </Message>
+</Dialogue>
