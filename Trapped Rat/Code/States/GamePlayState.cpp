@@ -853,17 +853,53 @@ void GamePlayState::TownUpdate( float dt )
 				GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition( ).y ) )
 		{
 			tripped_trap = i;
-			//loot_gold = traps[i]->gold;
-			//for(int its = 0; its < 3; its++)
-			//{
-			//	if ( traps[ i ]->items[ its ] < 6 && traps[ i ]->items[ its ] >= 0) // proper item types
-			//	{
-			//		ItemType stupidcode = (ItemType)traps[ i ]->items[its];
-			//		loot.push_back(stupidcode);
-			//	}
-			//}
+			
+
+
 
 			// Just Trigger Combat on a %
+			int x = rand()%1000;
+			if(x < 325)
+			{
+				trap_combat = true;
+				SGD::Point characterOrderPosition;
+				temp->SetOrderPosition( 1 );
+				characterOrderPosition.x = 600.0f;
+				characterOrderPosition.y = (float)( temp->GetOrderPosition( ) * 100 + 150 + 16 );
+				temp->SetPosition( characterOrderPosition );
+				std::vector<Enemy*> moreguards;
+				partyAbilities.push_back( MasterAbilityList[ "Rush" ] );
+				temp->InitializeAbilities( partyAbilities );
+				moreguards.push_back( temp );
+				partyAbilities.clear( );
+
+				GameData::GetInstance( )->SetIsInCombat( true );
+				state = GPStates::Combat;
+				TurnManager::GetInstance( )->Initialize( Party, moreguards );
+				for ( size_t i = 0; i < Party.size( ); i++ )
+				{
+					if ( Party[ i ]->GetActive( ) )
+					{
+						m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( ), Party[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+						m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Party[ i ]->GetOrderPosition( )*50.0f ) ), Party[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+						m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[ i ]->GetOrderPosition( )*50.0f ) ), Party[ i ], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
+					}
+				}
+
+
+				for ( size_t i = 0; i < moreguards.size( ); i++ )
+				{
+					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( ), moreguards[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+				}
+			}
+
+			else
+			{
+				// Get loots bro
+				// Event?
+			}
+
+			// Riley Code for popup inserts here
 		}
 	}
 

@@ -98,6 +98,7 @@ public:
 	int tripped_trap = -1;		// Set this to -1 (false) otherwise it is the index of the trap we will be tripping
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
+	bool trap_combat = false;
 	HUDItem* ternary_bar;
 private:
 
