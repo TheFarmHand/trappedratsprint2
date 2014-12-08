@@ -323,6 +323,7 @@ AnimationSystem* CombatPlayer::GetAnimations()
 }
 void CombatPlayer::SetSelection( int selected )
 {
+
 	for ( unsigned int i = 0; i < menu.size(); i++ )
 	{
 		if ( i == selected )
@@ -330,7 +331,7 @@ void CombatPlayer::SetSelection( int selected )
 		else
 			GamePlayState::GetInstance()->GetSelectableObjects()[ i ]->SetSelected( false );
 	}
-	GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ selected ] );
+	//GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( , GamePlayState::GetInstance()->GetSelectableObjects()[ selected ] );
 }
 
 void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
@@ -439,6 +440,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 0 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			hudSelection = 0;
 
 		}
@@ -446,12 +448,14 @@ void CombatPlayer::HomeUpdate( float dt )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 2 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[2] );
 			hudSelection = 2;
 		}
 		else if ( pInput->IsKeyPressed( SGD::Key::Left ) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 1 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[1] );
 			hudSelection = 1;
 
 		}
@@ -459,6 +463,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 3 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[3] );
 			hudSelection = 3;
 		}
 
@@ -891,6 +896,7 @@ void CombatPlayer::RunUpdate( float dt )
 			hudSelection = 0;
 			help->UpdateSelection(5);
 			SetSelection(0);
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			SetHomeButtons();
 			return;
 		}
@@ -916,6 +922,7 @@ void CombatPlayer::RunUpdate( float dt )
 			states = 0;
 			mySelection = none;
 			SetSelection( 0 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 		}
 
 		else
@@ -929,6 +936,7 @@ void CombatPlayer::RunUpdate( float dt )
 			myTarget = 0;
 			hudSelection = 0;
 			SetSelection( 0 );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			SetHomeButtons( );
 
 			Reset();
@@ -985,11 +993,10 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 					else
 					{
 						menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ i ], i );
-						GamePlayState::GetInstance()->AbilityUsed = true;
-						GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
-						GamePlayState::GetInstance()->abilityTimer = 2.0f;
-						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
-						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
+						GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+						std::ostringstream usingAbility;
+						usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+						GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 					}
 				}
 			}
@@ -1023,12 +1030,10 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			else
 			{
 				menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ] );
-				//TurnManager::GetInstance( )->UsingAbility( this, pTurn->GetAllies( )[ myTarget ], menu[ hudSelection ]->GetAbility( ) );
-				GamePlayState::GetInstance()->AbilityUsed = true;
-				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
-				GamePlayState::GetInstance()->abilityTimer = 2.0f;
-				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
-				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
+				GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		}
 		myTarget = 0;
@@ -1042,7 +1047,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		hudSelection = 0;
 		//	TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
-		help->UpdateSelection( 5 );
+		//help->UpdateSelection( 5 );
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
@@ -1092,11 +1097,10 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 					else
 					{
 						menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ i ], i );
-						GamePlayState::GetInstance()->AbilityUsed = true;
-						GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
-						GamePlayState::GetInstance()->abilityTimer = 2.0f;
-						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
-						GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
+						GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+						std::ostringstream usingAbility;
+						usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+						GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 					}
 				}
 			}
@@ -1130,11 +1134,10 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			{
 				// Turn Manager will handle the go between for abilities and attacks for consistency and particles
 				TurnManager::GetInstance()->UsingAbility( this, pTurn->GetEnemies()[ myTarget ], menu[ hudSelection ]->GetAbility() );
-				GamePlayState::GetInstance()->AbilityUsed = true;
-				GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
-				GamePlayState::GetInstance()->abilityTimer = 2.0f;
-				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->ResetAll();
-				GamePlayState::GetInstance()->CurrentAbilityUsed->GetAnimate()->Play( 0 );
+				GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		}
 
@@ -1149,7 +1152,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		hudSelection = 0;
 		//TurnManager::GetInstance()->setTimeStop( false );
 		TurnManager::GetInstance()->setTurnPause( true );
-		help->UpdateSelection( 5 );
+		//help->UpdateSelection( 5 );
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
@@ -1299,6 +1302,7 @@ void CombatPlayer::TernaryBlast( float dt )
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
+		GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 		SetHomeButtons();
 		GamePlayState::GetInstance()->SetTernary( false );
 		GamePlayState::GetInstance()->SetGauge( 0 );

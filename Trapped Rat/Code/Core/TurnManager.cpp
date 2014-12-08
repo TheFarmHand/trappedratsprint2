@@ -663,7 +663,10 @@ void TurnManager::CombatUpdate( float dt )
 	{
 		GamePlayState::GetInstance()->abilityTimer -= dt;
 		if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
+			{
 			GamePlayState::GetInstance()->AbilityUsed = false;
+			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
+			}
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
 	}
 

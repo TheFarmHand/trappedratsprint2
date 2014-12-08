@@ -42,4 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>RatAnimBattle.xml</Animation>
+  <Portrait>pReplaceme.png</Portrait>
+  <Timeline>tReplaceme.png</Timeline>
 </Character>
