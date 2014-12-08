@@ -227,8 +227,8 @@ void TurnManager::Render()
 		pPartMan->Render();
 	if ( GamePlayState::GetInstance()->AbilityUsed )
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
-	if ( testCover )
-		SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
+	//if ( testCover )
+		//SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
 
 	//Render Elemental Chart if Needed
 
@@ -694,7 +694,7 @@ void TurnManager::CombatUpdate( float dt )
 	{
 		//AllCombatUnits[0]->SetProgress(0.0f);
 		turnPause = false;
-		testCover = false;
+		//testCover = false;
 	}
 }
 void TurnManager::AnimationUpdate( float dt )
