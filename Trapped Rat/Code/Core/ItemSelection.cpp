@@ -32,19 +32,19 @@ bool ItemSelection::Update(float dt)
 {
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 
-	if (input->IsKeyPressed(SGD::Key::Enter))
+	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 	{
 		item_cursor;
 		CollectItem(item_cursor);
 		item_selected = true;
 	}
-	if (input->IsKeyPressed(SGD::Key::Up))
+	if (input->IsKeyPressed(SGD::Key::Up)||input->IsDPadPressed(0,SGD::DPad::Up))
 	{
 		item_cursor--;
 		if (item_cursor < 0)
 			item_cursor = max_index;
 	}
-	if (input->IsKeyPressed(SGD::Key::Down))
+	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down))
 	{
 		item_cursor++;
 		if (item_cursor > max_index)

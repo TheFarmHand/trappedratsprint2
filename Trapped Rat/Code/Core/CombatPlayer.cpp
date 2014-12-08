@@ -451,7 +451,7 @@ void CombatPlayer::HomeUpdate( float dt )
 
 	if ( states == 0 )
 	{
-		if ( pInput->IsKeyPressed( SGD::Key::Up ) )
+		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed(0,SGD::DPad::Up) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 0 );
@@ -459,14 +459,14 @@ void CombatPlayer::HomeUpdate( float dt )
 			hudSelection = 0;
 
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Right ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsDPadPressed(0, SGD::DPad::Right))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 2 );
 			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[2] );
 			hudSelection = 2;
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Left ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsDPadPressed(0, SGD::DPad::Left))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 1 );
@@ -474,7 +474,7 @@ void CombatPlayer::HomeUpdate( float dt )
 			hudSelection = 1;
 
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Down ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsDPadPressed(0, SGD::DPad::Down))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 3 );
@@ -484,7 +484,7 @@ void CombatPlayer::HomeUpdate( float dt )
 
 
 		// ****************** Ternary Blast Code added by Grant *******************
-		else if ( GamePlayState::GetInstance()->GetGauge() >= MAXTG && pInput->IsKeyPressed( SGD::Key::O ) )
+		else if ( GamePlayState::GetInstance()->GetGauge() >= MAXTG && pInput->IsKeyPressed( SGD::Key::O ) || pInput->IsButtonPressed(0,5) )
 			// Ternary Blast activation
 		{
 			GameData::GetInstance()->PlaySelectionChange();
@@ -514,7 +514,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		// ****************** Ternary Blast Code END  *******************
 
 
-		if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
+		if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed(0,1 ))
 		{
 			unsigned int activeindex = 0;
 			GameData::GetInstance()->PlaySelectionChange();
@@ -574,7 +574,7 @@ void CombatPlayer::HomeUpdate( float dt )
 			}
 			return;
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+		else if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
 		{
 			states = 0;
 			myTarget = 0;
@@ -591,7 +591,7 @@ void CombatPlayer::AttackUpdate( float dt )
 	TargetUnit( pTurn->GetEnemies() );
 
 
-	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) )
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
@@ -612,7 +612,7 @@ void CombatPlayer::AttackUpdate( float dt )
 		mySelection = none;
 		SetSelection( 0 );
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
@@ -663,7 +663,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		SetHomeButtons();
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
+	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
 	{
 
 		//pTurn->HealTarget(pTurn->GetAllies()[myTarget], 15);
@@ -721,7 +721,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		SetHomeButtons();
 		//ill keep this stuff here ^^^^
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
@@ -740,14 +740,14 @@ void CombatPlayer::AbilityUpdate( float dt )
 	HelpText *help = game->GetHelpText();
 	bool anyAllyDead = false;
 
-	if ( pInput->IsKeyPressed( SGD::Key::Up ) )
+	if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Up))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 0;
 		help->UpdateSelection( 1, menu[ 0 ] );
 
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Right ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsKeyPressed(SGD::Key::Right))
 	{
 		if ( menu[ 2 ]->GetObjectType() == 1 )
 		{
@@ -757,7 +757,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Left ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsKeyPressed(SGD::Key::Left))
 	{
 		if ( menu[ 1 ]->GetObjectType() == 1 )
 		{
@@ -767,7 +767,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Down ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsKeyPressed(SGD::Key::Down))
 	{
 		if ( menu[ 3 ]->GetObjectType() == 1 )
 		{
@@ -778,7 +778,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 		}
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
@@ -791,7 +791,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	}
 
-	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
+	else if ( pInput->IsKeyPressed( SGD::Key::Enter )||pInput->IsButtonPressed(0,1) )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		if ( menu[ hudSelection ]->GetAbility() == nullptr )
@@ -886,7 +886,7 @@ void CombatPlayer::RunUpdate( float dt )
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
 	{
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
@@ -897,7 +897,7 @@ void CombatPlayer::RunUpdate( float dt )
 
 	}
 
-	if( pInput->IsKeyPressed(SGD::Key::Enter) )
+	if (pInput->IsKeyPressed(SGD::Key::Enter) ||pInput->IsButtonPressed(0, 1))
 	{
 		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight ||GamePlayState::GetInstance()->ignore_game_over)
 		{
@@ -979,7 +979,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		ItemsUpdate( dt );
 		return;
 	}
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
@@ -991,7 +991,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
+	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
 	{
 		//Input Ability Use Here
 		if ( mySelection == allAlly )
@@ -1082,7 +1082,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		TargetUnit( pTurn->GetEnemies() );
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) )
+	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
@@ -1094,7 +1094,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		GamePlayState::GetInstance()->ClearTernary();
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Enter ) )
+	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
 	{
 		//Input Ability Use Here
 		if ( mySelection == allEnemy )
@@ -1193,7 +1193,7 @@ void CombatPlayer::SetHomeButtons()
 void CombatPlayer::SelectingItems( float dt )
 {
 	HelpText *help = GamePlayState::GetInstance()->GetHelpText();
-
+	SGD::InputManager *pInput = SGD::InputManager::GetInstance();
 	bool selected = item_choose->Update( dt );
 	tempitem->SetExplination( item_choose->GetCurrentExplanation() );
 	helpobject->SetItem( tempitem );
@@ -1254,7 +1254,7 @@ void CombatPlayer::SelectingItems( float dt )
 		}
 
 	}
-	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Escape ) )
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
 		delete item_choose;
 		item_choose = nullptr;

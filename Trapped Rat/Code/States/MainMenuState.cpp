@@ -51,7 +51,7 @@ void MainMenuState::Update(float dt)
 	}*/
 
 
-	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0, 0))
+	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0, 1))
 	{
 
 		switch (index)
