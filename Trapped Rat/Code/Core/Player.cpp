@@ -49,6 +49,7 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("GainCheckers");
 	Listener::RegisterForEvent("CecilFight");
 	Listener::RegisterForEvent("Miniboss");
+	Listener::RegisterForEvent("Trap");
 }
 
 
@@ -459,4 +460,9 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		
 	}
+
+	else if (pEvent->GetEventID() == "Trap")
+	{
+		// Player trips the trap (wrote it elsewhere, pretending to plan to refactor it later)
 	}
+}

@@ -628,11 +628,6 @@ void CombatPlayer::ItemsUpdate( float dt )
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	// **************** USER STORY COMPLETION FOR HEALING **************** //
-	// **************** REPLACE WITH ITEM SELECTION CODE  **************** //
-	// This code can be repurposed for actually using a healing item
-
-
 	// Do player selection
 	if ( item_choose != nullptr )
 	{

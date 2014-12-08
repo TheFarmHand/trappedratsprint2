@@ -59,6 +59,7 @@ void GamePlayState::Enter()
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
 	//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	Loading("Loading Images...");
+	rattrap = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/RatTrap32.png" );
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/tempcombathud.png");
 	enemytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/enemytargeticon.png" );
 	allytargeting = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/allytargeticon.png" );
@@ -843,6 +844,28 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 		}
+
+	for (unsigned int i = 0; i < traps.size(); i++)
+	{
+		if ( TileSystem::GetInstance( )->GetTileIndex( traps[ i ]->GetPosition( ).x, traps[ i ]->GetPosition( ).y )
+				 == TileSystem::GetInstance( )->GetTileIndex(
+				GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition( ).x,
+				GameData::GetInstance( )->GetOverworldPlayer( )->GetPosition( ).y ) )
+		{
+			tripped_trap = i;
+			//loot_gold = traps[i]->gold;
+			//for(int its = 0; its < 3; its++)
+			//{
+			//	if ( traps[ i ]->items[ its ] < 6 && traps[ i ]->items[ its ] >= 0) // proper item types
+			//	{
+			//		ItemType stupidcode = (ItemType)traps[ i ]->items[its];
+			//		loot.push_back(stupidcode);
+			//	}
+			//}
+
+			// Just Trigger Combat on a %
+		}
+	}
 
 	for (unsigned int i = 0; i < guards.size(); i++)
 	{
@@ -1686,6 +1709,38 @@ HUDItem* GamePlayState::CreateBar( SGD::Size _size, SGD::Point _pos, Character *
 	return temp;
 	}
 
+void GamePlayState::AddTrap(std::string loot, SGD::Point pos)
+// string needs parsed thusly: 000.111
+// 000 are individual item ids, 111 is the amount of gold to recieve
+{
+	int i1, i2, i3;
+	i1 = loot[0] - '0';
+	i2 = loot[1] - '0';
+	i3 = loot[2] - '0';
+	std::string temp="";
+	temp+=loot[4];
+	temp+= loot[5];
+	temp+= loot[6];
+	int gold = std::stoi(temp.c_str());
+
+	RatTrap* toadd = CreateRatTrap(pos ,i1, i1, i3, gold);
+	traps.push_back(toadd);
+	
+}
+
+RatTrap * GamePlayState::CreateRatTrap( SGD::Point pos, int item1, int item2, int item3, int gold)
+	//enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive };
+	// Traps hold up to 3 items, -1 will translate to nothing + gold
+{
+	RatTrap* temp = new RatTrap();
+	temp->SetPosition(pos);
+	temp->items[ 0 ] = item1;
+	temp->items[ 1 ] = item2;
+	temp->items[ 2 ] = item3;
+	temp->gold = gold;
+	temp->SetImage(rattrap);
+	return temp;
+}
 
 void GamePlayState::DialogueUpdate( float dt )
 	{
@@ -2167,7 +2222,7 @@ void GamePlayState::MapUpdate(float dt)
 		{
 		case 0: //Wind
 			Loading("Loading Map");
-			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\WindTown.xml");
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TrapTest.xml");
 			//here we load in the dialogue
 			dialogue->Load("Assets/Scripts/windywoods_enter.xml");
 			break;

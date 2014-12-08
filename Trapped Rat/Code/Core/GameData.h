@@ -68,6 +68,7 @@ public:
 	bool GetWindowed(){ return is_windowed; }
 	int GetSaveFile(){ return save_file; }
 	void PlaySelectionChange();
+	
 	//mutators
 	void SetCamera(SGD::Point point){ CameraPos = point; }
 	void UpdateCamera(BaseObject* obj);
