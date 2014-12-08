@@ -43,7 +43,7 @@ class GamePlayState :
 	SGD::HTexture background = SGD::INVALID_HANDLE;
 	SGD::HTexture button = SGD::INVALID_HANDLE;
 	SGD::HTexture cursor = SGD::INVALID_HANDLE;
-	Layer temp;
+	//Layer temp;
 	std::vector<CombatPlayer*> Party;
 	Enemy e1, e2, e3;
 	Enemy *enemy1;
@@ -100,6 +100,7 @@ public:
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	bool trap_combat = false;
 	HUDItem* ternary_bar;
+	void RemoveTrap(int);
 private:
 
 	//party & ability selection

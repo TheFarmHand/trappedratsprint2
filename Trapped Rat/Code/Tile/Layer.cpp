@@ -88,8 +88,8 @@ void Layer::Initialize( const char* path)
 		{
 			int x, y, pixX, pixY;
 			SGD::Point destination;
-			x = tileID % layerWidth;
-			y = tileID / layerWidth;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
 			pixX = x * tileWidth;
 			pixY = y * tileHeight;
 			destination.x = (float)pixX;
