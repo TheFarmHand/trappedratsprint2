@@ -51,7 +51,7 @@ void GamePlayState::Enter()
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/padlock.png" );
 
 
-	//is_tutorial = true;
+	is_tutorial = true;
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/Scroll.png" );
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/MenuBackground.png" );
@@ -472,8 +472,8 @@ void GamePlayState::Enter()
 	MinibossFight = false;
 	FinalBossFight = false;
 	SGD::InputManager::GetInstance()->Update();
-	state = Map;
-	laststate = Map;
+	//state = Map;
+	//laststate = Map;
 
 
 	//state = BattleSummary;
@@ -639,6 +639,7 @@ void GamePlayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( TurnIndicator );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( helpback );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( combathud );
+	SGD::GraphicsManager::GetInstance()->UnloadTexture( rattrap );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( allytargeting );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( enemytargeting );
 	if ( buttonimg != SGD::INVALID_HANDLE )

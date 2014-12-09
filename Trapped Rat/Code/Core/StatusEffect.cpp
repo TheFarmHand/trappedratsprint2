@@ -160,11 +160,11 @@ void StatusEffect::HandleSpecial()
 	// Enfire
 
 	// Hedge
-	if ( name == "Hedge" )
-	{
-		owner->AddStatus( &SEM->GetStatus( "Regen" ) );
-		owner->AddStatus( &SEM->GetStatus( "DefenseUp" ) );
-	}
+	//if ( name == "Hedge" )
+	//{
+	//	owner->AddStatus( &SEM->GetStatus( "Regen" ) );
+	//	owner->AddStatus( &SEM->GetStatus( "DefenseUp" ) );
+	//}
 
 }
 

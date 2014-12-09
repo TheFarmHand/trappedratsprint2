@@ -65,7 +65,7 @@ void Character::Render()
 	int offset = 0;
 	for ( auto iter = effects.begin( ); iter != effects.end( ); iter++ )
 	{
-		SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { (position.x-size.width/2) + 10*offset, position.y - size.height - 5 } );
+		SGD::GraphicsManager::GetInstance( )->DrawTexture( ( *iter )->GetIcon( ), { (position.x-size.width/2) + 16*offset, position.y - size.height - 5 } );
 		offset++;
 	}
 }
@@ -323,7 +323,6 @@ void Character::SetHP( int _hp )
 	else if ( HP <= 0 )
 	{
 		HP = 0;
-		alive = false;
 		if ( name == "Jane" && isAlive())
 			{
 			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
@@ -334,6 +333,8 @@ void Character::SetHP( int _hp )
 			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
 			JohnDead = true;
 			}
+		alive = false;
+
 	}
 
 	if(HP > GetMaxHP())
@@ -417,11 +418,19 @@ void Character::AddStatus( StatusEffect *status , Character* theGuard, bool tern
 	StatusEffect* temp = new StatusEffect();
 	// Setup damage values
 	*temp = *status;
-	temp->SetOwner( this );
-	temp->SetGuard( theGuard );
-	temp->SetTernEffect(ternary);
-	effects.push_back( temp );
-	temp->Initialize();
+	if ( temp->GetName() == "Hedge" )
+		{
+		AddStatus( &StatusEffectManager::GetInstance()->GetStatus("DefenseUp"), status->GetOwner(), ternary);
+		AddStatus( &StatusEffectManager::GetInstance()->GetStatus("Regen"), status->GetOwner(), ternary);
+		}
+	else
+		{
+		temp->SetOwner( this );
+		temp->SetGuard( theGuard );
+		temp->SetTernEffect( ternary );
+		effects.push_back( temp );
+		temp->Initialize();
+		}
 }
 void Character::InitializeAbilities( std::vector<Ability*> toSet )
 {

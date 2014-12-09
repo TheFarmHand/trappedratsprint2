@@ -62,5 +62,7 @@ public:
 	void virtual SetType(int type);
 	void virtual SetTernEffect(bool buul) { ternary_effect = buul; }
 	StatusEffect& operator=(const StatusEffect& rhs);
-};
+
+	SGD::HTexture bp = SGD::INVALID_HANDLE;
+	};
 
