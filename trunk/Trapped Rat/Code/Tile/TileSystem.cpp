@@ -94,23 +94,23 @@ bool TileSystem::TileEvent( float &x, float &y, SGD::Rectangle &rect, std::strin
 	pos.x = x;
 	pos.y = y;
 
-	tileIndex = GetTileIndex( rect.left + 1, rect.top );
-	if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+		tileIndex = GetTileIndex( rect.left + 1, rect.top );
+		if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName && layers.GetTileMap()[GetTileIndex( x, y )].GetTileID() == layers.GetTileMap()[tileIndex].GetTileID() )
 		collided = true;
 	else
 		{
 		tileIndex = GetTileIndex( rect.right - 1, rect.top );
-		if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+		if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName && layers.GetTileMap()[GetTileIndex( x, y )].GetTileID() == layers.GetTileMap()[tileIndex].GetTileID() )
 			collided = true;
 		else
 			{
 			tileIndex = GetTileIndex( rect.left + 1, rect.bottom - 1 );
-			if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+			if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName && layers.GetTileMap()[GetTileIndex( x, y )].GetTileID() == layers.GetTileMap()[tileIndex].GetTileID() )
 				collided = true;
 			else
 				{
 				tileIndex = GetTileIndex( rect.right - 1, rect.bottom - 1 );
-				if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+				if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName && layers.GetTileMap()[GetTileIndex( x, y )].GetTileID() == layers.GetTileMap()[tileIndex].GetTileID() )
 					collided = true;
 				}
 			}

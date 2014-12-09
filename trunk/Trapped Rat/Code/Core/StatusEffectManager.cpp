@@ -26,9 +26,9 @@ void StatusEffectManager::Terminate()
 	{
 		StatusEffect* temp;
 		temp = (*iter).second;
+		SGD::GraphicsManager::GetInstance()->UnloadTexture( temp->bp );
 		delete temp;
 	}
-	SGD::GraphicsManager::GetInstance( )->UnloadTexture(bp);
 }
 
 void StatusEffectManager::LoadStatusEffect( std::string filename )
@@ -81,9 +81,9 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 		}
 		path = "../Trapped Rat/Assets/Textures/StatusEffects/";
 		path += image;
-		bp = SGD::GraphicsManager::GetInstance()->LoadTexture( path.c_str() );
+		temp->bp = SGD::GraphicsManager::GetInstance()->LoadTexture( path.c_str() );
 		
-		temp->SetIcon( bp );	// Load image here later
+		temp->SetIcon( temp->bp );	// Load image here later
 		StatusList[ name.c_str() ] = temp;
 	}
 	

@@ -735,6 +735,8 @@ void Enemy::BWRAI()
 void Enemy::FFWAI()
 	{
 	int target;
+	std::ostringstream usingAbility;
+
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
 	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
@@ -745,11 +747,19 @@ void Enemy::FFWAI()
 		if ( !FlameSpout )
 			{
 			FlameSpout = true;
-			FSCountdown = 2;
+			usingAbility << name << " starts casting Flame Spout";
+			GamePlayState::GetInstance()->AbilityUsed = true;
+			GamePlayState::GetInstance()->abilityTimer = 2.0f;
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
+			FSCountdown = 4;
 			}
-		else if ( FSCountdown > 0 )
+		else if ( FSCountdown >= 1 )
 			{
 			--FSCountdown;
+			usingAbility << FSCountdown << "...";
+			GamePlayState::GetInstance()->AbilityUsed = true;
+			GamePlayState::GetInstance()->abilityTimer = 2.0f;
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
 		else
@@ -760,7 +770,6 @@ void Enemy::FFWAI()
 					abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				}
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
-			std::ostringstream usingAbility;
 			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			FlameSpout = false;
@@ -1112,17 +1121,21 @@ void Enemy::CecilPhaseThree()
 	if ( !HolyFlare )
 		{
 		HolyFlare = true;
-		HFCountdown = 5;
+		HFCountdown = 6;
 		damageDealt = 0.0f;
 		//Dialogue for casting/countdown
 		usingAbility << name << " starts casting Holy Flare";
+		GamePlayState::GetInstance()->AbilityUsed = true;
+		GamePlayState::GetInstance()->abilityTimer = 2.0f;
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
-	if ( HFCountdown > 0 )
+	else if ( HFCountdown >= 1 )
 		{
 		--HFCountdown;
 		//Dialogue for countdown
 		usingAbility << HFCountdown << "...";
+		GamePlayState::GetInstance()->AbilityUsed = true;
+		GamePlayState::GetInstance()->abilityTimer = 2.0f;
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}

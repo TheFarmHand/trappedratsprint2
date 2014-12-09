@@ -489,6 +489,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 			{
 				// Clear it
 				to_remove = ( *iter );
+				to_remove->Clear();
 
 			}
 			return;
