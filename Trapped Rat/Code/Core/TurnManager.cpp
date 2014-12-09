@@ -92,7 +92,7 @@ void TurnManager::CombatLoot()
 
 		for ( int its = 0; its < 3; its++ )
 		{
-			if ( pGPS->GetTraps()[ i ]->items[ its ] < 6 && pGPS->GetTraps()[ i ]->items[ its ] >= 0 ) // proper item types
+			if ( pGPS->GetTraps()[ i ]->items[ its ] < 5 && pGPS->GetTraps()[ i ]->items[ its ] >= 0 ) // proper item types
 			{
 				ItemType stupidcode = (ItemType)pGPS->GetTraps()[ i ]->items[ its ];
 				pGPS->AddItem( stupidcode );
