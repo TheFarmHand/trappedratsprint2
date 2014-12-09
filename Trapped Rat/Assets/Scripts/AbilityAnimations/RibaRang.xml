@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="12">
+      <Path>bonerang.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>RibARang</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="24" y="28" />
+      <DrawRect left="0" top="1" right="54" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="73" y="28" />
+      <DrawRect left="54" top="0" right="94" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="186" y="29" />
+      <DrawRect left="159" top="4" right="211" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="130" y="31" />
+      <DrawRect left="98" top="6" right="163" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="26" y="28" />
+      <DrawRect left="1" top="1" right="54" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="72" y="26" />
+      <DrawRect left="53" top="3" right="93" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="188" y="30" />
+      <DrawRect left="158" top="4" right="214" bottom="70" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="129" y="31" />
+      <DrawRect left="99" top="4" right="159" bottom="63" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="28" y="32" />
+      <DrawRect left="2" top="3" right="51" bottom="70" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="72" y="25" />
+      <DrawRect left="53" top="1" right="94" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.5">
+      <AnchorPoint x="218" y="33" />
+      <DrawRect left="208" top="0" right="255" bottom="69" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="412" y="259" />
+      <DrawRect left="302" top="169" right="526" bottom="334" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

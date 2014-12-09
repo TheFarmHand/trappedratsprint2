@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>ScorchSprites.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Scorch</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="36" y="47" />
+      <DrawRect left="0" top="22" right="77" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="129" y="49" />
+      <DrawRect left="91" top="18" right="169" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="226" y="48" />
+      <DrawRect left="191" top="16" right="259" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
