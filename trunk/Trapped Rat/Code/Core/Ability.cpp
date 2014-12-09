@@ -122,20 +122,6 @@ Ability::~Ability()
 
 void Ability::Render()
 	{
-
-	if ( offensive )
-		{
-		//SGD::GraphicsManager::GetInstance()->DrawString( L"Offensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
-		//abilityName = "Drown";
-		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
-		}
-	if ( healing )
-		{
-		//SGD::GraphicsManager::GetInstance()->DrawString( L"Defensive", SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2, GameData::GetInstance()->GetScreenHeight() / 2 ), SGD::Color( 255, 255, 255, 255 ) );
-		//abilityName = "Healing Light";
-		//SGD::GraphicsManager::GetInstance()->DrawString( abilityName.c_str(), SGD::Point( GameData::GetInstance()->GetScreenWidth() / 2 - 20, GameData::GetInstance()->GetScreenHeight() / 2 + 20 ), SGD::Color( 255, 255, 255, 255 ) );
-		}
-	//animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
 	RenderAnimation();
 	}
 void Ability::Update( float dt )
@@ -152,13 +138,13 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		{
 		target->SetLiving( true );
 		}
-	if ( offensive && !status)
+	if ( offensive && !status )
 		{
 		if ( abilityName == "Firefall" )
 			{
 			tempFirefall = (int)( formulaTotal / 2 );
 			target->TakeDamage( (int)tempFirefall );
-			target->TakeDamage( (int)tempFirefall, true);
+			target->TakeDamage( (int)tempFirefall, true );
 			}
 		else
 			target->TakeDamage( (int)formulaTotal );
@@ -166,17 +152,17 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 	if ( healing )
 		{
 		int dmg = (int)-formulaTotal;
-		if(abilityName == "Whispering Wind")
+		if ( abilityName == "Whispering Wind" )
 			{
 			if ( ternary )
 				dmg = (int)( dmg * 1.75f );
 			}
 		else if ( abilityName == "Second Wind" )
 			{
-			if (ternary)
+			if ( ternary )
 				dmg *= 2;
 			}
-			target->TakeDamage( dmg );
+		target->TakeDamage( dmg );
 		}
 	if ( abilityName == "Wind Split" )
 		{
@@ -189,37 +175,42 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		owner->SetHP( owner->GetMaxHP() );
 		}
 	if ( status && statusName == "Cover" )
-	{
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner, ternary );
-		owner->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Guarding" ), target, ternary);
-	}
-
-	else if (status && abilityName == "Acid Rain" )
-	{
-		if(ternary)
 		{
-			float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus("Poison").GetTickDmg();
-			tickdmg += (0.35f * owner->GetMagic());
-			tickdmg *= 3;
-			tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic());
-			target->TakeDamage((int)tickdmg);
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner, ternary );
+		owner->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Guarding" ), target, ternary );
 		}
+
+	else if ( status && abilityName == "Acid Rain" )
+		{
+		if ( ternary )
+			{
+			float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus( "Poison" ).GetTickDmg();
+			tickdmg += ( 0.35f * owner->GetMagic() );
+			tickdmg *= 3;
+			tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic() );
+			target->TakeDamage( (int)tickdmg );
+			}
 		else
-			target->AddStatus(&StatusEffectManager::GetInstance()->GetStatus("Poison"));
-	}
+			{
+			if ( !target->HasEffect( statusName ) )
+				target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Poison" ) );
+			
+			}
+		}
 
 	else if ( status )
 		{
-		if (atkMod > 0 || mgcMod > 0)
+		if ( atkMod > 0 || mgcMod > 0 )
 			target->TakeDamage( (int)formulaTotal );
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
+		if ( !target->HasEffect( statusName ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
 		}
 
 	if ( abilityName == "Rib-a-Rang" )
-		if(!ternary)
+		if ( !ternary )
 			owner->SetHP( owner->GetHP() - (int)( ( owner->GetHP() * hpMod ) ) );
-	
-	if ( AoeCounter == 0 ) 
+
+	if ( AoeCounter == 0 )
 		{
 		if ( GamePlayState::GetInstance()->usingTernary() )
 			owner->SetBP( owner->GetBP() - bpCost / 2 );
@@ -276,7 +267,7 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 		}
 	else if ( healing )
 		{
-		formulaTotal = ( owner->GetMaxHP() * hpMod ) + ( mgcMod * owner->GetMagic());
+		formulaTotal = ( owner->GetMaxHP() * hpMod ) + ( mgcMod * owner->GetMagic() );
 		return;
 		}
 	if ( weak )
@@ -393,7 +384,7 @@ void Ability::SetAccess( bool combatUse )
 	access = combatUse;
 	}
 void Ability::RenderAnimation()
-{
+	{
 	//This Function is called in Render
 
 	//On Top Of Target
@@ -411,20 +402,20 @@ void Ability::RenderAnimation()
 		animate->Render(Abiltarget->GetPosition().x, Abiltarget->GetPosition().y);
 	}
 	//Adjusted Up and Left
-	else if (abilityName == "Slow Claw")
-	{
-		animate->Render(Abiltarget->GetPosition().x - 32, Abiltarget->GetPosition().y - 32);
-	}
+	else if ( abilityName == "Slow Claw" )
+		{
+		animate->Render( Abiltarget->GetPosition().x - 32, Abiltarget->GetPosition().y - 32 );
+		}
 	//At Left of Target
 	else if (abilityName == "left")
 	{
 		animate->Render(Abiltarget->GetPosition().x - 100, Abiltarget->GetPosition().y);
 	}
 	//Right of Target
-	else if (abilityName == "Counter Claw")
-	{
-		animate->Render(Abiltarget->GetPosition().x + 100, Abiltarget->GetPosition().y);
-	}
+	else if ( abilityName == "Counter Claw" )
+		{
+		animate->Render( Abiltarget->GetPosition().x + 100, Abiltarget->GetPosition().y );
+		}
 	//Top of Enemy Side
 	else if (abilityName == "Acid Rain")
 	{
@@ -471,8 +462,8 @@ void Ability::RenderAnimation()
 	}
 	//Original Default
 	else
-	{
-		animate->Render(Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y);
+		{
+		animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
 
+		}
 	}
-}

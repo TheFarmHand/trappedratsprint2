@@ -51,13 +51,13 @@ void GamePlayState::Enter()
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/padlock.png" );
 
 
-	is_tutorial = true;
+	//is_tutorial = true;
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/Scroll.png" );
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/MenuBackground.png" );
 	Loading( "Loading Tiles..." );
 	SGD::MessageManager::GetInstance()->Initialize( &MessageProc );
-	//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	Loading( "Loading Images..." );
 	rattrap = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/RatTrap32.png" );
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/tempcombathud.png" );
@@ -143,14 +143,14 @@ void GamePlayState::Enter()
 	p1->SetPosition( characterOrderPosition );
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList[ "Burrow" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Water Fang" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Slow Claw" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Earth Fang" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Poison Fang" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Fire Fang" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Counter Claw" ] );
-	partyAbilities.push_back( MasterAbilityList[ "Wind Fang" ] );
+	partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
+	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
+	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
 	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
