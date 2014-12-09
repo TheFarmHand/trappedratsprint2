@@ -86,6 +86,41 @@ void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char d
 		}
 	}
 
+bool TileSystem::TileEvent( float &x, float &y, SGD::Rectangle &rect, std::string eventName )
+	{
+	bool collided = false;
+	int tileIndex;
+	SGD::Point pos;
+	pos.x = x;
+	pos.y = y;
+
+	tileIndex = GetTileIndex( rect.left + 1, rect.top );
+	if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+		collided = true;
+	else
+		{
+		tileIndex = GetTileIndex( rect.right - 1, rect.top );
+		if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+			collided = true;
+		else
+			{
+			tileIndex = GetTileIndex( rect.left + 1, rect.bottom - 1 );
+			if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+				collided = true;
+			else
+				{
+				tileIndex = GetTileIndex( rect.right - 1, rect.bottom - 1 );
+				if ( layers.GetTileMap()[tileIndex].GetEventID() == eventName )
+					collided = true;
+				}
+			}
+		}
+
+	if ( collided )
+		return true;
+	return false;
+	}
+
 void TileSystem::TileEvent( SGD::Point pos )
 	{
 	int tileIndex;

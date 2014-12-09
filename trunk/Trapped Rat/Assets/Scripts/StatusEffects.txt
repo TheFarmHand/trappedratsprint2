@@ -48,7 +48,7 @@ TestParticleBlue.png
 
 DefenseUp
 0 3 0 1
-TestParticleBlue.png
+DefenseUp.png
 
 DefenseDown
 0 3 0 1
@@ -75,7 +75,7 @@ Confused
 TestParticleBlue.png
 
 Stun
-0 1 0 2
+0 2 0 2
 TestParticleBlue.png
 
 Enfire
