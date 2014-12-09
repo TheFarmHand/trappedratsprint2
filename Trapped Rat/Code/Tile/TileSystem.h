@@ -18,6 +18,7 @@ public:
 	SGD::Size GetTileSize();
 
 	void TileCollision( float &x, float &y, SGD::Rectangle &rect, char dir );
+	bool TileEvent( float &x, float &y, SGD::Rectangle &rect, std::string eventName );
 	void TileEvent( SGD::Point pos );
 	int GetLayerWidth();
 	int GetLayerHeight();
