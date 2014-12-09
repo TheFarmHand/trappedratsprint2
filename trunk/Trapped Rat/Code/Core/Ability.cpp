@@ -162,7 +162,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 			if ( ternary )
 				dmg *= 2;
 			}
-		target->TakeDamage( dmg );
+			target->TakeDamage( dmg );
 		}
 	if ( abilityName == "Wind Split" )
 		{
@@ -175,27 +175,27 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		owner->SetHP( owner->GetMaxHP() );
 		}
 	if ( status && statusName == "Cover" )
-		{
+	{
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), owner, ternary );
 		owner->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Guarding" ), target, ternary );
-		}
+	}
 
 	else if ( status && abilityName == "Acid Rain" )
-		{
+	{
 		if ( ternary )
-			{
+		{
 			float tickdmg = (float)StatusEffectManager::GetInstance()->GetStatus( "Poison" ).GetTickDmg();
 			tickdmg += ( 0.35f * owner->GetMagic() );
 			tickdmg *= 3;
 			tickdmg -= ( 0.25f * target->GetDefense() + 0.25f * target->GetMagic() );
 			target->TakeDamage( (int)tickdmg );
-			}
+		}
 		else
 			{
 			if ( !target->HasEffect( statusName ) )
 				target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Poison" ) );
 			
-			}
+	}
 		}
 
 	else if ( status )
@@ -203,7 +203,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		if ( atkMod > 0 || mgcMod > 0 )
 			target->TakeDamage( (int)formulaTotal );
 		if ( !target->HasEffect( statusName ) )
-			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( statusName ), nullptr, ternary );
 		}
 
 	if ( abilityName == "Rib-a-Rang" )
@@ -388,14 +388,12 @@ void Ability::RenderAnimation()
 	//This Function is called in Render
 
 	//On Top Of Target
-	if (abilityName == "Burrow" || abilityName == "Earth Fang" || abilityName == "Water Fang" || abilityName == "Fire Fang" 
-		|| abilityName == "Wind Fang" || abilityName == "Poison Fang" || abilityName == "Puddle"
-		|| abilityName == "Whirlpool"
-		|| abilityName == "Collapse" || abilityName == "Ignite" || abilityName == "Scorch"
-		|| abilityName == "Rib-a-Rang" || abilityName == "Emblazon" || abilityName == "Firefall" ||abilityName == "Fire Spikes"
-		|| abilityName == "Incinerate" || abilityName == "Leaf on the Wind" || abilityName == "Tailwind" || abilityName =="Wind Vale"
-		|| abilityName == "Zephyr" || abilityName == "Whispering Wind" || abilityName == "Second Wind" || abilityName == "Tornado"
-		|| abilityName == "Tempest" || abilityName == "Hedge Guard" || abilityName =="Cover" || abilityName == "Rampart"
+	if (abilityName == "Burrow" || abilityName == "Earth Fang" || abilityName == "Water Fang" || abilityName == "Fire Fang" || abilityName == "Wind Fang" || abilityName == "Poison Fang" 
+		|| abilityName == "Puddle"|| abilityName == "Whirlpool"
+		|| abilityName == "Collapse" || abilityName == "Ignite" || abilityName == "Scorch" || abilityName == "Firefall" ||abilityName == "Fire Spikes"
+		|| abilityName == "Leaf on the Wind" || abilityName == "Tailwind" || abilityName =="Wind Vale"|| abilityName == "Zephyr" 
+		|| abilityName == "Whispering Wind" || abilityName == "Tornado"|| abilityName == "Tempest" 
+		|| abilityName == "Hedge Guard" || abilityName =="Cover" || abilityName == "Rampart"
 		|| abilityName == "Rock Spike" || abilityName == "Geo Crush" || abilityName == "Tremor" || abilityName == "Quake"
 		|| abilityName == "Pinch" )
 	{
@@ -403,26 +401,26 @@ void Ability::RenderAnimation()
 	}
 	//Adjusted Up and Left
 	else if ( abilityName == "Slow Claw" )
-		{
+	{
 		animate->Render( Abiltarget->GetPosition().x - 32, Abiltarget->GetPosition().y - 32 );
-		}
+	}
 	//At Left of Target
 	else if (abilityName == "left")
 	{
 		animate->Render(Abiltarget->GetPosition().x - 100, Abiltarget->GetPosition().y);
 	}
 	//Right of Target
-	else if ( abilityName == "Counter Claw" )
-		{
+	else if (abilityName == "Emblazon" || abilityName == "Counter Claw")
+	{
 		animate->Render( Abiltarget->GetPosition().x + 100, Abiltarget->GetPosition().y );
-		}
+	}
 	//Top of Enemy Side
 	else if (abilityName == "Acid Rain")
 	{
 		animate->Render(Abiltarget->GetPosition().x - 50.0f, 180.0f);
 	}
 	//Projectile Rendering from ally to enemy
-	else if (abilityName == "Dissolve" || abilityName == "Squirt" || abilityName == "Torrent")
+	else if (abilityName == "Dissolve" || abilityName == "Squirt" || abilityName == "Torrent" || abilityName == "Rib-a-Rang" || abilityName == "Incinerate")
 	{
 		//This Code Only Works for allies 
 		float xDistance = Abiltarget->GetPosition().x - Abilowner->GetPosition().x;
@@ -448,12 +446,11 @@ void Ability::RenderAnimation()
 		animate->Render(xpos, 200);
 	}
 	//Render on Top of all Enemies
-	else if (abilityName == "Splash")
+	else if (abilityName == "Splash"  || abilityName == "Second Wind")
 	{
 		animate->Render(Abiltarget->GetPosition().x, 130);
 		animate->Render(Abiltarget->GetPosition().x, 230);
 		animate->Render(Abiltarget->GetPosition().x, 300);
-
 	}
 	//AOE RENDERING NEEDS TO BE HARDCODDEDDDD
 	else if (abilityName == "AOE")
@@ -462,8 +459,8 @@ void Ability::RenderAnimation()
 	}
 	//Original Default
 	else
-		{
+	{
 		animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
 
-		}
+	}
 	}

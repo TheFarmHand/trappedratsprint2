@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>Jeeves.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Collapse</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="88" y="34" />
+      <DrawRect left="55" top="4" right="112" bottom="93" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.85">
+      <AnchorPoint x="34" y="106" />
+      <DrawRect left="1" top="100" right="64" bottom="154" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.55">
+      <AnchorPoint x="98" y="108" />
+      <DrawRect left="63" top="102" right="131" bottom="158" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>FireFall.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Firefall</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="31" y="31" />
+      <DrawRect left="0" top="0" right="64" bottom="44" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="95" y="31" />
+      <DrawRect left="64" top="0" right="128" bottom="45" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="159" y="31" />
+      <DrawRect left="128" top="0" right="192" bottom="53" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="223" y="31" />
+      <DrawRect left="192" top="2" right="253" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>IgniteSpriteSheet.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Ignite</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="35" y="46" />
+      <DrawRect left="2" top="2" right="75" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="141" y="45" />
+      <DrawRect left="95" top="2" right="191" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="257" y="43" />
+      <DrawRect left="209" top="0" right="311" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="370" y="44" />
+      <DrawRect left="323" top="0" right="424" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="479" y="43" />
+      <DrawRect left="437" top="2" right="512" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

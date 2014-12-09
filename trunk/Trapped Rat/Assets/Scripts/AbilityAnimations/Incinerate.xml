@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>IncinerateSpriteSheet.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Incinerate</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="35" y="32" />
+      <DrawRect left="4" top="7" right="72" bottom="54" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="99" y="31" />
+      <DrawRect left="71" top="9" right="129" bottom="55" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="183" y="31" />
+      <DrawRect left="135" top="8" right="210" bottom="49" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="235" y="33" />
+      <DrawRect left="204" top="0" right="256" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.75">
+      <AnchorPoint x="157" y="57" />
+      <DrawRect left="153" top="53" right="165" bottom="58" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
