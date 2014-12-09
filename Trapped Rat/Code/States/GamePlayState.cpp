@@ -464,8 +464,8 @@ void GamePlayState::Enter()
 	MinibossFight = false;
 	FinalBossFight = false;
 	SGD::InputManager::GetInstance()->Update();
-	state = Combat;
-	laststate = Combat;
+	state = Map;
+	laststate = Map;
 
 
 	//state = BattleSummary;
@@ -844,13 +844,13 @@ void GamePlayState::TownUpdate( float dt )
 
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
-		 /*TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
+		 if(TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
 			 == TileSystem::GetInstance()->GetTileIndex(
 			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x,
-			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )*/
+			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )
 
-		SGD::Point posi = GameData::GetInstance( )->GetOverworldPlayer()->GetPosition();
-		if ( TileSystem::GetInstance( )->TileEvent( posi.x, posi.y, GameData::GetInstance( )->GetOverworldPlayer( )->GetRect(), "Trap") )
+		/*SGD::Point posi = GameData::GetInstance( )->GetOverworldPlayer()->GetPosition();
+		if ( TileSystem::GetInstance( )->TileEvent( posi.x, posi.y, GameData::GetInstance( )->GetOverworldPlayer( )->GetRect(), "Trap") )*/
 		{
 			tripped_trap = t;
 
@@ -973,6 +973,7 @@ void GamePlayState::TownUpdate( float dt )
 				loot_gold = 0;
 				loot_xp = 0;
 				RemoveTrap( tripped_trap );
+				break;
 			}
 		}
 	}
@@ -1036,9 +1037,11 @@ void GamePlayState::RemoveTrap( int index )
 		for ( auto iter = traps.begin( ); iter != traps.end( ); iter++ )
 		{
 			if(traps[index] == (*iter) )
+			{
 			delete traps[index];
 			traps.erase(iter);
 			break;
+			}
 		}
 		
 	}
