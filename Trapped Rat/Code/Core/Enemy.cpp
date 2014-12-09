@@ -74,7 +74,7 @@ void Enemy::Update( float dt )
 		if ( stepforward == false && stepbackward == false )
 			{
 			stepforward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			}
 		if ( stepforward == true && stepbackward == false )
 			{
@@ -101,7 +101,7 @@ void Enemy::Update( float dt )
 				if ( stepbackward == false && stepforward == false && progress != 0.0f )
 					{
 					stepbackward = true;
-					stepTime = 1.0f;
+					stepTime = .50f;
 					progress = 0.0f;
 					}
 				progress = 0.0f;
@@ -176,7 +176,7 @@ void Enemy::Update( float dt )
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
 				{
 				stepbackward = true;
-				stepTime = 1.0f;
+				stepTime = .50f;
 				progress = 0.0f;
 				}
 			//Attack( this, TurnManager::GetInstance()->GetAllies()[living[pool]] );

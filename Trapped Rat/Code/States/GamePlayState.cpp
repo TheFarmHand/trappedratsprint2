@@ -143,7 +143,7 @@ void GamePlayState::Enter()
 	p1->SetPosition( characterOrderPosition );
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList["Rampart"] );
+	partyAbilities.push_back( MasterAbilityList["Burrow"] );
 	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
 	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
 	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
