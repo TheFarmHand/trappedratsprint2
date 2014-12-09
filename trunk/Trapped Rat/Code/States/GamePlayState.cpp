@@ -2360,7 +2360,7 @@ void GamePlayState::MapUpdate( float dt )
 		{
 			case 0: //Wind
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\TrapTest.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
 				break;
