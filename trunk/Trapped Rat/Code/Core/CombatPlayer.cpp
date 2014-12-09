@@ -1358,27 +1358,32 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 {
 	if ( abil == "Fire Fang" )
 	{
+	if ( !target->HasEffect( "Burn" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
 	else if ( abil == "Water Fang" )
 	{
+	if ( !target->HasEffect( "Drown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Drown" ) );
 	}
 
 	else if ( abil == "Earth Fang" )
 	{
+	if ( !target->HasEffect( "Muck" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
 	}
 
 	else if ( abil == "Wind Fang" )
 	{
+	if ( !target->HasEffect( "Wisp" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Wisp" ) );
 	}
 
 	else if ( abil == "Poison Fang" )
 	{
 		// add delerium once it works
+	if ( !target->HasEffect( "Confused" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Confused" ) );
 	}
 
@@ -1393,41 +1398,49 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 
 	else if ( abil == "Splash" )
 	{
+	if ( !target->HasEffect( "SpeedDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
 	else if ( abil == "Flood" )
 	{
+	if ( !target->HasEffect( "AvoisionDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AvoisionDown" ) );
 	}
 
 	else if ( abil == "Squirt" )
 	{
+	if ( !target->HasEffect( "Stun" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Stun" ) );
 	}
 
 	else if ( abil == "Torrent" )
 	{
+	if ( !target->HasEffect( "AttackDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
 	}
 
 	else if ( abil == "Puddle" )
 	{
+	if ( !target->HasEffect( "DefenseUp" ) )
 		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseUp" ) );
 	}
 
 	else if ( abil == "Disolve" )
 	{
+	if ( !target->HasEffect( "AttackUp" ) )
 		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 	}
 
 	else if ( abil == "Ignite" )
 	{
+	if ( !target->HasEffect( "Burn" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
 	else if ( abil == "Incinerate" )
 	{
+	if ( !target->HasEffect( "Burn" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
@@ -1437,6 +1450,7 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 		{
 			if ( TurnManager::GetInstance()->GetAllies()[ i ]->isAlive() )
 			{
+			if ( !target->HasEffect( "AttackUp" ) )
 				TurnManager::GetInstance()->GetAllies()[ i ]->AddStatus(
 					&StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 			}
@@ -1455,30 +1469,43 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 
 	else if ( abil == "Zephyr" )
 	{
+	if ( !target->HasEffect( "Regen" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Regen" ) );
 	}
 
 	else if ( abil == "Rock Spike" )
 	{
+	if ( !target->HasEffect( "MagicDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicDown" ) );
 	}
 
 	else if ( abil == "Geo Crush" )
 	{
+	if ( !target->HasEffect( "SpeedDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
 	else if ( abil == "Tremor" )
 	{
+	if ( !target->HasEffect( "DefenseDown" ) )
 		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseDown" ) );
 	}
 
 	else if ( abil == "Quake" )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
+		{
+		if ( !target->HasEffect( "AttackDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
+		}
 
 	else if ( abil == "Pinch" )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
+		{
+		if ( !target->HasEffect( "Muck" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
+		}
 
 	else if ( abil == "Rampart" )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
+		{
+		if ( !target->HasEffect( "MagicUp" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
+		}
 }
