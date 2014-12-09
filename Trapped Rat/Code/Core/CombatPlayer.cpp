@@ -933,6 +933,7 @@ void CombatPlayer::RunUpdate( float dt )
 			mySelection = none;
 			SetSelection( 0 );
 			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
+			GamePlayState::GetInstance()->PlaySoundEffect(0);
 		}
 
 		else
