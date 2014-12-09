@@ -130,6 +130,9 @@ void Ability::Update( float dt )
 	}
 void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, bool ternary )
 	{
+	//Hack Code, Fix Later
+	GamePlayState::GetInstance()->PlaySoundEffect(1);
+	//EndHack
 	int tempFirefall = 0;
 	Abilowner = owner;
 	Abiltarget = target;

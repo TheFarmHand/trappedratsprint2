@@ -57,7 +57,7 @@ void GamePlayState::Enter()
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/MenuBackground.png" );
 	Loading( "Loading Tiles..." );
 	SGD::MessageManager::GetInstance()->Initialize( &MessageProc );
-	TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
+	//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 	Loading( "Loading Images..." );
 	rattrap = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/RatTrap32.png" );
 	combathud = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/tempcombathud.png" );
@@ -452,6 +452,14 @@ void GamePlayState::Enter()
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume() );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume() );
 
+
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/doors.wav"));//0
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Pain.wav"));//1
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/woodhit.wav"));//2
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/footstep.wav"));//3
+
+
+
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
 	pStatManager = StatusEffectManager::GetInstance();
 	pStatManager->Initialize();
@@ -551,6 +559,12 @@ void GamePlayState::Update( float dt )
 void GamePlayState::Exit()
 {
 	Loading( "Dumping..." );
+	for (size_t i = 0; i < m_vsoundeffects.size(); i++)
+	{
+		SGD::AudioManager::GetInstance()->UnloadAudio(m_vsoundeffects[i]);
+	}
+	m_vsoundeffects.clear();
+
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
 	{
 		delete m_vhuditems[ i ];
@@ -861,6 +875,13 @@ void GamePlayState::TownUpdate( float dt )
 				trap_combat = true;
 
 				GameData::GetInstance()->SetIsInCombat( true );
+
+				if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+					SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
+
+				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+
+
 				state = GPStates::Combat;
 				std::vector<Enemy*> tempEnemy;
 				SGD::Point characterOrderPosition;
@@ -1008,6 +1029,12 @@ void GamePlayState::TownUpdate( float dt )
 
 			GameData::GetInstance()->SetIsInCombat( true );
 			state = GPStates::Combat;
+
+			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+				SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
+
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+
 			TurnManager::GetInstance()->Initialize( Party, moreguards );
 			for ( size_t i = 0; i < Party.size(); i++ )
 			{
@@ -2337,21 +2364,33 @@ void GamePlayState::MapUpdate( float dt )
 		if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Right ) || input->IsDPadPressed( 0, SGD::DPad::Right ) )
 		{
 			SelectedTown = 0;
+			GameData::GetInstance()->PlaySelectionChange();
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Up ) || input->IsDPadPressed( 0, SGD::DPad::Up ) )
 		{
-			if ( unlockedTowns >= 1 )
+			if (unlockedTowns >= 1)
+			{
 				SelectedTown = 1;
+				GameData::GetInstance()->PlaySelectionChange();
+			}
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Left ) || input->IsDPadPressed( 0, SGD::DPad::Left ) )
 		{
-			if ( unlockedTowns >= 2 )
+			if (unlockedTowns >= 2)
+			{
 				SelectedTown = 2;
+				GameData::GetInstance()->PlaySelectionChange();
+
+			}
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Down ) || input->IsDPadPressed( 0, SGD::DPad::Down ) )
 		{
-			if ( unlockedTowns >= 3 )
+			if (unlockedTowns >= 3)
+			{
 				SelectedTown = 3;
+				GameData::GetInstance()->PlaySelectionChange();
+
+			}
 		}
 	}
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || input->IsButtonPressed( 0, 1 ) )
@@ -2394,6 +2433,8 @@ void GamePlayState::MapUpdate( float dt )
 		}
 		laststate = Town;
 		state = Dia;
+		GameData::GetInstance()->PlaySelectionChange();
+
 	}
 }
 
@@ -2460,9 +2501,16 @@ void GamePlayState::SummaryUpdate( float dt )
 	//	loot_xp = 100;
 	//	loot_gold = 5;
 	//}
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
+	}
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || SGD::InputManager::GetInstance()->IsButtonPressed( 0, 1 ) )
 	{
+		GameData::GetInstance()->PlaySelectionChange();
 		RemoveTrap( tripped_trap );
 		state = Town;
 		loot.clear();
@@ -2991,5 +3039,12 @@ void GamePlayState::BossAnimation()
 			SGD::GraphicsManager::GetInstance()->DrawRectangle( { 0, 0, 800, 600 }, { 0, 0, 0 } );
 
 		SGD::GraphicsManager::GetInstance()->Update();
+	}
+}
+void GamePlayState::PlaySoundEffect(int _index)
+{
+	if (_index < (int)m_vsoundeffects.size())
+	{
+		SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[_index]);
 	}
 }
