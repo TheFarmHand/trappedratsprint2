@@ -842,6 +842,12 @@ void GamePlayState::TownUpdate( float dt )
 		state = GPStates::Menu;
 	}
 
+
+
+
+
+
+
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
 		if ( TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
@@ -853,7 +859,7 @@ void GamePlayState::TownUpdate( float dt )
 
 			// Just Trigger Combat on a %
 			int x = rand() % 1000;
-			if ( x < 900 )
+			if ( x < 325 )
 			{
 				trap_combat = true;
 
@@ -966,9 +972,8 @@ void GamePlayState::TownUpdate( float dt )
 						AddItem( stupidcode );
 					}
 				}
+				RemoveTrap( tripped_trap );
 			}
-			RemoveTrap( tripped_trap );
-			// Riley Code for popup inserts here
 		}
 	}
 
@@ -1433,6 +1438,11 @@ void GamePlayState::TownRender()
 		guards[ i ]->Render();
 		SGD::Point xy = guards[ i ]->GetPosition();
 		int x = 0;
+	}
+
+	for ( unsigned int i = 0; i < traps.size(); i++)
+	{
+		traps[i]->Render();
 	}
 }
 void GamePlayState::MenuRender()
@@ -2450,7 +2460,7 @@ void GamePlayState::SummaryUpdate( float dt )
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || SGD::InputManager::GetInstance()->IsButtonPressed( 0, 1 ) )
 	{
-
+		RemoveTrap( tripped_trap );
 		state = Town;
 		loot.clear();
 		loot_xp = 0;

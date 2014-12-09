@@ -9,10 +9,12 @@ class RatTrap :
 	public BaseObject
 {
 public:
-	RatTrap( ) = default;
+	RatTrap( );
 	~RatTrap( ) = default;
 
 	int items[3];
 	int gold = 0;
+
+	void Render();
 
 };
