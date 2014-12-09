@@ -101,6 +101,7 @@ public:
 	bool trap_combat = false;
 	HUDItem* ternary_bar;
 	void RemoveTrap(int);
+	std::vector<SGD::HAudio> m_vsoundeffects;
 private:
 
 	//party & ability selection
@@ -116,6 +117,8 @@ private:
 	bool is_tutorial = false;
 	std::vector<Enemy*> tutorialenemy;
 	std::vector<CombatPlayer*> Parents;
+
+
 
 public:
 	bool run_succeed = false;
@@ -213,5 +216,7 @@ public:
 
 
 	void CreateMinibossFight();
+
+	void PlaySoundEffect(int _index);
 };
 

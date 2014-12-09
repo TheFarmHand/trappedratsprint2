@@ -157,6 +157,8 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 		Numbers* temp = new Numbers( dmg, SGD::Color( 180, 0, 0 ), this, tempoffset );
 		damagenumbers.push_back( temp );
 		}
+
+	GamePlayState::GetInstance()->PlaySoundEffect(1);
 }
 
 bool Character::HasEffect( std::string effect )

@@ -6,7 +6,7 @@
 #include "GameData.h"
 #include "..\Tile\TileSystem.h"
 #include "../SGD Wrappers/SGD_Event.h"
-
+#include "../SGD Wrappers/SGD_AudioManager.h"
 
 Player::Player() : Listener(this)
 {
@@ -142,8 +142,16 @@ void Player::Update(float dt)
 	//update the animation
 	ansys->Update(dt);
 	//if Not Moving, Pause
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(GamePlayState::GetInstance()->m_vsoundeffects[3]))
+	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[3]);
+	}
 	if (!IsMoving())
 	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(GamePlayState::GetInstance()->m_vsoundeffects[3]))
+		{
+			SGD::AudioManager::GetInstance()->StopAudio(GamePlayState::GetInstance()->m_vsoundeffects[3]);
+		}
 		prevdir = 'a';
 		ansys->Pause(true);
 	}
@@ -170,162 +178,216 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if ( pEvent->GetEventID() == "House1" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if ( pEvent->GetEventID() == "World2" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + ( size.width / 2 );
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if ( pEvent->GetEventID() == "House2" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if ( pEvent->GetEventID() == "World3" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + ( size.width / 2 );
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if ( pEvent->GetEventID() == "House3" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 		}
 	else if (pEvent->GetEventID() == "World4")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "House4")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "World5")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "House5")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "fireworld1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "firehouse1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "fireworld2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "firehouse2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "fireworld3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "firehouse3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "firekeepworld")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "firekeep")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "heroworld1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herohouse1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "heroworld2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herohouse2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "heroworld3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
 		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herohouse3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herokeepworld")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2) -(int)TileSystem::GetInstance()->GetTileSize().width;
 		position.y = dest->y + size.height / 2;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herokeep")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
 		position.y = dest->y + size.height / 2;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "herokeep")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
 		position.y = dest->y + size.height / 2;
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "GainJeeves")
 	{
@@ -357,6 +419,8 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(jeeves);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainJeeves");
+		GamePlayState::GetInstance()->PlaySoundEffect(2);
+
 	}
 	else if (pEvent->GetEventID() == "GainSlippy")
 	{
@@ -388,6 +452,8 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(slippy);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainSlippy");
+		GamePlayState::GetInstance()->PlaySoundEffect(2);
+
 	}
 	else if (pEvent->GetEventID() == "GainCheckers")
 	{
@@ -418,6 +484,8 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(checkers);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainCheckers");
+		GamePlayState::GetInstance()->PlaySoundEffect(2);
+
 	}
 	else if (pEvent->GetEventID() == "GainBiggs")
 	{
@@ -448,17 +516,21 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(biggs);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainBiggs");
+		GamePlayState::GetInstance()->PlaySoundEffect(2);
+
 	}
 	else if (pEvent->GetEventID() == "CecilFight")
 	{
 		GamePlayState::GetInstance()->CreateFinalFight();
 		UnregisterFromEvent("CecilFight");
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
 	}
 	else if (pEvent->GetEventID() == "Miniboss")
 	{ 
 		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
-		
+		GamePlayState::GetInstance()->PlaySoundEffect(0);
 	}
 
 	else if (pEvent->GetEventID() == "Trap")
