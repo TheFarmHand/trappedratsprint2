@@ -842,18 +842,15 @@ void GamePlayState::TownUpdate( float dt )
 		state = GPStates::Menu;
 	}
 
-
-
-
-
-
-
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
-		if ( TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
+		 /*TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
 			 == TileSystem::GetInstance()->GetTileIndex(
 			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x,
-			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )
+			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )*/
+
+		SGD::Point posi = GameData::GetInstance( )->GetOverworldPlayer()->GetPosition();
+		if ( TileSystem::GetInstance( )->TileEvent( posi.x, posi.y, GameData::GetInstance( )->GetOverworldPlayer( )->GetRect(), "Trap") )
 		{
 			tripped_trap = t;
 
@@ -972,6 +969,9 @@ void GamePlayState::TownUpdate( float dt )
 						AddItem( stupidcode );
 					}
 				}
+				loot.clear();
+				loot_gold = 0;
+				loot_xp = 0;
 				RemoveTrap( tripped_trap );
 			}
 		}
