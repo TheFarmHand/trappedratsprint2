@@ -98,7 +98,7 @@ void CombatPlayer::Update( float dt )
 		if ( stepforward == false && stepbackward == false && stepTime != 0.0f )
 		{
 			stepforward = true;
-			stepTime = 1.0f;
+			stepTime = 0.50f;
 		}
 		if ( stepforward == true && stepbackward == false )
 		{
@@ -600,7 +600,7 @@ void CombatPlayer::AttackUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -644,7 +644,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		mySelection = none;
@@ -702,7 +702,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		mySelection = none;
@@ -920,7 +920,7 @@ void CombatPlayer::RunUpdate( float dt )
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
 			{
 				stepbackward = true;
-				stepTime = 1.0f;
+				stepTime = .50f;
 				progress = 0.0f;
 			}
 
@@ -941,7 +941,7 @@ void CombatPlayer::RunUpdate( float dt )
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
 			{
 				stepbackward = true;
-				stepTime = 1.0f;
+				stepTime = .50f;
 				progress = 0.0f;
 			}
 			myTarget = 0;
@@ -1051,7 +1051,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -1156,7 +1156,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
@@ -1302,7 +1302,7 @@ void CombatPlayer::TernaryBlast( float dt )
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
 			stepbackward = true;
-			stepTime = 1.0f;
+			stepTime = .50f;
 			progress = 0.0f;
 		}
 		TurnManager::GetInstance()->setProgressFullReached( false );
