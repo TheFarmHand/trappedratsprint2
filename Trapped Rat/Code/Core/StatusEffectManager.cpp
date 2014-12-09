@@ -34,13 +34,12 @@ void StatusEffectManager::Terminate()
 void StatusEffectManager::LoadStatusEffect( std::string filename )
 {
 	std::fstream infile;
-	std::string path = "../Trapped Rat/Assets/Textures";
+	std::string path = "../Trapped Rat/Assets/Textures/StatusEffects/";
 	infile.open( filename, std::ios_base::in );
 	StatusEffect *temp;
 	char a = ' ';
 	std::string name;
 	std::string image;
-	bp = SGD::GraphicsManager::GetInstance( )->LoadTexture( "../Trapped Rat/Assets/Textures/TestParticleBlue.png" );
 	while ( !infile.eof() )
 	{
 		
@@ -80,7 +79,10 @@ void StatusEffectManager::LoadStatusEffect( std::string filename )
 			image += a;
 			infile.get(a);
 		}
-
+		path = "../Trapped Rat/Assets/Textures/StatusEffects/";
+		path += image;
+		bp = SGD::GraphicsManager::GetInstance()->LoadTexture( path.c_str() );
+		
 		temp->SetIcon( bp );	// Load image here later
 		StatusList[ name.c_str() ] = temp;
 	}

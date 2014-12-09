@@ -4,7 +4,7 @@ TestParticleBlue.png
 
 Poison
 0 3 10 0
-TestParticleBlue.png
+Poison.png
 
 Counter
 0 1 0 2
@@ -12,7 +12,7 @@ TestParticleBlue.png
 
 Dodging
 0 1 0 2
-TestParticleBlue.png
+Dodge.png
 
 Drown
 4 3 10 0
@@ -32,7 +32,7 @@ TestParticleBlue.png
 
 SpeedDown
 0 3 0 1
-TestParticleBlue.png
+SpeedDown.png
 
 SpeedUp
 0 3 0 1
