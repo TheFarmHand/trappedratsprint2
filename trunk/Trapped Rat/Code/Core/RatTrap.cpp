@@ -10,6 +10,9 @@ RatTrap::RatTrap()
 void RatTrap::Render()
 {
 	SGD::GraphicsManager* pGraphics = SGD::GraphicsManager::GetInstance();
-	pGraphics->DrawTexture(image, position);
+	SGD::Point pos = position;
+	//pos.x -= 16;
+	pos.y -= 32;
+	pGraphics->DrawTexture(image, pos);
 
 }
