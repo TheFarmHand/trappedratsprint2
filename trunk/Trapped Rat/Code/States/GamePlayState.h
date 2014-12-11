@@ -17,6 +17,7 @@
 #include "../Core/Guard.h"
 #include "../SGD Wrappers/SGD_Listener.h"
 #include "../Core/RatTrap.h"
+#include "LoadGameState.h"
 
 #define MAXTG 250
 #define MAXITEM 5
@@ -24,7 +25,7 @@
 
 class Player;
 enum GPStates { Map, Town, Combat, Menu,Dia,Cuts, BattleSummary };
-enum MenuSubStates{ None, Options, HowTo, Party, Shop };
+enum MenuSubStates{ None, Options, HowTo, Party, Shop,Save };
 enum ItemType { SmallHP, LargeHP, SmallBP, LargeBP, Revive, MaxRevive } ;
 
 class HUDItem;
@@ -91,6 +92,12 @@ class GamePlayState :
 	std::vector<RatTrap*> traps;
 
 	int guard_index = -1;
+
+	//save stuff
+	int saveindex;
+	time_t playtime = 0;
+	data files[3];
+	
 public:
 	int gold = 50;
 	int loot_gold = 0;			// Updates whenever gold is added to your stack; (at end of combat primarily); use this for End of Combat window
@@ -213,10 +220,11 @@ public:
 	int GetTownSelected() { return SelectedTown; }
 	void CreateFinalFight();
 	void HoldOntoAbility( Ability* used );
-
-
+	void LoadGame(int index);//takes in relative path
+	void SaveGame();
 	void CreateMinibossFight();
-
+	void TutorialStart();
 	void PlaySoundEffect(int _index);
+	void SetTutorial(bool is){ is_tutorial = is; }
 };
 

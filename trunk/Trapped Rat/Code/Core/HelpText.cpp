@@ -134,6 +134,13 @@ void HelpText::ManualDisplay()
 				GameData::GetInstance()->GetFont()->DrawString(m_overridestring, 115, 15, { 0, 0, 100 }, 1.45f);
 			}
 			}
+		
+	}
+	else
+	{
+		GameData::GetInstance()->GetFont()->DrawString(m_overridestring, 116, 16, { 0, 0, 0 }, 1.45f);
+		GameData::GetInstance()->GetFont()->DrawString(m_overridestring, 115, 15, { 0, 0, 100 }, 1.45f);
+	
 	}
 
 

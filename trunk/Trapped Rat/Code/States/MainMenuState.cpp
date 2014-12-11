@@ -14,6 +14,7 @@
 #include "../Font/FontTestState.h"
 #include "OptionsState.h"
 #include "CreditsState.h"
+#include "LoadGameState.h"
 
 
 MainMenuState * MainMenuState::GetInstance()
@@ -59,6 +60,7 @@ void MainMenuState::Update(float dt)
 		case 0:
 		{
 				  GameData::GetInstance()->PlaySelectionChange();
+				  GamePlayState::GetInstance()->SetTutorial(true);
 				  GameData::GetInstance()->SwapState(GamePlayState::GetInstance());
 				  break;
 		}
@@ -66,20 +68,28 @@ void MainMenuState::Update(float dt)
 		case 1:
 		{
 				  GameData::GetInstance()->PlaySelectionChange();
-				  GameData::GetInstance()->SwapState(OptionsState::GetInstance());
+				  GameData::GetInstance()->SwapState(LoadGameState::GetInstance());
 				  break;
 		}
 		case 2:
 		{
 				  GameData::GetInstance()->PlaySelectionChange();
-				  GameData::GetInstance()->SwapState(CreditsState::GetInstance());
+				  GameData::GetInstance()->SwapState(OptionsState::GetInstance());
 				  break;
+				 
 		}
 		case 3:
 		{
 				  GameData::GetInstance()->PlaySelectionChange();
+				  GameData::GetInstance()->SwapState(CreditsState::GetInstance());
+				  break;
+		}
+		case 4:
+		{
+				  GameData::GetInstance()->PlaySelectionChange();
 				  GameData::GetInstance()->SetRunning(false);
 				  break;
+				  
 		}
 		}
 	}
@@ -88,13 +98,13 @@ void MainMenuState::Update(float dt)
 	{
 		index--;
 		if (index < 0)
-			index = 3;
+			index = 4;
 		GameData::GetInstance()->PlaySelectionChange();
 	}
 	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down))
 	{
 		index++;
-		if (index > 3)
+		if (index > 4)
 			index = 0;
 		GameData::GetInstance()->PlaySelectionChange();
 	}
@@ -111,16 +121,18 @@ void const MainMenuState::Render()
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+	SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
 
 
 	//display the cursor
 	//graphics->DrawString("*", { 45.0f, 100.0f + (index * 100) });
 	graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (index * 80) }, { 0, 0, 238, 73 });
 
-	GameData::GetInstance()->GetFont()->DrawString("Play", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
-	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
-	GameData::GetInstance()->GetFont()->DrawString("Credits", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
-	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("New Game", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Load Game", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Credits", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 420.0f, { 0, 0, 0 }, 2.0f);
 }
 void MainMenuState::Exit()
 {

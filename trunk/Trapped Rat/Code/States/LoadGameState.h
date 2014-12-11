@@ -1,5 +1,13 @@
 #pragma once
 #include "GameState.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include <vector>
+struct data
+{
+	int playtime = 0;
+	int town = 0;
+
+};
 class LoadGameState :
 	public GameState
 {
@@ -8,8 +16,15 @@ class LoadGameState :
 	LoadGameState(LoadGameState& rhs) = delete;
 	LoadGameState& operator=(LoadGameState& rhs) = delete;
 
+	data files[3];
 
 	int index = 0;
+	int maxindex = 0;
+	bool is_saving = false;
+	SGD::HTexture background = SGD::INVALID_HANDLE;
+	SGD::HTexture button = SGD::INVALID_HANDLE;
+	SGD::HTexture cursor = SGD::INVALID_HANDLE;
+	SGD::HTexture scroll = SGD::INVALID_HANDLE;
 public:
 	static LoadGameState* GetInstance();
 	void virtual Enter();

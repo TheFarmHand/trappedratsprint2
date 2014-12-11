@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>failure</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>You have trigger the trap_
+and attracted some enemies!</Words>
+  </Message>
+</Dialogue>

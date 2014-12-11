@@ -7,7 +7,7 @@
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>500</Base>
+      <Base>1</Base>
       <Scale>0</Scale>
     </HitPoints>
     <BattlePoints>
