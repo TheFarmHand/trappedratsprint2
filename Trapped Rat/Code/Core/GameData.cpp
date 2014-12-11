@@ -18,6 +18,9 @@
 #include <sstream>
 #include "../SGD Wrappers/SGD_EventManager.h"
 
+/*********  Grant's Evil Test State *********/
+//#include "../States/AiTestState.h"
+
 
 bool GameData::Initialize()
 {
@@ -56,7 +59,6 @@ bool GameData::Initialize()
 	CurrentState->Enter();
 
 	CameraPos = SGD::Point(0.0, 0.0);
-
 
 	//set up the bitmap font
 	font = new Font();

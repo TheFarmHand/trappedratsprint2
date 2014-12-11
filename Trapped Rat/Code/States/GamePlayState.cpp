@@ -35,7 +35,7 @@ GamePlayState* GamePlayState::GetInstance()
 }
 void GamePlayState::Enter()
 {
-	playtime = time(0);
+	playtime = time( 0 );
 	GameData::GetInstance()->ResetPlayer();
 	dialogue = new Dialogue();
 	run_succeed = false;
@@ -54,10 +54,10 @@ void GamePlayState::Enter()
 	WorldMapAnsys->Play( 0 );
 	WorldMap = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/world.png" );
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/padlock.png" );
-	
+
 	abilityunlocked = true;
-	
-	
+
+
 	//testFinalFight = true;
 	scroll = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/Scroll.png" );
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/MenuBackground.png" );
@@ -149,14 +149,14 @@ void GamePlayState::Enter()
 	p1->SetPosition( characterOrderPosition );
 	p1->SetSize( { 64, 64 } );
 	std::vector<Ability*> partyAbilities;
-	partyAbilities.push_back( MasterAbilityList["Burrow"] );
-	partyAbilities.push_back( MasterAbilityList["Water Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Slow Claw"] );
-	partyAbilities.push_back( MasterAbilityList["Earth Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Poison Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Fire Fang"] );
-	partyAbilities.push_back( MasterAbilityList["Counter Claw"] );
-	partyAbilities.push_back( MasterAbilityList["Wind Fang"] );
+	partyAbilities.push_back( MasterAbilityList[ "Burrow" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Water Fang" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Slow Claw" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Earth Fang" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Poison Fang" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Fire Fang" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Counter Claw" ] );
+	partyAbilities.push_back( MasterAbilityList[ "Wind Fang" ] );
 	p1->SetActive( true );
 	p1->InitializeAbilities( partyAbilities );
 	Party.push_back( p1 );
@@ -362,7 +362,7 @@ void GamePlayState::Enter()
 	//	laststate = Combat;
 
 	//	}
-	
+
 
 	//Sets the abilities to unlocked if level is high enough (new game will only unlock the first ability)
 	CheckAbilityUnlocked();
@@ -640,8 +640,8 @@ void GamePlayState::Fight()
 			RandomAnimation();
 			//if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
 			//	SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
-			
-			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+
+			if ( !SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
 			{
 				StopAllBackgroundMusic();
 				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
@@ -813,22 +813,22 @@ void GamePlayState::TownUpdate( float dt )
 
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
-		 if(TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
+		if ( TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
 			 == TileSystem::GetInstance()->GetTileIndex(
 			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x,
 			 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )
 
-		/*SGD::Point posi = GameData::GetInstance( )->GetOverworldPlayer()->GetPosition();
-		if ( TileSystem::GetInstance( )->TileEvent( posi.x, posi.y, GameData::GetInstance( )->GetOverworldPlayer( )->GetRect(), "Trap") )*/
+			 /*SGD::Point posi = GameData::GetInstance( )->GetOverworldPlayer()->GetPosition();
+			 if ( TileSystem::GetInstance( )->TileEvent( posi.x, posi.y, GameData::GetInstance( )->GetOverworldPlayer( )->GetRect(), "Trap") )*/
 		{
 			tripped_trap = t;
-			
+
 
 			// Just Trigger Combat on a %
 			int x = rand() % 1000;
 			if ( x < 325 )
 			{
-				
+
 				trap_combat = true;
 
 				GameData::GetInstance()->SetIsInCombat( true );
@@ -841,6 +841,7 @@ void GamePlayState::TownUpdate( float dt )
 					StopAllBackgroundMusic();
 					SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
 				}
+
 
 				state = GPStates::Combat;
 				std::vector<Enemy*> tempEnemy;
@@ -926,7 +927,7 @@ void GamePlayState::TownUpdate( float dt )
 						m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[ i ]->GetOrderPosition()*50.0f ) ), Party[ i ], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
 					}
 				}
-				dialogue->Load("Assets/Scripts/trapfailure.xml");
+				dialogue->Load( "Assets/Scripts/trapfailure.xml" );
 				state = Dia;
 				laststate = GPStates::Combat;
 
@@ -941,7 +942,7 @@ void GamePlayState::TownUpdate( float dt )
 			else
 				// no Combat
 			{
-				dialogue->Load("Assets/Scripts/trapsuccess.xml");
+				dialogue->Load( "Assets/Scripts/trapsuccess.xml" );
 				state = Dia;
 				laststate = GPStates::Town;
 				// Get loots bro
@@ -1029,22 +1030,22 @@ void GamePlayState::TownUpdate( float dt )
 void GamePlayState::RemoveTrap( int index )
 {
 	// Safety first kids
-	if(index == -1) return;
-	if(index < (int)traps.size()) 
+	if ( index == -1 ) return;
+	if ( index < (int)traps.size() )
 	{
-		for ( auto iter = traps.begin( ); iter != traps.end( ); iter++ )
+		for ( auto iter = traps.begin(); iter != traps.end(); iter++ )
 		{
-			if(traps[index] == (*iter) )
+			if ( traps[ index ] == ( *iter ) )
 			{
-			delete traps[index];
-			traps.erase(iter);
-			break;
+				delete traps[ index ];
+				traps.erase( iter );
+				break;
 			}
 		}
-		
+
 	}
-		tripped_trap = -1;
-		trap_combat = false;
+	tripped_trap = -1;
+	trap_combat = false;
 }
 
 void GamePlayState::MenuUpdate( float dt )
@@ -1116,14 +1117,14 @@ void GamePlayState::MenuUpdate( float dt )
 			break;
 		case Save:
 			maxindex = 2;
-			if (maxindex < 0)
+			if ( maxindex < 0 )
 				maxindex = 0;
-			if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
+			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
 				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				menuindex = 0;
 				substate = MenuSubStates::None;
-				
+
 
 			}
 			break;
@@ -1152,22 +1153,22 @@ void GamePlayState::MenuUpdate( float dt )
 									   break;
 							 }
 							 case 1:
-									   if ( laststate == Combat )
-									   {
-									 GameData::GetInstance()->PlaySelectionChange();
-										   menuindex = 0;
-									 substate = MenuSubStates::Options;
-									   }
-									   else
+								 if ( laststate == Combat )
 								 {
-										   substate = MenuSubStates::Shop;
+									 GameData::GetInstance()->PlaySelectionChange();
+									 menuindex = 0;
+									 substate = MenuSubStates::Options;
+								 }
+								 else
+								 {
+									 substate = MenuSubStates::Shop;
 								 }
 
-									   break;
+								 break;
 							 case 2:
 								 if ( laststate == Combat )
 								 {
-									 GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+									 GameData::GetInstance()->SwapState( MainMenuState::GetInstance() );
 									 state = GPStates::Town;
 									 laststate = state;
 									 substate = MenuSubStates::None;
@@ -1185,40 +1186,40 @@ void GamePlayState::MenuUpdate( float dt )
 								 }
 								 break;
 							 case 3:
-								 {
-									   TCHAR path[MAX_PATH];
-									   if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path)))
+							 {
+									   TCHAR path[ MAX_PATH ];
+									   if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
 									   {
-										   PathAppend(path, TEXT("basicinfo.txt"));
-								 }
+										   PathAppend( path, TEXT( "basicinfo.txt" ) );
+									   }
 									   std::ifstream fin;
-									   fin.open(path);
-									   if (fin.is_open())
-								 {
-										   for (int i = 0; i < 3;i++)
+									   fin.open( path );
+									   if ( fin.is_open() )
+									   {
+										   for ( int i = 0; i < 3; i++ )
 										   {
 											   data temp;
 											   fin >> temp.playtime >> temp.town;
-											   files[i] = temp;
-											   fin.ignore(INT_MAX, '\n');
+											   files[ i ] = temp;
+											   fin.ignore( INT_MAX, '\n' );
 										   }
-										   
+
 									   }
 									   //SaveGame();
-									 menuindex = 0;
+									   menuindex = 0;
 									   substate = Save;
 									   //we should display something if the save is successful
 									   //we should have them select which file to save to
 									   break;
-								 }
+							 }
 							 case 4:
 								 GameData::GetInstance()->PlaySelectionChange();
 								 menuindex = 0;
 								 substate = MenuSubStates::Options;
-								 
+
 								 break;
 							 case 5:
-								 GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+								 GameData::GetInstance()->SwapState( MainMenuState::GetInstance() );
 								 state = GPStates::Town;
 								 laststate = state;
 								 substate = MenuSubStates::None;
@@ -1360,13 +1361,13 @@ void GamePlayState::MenuUpdate( float dt )
 
 				}
 				break;
-				case Save:
-					GameData::GetInstance()->PlaySelectionChange();
-					saveindex = menuindex;
-					menuindex = 3;
-					substate = None;
-					SaveGame();
-					break;
+			case Save:
+				GameData::GetInstance()->PlaySelectionChange();
+				saveindex = menuindex;
+				menuindex = 3;
+				substate = None;
+				SaveGame();
+				break;
 			default:
 				break;
 		}
@@ -1481,9 +1482,9 @@ void GamePlayState::TownRender()
 		int x = 0;
 	}
 
-	for ( unsigned int i = 0; i < traps.size(); i++)
+	for ( unsigned int i = 0; i < traps.size(); i++ )
 	{
-		traps[i]->Render();
+		traps[ i ]->Render();
 	}
 }
 void GamePlayState::MenuRender()
@@ -1503,7 +1504,7 @@ void GamePlayState::MenuRender()
 			{
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 335.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 415.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
-				SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 495.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 495.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
 			}
 			graphics->DrawTextureSection( cursor, { 10.0f, 95.0f + ( menuindex * 80 ) }, { 0, 0, 238, 73 } );
 			if ( laststate == Combat )
@@ -1516,13 +1517,13 @@ void GamePlayState::MenuRender()
 			}
 			else
 			{
-				GameData::GetInstance()->GetFont()->DrawString("Resume", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString( "Resume", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f );
 				GameData::GetInstance()->GetFont()->DrawString( "Shop", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f );
 				GameData::GetInstance()->GetFont()->DrawString( "Party", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f );
-				GameData::GetInstance()->GetFont()->DrawString( "Save Game", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
+				GameData::GetInstance()->GetFont()->DrawString( "Save Game", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f );
 				GameData::GetInstance()->GetFont()->DrawString( "Options", 100.0f, 440.0f, { 0, 0, 0 }, 2.0f );
 				GameData::GetInstance()->GetFont()->DrawString( "Main Menu", 100.0f, 520.0f, { 0, 0, 0 }, 2.0f );
-				
+
 			}
 
 
@@ -1692,42 +1693,42 @@ void GamePlayState::MenuRender()
 		case Save:
 		{
 					 Font * font = GameData::GetInstance()->GetFont();
-					
-
-					 graphics->DrawTextureSection(background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f });
-					 SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
-					 if (maxindex >= 1)
-					 SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
-					 if (maxindex == 2)
-					 SGD::GraphicsManager::GetInstance()->DrawTextureSection(button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f });
-
-					 graphics->DrawTextureSection(cursor, { 10.0f, 95.0f + (menuindex * 80) }, { 0, 0, 238, 73 });
-					 GameData::GetInstance()->GetFont()->DrawString("File 1", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f);
-					 if (maxindex >=1)
-					 GameData::GetInstance()->GetFont()->DrawString("File 2", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
-					 if (maxindex ==2)
-					 GameData::GetInstance()->GetFont()->DrawString("File 3", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
 
 
-					 SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
+					 graphics->DrawTextureSection( background, { 0.0, 0.0 }, { 0.0f, 0.0f, 800.0f, 600.0f } );
+					 SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 95.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
+					 if ( maxindex >= 1 )
+						 SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 175.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
+					 if ( maxindex == 2 )
+						 SGD::GraphicsManager::GetInstance()->DrawTextureSection( button, { 45.0f, 255.0f }, { 15.0f, 5.0f, 240.0f, 70.0f } );
+
+					 graphics->DrawTextureSection( cursor, { 10.0f, 95.0f + ( menuindex * 80 ) }, { 0, 0, 238, 73 } );
+					 GameData::GetInstance()->GetFont()->DrawString( "File 1", 100.0f, 120.0f, { 0, 0, 0 }, 2.0f );
+					 if ( maxindex >= 1 )
+						 GameData::GetInstance()->GetFont()->DrawString( "File 2", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f );
+					 if ( maxindex == 2 )
+						 GameData::GetInstance()->GetFont()->DrawString( "File 3", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f );
+
+
+					 SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 } );
 					 //have a file that has quick info to load in
 					 //here we display a scroll to show how well the game is going
 					 //we want
 					 //time of last save
 					 //who was in the main party
 					 //the town they are currently in
-					 if (files[menuindex].playtime != 0)
+					 if ( files[ menuindex ].playtime != 0 )
 					 {
 						 std::ostringstream playtime;
-						 playtime << "Playtime: " << files[menuindex].playtime;
-						 GameData::GetInstance()->GetFont()->DrawString(playtime.str(), 475.0f, 225.0f, { 0, 0, 0 });
+						 playtime << "Playtime: " << files[ menuindex ].playtime;
+						 GameData::GetInstance()->GetFont()->DrawString( playtime.str(), 475.0f, 225.0f, { 0, 0, 0 } );
 						 std::ostringstream town;
-						 town << "Town: " << files[menuindex].town;
-						 GameData::GetInstance()->GetFont()->DrawString(town.str(), 475.0f, 275.0f, { 0, 0, 0 });
+						 town << "Town: " << files[ menuindex ].town;
+						 GameData::GetInstance()->GetFont()->DrawString( town.str(), 475.0f, 275.0f, { 0, 0, 0 } );
 					 }
 					 else
 					 {
-						 GameData::GetInstance()->GetFont()->DrawString("EMPTY", 475.0f, 175.0f, { 0, 0, 0 });
+						 GameData::GetInstance()->GetFont()->DrawString( "EMPTY", 475.0f, 175.0f, { 0, 0, 0 } );
 					 }
 					 break;
 		}
@@ -1761,50 +1762,46 @@ void GamePlayState::CombatUpdate( float dt )
 		run_succeed = false;
 	}
 
-	/*if ( input->IsKeyPressed( SGD::Key::Eight ) )
-		{
-		Party[0]->SetBP( Party[0]->GetMaxBP() );
-		}
-		if ( input->IsKeyPressed( SGD::Key::One ) )
-		{
-		Party[0]->SetHP( Party[0]->GetMaxHP() );
-		}
-		if ( input->IsKeyPressed( SGD::Key::Z ) )
-		{
-		Party[0]->SetProgress( 100.0f );
-		}
-		if ( input->IsKeyPressed( SGD::Key::X ) )
-		{
-		Party[1]->SetProgress( 100.0f );
-		}
-		if ( input->IsKeyPressed( SGD::Key::C ) )
-		{
-		Party[2]->SetProgress( 100.0f );
-		}
-		if ( input->IsKeyPressed( SGD::Key::L ) )
-		{
-		Party[0]->AddStatus( &pStatManager->GetStatus( "Regen" ) );
-		}*/
-
-	/*if(input->IsKeyPressed(SGD::Key::Nine))
+	if ( input->IsKeyPressed( SGD::Key::Eight ) )
 	{
-	ternary_gauge = MAXTG;
-	}*/
+		Party[ 0 ]->SetBP( Party[ 0 ]->GetMaxBP() );
+	}
+	if ( input->IsKeyPressed( SGD::Key::One ) )
+	{
+		Party[ 0 ]->SetHP( Party[ 0 ]->GetMaxHP() );
+	}
+	if ( input->IsKeyPressed( SGD::Key::Z ) )
+	{
+		Party[ 0 ]->SetProgress( 100.0f );
+	}
+	if ( input->IsKeyPressed( SGD::Key::X ) )
+	{
+		Party[ 1 ]->SetProgress( 100.0f );
+	}
+	if ( input->IsKeyPressed( SGD::Key::C ) )
+	{
+		Party[ 2 ]->SetProgress( 100.0f );
+	}
+
+	if ( input->IsKeyPressed( SGD::Key::Nine ) )
+	{
+		ternary_gauge = MAXTG;
+	}
 
 	if ( state == GPStates::Town )
 	{
 	//	if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
 		//	SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
-		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+		if ( !SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
 		{
 			StopAllBackgroundMusic();
 			SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
-		}
+	}
 	}
 
-	for (size_t i = 0; i < m_vhuditems.size(); i++)
+	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
 	{
-		m_vhuditems[i]->Update(dt);
+		m_vhuditems[ i ]->Update( dt );
 	}
 	TurnManager::GetInstance()->Update( dt );
 
@@ -1831,6 +1828,22 @@ void GamePlayState::CombatRender()
 
 	// Let's put the ternary bar here
 	ternary_bar->Render();
+	if ( ternary )
+	{
+		// Scroll Backdrop
+		graphics->DrawTexture( scroll, { 320, 155 }, 0.0f, { }, { }, { 0.45f, 0.4f } );
+
+		// Ability Texts
+		for ( int i = 0; i < myTernTargets.num_targets; i++ )
+		{
+			GameData::GetInstance()->GetFont()->DrawString( myTernTargets.abilities[ i ]->GetAbilityName(), 330.0f, (float)210 + ( i * 30 ), { 0, 0, 255 } );
+		}
+
+		if ( myTernTargets.num_targets == 3 )
+		{
+			GameData::GetInstance()->GetFont()->DrawString( "Press Enter", 330.0f, 300.0f, { 0, 255, 0 } );
+		}
+	}
 
 }
 
@@ -2155,10 +2168,10 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 		{
 			toon->SetEtype( ETYPE::MULTI );
 		}
-		
+
 		AnimationSystem* tempani = new AnimationSystem();
-		tempani->Load(timeLine.c_str());
-		tempani->Play(0);
+		tempani->Load( timeLine.c_str() );
+		tempani->Play( 0 );
 		toon->SetTimelineAnimation( tempani );
 		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 
@@ -2301,9 +2314,9 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		}*/
 
 		AnimationSystem* tempani = new AnimationSystem();
-		tempani->Load(timeLine.c_str());
-		tempani->Play(0);
-		toon->SetTimelineAnimation(tempani);
+		tempani->Load( timeLine.c_str() );
+		tempani->Play( 0 );
+		toon->SetTimelineAnimation( tempani );
 		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 	}
 	return toon;
@@ -2340,7 +2353,10 @@ std::vector<Items> * GamePlayState::GetInventory()
 
 void GamePlayState::SetGauge( int val )
 {
-	ternary_gauge = val;
+	if ( val > 0 )
+		ternary_gauge = val;
+	else
+		ternary_gauge = 1;
 }
 
 int GamePlayState::GetGauge()
@@ -2370,12 +2386,43 @@ void GamePlayState::AddToTB( Ability* abi, Character* target )
 
 	myTernTargets.targets.push_back( target );
 	myTernTargets.abilities.push_back( abi );
-	//myTernTargets.num_targets++;
 }
 
 void GamePlayState::AddTarget()
 {
 	myTernTargets.num_targets++;
+}
+
+bool GamePlayState::RemoveTarget()
+{
+	myTernTargets.num_targets--;
+	if ( myTernTargets.num_targets < 0 )
+	{
+		myTernTargets.num_targets = 0;
+		return false;
+	}
+	return true;
+}
+
+void GamePlayState::DeselectTernaryTarget()
+{
+	// No longer need this style of deselect
+	//if ( myTernTargets.abilities[myTernTargets.abilities.size()-1]->GetAOE() )	// AOE ability
+	//{
+	//	for(unsigned int i=0; i < TurnManager::GetInstance()->GetEnemies().size(); i++)
+	//	{
+	//		if ( TurnManager::GetInstance( )->GetEnemies( )[i]->isAlive())
+	//		{
+	//			myTernTargets.abilities.pop_back( );
+	//			myTernTargets.targets.pop_back( );
+	//		}
+	//	}
+	//}
+
+	//myTernTargets.num_targets--;
+	myTernTargets.abilities.pop_back();
+	myTernTargets.targets.pop_back();
+
 }
 
 void GamePlayState::ClearTernary()
@@ -2457,10 +2504,10 @@ void GamePlayState::MapUpdate( float dt )
 //		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
 	//		SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
 		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Map))
-		{
+	{
 			StopAllBackgroundMusic();
 			SGD::AudioManager::GetInstance()->PlayAudio(m_Map);
-		}
+	}
 	//}
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
@@ -2497,7 +2544,7 @@ void GamePlayState::MapUpdate( float dt )
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Up ) || input->IsDPadPressed( 0, SGD::DPad::Up ) )
 		{
-			if (unlockedTowns >= 1)
+			if ( unlockedTowns >= 1 )
 			{
 				SelectedTown = 1;
 				GameData::GetInstance()->PlaySelectionChange();
@@ -2505,7 +2552,7 @@ void GamePlayState::MapUpdate( float dt )
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Left ) || input->IsDPadPressed( 0, SGD::DPad::Left ) )
 		{
-			if (unlockedTowns >= 2)
+			if ( unlockedTowns >= 2 )
 			{
 				SelectedTown = 2;
 				GameData::GetInstance()->PlaySelectionChange();
@@ -2514,7 +2561,7 @@ void GamePlayState::MapUpdate( float dt )
 		}
 		else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Down ) || input->IsDPadPressed( 0, SGD::DPad::Down ) )
 		{
-			if (unlockedTowns >= 3)
+			if ( unlockedTowns >= 3 )
 			{
 				SelectedTown = 3;
 				GameData::GetInstance()->PlaySelectionChange();
@@ -2618,30 +2665,30 @@ void GamePlayState::MapRender()
 		WorldMapAnsys->Render( townpoints[ SelectedTown ].x + 32, townpoints[ SelectedTown ].y + 32 );
 	}
 	//Render Nameof town
-	switch (SelectedTown)
+	switch ( SelectedTown )
 	{
-	case 0:
-		GameData::GetInstance()->GetFont()->DrawString("Windy Woods", 94, 14, { 0, 0, 0 }, 7.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Windy Woods", 90, 10, { 50, 200, 50 }, 7.0f);
-		break;
-	case 1:
-		GameData::GetInstance()->GetFont()->DrawString("Magma Falls", 94, 14, { 0, 0, 0 }, 7.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Magma Falls", 90, 10, { 200, 50, 50 }, 7.0f);
-		break;
-	case 2: 
-		GameData::GetInstance()->GetFont()->DrawString("Earthy Town", 94, 14, { 0, 0, 0 }, 7.0f);
-		GameData::GetInstance()->GetFont()->DrawString("Earthy Town", 90, 10, { 153, 83, 32 }, 7.0f);
-		break;
-	case 3:
-		GameData::GetInstance()->GetFont()->DrawString("New Water City", 49, 14, { 0, 0, 0 }, 6.5f);
-		GameData::GetInstance()->GetFont()->DrawString("New Water City", 45, 10, { 50, 50, 200 }, 6.5f);
-		break;
-	case 4:
-		GameData::GetInstance()->GetFont()->DrawString("Hero's Landing", 94, 14, { 0, 0, 0 }, 6.5f);
-		GameData::GetInstance()->GetFont()->DrawString("Hero's Landing", 90, 10, { 50, 200, 50 }, 6.5f);
-		break;
-	default:
-		break;
+		case 0:
+			GameData::GetInstance()->GetFont()->DrawString( "Windy Woods", 94, 14, { 0, 0, 0 }, 7.0f );
+			GameData::GetInstance()->GetFont()->DrawString( "Windy Woods", 90, 10, { 50, 200, 50 }, 7.0f );
+			break;
+		case 1:
+			GameData::GetInstance()->GetFont()->DrawString( "Magma Falls", 94, 14, { 0, 0, 0 }, 7.0f );
+			GameData::GetInstance()->GetFont()->DrawString( "Magma Falls", 90, 10, { 200, 50, 50 }, 7.0f );
+			break;
+		case 2:
+			GameData::GetInstance()->GetFont()->DrawString( "Earthy Town", 94, 14, { 0, 0, 0 }, 7.0f );
+			GameData::GetInstance()->GetFont()->DrawString( "Earthy Town", 90, 10, { 153, 83, 32 }, 7.0f );
+			break;
+		case 3:
+			GameData::GetInstance()->GetFont()->DrawString( "New Water City", 49, 14, { 0, 0, 0 }, 6.5f );
+			GameData::GetInstance()->GetFont()->DrawString( "New Water City", 45, 10, { 50, 50, 200 }, 6.5f );
+			break;
+		case 4:
+			GameData::GetInstance()->GetFont()->DrawString( "Hero's Landing", 94, 14, { 0, 0, 0 }, 6.5f );
+			GameData::GetInstance()->GetFont()->DrawString( "Hero's Landing", 90, 10, { 50, 200, 50 }, 6.5f );
+			break;
+		default:
+			break;
 	}
 }
 
@@ -2795,29 +2842,29 @@ void GamePlayState::SummaryRender()
 		tempparty.push_back( Party[ i ] );
 		tempparty[ i ]->SetPosition( { 150.0f + ( 100.0f * i ), 200.0f } );
 		tempparty[ i ]->Render();
-		if (tempparty[i]->hasLeveled())
+		if ( tempparty[ i ]->hasLeveled() )
 		{
-			SGD::Point pos = tempparty[i]->GetPosition();
-			if (i % 2)
+			SGD::Point pos = tempparty[ i ]->GetPosition();
+			if ( i % 2 )
 			{
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 98, pos.y - 38 - (30 * i), { 0, 0, 0 }, 3.0f);
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 102, pos.y - 42 - (30 * i), { 0, 0, 0 }, 3.0f);
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 100, pos.y - 40 - (30 * i), { 150, 200, 100 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 98, pos.y - 38 - ( 30 * i ), { 0, 0, 0 }, 3.0f );
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 102, pos.y - 42 - ( 30 * i ), { 0, 0, 0 }, 3.0f );
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 100, pos.y - 40 - ( 30 * i ), { 150, 200, 100 }, 3.0f );
 			}
 			else
 			{
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 98, pos.y - 38, { 0, 0, 0 }, 3.0f);
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 102, pos.y - 42, { 0, 0, 0 }, 3.0f);
-				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 100, pos.y - 40 , { 150, 200, 100 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 98, pos.y - 38, { 0, 0, 0 }, 3.0f );
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 102, pos.y - 42, { 0, 0, 0 }, 3.0f );
+				GameData::GetInstance()->GetFont()->DrawString( "Level Up", pos.x - 100, pos.y - 40, { 150, 200, 100 }, 3.0f );
 			}
-			
+
 
 		}
-		if (abilityunlocked)
+		if ( abilityunlocked )
 		{
-			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 198, 262, { 0, 0, 0 },3.0f);
-			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 202, 258, { 0, 0, 0 },3.0f);
-			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 200, 260, { 155, 0, 155 },3.0f);
+			GameData::GetInstance()->GetFont()->DrawString( "New Abilities Learned", 198, 262, { 0, 0, 0 }, 3.0f );
+			GameData::GetInstance()->GetFont()->DrawString( "New Abilities Learned", 202, 258, { 0, 0, 0 }, 3.0f );
+			GameData::GetInstance()->GetFont()->DrawString( "New Abilities Learned", 200, 260, { 155, 0, 155 }, 3.0f );
 		}
 		SGD::Point characterOrderPosition;
 		characterOrderPosition.x = 100.0f;
@@ -2830,6 +2877,7 @@ void GamePlayState::SummaryRender()
 	{
 		str += shopinv[ loot[ i ] ].GetName() + " _  ";
 	}
+
 	GameData::GetInstance()->GetFont()->DrawString( str, 250, 350, { 20, 0, 20 }, 2.0f );
 	GameData::GetInstance()->GetFont()->DrawString( "Press Enter to Continue", 250, 300, { 50, 50, 50 }, 2.0f );
 }
@@ -3253,115 +3301,115 @@ void GamePlayState::BossAnimation()
 		SGD::GraphicsManager::GetInstance()->Update();
 	}
 }
-void GamePlayState::PlaySoundEffect(int _index)
+void GamePlayState::PlaySoundEffect( int _index )
 {
-	if (_index < (int)m_vsoundeffects.size())
+	if ( _index < (int)m_vsoundeffects.size() )
 	{
-		SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[_index]);
+		SGD::AudioManager::GetInstance()->PlayAudio( m_vsoundeffects[ _index ] );
 	}
 }
-void GamePlayState::LoadGame(int index)
+void GamePlayState::LoadGame( int index )
 {
 	//this just takes in the relative path
 	saveindex = index;
 
 	std::ifstream fin;
-	TCHAR path[MAX_PATH];
-	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path)))
+	TCHAR path[ MAX_PATH ];
+	if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
 	{
-		if (saveindex == 0)
-			PathAppend(path, TEXT("savegame0.txt"));
-		else if (saveindex == 1)
-			PathAppend(path, TEXT("savegame1.txt"));
-		else if (saveindex == 2)
-			PathAppend(path, TEXT("savegame2.txt"));
+		if ( saveindex == 0 )
+			PathAppend( path, TEXT( "savegame0.txt" ) );
+		else if ( saveindex == 1 )
+			PathAppend( path, TEXT( "savegame1.txt" ) );
+		else if ( saveindex == 2 )
+			PathAppend( path, TEXT( "savegame2.txt" ) );
 		else
-			PathAppend(path, TEXT("lolnothing"));
+			PathAppend( path, TEXT( "lolnothing" ) );
 	}
-	fin.open(path);
-	if (fin.is_open())
+	fin.open( path );
+	if ( fin.is_open() )
 	{
 		fin >> SelectedTown;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		fin >> unlockedTowns;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		float x;
 		float y;
 		fin >> x;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		fin >> y;
-		fin.ignore(INT_MAX, '\n');
-		GameData::GetInstance()->GetOverworldPlayer()->SetPosition({ x, y });
+		fin.ignore( INT_MAX, '\n' );
+		GameData::GetInstance()->GetOverworldPlayer()->SetPosition( { x, y } );
 		int count;
 		fin >> count;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		inventory.clear();
-		for (int i = 0; i < count; i++)//this is just for items
+		for ( int i = 0; i < count; i++ )//this is just for items
 		{
 			std::string temp;
 			fin >> temp;
-			fin.ignore(INT_MAX, '\n');
-			for (unsigned int j = 0; j < shopinv.size(); j++)
+			fin.ignore( INT_MAX, '\n' );
+			for ( unsigned int j = 0; j < shopinv.size(); j++ )
 			{
-				if (temp == shopinv[j].GetName())
+				if ( temp == shopinv[ j ].GetName() )
 				{
-					inventory.push_back(shopinv[j]);
+					inventory.push_back( shopinv[ j ] );
 				}
 			}
 		}
 		fin >> gold;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		fin >> count;
-		for (unsigned int i = 0; i < Party.size(); i++)
+		for ( unsigned int i = 0; i < Party.size(); i++ )
 		{
-			delete Party[i];
+			delete Party[ i ];
 		}
 		Party.clear();
-		for (int i = 0; i < count; i++)//party stuff
+		for ( int i = 0; i < count; i++ )//party stuff
 		{
 			std::string temp;
 			int lvl;
 			int bp;
 			int hp;
 			fin >> temp;
-			fin.ignore(INT_MAX, '\n');
+			fin.ignore( INT_MAX, '\n' );
 			fin >> lvl;
-			fin.ignore(INT_MAX, '\n');
+			fin.ignore( INT_MAX, '\n' );
 			fin >> hp;
-			fin.ignore(INT_MAX, '\n');
+			fin.ignore( INT_MAX, '\n' );
 			fin >> bp;
-			fin.ignore(INT_MAX, '\n');
+			fin.ignore( INT_MAX, '\n' );
 
 			SGD::Point characterOrderPosition;
 			std::vector<Ability*> partyAbilities;
 
-			if (temp == "Ratsputin")
+			if ( temp == "Ratsputin" )
 			{
 				CombatPlayer* p1 = nullptr;
-				p1 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/Ratsputin.xml"));
-				p1->SetOrderPosition(Party.size());
+				p1 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Ratsputin.xml" ) );
+				p1->SetOrderPosition( Party.size() );
 				characterOrderPosition.x = 100.0f;
-				characterOrderPosition.y = (float)(p1->GetOrderPosition() * 100 + 150);
-				p1->SetPosition(characterOrderPosition);
-				p1->SetSize({ 64, 64 });
-				partyAbilities.push_back(MasterAbilityList["Burrow"]);
-				partyAbilities.push_back(MasterAbilityList["Water Fang"]);
-				partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
-				partyAbilities.push_back(MasterAbilityList["Earth Fang"]);
-				partyAbilities.push_back(MasterAbilityList["Poison Fang"]);
-				partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
-				partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
-				partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
-				p1->SetActive(true);
-				p1->InitializeAbilities(partyAbilities);
-				p1->SetLevel(lvl);
-				p1->SetBP(bp);
-				p1->SetHP(hp);
-				Party.push_back(p1);
+				characterOrderPosition.y = (float)( p1->GetOrderPosition() * 100 + 150 );
+				p1->SetPosition( characterOrderPosition );
+				p1->SetSize( { 64, 64 } );
+				partyAbilities.push_back( MasterAbilityList[ "Burrow" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Water Fang" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Slow Claw" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Earth Fang" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Poison Fang" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Fire Fang" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Counter Claw" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Wind Fang" ] );
+				p1->SetActive( true );
+				p1->InitializeAbilities( partyAbilities );
+				p1->SetLevel( lvl );
+				p1->SetBP( bp );
+				p1->SetHP( hp );
+				Party.push_back( p1 );
 			}
-			if (temp == "Biggs")
+			if ( temp == "Biggs" )
 			{
-				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent("GainBiggs");
+				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent( "GainBiggs" );
 				CombatPlayer* p4 = nullptr;
 				p4 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Biggs.xml" ) );
 				p4->SetOrderPosition( Party.size() );
@@ -3369,27 +3417,27 @@ void GamePlayState::LoadGame(int index)
 				characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
 				p4->SetPosition( characterOrderPosition );
 				p4->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList["Zephyr"] );
-				partyAbilities.push_back( MasterAbilityList["Leaf on the Wind"] );
-				partyAbilities.push_back( MasterAbilityList["Second Wind"] );
-				partyAbilities.push_back( MasterAbilityList["Whispering Wind"] );
-				partyAbilities.push_back( MasterAbilityList["Tailwind"] );
-				partyAbilities.push_back( MasterAbilityList["Tempest"] );
-				partyAbilities.push_back( MasterAbilityList["Tornado"] );
-				partyAbilities.push_back( MasterAbilityList["Wind Vale"] );
+				partyAbilities.push_back( MasterAbilityList[ "Zephyr" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Leaf on the Wind" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Second Wind" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Whispering Wind" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Tailwind" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Tempest" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Tornado" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Wind Vale" ] );
 				p4->InitializeAbilities( partyAbilities );
-				if (Party.size() >= 3)
-					p4->SetActive(false);
+				if ( Party.size() >= 3 )
+					p4->SetActive( false );
 				else
-					p4->SetActive(true);
-				p4->SetLevel(lvl);
-				p4->SetBP(bp);
-				p4->SetHP(hp);
+					p4->SetActive( true );
+				p4->SetLevel( lvl );
+				p4->SetBP( bp );
+				p4->SetHP( hp );
 				Party.push_back( p4 );
 			}
-			if (temp == "Jeeves")
+			if ( temp == "Jeeves" )
 			{
-				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent("GainJeeves");
+				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent( "GainJeeves" );
 				CombatPlayer* p5 = nullptr;
 				p5 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/testcharacterJeeves.xml" ) );
 				p5->SetOrderPosition( Party.size() );
@@ -3397,27 +3445,27 @@ void GamePlayState::LoadGame(int index)
 				characterOrderPosition.y = (float)( p5->GetOrderPosition() * 100 + 150 );
 				p5->SetPosition( characterOrderPosition );
 				p5->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList["Collapse"] );
-				partyAbilities.push_back( MasterAbilityList["Emblazon"] );
-				partyAbilities.push_back( MasterAbilityList["Firefall"] );
-				partyAbilities.push_back( MasterAbilityList["Fire Spikes"] );
-				partyAbilities.push_back( MasterAbilityList["Ignite"] );
-				partyAbilities.push_back( MasterAbilityList["Scorch"] );
-				partyAbilities.push_back( MasterAbilityList["Rib-a-Rang"] );
-				partyAbilities.push_back( MasterAbilityList["Incinerate"] );
+				partyAbilities.push_back( MasterAbilityList[ "Collapse" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Emblazon" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Firefall" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Fire Spikes" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Ignite" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Scorch" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Rib-a-Rang" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Incinerate" ] );
 				p5->InitializeAbilities( partyAbilities );
-				if (Party.size() >= 3)
-					p5->SetActive(false);
+				if ( Party.size() >= 3 )
+					p5->SetActive( false );
 				else
-					p5->SetActive(true);
-				p5->SetLevel(lvl);
-				p5->SetBP(bp);
-				p5->SetHP(hp);
+					p5->SetActive( true );
+				p5->SetLevel( lvl );
+				p5->SetBP( bp );
+				p5->SetHP( hp );
 				Party.push_back( p5 );
 			}
-			if (temp == "Checkers")
+			if ( temp == "Checkers" )
 			{
-				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent("GainCheckers");
+				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent( "GainCheckers" );
 				CombatPlayer* p3 = nullptr;
 				p3 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Checkers.xml" ) );
 				p3->SetOrderPosition( Party.size() );
@@ -3425,65 +3473,65 @@ void GamePlayState::LoadGame(int index)
 				characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
 				p3->SetPosition( characterOrderPosition );
 				p3->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList["Cover"] );
-				partyAbilities.push_back( MasterAbilityList["Geo Crush"] );
-				partyAbilities.push_back( MasterAbilityList["Pinch"] );
-				partyAbilities.push_back( MasterAbilityList["Quake"] );
-				partyAbilities.push_back( MasterAbilityList["Hedge Guard"] );
-				partyAbilities.push_back( MasterAbilityList["Rock Spike"] );
-				partyAbilities.push_back( MasterAbilityList["Rampart"] );
-				partyAbilities.push_back(MasterAbilityList["Tremor"]);
-				if (Party.size() >= 3)
-					p3->SetActive(false);
+				partyAbilities.push_back( MasterAbilityList[ "Cover" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Geo Crush" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Pinch" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Quake" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Hedge Guard" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Rock Spike" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Rampart" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Tremor" ] );
+				if ( Party.size() >= 3 )
+					p3->SetActive( false );
 				else
-					p3->SetActive(true);
-				p3->SetLevel(lvl);
-				p3->SetBP(bp);
-				p3->SetHP(hp);
+					p3->SetActive( true );
+				p3->SetLevel( lvl );
+				p3->SetBP( bp );
+				p3->SetHP( hp );
 				p3->InitializeAbilities( partyAbilities );
 				Party.push_back( p3 );
 			}
-			if (temp == "Slippy")
+			if ( temp == "Slippy" )
 			{
-				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent("GainSlippy");
+				GameData::GetInstance()->GetOverworldPlayer()->UnregisterFromEvent( "GainSlippy" );
 				CombatPlayer* p2 = nullptr;
 				p2 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/Slippy.xml" ) );
-				p2->SetOrderPosition(Party.size());
+				p2->SetOrderPosition( Party.size() );
 				characterOrderPosition.x = 100.0f;
 				characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150 );
 				p2->SetPosition( characterOrderPosition );
 				p2->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList["Puddle"] );
-				partyAbilities.push_back( MasterAbilityList["Whirlpool"] );
-				partyAbilities.push_back( MasterAbilityList["Acid Rain"] );
-				partyAbilities.push_back( MasterAbilityList["Torrent"] );
-				partyAbilities.push_back( MasterAbilityList["Flood"] );
-				partyAbilities.push_back( MasterAbilityList["Squirt"] );
-				partyAbilities.push_back( MasterAbilityList["Dissolve"] );
-				partyAbilities.push_back( MasterAbilityList["Splash"] );
-				if (Party.size() >= 3)
-					p2->SetActive(false);
+				partyAbilities.push_back( MasterAbilityList[ "Puddle" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Whirlpool" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Acid Rain" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Torrent" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Flood" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Squirt" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Dissolve" ] );
+				partyAbilities.push_back( MasterAbilityList[ "Splash" ] );
+				if ( Party.size() >= 3 )
+					p2->SetActive( false );
 				else
-					p2->SetActive(true);
-				p2->SetLevel(lvl);
-				p2->SetBP(bp);
-				p2->SetHP(hp);
+					p2->SetActive( true );
+				p2->SetLevel( lvl );
+				p2->SetBP( bp );
+				p2->SetHP( hp );
 				p2->InitializeAbilities( partyAbilities );
 				Party.push_back( p2 );
 			}
-			
-			
+
+
 		}
 		fin >> ternary_gauge;
-		fin.ignore(INT_MAX, '\n');
+		fin.ignore( INT_MAX, '\n' );
 		fin >> count;
-		fin.ignore(INT_MAX, '\n');
-		for (unsigned int i = 0; i < traps.size(); i++)
+		fin.ignore( INT_MAX, '\n' );
+		for ( unsigned int i = 0; i < traps.size(); i++ )
 		{
-			delete traps[i];
+			delete traps[ i ];
 		}
 		traps.clear();
-		for (int i = 0; i < count; i++)
+		for ( int i = 0; i < count; i++ )
 		{
 			/*RatTrap * temp = new RatTrap();
 			fin >> x;
@@ -3508,102 +3556,60 @@ void GamePlayState::LoadGame(int index)
 		is_tutorial = true;
 		TutorialStart();
 	}
-	
+
 }
 void GamePlayState::SaveGame()
 {
-	
-		TCHAR path[MAX_PATH];
-		if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path)))
-		{
-			PathAppend(path, TEXT("basicinfo.txt"));
-		}
-		std::ifstream fin;
-		std::vector<data> datas;
-		
-		fin.open(path);
-		if (fin.is_open())
-		{
-			for (int i = 0; i < 3;i++)
-			{
-				data temp;
-				fin  >> temp.playtime >> temp.town;
-				files[i] = temp;
-				fin.ignore(INT_MAX, '\n');
-			}
-			files[saveindex].playtime = 555;
-			files[saveindex].town = SelectedTown;
-			fin.close();
-		}
-		std::ofstream out;
-		out.open(path,std::ios_base::trunc);
-		if (out.is_open())
-		{
-			if (out.is_open())
-			{
-				for (int i = 0; i < 3;i++)
-				{
-					out << files[i].playtime << ' ' <<  files[i].town << "\n";
-				}
-				out.close();
-			}
-		}
 
-
-		if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path)))
-		{
-			if (saveindex ==0)
-			PathAppend(path, TEXT("savegame0.txt"));
-			if (saveindex == 1)
-			PathAppend(path, TEXT("savegame1.txt"));
-			if (saveindex == 2)
-			PathAppend(path, TEXT("savegame2.txt"));
-		}
-		std::ofstream fout;
-	fout.open(path);
-	if(fout.is_open())
+	TCHAR path[ MAX_PATH ];
+	if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
 	{
-		//here we save
-		//first lets do what town we are in
-		fout << SelectedTown << "\n";
-		//now we write in what towns we have unlocked
-		fout << unlockedTowns << "\n";
-		//overworldinfo
-		fout <<GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x << "\n";
-		fout <<GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y << "\n";
-		fout << inventory.size() << "\n";
-		for (unsigned int i = 0; i < inventory.size(); i++)
-		{
-			fout << inventory[i].GetName() << "\n";//we only need the name
-												   //when we load it in we will copy the item with the same name from the shopinv
+		PathAppend( path, TEXT( "basicinfo.txt" ) );
+	}
+	std::ifstream fin;
+	std::vector<data> datas;
 
-		}
-		fout << gold << "\n";//how much gold we got?
-		fout << Party.size() << "\n";
-		for (unsigned int i = 0; i < Party.size(); i++)
+	fin.open( path );
+	if ( fin.is_open() )
+	{
+		for ( int i = 0; i < 3; i++ )
 		{
-			fout << Party[i]->GetName() << "\n";
-			fout << Party[i]->GetLevel() << "\n";
-			fout << Party[i]->GetHP() << "\n";
-			fout << Party[i]->GetBP() << "\n";
+			data temp;
+			fin >> temp.playtime >> temp.town;
+			files[ i ] = temp;
+			fin.ignore( INT_MAX, '\n' );
 		}
-		fout << ternary_gauge << "\n";//i think this is all we need for ternary stuff
-		for (unsigned int i = 0; i < traps.size(); i++)//now lets do some trap stuff
+		files[ saveindex ].playtime = 555;
+		files[ saveindex ].town = SelectedTown;
+		fin.close();
+	}
+	std::ofstream out;
+	out.open( path, std::ios_base::trunc );
+	if ( out.is_open() )
+	{
+		if ( out.is_open() )
 		{
-			fout << traps[i]->GetPosition().x << "\n";
-			fout << traps[i]->GetPosition().y << "\n";
-			fout << traps[i]->gold << "\n";
-			fout << traps[i]->items[0] << "\n";
-			fout << traps[i]->items[1] << "\n";//lets get that trap data
-			fout << traps[i]->items[2] << "\n";
-
+			for ( int i = 0; i < 3; i++ )
+			{
+				out << files[ i ].playtime << ' ' << files[ i ].town << "\n";
+			}
+			out.close();
 		}
-		fout.close();
 	}
 
-	//save to this folder for testing
-	fout.open("savegame.txt");
-	if (fout.is_open())
+
+	if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
+	{
+		if ( saveindex == 0 )
+			PathAppend( path, TEXT( "savegame0.txt" ) );
+		if ( saveindex == 1 )
+			PathAppend( path, TEXT( "savegame1.txt" ) );
+		if ( saveindex == 2 )
+			PathAppend( path, TEXT( "savegame2.txt" ) );
+	}
+	std::ofstream fout;
+	fout.open( path );
+	if ( fout.is_open() )
 	{
 		//here we save
 		//first lets do what town we are in
@@ -3614,41 +3620,83 @@ void GamePlayState::SaveGame()
 		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x << "\n";
 		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y << "\n";
 		fout << inventory.size() << "\n";
-		for (unsigned int i = 0; i < inventory.size(); i++)
+		for ( unsigned int i = 0; i < inventory.size(); i++ )
 		{
-			fout << inventory[i].GetName() << "\n";//we only need the name
+			fout << inventory[ i ].GetName() << "\n";//we only need the name
 			//when we load it in we will copy the item with the same name from the shopinv
 
 		}
 		fout << gold << "\n";//how much gold we got?
 		fout << Party.size() << "\n";
-		for (unsigned int i = 0; i < Party.size(); i++)
+		for ( unsigned int i = 0; i < Party.size(); i++ )
 		{
-			fout << Party[i]->GetName() << "\n";
-			fout << Party[i]->GetLevel() << "\n";
-			fout << Party[i]->GetHP() << "\n";
-			fout << Party[i]->GetBP() << "\n";
+			fout << Party[ i ]->GetName() << "\n";
+			fout << Party[ i ]->GetLevel() << "\n";
+			fout << Party[ i ]->GetHP() << "\n";
+			fout << Party[ i ]->GetBP() << "\n";
 		}
 		fout << ternary_gauge << "\n";//i think this is all we need for ternary stuff
-		fout << traps.size() << "\n";
-		for (unsigned int i = 0; i < traps.size(); i++)//now lets do some trap stuff
+		for ( unsigned int i = 0; i < traps.size(); i++ )//now lets do some trap stuff
 		{
-			fout << traps[i]->GetPosition().x << "\n";
-			fout << traps[i]->GetPosition().y << "\n";
-			fout << traps[i]->gold << "\n";
-			fout << traps[i]->items[0] << "\n";
-			fout << traps[i]->items[1] << "\n";//lets get that trap data
-			fout << traps[i]->items[2] << "\n";
+			fout << traps[ i ]->GetPosition().x << "\n";
+			fout << traps[ i ]->GetPosition().y << "\n";
+			fout << traps[ i ]->gold << "\n";
+			fout << traps[ i ]->items[ 0 ] << "\n";
+			fout << traps[ i ]->items[ 1 ] << "\n";//lets get that trap data
+			fout << traps[ i ]->items[ 2 ] << "\n";
 
 		}
 		fout.close();
 	}
-	
+
+	//save to this folder for testing
+	fout.open( "savegame.txt" );
+	if ( fout.is_open() )
+	{
+		//here we save
+		//first lets do what town we are in
+		fout << SelectedTown << "\n";
+		//now we write in what towns we have unlocked
+		fout << unlockedTowns << "\n";
+		//overworldinfo
+		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x << "\n";
+		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y << "\n";
+		fout << inventory.size() << "\n";
+		for ( unsigned int i = 0; i < inventory.size(); i++ )
+		{
+			fout << inventory[ i ].GetName() << "\n";//we only need the name
+			//when we load it in we will copy the item with the same name from the shopinv
+
+		}
+		fout << gold << "\n";//how much gold we got?
+		fout << Party.size() << "\n";
+		for ( unsigned int i = 0; i < Party.size(); i++ )
+		{
+			fout << Party[ i ]->GetName() << "\n";
+			fout << Party[ i ]->GetLevel() << "\n";
+			fout << Party[ i ]->GetHP() << "\n";
+			fout << Party[ i ]->GetBP() << "\n";
+		}
+		fout << ternary_gauge << "\n";//i think this is all we need for ternary stuff
+		fout << traps.size() << "\n";
+		for ( unsigned int i = 0; i < traps.size(); i++ )//now lets do some trap stuff
+		{
+			fout << traps[ i ]->GetPosition().x << "\n";
+			fout << traps[ i ]->GetPosition().y << "\n";
+			fout << traps[ i ]->gold << "\n";
+			fout << traps[ i ]->items[ 0 ] << "\n";
+			fout << traps[ i ]->items[ 1 ] << "\n";//lets get that trap data
+			fout << traps[ i ]->items[ 2 ] << "\n";
+
+		}
+		fout.close();
+	}
+
 }
 
 void GamePlayState::TutorialStart()
 {
-	if (is_tutorial)
+	if ( is_tutorial )
 	{
 		SelectedTown = 0;
 		unlockedTowns = 0;
@@ -3657,89 +3705,89 @@ void GamePlayState::TutorialStart()
 		std::vector<Enemy*> tempEnemy;
 		std::vector<CombatPlayer*> tempParty;
 		CombatPlayer* p6 = nullptr;
-		p6 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/mom.xml"));
-		p6->SetOrderPosition(0);
+		p6 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/mom.xml" ) );
+		p6->SetOrderPosition( 0 );
 		characterOrderPosition.x = 100.0f;
-		characterOrderPosition.y = (float)(p6->GetOrderPosition() * 100 + 150);
-		p6->SetPosition(characterOrderPosition);
-		p6->SetSize({ 64, 64 });
-		partyAbilities.push_back(MasterAbilityList["Burrow"]);
-		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
-		partyAbilities.push_back(MasterAbilityList["Earth Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Poison Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
-		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
-		p6->InitializeAbilities(partyAbilities);
-		p6->SetActive(true);
-		Parents.push_back(p6);
+		characterOrderPosition.y = (float)( p6->GetOrderPosition() * 100 + 150 );
+		p6->SetPosition( characterOrderPosition );
+		p6->SetSize( { 64, 64 } );
+		partyAbilities.push_back( MasterAbilityList[ "Burrow" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Water Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Slow Claw" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Earth Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Poison Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Fire Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Counter Claw" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Wind Fang" ] );
+		p6->InitializeAbilities( partyAbilities );
+		p6->SetActive( true );
+		Parents.push_back( p6 );
 
 		partyAbilities.clear();
 
 		CombatPlayer* p7 = nullptr;
-		p7 = (LoadCombatPlayer("../Trapped Rat/Assets/Scripts/dad.xml"));
-		p7->SetOrderPosition(1);
+		p7 = ( LoadCombatPlayer( "../Trapped Rat/Assets/Scripts/dad.xml" ) );
+		p7->SetOrderPosition( 1 );
 		characterOrderPosition.x = 100.0f;
-		characterOrderPosition.y = (float)(p7->GetOrderPosition() * 100 + 150);
-		p7->SetPosition(characterOrderPosition);
-		p7->SetSize({ 64, 64 });
-		partyAbilities.push_back(MasterAbilityList["Burrow"]);
-		partyAbilities.push_back(MasterAbilityList["Water Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Slow Claw"]);
-		partyAbilities.push_back(MasterAbilityList["Earth Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Poison Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Fire Fang"]);
-		partyAbilities.push_back(MasterAbilityList["Counter Claw"]);
-		partyAbilities.push_back(MasterAbilityList["Wind Fang"]);
-		p7->InitializeAbilities(partyAbilities);
-		p7->SetActive(true);
-		Parents.push_back(p7);
+		characterOrderPosition.y = (float)( p7->GetOrderPosition() * 100 + 150 );
+		p7->SetPosition( characterOrderPosition );
+		p7->SetSize( { 64, 64 } );
+		partyAbilities.push_back( MasterAbilityList[ "Burrow" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Water Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Slow Claw" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Earth Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Poison Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Fire Fang" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Counter Claw" ] );
+		partyAbilities.push_back( MasterAbilityList[ "Wind Fang" ] );
+		p7->InitializeAbilities( partyAbilities );
+		p7->SetActive( true );
+		Parents.push_back( p7 );
 
 		Enemy* cecil = nullptr;
-		cecil = LoadEnemy("../Trapped Rat/Assets/Scripts/Cecil.xml");
-		cecil->SetOrderPosition(0);
+		cecil = LoadEnemy( "../Trapped Rat/Assets/Scripts/Cecil.xml" );
+		cecil->SetOrderPosition( 0 );
 		characterOrderPosition.x = 600.0f;
-		characterOrderPosition.y = (float)(cecil->GetOrderPosition() * 100 + 150 + 16);
-		cecil->SetPosition(characterOrderPosition);
-		tutorialenemy.push_back(cecil);
+		characterOrderPosition.y = (float)( cecil->GetOrderPosition() * 100 + 150 + 16 );
+		cecil->SetPosition( characterOrderPosition );
+		tutorialenemy.push_back( cecil );
 
-		for (unsigned int i = 0; i < Parents.size(); i++)
+		for ( unsigned int i = 0; i < Parents.size(); i++ )
 		{
-			Parents[i]->GetAbility(0)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(1)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(2)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(3)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(4)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(5)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(6)->CalcluateBpScaledCost(Parents[i]);
-			Parents[i]->GetAbility(7)->CalcluateBpScaledCost(Parents[i]);
+			Parents[ i ]->GetAbility( 0 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 1 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 2 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 3 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 4 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 5 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 6 )->CalcluateBpScaledCost( Parents[ i ] );
+			Parents[ i ]->GetAbility( 7 )->CalcluateBpScaledCost( Parents[ i ] );
 		}
-		TurnManager::GetInstance()->Initialize(Parents, tutorialenemy);
-		for (size_t i = 0; i < Parents.size(); i++)
+		TurnManager::GetInstance()->Initialize( Parents, tutorialenemy );
+		for ( size_t i = 0; i < Parents.size(); i++ )
 		{
-			if (Parents[i]->GetActive())
+			if ( Parents[ i ]->GetActive() )
 			{
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), Parents[i], SGD::Color(0, 255, 0), SGD::Point(-30, -25)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 440 + (Parents[i]->GetOrderPosition()*50.0f)), Parents[i], SGD::Color(0, 255, 0), SGD::Point(0, 0)));
-				m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(630, 465 + (Parents[i]->GetOrderPosition()*50.0f)), Parents[i], SGD::Color(0, 100, 255), SGD::Point(0, 0), false));
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), Parents[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -25 ) ) );
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 440 + ( Parents[ i ]->GetOrderPosition()*50.0f ) ), Parents[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( 0, 0 ) ) );
+				m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Parents[ i ]->GetOrderPosition()*50.0f ) ), Parents[ i ], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
 			}
 		}
 
 
-		for (size_t i = 0; i < tutorialenemy.size(); i++)
+		for ( size_t i = 0; i < tutorialenemy.size(); i++ )
 		{
-			m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), tutorialenemy[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
+			m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), tutorialenemy[ i ], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
 		}
 		state = Combat;
 		laststate = Combat;
-		GameData::GetInstance()->SetIsInCombat(true);
+		GameData::GetInstance()->SetIsInCombat( true );
 	}
 }
 
-void GamePlayState::AddToHUDItems(HUDItem* item)
+void GamePlayState::AddToHUDItems( HUDItem* item )
 {
-	m_vhuditems.push_back(item);
+	m_vhuditems.push_back( item );
 }
 
 void GamePlayState::CreateOverworldObject( std::string object, std::string animation, SGD::Point destination, bool allied)
