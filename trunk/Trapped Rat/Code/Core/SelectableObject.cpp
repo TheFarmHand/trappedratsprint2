@@ -28,6 +28,7 @@ void SelectableObject::Render()
 		if (selectedImage != SGD::INVALID_HANDLE)
 			SGD::GraphicsManager::GetInstance()->DrawTexture(selectedImage, { position.x, position.y-3 }, 0, {}, {}, {.6f,.6f});
 	}
+
 	if (GameData::GetInstance()->GetFont()->IsSpanish())
 	{
 		std::string str = string;
@@ -59,6 +60,7 @@ void SelectableObject::Render()
 		}
 
 	}
+
 	else
 	{
 		if (string.length())
