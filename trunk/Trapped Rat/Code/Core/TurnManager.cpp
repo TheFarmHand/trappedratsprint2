@@ -425,7 +425,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 				else if ( ( *iter )->GetOwner()->GetName() == "Biggs" )
 					target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedUp" ) );
 				else if ( ( *iter )->GetOwner()->GetName() == "Slippy" )
-					// what
+					// Slippy don't do what you think he do
 				{
 
 				}

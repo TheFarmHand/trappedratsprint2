@@ -7,15 +7,15 @@
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>600</Base>
+      <Base>20</Base>
       <Scale>5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>120</Base>
+      <Base>12</Base>
       <Scale>2.5</Scale>
     </BattlePoints>
     <Attack>
-      <Base>60</Base>
+      <Base>16</Base>
       <Scale>0.5</Scale>
     </Attack>
     <Magic>
@@ -23,7 +23,7 @@
       <Scale>0.5</Scale>
     </Magic>
     <Defense>
-      <Base>90</Base>
+      <Base>10</Base>
       <Scale>0.3</Scale>
     </Defense>
     <Speed>
@@ -35,7 +35,7 @@
       <Scale>0.4</Scale>
     </Avoision>
   </Stats>
-  <Level>20</Level>
+  <Level>1</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>

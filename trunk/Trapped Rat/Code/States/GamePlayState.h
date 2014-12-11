@@ -205,11 +205,16 @@ public:
 	HelpText* GetHelpText();
 	int GetGauge();
 	int GetMaxGauge();
+	
 	bool usingTernary();
 	void ClearTernary();
 	void AddTarget( );
+	bool RemoveTarget( );		// Returns true if there was a target able to be removed
+	void DeselectTernaryTarget();
+
 	void CheckAbilityUnlocked( bool EOC = false );
 	std::map<std::string, Ability*> GetMasterList();
+	
 	// Items
 	void AddItem( ItemType it );
 	void AddGold( int val );

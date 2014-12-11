@@ -30,6 +30,7 @@ public:
 	bool GetActive();
 	void SetActive( bool a );
 	void Reset();
+	bool GetTernConfirm() {return tern_confirm;}
 
 	void SetAnimations(AnimationSystem*);
 	AnimationSystem* GetAnimations();
@@ -73,10 +74,14 @@ private:
 	int nextlvl = 250;
 	bool leveledup = false;		// Leveled up last time we got XP 
 	bool runaway = false;		// Wait what is this about?
+	int tern_index = 0;
+	bool tern_confirm = false;
 	
 	// End Leveling Stuff
 
 	void TargetUnit(std::vector<Character*> &targets);
+
+	void TernarySelection();
 
 	void HomeUpdate(float dt);
 	void AttackUpdate(float dt);

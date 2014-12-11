@@ -56,7 +56,7 @@ void CombatPlayer::Update( float dt )
 		{
 			TurnManager::GetInstance()->setProgressFullReached( false );
 			TurnManager::GetInstance()->setTimeStop( false );
-			if(runaway)
+			if ( runaway )
 			{
 				GamePlayState::GetInstance()->run_succeed = true;
 				runaway = false;
@@ -274,29 +274,28 @@ void CombatPlayer::Render()
 
 	if ( ansys != nullptr )
 	{
-		if (GamePlayState::GetInstance()->AbilityUsed)
+		if ( GamePlayState::GetInstance()->AbilityUsed )
 		{
-			if ((GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Collapse") && GamePlayState::GetInstance()->CurrentAbilityUsed->GetOwner() == this)
+			if ( ( GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Collapse" ) && GamePlayState::GetInstance()->CurrentAbilityUsed->GetOwner() == this )
 			{
 
 			}
 			else
 			{
-				ansys->Render(position.x, position.y);
+				ansys->Render( position.x, position.y );
 			}
 		}
 		else
 		{
-			ansys->Render(position.x, position.y);
+			ansys->Render( position.x, position.y );
 		}
-		
+
 	}
 
 	Character::Render();
 
 	if ( item_choose != nullptr )
 		item_choose->Render();
-
 }
 
 
@@ -461,40 +460,40 @@ void CombatPlayer::HomeUpdate( float dt )
 
 	if ( states == 0 )
 	{
-		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed(0,SGD::DPad::Up) )
+		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed( 0, SGD::DPad::Up ) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 0 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 			hudSelection = 0;
 
 		}
-		else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsDPadPressed(0, SGD::DPad::Right))
+		else if ( pInput->IsKeyPressed( SGD::Key::Right ) || pInput->IsDPadPressed( 0, SGD::DPad::Right ) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 2 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[2] );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 2 ] );
 			hudSelection = 2;
 		}
-		else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsDPadPressed(0, SGD::DPad::Left))
+		else if ( pInput->IsKeyPressed( SGD::Key::Left ) || pInput->IsDPadPressed( 0, SGD::DPad::Left ) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 1 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[1] );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 1 ] );
 			hudSelection = 1;
 
 		}
-		else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsDPadPressed(0, SGD::DPad::Down))
+		else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsDPadPressed( 0, SGD::DPad::Down ) )
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 3 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[3] );
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 3 ] );
 			hudSelection = 3;
 		}
 
 
 		// ****************** Ternary Blast Code added by Grant *******************
-		else if ( GamePlayState::GetInstance()->GetGauge() >= MAXTG && pInput->IsKeyPressed( SGD::Key::O ) || pInput->IsButtonPressed(0,5) )
+		else if ( GamePlayState::GetInstance()->GetGauge() >= MAXTG && pInput->IsKeyPressed( SGD::Key::O ) || pInput->IsButtonPressed( 0, 5 ) )
 			// Ternary Blast activation
 		{
 			GameData::GetInstance()->PlaySelectionChange();
@@ -524,7 +523,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		// ****************** Ternary Blast Code END  *******************
 
 
-		if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed(0,1 ))
+		if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 		{
 			unsigned int activeindex = 0;
 			GameData::GetInstance()->PlaySelectionChange();
@@ -584,7 +583,7 @@ void CombatPlayer::HomeUpdate( float dt )
 			}
 			return;
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
+		else if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 		{
 			states = 0;
 			myTarget = 0;
@@ -601,7 +600,7 @@ void CombatPlayer::AttackUpdate( float dt )
 	TargetUnit( pTurn->GetEnemies() );
 
 
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
+	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
@@ -622,7 +621,7 @@ void CombatPlayer::AttackUpdate( float dt )
 		mySelection = none;
 		SetSelection( 0 );
 	}
-	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
+	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		GameData::GetInstance()->PlaySelectionChange();
@@ -669,7 +668,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		SetHomeButtons();
 	}
 
-	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
+	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 
 		//pTurn->HealTarget(pTurn->GetAllies()[myTarget], 15);
@@ -751,7 +750,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		SetHomeButtons();
 		//ill keep this stuff here ^^^^
 	}
-	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
+	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
@@ -771,14 +770,14 @@ void CombatPlayer::AbilityUpdate( float dt )
 	HelpText *help = game->GetHelpText();
 	bool anyAllyDead = false;
 
-	if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Up))
+	if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Up ) )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 0;
 		help->UpdateSelection( 1, menu[ 0 ] );
 
 	}
-	else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsKeyPressed(SGD::Key::Right))
+	else if ( pInput->IsKeyPressed( SGD::Key::Right ) || pInput->IsKeyPressed( SGD::Key::Right ) )
 	{
 		if ( menu[ 2 ]->GetObjectType() == 1 )
 		{
@@ -788,7 +787,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsKeyPressed(SGD::Key::Left))
+	else if ( pInput->IsKeyPressed( SGD::Key::Left ) || pInput->IsKeyPressed( SGD::Key::Left ) )
 	{
 		if ( menu[ 1 ]->GetObjectType() == 1 )
 		{
@@ -798,7 +797,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsKeyPressed(SGD::Key::Down))
+	else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsKeyPressed( SGD::Key::Down ) )
 	{
 		if ( menu[ 3 ]->GetObjectType() == 1 )
 		{
@@ -809,9 +808,22 @@ void CombatPlayer::AbilityUpdate( float dt )
 		}
 	}
 
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
+		if ( GamePlayState::GetInstance()->usingTernary() )
+		{
+			if ( GamePlayState::GetInstance()->RemoveTarget() )
+			{
+				GamePlayState::GetInstance()->DeselectTernaryTarget();
+				myTarget = 0;
+				mySelection = none;
+				states = 7;
+				return;
+			}
+		}
+
+		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -819,10 +831,11 @@ void CombatPlayer::AbilityUpdate( float dt )
 		SetSelection( 0 );
 		SetHomeButtons();
 		GamePlayState::GetInstance()->ClearTernary();
+		GamePlayState::GetInstance()->SetTernary( false );
 
 	}
 
-	else if ( pInput->IsKeyPressed( SGD::Key::Enter )||pInput->IsButtonPressed(0,1) )
+	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		if ( menu[ hudSelection ]->GetAbility() == nullptr )
@@ -917,7 +930,7 @@ void CombatPlayer::RunUpdate( float dt )
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
-	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
@@ -929,7 +942,7 @@ void CombatPlayer::RunUpdate( float dt )
 
 	}
 
-	if (pInput->IsKeyPressed(SGD::Key::Enter) ||pInput->IsButtonPressed(0, 1))
+	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 	if ( GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight || GamePlayState::GetInstance()->ignore_game_over )
 		{
@@ -947,8 +960,8 @@ void CombatPlayer::RunUpdate( float dt )
 			SetHomeButtons();
 			return;
 		}
-		int chance = rand()%1000;
-		if(chance < GetAvoision() * 250)
+		int chance = rand() % 1000;
+		if ( chance < GetAvoision() * 250 )
 		{
 			//GamePlayState::GetInstance()->run_succeed = true;
 			runaway = true;
@@ -967,10 +980,10 @@ void CombatPlayer::RunUpdate( float dt )
 				progress = 0.0f;
 			}
 
-			TurnManager::GetInstance( )->setProgressFullReached( false );
+			TurnManager::GetInstance()->setProgressFullReached( false );
 			hudSelection = 0;
 			//TurnManager::GetInstance()->setTimeStop( false );
-			TurnManager::GetInstance( )->setTurnPause( true );
+			TurnManager::GetInstance()->setTurnPause( true );
 			//help->UpdateSelection( 5 );
 			states = 0;
 			mySelection = none;
@@ -1000,7 +1013,7 @@ void CombatPlayer::RunUpdate( float dt )
 			SetHomeButtons( );
 
 			Reset();
-			
+
 		}
 	}
 
@@ -1024,9 +1037,37 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		ItemsUpdate( dt );
 		return;
 	}
-	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
+
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
+		if ( GamePlayState::GetInstance()->usingTernary() )
+		{
+			//if ( GamePlayState::GetInstance()->RemoveTarget() )
+			{
+				// If there was at least 1 queued up ability, stay in Ternary State
+				// Nothing should need to happen here
+
+				//GamePlayState::GetInstance()->DeselectTernaryTarget();
+				myTarget = 0;
+				mySelection = none;
+				states = 7;
+				return;
+			}
+
+			/*else
+			{
+				states = 0;
+				help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
+				mySelection = none;
+				hudSelection = 0;
+				SetSelection( 0 );
+				SetHomeButtons();
+				GamePlayState::GetInstance()->ClearTernary();
+				GamePlayState::GetInstance()->SetTernary( false );
+			}*/
+		}
+
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -1037,24 +1078,27 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 
 	}
 
-	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
+	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 		//Input Ability Use Here
 		if ( mySelection == allAlly )
 		{
+			if ( GamePlayState::GetInstance()->usingTernary() )
+			{
+				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ 0 ] );
+				GamePlayState::GetInstance()->AddTarget();
+				TernarySelection();
+				return;
+			}
+
 			for ( size_t i = 0; i < pTurn->GetAllies().size(); i++ )
 			{
 				if ( pTurn->GetAllies()[ i ]->isAlive() )
 				{
-					if ( GamePlayState::GetInstance()->usingTernary() )
-					{
-						GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ i ] );
-					}
 
-					else
 					{
 						menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ i ], i );
-						GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+						GamePlayState::GetInstance()->HoldOntoAbility( menu[ hudSelection ]->GetAbility() );
 						std::ostringstream usingAbility;
 						usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 						GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -1063,40 +1107,44 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			}
 
 			// After adding all the aoe casts to the Ternary vectors
-			if ( GamePlayState::GetInstance()->usingTernary() )
-			{
-				GamePlayState::GetInstance()->AddTarget();
-				//GamePlayState::GetInstance()->myTernTargets.num_targets -= ( numAlive - 1 );	// Should adjust for AOE
-				// Reset certain targety things
-				myTarget = 0;
-				mySelection = none;
-				states = 7;
-				return;
-			}
+			//if ( GamePlayState::GetInstance()->usingTernary() )
+			//{
+			//	TernarySelection();
+			//	//GamePlayState::GetInstance()->AddTarget();
+			//	//// Reset certain targety things
+			//	//myTarget = 0;
+			//	//mySelection = none;
+			//	//states = 7;
+			//	return;
+			//}
 		}
+
 		else if ( mySelection == player || mySelection == self || mySelection == deadAlly )
 		{
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
-				// Add selection to vector
-				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ myTarget ] );
-				GamePlayState::GetInstance()->AddTarget();
+
+				//Add selection to vector
+				/*GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ myTarget ] );
+				GamePlayState::GetInstance()->AddTarget();*/
 				// Reset certain targety things
-				myTarget = 0;
-				mySelection = none;
-				states = 7;
+				TernarySelection();
+				//myTarget = 0;
+				//mySelection = none;
+				//states = 7;
 				return;
 			}
 
 			else
 			{
 				menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetAllies()[ myTarget ] );
-				GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+				GamePlayState::GetInstance()->HoldOntoAbility( menu[ hudSelection ]->GetAbility() );
 				std::ostringstream usingAbility;
 				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			}
 		}
+
 		myTarget = 0;
 		if ( stepbackward == false && stepforward == false && progress != 0.0f )
 		{
@@ -1104,6 +1152,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 			stepTime = .50f;
 			progress = 0.0f;
 		}
+
 		TurnManager::GetInstance()->setProgressFullReached( false );
 		hudSelection = 0;
 		//	TurnManager::GetInstance()->setTimeStop( false );
@@ -1128,9 +1177,25 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 		TargetUnit( pTurn->GetEnemies() );
 	}
 
-	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
+	if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
+		if ( GamePlayState::GetInstance()->usingTernary() )
+		{
+			//if ( GamePlayState::GetInstance()->RemoveTarget() )
+			{
+				// If there was at least 1 queued up ability, stay in Ternary State
+				// Reset targeting info and state
+
+				//GamePlayState::GetInstance()->DeselectTernaryTarget();
+				myTarget = 0;
+				mySelection = none;
+				states = 7;
+				return;
+			}
+
+		}
+
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -1139,27 +1204,32 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 
 		SetHomeButtons();
 		GamePlayState::GetInstance()->ClearTernary();
+		GamePlayState::GetInstance()->SetTernary( false );
+
 	}
 
-	if (pInput->IsKeyPressed(SGD::Key::Enter) || pInput->IsButtonPressed(0, 1))
+	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
 		//Input Ability Use Here
 		if ( mySelection == allEnemy )
 		{
+
+			if ( GamePlayState::GetInstance()->usingTernary() )
+			{
+				// Add selection to vector
+				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ 0 ] );
+				GamePlayState::GetInstance()->AddTarget();
+				TernarySelection();
+				return;
+			}
 			for ( size_t i = 0; i < pTurn->GetEnemies().size(); i++ )
 			{
 				if ( pTurn->GetEnemies()[ i ]->isAlive() )
 				{
-					if ( GamePlayState::GetInstance()->usingTernary() )
-					{
-						// Add selection to vector
-						GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ i ] );
-					}
 
-					else
 					{
 						menu[ hudSelection ]->GetAbility()->CastAbility( this, pTurn->GetEnemies()[ i ], i );
-						GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+						GamePlayState::GetInstance()->HoldOntoAbility( menu[ hudSelection ]->GetAbility() );
 						std::ostringstream usingAbility;
 						usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 						GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -1169,7 +1239,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
-				GamePlayState::GetInstance()->AddTarget();
+
 				//GamePlayState::GetInstance()->myTernTargets.num_targets -= ( numAlive - 1 );	// Should adjust for AOE
 				myTarget = 0;
 				mySelection = none;
@@ -1196,7 +1266,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			{
 				// Turn Manager will handle the go between for abilities and attacks for consistency and particles
 				TurnManager::GetInstance()->UsingAbility( this, pTurn->GetEnemies()[ myTarget ], menu[ hudSelection ]->GetAbility() );
-				GamePlayState::GetInstance()->HoldOntoAbility( menu[hudSelection]->GetAbility() );
+				GamePlayState::GetInstance()->HoldOntoAbility( menu[ hudSelection ]->GetAbility() );
 				std::ostringstream usingAbility;
 				usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 				GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -1271,12 +1341,12 @@ void CombatPlayer::SelectingItems( float dt )
 				GameData::GetInstance()->PlaySelectionChange();
 				mySelection = none;
 				states = 0;
-				TurnManager::GetInstance()->setProgressFullReached(false);
+				TurnManager::GetInstance()->setProgressFullReached( false );
 				//pTurn->setTimeStop( false );
-				TurnManager::GetInstance()->setTurnPause(true);
+				TurnManager::GetInstance()->setTurnPause( true );
 				hudSelection = 0;
-				help->UpdateSelection(5);
-				SetSelection(0);
+				help->UpdateSelection( 5 );
+				SetSelection( 0 );
 				SetHomeButtons();
 				return;
 			}
@@ -1293,15 +1363,15 @@ void CombatPlayer::SelectingItems( float dt )
 			item_choose = nullptr;
 			GameData::GetInstance()->PlaySelectionChange();
 			states = 0;
-			help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 			mySelection = none;
 			hudSelection = 0;
-			SetSelection(0);
+			SetSelection( 0 );
 			SetHomeButtons();
 		}
 
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
+	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
 		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		delete item_choose;
@@ -1333,42 +1403,117 @@ void CombatPlayer::TernaryBlast( float dt )
 	else
 		// Selected all the targets, cast them and get outta dodge
 	{
-		// For ability pausing type stuff, need to refactor this function, for now all abilities blitz the field
-		for ( unsigned int i = 0; i < GamePlayState::GetInstance()->myTernTargets.abilities.size(); i++ )
+		if ( SGD::InputManager::GetInstance( )->IsKeyPressed( SGD::Key::Escape ) )
 		{
-			TurnManager::GetInstance()->UsingAbility(
-				this,
-				GamePlayState::GetInstance()->myTernTargets.targets[ i ],
-				GamePlayState::GetInstance()->myTernTargets.abilities[ i ],
-				true );	// true for ternary stuff	
-			ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[ i ]->GetAbilityName(),
-						  GamePlayState::GetInstance()->myTernTargets.targets[ i ] );
-
-			GamePlayState::GetInstance()->AbilityUsed = true;
-			GamePlayState::GetInstance()->CurrentAbilityUsed = menu[ hudSelection ]->GetAbility();
-			GamePlayState::GetInstance()->abilityTimer = 2.0f;
+			GamePlayState::GetInstance()->RemoveTarget();
+			GamePlayState::GetInstance( )->DeselectTernaryTarget( );
+			myTarget = 0;
+			mySelection = none;
+			states = 7;
+			return;
 		}
 
-		GamePlayState::GetInstance()->ClearTernary();
-		myTarget = 0;
-		if ( stepbackward == false && stepforward == false && progress != 0.0f )
+		if(SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter)) 
+			tern_confirm = true;
+		// Need to pick one ability out at a time, cast it, continue to update, and lalala.
+		// Carry index of current ability cast somewhere global, check for AOE and then do the things
+		if(tern_confirm)
 		{
-			stepbackward = true;
-			stepTime = .50f;
-			progress = 0.0f;
+			if ( !( GamePlayState::GetInstance()->abilityTimer > 0.0f ) )
+			{
+				if ( GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ]->GetAOE() )
+				{
+					// Hit em all
+
+					if ( GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ]->GetOffensive() )
+					{
+
+						for ( unsigned int targets = 0; targets < TurnManager::GetInstance()->GetEnemies().size(); targets++ )
+						{
+							if ( TurnManager::GetInstance()->GetEnemies()[ targets ]->isAlive() )
+							{
+								TurnManager::GetInstance()->UsingAbility(
+									this,
+									TurnManager::GetInstance()->GetEnemies()[ targets ],
+									GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ],
+									true );	// true for ternary stuff	
+
+								ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ]->GetAbilityName(),
+											  TurnManager::GetInstance()->GetEnemies()[ targets ] );
+							}
+						}
+					}
+
+					else
+					{
+						for ( unsigned int targets = 0; targets < TurnManager::GetInstance()->GetAllies().size(); targets++ )
+						{
+							if ( TurnManager::GetInstance()->GetAllies()[ targets ]->isAlive() )
+							{
+								TurnManager::GetInstance()->UsingAbility(
+									this,
+									TurnManager::GetInstance()->GetAllies()[ targets ],
+									GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ],
+									true );	// true for ternary stuff	
+								ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ]->GetAbilityName(),
+											  TurnManager::GetInstance()->GetAllies()[ targets ] );
+							}
+						}
+					}
+
+					GamePlayState::GetInstance()->AbilityUsed = true;
+					GamePlayState::GetInstance( )->CurrentAbilityUsed = GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ];
+					GamePlayState::GetInstance()->abilityTimer = 1.5f;
+					tern_index++;
+					return;
+				}
+
+				// If Not AOE, do one thing
+				if ( GamePlayState::GetInstance( )->myTernTargets.targets[ tern_index ]->isAlive( ) )
+				{
+				TurnManager::GetInstance()->UsingAbility(
+					this,
+					GamePlayState::GetInstance()->myTernTargets.targets[ tern_index ],
+					GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ],
+					true );	// true for ternary stuff	
+				ApplyTernary( GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ]->GetAbilityName( ),
+							  GamePlayState::GetInstance( )->myTernTargets.targets[ tern_index ] );
+
+				GamePlayState::GetInstance()->AbilityUsed = true;
+				GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ];
+				GamePlayState::GetInstance()->abilityTimer = 1.5f;
+				
+				}
+				tern_index++;
+			}
 		}
-		TurnManager::GetInstance()->setProgressFullReached( false );
-		hudSelection = 0;
-		//TurnManager::GetInstance()->setTimeStop( false );
-		TurnManager::GetInstance()->setTurnPause( true );
-		GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
-		states = 0;
-		mySelection = none;
-		SetSelection( 0 );
-		GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-		SetHomeButtons();
-		GamePlayState::GetInstance()->SetTernary( false );
-		GamePlayState::GetInstance()->SetGauge( 0 );
+
+		if ( tern_index >= 3 )
+		{
+			
+			GamePlayState::GetInstance()->ClearTernary();
+			myTarget = 0;
+			if ( stepbackward == false && stepforward == false && progress != 0.0f )
+			{
+				stepbackward = true;
+				stepTime = .50f;
+				progress = 0.0f;
+			}
+			TurnManager::GetInstance()->setProgressFullReached( false );
+			hudSelection = 0;
+			//TurnManager::GetInstance()->setTimeStop( false );
+			TurnManager::GetInstance()->setTurnPause( true );
+			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
+			states = 0;
+			mySelection = none;
+			SetSelection( 0 );
+			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
+			SetHomeButtons();
+			GamePlayState::GetInstance()->SetTernary( false );
+			GamePlayState::GetInstance()->SetGauge( 0 );
+			tern_index = 0;
+			tern_confirm = false;
+		}
 	}
 }
 
@@ -1382,7 +1527,7 @@ int CombatPlayer::GetLevel()
 	return level;
 }
 
-int CombatPlayer::GetNextlvl( )
+int CombatPlayer::GetNextlvl()
 {
 	return nextlvl;
 }
@@ -1412,33 +1557,33 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 {
 	if ( abil == "Fire Fang" )
 	{
-	if ( !target->HasEffect( "Burn" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
+		if ( !target->HasEffect( "Burn" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
 	else if ( abil == "Water Fang" )
 	{
-	if ( !target->HasEffect( "Drown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Drown" ) );
+		if ( !target->HasEffect( "Drown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Drown" ) );
 	}
 
 	else if ( abil == "Earth Fang" )
 	{
-	if ( !target->HasEffect( "Muck" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
+		if ( !target->HasEffect( "Muck" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
 	}
 
 	else if ( abil == "Wind Fang" )
 	{
-	if ( !target->HasEffect( "Wisp" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Wisp" ) );
+		if ( !target->HasEffect( "Wisp" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Wisp" ) );
 	}
 
 	else if ( abil == "Poison Fang" )
 	{
 		// add delerium once it works
-	if ( !target->HasEffect( "Confused" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance( )->GetStatus( "Confused" ) );
+		if ( !target->HasEffect( "Confused" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Confused" ) );
 	}
 
 	else if ( abil == "Slow Claw" )
@@ -1452,50 +1597,50 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 
 	else if ( abil == "Splash" )
 	{
-	if ( !target->HasEffect( "SpeedDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
+		if ( !target->HasEffect( "SpeedDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
 	else if ( abil == "Flood" )
 	{
-	if ( !target->HasEffect( "AvoisionDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AvoisionDown" ) );
+		if ( !target->HasEffect( "AvoisionDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AvoisionDown" ) );
 	}
 
 	else if ( abil == "Squirt" )
 	{
-	if ( !target->HasEffect( "Stun" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Stun" ) );
+		if ( !target->HasEffect( "Stun" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Stun" ) );
 	}
 
 	else if ( abil == "Torrent" )
 	{
-	if ( !target->HasEffect( "AttackDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
+		if ( !target->HasEffect( "AttackDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
 	}
 
 	else if ( abil == "Puddle" )
 	{
-	if ( !target->HasEffect( "DefenseUp" ) )
-		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseUp" ) );
+		if ( !target->HasEffect( "DefenseUp" ) )
+			this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseUp" ) );
 	}
 
 	else if ( abil == "Disolve" )
 	{
-	if ( !target->HasEffect( "AttackUp" ) )
-		this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
+		if ( !target->HasEffect( "AttackUp" ) )
+			this->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 	}
 
 	else if ( abil == "Ignite" )
 	{
-	if ( !target->HasEffect( "Burn" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
+		if ( !target->HasEffect( "Burn" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
 	else if ( abil == "Incinerate" )
 	{
-	if ( !target->HasEffect( "Burn" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
+		if ( !target->HasEffect( "Burn" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Burn" ) );
 	}
 
 	else if ( abil == "Scorch" )
@@ -1504,8 +1649,8 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 		{
 			if ( TurnManager::GetInstance()->GetAllies()[ i ]->isAlive() )
 			{
-			if ( !target->HasEffect( "AttackUp" ) )
-				TurnManager::GetInstance()->GetAllies()[ i ]->AddStatus(
+				if ( !target->HasEffect( "AttackUp" ) )
+					TurnManager::GetInstance()->GetAllies()[ i ]->AddStatus(
 					&StatusEffectManager::GetInstance()->GetStatus( "AttackUp" ) );
 			}
 		}
@@ -1523,43 +1668,54 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 
 	else if ( abil == "Zephyr" )
 	{
-	if ( !target->HasEffect( "Regen" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Regen" ) );
+		if ( !target->HasEffect( "Regen" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Regen" ) );
 	}
 
 	else if ( abil == "Rock Spike" )
 	{
-	if ( !target->HasEffect( "MagicDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicDown" ) );
+		if ( !target->HasEffect( "MagicDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicDown" ) );
 	}
 
 	else if ( abil == "Geo Crush" )
 	{
-	if ( !target->HasEffect( "SpeedDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
+		if ( !target->HasEffect( "SpeedDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "SpeedDown" ) );
 	}
 
 	else if ( abil == "Tremor" )
 	{
-	if ( !target->HasEffect( "DefenseDown" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseDown" ) );
+		if ( !target->HasEffect( "DefenseDown" ) )
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "DefenseDown" ) );
 	}
 
 	else if ( abil == "Quake" )
-		{
+	{
 		if ( !target->HasEffect( "AttackDown" ) )
 			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "AttackDown" ) );
-		}
+	}
 
 	else if ( abil == "Pinch" )
-		{
+	{
 		if ( !target->HasEffect( "Muck" ) )
 			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "Muck" ) );
-		}
+	}
 
 	else if ( abil == "Rampart" )
-		{
+	{
 		if ( !target->HasEffect( "MagicUp" ) )
-		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
-		}
+			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
+	}
+}
+
+void CombatPlayer::TernarySelection()
+{
+	GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), TurnManager::GetInstance()->GetAllies()[ myTarget ] );
+	GamePlayState::GetInstance()->AddTarget();
+	// Reset certain targety things
+	myTarget = 0;
+	mySelection = none;
+	states = 7;
+	return;
 }

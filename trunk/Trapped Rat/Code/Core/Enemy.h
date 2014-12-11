@@ -6,7 +6,7 @@ class Enemy :
 {
 private:
 	AnimationSystem* ansys = nullptr;
-	int xp_value = 100;
+	int xp_value = 150;
 	//int level;
 	bool firstBelowQuarter = false;
 	bool firstBelowHalf = false;
