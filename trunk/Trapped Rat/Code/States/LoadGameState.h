@@ -6,7 +6,7 @@ struct data
 {
 	int playtime = 0;
 	int town = 0;
-
+	//int partysize = 0;
 };
 class LoadGameState :
 	public GameState
