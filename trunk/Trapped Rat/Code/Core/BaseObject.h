@@ -9,7 +9,7 @@ protected:
 	SGD::Size size;
 	SGD::Vector velocity;
 
-	enum type { None, Rat, Enemy, Ally };
+	enum type { None, Rat, Enemies, Ally };
 	type AllyCode;
 public:
 

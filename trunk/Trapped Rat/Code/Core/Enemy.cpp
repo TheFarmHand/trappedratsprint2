@@ -253,7 +253,7 @@ AnimationSystem* Enemy::GetAnimations()
 	}
 int Enemy::GetType()
 	{
-	return type::Enemy;
+	return type::Enemies;
 	}
 
 

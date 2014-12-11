@@ -2239,7 +2239,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 
 			return nullptr;
 		}
-		else if ( type == "Enemy" || type == "Boss" || type == "Mini Boss" )
+		else if ( type == "Enemies" || type == "Boss" || type == "Mini Boss" )
 		{
 			//create a enemy
 			toon = CreateCommonEnemy( name, stats, level, HP, HP, speed, 0, nullptr, { 0.0f, 0.0f }, { 64.0f, 64.0f }, animation );
