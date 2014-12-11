@@ -1822,7 +1822,7 @@ void GamePlayState::CombatRender()
 	graphics->DrawTexture( combatback, { 0, 0 } );
 	graphics->DrawTextureSection( combathud, { -0.1f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
 	//GameData::GetInstance()->GetFont()->DrawString( "You are in Combat", 50.0, 50.0, { 155, 255, 155 } );
-	TurnManager::GetInstance()->Render();
+	
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
 	{
 		if ( m_vhuditems[ i ]->GetActive() )
@@ -1834,7 +1834,7 @@ void GamePlayState::CombatRender()
 			m_vSelectableItems[ i ]->Render();
 	}
 	helptextbox->Render();
-
+	TurnManager::GetInstance()->Render();
 	// Let's put the ternary bar here
 	ternary_bar->Render();
 	if ( ternary )

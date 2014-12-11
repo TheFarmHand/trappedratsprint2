@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>EnemySprites/OverworldObjects.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Overworld</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="208" y="650" />
+      <DrawRect left="193" top="641" right="224" bottom="674" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="240" y="650" />
+      <DrawRect left="226" top="640" right="256" bottom="673" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="272" y="650" />
+      <DrawRect left="259" top="640" right="287" bottom="673" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="240" y="650" />
+      <DrawRect left="225" top="639" right="256" bottom="673" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
