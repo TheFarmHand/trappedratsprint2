@@ -131,7 +131,7 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 	}*/
 	SGD::Point tempoffset;
 	tempoffset.y = 0;
-	if (GetType() == Enemy)
+	if (GetType() == Enemies)
 	{
 		tempoffset.x = -50;
 	}
@@ -204,7 +204,7 @@ void Character::TakeDamage(int dmg, bool firefall, bool statusDot)
 	}
 	SGD::Point tempoffset;
 	tempoffset.y = 0;
-	if (GetType() == Enemy)
+	if (GetType() == Enemies)
 	{
 		tempoffset.x = -50;
 	}
@@ -272,7 +272,7 @@ void Character::TakeDamage(int dmg, bool firefall, bool statusDot, bool dodgeing
 	}
 	SGD::Point tempoffset;
 	tempoffset.y = 0;
-	if (GetType() == Enemy)
+	if (GetType() == Enemies)
 	{
 		tempoffset.x = -50;
 	}

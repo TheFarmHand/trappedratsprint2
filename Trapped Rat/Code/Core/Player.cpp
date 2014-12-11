@@ -566,7 +566,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
 		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
 			{
-			if ( ( *iter )->getAllyCode() == type::Enemy )
+			if ( ( *iter )->getAllyCode() == type::Enemies )
 				{
 				delete *iter;
 				GamePlayState::GetInstance()->overworldObjects.erase( iter );
@@ -584,7 +584,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
 		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
 			{
-			if ( ( *iter )->getAllyCode() == type::Enemy )
+			if ( ( *iter )->getAllyCode() == type::Enemies )
 				{
 				delete *iter;
 				GamePlayState::GetInstance()->overworldObjects.erase( iter );

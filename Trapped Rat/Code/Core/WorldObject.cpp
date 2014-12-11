@@ -19,7 +19,7 @@ if ( allied )
 	}
 else
 	{
-	AllyCode = type::Enemy;
+	AllyCode = type::Enemies;
 	}
 }
 
