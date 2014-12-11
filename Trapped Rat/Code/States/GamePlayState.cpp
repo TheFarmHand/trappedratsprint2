@@ -22,6 +22,7 @@
 #include "../SGD Wrappers/SGD_Event.h"
 #include "GameOverWinState.h"
 #include <shlwapi.h>
+#include "../Animation/AnimationSystem.h"
 #pragma comment(lib,"shlwapi.lib")
 #include "shlobj.h"
 #include <ctime>
@@ -2043,7 +2044,8 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 		std::string tempStr = root->FirstChildElement( "Portrait" )->GetText();
 		std::string charPortrait = "../Trapped Rat/Assets/Textures/" + tempStr;
 		tempStr = root->FirstChildElement( "Timeline" )->GetText();
-		std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
+		//std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
+		std::string timeLine = tempStr;
 
 		if ( type == "Ally" )
 		{
@@ -2106,8 +2108,11 @@ CombatPlayer * GamePlayState::LoadCombatPlayer( std::string _path )
 		{
 			toon->SetEtype( ETYPE::MULTI );
 		}
-
-		toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( timeLine.c_str() ) );
+		
+		AnimationSystem* tempani = new AnimationSystem();
+		tempani->Load(timeLine.c_str());
+		tempani->Play(0);
+		toon->SetTimelineAnimation( tempani );
 		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 
 	}
@@ -2167,8 +2172,8 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		std::string tempStr = root->FirstChildElement( "Portrait" )->GetText();
 		std::string charPortrait = "../Trapped Rat/Assets/Textures/" + tempStr;
 		tempStr = root->FirstChildElement( "Timeline" )->GetText();
-		std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
-
+		//std::string timeLine = "../Trapped Rat/Assets/Textures/" + tempStr;
+		std::string timeLine = tempStr;
 		if ( type == "Ally" )
 		{
 
@@ -2209,7 +2214,10 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 			toon->SetEtype( ETYPE::MULTI );
 		}
 
-		toon->SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( timeLine.c_str() ) );
+		AnimationSystem* tempani = new AnimationSystem();
+		tempani->Load(timeLine.c_str());
+		tempani->Play(0);
+		toon->SetTimelineAnimation(tempani);
 		toon->SetPortrait( SGD::GraphicsManager::GetInstance()->LoadTexture( charPortrait.c_str() ) );
 	}
 	return toon;

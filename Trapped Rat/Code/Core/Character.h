@@ -8,7 +8,7 @@
 #include "Stats.h"
 #include "StatusEffect.h"
 #include "Ability.h"
-
+#include "../Animation/AnimationSystem.h"
 class Numbers;
 class OwnedHUD;
 class Character :
@@ -40,7 +40,8 @@ class Character :
 		std::string alliance;
 
 		SGD::HTexture portrait = SGD::INVALID_HANDLE;
-		SGD::HTexture timelineanimation = SGD::INVALID_HANDLE;
+	//	SGD::HTexture timelineanimation = SGD::INVALID_HANDLE;
+		AnimationSystem* timelineanimation = nullptr;
 
 		OwnedHUD* TurnIndicator = nullptr;
 	public:
@@ -85,7 +86,7 @@ class Character :
 		std::string GetAlliance();
 		void SetEtype( ETYPE _type );
 		SGD::HTexture GetPortrait();
-		SGD::HTexture GetTimelineAnimation();
+		AnimationSystem* GetTimelineAnimation();
 
 		//std::vector<StatusEffect*>& GetEffects();
 		std::list<StatusEffect*>& GetEffects();
@@ -107,7 +108,7 @@ class Character :
 		void AddStatus( StatusEffect *status, Character* theOwner = nullptr, bool ternary = false );
 		void SetTurnIndicator( OwnedHUD* _indicator );
 		void SetPortrait( SGD::HTexture _port );
-		void SetTimelineAnimation( SGD::HTexture _timeline );
+		void SetTimelineAnimation( AnimationSystem* _timeline );
 		void SetAlliance( std::string type );
 		int dogTarget = -1;
 		int lastAttacker = -1;

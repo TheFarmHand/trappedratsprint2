@@ -156,7 +156,11 @@ void Boss::CreateCecil( const char* path )
 
 		if ( GetName() == "Cecil" )
 			{
-			SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
+			//AnimationSystem* tempani = new AnimationSystem();
+			//tempani->Load();
+			//SetTimelineAnimation(tempani);
+
+			//SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
 			}
 		}
 	}
@@ -267,7 +271,7 @@ void Boss::CreateJohn( const char* path )
 
 		if ( GetName() == "John" )
 			{
-			SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
+//			SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
 			}
 		}
 	}
@@ -378,7 +382,7 @@ void Boss::CreateJane( const char* path )
 
 		if ( GetName() == "Jane" )
 			{
-			SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
+//			SetTimelineAnimation( SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/DogTimeline.png" ) );
 			}
 		}
 	}

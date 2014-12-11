@@ -27,16 +27,17 @@ Character::~Character()
 	{
 		SGD::GraphicsManager::GetInstance()->UnloadTexture(portrait);
 	}
-	if (timelineanimation != SGD::INVALID_HANDLE)
+	if (timelineanimation != nullptr)
 	{
-		SGD::GraphicsManager::GetInstance()->UnloadTexture(timelineanimation);
+		timelineanimation->UnloadAll();
+		delete timelineanimation;
+		timelineanimation = nullptr;
 	}
 	if (TurnIndicator != nullptr)
 	{
 		delete TurnIndicator;
 		TurnIndicator = nullptr;
 	}
-
 }
 void Character::Update( float dt )
 {
@@ -44,6 +45,7 @@ void Character::Update( float dt )
 	{
 		damagenumbers[i]->Update(dt);
 	}
+	timelineanimation->Update(dt);
 }
 void Character::UpdateAnimation( float dt )
 {
@@ -263,7 +265,7 @@ SGD::HTexture Character::GetPortrait()
 {
 	return portrait;
 }
-SGD::HTexture Character::GetTimelineAnimation()
+AnimationSystem* Character::GetTimelineAnimation()
 {
 	return timelineanimation;
 }
@@ -390,7 +392,7 @@ void Character::SetPortrait(SGD::HTexture _port)
 {
 	portrait = _port;
 }
-void Character::SetTimelineAnimation(SGD::HTexture _timeline)
+void Character::SetTimelineAnimation(AnimationSystem* _timeline)
 {
 	timelineanimation = _timeline;
 }
