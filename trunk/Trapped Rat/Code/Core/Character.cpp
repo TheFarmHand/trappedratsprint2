@@ -483,7 +483,7 @@ void Character::SetHP( int _hp )
 
 		if (GetAlliance() == "Ally")
 		{
-			if (name == "Slippy" || name == "Biggs" || name == "Ratsputin" || name == "Dadsputin" || name == "Momsputin")
+			if (name == "Slippy" || name == "Biggs" || name == "Ratsputin" || name == "Dadsputin" || name == "Momsputin" || name == "Checkers")
 			{
 				dynamic_cast<CombatPlayer*>(this)->GetAnimations()->ResetAll();
 				dynamic_cast<CombatPlayer*>(this)->GetAnimations()->Play("Death");

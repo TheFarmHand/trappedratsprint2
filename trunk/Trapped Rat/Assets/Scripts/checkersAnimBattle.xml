@@ -1,21 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="3">
   <Animation>
-    <Image numFrames="2">
-      <Path>checkers.png</Path>
+    <Image numFrames="4">
+      <Path>Crab.png</Path>
     </Image>
     <Looping>True</Looping>
-    <Name>Name</Name>
-    <NextName>None</NextName>
-    <Frame delay="1">
-      <AnchorPoint x="51" y="16" />
-      <DrawRect left="37" top="12" right="69" bottom="40" />
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="325" y="6" />
+      <DrawRect left="278" top="1" right="372" bottom="64" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="1">
-      <AnchorPoint x="87" y="15" />
-      <DrawRect left="72" top="12" right="106" bottom="40" />
+    <Frame delay="0.25">
+      <AnchorPoint x="422" y="0" />
+      <DrawRect left="373" top="1" right="471" bottom="54" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="514" y="5" />
+      <DrawRect left="469" top="1" right="560" bottom="55" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="608" y="4" />
+      <DrawRect left="560" top="0" right="657" bottom="54" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="5">
+      <Path>Crab.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.3">
+      <AnchorPoint x="668" y="137" />
+      <DrawRect left="622" top="116" right="723" bottom="185" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="890" y="227" />
+      <DrawRect left="828" top="182" right="968" bottom="279" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="747" y="293" />
+      <DrawRect left="687" top="277" right="813" bottom="342" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="574" y="289" />
+      <DrawRect left="517" top="272" right="647" bottom="350" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="428" y="291" />
+      <DrawRect left="357" top="238" right="499" bottom="353" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>Crab.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.3">
+      <AnchorPoint x="428" y="291" />
+      <DrawRect left="366" top="269" right="498" bottom="357" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
