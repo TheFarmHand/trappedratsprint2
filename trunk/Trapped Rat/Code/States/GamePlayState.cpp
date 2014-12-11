@@ -374,6 +374,7 @@ void GamePlayState::Enter()
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/entercombat.wav" );
 	m_Map = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Map.xwm");
 	m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
+	m_SummaryAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Victory.xwm");
 	SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio, true );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume() );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume() );
@@ -555,7 +556,7 @@ void GamePlayState::Exit()
 	SGD::AudioManager::GetInstance()->UnloadAudio( entercombat );
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Credits);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Map);
-
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_SummaryAudio);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( WorldMap );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( PadLock );
 
@@ -790,13 +791,18 @@ void GamePlayState::Fight()
 void GamePlayState::TownUpdate( float dt )
 {
 	GameData::GetInstance()->GetOverworldPlayer()->Update( dt );
+
 	for ( unsigned int i = 0; i < overworldObjects.size(); ++i )
 		{
 		if ( overworldObjects[i] != nullptr )
 			overworldObjects[i]->Update( dt );
 		}
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
-
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+	{
+		StopAllBackgroundMusic();
+		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio, true);
+	}
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 	{
@@ -2679,10 +2685,10 @@ void GamePlayState::SummaryUpdate( float dt )
 	//	loot_xp = 100;
 	//	loot_gold = 5;
 	//}
-	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_SummaryAudio))
 	{
 		StopAllBackgroundMusic();
-		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
+		SGD::AudioManager::GetInstance()->PlayAudio(m_SummaryAudio);
 	}
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || SGD::InputManager::GetInstance()->IsButtonPressed( 0, 1 ) )
@@ -3757,6 +3763,11 @@ void GamePlayState::StopAllBackgroundMusic()
 	{
 		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 			SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
+	}
+	if (m_SummaryAudio != SGD::INVALID_HANDLE)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_SummaryAudio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_SummaryAudio);
 	}
 	//ADD Any additional background audio here
 }
