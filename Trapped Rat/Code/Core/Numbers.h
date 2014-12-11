@@ -7,6 +7,7 @@ private:
 	int value;
 	float lifespan;
 	SGD::Color color;
+	bool evaded;
 public:
 	Numbers();
 	Numbers(int _value, SGD::Color _color, Character* _owner,SGD::Point _offset);

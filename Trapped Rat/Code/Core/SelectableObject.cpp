@@ -2,7 +2,7 @@
 #include "SelectableObject.h"
 #include "../Core/GameData.h"
 #include "../Font/Font.h"
-
+#include "TurnManager.h"
 SelectableObject::SelectableObject()
 {
 	selectedImage = SGD::GraphicsManager::GetInstance()->LoadTexture("Assets/Textures/highlight.png");
@@ -37,8 +37,25 @@ void SelectableObject::Render()
 			int xoffset = 40 - (str.length() * 4);
 			if (xoffset < 0)
 				xoffset = 0;
-			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
-			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 180, 0, 180 }, 1.8f);
+			if (m_objecttype == 1)
+			{
+				if (TurnManager::GetInstance()->GetAll()[0]->GetBP() < m_ability->GetBPCost())
+				{
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 50, 50, 50 }, 1.8f);
+				}
+				else
+				{
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 180, 0, 180 }, 1.8f);
+				}
+			}
+			else
+			{
+				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 180, 0, 180 }, 1.8f);
+			}
+		
 		}
 
 	}
@@ -56,15 +73,51 @@ void SelectableObject::Render()
 			{
 				scale = 2.5f - (string.length()*.09f);
 			}
-			if (scale == 0.0f)
-			{
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, 1.8f);
-			}
 			else
 			{
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, scale);
+				scale = 1.8f;
+			}
+			//if (scale == 0.0f)
+			//{
+			//	if (m_objecttype == 1)
+			//	{
+			//		if (TurnManager::GetInstance()->GetAll()[0]->GetBP() < m_ability->GetBPCost())
+			//		{
+			//			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+			//			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 50, 50, 50 }, 1.8f);
+			//		}
+			//		else
+			//		{
+			//			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+			//			GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, 1.8f);
+			//		}
+			//	}
+			//	else
+			//	{
+			//		GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+			//		GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, 1.8f);
+			//	}
+			//}
+			//else
+			{
+				if (m_objecttype == 1)
+				{
+					if (TurnManager::GetInstance()->GetAll()[0]->GetBP() < m_ability->GetBPCost())
+					{
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 50, 50, 50 }, scale);
+					}
+					else
+					{
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, scale);
+					}
+				}
+				else
+				{
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, scale);
+				}
 			}
 		}
 	}
