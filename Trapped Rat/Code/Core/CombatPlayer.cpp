@@ -1330,13 +1330,14 @@ int CombatPlayer::GetLevel()
 	return level;
 }
 
-//int CombatPlayer::GetNextlvl( )
-//{
-//	return nextlvl;
-//}
+int CombatPlayer::GetNextlvl( )
+{
+	return nextlvl;
+}
 
 void CombatPlayer::AddXP( int xp )
 {
+	leveledup = false;
 	XP += xp;
 	if ( XP >= nextlvl )
 	{
@@ -1349,6 +1350,7 @@ void CombatPlayer::LevelUp()
 	level++;
 	XP -= nextlvl;
 	nextlvl = level * 150 + 100;
+	leveledup = true;
 }
 
 

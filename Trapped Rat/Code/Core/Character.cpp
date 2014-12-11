@@ -430,11 +430,11 @@ void Character::AddStatus( StatusEffect *status , Character* theGuard, bool tern
 		}
 	else
 		{
-		temp->SetOwner( this );
+	temp->SetOwner( this );
 		temp->SetGuard( theGuard );
 		temp->SetTernEffect( ternary );
-		effects.push_back( temp );
-		temp->Initialize();
+	effects.push_back( temp );
+	temp->Initialize( );
 		}
 }
 void Character::InitializeAbilities( std::vector<Ability*> toSet )
