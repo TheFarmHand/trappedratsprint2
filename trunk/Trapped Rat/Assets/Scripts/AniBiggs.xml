@@ -1,21 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="1">
   <Animation>
-    <Image numFrames="2">
-      <Path>OverworldBiggs.png</Path>
+    <Image numFrames="3">
+      <Path>EnemySprites/WindRogue.png</Path>
     </Image>
     <Looping>True</Looping>
-    <Name>AniBiggs</Name>
-    <NextName>None</NextName>
-    <Frame delay="0.25">
-      <AnchorPoint x="71" y="92" />
-      <DrawRect left="46" top="50" right="93" bottom="99" />
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="45" y="28" />
+      <DrawRect left="17" top="12" right="80" bottom="76" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="119" y="92" />
-      <DrawRect left="95" top="48" right="141" bottom="100" />
+    <Frame delay="0.15">
+      <AnchorPoint x="109" y="28" />
+      <DrawRect left="82" top="11" right="145" bottom="78" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="173" y="28" />
+      <DrawRect left="144" top="11" right="214" bottom="79" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
