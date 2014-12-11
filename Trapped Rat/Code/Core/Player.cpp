@@ -48,8 +48,10 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("GainBiggs");
 	Listener::RegisterForEvent("GainCheckers");
 	Listener::RegisterForEvent("CecilFight");
-	Listener::RegisterForEvent("Miniboss");
-	Listener::RegisterForEvent("Trap");
+	Listener::RegisterForEvent("Rogue");
+	Listener::RegisterForEvent( "Warrior" );
+	Listener::RegisterForEvent( "Wizard" );
+	Listener::RegisterForEvent( "Trap" );
 }
 
 
@@ -576,7 +578,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "Miniboss")
+	else if (pEvent->GetEventID() == "Rogue")
 	{ 
 		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
@@ -591,7 +593,39 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 				break;
 				}
 			}
-	}
+		}
+	else if ( pEvent->GetEventID() == "Warrior" )
+		{
+		position.y -= 32;
+		GamePlayState::GetInstance()->CreateMinibossFight();
+		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Enemies )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
+		}
+	else if ( pEvent->GetEventID() == "Wizard" )
+		{
+		position.y -= 32;
+		GamePlayState::GetInstance()->CreateMinibossFight();
+		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Enemies )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
+		}
 
 	else if (pEvent->GetEventID() == "Trap")
 	{

@@ -43,5 +43,5 @@
   </Sound>
   <Animation>CombatAnimations/WindRogue.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLWR.xml</Timeline>
 </Character>

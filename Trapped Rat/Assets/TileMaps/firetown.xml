@@ -2420,7 +2420,7 @@
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="49" collision="0" event="Miniboss" onfire="Miniboss" objectID="0" objectNumber="0" />
+  <tiles id="49" collision="0" event="Warrior" onfire="Warrior" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
