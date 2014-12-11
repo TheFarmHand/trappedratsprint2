@@ -5,8 +5,8 @@
 #include <string>
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "MainMenuState.h"
-
-
+#include "GamePlayState.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
  CreditsState* CreditsState::GetInstance()
 {
 	 static CreditsState data;
@@ -37,9 +37,9 @@
 	 font->DrawString("Associate Producers...", 50.0f, 140.0f + newy, { 0, 0, 0 },2.0f);
 	 font->DrawString("Shawn Paris, Robert Martinez", 100.0f, 170.0f + newy, { 0,0,0 },2.0f);
 	 font->DrawString("Artists...", 50.0f, 200.0f + newy, { 0,0,0 },2.0f);
-	 font->DrawString("Gregory Bey, Caris Frazier, Erich Jaeger", 100.0f, 230.0f + newy, { 0,0,0 },2.0f);
-	 font->DrawString("Developers...", 50.0f, 260.0f + newy, { 0,0,0 },2.0f);
-	 font->DrawString("Riley Wood, Joe Thompson, Matthew Zanini, Grant Taylor", 100.0f, 290.0f + newy, { 0,0,0 },2.0f);
+	 font->DrawString("Gregory Bey, Caris Frazier,_Erich Jaeger, Victoria Hastings", 100.0f, 230.0f + newy, { 0,0,0 },2.0f);
+	 font->DrawString("Developers...", 50.0f, 290.0f + newy, { 0,0,0 },2.0f);
+	 font->DrawString("Riley Wood, Joe Thompson,_Matthew Zanini, Grant Taylor", 100.0f, 320.0f + newy, { 0,0,0 },2.0f);
 	 //font->DrawString("Press Escape to Exit", 50.0f, 500.0f, { 0,0,0 });
  }
 void CreditsState::Enter()
@@ -47,6 +47,12 @@ void CreditsState::Enter()
 	background = SGD::GraphicsManager::GetInstance()->LoadTexture("Assets/Textures/MenuBackground.png");
 	logo = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/logo.png");
 
+	GamePlayState::GetInstance()->StopAllBackgroundMusic();
+	if (GamePlayState::GetInstance()->m_Credits == SGD::INVALID_HANDLE)
+	{
+		GamePlayState::GetInstance()->m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
+	}
+	SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_Credits);
 }
 void CreditsState::Update(float dt)
 {
@@ -61,4 +67,9 @@ void CreditsState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(background);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(logo);
 	increment = 0.0f;
+	if (GamePlayState::GetInstance()->m_Credits != SGD::INVALID_HANDLE)
+	{
+		SGD::AudioManager::GetInstance()->UnloadAudio(GamePlayState::GetInstance()->m_Credits);
+		GamePlayState::GetInstance()->m_Credits = SGD::INVALID_HANDLE;
+	}
 }
