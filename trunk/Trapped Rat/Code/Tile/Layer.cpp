@@ -166,7 +166,7 @@ void Layer::Initialize( const char* path)
 			pixX = x * tileWidth;
 			pixY = y * tileHeight;
 			destination.x = (float)pixX + 16;
-			destination.y = (float)pixY + 32;
+			destination.y = (float)pixY;
 
 			std::string objectName = "OverworldBiggs";
 			std::string objectAni = "AniBiggs";

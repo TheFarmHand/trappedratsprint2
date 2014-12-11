@@ -5,7 +5,7 @@
 WorldObject::WorldObject(std::string imagePath, std::string aniPath, bool allied)
 {
 std::string path = "Assets/Textures/";
-size = SGD::Size( 32, 32 );
+size = SGD::Size( 64, 64 );
 path += imagePath + ".png";
 image = SGD::GraphicsManager::GetInstance()->LoadTexture( path.c_str() );
 ansys = new AnimationSystem();
