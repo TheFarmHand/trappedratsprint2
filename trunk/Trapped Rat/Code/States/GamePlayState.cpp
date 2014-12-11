@@ -624,8 +624,9 @@ void GamePlayState::Fight()
 			RandomAnimation();
 			if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
 				SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
-
-			SGD::AudioManager::GetInstance()->PlayAudio( m_Audio, true );
+			
+			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+				SGD::AudioManager::GetInstance()->PlayAudio( m_Audio, true );
 
 			GameData::GetInstance()->SetIsInCombat( true );
 			state = GPStates::Combat;
@@ -805,8 +806,9 @@ void GamePlayState::TownUpdate( float dt )
 
 				if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 					SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
-
-				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+				
+				if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+					SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
 
 
 				state = GPStates::Combat;
@@ -967,7 +969,8 @@ void GamePlayState::TownUpdate( float dt )
 			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 				SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
 
-			SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
 
 			TurnManager::GetInstance()->Initialize( Party, moreguards );
 			for ( size_t i = 0; i < Party.size(); i++ )
@@ -1114,18 +1117,18 @@ void GamePlayState::MenuUpdate( float dt )
 									   break;
 							 }
 							 case 1:
-								 if ( laststate == Combat )
-								 {
+									   if ( laststate == Combat )
+									   {
 									 GameData::GetInstance()->PlaySelectionChange();
-									 menuindex = 0;
+										   menuindex = 0;
 									 substate = MenuSubStates::Options;
-								 }
-								 else
+									   }
+									   else
 								 {
-									 substate = MenuSubStates::Shop;
+										   substate = MenuSubStates::Shop;
 								 }
 
-								 break;
+									   break;
 							 case 2:
 								 if ( laststate == Combat )
 								 {
@@ -1147,16 +1150,16 @@ void GamePlayState::MenuUpdate( float dt )
 								 }
 								 break;
 							 case 3:
-							 {
+								 {
 									   TCHAR path[MAX_PATH];
 									   if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path)))
 									   {
 										   PathAppend(path, TEXT("basicinfo.txt"));
-									   }
+								 }
 									   std::ifstream fin;
 									   fin.open(path);
 									   if (fin.is_open())
-									   {
+								 {
 										   for (int i = 0; i < 3;i++)
 										   {
 											   data temp;
@@ -1167,12 +1170,12 @@ void GamePlayState::MenuUpdate( float dt )
 										   
 									   }
 									   //SaveGame();
-									   menuindex = 0;
+									 menuindex = 0;
 									   substate = Save;
 									   //we should display something if the save is successful
 									   //we should have them select which file to save to
 									   break;
-							 }
+								 }
 							 case 4:
 								 GameData::GetInstance()->PlaySelectionChange();
 								 menuindex = 0;
@@ -1747,9 +1750,14 @@ void GamePlayState::CombatUpdate( float dt )
 	{
 		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
 			SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
-		SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
+		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+			SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
 	}
 
+	for (size_t i = 0; i < m_vhuditems.size(); i++)
+	{
+		m_vhuditems[i]->Update(dt);
+	}
 	TurnManager::GetInstance()->Update( dt );
 
 
@@ -2347,6 +2355,15 @@ void GamePlayState::CheckAbilityUnlocked( bool EOC )
 
 void GamePlayState::MapUpdate( float dt )
 {
+
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+			SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
+	}
+
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
 	{
@@ -2465,6 +2482,32 @@ void GamePlayState::MapRender()
 	if ( WorldMapAnsys != nullptr )
 	{
 		WorldMapAnsys->Render( townpoints[ SelectedTown ].x + 32, townpoints[ SelectedTown ].y + 32 );
+	}
+	//Render Name of town
+	switch (SelectedTown)
+	{
+	case 0:
+		GameData::GetInstance()->GetFont()->DrawString("Windy Woods", 94, 14, { 0, 0, 0 }, 7.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Windy Woods", 90, 10, { 50, 200, 50 }, 7.0f);
+		break;
+	case 1:
+		GameData::GetInstance()->GetFont()->DrawString("Magma Falls", 94, 14, { 0, 0, 0 }, 7.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Magma Falls", 90, 10, { 200, 50, 50 }, 7.0f);
+		break;
+	case 2: 
+		GameData::GetInstance()->GetFont()->DrawString("Earthy Town", 94, 14, { 0, 0, 0 }, 7.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Earthy Town", 90, 10, { 153, 83, 32 }, 7.0f);
+		break;
+	case 3:
+		GameData::GetInstance()->GetFont()->DrawString("New Water City", 49, 14, { 0, 0, 0 }, 6.5f);
+		GameData::GetInstance()->GetFont()->DrawString("New Water City", 45, 10, { 50, 50, 200 }, 6.5f);
+		break;
+	case 4:
+		GameData::GetInstance()->GetFont()->DrawString("Hero's Landing", 94, 14, { 0, 0, 0 }, 6.5f);
+		GameData::GetInstance()->GetFont()->DrawString("Hero's Landing", 90, 10, { 50, 200, 50 }, 6.5f);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -3534,4 +3577,9 @@ void GamePlayState::TutorialStart()
 		laststate = Combat;
 		GameData::GetInstance()->SetIsInCombat(true);
 	}
+}
+
+void GamePlayState::AddToHUDItems(HUDItem* item)
+{
+	m_vhuditems.push_back(item);
 }

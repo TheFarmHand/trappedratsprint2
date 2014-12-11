@@ -226,5 +226,6 @@ public:
 	void TutorialStart();
 	void PlaySoundEffect(int _index);
 	void SetTutorial(bool is){ is_tutorial = is; }
+	void AddToHUDItems(HUDItem* item);
 };
 

@@ -141,21 +141,26 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 	{
 		//hurt
 		Numbers* temp = new Numbers(dmg, SGD::Color(180, 0, 0),this,tempoffset);
-		damagenumbers.push_back(temp);
+	//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
 	}
 	else if (!firefall )
 	{
 		//healed
 
 		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0),this,tempoffset);
-		damagenumbers.push_back(temp);
+	//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
 	}
 	if ( firefall )
 		{
 		tempoffset.x -= 30;
 		tempoffset.y += 10;
 		Numbers* temp = new Numbers( dmg, SGD::Color( 180, 0, 0 ), this, tempoffset );
-		damagenumbers.push_back( temp );
+		//damagenumbers.push_back( temp );
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
 		}
 
 	GamePlayState::GetInstance()->PlaySoundEffect(1);
