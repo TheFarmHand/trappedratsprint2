@@ -380,11 +380,12 @@ void GamePlayState::Enter()
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume() );
 
 
-	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/doors.wav"));//0
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/dooropen.wav"));//0
 	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Pain.wav"));//1
-	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/woodhit.wav"));//2
-	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/footstep.wav"));//3
-
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/trap.wav"));//2
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/walking.wav"));//3
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/cancel.wav"));//4
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/run.wav"));//5
 
 
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
@@ -1058,7 +1059,7 @@ void GamePlayState::MenuUpdate( float dt )
 				maxindex = 2;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
-				GameData::GetInstance()->PlaySelectionChange();
+				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				menuindex = 0;
 				state = laststate;
 			}
@@ -1067,7 +1068,7 @@ void GamePlayState::MenuUpdate( float dt )
 			maxindex = 4;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
-				GameData::GetInstance()->PlaySelectionChange();
+				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				menuindex = 0;
 				substate = MenuSubStates::None;
 
@@ -1077,7 +1078,7 @@ void GamePlayState::MenuUpdate( float dt )
 			maxindex = (int)shopinv.size() - 1;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
-				GameData::GetInstance()->PlaySelectionChange();
+				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				menuindex = 0;
 				substate = MenuSubStates::None;
 				//shopinv.clear();
@@ -1094,6 +1095,7 @@ void GamePlayState::MenuUpdate( float dt )
 				maxindex = Party[ character_index ]->GetAbilitiesSize() - 1;
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
+				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				if ( selecting_ability || selecting_party || select_first )
 				{
 					selecting_ability = false;
@@ -1105,7 +1107,7 @@ void GamePlayState::MenuUpdate( float dt )
 				}
 				else
 				{
-					GameData::GetInstance()->PlaySelectionChange();
+					
 					menuindex = 0;
 					substate = MenuSubStates::None;
 				}
@@ -1118,7 +1120,7 @@ void GamePlayState::MenuUpdate( float dt )
 				maxindex = 0;
 			if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 			{
-				GameData::GetInstance()->PlaySelectionChange();
+				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
 				menuindex = 0;
 				substate = MenuSubStates::None;
 				
@@ -1621,16 +1623,20 @@ void GamePlayState::MenuRender()
 			{
 				if ( i < 3 )
 				{
-					GameData::GetInstance()->GetFont()->DrawString( Party[ i ]->GetName(), 100.0f, 185.0f + ( i * 55 ), { 0, 150, 0 }, 1.5f );
+					GameData::GetInstance()->GetFont()->DrawString( Party[ i ]->GetName(), 90.0f, 185.0f + ( i * 55 ), { 0, 150, 0 }, 1.5f );
+					std::ostringstream lvl;
+					lvl << "Level: " << Party[i]->GetLevel();
+					GameData::GetInstance()->GetFont()->DrawString(lvl.str(), 250.0f, 185.0f + (i * 55), { 0,0, 0 }, 1.0f);
 				}
 				else
 				{
-					GameData::GetInstance()->GetFont()->DrawString( Party[ i ]->GetName(), 100.0f, 185.0f + ( i * 55 ), { 150, 0, 0 }, 1.5f );
+					GameData::GetInstance()->GetFont()->DrawString( Party[ i ]->GetName(), 90.0f, 185.0f + ( i * 55 ), { 150, 0, 0 }, 1.5f );
 				}
 				std::ostringstream info;
-				info << "HP: " << Party[ i ]->GetHP() << "/" << Party[ i ]->GetMaxHP() << "  BP: " << Party[ i ]->GetBP() << "/" << Party[ i ]->GetMaxBP();
-				GameData::GetInstance()->GetFont()->DrawString( info.str(), 100.0f, 200.0f + ( i * 55 ), { 0, 0, 0 }, 1.5f );
+				info << "HP: " << Party[ i ]->GetHP() << "/" << Party[ i ]->GetMaxHP() << "  BP: " << Party[ i ]->GetBP() << "/" << Party[ i ]->GetMaxBP() << "  XP:" << Party[i]->GetXP() << "/" << Party[i]->GetNextlvl();
+				GameData::GetInstance()->GetFont()->DrawString( info.str(), 90.0f, 200.0f + ( i * 55 ), { 0, 0, 0 }, 1.0f );
 				SGD::GraphicsManager::GetInstance()->DrawRectangle( { 80.0f, 180.0f, 320.0f, 330.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2 );
+
 			}
 
 			if ( selecting_ability )
@@ -3644,6 +3650,8 @@ void GamePlayState::TutorialStart()
 {
 	if (is_tutorial)
 	{
+		SelectedTown = 0;
+		unlockedTowns = 0;
 		std::vector<Ability*> partyAbilities;
 		SGD::Point characterOrderPosition;
 		std::vector<Enemy*> tempEnemy;

@@ -69,8 +69,8 @@ private:
 	SelectableObject* helpobject = nullptr;
 	// Leveling Stuff
 
-	int XP;			// Current XP amount
-	int nextlvl;	// XP to next level
+	int XP = 0;
+	int nextlvl = 250;
 	bool leveledup = false;		// Leveled up last time we got XP 
 	bool runaway = false;		// Wait what is this about?
 	

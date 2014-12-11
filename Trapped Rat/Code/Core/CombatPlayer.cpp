@@ -10,6 +10,7 @@
 #include "../Font/Font.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
 
 
 CombatPlayer::CombatPlayer()
@@ -623,6 +624,7 @@ void CombatPlayer::AttackUpdate( float dt )
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		GameData::GetInstance()->PlaySelectionChange();
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
@@ -751,8 +753,8 @@ void CombatPlayer::ItemsUpdate( float dt )
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
-	GameData::GetInstance()->PlaySelectionChange();
-	states = 0;
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
+		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
 		hudSelection = 0;
@@ -809,7 +811,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
 	{
-		GameData::GetInstance()->PlaySelectionChange();
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -917,6 +919,7 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Escape ) ||pInput->IsButtonPressed(0,2))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -973,7 +976,7 @@ void CombatPlayer::RunUpdate( float dt )
 			mySelection = none;
 			SetSelection( 0 );
 			//help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
-			GamePlayState::GetInstance()->PlaySoundEffect(0);
+			GamePlayState::GetInstance()->PlaySoundEffect(5);
 		}
 
 		else
@@ -1023,6 +1026,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 	}
 	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -1126,6 +1130,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 
 	if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
@@ -1298,6 +1303,7 @@ void CombatPlayer::SelectingItems( float dt )
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(GamePlayState::GetInstance()->m_vsoundeffects[4]);
 		delete item_choose;
 		item_choose = nullptr;
 		GameData::GetInstance()->PlaySelectionChange();
