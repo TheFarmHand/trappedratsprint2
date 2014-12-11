@@ -1086,8 +1086,8 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 		{
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
-				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ 0 ] );
-				GamePlayState::GetInstance()->AddTarget();
+				/*GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ 0 ] );
+				GamePlayState::GetInstance()->AddTarget();*/
 				TernarySelection();
 				return;
 			}
@@ -1218,8 +1218,8 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 			if ( GamePlayState::GetInstance()->usingTernary() )
 			{
 				// Add selection to vector
-				GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ 0 ] );
-				GamePlayState::GetInstance()->AddTarget();
+				/*GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ 0 ] );
+				GamePlayState::GetInstance()->AddTarget();*/
 				TernarySelection();
 				return;
 			}
@@ -1456,6 +1456,10 @@ void CombatPlayer::TernaryBlast( float dt )
 									TurnManager::GetInstance()->GetAllies()[ targets ],
 									GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ],
 									true );	// true for ternary stuff	
+								GamePlayState::GetInstance( )->HoldOntoAbility( GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ] );
+								std::ostringstream usingAbility;
+								usingAbility << name << " uses " << GamePlayState::GetInstance( )->CurrentAbilityUsed->GetAbilityName( );
+								GamePlayState::GetInstance( )->GetHelpText( )->ManualOverride( usingAbility.str( ), this );
 								ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[ tern_index ]->GetAbilityName(),
 											  TurnManager::GetInstance()->GetAllies()[ targets ] );
 							}
@@ -1464,7 +1468,7 @@ void CombatPlayer::TernaryBlast( float dt )
 
 					GamePlayState::GetInstance()->AbilityUsed = true;
 					GamePlayState::GetInstance( )->CurrentAbilityUsed = GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ];
-					GamePlayState::GetInstance()->abilityTimer = 1.5f;
+					GamePlayState::GetInstance()->abilityTimer = 2.0f;
 					tern_index++;
 					return;
 				}
@@ -1477,12 +1481,18 @@ void CombatPlayer::TernaryBlast( float dt )
 					GamePlayState::GetInstance()->myTernTargets.targets[ tern_index ],
 					GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ],
 					true );	// true for ternary stuff	
+				GamePlayState::GetInstance( )->HoldOntoAbility( GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ] );
+				std::ostringstream usingAbility;
+				usingAbility << name << " uses " << GamePlayState::GetInstance( )->CurrentAbilityUsed->GetAbilityName( );
+				GamePlayState::GetInstance( )->GetHelpText( )->ManualOverride( usingAbility.str( ), this );
+				
+				
 				ApplyTernary( GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ]->GetAbilityName( ),
 							  GamePlayState::GetInstance( )->myTernTargets.targets[ tern_index ] );
 
 				GamePlayState::GetInstance()->AbilityUsed = true;
 				GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance( )->myTernTargets.abilities[ tern_index ];
-				GamePlayState::GetInstance()->abilityTimer = 1.5f;
+				GamePlayState::GetInstance()->abilityTimer = 2.0f;
 				
 				}
 				tern_index++;

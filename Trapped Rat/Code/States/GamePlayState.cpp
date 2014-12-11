@@ -1811,6 +1811,7 @@ void GamePlayState::CombatUpdate( float dt )
 	{
 		m_vhuditems[ i ]->Update( dt );
 	}
+	
 	TurnManager::GetInstance()->Update( dt );
 
 
@@ -2583,7 +2584,7 @@ void GamePlayState::MapUpdate( float dt )
 		{
 			case 0: //Wind
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown2.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
 				//Load Audio

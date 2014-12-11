@@ -40,12 +40,12 @@ void TurnManager::CombatLoot()
 {
 	GamePlayState* pGPS = GamePlayState::GetInstance();
 	int num_items = 0;
-	int gold = 0;
+	int gold = 10;
 	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
 	{
 		int test = rand() % 100;
 		if ( test < 35 ) num_items++;
-		gold += rand() % 15;
+		gold += rand() % 25;
 	}
 
 	for ( int i = 0; i < num_items; i++ )
@@ -68,7 +68,7 @@ void TurnManager::CombatLoot()
 			pGPS->AddItem( LargeHP );
 		}
 
-		else if ( item < 825 )	// Large BP
+		else if ( item < 850 )	// Large BP
 		{
 			pGPS->AddItem( LargeBP );
 		}
@@ -99,6 +99,11 @@ void TurnManager::CombatLoot()
 			}
 		}
 		pGPS->tripped_trap = -1;
+	}
+	else
+
+	{
+		pGPS->AddGold(gold);
 	}
 }
 
