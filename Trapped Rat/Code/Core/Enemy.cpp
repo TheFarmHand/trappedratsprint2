@@ -217,6 +217,16 @@ void Enemy::Render()
 	std::ostringstream ss;
 	ss << "Speed: " << GetSpeed();
 	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
+	std::ostringstream se;
+	if ( GetEType() == WIND )
+		se << "Element: Wind";
+	if ( GetEType() == FIRE )
+		se << "Element: Fire";
+	if ( GetEType() == EARTH )
+		se << "Element: Earth";
+	if ( GetEType() == WATER )
+		se << "Element: Water";
+	GameData::GetInstance()->GetFont()->DrawString( se.str(), position.x + 50, position.y + 55, { 0, 0, 0 } );
 
 	if ( ansys != nullptr )
 		{

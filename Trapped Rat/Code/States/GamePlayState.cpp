@@ -2213,7 +2213,46 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		{
 			return nullptr;
 		}
-		if ( element == "Wind" )
+		switch ( SelectedTown )
+			{
+			case 0:
+				toon->SetEtype( ETYPE::WIND );
+				break;
+			case 1:
+				toon->SetEtype( ETYPE::FIRE );
+				break;
+			case 2:
+				toon->SetEtype( ETYPE::EARTH );
+				break;
+			case 3:
+				toon->SetEtype( ETYPE::WATER );
+				break;
+			case 4:
+				{
+				int randomEle = rand() % 4;
+				switch ( randomEle )
+					{
+					case 1:
+						toon->SetEtype( ETYPE::WIND );
+						break;
+					case 2:
+						toon->SetEtype( ETYPE::FIRE );
+						break;
+					case 3:
+						toon->SetEtype( ETYPE::EARTH );
+						break;
+					case 4:
+						toon->SetEtype( ETYPE::WATER );
+						break;
+					default:
+						break;
+					}
+				}
+				break;
+			default:
+				break;
+			}
+		/*if ( element == "Wind" )
 		{
 			toon->SetEtype( ETYPE::WIND );
 		}
@@ -2232,7 +2271,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 		else
 		{
 			toon->SetEtype( ETYPE::MULTI );
-		}
+		}*/
 
 		AnimationSystem* tempani = new AnimationSystem();
 		tempani->Load(timeLine.c_str());
