@@ -688,6 +688,24 @@ void TurnManager::CombatUpdate( float dt )
 		}
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Update( dt );
 	}
+	else if ( GamePlayState::GetInstance()->ItemUsed )
+		{
+		GamePlayState::GetInstance()->itemTimer -= dt;
+		if ( GamePlayState::GetInstance()->itemTimer <= 0.0f )
+			{
+			GamePlayState::GetInstance()->ItemUsed = false;
+			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
+			}
+		}
+	else if ( GamePlayState::GetInstance()->RunUsed )
+		{
+		GamePlayState::GetInstance()->runTimer -= dt;
+		if ( GamePlayState::GetInstance()->runTimer <= 0.0f )
+			{
+			GamePlayState::GetInstance()->RunUsed = false;
+			GamePlayState::GetInstance()->GetHelpText()->UpdateSelection( 5 );
+			}
+		}
 
 	if ( !turnPause )
 	{

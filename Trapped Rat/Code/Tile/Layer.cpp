@@ -97,6 +97,97 @@ void Layer::Initialize( const char* path)
 
 			GamePlayState::GetInstance()->AddTrap(tF, destination);
 		}
+		if ( tE == "GainBiggs" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
+			}
+		else if ( tE == "GainCheckers" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
+			}
+		else if ( tE == "GainSlippy" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
+			}
+		else if ( tE == "GainJeeves" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
+			}
+		else if ( tE == "Miniboss" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, false );
+			}
+		else if ( tE == "CecilFight" )
+			{
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, false );
+			}
+
 
 		tiles = tiles->NextSiblingElement( "tiles" );
 		

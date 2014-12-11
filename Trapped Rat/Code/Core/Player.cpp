@@ -419,6 +419,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(jeeves);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainJeeves");
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Ally )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 		GamePlayState::GetInstance()->PlaySoundEffect(2);
 
 	}
@@ -452,6 +462,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(slippy);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainSlippy");
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Ally )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 		GamePlayState::GetInstance()->PlaySoundEffect(2);
 
 	}
@@ -484,6 +504,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(checkers);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainCheckers");
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Ally )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 		GamePlayState::GetInstance()->PlaySoundEffect(2);
 
 	}
@@ -516,6 +546,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->AddToParty(biggs);
 		GamePlayState::GetInstance()->CheckAbilityUnlocked();
 		UnregisterFromEvent("GainBiggs");
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Ally )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 		GamePlayState::GetInstance()->PlaySoundEffect(2);
 
 	}
@@ -523,6 +563,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	{
 		GamePlayState::GetInstance()->CreateFinalFight();
 		UnregisterFromEvent("CecilFight");
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Enemy )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
@@ -531,6 +581,16 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Enemy )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
 	}
 
 	else if (pEvent->GetEventID() == "Trap")
