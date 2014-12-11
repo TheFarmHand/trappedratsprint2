@@ -372,6 +372,8 @@ void GamePlayState::Enter()
 	m_Audio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/req.xwm" );
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/entercombat.wav" );
+	m_Map = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Map.xwm");
+	m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
 	SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio, true );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume() );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume() );
@@ -485,39 +487,39 @@ void GamePlayState::Exit()
 	{
 	Loading( "Dumping..." );
 	for ( size_t i = 0; i < m_vsoundeffects.size(); i++ )
-		{
+	{
 		SGD::AudioManager::GetInstance()->UnloadAudio( m_vsoundeffects[i] );
-		}
+	}
 	m_vsoundeffects.clear();
 
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
-		{
+	{
 		delete m_vhuditems[i];
-		}
+	}
 	m_vhuditems.clear();
 	for ( size_t i = 0; i < m_vSelectableItems.size(); i++ )
-		{
+	{
 		delete m_vSelectableItems[i];
-		}
+	}
 	m_vSelectableItems.clear();
 	if ( enemy1 != nullptr )
-		{
+	{
 		delete enemy1;
 		enemy1 = nullptr;
-		}
+	}
 	if ( dialogue != nullptr )
 		delete dialogue;
 	if ( enemy2 != nullptr )
-		{
+	{
 		delete enemy2;
 		enemy2 = nullptr;
-		}
+	}
 
 	if ( enemy3 != nullptr )
-		{
+	{
 		delete enemy3;
 		enemy3 = nullptr;
-		}
+	}
 
 	if ( helptextbox != nullptr )
 		delete helptextbox;
@@ -525,21 +527,21 @@ void GamePlayState::Exit()
 	TurnManager::GetInstance()->Terminate();
 	delete ternary_bar;
 	for ( unsigned int i = 0; i < Party.size(); i++ )
-		{
+	{
 		delete Party[i];
 		Party[i] = nullptr;
-		}
+	}
 	for ( unsigned int i = 0; i < Parents.size(); i++ )
-		{
+	{
 		delete Parents[i];
 		Parents[i] = nullptr;
 
-		}
+	}
 	for ( unsigned int i = 0; i < guards.size(); i++ )
-		{
+	{
 		delete guards[i];
 		guards[i] = nullptr;
-		}
+	}
 	tutorialenemy.clear();
 	guards.clear();
 	shopinv.clear();
@@ -551,6 +553,8 @@ void GamePlayState::Exit()
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_Audio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( entercombat );
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_Credits);
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_Map);
 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( WorldMap );
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( PadLock );
@@ -583,9 +587,9 @@ void GamePlayState::Exit()
 
 	auto iterAbil = MasterAbilityList.begin();
 	for ( ; iterAbil != MasterAbilityList.end(); ++iterAbil )
-		{
+	{
 		delete iterAbil->second;
-		}
+	}
 	MasterAbilityList.clear();
 
 	for ( unsigned int i = 0; i < overworldObjects.size(); ++i )
@@ -632,11 +636,14 @@ void GamePlayState::Fight()
 			stepcounter = rand() % 100;
 			//play animation for entering random combat
 			RandomAnimation();
-			if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
-				SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
+			//if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_overAudio ) )
+			//	SGD::AudioManager::GetInstance()->StopAudio( m_overAudio );
 			
 			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
-				SGD::AudioManager::GetInstance()->PlayAudio( m_Audio, true );
+			{
+				StopAllBackgroundMusic();
+				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+			}
 
 			GameData::GetInstance()->SetIsInCombat( true );
 			state = GPStates::Combat;
@@ -819,12 +826,14 @@ void GamePlayState::TownUpdate( float dt )
 
 				GameData::GetInstance()->SetIsInCombat( true );
 
-				if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
-					SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
+				/*if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+					SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);*/
 				
 				if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+				{
+					StopAllBackgroundMusic();
 					SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
-
+				}
 
 				state = GPStates::Combat;
 				std::vector<Enemy*> tempEnemy;
@@ -981,11 +990,14 @@ void GamePlayState::TownUpdate( float dt )
 			GameData::GetInstance()->SetIsInCombat( true );
 			state = GPStates::Combat;
 
-			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+		/*	if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 				SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
-
+*/
 			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+			{
+				StopAllBackgroundMusic();
 				SGD::AudioManager::GetInstance()->PlayAudio(m_Audio, true);
+			}
 
 			TurnManager::GetInstance()->Initialize( Party, moreguards );
 			for ( size_t i = 0; i < Party.size(); i++ )
@@ -1769,10 +1781,13 @@ void GamePlayState::CombatUpdate( float dt )
 
 	if ( state == GPStates::Town )
 	{
-		if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
-			SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
+	//	if ( SGD::AudioManager::GetInstance()->IsAudioPlaying( m_Audio ) )
+		//	SGD::AudioManager::GetInstance()->StopAudio( m_Audio );
 		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
-			SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
+		{
+			StopAllBackgroundMusic();
+			SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
+		}
 	}
 
 	for (size_t i = 0; i < m_vhuditems.size(); i++)
@@ -2214,9 +2229,9 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 			return nullptr;
 		}
 		switch ( SelectedTown )
-			{
+		{
 			case 0:
-				toon->SetEtype( ETYPE::WIND );
+			toon->SetEtype( ETYPE::WIND );
 				break;
 			case 1:
 				toon->SetEtype( ETYPE::FIRE );
@@ -2246,7 +2261,7 @@ Enemy* GamePlayState::LoadEnemy( std::string _path )
 						break;
 					default:
 						break;
-					}
+		}
 				}
 				break;
 			default:
@@ -2425,13 +2440,16 @@ void GamePlayState::CheckAbilityUnlocked( bool EOC )
 void GamePlayState::MapUpdate( float dt )
 {
 
-	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
-	{
-		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
-			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
-		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
-			SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
-	}
+	//if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+	//{
+//		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+	//		SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+		if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Map))
+		{
+			StopAllBackgroundMusic();
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Map);
+		}
+	//}
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
@@ -2501,35 +2519,70 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
+				//Load Audio
+				if (m_overAudio != SGD::INVALID_HANDLE)
+				{
+					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+					m_overAudio = SGD::INVALID_HANDLE;
+				}
+				m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm");
 				break;
 			case 1://Fire
 				Loading( "Loading Map" );
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\firetown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/magmafalls_enter.xml" );
+				if (m_overAudio != SGD::INVALID_HANDLE)
+				{
+					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+					m_overAudio = SGD::INVALID_HANDLE;
+				}
+				m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Fire.xwm");
 				break;
 			case 2://Earth
 				Loading( "Loading Map" );
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\EarthTown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/earthytown_enter.xml" );
+				if (m_overAudio != SGD::INVALID_HANDLE)
+				{
+					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+					m_overAudio = SGD::INVALID_HANDLE;
+				}
+				m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Earth.xwm");
 				break;
 			case 3://Water
 				Loading( "Loading Map" );
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WaterTown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/newwatercity_enter.xml" );
+
+				if (m_overAudio != SGD::INVALID_HANDLE)
+				{
+					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+					m_overAudio = SGD::INVALID_HANDLE;
+				}
+				m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Water.xwm");
 				break;
 			case 4://Final Town
 				Loading( "Loading Map" );
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\herotown.xml" );
 				//here we load in the dialogue
 				dialogue->Load( "Assets/Scripts/heroslanding_enter.xml" );
+
+				if (m_overAudio != SGD::INVALID_HANDLE)
+				{
+					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
+					m_overAudio = SGD::INVALID_HANDLE;
+				}
+				m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Hero.xwm");
 				break;
 			default:
 				//TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\TestTown.xml");
 				break;
 		}
+		StopAllBackgroundMusic();
+		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
 		laststate = Town;
 		state = Dia;
 		GameData::GetInstance()->PlaySelectionChange();
@@ -2628,8 +2681,7 @@ void GamePlayState::SummaryUpdate( float dt )
 	//}
 	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 	{
-		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
-			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+		StopAllBackgroundMusic();
 		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
 	}
 
@@ -3684,3 +3736,27 @@ void GamePlayState::CreateOverworldObject( std::string object, std::string anima
 	
 	overworldObjects.push_back( tempObj );
 	}
+void GamePlayState::StopAllBackgroundMusic()
+{
+	if (m_Audio != SGD::INVALID_HANDLE)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Audio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Audio);
+	}
+	if (m_Credits != SGD::INVALID_HANDLE)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Credits))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Credits);
+	}
+	if (m_Map != SGD::INVALID_HANDLE)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Map))
+			SGD::AudioManager::GetInstance()->StopAudio(m_Map);
+	}
+	if (m_overAudio != SGD::INVALID_HANDLE)
+	{
+		if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
+			SGD::AudioManager::GetInstance()->StopAudio(m_overAudio);
+	}
+	//ADD Any additional background audio here
+}
