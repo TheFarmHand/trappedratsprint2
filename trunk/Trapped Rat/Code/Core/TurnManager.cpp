@@ -517,7 +517,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		// Do some Dodge word magic instead of damage
 		// For now:
 		value = 0;
-		target->TakeDamage( value );
+		target->TakeDamage( value ,false,false,true);
 	}
 
 	if ( guard )

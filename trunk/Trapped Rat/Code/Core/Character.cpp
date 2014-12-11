@@ -167,7 +167,147 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 
 	GamePlayState::GetInstance()->PlaySoundEffect(1);
 }
+void Character::TakeDamage(int dmg, bool firefall, bool statusDot)
+{
+	if (statusDot == false)
+	{
+		TakeDamage(dmg, firefall);
+		return;
+	}
+	if (name == "Cecil" && CecilPhase == 3)
+	{
+		damageDealt += dmg;
+		dmg = 5;
+	}
+	if (name == "Cecil" && CecilPhase == 2 && HP / (float)(GetMaxHP()) < 0.1f)
+	{
+		dmg = 0;
+	}
+	SetHP(HP - dmg);
 
+	if (dmg>0)
+		GamePlayState::GetInstance()->AddToGauge(dmg);
+	if (name == "Jane" && alive == true)
+		++JaneHit;
+	else if (name == "John" && alive == true)
+		++JohnHit;
+	else if (name == "Shopkeeper" && alive == true)
+	{
+		for (unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++)
+		{
+			if (TurnManager::GetInstance()->GetAllies()[i]->GetProgress() >= 100.0f)
+			{
+				lastAttacker = i;
+				break;
+			}
+		}
+	}
+	SGD::Point tempoffset;
+	tempoffset.y = 0;
+	if (GetType() == Enemy)
+	{
+		tempoffset.x = -50;
+	}
+	else
+	{
+		tempoffset.x = 50;
+	}
+	if (dmg > 0 && !firefall)
+	{
+		//hurt
+		Numbers* temp = new Numbers(dmg, SGD::Color(180, 180, 50), this, tempoffset);
+		//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+	}
+	else if (!firefall)
+	{
+		//healed
+
+		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0), this, tempoffset);
+		//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
+	}
+	if (firefall)
+	{
+		tempoffset.x -= 30;
+		tempoffset.y += 10;
+		Numbers* temp = new Numbers(dmg, SGD::Color(180, 0, 0), this, tempoffset);
+		//damagenumbers.push_back( temp );
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
+	}
+
+	GamePlayState::GetInstance()->PlaySoundEffect(1);
+}
+void Character::TakeDamage(int dmg, bool firefall, bool statusDot, bool dodgeing)
+{
+	if (name == "Cecil" && CecilPhase == 3)
+	{
+		damageDealt += dmg;
+		dmg = 5;
+	}
+	if (name == "Cecil" && CecilPhase == 2 && HP / (float)(GetMaxHP()) < 0.1f)
+	{
+		dmg = 0;
+	}
+	SetHP(HP - dmg);
+
+	if (dmg>0)
+		GamePlayState::GetInstance()->AddToGauge(dmg);
+	if (name == "Jane" && alive == true)
+		++JaneHit;
+	else if (name == "John" && alive == true)
+		++JohnHit;
+	else if (name == "Shopkeeper" && alive == true)
+	{
+		for (unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++)
+		{
+			if (TurnManager::GetInstance()->GetAllies()[i]->GetProgress() >= 100.0f)
+			{
+				lastAttacker = i;
+				break;
+			}
+		}
+	}
+	SGD::Point tempoffset;
+	tempoffset.y = 0;
+	if (GetType() == Enemy)
+	{
+		tempoffset.x = -50;
+	}
+	else
+	{
+		tempoffset.x = 50;
+	}
+	if (dmg > 0 && !firefall)
+	{
+		//hurt
+		Numbers* temp = new Numbers(dmg, SGD::Color(180, 180, 50), this, tempoffset);
+		//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+	}
+	else if (!firefall)
+	{
+		//healed
+
+		Numbers* temp = new Numbers(abs(dmg), SGD::Color(0, 180, 0), this, tempoffset,true);
+		//	damagenumbers.push_back(temp);
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
+	}
+	if (firefall)
+	{
+		tempoffset.x -= 30;
+		tempoffset.y += 10;
+		Numbers* temp = new Numbers(dmg, SGD::Color(180, 0, 0), this, tempoffset);
+		//damagenumbers.push_back( temp );
+		GamePlayState::GetInstance()->AddToHUDItems(temp);
+
+	}
+
+	GamePlayState::GetInstance()->PlaySoundEffect(1);
+}
 bool Character::HasEffect( std::string effect )
 {
 	for ( auto iter = GetEffects( ).begin( ); iter != GetEffects( ).end( ); iter++ )

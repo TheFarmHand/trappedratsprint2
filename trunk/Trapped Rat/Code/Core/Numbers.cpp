@@ -53,3 +53,13 @@ Numbers::Numbers(int _value, SGD::Color _color, Character* _owner, SGD::Point _o
 	is_active = true;
 	evaded = false;
 }
+Numbers::Numbers(int _value, SGD::Color _color, Character* _owner, SGD::Point _offset, bool _evade)
+{
+	value = _value;
+	color = _color;
+	m_offset = _offset;
+	owner = _owner;
+	lifespan = 90;
+	is_active = true;
+	evaded = _evade;
+}
