@@ -239,7 +239,7 @@ void StatusEffect::HandleDOT()
 	if ( name == "Regen" )
 		owner->TakeDamage( -dmg_tick );
 	else
-		owner->TakeDamage( ElementalMod() );	// Tweaks numbers according to Elemental affinities
+		owner->TakeDamage( ElementalMod(),false,true );	// Tweaks numbers according to Elemental affinities
 
 }
 

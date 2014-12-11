@@ -11,6 +11,8 @@ private:
 public:
 	Numbers();
 	Numbers(int _value, SGD::Color _color, Character* _owner,SGD::Point _offset);
+	Numbers(int _value, SGD::Color _color, Character* _owner, SGD::Point _offset, bool _evade);
+
 	virtual ~Numbers();
 
 	void virtual Update(float dt);

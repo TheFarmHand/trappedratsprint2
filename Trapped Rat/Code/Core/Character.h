@@ -58,6 +58,8 @@ class Character :
 		void virtual UseAbility();
 		void virtual StatusTick();
 		void virtual TakeDamage( int dmg, bool firefall = false );
+		void virtual TakeDamage(int dmg, bool firefall, bool statusDot );
+		void virtual TakeDamage(int dmg, bool firefall, bool statusDot, bool dodgeing);
 		void React();
 		void RemoveEffect( std::string effect );
 

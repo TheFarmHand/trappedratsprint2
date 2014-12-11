@@ -54,8 +54,8 @@ void GamePlayState::Enter()
 	WorldMapAnsys->Play( 0 );
 	WorldMap = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/world.png" );
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/padlock.png" );
-
-
+	
+	abilityunlocked = true;
 	
 	
 	//testFinalFight = true;
@@ -2343,6 +2343,7 @@ void GamePlayState::Loading( std::string _loading )
 
 void GamePlayState::CheckAbilityUnlocked( bool EOC )
 {
+	abilityunlocked = false;
 	for ( unsigned int i = 0; i < Party.size(); i++ )
 	{
 		for ( unsigned int k = 0; k < 8; k++ )
@@ -2355,6 +2356,7 @@ void GamePlayState::CheckAbilityUnlocked( bool EOC )
 
 					//Enter code to notify loot/exp screen that a new ability was unlocked(i.e. level gained...show stat gains and new ability unlocked)
 					// Print to Window Screen the details
+					abilityunlocked = true;
 				}
 			}
 		}
@@ -2491,7 +2493,7 @@ void GamePlayState::MapRender()
 	{
 		WorldMapAnsys->Render( townpoints[ SelectedTown ].x + 32, townpoints[ SelectedTown ].y + 32 );
 	}
-	//Render Name of town
+	//Render Nameof town
 	switch (SelectedTown)
 	{
 	case 0:
@@ -2670,7 +2672,30 @@ void GamePlayState::SummaryRender()
 		tempparty.push_back( Party[ i ] );
 		tempparty[ i ]->SetPosition( { 150.0f + ( 100.0f * i ), 200.0f } );
 		tempparty[ i ]->Render();
+		if (tempparty[i]->hasLeveled())
+		{
+			SGD::Point pos = tempparty[i]->GetPosition();
+			if (i % 2)
+			{
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 98, pos.y - 38 - (30 * i), { 0, 0, 0 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 102, pos.y - 42 - (30 * i), { 0, 0, 0 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 100, pos.y - 40 - (30 * i), { 150, 200, 100 }, 3.0f);
+			}
+			else
+			{
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 98, pos.y - 38, { 0, 0, 0 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 102, pos.y - 42, { 0, 0, 0 }, 3.0f);
+				GameData::GetInstance()->GetFont()->DrawString("Level Up", pos.x - 100, pos.y - 40 , { 150, 200, 100 }, 3.0f);
+			}
+			
 
+		}
+		if (abilityunlocked)
+		{
+			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 198, 262, { 0, 0, 0 },3.0f);
+			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 202, 258, { 0, 0, 0 },3.0f);
+			GameData::GetInstance()->GetFont()->DrawString("New Abilities Learned", 200, 260, { 155, 0, 155 },3.0f);
+		}
 		SGD::Point characterOrderPosition;
 		characterOrderPosition.x = 100.0f;
 		characterOrderPosition.y = (float)( Party[ i ]->GetOrderPosition() * 100 + 150 );

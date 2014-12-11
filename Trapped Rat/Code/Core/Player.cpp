@@ -162,7 +162,7 @@ void Player::Render()
 	SGD::Rectangle rect = { position, size };
 	SGD::Point camera = GameData::GetInstance()->GetCamera();
 	SGD::Point center = { (position.x-size.width/2) - camera.x, (position.y- size.height/2) - camera.y };
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, center, { 132, 1, 164, 33 });
+	//SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, center, { 132, 1, 164, 33 });
 	ansys->Render(position.x,position.y);
 
 }

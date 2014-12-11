@@ -79,7 +79,7 @@ class GamePlayState :
 	AnimationSystem* WorldMapAnsys = nullptr;
 	int unlockedTowns = 0;//0-4 based on how many towns are cleared
 	SGD::Point townpoints[5];
-
+	bool abilityunlocked;
 
 	std::map<std::string, Ability*> MasterAbilityList;
 	StatusEffectManager* pStatManager;
