@@ -33,7 +33,11 @@ void  Bars::Render()
 	{
 		if (is_HP)
 		{
-			width = (int)((float)size.width * ((float)owner->GetHP() / owner->GetMaxHP()));
+			float temp = size.width * ((float)owner->GetHP() / owner->GetMaxHP());
+			if (temp < 1.0f && temp > 0.0f)
+				width = 1;
+			else
+				width = (int)((float)size.width * ((float)owner->GetHP() / owner->GetMaxHP()));
 			if ((float)owner->GetHP() / owner->GetMaxHP() > .66f)
 			{
 				color = SGD::Color(0, 255, 0);
