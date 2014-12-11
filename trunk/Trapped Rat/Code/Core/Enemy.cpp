@@ -368,6 +368,7 @@ void Enemy::DogAI()
 		}
 	if ( pack )
 		{
+		dogTarget = 0;
 		if ( TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget >= 0 )
 			{
 			dogTarget = TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget;

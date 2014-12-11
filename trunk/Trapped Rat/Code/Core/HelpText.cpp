@@ -2,6 +2,7 @@
 #include "GameData.h"
 #include "../Font/Font.h"
 #include "SelectableObject.h"
+#include "../States/GamePlayState.h"
 #include "Items.h"
 #include "Character.h"
 HelpText::HelpText()
@@ -102,8 +103,8 @@ void HelpText::WaitingDisplay()
 }
 void HelpText::RunDisplay()
 {
-	GameData::GetInstance()->GetFont()->DrawString("Select yourself to confirm _your COWARDICE", 116, 16, { 0, 0, 0 }, 1.45f);
-	GameData::GetInstance()->GetFont()->DrawString("Select yourself to confirm _your COWARDICE", 115, 15, { 0, 0, 100 }, 1.45f);
+	GameData::GetInstance()->GetFont()->DrawString( "Select yourself to confirm _your COWARDICE", 116, 16, { 0, 0, 0 }, 1.45f );
+	GameData::GetInstance()->GetFont()->DrawString( "Select yourself to confirm _your COWARDICE", 115, 15, { 0, 0, 100 }, 1.45f );
 }
 
 void HelpText::ManualOverride(std::string _customstring, Character* _ownercharacter)

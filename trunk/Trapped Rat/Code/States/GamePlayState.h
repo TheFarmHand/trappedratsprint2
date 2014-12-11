@@ -18,6 +18,7 @@
 #include "../SGD Wrappers/SGD_Listener.h"
 #include "../Core/RatTrap.h"
 #include "LoadGameState.h"
+#include "../Core/WorldObject.h"
 
 #define MAXTG 250
 #define MAXITEM 5
@@ -91,6 +92,7 @@ class GamePlayState :
 	std::vector<ItemType> loot;
 	std::vector<RatTrap*> traps;
 
+
 	int guard_index = -1;
 
 	//save stuff
@@ -99,6 +101,8 @@ class GamePlayState :
 	data files[3];
 	
 public:
+	int randomEnemyIndex;//move back to .cpp
+
 	int gold = 50;
 	int loot_gold = 0;			// Updates whenever gold is added to your stack; (at end of combat primarily); use this for End of Combat window
 	int loot_xp = 0;			// This is also the XP value earned after combat 
@@ -133,8 +137,15 @@ public:
 	bool FinalBossFight = false;
 	bool ignore_game_over = false;
 	bool AbilityUsed;
+	bool ItemUsed;
+	bool RunUsed;
 	float abilityTimer;
+	float itemTimer;
+	float runTimer;
 	Ability* CurrentAbilityUsed;
+	Items* CurrentItemUsed;
+	std::vector<WorldObject*> overworldObjects;
+
 	bool testFinalFight;
 	bool is_test_message = false;
 	static void Test();
@@ -167,6 +178,8 @@ public:
 	HUDItem * CreateHudItem(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	SelectableObject * CreateSelectableObject(SGD::HTexture _image, SGD::Point _position, SGD::Size _size, std::string string);
 	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset, bool isHP = true);
+
+	void CreateOverworldObject( std::string object, std::string animation, SGD::Point destination, bool allied );
 
 	void RandomAnimation();
 	void GuardAnimation();
@@ -227,5 +240,7 @@ public:
 	void PlaySoundEffect(int _index);
 	void SetTutorial(bool is){ is_tutorial = is; }
 	void AddToHUDItems(HUDItem* item);
+
+	std::vector<WorldObject*> GetWorldObjects() {return overworldObjects;}
 };
 

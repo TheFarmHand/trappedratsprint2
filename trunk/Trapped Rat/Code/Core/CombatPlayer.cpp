@@ -449,6 +449,15 @@ void CombatPlayer::HomeUpdate( float dt )
 	GamePlayState *game = GamePlayState::GetInstance();
 	HelpText *help = game->GetHelpText();
 
+	if ( GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight || GamePlayState::GetInstance()->ignore_game_over )
+		{
+		GamePlayState::GetInstance()->GetSelectableObjects()[3]->SetExplination( "You are unable to run from this battle" );
+		}
+	else
+		{
+		GamePlayState::GetInstance()->GetSelectableObjects()[3]->SetExplination( "Attempt to run from this battle" );
+		}
+
 	if ( states == 0 )
 	{
 		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed(0,SGD::DPad::Up) )
@@ -667,10 +676,20 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( chosen.GetName() == "Small Heal" )
 		{
 			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], 15 );
+			GamePlayState::GetInstance()->itemTimer = 2.0f;
+			GamePlayState::GetInstance()->ItemUsed = true;
+			std::ostringstream usingItem;
+			usingItem << name << " uses " << chosen.GetName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
 		if ( chosen.GetName() == "Large Heal" )
 		{
 			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], 30 );
+			GamePlayState::GetInstance()->itemTimer = 2.0f;
+			GamePlayState::GetInstance()->ItemUsed = true;
+			std::ostringstream usingItem;
+			usingItem << name << " uses " << chosen.GetName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
 		if ( chosen.GetName() == "Small BP Restore" )
 		{
@@ -678,6 +697,11 @@ void CombatPlayer::ItemsUpdate( float dt )
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
+			GamePlayState::GetInstance()->itemTimer = 2.0f;
+			GamePlayState::GetInstance()->ItemUsed = true;
+			std::ostringstream usingItem;
+			usingItem << name << " uses " << chosen.GetName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
 		if ( chosen.GetName() == "Large BP Restore" )
 		{
@@ -685,12 +709,21 @@ void CombatPlayer::ItemsUpdate( float dt )
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
+			GamePlayState::GetInstance()->itemTimer = 2.0f;
+			GamePlayState::GetInstance()->ItemUsed = true;
+			std::ostringstream usingItem;
+			usingItem << name << " uses " << chosen.GetName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
 		if ( chosen.GetName() == "Revive" )
 		{
 			pTurn->GetAllies()[ myTarget ]->SetLiving( true );
 			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], (int)( pTurn->GetAllies()[ myTarget ]->GetHP() + 0.25 * GetMaxHP() ) );
-
+			GamePlayState::GetInstance()->itemTimer = 2.0f;
+			GamePlayState::GetInstance()->ItemUsed = true;
+			std::ostringstream usingItem;
+			usingItem << name << " uses " << chosen.GetName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
 
 
@@ -711,14 +744,15 @@ void CombatPlayer::ItemsUpdate( float dt )
 		//pTurn->setTimeStop( false );
 		pTurn->setTurnPause( true );
 		hudSelection = 0;
-		help->UpdateSelection( 5 );
+		//help->UpdateSelection( 5 );
 		SetSelection( 0 );
 		SetHomeButtons();
 		//ill keep this stuff here ^^^^
 	}
 	else if (pInput->IsKeyPressed(SGD::Key::Escape) || pInput->IsButtonPressed(0, 2))
 	{
-		states = 0;
+	GameData::GetInstance()->PlaySelectionChange();
+	states = 0;
 		help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 0 ] );
 		mySelection = none;
 		hudSelection = 0;
@@ -894,17 +928,17 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if (pInput->IsKeyPressed(SGD::Key::Enter) ||pInput->IsButtonPressed(0, 1))
 	{
-		if(GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight ||GamePlayState::GetInstance()->ignore_game_over)
+	if ( GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight || GamePlayState::GetInstance()->ignore_game_over )
 		{
 			// You can't run away
 			GameData::GetInstance()->PlaySelectionChange();
 			mySelection = none;
 			states = 0;
-			TurnManager::GetInstance()->setProgressFullReached(false);
+			//TurnManager::GetInstance()->setProgressFullReached(false);
 			//pTurn->setTimeStop( false );
-			TurnManager::GetInstance()->setTurnPause(true);
+			//TurnManager::GetInstance()->setTurnPause(true);
 			hudSelection = 0;
-			help->UpdateSelection(5);
+			//help->UpdateSelection(5);
 			SetSelection(0);
 			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			SetHomeButtons();
@@ -915,6 +949,12 @@ void CombatPlayer::RunUpdate( float dt )
 		{
 			//GamePlayState::GetInstance()->run_succeed = true;
 			runaway = true;
+
+			GamePlayState::GetInstance()->runTimer = 2.0f;
+			GamePlayState::GetInstance()->RunUsed = true;
+			std::ostringstream runText;
+			runText << name << " succeeds in running away!";
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( runText.str(), this );
 
 			myTarget = 0;
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
@@ -928,16 +968,22 @@ void CombatPlayer::RunUpdate( float dt )
 			hudSelection = 0;
 			//TurnManager::GetInstance()->setTimeStop( false );
 			TurnManager::GetInstance( )->setTurnPause( true );
-			help->UpdateSelection( 5 );
+			//help->UpdateSelection( 5 );
 			states = 0;
 			mySelection = none;
 			SetSelection( 0 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
+			//help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			GamePlayState::GetInstance()->PlaySoundEffect(0);
 		}
 
 		else
 		{
+		GamePlayState::GetInstance()->runTimer = 2.0f;
+		GamePlayState::GetInstance()->RunUsed = true;
+		std::ostringstream runText;
+		runText << name << " failed to run away!";
+		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( runText.str(), this );
+
 			if ( stepbackward == false && stepforward == false && progress != 0.0f )
 			{
 				stepbackward = true;
@@ -947,7 +993,7 @@ void CombatPlayer::RunUpdate( float dt )
 			myTarget = 0;
 			hudSelection = 0;
 			SetSelection( 0 );
-			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
+			//help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[0] );
 			SetHomeButtons( );
 
 			Reset();
@@ -1257,9 +1303,9 @@ void CombatPlayer::SelectingItems( float dt )
 		GameData::GetInstance()->PlaySelectionChange();
 		mySelection = none;
 		states = 0;
-		TurnManager::GetInstance()->setProgressFullReached( false );
+		//TurnManager::GetInstance()->setProgressFullReached( false );
 		//pTurn->setTimeStop( false );
-		TurnManager::GetInstance()->setTurnPause( true );
+		//TurnManager::GetInstance()->setTurnPause( true );
 		hudSelection = 0;
 		help->UpdateSelection( 5 );
 		SetSelection( 0 );
@@ -1508,6 +1554,6 @@ void CombatPlayer::ApplyTernary( std::string abil, Character* target )
 	else if ( abil == "Rampart" )
 		{
 		if ( !target->HasEffect( "MagicUp" ) )
-			target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
+		target->AddStatus( &StatusEffectManager::GetInstance()->GetStatus( "MagicUp" ) );
 		}
 }

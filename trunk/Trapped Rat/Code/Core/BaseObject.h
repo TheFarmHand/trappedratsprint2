@@ -9,7 +9,8 @@ protected:
 	SGD::Size size;
 	SGD::Vector velocity;
 
-	enum type { None, Rat, Enemy };
+	enum type { None, Rat, Enemy, Ally };
+	type AllyCode;
 public:
 
 	BaseObject();
@@ -24,6 +25,7 @@ public:
 	SGD::Rectangle GetRect();
 	SGD::Size GetSize() { return size; }
 	SGD::Vector GetVelocity(){ return velocity; }
+	type getAllyCode() { return AllyCode; }
 	int virtual GetType();
 
 	//mutators

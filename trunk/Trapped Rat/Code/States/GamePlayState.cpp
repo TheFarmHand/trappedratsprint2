@@ -101,7 +101,7 @@ void GamePlayState::Enter()
 	m_vSelectableItems.push_back( ob );
 
 	ob = CreateSelectableObject( buttonimg, { 70, 545 }, { 64, 64 }, "Run" );
-	ob->SetExplination( "FLEE from combat" );
+	ob->SetExplination( "Attempt to run from this battle" );
 	m_vSelectableItems.push_back( ob );
 
 	helptextbox = new HelpText();
@@ -482,42 +482,42 @@ void GamePlayState::Update( float dt )
 
 }
 void GamePlayState::Exit()
-{
-	Loading( "Dumping..." );
-	for (size_t i = 0; i < m_vsoundeffects.size(); i++)
 	{
-		SGD::AudioManager::GetInstance()->UnloadAudio(m_vsoundeffects[i]);
-	}
+	Loading( "Dumping..." );
+	for ( size_t i = 0; i < m_vsoundeffects.size(); i++ )
+		{
+		SGD::AudioManager::GetInstance()->UnloadAudio( m_vsoundeffects[i] );
+		}
 	m_vsoundeffects.clear();
 
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
-	{
-		delete m_vhuditems[ i ];
-	}
+		{
+		delete m_vhuditems[i];
+		}
 	m_vhuditems.clear();
 	for ( size_t i = 0; i < m_vSelectableItems.size(); i++ )
-	{
-		delete m_vSelectableItems[ i ];
-	}
+		{
+		delete m_vSelectableItems[i];
+		}
 	m_vSelectableItems.clear();
 	if ( enemy1 != nullptr )
-	{
+		{
 		delete enemy1;
 		enemy1 = nullptr;
-	}
+		}
 	if ( dialogue != nullptr )
 		delete dialogue;
 	if ( enemy2 != nullptr )
-	{
+		{
 		delete enemy2;
 		enemy2 = nullptr;
-	}
+		}
 
 	if ( enemy3 != nullptr )
-	{
+		{
 		delete enemy3;
 		enemy3 = nullptr;
-	}
+		}
 
 	if ( helptextbox != nullptr )
 		delete helptextbox;
@@ -525,21 +525,21 @@ void GamePlayState::Exit()
 	TurnManager::GetInstance()->Terminate();
 	delete ternary_bar;
 	for ( unsigned int i = 0; i < Party.size(); i++ )
-	{
-		delete Party[ i ];
-		Party[ i ] = nullptr;
-	}
+		{
+		delete Party[i];
+		Party[i] = nullptr;
+		}
 	for ( unsigned int i = 0; i < Parents.size(); i++ )
-	{
-		delete Parents[ i ];
-		Parents[ i ] = nullptr;
+		{
+		delete Parents[i];
+		Parents[i] = nullptr;
 
-	}
+		}
 	for ( unsigned int i = 0; i < guards.size(); i++ )
-	{
-		delete guards[ i ];
-		guards[ i ] = nullptr;
-	}
+		{
+		delete guards[i];
+		guards[i] = nullptr;
+		}
 	tutorialenemy.clear();
 	guards.clear();
 	shopinv.clear();
@@ -583,10 +583,19 @@ void GamePlayState::Exit()
 
 	auto iterAbil = MasterAbilityList.begin();
 	for ( ; iterAbil != MasterAbilityList.end(); ++iterAbil )
-	{
+		{
 		delete iterAbil->second;
-	}
+		}
 	MasterAbilityList.clear();
+
+	for ( unsigned int i = 0; i < overworldObjects.size(); ++i )
+		{
+		if ( overworldObjects[i] != nullptr )
+			{
+			delete overworldObjects[i];
+			}
+		}
+	overworldObjects.clear();
 
 	pStatManager->Terminate();
 	pStatManager = nullptr;
@@ -774,6 +783,11 @@ void GamePlayState::Fight()
 void GamePlayState::TownUpdate( float dt )
 {
 	GameData::GetInstance()->GetOverworldPlayer()->Update( dt );
+	for ( unsigned int i = 0; i < overworldObjects.size(); ++i )
+		{
+		if ( overworldObjects[i] != nullptr )
+			overworldObjects[i]->Update( dt );
+		}
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
@@ -1432,6 +1446,12 @@ void GamePlayState::MenuUpdate( float dt )
 void GamePlayState::TownRender()
 {
 	TileSystem::GetInstance()->Render();
+
+	for ( unsigned int i = 0; i < overworldObjects.size(); i++ )
+		{
+		if ( overworldObjects[i] != nullptr )
+			overworldObjects[i]->Render();
+		}
 
 	GameData::GetInstance()->GetOverworldPlayer()->Render();
 	for ( unsigned int i = 0; i < guards.size(); i++ )
@@ -3616,3 +3636,12 @@ void GamePlayState::AddToHUDItems(HUDItem* item)
 {
 	m_vhuditems.push_back(item);
 }
+
+void GamePlayState::CreateOverworldObject( std::string object, std::string animation, SGD::Point destination, bool allied)
+	{
+	WorldObject* tempObj = new WorldObject(object, animation, allied);
+	
+	tempObj->SetPosition( destination );
+	
+	overworldObjects.push_back( tempObj );
+	}
