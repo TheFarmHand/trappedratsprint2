@@ -39,11 +39,13 @@ public:
 	//void SetCurrBP(int _bp){ curBP = _bp; }
 
 	// XP functions
+	// Increases XP by the value, handling level up and carry over XP
+	// Changes the amount of xp needed to the next level
 
 	int GetXP( );
 	int GetLevel( );
 	int GetNextlvl( );
-
+	bool hasLeveled() {return leveledup;}
 	void AddXP( int xp );
 	void AddAbility( );
 	void LevelUp( );
@@ -67,13 +69,11 @@ private:
 	SelectableObject* helpobject = nullptr;
 	// Leveling Stuff
 
-	int XP;
-	int nextlvl;
-	bool runaway = false;
-	// Increases XP by the value, handling level up and carry over XP
-	// Changes the amount of xp needed to the next level
+	int XP;			// Current XP amount
+	int nextlvl;	// XP to next level
+	bool leveledup = false;		// Leveled up last time we got XP 
+	bool runaway = false;		// Wait what is this about?
 	
-
 	// End Leveling Stuff
 
 	void TargetUnit(std::vector<Character*> &targets);
@@ -89,8 +89,7 @@ private:
 	void SetHomeButtons();
 	//int maxBP;
 	//int curBP;
-
-	
+		
 };
 
 
