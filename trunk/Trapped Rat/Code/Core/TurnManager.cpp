@@ -182,7 +182,7 @@ void TurnManager::Render()
 		SGD::GraphicsManager::GetInstance()->DrawTexture( timelineImage, { 0, 70 }, 0.0f, { }, { }, { 1.0f, .5f } );
 		for ( unsigned int i = 0; i < AlliedUnits.size(); ++i )
 		{
-			if ( AlliedUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE  && AlliedUnits[ i ]->isAlive() )
+			if ( AlliedUnits[ i ]->GetTimelineAnimation() != nullptr && AlliedUnits[ i ]->isAlive() )
 			{
 				//87 = y
 				//95 = start x
@@ -190,7 +190,8 @@ void TurnManager::Render()
 				//555
 				float progress = AlliedUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
-				SGD::GraphicsManager::GetInstance()->DrawTexture( AlliedUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
+//				SGD::GraphicsManager::GetInstance()->DrawTexture( AlliedUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
+				AlliedUnits[i]->GetTimelineAnimation()->Render(95 + progress, 87);
 				int offset = 0;
 				for ( auto iter = AlliedUnits[ i ]->GetEffects().begin(); iter != AlliedUnits[ i ]->GetEffects().end(); iter++ )
 				{
@@ -201,11 +202,12 @@ void TurnManager::Render()
 		}
 		for ( size_t i = 0; i < EnemyUnits.size(); i++ )
 		{
-			if ( EnemyUnits[ i ]->GetTimelineAnimation() != SGD::INVALID_HANDLE && EnemyUnits[ i ]->isAlive() )
+			if ( EnemyUnits[ i ]->GetTimelineAnimation() !=nullptr && EnemyUnits[ i ]->isAlive() )
 			{
 				float progress = EnemyUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
-				SGD::GraphicsManager::GetInstance()->DrawTexture( EnemyUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
+				//SGD::GraphicsManager::GetInstance()->DrawTexture( EnemyUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
+				EnemyUnits[i]->GetTimelineAnimation()->Render(95 + progress, 87);
 				int offset = 0;
 				for ( auto iter = EnemyUnits[ i ]->GetEffects().begin(); iter != EnemyUnits[ i ]->GetEffects().end(); iter++ )
 				{
