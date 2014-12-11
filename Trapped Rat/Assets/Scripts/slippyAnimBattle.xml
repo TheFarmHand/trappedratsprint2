@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="3">
   <Animation>
     <Image numFrames="3">
       <Path>SlippySpriteSheet.png</Path>
@@ -22,6 +22,52 @@
     <Frame delay="0.25">
       <AnchorPoint x="306" y="11" />
       <DrawRect left="276" top="0" right="341" bottom="59" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="4">
+      <Path>SlippySpriteSheet.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.4">
+      <AnchorPoint x="467" y="248" />
+      <DrawRect left="433" top="221" right="503" bottom="272" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="389" y="245" />
+      <DrawRect left="356" top="226" right="422" bottom="275" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="334" y="243" />
+      <DrawRect left="298" top="226" right="359" bottom="278" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="1.05">
+      <AnchorPoint x="275" y="248" />
+      <DrawRect left="255" top="232" right="301" bottom="276" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>SlippySpriteSheet.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.6">
+      <AnchorPoint x="270" y="250" />
+      <DrawRect left="260" top="241" right="300" bottom="272" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

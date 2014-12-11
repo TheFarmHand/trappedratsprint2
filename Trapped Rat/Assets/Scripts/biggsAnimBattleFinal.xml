@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="3">
+  <Animation>
+    <Image numFrames="7">
+      <Path>BiggsArcher.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="45" y="24" />
+      <DrawRect left="19" top="10" right="75" bottom="88" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="124" y="26" />
+      <DrawRect left="103" top="13" right="163" bottom="89" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="201" y="26" />
+      <DrawRect left="173" top="8" right="243" bottom="88" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="280" y="26" />
+      <DrawRect left="255" top="12" right="312" bottom="89" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="354" y="26" />
+      <DrawRect left="321" top="10" right="388" bottom="94" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="430" y="26" />
+      <DrawRect left="400" top="9" right="469" bottom="92" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="509" y="26" />
+      <DrawRect left="482" top="10" right="558" bottom="94" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="6">
+      <Path>BiggsArcher.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="28" y="508" />
+      <DrawRect left="3" top="496" right="62" bottom="575" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="104" y="510" />
+      <DrawRect left="77" top="494" right="130" bottom="578" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="174" y="508" />
+      <DrawRect left="147" top="494" right="213" bottom="572" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="246" y="511" />
+      <DrawRect left="222" top="498" right="290" bottom="578" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="330" y="513" />
+      <DrawRect left="299" top="514" right="378" bottom="572" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="412" y="515" />
+      <DrawRect left="387" top="511" right="458" bottom="572" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>BiggsArcher.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.6">
+      <AnchorPoint x="412" y="515" />
+      <DrawRect left="380" top="497" right="462" bottom="569" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

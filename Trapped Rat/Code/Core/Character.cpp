@@ -5,7 +5,7 @@
 #include <cmath>
 #include "OwnedHUD.h"
 #include "../States/GamePlayState.h"
-
+#include "Enemy.h"
 Character::Character()
 {
 
@@ -480,6 +480,24 @@ void Character::SetHP( int _hp )
 			TurnManager::GetInstance()->GetEnemies()[1]->SetProgress( 100.0f );
 			JohnDead = true;
 			}
+
+		if (GetAlliance() == "Ally")
+		{
+			if (name == "Slippy" || name == "Biggs" || name == "Ratsputin" || name == "Dadsputin" || name == "Momsputin")
+			{
+				dynamic_cast<CombatPlayer*>(this)->GetAnimations()->ResetAll();
+				dynamic_cast<CombatPlayer*>(this)->GetAnimations()->Play("Death");
+			}
+		}
+		else
+		{
+			//Write Enemy Code Here
+			if (name == "Placeholder")
+			{
+				dynamic_cast<Enemy*>(this)->GetAnimations()->ResetAll();
+				dynamic_cast<Enemy*>(this)->GetAnimations()->Play("Death");
+			}
+		}
 		alive = false;
 
 	}
