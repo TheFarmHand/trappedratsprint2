@@ -66,7 +66,7 @@ class GamePlayState :
 	SGD::HAudio m_overAudio = SGD::INVALID_HANDLE;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
 	SGD::HAudio m_Map = SGD::INVALID_HANDLE;
-	SGD::HAudio m_Credits = SGD::INVALID_HANDLE;
+
 	SGD::HAudio m_SummaryAudio = SGD::INVALID_HANDLE;
 
 	SGD::HTexture rattrap = SGD::INVALID_HANDLE;
@@ -118,6 +118,7 @@ public:
 	void RemoveTrap(int);
 	std::vector<SGD::HAudio> m_vsoundeffects;
 	void StopAllBackgroundMusic();
+	SGD::HAudio m_Credits = SGD::INVALID_HANDLE;
 private:
 
 	//party & ability selection

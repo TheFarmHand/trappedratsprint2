@@ -373,7 +373,10 @@ void GamePlayState::Enter()
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/entercombat.wav" );
 	m_Map = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Map.xwm");
-	m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
+	if (m_Credits != SGD::INVALID_HANDLE)
+	{
+		m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
+	}
 	m_SummaryAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Victory.xwm");
 	SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio, true );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume() );
@@ -555,7 +558,12 @@ void GamePlayState::Exit()
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_Audio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
 	SGD::AudioManager::GetInstance()->UnloadAudio( entercombat );
-	SGD::AudioManager::GetInstance()->UnloadAudio(m_Credits);
+	if (m_Credits != SGD::INVALID_HANDLE)
+	{
+		SGD::AudioManager::GetInstance()->UnloadAudio(m_Credits);
+		m_Credits = SGD::INVALID_HANDLE;
+	}
+
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Map);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_SummaryAudio);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( WorldMap );
