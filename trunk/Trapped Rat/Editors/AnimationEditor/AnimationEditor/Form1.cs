@@ -298,6 +298,8 @@ MessageBoxButtons.OKCancel);
                 {
                     curFrame = 0;
                 }
+                if (curFrame == -1)
+                    curFrame = 0;
                 Frame playfram = an.Frames[curFrame];
                 
                 Point Drawpoint = new Point(275, 160);
