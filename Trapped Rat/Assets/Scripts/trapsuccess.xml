@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>success</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>You have gotten some goodies 
+_from the trap!</Words>
+  </Message>
+</Dialogue>

@@ -53,6 +53,8 @@ void CreditsState::Update(float dt)
 	increment += dt * 30;
 	if (increment >= 820.0f)
 		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0,2))
+		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 }
 void CreditsState::Exit()
 {
