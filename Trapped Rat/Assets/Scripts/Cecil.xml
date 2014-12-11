@@ -3,7 +3,7 @@
   <Name>Young Cecil</Name>
   <Side>Enemy</Side>
   <Element>Wind</Element>
-  <Type>Enemy</Type>
+  <Type>Enemies</Type>
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
