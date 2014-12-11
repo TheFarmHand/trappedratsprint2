@@ -61,9 +61,12 @@ class GamePlayState :
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
 	Dialogue * dialogue = nullptr;
 	std::vector<Guard*> guards;
-	SGD::HAudio m_Audio;
-	SGD::HAudio m_overAudio;
+
+	SGD::HAudio m_Audio = SGD::INVALID_HANDLE;
+	SGD::HAudio m_overAudio = SGD::INVALID_HANDLE;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
+	SGD::HAudio m_Map = SGD::INVALID_HANDLE;
+	SGD::HAudio m_Credits = SGD::INVALID_HANDLE;
 
 	SGD::HTexture rattrap = SGD::INVALID_HANDLE;
 	SGD::HTexture enemytargeting = SGD::INVALID_HANDLE;
@@ -113,6 +116,7 @@ public:
 	HUDItem* ternary_bar;
 	void RemoveTrap(int);
 	std::vector<SGD::HAudio> m_vsoundeffects;
+	void StopAllBackgroundMusic();
 private:
 
 	//party & ability selection
