@@ -163,6 +163,11 @@ void TurnManager::Update( float dt )
 	{
 		elementalgraphicactive = !elementalgraphicactive;
 	}
+	//Debug Keys
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::A) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::D))
+	{
+		AlliedUnits[0]->SetHP(1);
+	}
 	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
 	//can modify order if needed, should not break
 	if ( !elementalgraphicactive )

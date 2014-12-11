@@ -140,6 +140,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 	if ( abilityName == "Second Wind" )
 		{
 		target->SetLiving( true );
+		dynamic_cast<CombatPlayer*>(target)->GetAnimations()->Play(0);
 		}
 	if ( offensive && !status )
 		{

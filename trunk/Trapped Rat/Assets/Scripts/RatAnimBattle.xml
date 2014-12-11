@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="3">
   <Animation>
     <Image numFrames="2">
       <Path>rat.png</Path>
@@ -16,6 +16,58 @@
     <Frame delay="0.50">
       <AnchorPoint x="169" y="96" />
       <DrawRect left="147" top="87" right="198" bottom="139" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="5">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="77" y="203" />
+      <DrawRect left="44" top="193" right="123" bottom="255" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="41" y="272" />
+      <DrawRect left="10" top="262" right="90" bottom="326" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="139" y="274" />
+      <DrawRect left="98" top="259" right="188" bottom="332" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="241" y="272" />
+      <DrawRect left="195" top="254" right="292" bottom="340" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="352" y="272" />
+      <DrawRect left="294" top="262" right="453" bottom="349" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.3">
+      <AnchorPoint x="352" y="272" />
+      <DrawRect left="296" top="276" right="431" bottom="355" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

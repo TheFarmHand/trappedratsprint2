@@ -719,6 +719,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		if ( chosen.GetName() == "Revive" )
 		{
 			pTurn->GetAllies()[ myTarget ]->SetLiving( true );
+			dynamic_cast<CombatPlayer*>(pTurn->GetAllies()[myTarget])->GetAnimations()->Play(0);
 			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], (int)( pTurn->GetAllies()[ myTarget ]->GetHP() + 0.25 * GetMaxHP() ) );
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
