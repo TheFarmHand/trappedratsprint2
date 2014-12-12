@@ -614,6 +614,11 @@ void GamePlayState::Exit()
 	pStatManager->Terminate();
 	pStatManager = nullptr;
 
+	for(int i=0; i<traps.size(); i++)
+	{
+		delete traps[i];
+	}
+
 }
 
 void GamePlayState::MessageProc( const SGD::Message * mess )

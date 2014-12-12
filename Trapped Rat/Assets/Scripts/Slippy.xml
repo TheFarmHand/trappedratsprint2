@@ -11,16 +11,16 @@
       <Scale>1.5</Scale>
     </HitPoints>
     <BattlePoints>
-      <Base>14</Base>
-      <Scale>2.5</Scale>
+      <Base>100</Base>
+      <Scale>4.5</Scale>
     </BattlePoints>
     <Attack>
       <Base>6</Base>
       <Scale>0.3</Scale>
     </Attack>
     <Magic>
-      <Base>14</Base>
-      <Scale>0.8</Scale>
+      <Base>2</Base>
+      <Scale>0.4</Scale>
     </Magic>
     <Defense>
       <Base>7</Base>
