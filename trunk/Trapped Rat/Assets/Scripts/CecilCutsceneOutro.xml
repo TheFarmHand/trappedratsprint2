@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>dieing</Name>
+    <Portrait>PortraitCecil.png</Portrait>
+    <Words>...Gyuhhh...</Words>
+  </Message>
+  <Message>
+    <Name>avenged</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Cecil is dead and I have now _avenged my parents.</Words>
+  </Message>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>.</Words>
+  </Message>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>.</Words>
+  </Message>
+</Dialogue>

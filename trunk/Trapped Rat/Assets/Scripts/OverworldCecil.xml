@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="2">
   <Animation>
     <Image numFrames="4">
       <Path>EnemySprites/overworldobjects.png</Path>
@@ -28,6 +28,38 @@
     <Frame delay="0.25">
       <AnchorPoint x="47" y="11" />
       <DrawRect left="29" top="1" right="61" bottom="33" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="4">
+      <Path>EnemySprites/overworldobjects.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Left</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="16" y="45" />
+      <DrawRect left="3" top="32" right="31" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="49" y="45" />
+      <DrawRect left="31" top="33" right="63" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="81" y="45" />
+      <DrawRect left="64" top="33" right="96" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="49" y="45" />
+      <DrawRect left="29" top="31" right="66" bottom="64" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
