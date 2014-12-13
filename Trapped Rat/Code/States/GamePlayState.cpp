@@ -595,6 +595,7 @@ void GamePlayState::Exit()
 
 	// Double Check ParticleManager in TurnManager (Particles need to be a singleton, blah)
 	// Cleans up those leaks
+	// These comments feel pretty old
 
 
 	auto iterAbil = MasterAbilityList.begin();
@@ -730,7 +731,15 @@ void GamePlayState::Fight()
 					default:
 						break;
 				}
-				tempRandomEnemy->SetHP( tempRandomEnemy->GetMaxHP() );
+
+				// Setup Enemy levels
+				int templevel = Party[ 0 ]->GetLevel( );
+				templevel -= 2;
+				if ( templevel <= 0 ) templevel = 1;
+				templevel += ( rand( ) % 5 );
+				tempRandomEnemy->SetLevel( templevel );
+				tempRandomEnemy->SetXPVal( 50 + ( ( templevel - Party[ 0 ]->GetLevel( ) ) * 5 ) );
+				tempRandomEnemy->SetHP( tempRandomEnemy->GetMaxHP( ) );
 
 				tempRandomEnemy->SetOrderPosition( i );
 				characterOrderPosition.x = 600.0f;
@@ -909,8 +918,15 @@ void GamePlayState::TownUpdate( float dt )
 						default:
 							break;
 					}
-					tempRandomEnemy->SetHP( tempRandomEnemy->GetMaxHP() );
 
+					// Setup Enemy levels
+					int templevel = Party[0]->GetLevel();
+					templevel-=2;
+					if(templevel <= 0) templevel = 1;
+					templevel += (rand()%5);
+					tempRandomEnemy->SetLevel(templevel);
+					tempRandomEnemy->SetXPVal(50 + ((templevel - Party[0]->GetLevel())*5));
+					tempRandomEnemy->SetHP( tempRandomEnemy->GetMaxHP( ) );
 					tempRandomEnemy->SetOrderPosition( i );
 					characterOrderPosition.x = 600.0f;
 					characterOrderPosition.y = (float)( tempRandomEnemy->GetOrderPosition() * 100 + 150 + 16 );
