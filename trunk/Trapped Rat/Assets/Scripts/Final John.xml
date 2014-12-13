@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>biggsAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/JohnAnimBattle.xml</Animation>
+  <Portrait>PortraitJohn.png</Portrait>
+  <Timeline>TLJohn.xml</Timeline>
 </Character>

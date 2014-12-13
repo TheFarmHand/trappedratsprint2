@@ -8,20 +8,20 @@
     <Name>Timeline</Name>
     <NextName>none</NextName>
     <Frame delay="0.15">
-      <AnchorPoint x="278" y="590" />
-      <DrawRect left="256" top="576" right="303" bottom="643" />
+      <AnchorPoint x="269" y="590" />
+      <DrawRect left="256" top="576" right="280" bottom="625" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.15">
-      <AnchorPoint x="337" y="590" />
-      <DrawRect left="317" top="573" right="357" bottom="640" />
+      <AnchorPoint x="303" y="589" />
+      <DrawRect left="288" top="574" right="318" bottom="615" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="397" y="590" />
-      <DrawRect left="377" top="576" right="436" bottom="635" />
+      <AnchorPoint x="339" y="590" />
+      <DrawRect left="325" top="576" right="355" bottom="611" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

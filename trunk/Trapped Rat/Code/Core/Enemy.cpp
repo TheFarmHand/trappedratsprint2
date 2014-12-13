@@ -275,14 +275,22 @@ void Enemy::SetXPVal( int val )
 //Common Enemy
 void Enemy::CatAI()
 	{
-	int lowestHp = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	int lowestHp = 0;
+	int tempLow;
 	int target = 0;
 	int tempAtk = (int)( GetAttack() * 1.3f );
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHp )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
-			target = i;
+			tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+			if ( lowestHp == 0 )
+				lowestHp = tempLow;
+			else if( lowestHp < tempLow )
+				{
+				lowestHp = tempLow;
+				target = i;
+				}
 			}
 		}
 	if ( lowestHp / TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP() < 0.4f
@@ -341,10 +349,13 @@ void Enemy::RavenAI()
 			elementalTarget = 3;
 		else if ( GamePlayState::GetInstance()->GetTownSelected() == 3 )
 			elementalTarget = 0;
+		else
+			elementalTarget = rand() % 4;
 
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 			{
-			if ( elementalTarget == TurnManager::GetInstance()->GetAllies()[i]->GetEType() )
+			if ( elementalTarget == TurnManager::GetInstance()->GetAllies()[i]->GetEType() &&
+				 TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 				{
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -378,7 +389,6 @@ void Enemy::DogAI()
 		}
 	if ( pack )
 		{
-		dogTarget = 0;
 		if ( TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget >= 0 )
 			{
 			dogTarget = TurnManager::GetInstance()->GetEnemies()[packMate]->dogTarget;
@@ -416,7 +426,7 @@ void Enemy::DogAI()
 				}
 			}
 		}
-	else if ( dogTarget > -1 )
+	else if ( dogTarget >= 0 )
 		{
 		if ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
 			{
@@ -451,7 +461,7 @@ void Enemy::DogAI()
 			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[dogTarget], dmg );
 			}
 		}
-	else
+	/*else
 		{
 		dogTarget = rand() % TurnManager::GetInstance()->GetAllies().size();
 		while ( !TurnManager::GetInstance()->GetAllies()[dogTarget]->isAlive() )
@@ -464,7 +474,7 @@ void Enemy::DogAI()
 		if ( dmg <= 0 )
 			dmg = 0;
 		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[dogTarget], dmg );
-		}
+		}*/
 	}
 void Enemy::ChefAI()
 	{
@@ -478,7 +488,8 @@ void Enemy::ChefAI()
 	int tempAtk = (int)( GetAttack() * 1.25f );
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.75f )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.75f &&
+			 TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -518,7 +529,9 @@ void Enemy::BlacksmithAI()
 
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetDefense() > GetDefense() )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetDefense() > GetDefense() &&
+			 TurnManager::GetInstance()->GetAllies()[i]->isAlive() &&
+			 !TurnManager::GetInstance()->GetAllies()[i]->HasEffect("DefenseDown") )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -527,7 +540,8 @@ void Enemy::BlacksmithAI()
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
-		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.25f )
+		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.25f &&
+				  TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			int dmg = rand() % tempAtk + tempAtk;
 			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[i]->GetStats().defense );
@@ -552,6 +566,10 @@ void Enemy::ShopkeeperAI()
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
+	if ( lastAttacker >= 0 && TurnManager::GetInstance()->GetAllies()[lastAttacker]->isAlive() )
+		{
+		target = lastAttacker;
+		}
 	int tempAtk = (int)( GetAttack() * 1.25f );
 	if ( GetHP() / (float)( GetMaxHP() ) > 0.5f )
 		{
@@ -561,10 +579,6 @@ void Enemy::ShopkeeperAI()
 		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
-		}
-	if ( lastAttacker >= 0 && TurnManager::GetInstance()->GetAllies()[lastAttacker]->isAlive() )
-		{
-		target = lastAttacker;
 		}
 	if ( ( rand() % 20 ) % 3 == 0 )
 		{
@@ -599,7 +613,8 @@ void Enemy::TailorAI()
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
 		healthRange = TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() );
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetSpeed() > GetSpeed() )
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetSpeed() > GetSpeed() &&
+			 TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -608,7 +623,8 @@ void Enemy::TailorAI()
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			return;
 			}
-		else if ( healthRange < 0.75f && healthRange > 0.25f )
+		else if ( healthRange < 0.75f && healthRange > 0.25f &&
+				  TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			int dmg = rand() % tempAtk + tempAtk;
 			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[i]->GetStats().defense );
@@ -635,7 +651,7 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.4f
+		if ( TurnManager::GetInstance()->GetEnemies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetEnemies()[i]->GetMaxHP() ) < 0.6f
 			 && TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i] );
@@ -648,7 +664,7 @@ void Enemy::PriestAI()
 		}
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 		{
-		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.4f
+		if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() / (float)( TurnManager::GetInstance()->GetAllies()[i]->GetMaxHP() ) < 0.5f
 			 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 			{
 			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
@@ -715,7 +731,8 @@ void Enemy::BWRAI()
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
 	int lowestHealth = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
-	if ( GetHP() / (float)( GetMaxHP() ) < 0.5f )
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.5f &&
+		 TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		if ( !WRsplit )
 			{
@@ -753,7 +770,7 @@ void Enemy::FFWAI()
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
-	if ( GetHP() / (float)( GetMaxHP() ) < 0.35f )
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.55f )
 		{
 		if ( !FlameSpout )
 			{
@@ -843,9 +860,24 @@ void Enemy::SEMAI()
 void Enemy::WWWAI()
 	{
 	int target;
-	int lowestHealth = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	int lowestHp = 0;
+	int tempLow;
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+			{
+			tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+			if ( lowestHp == 0 )
+				lowestHp = tempLow;
+			else if ( lowestHp < tempLow )
+				{
+				lowestHp = tempLow;
+				target = i;
+				}
+			}
+		}
 	float health = GetHP() / (float)( GetMaxHP() );
-	if ( health < 0.25f && !firstBelowQuarter )
+	if ( health < 0.25f && !firstBelowQuarter && !HasEffect("WaterWall"))
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -855,7 +887,7 @@ void Enemy::WWWAI()
 		firstBelowQuarter = true;
 		return;
 		}
-	else if ( health < 0.5f && !firstBelowHalf )
+	else if ( health < 0.5f && !firstBelowHalf && !HasEffect( "WaterWall" ) )
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -865,7 +897,7 @@ void Enemy::WWWAI()
 		firstBelowHalf = true;
 		return;
 		}
-	else if ( health < 0.75f && !firstBelow3Quarter )
+	else if ( health < 0.75f && !firstBelow3Quarter && !HasEffect( "WaterWall" ) )
 		{
 		abilityList[0]->CastAbility( this, this );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -882,12 +914,6 @@ void Enemy::WWWAI()
 			{
 			target = i;
 			break;
-			}
-		else if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHealth
-				  && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
-			{
-			lowestHealth = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
-			target = i;
 			}
 		}
 	int dmg = rand() % GetAttack() + GetAttack();
@@ -963,9 +989,11 @@ void Enemy::CecilPhaseOne()
 				TurnManager::GetInstance()->GetEnemies()[0]->SetLiving( true );
 				TurnManager::GetInstance()->GetEnemies()[0]->SetHP( TurnManager::GetInstance()->GetEnemies()[0]->GetMaxHP() );
 				TurnManager::GetInstance()->GetEnemies()[0]->SetProgress( 0.0f );
+				TurnManager::GetInstance()->GetEnemies()[0]->SetPosition( SGD::Point( 600.0f, (float)( TurnManager::GetInstance()->GetEnemies()[0]->GetOrderPosition() * 100 + 150 + 16 ) ) );
 				TurnManager::GetInstance()->GetEnemies()[2]->SetLiving( true );
 				TurnManager::GetInstance()->GetEnemies()[2]->SetHP( TurnManager::GetInstance()->GetEnemies()[2]->GetMaxHP() );
 				TurnManager::GetInstance()->GetEnemies()[2]->SetProgress( 0.0f );
+				TurnManager::GetInstance()->GetEnemies()[2]->SetPosition( SGD::Point( 600.0f, (float)( TurnManager::GetInstance()->GetEnemies()[2]->GetOrderPosition() * 100 + 150 + 16 ) ) );
 				}
 			}
 		}
@@ -973,6 +1001,7 @@ void Enemy::CecilPhaseOne()
 void Enemy::CecilPhaseTwo()
 	{
 	int tempAtk;
+	int target;
 	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneDead )
 		{
 		TurnManager::GetInstance()->GetEnemies()[0]->JaneDead = false;
@@ -1078,9 +1107,11 @@ void Enemy::CecilPhaseTwo()
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
-	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
-		{
+	//if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
+	if (true )
+	{
 		//cover code of Jane
+		TurnManager::GetInstance()->GetEnemies()[0]->JaneHit += 1;
 		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[0] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[4] );
 		std::ostringstream usingAbility;
@@ -1091,6 +1122,7 @@ void Enemy::CecilPhaseTwo()
 	else if ( TurnManager::GetInstance()->GetEnemies()[0]->JohnHit % 3 == 0 )
 		{
 		//cover code of John
+		TurnManager::GetInstance()->GetEnemies()[0]->JohnHit += 1;
 		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[2] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[4] );
 		std::ostringstream usingAbility;
@@ -1110,6 +1142,17 @@ void Enemy::CecilPhaseTwo()
 			std::ostringstream usingAbility;
 			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
+			target = rand() % TurnManager::GetInstance()->GetAllies().size();
+			while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
+				{
+				target = rand() % TurnManager::GetInstance()->GetAllies().size();
+				}
+		int atk = GetStats().attack;
+		int dmg = rand() % atk + atk;
+		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+		if ( dmg <= 0 )
+			dmg = 0;
+		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
 			return;
 			}
 		else
@@ -1122,6 +1165,17 @@ void Enemy::CecilPhaseTwo()
 			std::ostringstream usingAbility;
 			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
+			target = rand() % TurnManager::GetInstance()->GetAllies().size();
+			while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
+				{
+				target = rand() % TurnManager::GetInstance()->GetAllies().size();
+				}
+			int atk = GetStats().attack;
+			int dmg = rand() % atk + atk;
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetStats().defense );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
 			return;
 			}
 		}
@@ -1198,7 +1252,8 @@ void Enemy::JaneAI()
 		//cast protect
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 			{
-			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
+			if ( TurnManager::GetInstance()->GetEnemies()[i]->isAlive() )
+				abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
 			}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
 		std::ostringstream usingAbility;
@@ -1249,7 +1304,8 @@ void Enemy::JaneAI()
 void Enemy::JohnAI()
 	{
 	int target;
-	int lowestHP = TurnManager::GetInstance()->GetAllies()[0]->GetHP();
+	int lowestHp = 0;
+	int tempLow;
 	float ratPartyAvgHealth = 0.0f;
 
 	if ( !HasEffect( "SpeedUp" ) )
@@ -1257,7 +1313,8 @@ void Enemy::JohnAI()
 		//cast Haste
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 			{
-			abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
+			if ( TurnManager::GetInstance()->GetEnemies()[i]->isAlive())
+				abilityList[2]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[i], i );
 			}
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[2] );
 		std::ostringstream usingAbility;
@@ -1282,13 +1339,18 @@ void Enemy::JohnAI()
 			}
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 			{
-			if ( TurnManager::GetInstance()->GetAllies()[i]->GetHP() < lowestHP
-				 && TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+			if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
 				{
-				lowestHP = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
-				target = i;
+				tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
+				if ( lowestHp == 0 )
+					lowestHp = tempLow;
+				else if ( lowestHp < tempLow )
+					{
+					lowestHp = tempLow;
+					target = i;
+					}
+				ratPartyAvgHealth += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 				}
-			ratPartyAvgHealth += TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 			}
 		ratPartyAvgHealth /= TurnManager::GetInstance()->GetAllies().size();
 

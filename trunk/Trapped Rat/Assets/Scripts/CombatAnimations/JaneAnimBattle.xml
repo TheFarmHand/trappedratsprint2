@@ -1,73 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="3">
   <Animation>
-    <Image numFrames="3">
-      <Path>EnemySprites/EarthMonk.png</Path>
+    <Image numFrames="4">
+      <Path>EnemySprites/Jane.png</Path>
     </Image>
     <Looping>True</Looping>
     <Name>Idle</Name>
     <NextName>none</NextName>
-    <Frame delay="0.25">
-      <AnchorPoint x="32" y="27" />
-      <DrawRect left="6" top="7" right="57" bottom="69" />
+    <Frame delay="0.15">
+      <AnchorPoint x="37" y="23" />
+      <DrawRect left="8" top="6" right="66" bottom="71" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="79" y="27" />
-      <DrawRect left="56" top="6" right="107" bottom="78" />
+    <Frame delay="0.15">
+      <AnchorPoint x="101" y="23" />
+      <DrawRect left="72" top="5" right="127" bottom="66" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="127" y="27" />
-      <DrawRect left="103" top="6" right="163" bottom="74" />
+    <Frame delay="0.15">
+      <AnchorPoint x="165" y="23" />
+      <DrawRect left="135" top="2" right="197" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="101" y="23" />
+      <DrawRect left="71" top="6" right="129" bottom="66" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
   </Animation>
   <Animation>
-    <Image numFrames="4">
-      <Path>EnemySprites/EarthMonk.png</Path>
+    <Image numFrames="3">
+      <Path>EnemySprites/Jane.png</Path>
     </Image>
     <Looping>False</Looping>
     <Name>Death</Name>
     <NextName>dead</NextName>
     <Frame delay="0.2">
-      <AnchorPoint x="38" y="171" />
-      <DrawRect left="7" top="150" right="63" bottom="210" />
+      <AnchorPoint x="35" y="105" />
+      <DrawRect left="8" top="81" right="68" bottom="138" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="83" y="171" />
-      <DrawRect left="62" top="148" right="110" bottom="210" />
+      <AnchorPoint x="82" y="103" />
+      <DrawRect left="69" top="73" right="122" bottom="140" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="132" y="171" />
-      <DrawRect left="109" top="148" right="173" bottom="211" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="199" y="159" />
-      <DrawRect left="172" top="149" right="239" bottom="214" />
+      <AnchorPoint x="128" y="87" />
+      <DrawRect left="123" top="69" right="199" bottom="135" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
   </Animation>
   <Animation>
     <Image numFrames="1">
-      <Path>EnemySprites/EarthMonk.png</Path>
+      <Path>EnemySprites/Jane.png</Path>
     </Image>
     <Looping>True</Looping>
     <Name>dead</Name>
     <NextName>none</NextName>
     <Frame delay="0.1">
-      <AnchorPoint x="199" y="159" />
-      <DrawRect left="172" top="160" right="239" bottom="209" />
+      <AnchorPoint x="128" y="87" />
+      <DrawRect left="129" top="62" right="194" bottom="133" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
