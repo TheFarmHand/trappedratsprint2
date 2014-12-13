@@ -131,7 +131,8 @@ void Dialogue::Render()
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, position, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
 
 
-
+		if (messages.front().words == " ")
+			return;
 		//render the words of the top message in the vector along with the portrait
 		std::string temp = messages.front().words;
 		GameData::GetInstance()->GetFont()->DrawString(temp, position.x - 270.0f, position.y + 25.0f, { 0, 0, 0 });
