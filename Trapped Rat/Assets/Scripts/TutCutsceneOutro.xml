@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Complete</Name>
+    <Portrait>Bowie.png</Portrait>
+    <Words>Quest Complete!  
+Guess I'm done killing Rats.</Words>
+  </Message>
+  <Message>
+    <Name>killed</Name>
+    <Portrait>Bowie.png</Portrait>
+    <Words>Hey Rat, I killed your entire family!</Words>
+  </Message>
+  <Message>
+    <Name>myfamily</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Mom! Dad!</Words>
+  </Message>
+  <Message>
+    <Name>No</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Noooooooooooooooooooooooooo_ooooooooooooooooooooo_oooooooooooooooo!</Words>
+  </Message>
+</Dialogue>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>here</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>So we're finally here, Hero's Landing.</Words>
+  </Message>
+  <Message>
+    <Name>kill</Name>
+    <Portrait>slippyportrait.png</Portrait>
+    <Words>Yeah!  Let's go kill that Cecil guy!</Words>
+  </Message>
+  <Message>
+    <Name>where</Name>
+    <Portrait>checkersportrait.png</Portrait>
+    <Words>Where do you think he's at?</Words>
+  </Message>
+  <Message>
+    <Name>jeeves</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>BLEEERRRRGGGGHHHHHhhh</Words>
+  </Message>
+  <Message>
+    <Name>keep</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>That's right Jeeves. _Cecil normally stays in his keep over there.</Words>
+  </Message>
+</Dialogue>

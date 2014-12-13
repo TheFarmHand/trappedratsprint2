@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>ql</Name>
+    <Portrait>Bowie.png</Portrait>
+    <Words>Quest Log: Collect 3 Rat Tails</Words>
+  </Message>
+  <Message>
+    <Name>rat</Name>
+    <Portrait>Bowie.png</Portrait>
+    <Words>I guess I should start killing these Rats then.</Words>
+  </Message>
+  <Message>
+    <Name>link</Name>
+    <Portrait>Bowie2.png</Portrait>
+    <Words>HIUAAAAAAAAAAAAAH!</Words>
+  </Message>
+  <Message>
+    <Name>two</Name>
+    <Portrait>Bowie.png</Portrait>
+    <Words>Two more to go!</Words>
+  </Message>
+</Dialogue>

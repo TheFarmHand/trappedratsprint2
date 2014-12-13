@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Welcome</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>It looks like Cecil went this way.</Words>
+  </Message>
+  <Message>
+    <Name>keep</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>If he's here, he will probably be in the keep.</Words>
+  </Message>
+  <Message>
+    <Name>stronger</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Keeps house powerful enemies that I should_fight to grow stronger.</Words>
+  </Message>
+  <Message>
+    <Name>Guards</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>But first I should take care of these Guards.</Words>
+  </Message>
+<Message>
+    <Name>Guards2</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Don't wanna be interrupted during_a difficult battle.</Words>
+  </Message>
+</Dialogue>
