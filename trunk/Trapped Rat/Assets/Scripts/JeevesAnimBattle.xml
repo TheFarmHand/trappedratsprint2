@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="3">
   <Animation>
     <Image numFrames="2">
       <Path>Jeeves.png</Path>
@@ -16,6 +16,118 @@
     <Frame delay="0.25">
       <AnchorPoint x="88" y="30" />
       <DrawRect left="55" top="4" right="112" bottom="93" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="15">
+      <Path>Jeeves.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="135" y="278" />
+      <DrawRect left="99" top="257" right="176" bottom="329" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="214" y="278" />
+      <DrawRect left="174" top="256" right="248" bottom="326" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="297" y="276" />
+      <DrawRect left="249" top="250" right="334" bottom="326" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="378" y="276" />
+      <DrawRect left="332" top="247" right="412" bottom="325" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="450" y="273" />
+      <DrawRect left="409" top="238" right="503" bottom="321" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="130" y="354" />
+      <DrawRect left="95" top="328" right="172" bottom="403" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="209" y="354" />
+      <DrawRect left="173" top="331" right="251" bottom="401" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="286" y="354" />
+      <DrawRect left="250" top="329" right="330" bottom="400" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="365" y="353" />
+      <DrawRect left="327" top="325" right="405" bottom="401" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="440" y="361" />
+      <DrawRect left="408" top="323" right="490" bottom="401" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="128" y="438" />
+      <DrawRect left="92" top="403" right="173" bottom="478" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="209" y="438" />
+      <DrawRect left="173" top="403" right="252" bottom="481" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="287" y="438" />
+      <DrawRect left="253" top="402" right="325" bottom="481" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="365" y="438" />
+      <DrawRect left="327" top="400" right="410" bottom="481" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="455" y="436" />
+      <DrawRect left="409" top="403" right="489" bottom="479" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>Jeeves.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="455" y="463" />
+      <DrawRect left="427" top="446" right="470" bottom="493" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

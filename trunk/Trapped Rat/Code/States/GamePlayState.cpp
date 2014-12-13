@@ -2902,7 +2902,7 @@ void GamePlayState::SummaryRender()
 		tempparty.push_back( Party[ i ] );
 		tempparty[ i ]->SetPosition( { 150.0f + ( 100.0f * i ), 200.0f } );
 		tempparty[ i ]->Render();
-		if ( tempparty[ i ]->hasLeveled() )
+		if ( tempparty[ i ]->hasLeveled() && tempparty[i]->isAlive() )
 		{
 			SGD::Point pos = tempparty[ i ]->GetPosition();
 			if ( i % 2 )
