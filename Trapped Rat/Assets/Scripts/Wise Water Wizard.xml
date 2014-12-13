@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>biggsAnimBattle.xml</Animation>
+  <Animation>CombatAnimations/WaterWizard.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
   <Timeline>biggsAnimBattle.xml</Timeline>
 </Character>

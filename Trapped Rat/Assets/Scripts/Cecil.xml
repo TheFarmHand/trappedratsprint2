@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>CecilBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>PortraitCecil.png</Portrait>
   <Timeline>TLCecil.xml</Timeline>
 </Character>
