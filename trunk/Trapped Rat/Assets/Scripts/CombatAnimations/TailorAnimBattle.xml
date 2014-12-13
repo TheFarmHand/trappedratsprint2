@@ -6,7 +6,7 @@
     </Image>
     <Looping>True</Looping>
     <Name>Idle</Name>
-    <NextName></NextName>
+    <NextName>none</NextName>
     <Frame delay="0.35">
       <AnchorPoint x="30" y="340" />
       <DrawRect left="13" top="320" right="53" bottom="381" />

@@ -43,5 +43,5 @@
   </Sound>
   <Animation>CombatAnimations/TailorAnimBattle.xml</Animation>
   <Portrait>PortraitTailor.png</Portrait>
-  <Timeline>TLPortrait.xml</Timeline>
+  <Timeline>TLTailor.xml</Timeline>
 </Character>
