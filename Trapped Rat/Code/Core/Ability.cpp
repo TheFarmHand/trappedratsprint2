@@ -153,6 +153,12 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 	Abilowner = owner;
 	Abiltarget = target;
 	CalculateFormula( owner, target );
+	if ( target->HasEffect( "WaterWall" ) )
+		{
+		target->TakeDamage( (int)( formulaTotal ), true );
+		target->TakeDamage( (int)( -( formulaTotal / 4 ) ) );
+		return;
+		}
 	if ( abilityName == "Second Wind" )
 		{
 		target->SetLiving( true );
@@ -193,6 +199,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		TurnManager::GetInstance()->GetEnemies()[1]->SetMaxHP( owner->GetMaxHP() / 2 );
 		TurnManager::GetInstance()->GetEnemies()[1]->SetHP( TurnManager::GetInstance()->GetEnemies()[1]->GetMaxHP() );
 		TurnManager::GetInstance()->GetEnemies()[1]->WRsplit = true;
+		TurnManager::GetInstance()->GetEnemies()[1]->SetPosition( SGD::Point( 600.0f, (float)( TurnManager::GetInstance()->GetEnemies()[1]->GetOrderPosition() * 100 + 150 + 16 ) ) );
 		owner->SetMaxHP( owner->GetMaxHP() / 2 );
 		owner->SetHP( owner->GetMaxHP() );
 		}
@@ -462,7 +469,7 @@ void Ability::RenderAnimation()
 	else if (abilityName == "Flood")
 	{
 		//float xDistance = Abiltarget->GetPosition().x - Abilowner->GetPosition().x;
-		float percentage = (2.0f - GamePlayState::GetInstance()->abilityTimer) / 1.0f;
+		float percentage = (2.0f - GamePlayState::GetInstance()->abilityTimer);
 		//xDistance *= percentage;
 		float xpos = Abilowner->GetPosition().x * percentage;
 		animate->Render(xpos, 200);

@@ -1,45 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="1">
   <Animation>
-    <Image numFrames="6">
-      <Path>ShieldBlockSpriteSheet.png</Path>
+    <Image numFrames="3">
+      <Path>CounterClaw.png</Path>
     </Image>
-    <Looping>False</Looping>
-    <Name>Counter</Name>
-    <NextName>None</NextName>
-    <Frame delay="0.15">
-      <AnchorPoint x="27" y="129" />
-      <DrawRect left="4" top="107" right="35" bottom="147" />
+    <Looping>True</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.65">
+      <AnchorPoint x="66" y="24" />
+      <DrawRect left="26" top="4" right="95" bottom="51" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.15">
-      <AnchorPoint x="70" y="129" />
-      <DrawRect left="40" top="101" right="97" bottom="154" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.45">
-      <AnchorPoint x="124" y="121" />
-      <DrawRect left="99" top="87" right="157" bottom="154" />
+      <AnchorPoint x="131" y="31" />
+      <DrawRect left="96" top="4" right="160" bottom="53" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.35">
-      <AnchorPoint x="183" y="121" />
-      <DrawRect left="157" top="81" right="224" bottom="166" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="123" y="122" />
-      <DrawRect left="99" top="87" right="155" bottom="155" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.25">
-      <AnchorPoint x="181" y="120" />
-      <DrawRect left="155" top="79" right="223" bottom="167" />
+      <AnchorPoint x="197" y="39" />
+      <DrawRect left="162" top="2" right="228" bottom="65" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

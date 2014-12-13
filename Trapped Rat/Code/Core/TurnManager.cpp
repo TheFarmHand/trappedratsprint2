@@ -201,7 +201,7 @@ void TurnManager::Render()
 				float progress = AlliedUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
 //				SGD::GraphicsManager::GetInstance()->DrawTexture( AlliedUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
-				AlliedUnits[i]->GetTimelineAnimation()->Render(95 + progress, 87);
+				AlliedUnits[i]->GetTimelineAnimation()->Render(111 + progress, 87);
 				int offset = 0;
 				for ( auto iter = AlliedUnits[ i ]->GetEffects().begin(); iter != AlliedUnits[ i ]->GetEffects().end(); iter++ )
 				{
@@ -217,7 +217,7 @@ void TurnManager::Render()
 				float progress = EnemyUnits[ i ]->GetProgress() / 100.0f;
 				progress *= 555;
 				//SGD::GraphicsManager::GetInstance()->DrawTexture( EnemyUnits[ i ]->GetTimelineAnimation(), { 95 + progress, 87 }, 0, { }, { }, { 1.0f, 1.0f } );
-				EnemyUnits[i]->GetTimelineAnimation()->Render(95 + progress, 87);
+				EnemyUnits[i]->GetTimelineAnimation()->Render(111 + progress, 87);
 				int offset = 0;
 				for ( auto iter = EnemyUnits[ i ]->GetEffects().begin(); iter != EnemyUnits[ i ]->GetEffects().end(); iter++ )
 				{
@@ -496,7 +496,8 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 		else if ( ( *iter )->GetName() == "WaterWall" )
 		{
 			( *iter )->SetTickDmg( ( *iter )->GetTickDmg() - value );
-
+			target->TakeDamage( value, true );
+			target->TakeDamage( -(value / 4) );
 			if ( ( *iter )->GetTickDmg() <= 0 )
 			{
 				// Clear it

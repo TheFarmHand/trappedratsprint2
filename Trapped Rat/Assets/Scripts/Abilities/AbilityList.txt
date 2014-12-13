@@ -59,6 +59,6 @@ Holy Flare
 Rush
 Wind Split
 Water Wall
+Earthen Mace
 Earthen Shield
-Earthen Ward
 Flame Spout

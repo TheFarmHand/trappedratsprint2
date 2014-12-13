@@ -698,6 +698,7 @@ void GamePlayState::Fight()
 				{
 					case 0:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Dog.xml" );
+						tempRandomEnemy->dogTarget = 0;
 						partyAbilities.push_back( MasterAbilityList[ "Feral Bite" ] );
 						break;
 					case 1:
@@ -718,6 +719,7 @@ void GamePlayState::Fight()
 						break;
 					case 5:
 						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Shopkeeper.xml" );
+						tempRandomEnemy->lastAttacker = -1;
 						partyAbilities.push_back( MasterAbilityList[ "Elemental Poison" ] );
 						break;
 					case 6:
@@ -1884,7 +1886,7 @@ void GamePlayState::CombatRender()
 {
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTexture( combatback, { 0, 0 } );
-	graphics->DrawTextureSection( combathud, { 0.0f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
+	graphics->DrawTextureSection( combathud, { -0.1f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
 	//GameData::GetInstance()->GetFont()->DrawString( "You are in Combat", 50.0, 50.0, { 155, 255, 155 } );
 	
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )
@@ -3018,8 +3020,8 @@ void GamePlayState::CreateFinalFight()
 	janeFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final Jane.xml" );
 	janeFinal->SetOrderPosition( 0 );
 	janeFinal->SetLiving( false );
-	janeFinal->SetHP( 0 );
-	characterOrderPosition.x = 600.0f;
+	//janeFinal->SetHP( 0 );
+	characterOrderPosition.x = 1600.0f;
 	characterOrderPosition.y = (float)( janeFinal->GetOrderPosition() * 100 + 150 + 16 );
 	janeFinal->SetPosition( characterOrderPosition );
 	partyAbilities.push_back( MasterAbilityList[ "Healing Light" ] );
@@ -3032,8 +3034,8 @@ void GamePlayState::CreateFinalFight()
 	johnFinal = LoadEnemy( "../Trapped Rat/Assets/Scripts/Final John.xml" );
 	johnFinal->SetOrderPosition( 2 );
 	johnFinal->SetLiving( false );
-	johnFinal->SetHP( 0 );
-	characterOrderPosition.x = 600.0f;
+	//johnFinal->SetHP( 0 );
+	characterOrderPosition.x = 1600.0f;
 	characterOrderPosition.y = (float)( johnFinal->GetOrderPosition() * 100 + 150 + 16 );
 	johnFinal->SetPosition( characterOrderPosition );
 	partyAbilities.push_back( MasterAbilityList[ "Sure Shot" ] );
@@ -3119,7 +3121,7 @@ void GamePlayState::CreateMinibossFight()
 					BWR2->SetOrderPosition( 0 );
 					BWR2->SetLiving( false );
 					BWR2->SetHP( 0 );
-					characterOrderPosition.x = 600.0f;
+					characterOrderPosition.x = 1600.0f;
 					characterOrderPosition.y = (float)( BWR2->GetOrderPosition() * 100 + 150 + 16 );
 					BWR2->SetPosition( characterOrderPosition );
 					partyAbilities.push_back( MasterAbilityList[ "Wind Split" ] );
@@ -3181,7 +3183,7 @@ void GamePlayState::CreateMinibossFight()
 					FFW2->SetOrderPosition( 0 );
 					FFW2->SetLiving( false );
 					FFW2->SetHP( 0 );
-					characterOrderPosition.x = 600.0f;
+					characterOrderPosition.x = 1600.0f;
 					characterOrderPosition.y = (float)( FFW2->GetOrderPosition() * 100 + 150 + 16 );
 					FFW2->SetPosition( characterOrderPosition );
 					partyAbilities.push_back( MasterAbilityList[ "Flame Spout" ] );
@@ -3244,7 +3246,7 @@ void GamePlayState::CreateMinibossFight()
 					SEM2->SetOrderPosition( 0 );
 					SEM2->SetLiving( false );
 					SEM2->SetHP( 0 );
-					characterOrderPosition.x = 600.0f;
+					characterOrderPosition.x = 1600.0f;
 					characterOrderPosition.y = (float)( SEM2->GetOrderPosition() * 100 + 150 + 16 );
 					SEM2->SetPosition( characterOrderPosition );
 					partyAbilities.push_back( MasterAbilityList[ "Earthen Shield" ] );
@@ -3307,7 +3309,7 @@ void GamePlayState::CreateMinibossFight()
 					WWW2->SetOrderPosition( 0 );
 					WWW2->SetLiving( false );
 					WWW2->SetHP( 0 );
-					characterOrderPosition.x = 600.0f;
+					characterOrderPosition.x = 1600.0f;
 					characterOrderPosition.y = (float)( WWW2->GetOrderPosition() * 100 + 150 + 16 );
 					WWW2->SetPosition( characterOrderPosition );
 					partyAbilities.push_back( MasterAbilityList[ "Water Wall" ] );

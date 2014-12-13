@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Feathered_Flurry Name="Earthen Ward" Offensive="false">
+<Feathered_Flurry Name="Earthen Mace" Offensive="false">
 <Help Text="" />
   <Affinity ElementalType="Earth" />
-  <StatusEffect Effect="MagicalReflect" />
+  <StatusEffect Effect="PhysicalReflect" />
   <AreaOfEffect AOE="false" />
   <Self selfTarget="false" />
   <Healing Heals="false" />

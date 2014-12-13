@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>biggsAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/JaneAnimBattle.xml</Animation>
+  <Portrait>PortraitJane.png</Portrait>
+  <Timeline>TLJane.xml</Timeline>
 </Character>
