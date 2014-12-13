@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>rat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>TLRat</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="18" y="104" />
+      <DrawRect left="1" top="100" right="32" bottom="131" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.18">
+      <AnchorPoint x="48" y="104" />
+      <DrawRect left="34" top="100" right="65" bottom="131" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
