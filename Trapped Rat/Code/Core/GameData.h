@@ -48,6 +48,7 @@ private:
 	SGD::HAudio cancel_sound = SGD::INVALID_HANDLE;
 	SGD::HAudio menu_music = SGD::INVALID_HANDLE;
 public:
+	float input_timer = 0.15f;;
 	static GameData * GetInstance();
 	void SetRunning(bool _run);
 	bool Initialize();

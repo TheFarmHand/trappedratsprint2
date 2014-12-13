@@ -1425,8 +1425,9 @@ void GamePlayState::MenuUpdate( float dt )
 	//changing the values for language
 
 
-	if (input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right) ||input->GetLeftJoystick(0).x < 0 || input->GetLeftJoystick(0).x > 0)
+	if ((input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x < 0 || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
 	{
+		GameData::GetInstance()->input_timer = 0.15f;
 		switch ( substate )
 		{
 			case None:
@@ -1453,26 +1454,30 @@ void GamePlayState::MenuUpdate( float dt )
 								case 1:
 								{
 
-										  if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0)
+										  if ((input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0) && GameData::GetInstance()->input_timer < 0)
 										  {
 											  GameData::GetInstance()->SetMusicVolume( GameData::GetInstance()->GetMusicVolume() - 5 );
+											  GameData::GetInstance()->input_timer = 0.15f;
 										  }
-										  else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0)
+										  else if ((input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
 										  {
 											  GameData::GetInstance()->SetMusicVolume( GameData::GetInstance()->GetMusicVolume() + 5 );
+											  GameData::GetInstance()->input_timer = 0.15f;
 										  }
 										  GameData::GetInstance()->PlaySelectionChange();
 										  break;
 								}
 								case 2:
 								{
-										  if (input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0)
+										  if ((input->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0) && GameData::GetInstance()->input_timer < 0)
 										  {
 											  GameData::GetInstance()->SetEffectVolume( GameData::GetInstance()->GetEffectVolume() - 5 );
+											  GameData::GetInstance()->input_timer = 0.15f;
 										  }
-										  else if (input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0)
+										  else if ((input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
 										  {
 											  GameData::GetInstance()->SetEffectVolume( GameData::GetInstance()->GetEffectVolume() + 5 );
+											  GameData::GetInstance()->input_timer = 0.15f;
 										  }
 										  GameData::GetInstance()->PlaySelectionChange();
 										  break;
@@ -1495,19 +1500,21 @@ void GamePlayState::MenuUpdate( float dt )
 	}
 
 	//navigating menu
-	if (input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0)
+	if ((input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		menuindex--;
 		if ( menuindex < 0 )
 			menuindex = maxindex;
 		GameData::GetInstance()->PlaySelectionChange();
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
-	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0)
+	if ((input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		menuindex++;
 		if ( menuindex > maxindex )
 			menuindex = 0;
 		GameData::GetInstance()->PlaySelectionChange();
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
 }
 void GamePlayState::TownRender()
@@ -2612,35 +2619,37 @@ void GamePlayState::MapUpdate( float dt )
 	}
 	else
 	{
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0)
+		if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
 		{
 			SelectedTown = 0;
 			GameData::GetInstance()->PlaySelectionChange();
+			GameData::GetInstance()->input_timer = 0.15f;
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0)
+		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0) && GameData::GetInstance()->input_timer < 0)
 		{
 			if ( unlockedTowns >= 1 )
 			{
 				SelectedTown = 1;
 				GameData::GetInstance()->PlaySelectionChange();
+				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0)
+		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0) && GameData::GetInstance()->input_timer < 0)
 		{
 			if ( unlockedTowns >= 2 )
 			{
 				SelectedTown = 2;
 				GameData::GetInstance()->PlaySelectionChange();
-
+				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
-		else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0)
+		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0) && GameData::GetInstance()->input_timer < 0)
 		{
 			if ( unlockedTowns >= 3 )
 			{
 				SelectedTown = 3;
 				GameData::GetInstance()->PlaySelectionChange();
-
+				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
 	}
