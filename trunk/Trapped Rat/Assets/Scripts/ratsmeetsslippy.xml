@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Hey!
+_you look friendly!</Words>
+  </Message>
+  <Message>
+    <Name>asdfasdfasdf</Name>
+    <Portrait>slippyportrait.png</Portrait>
+    <Words>I am!
+_Although I havn't
+_had to many friends
+_growing up in the sewers.</Words>
+  </Message>
+  <Message>
+    <Name>eggggg</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>...Well do you want 
+_to join up with us?</Words>
+  </Message>
+  <Message>
+    <Name>kjsdjkdf</Name>
+    <Portrait>slippyportrait.png</Portrait>
+    <Words>Sure!</Words>
+  </Message>
+</Dialogue>

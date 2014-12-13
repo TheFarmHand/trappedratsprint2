@@ -28,7 +28,9 @@ void MainMenuState::Enter()
 	button = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/button.png");
 	cursor = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/cheese.png");
 	logo = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/logo.png");
-
+	//here we should load in the music and play it
+	
+	SGD::AudioManager::GetInstance()->PlayAudio(GameData::GetInstance()->GetMenuMusic(), true);
 	
 
 }
@@ -54,11 +56,12 @@ void MainMenuState::Update(float dt)
 
 	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0, 1))
 	{
-
+		GameData::GetInstance()->PlayConfirm();
 		switch (index)
 		{
 		case 0:
 		{
+				  SGD::AudioManager::GetInstance()->StopAudio(GameData::GetInstance()->GetMenuMusic());
 				  GameData::GetInstance()->PlaySelectionChange();
 				  GamePlayState::GetInstance()->SetTutorial(true);
 				  GameData::GetInstance()->SwapState(GamePlayState::GetInstance());
@@ -140,4 +143,5 @@ void MainMenuState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(button);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(cursor);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(logo);
+	
 }

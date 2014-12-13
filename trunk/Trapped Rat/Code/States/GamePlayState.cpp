@@ -1107,8 +1107,11 @@ void GamePlayState::MenuUpdate( float dt )
 			maxindex = Party.size() - 1;
 			if ( select_first && selecting_party == false )
 				maxindex = 1;
-			if ( selecting_ability )
-				maxindex = Party[ character_index ]->GetAbilitiesSize() - 1;
+			if (selecting_ability)
+			{
+				GamePlayState::GetHelpText()->ManualOverride(Party[character_index]->GetAbility(menuindex)->GetExplination());
+				maxindex = Party[character_index]->GetAbilitiesSize() - 1;
+			}
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
 				SGD::AudioManager::GetInstance()->PlayAudio(m_vsoundeffects[4]);
@@ -1272,7 +1275,7 @@ void GamePlayState::MenuUpdate( float dt )
 
 				break;
 			case MenuSubStates::Party:
-
+				
 				if ( selecting_ability == false && selecting_party == false && select_first == false )
 				{
 					PlaySoundEffect(6);
@@ -1667,6 +1670,7 @@ void GamePlayState::MenuRender()
 
 			if ( selecting_ability )
 			{
+				GamePlayState::GetHelpText()->Render();
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 } );
 				for ( int i = 0; i < Party[ character_index ]->GetAbilitiesSize(); i++ )
 				{
@@ -2947,7 +2951,24 @@ void GamePlayState::AddToParty( CombatPlayer*_player )
 	Party.push_back( _player );
 	state = Dia;
 	laststate = Town;
-	dialogue->Load( "Assets/Scripts/gainedcompanion.xml" );
+	if (_player->GetName() == "Biggs")
+	{
+		dialogue->Load("Assets/Scripts/ratsmeetsbiggs.xml");
+	}
+	if (_player->GetName() == "Jeeves")
+	{
+		dialogue->Load("Assets/Scripts/ratsmeetsjeeves.xml");
+	}
+	if (_player->GetName() == "Slippy")
+	{
+
+		dialogue->Load("Assets/Scripts/ratsmeetsslippy.xml");
+	}
+	if (_player->GetName() == "Checkers")
+	{
+		dialogue->Load("Assets/Scripts/ratsmeetscheckers.xml");
+	}
+	
 }
 
 std::map<std::string, Ability*> GamePlayState::GetMasterList()

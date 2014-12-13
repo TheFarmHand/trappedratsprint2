@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>woh</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Woh, what happened
+_to you!</Words>
+  </Message>
+  <Message>
+    <Name>jfkdl</Name>
+    <Portrait>checkersportrait.png</Portrait>
+    <Words>That Jerk Cecil
+_tried to boil me!</Words>
+  </Message>
+  <Message>
+    <Name>rats</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>I am trying to avenge my parents,
+_Cecil killed them!</Words>
+  </Message>
+  <Message>
+    <Name>tag</Name>
+    <Portrait>checkersportrait.png</Portrait>
+    <Words>Ill tag along!</Words>
+  </Message>
+</Dialogue>

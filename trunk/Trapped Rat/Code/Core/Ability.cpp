@@ -34,6 +34,7 @@ Ability::Ability( const char* path )
 	const char* tempHelp = help->Attribute( "Text" );
 	std::string tempH( tempHelp );
 	noBPexplination = tempH;
+	explination = noBPexplination;
 
 	TiXmlElement* affinity = help->NextSiblingElement( "Affinity" );
 	const char* tempAff = affinity->Attribute( "ElementalType" );
