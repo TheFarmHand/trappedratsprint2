@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>raven.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Timeline</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.05">
+      <AnchorPoint x="284" y="90" />
+      <DrawRect left="258" top="79" right="303" bottom="118" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="245" y="90" />
+      <DrawRect left="223" top="86" right="258" bottom="119" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="208" y="90" />
+      <DrawRect left="184" top="82" right="223" bottom="121" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="170" y="90" />
+      <DrawRect left="139" top="68" right="185" bottom="119" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

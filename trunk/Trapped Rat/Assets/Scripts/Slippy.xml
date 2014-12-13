@@ -43,5 +43,5 @@
   </Sound>
   <Animation>slippyAnimBattle.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLSlippy.xml</Timeline>
 </Character>

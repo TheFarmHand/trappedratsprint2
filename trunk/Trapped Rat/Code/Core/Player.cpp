@@ -50,6 +50,7 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("CecilFight");
 	Listener::RegisterForEvent("Rogue");
 	Listener::RegisterForEvent( "Warrior" );
+	Listener::RegisterForEvent( "Monk" );
 	Listener::RegisterForEvent( "Wizard" );
 	Listener::RegisterForEvent( "Trap" );
 }
@@ -595,6 +596,22 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 			}
 		}
 	else if ( pEvent->GetEventID() == "Warrior" )
+		{
+		position.y -= 32;
+		GamePlayState::GetInstance()->CreateMinibossFight();
+		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
+		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
+		for ( ; iter != GamePlayState::GetInstance()->overworldObjects.end(); ++iter )
+			{
+			if ( ( *iter )->getAllyCode() == type::Enemies )
+				{
+				delete *iter;
+				GamePlayState::GetInstance()->overworldObjects.erase( iter );
+				break;
+				}
+			}
+		}
+	else if ( pEvent->GetEventID() == "Monk" )
 		{
 		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();

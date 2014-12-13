@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>DogAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/CatAnimBattle.xml</Animation>
+  <Portrait>PortraitCat.png</Portrait>
+  <Timeline>TLCat.xml</Timeline>
 </Character>
