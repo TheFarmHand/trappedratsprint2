@@ -1884,7 +1884,7 @@ void GamePlayState::CombatRender()
 {
 	SGD::GraphicsManager * graphics = SGD::GraphicsManager::GetInstance();
 	graphics->DrawTexture( combatback, { 0, 0 } );
-	graphics->DrawTextureSection( combathud, { -0.1f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
+	graphics->DrawTextureSection( combathud, { 0.0f, 425.0f }, { 0.0f, 0.0f, 800.0f, 175.0f } );
 	//GameData::GetInstance()->GetFont()->DrawString( "You are in Combat", 50.0, 50.0, { 155, 255, 155 } );
 	
 	for ( size_t i = 0; i < m_vhuditems.size(); i++ )

@@ -148,7 +148,7 @@ void Dialogue::Render()
 		if (timer <= 0 && !m_auto)
 		{
 
-			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 250.0f, 350.0f, { 0, 0, 0 });
+			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", position.x - 270.0f, position.y + 150.0f, { 0, 0, 0 });
 		}
 
 	}
