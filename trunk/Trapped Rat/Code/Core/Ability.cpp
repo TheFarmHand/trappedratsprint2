@@ -299,7 +299,7 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 	}
 void Ability::CalcluateBpScaledCost( Character* owner )
 	{
-	bpCost = baseBP + (int)( owner->GetLevel() * 0.5f );
+	bpCost = baseBP + (int)( owner->GetLevel() * 0.2f );
 	std::string temp = std::to_string( bpCost );
 	temp += " BP cost" + noBPexplination;
 	//explination = temp;

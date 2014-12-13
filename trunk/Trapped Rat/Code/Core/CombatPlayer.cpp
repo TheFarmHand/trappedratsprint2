@@ -353,11 +353,12 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 {
 	SGD::InputManager* pInput = SGD::InputManager::GetInstance();
 
+	// Find yoursel
 	if ( mySelection == self )
 	{
-		/*if ( pInput->IsKeyPressed( SGD::Key::Up )  )
-
-		if(  pInput->IsKeyPressed( SGD::Key::Left )*/
+		myTarget = 0;
+		while(targets[myTarget] != this)
+			myTarget++;
 	}
 
 	// Input
@@ -392,6 +393,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 
 		if ( myTarget < 0 ) myTarget = 0;
 	}
+
 	else if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Left) || pInput->GetLeftJoystick(0).y < 0 || pInput->GetLeftJoystick(0).x < 0 || pInput->IsDPadPressed(0, SGD::DPad::Up) || pInput->IsDPadPressed(0, SGD::DPad::Left))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
@@ -429,7 +431,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 		}
 
 		// Shouldn't ever need this check, but safety first
-		if ( myTarget > (int)targets.size() - 1 ) myTarget = (int)targets.size() - 1;
+		if ( myTarget > (int)targets.size() - 1 ) myTarget = ((int)targets.size() - 1);
 
 
 	}
@@ -572,6 +574,7 @@ void CombatPlayer::HomeUpdate( float dt )
 							menu[ i ]->SetObjectType( 0 );
 						}
 					}
+
 					hudSelection = 0;
 					help->UpdateSelection( 1, menu[ 0 ] );
 					break;
@@ -860,7 +863,10 @@ void CombatPlayer::AbilityUpdate( float dt )
 					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetEnemies().size(); i++ )
 					{
 						if ( TurnManager::GetInstance()->GetEnemies()[ i ]->isAlive() )
+						{
 							myTarget = i;
+							break;
+						}
 					}
 				}
 				states = 6;

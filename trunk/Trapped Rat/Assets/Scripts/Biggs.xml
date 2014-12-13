@@ -12,11 +12,11 @@
     </HitPoints>
     <BattlePoints>
       <Base>20</Base>
-      <Scale>6</Scale>
+      <Scale>4.5</Scale>
     </BattlePoints>
     <Attack>
-      <Base>12</Base>
-      <Scale>0.8</Scale>
+      <Base>11</Base>
+      <Scale>1.2</Scale>
     </Attack>
     <Magic>
       <Base>13</Base>
@@ -24,7 +24,7 @@
     </Magic>
     <Defense>
       <Base>10</Base>
-      <Scale>0.4</Scale>
+      <Scale>0.8</Scale>
     </Defense>
     <Speed>
       <Base>30</Base>

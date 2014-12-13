@@ -8,15 +8,15 @@
   <Stats>
     <HitPoints>
       <Base>22</Base>
-      <Scale>5</Scale>
+      <Scale>4</Scale>
     </HitPoints>
     <BattlePoints>
       <Base>0</Base>
       <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>8</Base>
-      <Scale>0.5</Scale>
+      <Base>9</Base>
+      <Scale>1.2</Scale>
     </Attack>
     <Magic>
       <Base>7</Base>
@@ -27,7 +27,7 @@
       <Scale>0.7</Scale>
     </Defense>
     <Speed>
-      <Base>26</Base>
+      <Base>24</Base>
       <Scale>0.25</Scale>
     </Speed>
     <Avoision>
