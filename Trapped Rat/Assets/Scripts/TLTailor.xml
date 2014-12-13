@@ -2,26 +2,26 @@
 <Data numAnimations="1">
   <Animation>
     <Image numFrames="3">
-      <Path>Priestess.png</Path>
+      <Path>Tailor.png</Path>
     </Image>
     <Looping>True</Looping>
     <Name>Timeline</Name>
     <NextName>none</NextName>
     <Frame delay="0.15">
-      <AnchorPoint x="287" y="718" />
-      <DrawRect left="262" top="704" right="309" bottom="766" />
+      <AnchorPoint x="278" y="590" />
+      <DrawRect left="256" top="576" right="303" bottom="643" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.15">
-      <AnchorPoint x="347" y="718" />
-      <DrawRect left="323" top="702" right="365" bottom="769" />
+      <AnchorPoint x="337" y="590" />
+      <DrawRect left="317" top="573" right="357" bottom="640" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="415" y="718" />
-      <DrawRect left="390" top="693" right="445" bottom="760" />
+      <AnchorPoint x="397" y="590" />
+      <DrawRect left="377" top="576" right="436" bottom="635" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
