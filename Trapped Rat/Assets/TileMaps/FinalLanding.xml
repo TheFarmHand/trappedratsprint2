@@ -1088,9 +1088,9 @@
   <tiles id="100" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="101" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="127" collision="0" event="herocave" onfire="herocaveworld" objectID="0" objectNumber="0" />
-  <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="101" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="102" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1169,9 +1169,9 @@
   <tiles id="100" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="101" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="127" collision="0" event="herocaveworld" onfire="herocave" objectID="0" objectNumber="0" />
-  <tiles id="101" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="101" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="102" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1188,9 +1188,9 @@
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="26" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="26" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
