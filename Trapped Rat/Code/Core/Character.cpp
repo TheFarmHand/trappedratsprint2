@@ -164,8 +164,14 @@ if ( name == "Cecil" && CecilPhase == 2 && HP / (float)( GetMaxHP() ) < 0.1f )
 		GamePlayState::GetInstance()->AddToHUDItems(temp);
 
 		}
-
-	GamePlayState::GetInstance()->PlaySoundEffect(1);
+	/*if (dmg < 0)
+	{
+		GamePlayState::GetInstance()->PlaySoundEffect(7);
+	}
+	else
+	{
+		GamePlayState::GetInstance()->PlaySoundEffect(1);
+	}*/
 }
 void Character::TakeDamage(int dmg, bool firefall, bool statusDot)
 {

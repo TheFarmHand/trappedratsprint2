@@ -8,6 +8,7 @@
 #include "../States/GamePlayState.h"
 #include "../tinyxml/tinyxml.h"
 
+
 Ability::Ability( const char* path )
 	{
 	TiXmlDocument abilityDoc;
@@ -112,12 +113,22 @@ Ability::Ability( const char* path )
 	unlocked = false;
 	animate = new AnimationSystem();
 	animate->Load( animationPath );
+
+
+	//load the sound
+	std::string soundpath;
+	soundpath = "../Trapped Rat/Assets/Sounds/" + abilityName + ".wav";
+	sound = SGD::AudioManager::GetInstance()->LoadAudio(soundpath.c_str());
 	}
 
 
 Ability::~Ability()
 	{
 	delete animate;
+	if (sound != SGD::INVALID_HANDLE)
+	{
+		SGD::AudioManager::GetInstance()->UnloadAudio(sound);
+	}
 	}
 
 void Ability::Render()
@@ -131,8 +142,12 @@ void Ability::Update( float dt )
 void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, bool ternary )
 	{
 	//Hack Code, Fix Later
-	GamePlayState::GetInstance()->PlaySoundEffect(1);
+	//GamePlayState::GetInstance()->PlaySoundEffect(1);
 	//EndHack
+	if (sound != SGD::INVALID_HANDLE)
+	{
+		SGD::AudioManager::GetInstance()->PlayAudio(sound);
+	}
 	int tempFirefall = 0;
 	Abilowner = owner;
 	Abiltarget = target;
@@ -155,6 +170,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		}
 	if ( healing )
 		{
+		
 		int dmg = (int)-formulaTotal;
 		if ( abilityName == "Whispering Wind" )
 			{
@@ -170,6 +186,7 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 		}
 	if ( abilityName == "Wind Split" )
 		{
+		
 		owner->WRsplit = true;
 		TurnManager::GetInstance()->GetEnemies()[1]->SetLiving( true );
 		TurnManager::GetInstance()->GetEnemies()[1]->SetMaxHP( owner->GetMaxHP() / 2 );

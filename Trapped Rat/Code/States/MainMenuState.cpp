@@ -132,7 +132,7 @@ void const MainMenuState::Render()
 	GameData::GetInstance()->GetFont()->DrawString("Load Game", 100.0f, 200.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Options", 100.0f, 280.0f, { 0, 0, 0 }, 2.0f);
 	GameData::GetInstance()->GetFont()->DrawString("Credits", 100.0f, 360.0f, { 0, 0, 0 }, 2.0f);
-	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 420.0f, { 0, 0, 0 }, 2.0f);
+	GameData::GetInstance()->GetFont()->DrawString("Exit", 100.0f, 440.0f, { 0, 0, 0 }, 2.0f);
 }
 void MainMenuState::Exit()
 {

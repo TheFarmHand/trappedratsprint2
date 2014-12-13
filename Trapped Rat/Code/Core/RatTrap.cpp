@@ -13,6 +13,7 @@ void RatTrap::Render()
 	SGD::Point pos = position;
 	//pos.x -= 16;
 	pos.y -= 32;
+	if (image != SGD::INVALID_HANDLE)
 	pGraphics->DrawTexture(image, pos);
 
 }

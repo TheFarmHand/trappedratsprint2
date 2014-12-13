@@ -101,8 +101,9 @@ class GamePlayState :
 
 	//save stuff
 	int saveindex;
-	time_t playtime = 0;
+	float playtime = 0.0f;
 	data files[3];
+	
 	
 public:
 	int randomEnemyIndex;//move back to .cpp
@@ -186,6 +187,7 @@ public:
 	HUDItem* CreateBar(SGD::Size _size,SGD::Point _pos,Character * _owner, SGD::Color _color,SGD::Point _offset, bool isHP = true);
 
 	void CreateOverworldObject( std::string object, std::string animation, SGD::Point destination, bool allied );
+	bool CheckIfExist(std::string _name);
 
 	void RandomAnimation();
 	void GuardAnimation();

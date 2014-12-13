@@ -363,7 +363,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 	// Input
 	else if ( mySelection == deadAlly )
 	{
-		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Left ) )
+		if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Left) || pInput->GetLeftJoystick(0).y < 0 || pInput->GetLeftJoystick(0).x < 0 || pInput->IsDPadPressed(0, SGD::DPad::Up) || pInput->IsDPadPressed(0, SGD::DPad::Left))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			--myTarget;
@@ -376,7 +376,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 					myTarget = targets.size() - 1;
 			}
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsKeyPressed( SGD::Key::Right ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsKeyPressed(SGD::Key::Right) || pInput->GetLeftJoystick(0).y > 0 || pInput->GetLeftJoystick(0).x > 0 || pInput->IsDPadPressed(0, SGD::DPad::Down) || pInput->IsDPadPressed(0, SGD::DPad::Right))
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			++myTarget;
@@ -392,7 +392,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 
 		if ( myTarget < 0 ) myTarget = 0;
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Left ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Left) || pInput->GetLeftJoystick(0).y < 0 || pInput->GetLeftJoystick(0).x < 0 || pInput->IsDPadPressed(0, SGD::DPad::Up) || pInput->IsDPadPressed(0, SGD::DPad::Left))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		--myTarget;
@@ -409,7 +409,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 		if ( myTarget < 0 ) myTarget = 0;
 	}
 
-	else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsKeyPressed( SGD::Key::Right ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsKeyPressed(SGD::Key::Right) || pInput->GetLeftJoystick(0).y > 0 || pInput->GetLeftJoystick(0).x > 0 || pInput->IsDPadPressed(0, SGD::DPad::Down) || pInput->IsDPadPressed(0, SGD::DPad::Right))
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		++myTarget;
@@ -460,7 +460,7 @@ void CombatPlayer::HomeUpdate( float dt )
 
 	if ( states == 0 )
 	{
-		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed( 0, SGD::DPad::Up ) )
+		if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsDPadPressed(0,SGD::DPad::Up)  || pInput->GetLeftJoystick(0).y < 0)
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 0 );
@@ -468,14 +468,14 @@ void CombatPlayer::HomeUpdate( float dt )
 			hudSelection = 0;
 
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Right ) || pInput->IsDPadPressed( 0, SGD::DPad::Right ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsDPadPressed(0, SGD::DPad::Right) || pInput->GetLeftJoystick(0).x > 0)
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 2 );
 			help->UpdateSelection( 0, GamePlayState::GetInstance()->GetSelectableObjects()[ 2 ] );
 			hudSelection = 2;
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Left ) || pInput->IsDPadPressed( 0, SGD::DPad::Left ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsDPadPressed(0, SGD::DPad::Left) || pInput->GetLeftJoystick(0).x < 0)
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 1 );
@@ -483,7 +483,7 @@ void CombatPlayer::HomeUpdate( float dt )
 			hudSelection = 1;
 
 		}
-		else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsDPadPressed( 0, SGD::DPad::Down ) )
+		else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsDPadPressed(0, SGD::DPad::Down) || pInput->GetLeftJoystick(0).y > 0)
 		{
 			GameData::GetInstance()->PlaySelectionChange();
 			SetSelection( 3 );
@@ -526,7 +526,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 		{
 			unsigned int activeindex = 0;
-			GameData::GetInstance()->PlaySelectionChange();
+			GamePlayState::GetInstance()->PlaySoundEffect(6);
 			switch ( hudSelection )
 			{
 				case 0: // Attack
@@ -602,7 +602,7 @@ void CombatPlayer::AttackUpdate( float dt )
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		GameData::GetInstance()->PlaySelectionChange();
+		//GamePlayState::GetInstance()->PlaySoundEffect(6);
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
 		//	}
 		myTarget = 0;
@@ -620,6 +620,8 @@ void CombatPlayer::AttackUpdate( float dt )
 		states = 0;
 		mySelection = none;
 		SetSelection( 0 );
+		GamePlayState::GetInstance()->PlaySoundEffect(1);
+		
 	}
 	else if ( pInput->IsKeyPressed( SGD::Key::Escape ) || pInput->IsButtonPressed( 0, 2 ) )
 	{
@@ -670,7 +672,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-
+		//GamePlayState::GetInstance()->PlaySoundEffect(7);
 		//pTurn->HealTarget(pTurn->GetAllies()[myTarget], 15);
 		//this is where we say what the items do
 		//Select(pTurn->GetAllies()[myTarget]);
@@ -727,7 +729,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 			usingItem << name << " uses " << chosen.GetName();
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingItem.str(), this );
 		}
-
+		GamePlayState::GetInstance()->PlaySoundEffect(6);
 
 
 		//reset chosen
@@ -771,14 +773,14 @@ void CombatPlayer::AbilityUpdate( float dt )
 	HelpText *help = game->GetHelpText();
 	bool anyAllyDead = false;
 
-	if ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Up ) )
+	if (pInput->IsKeyPressed(SGD::Key::Up) || pInput->IsKeyPressed(SGD::Key::Up) || pInput->GetLeftJoystick(0).y < 0)
 	{
 		GameData::GetInstance()->PlaySelectionChange();
 		hudSelection = 0;
 		help->UpdateSelection( 1, menu[ 0 ] );
 
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Right ) || pInput->IsKeyPressed( SGD::Key::Right ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Right) || pInput->IsKeyPressed(SGD::Key::Right) || pInput->GetLeftJoystick(0).x > 0)
 	{
 		if ( menu[ 2 ]->GetObjectType() == 1 )
 		{
@@ -788,7 +790,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Left ) || pInput->IsKeyPressed( SGD::Key::Left ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Left) || pInput->IsKeyPressed(SGD::Key::Left) || pInput->GetLeftJoystick(0).x < 0)
 	{
 		if ( menu[ 1 ]->GetObjectType() == 1 )
 		{
@@ -798,7 +800,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 		}
 	}
-	else if ( pInput->IsKeyPressed( SGD::Key::Down ) || pInput->IsKeyPressed( SGD::Key::Down ) )
+	else if (pInput->IsKeyPressed(SGD::Key::Down) || pInput->IsKeyPressed(SGD::Key::Down) || pInput->GetLeftJoystick(0).y > 0)
 	{
 		if ( menu[ 3 ]->GetObjectType() == 1 )
 		{
@@ -838,7 +840,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		GameData::GetInstance()->PlaySelectionChange();
+		GamePlayState::GetInstance()->PlaySoundEffect(6);
 		if ( menu[ hudSelection ]->GetAbility() == nullptr )
 		{
 			return;
@@ -948,7 +950,7 @@ void CombatPlayer::RunUpdate( float dt )
 	if ( GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight || GamePlayState::GetInstance()->ignore_game_over )
 		{
 			// You can't run away
-			GameData::GetInstance()->PlaySelectionChange();
+			GamePlayState::GetInstance()->PlaySoundEffect(4);
 			mySelection = none;
 			states = 0;
 			//TurnManager::GetInstance()->setProgressFullReached(false);

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "../Animation/AnimationSystem.h"
-
+#include "../SGD Wrappers/SGD_AudioManager.h"
 class Character;
 
 // Elemental Type
@@ -32,7 +32,7 @@ private:
 	AnimationSystem* animate;
 	Character* Abilowner;
 	Character* Abiltarget;
-
+	SGD::HAudio sound = SGD::INVALID_HANDLE;
 public:
 	Ability( const char* path );
 	virtual ~Ability();
