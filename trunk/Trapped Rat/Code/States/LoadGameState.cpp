@@ -51,7 +51,7 @@ void  LoadGameState::Enter()
 			{
 				
 				data temp;
-				fin >> temp.playtime >> temp.town;
+				fin >> temp.playtime >> temp.town >> temp.partysize >> temp.gold;
 				files[i] = temp;
 				fin.ignore(INT_MAX, '\n');
 
@@ -85,12 +85,39 @@ void const LoadGameState::Render()
 			//the town they are currently in
 	if (files[index].playtime != 0)
 	{
+		std::string townwords;
+		if (files[index].town == 0)
+		{
+			townwords = "Windy Woods";
+		}
+		if (files[index].town == 1)
+		{
+			townwords = "Magma Falls";
+		}
+		if (files[index].town == 2)
+		{
+			townwords = "Earthy Town";
+		}
+		if (files[index].town == 3)
+		{
+			townwords = "New Water City";
+		}
+		if (files[index].town == 4)
+		{
+			townwords = "Hero's Landing";
+		}
 		std::ostringstream playtime;
-		playtime << "Playtime: " << files[index].playtime;
+		playtime << "Playtime: " << ceilf(files[index].playtime * 10) / 10 << " minutes";
 		GameData::GetInstance()->GetFont()->DrawString(playtime.str(), 475.0f, 225.0f, { 0, 0, 0 });
 		std::ostringstream town;
-		town << "Town: " << files[index].town;
+		town << "Town: " << townwords.c_str();
 		GameData::GetInstance()->GetFont()->DrawString(town.str(), 475.0f, 275.0f, { 0, 0, 0 });
+		std::ostringstream party;
+		party << "Party Size: " << files[index].partysize;
+		GameData::GetInstance()->GetFont()->DrawString(party.str(), 475.0f, 325.0f, { 0, 0, 0 });
+		std::ostringstream gold;
+		gold << "Gold: " << files[index].gold << 'g';
+		GameData::GetInstance()->GetFont()->DrawString(gold.str(), 475.0f, 375.0f, { 0, 0, 0 });
 	}
 	else
 	{

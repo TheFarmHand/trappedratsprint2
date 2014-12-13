@@ -15,7 +15,7 @@
     </Frame>
     <Frame delay="0.25">
       <AnchorPoint x="102" y="14" />
-      <DrawRect left="69" top="9" right="134" bottom="66" />
+      <DrawRect left="75" top="9" right="134" bottom="66" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
@@ -27,7 +27,7 @@
     </Frame>
     <Frame delay="0.25">
       <AnchorPoint x="102" y="14" />
-      <DrawRect left="69" top="9" right="134" bottom="66" />
+      <DrawRect left="76" top="9" right="135" bottom="67" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

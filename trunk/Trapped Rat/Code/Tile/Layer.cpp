@@ -97,7 +97,23 @@ void Layer::Initialize( const char* path)
 
 			GamePlayState::GetInstance()->AddTrap(tF, destination);
 		}
-		if ( tE == "GainBiggs" )
+		if (tE == "GainBiggs" && !GamePlayState::GetInstance()->CheckIfExist("Biggs"))
+			{
+			
+			int x, y, pixX, pixY;
+			SGD::Point destination;
+			x = layerCounter % layerWidth;
+			y = layerCounter / layerWidth;
+			pixX = x * tileWidth;
+			pixY = y * tileHeight;
+			destination.x = (float)pixX + 16;
+			destination.y = (float)pixY + 32;
+
+			std::string objectName = "OverworldBiggs";
+			std::string objectAni = "AniBiggs";
+			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
+			}
+		else if (tE == "GainCheckers" && !GamePlayState::GetInstance()->CheckIfExist("Checkers"))
 			{
 			int x, y, pixX, pixY;
 			SGD::Point destination;
@@ -112,7 +128,7 @@ void Layer::Initialize( const char* path)
 			std::string objectAni = "AniBiggs";
 			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
 			}
-		else if ( tE == "GainCheckers" )
+		else if (tE == "GainSlippy" && !GamePlayState::GetInstance()->CheckIfExist("Slippy"))
 			{
 			int x, y, pixX, pixY;
 			SGD::Point destination;
@@ -127,22 +143,7 @@ void Layer::Initialize( const char* path)
 			std::string objectAni = "AniBiggs";
 			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
 			}
-		else if ( tE == "GainSlippy" )
-			{
-			int x, y, pixX, pixY;
-			SGD::Point destination;
-			x = layerCounter % layerWidth;
-			y = layerCounter / layerWidth;
-			pixX = x * tileWidth;
-			pixY = y * tileHeight;
-			destination.x = (float)pixX + 16;
-			destination.y = (float)pixY + 32;
-
-			std::string objectName = "OverworldBiggs";
-			std::string objectAni = "AniBiggs";
-			GamePlayState::GetInstance()->CreateOverworldObject( objectName, objectAni, destination, true );
-			}
-		else if ( tE == "GainJeeves" )
+		else if (tE == "GainJeeves"&& !GamePlayState::GetInstance()->CheckIfExist("Jeeves"))
 			{
 			int x, y, pixX, pixY;
 			SGD::Point destination;

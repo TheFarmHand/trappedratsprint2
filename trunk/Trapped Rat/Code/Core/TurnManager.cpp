@@ -164,7 +164,7 @@ void TurnManager::Update( float dt )
 	}
 
 	//Check to see if elemental table display input
-	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::E ) )
+	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::E ) || SGD::InputManager::GetInstance()->IsButtonPressed(0,0) )
 	{
 		elementalgraphicactive = !elementalgraphicactive;
 	}

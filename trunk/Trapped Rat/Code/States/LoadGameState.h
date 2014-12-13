@@ -4,9 +4,10 @@
 #include <vector>
 struct data
 {
-	int playtime = 0;
+	float playtime = 0.0f;
 	int town = 0;
-	//int partysize = 0;
+	int partysize = 0;
+	int gold = 0;
 };
 class LoadGameState :
 	public GameState
