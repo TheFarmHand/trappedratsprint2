@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="3">
+  <Animation>
+    <Image numFrames="6">
+      <Path>shopkeeper.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="29" y="202" />
+      <DrawRect left="5" top="189" right="59" bottom="259" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="93" y="202" />
+      <DrawRect left="67" top="189" right="119" bottom="261" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="157" y="202" />
+      <DrawRect left="130" top="189" right="182" bottom="256" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.55">
+      <AnchorPoint x="221" y="202" />
+      <DrawRect left="197" top="189" right="253" bottom="258" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="157" y="202" />
+      <DrawRect left="129" top="190" right="180" bottom="261" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="93" y="202" />
+      <DrawRect left="68" top="188" right="119" bottom="257" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="5">
+      <Path>shopkeeper.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.4">
+      <AnchorPoint x="155" y="82" />
+      <DrawRect left="139" top="69" right="188" bottom="126" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="221" y="82" />
+      <DrawRect left="197" top="69" right="247" bottom="127" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="285" y="82" />
+      <DrawRect left="261" top="65" right="307" bottom="129" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="349" y="82" />
+      <DrawRect left="325" top="68" right="374" bottom="130" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="414" y="82" />
+      <DrawRect left="380" top="74" right="454" bottom="129" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>shopkeeper.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.01">
+      <AnchorPoint x="414" y="82" />
+      <DrawRect left="377" top="75" right="473" bottom="129" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

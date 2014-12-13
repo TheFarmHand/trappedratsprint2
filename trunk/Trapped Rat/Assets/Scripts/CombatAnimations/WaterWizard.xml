@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="3">
+  <Animation>
+    <Image numFrames="3">
+      <Path>EnemySprites/WaterWizard.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="28" y="13" />
+      <DrawRect left="6" top="2" right="57" bottom="74" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="76" y="13" />
+      <DrawRect left="55" top="1" right="107" bottom="77" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="124" y="13" />
+      <DrawRect left="104" top="1" right="161" bottom="80" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="6">
+      <Path>EnemySprites/WaterWizard.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="200" y="89" />
+      <DrawRect left="177" top="79" right="230" bottom="147" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="260" y="89" />
+      <DrawRect left="236" top="75" right="297" bottom="144" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="324" y="87" />
+      <DrawRect left="297" top="73" right="366" bottom="148" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="389" y="80" />
+      <DrawRect left="364" top="73" right="433" bottom="147" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="448" y="82" />
+      <DrawRect left="435" top="73" right="496" bottom="153" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="509" y="82" />
+      <DrawRect left="497" top="72" right="566" bottom="156" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>EnemySprites/WaterWizard.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="509" y="82" />
+      <DrawRect left="496" top="108" right="570" bottom="155" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
