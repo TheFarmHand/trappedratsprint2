@@ -1,79 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data numAnimations="3">
   <Animation>
-    <Image numFrames="4">
-      <Path>raven.png</Path>
+    <Image numFrames="3">
+      <Path>Priestess.png</Path>
     </Image>
     <Looping>True</Looping>
     <Name>Idle</Name>
-    <NextName>none</NextName>
-    <Frame delay="0.05">
-      <AnchorPoint x="32" y="15" />
-      <DrawRect left="5" top="0" right="78" bottom="65" />
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="30" y="147" />
+      <DrawRect left="12" top="128" right="53" bottom="189" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.05">
-      <AnchorPoint x="106" y="15" />
-      <DrawRect left="79" top="3" right="150" bottom="72" />
+    <Frame delay="0.25">
+      <AnchorPoint x="94" y="147" />
+      <DrawRect left="80" top="124" right="113" bottom="192" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
-    <Frame delay="0.05">
-      <AnchorPoint x="178" y="15" />
-      <DrawRect left="148" top="4" right="225" bottom="71" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.05">
-      <AnchorPoint x="250" y="15" />
-      <DrawRect left="221" top="2" right="296" bottom="73" />
+    <Frame delay="0.25">
+      <AnchorPoint x="158" y="147" />
+      <DrawRect left="144" top="126" right="181" bottom="190" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
   </Animation>
   <Animation>
     <Image numFrames="4">
-      <Path>raven.png</Path>
+      <Path>Priestess.png</Path>
     </Image>
     <Looping>False</Looping>
     <Name>Death</Name>
     <NextName>dead</NextName>
-    <Frame delay="0.25">
-      <AnchorPoint x="45" y="210" />
-      <DrawRect left="4" top="165" right="88" bottom="250" />
+    <Frame delay="0.2">
+      <AnchorPoint x="222" y="215" />
+      <DrawRect left="201" top="205" right="250" bottom="257" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="119" y="210" />
-      <DrawRect left="85" top="178" right="154" bottom="255" />
-      <CollisionRect left="0" top="0" right="0" bottom="0" />
-      <Event>NoEvent</Event>
-    </Frame>
-    <Frame delay="0.15">
-      <AnchorPoint x="190" y="210" />
-      <DrawRect left="155" top="196" right="230" bottom="253" />
+      <AnchorPoint x="286" y="215" />
+      <DrawRect left="266" top="202" right="307" bottom="256" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
     <Frame delay="0.25">
-      <AnchorPoint x="265" y="210" />
-      <DrawRect left="225" top="202" right="308" bottom="256" />
+      <AnchorPoint x="350" y="215" />
+      <DrawRect left="330" top="201" right="374" bottom="257" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="421" y="215" />
+      <DrawRect left="385" top="209" right="452" bottom="260" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>
   </Animation>
   <Animation>
     <Image numFrames="1">
-      <Path>raven.png</Path>
+      <Path>Priestess.png</Path>
     </Image>
-    <Looping>True</Looping>
+    <Looping>False</Looping>
     <Name>dead</Name>
     <NextName>none</NextName>
     <Frame delay="0.01">
-      <AnchorPoint x="265" y="210" />
-      <DrawRect left="229" top="209" right="312" bottom="249" />
+      <AnchorPoint x="421" y="215" />
+      <DrawRect left="383" top="215" right="461" bottom="260" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

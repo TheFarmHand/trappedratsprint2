@@ -62,7 +62,7 @@
     <Image numFrames="1">
       <Path>Dog.png</Path>
     </Image>
-    <Looping>False</Looping>
+    <Looping>True</Looping>
     <Name>dead</Name>
     <NextName>none</NextName>
     <Frame delay="0.01">

@@ -245,7 +245,7 @@ void TurnManager::Render()
 	}
 	for ( unsigned int i = 0; i < EnemyUnits.size(); ++i )
 	{
-		if ( EnemyUnits[ i ]->isAlive() )
+		//if ( EnemyUnits[ i ]->isAlive() )
 			EnemyUnits[ i ]->Render();
 	}
 	//*
