@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="2">
+<Data numAnimations="3">
   <Animation>
     <Image numFrames="4">
       <Path>cecil.png</Path>
@@ -38,7 +38,7 @@
     </Image>
     <Looping>False</Looping>
     <Name>Death</Name>
-    <NextName>None</NextName>
+    <NextName>dead</NextName>
     <Frame delay="0.1">
       <AnchorPoint x="57" y="108" />
       <DrawRect left="18" top="84" right="79" bottom="148" />
@@ -66,6 +66,20 @@
     <Frame delay="0.5">
       <AnchorPoint x="344" y="104" />
       <DrawRect left="313" top="67" right="378" bottom="153" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>cecil.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="347" y="114" />
+      <DrawRect left="312" top="107" right="381" bottom="156" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

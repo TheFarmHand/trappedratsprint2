@@ -498,7 +498,7 @@ void Character::SetHP( int _hp )
 		else
 		{
 			//Write Enemy Code Here
-		if ( name == "Cat" || name == "Dog" || name == "Raven" || name == "Chef" || name == "Blacksmith" )
+		if ( name == "Cat" || name == "Dog" || name == "Raven" || name == "Chef" || name == "Blacksmith" || name == "Cecil" )
 			{
 				dynamic_cast<Enemy*>(this)->GetAnimations()->ResetAll();
 				dynamic_cast<Enemy*>(this)->GetAnimations()->Play("Death");
