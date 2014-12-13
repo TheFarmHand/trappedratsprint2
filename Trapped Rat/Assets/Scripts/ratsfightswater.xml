@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>sddd</Name>
+    <Portrait>wizardportrait.png</Portrait>
+    <Words>Gross, another rat came up 
+_from the sewers!</Words>
+  </Message>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Let's fight!</Words>
+  </Message>
+</Dialogue>

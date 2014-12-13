@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Data numAnimations="1">
+<Data numAnimations="2">
   <Animation>
     <Image numFrames="4">
       <Path>cecil.png</Path>
     </Image>
     <Looping>True</Looping>
-    <Name>Name</Name>
+    <Name>Idle</Name>
     <NextName>None</NextName>
     <Frame delay="0.25">
       <AnchorPoint x="39" y="14" />
@@ -28,6 +28,44 @@
     <Frame delay="0.25">
       <AnchorPoint x="102" y="14" />
       <DrawRect left="76" top="9" right="135" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="5">
+      <Path>cecil.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.1">
+      <AnchorPoint x="57" y="108" />
+      <DrawRect left="18" top="84" right="79" bottom="148" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="115" y="106" />
+      <DrawRect left="80" top="83" right="145" bottom="148" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.1">
+      <AnchorPoint x="220" y="103" />
+      <DrawRect left="189" top="65" right="246" bottom="151" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="282" y="103" />
+      <DrawRect left="246" top="65" right="313" bottom="151" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.5">
+      <AnchorPoint x="344" y="104" />
+      <DrawRect left="313" top="67" right="378" bottom="153" />
       <CollisionRect left="0" top="0" right="0" bottom="0" />
       <Event>NoEvent</Event>
     </Frame>

@@ -3099,6 +3099,7 @@ void GamePlayState::CreateMinibossFight()
 	std::vector<Enemy*> bosses;
 	std::vector<Ability*> partyAbilities;
 	BossAnimation();
+	
 	switch ( SelectedTown )  //NOTE FOR JOE****Make sure to increment "unlockedTowns" after you win the fight against these Minibosses
 	{
 		case 0: //Wind <---
@@ -3160,7 +3161,7 @@ void GamePlayState::CreateMinibossFight()
 
 					state = Dia;
 					laststate = Combat;
-					dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+					dialogue->Load( "Assets/Scripts/ratsfightswind.xml" );
 					break;
 		}
 		case 1: //Fire <----
@@ -3222,7 +3223,7 @@ void GamePlayState::CreateMinibossFight()
 
 					state = Dia;
 					laststate = Combat;
-					dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+					dialogue->Load( "Assets/Scripts/ratsfightsfire.xml" );
 					break;
 		}
 		case 2: //Earth <---
@@ -3286,7 +3287,7 @@ void GamePlayState::CreateMinibossFight()
 
 					state = Dia;
 					laststate = Combat;
-					dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+					dialogue->Load( "Assets/Scripts/ratsfightsearth.xml" );
 					break;
 		}
 		case 3: //Water <----
@@ -3348,7 +3349,7 @@ void GamePlayState::CreateMinibossFight()
 
 					state = Dia;
 					laststate = Combat;
-					dialogue->Load( "Assets/Scripts/bossdialogue.xml" );
+					dialogue->Load( "Assets/Scripts/ratsfightswater.xml" );
 					break;
 		}
 		case 4://Cecils HomeTown **Should Not Be Used because no miniboss in that town

@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>CombatAnimations/WindRogue.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>windrogueportrait.png</Portrait>
   <Timeline>TLWR.xml</Timeline>
 </Character>

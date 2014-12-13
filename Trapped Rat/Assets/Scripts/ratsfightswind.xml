@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>ha</Name>
+    <Portrait>windrogueportrait.png</Portrait>
+    <Words>Hey a little Rat!
+_Im going to keep him as pet!</Words>
+  </Message>
+  <Message>
+    <Name>la;ksdjf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>No way man!</Words>
+  </Message>
+  <Message>
+    <Name>dffd</Name>
+    <Portrait>windrogueportrait.png</Portrait>
+    <Words>Ok then... Lets fight!</Words>
+  </Message>
+</Dialogue>

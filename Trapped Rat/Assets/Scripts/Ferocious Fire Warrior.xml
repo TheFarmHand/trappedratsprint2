@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>CombatAnimations/FireWarrior.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Portrait>fireportrait.png</Portrait>
+  <Timeline>firetimeline.xml</Timeline>
 </Character>

@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>CombatAnimations/WaterWizard.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Portrait>wizardportrait.png</Portrait>
+  <Timeline>wizardtimeline.xml</Timeline>
 </Character>
