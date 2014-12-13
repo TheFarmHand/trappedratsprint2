@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dialogue>
   <Message>
-    <Name>Boss</Name>
-    <Portrait>Bowie4.png</Portrait>
-    <Words>Time to fight a boss!</Words>
+    <Name>jsdfgjsdkl</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>My name is Ratsputin,
+_you killed my mother and father,
+_prepare to die....</Words>
+  </Message>
+  <Message>
+    <Name>asdfasd</Name>
+    <Portrait>PortraitCecil.png</Portrait>
+    <Words>Eeeek! 
+_A Rat!!!!!</Words>
   </Message>
 </Dialogue>
