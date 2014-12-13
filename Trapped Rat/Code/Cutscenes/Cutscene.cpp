@@ -84,6 +84,10 @@ void Cutscene::LoadCutscene(int _index)
 		dlg = new Dialogue();
 		dlg->Load("../Trapped Rat/Assets/Scripts/testdialogue.xml");
 	}
+	else if (_index == 1)
+	{
+		//Tutorial Cutscene
+	}
 }
 void Cutscene::Update(float dt)
 {	
