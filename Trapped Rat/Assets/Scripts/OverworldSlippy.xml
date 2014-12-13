@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>SlippySpriteSheet.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Timeline</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="72" y="329" />
+      <DrawRect left="58" top="311" right="90" bottom="339" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="105" y="329" />
+      <DrawRect left="92" top="308" right="118" bottom="339" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="137" y="329" />
+      <DrawRect left="125" top="307" right="152" bottom="337" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="164" y="329" />
+      <DrawRect left="150" top="303" right="178" bottom="339" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="190" y="329" />
+      <DrawRect left="178" top="308" right="206" bottom="337" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

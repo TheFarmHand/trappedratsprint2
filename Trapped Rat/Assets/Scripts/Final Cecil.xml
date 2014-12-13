@@ -7,7 +7,7 @@
   <IsRandom>false</IsRandom>
   <Stats>
     <HitPoints>
-      <Base>1</Base>
+      <Base>1000</Base>
       <Scale>0</Scale>
     </HitPoints>
     <BattlePoints>
@@ -15,19 +15,19 @@
       <Scale>2</Scale>
     </BattlePoints>
     <Attack>
-      <Base>16</Base>
+      <Base>58</Base>
       <Scale>0</Scale>
     </Attack>
     <Magic>
-      <Base>17</Base>
+      <Base>55</Base>
       <Scale>0</Scale>
     </Magic>
     <Defense>
-      <Base>16</Base>
+      <Base>62</Base>
       <Scale>0</Scale>
     </Defense>
     <Speed>
-      <Base>36</Base>
+      <Base>40</Base>
       <Scale>0</Scale>
     </Speed>
     <Avoision>
@@ -43,5 +43,5 @@
   </Sound>
   <Animation>CecilBattle.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLCecil.xml</Timeline>
 </Character>

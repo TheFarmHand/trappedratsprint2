@@ -43,5 +43,5 @@
   </Sound>
   <Animation>JeevesAnimBattle.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLJeeves.xml</Timeline>
 </Character>

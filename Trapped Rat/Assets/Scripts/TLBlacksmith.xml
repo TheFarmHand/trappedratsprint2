@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="6">
+      <Path>blacksmith.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Timeline</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="92" y="867" />
+      <DrawRect left="81" top="851" right="105" bottom="903" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="65" y="867" />
+      <DrawRect left="55" top="852" right="76" bottom="902" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="36" y="867" />
+      <DrawRect left="25" top="854" right="52" bottom="903" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="94" y="917" />
+      <DrawRect left="78" top="902" right="108" bottom="951" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="67" y="917" />
+      <DrawRect left="53" top="901" right="80" bottom="952" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="39" y="917" />
+      <DrawRect left="21" top="904" right="55" bottom="951" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

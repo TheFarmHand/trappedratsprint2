@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>Dog1.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Timeline</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="188" y="124" />
+      <DrawRect left="166" top="115" right="213" bottom="153" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="138" y="124" />
+      <DrawRect left="117" top="111" right="160" bottom="152" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="83" y="124" />
+      <DrawRect left="61" top="114" right="110" bottom="150" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="34" y="124" />
+      <DrawRect left="14" top="114" right="59" bottom="148" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>DogAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/DogAnimBattle.xml</Animation>
+  <Portrait>PortraitDog.png</Portrait>
+  <Timeline>TLDog.xml</Timeline>
 </Character>

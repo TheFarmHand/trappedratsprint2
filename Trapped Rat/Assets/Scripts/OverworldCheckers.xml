@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>checkers.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Overworld</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="258" y="124" />
+      <DrawRect left="238" top="114" right="275" bottom="144" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="296" y="124" />
+      <DrawRect left="278" top="110" right="312" bottom="146" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="334" y="124" />
+      <DrawRect left="316" top="110" right="350" bottom="149" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="372" y="124" />
+      <DrawRect left="352" top="109" right="393" bottom="147" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

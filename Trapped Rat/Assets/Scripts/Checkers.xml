@@ -43,5 +43,5 @@
   </Sound>
   <Animation>checkersAnimBattle.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLCheckers.xml</Timeline>
 </Character>

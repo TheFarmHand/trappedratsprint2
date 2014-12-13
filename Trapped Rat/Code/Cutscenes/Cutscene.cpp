@@ -40,7 +40,7 @@ void Cutscene::LoadCutscene(int _index)
 
 		//Load the Animation and start it
 		tempobj->ansys = new AnimationSystem();
-		tempobj->ansys->Load("DogAnimBattle.xml");
+		tempobj->ansys->Load("CombatAnimations/DogAnimBattle.xml");
 		tempobj->ansys->Play(0);
 
 		//Setup Objects Initial Waypoint  and Velocities

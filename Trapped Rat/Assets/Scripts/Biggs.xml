@@ -43,5 +43,5 @@
   </Sound>
   <Animation>biggsAnimBattleFinal.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLBiggs.xml</Timeline>
 </Character>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="2">
+      <Path>Jeeves.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Overworld</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.35">
+      <AnchorPoint x="143" y="37" />
+      <DrawRect left="130" top="28" right="156" bottom="57" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.35">
+      <AnchorPoint x="169" y="37" />
+      <DrawRect left="156" top="27" right="185" bottom="58" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

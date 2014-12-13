@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="3">
+  <Animation>
+    <Image numFrames="8">
+      <Path>EnemySprites/cat.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>None</NextName>
+    <Frame delay="2.00">
+      <AnchorPoint x="360" y="66" />
+      <DrawRect left="337" top="55" right="393" bottom="111" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="66" />
+      <DrawRect left="477" top="52" right="521" bottom="109" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="132" />
+      <DrawRect left="477" top="113" right="523" bottom="176" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="198" />
+      <DrawRect left="475" top="182" right="523" bottom="242" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="264" />
+      <DrawRect left="472" top="245" right="526" bottom="308" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="198" />
+      <DrawRect left="475" top="182" right="524" bottom="243" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="132" />
+      <DrawRect left="476" top="112" right="524" bottom="175" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.20">
+      <AnchorPoint x="494" y="66" />
+      <DrawRect left="477" top="51" right="523" bottom="110" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="5">
+      <Path>EnemySprites/cat.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.7">
+      <AnchorPoint x="692" y="66" />
+      <DrawRect left="667" top="56" right="726" bottom="111" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.40">
+      <AnchorPoint x="693" y="134" />
+      <DrawRect left="670" top="116" right="717" bottom="177" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="695" y="198" />
+      <DrawRect left="662" top="189" right="730" bottom="247" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="695" y="265" />
+      <DrawRect left="662" top="257" right="730" bottom="320" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="695" y="198" />
+      <DrawRect left="659" top="187" right="733" bottom="248" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>EnemySprites/cat.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.01">
+      <AnchorPoint x="695" y="198" />
+      <DrawRect left="665" top="181" right="729" bottom="251" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

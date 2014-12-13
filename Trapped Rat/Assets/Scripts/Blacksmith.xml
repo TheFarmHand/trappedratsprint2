@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>DogAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/BlacksmithAnimBattle.xml</Animation>
+  <Portrait>PortraitBlacksmith.png</Portrait>
+  <Timeline>TLBlacksmith.xml</Timeline>
 </Character>

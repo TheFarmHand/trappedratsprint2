@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>BiggsArcher.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Overworld</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="65" y="376" />
+      <DrawRect left="54" top="364" right="79" bottom="402" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="176" y="376" />
+      <DrawRect left="160" top="364" right="193" bottom="400" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="287" y="376" />
+      <DrawRect left="269" top="365" right="307" bottom="400" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
