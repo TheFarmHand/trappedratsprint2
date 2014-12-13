@@ -384,14 +384,23 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "herokeep")
+	
+	else if(pEvent->GetEventID() == "herocaveworld")
 	{
-		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
-		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 ) + (int)TileSystem::GetInstance( )->GetTileSize( ).width;
 		position.y = dest->y + size.height / 2;
-		GamePlayState::GetInstance()->PlaySoundEffect(0);
-
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 	}
+
+	else if ( pEvent->GetEventID( ) == "herocave" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 ) + (int)TileSystem::GetInstance( )->GetTileSize( ).width;
+		position.y = dest->y + size.height / 2;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+	}
+
 	else if (pEvent->GetEventID() == "GainJeeves")
 	{
 		//here we create jeeves and push him into the the vector
