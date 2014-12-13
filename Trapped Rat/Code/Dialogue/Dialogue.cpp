@@ -20,8 +20,10 @@ Dialogue::~Dialogue()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(pborder);
 	
 }
-void Dialogue::Load(std::string filepath)
+void Dialogue::Load(std::string filepath, bool _auto, SGD::Point _pos)
 {
+	m_auto = _auto;
+	position = _pos;
 	//unload the current thing
 
 
@@ -76,10 +78,18 @@ bool Dialogue::Update(float dt)
 	{
 		//here we take in input and make sure they dont just spam through the whole dialogue
 		timer -= dt;
+		if (timer <= 0 && m_auto)
+		{
+
+			GameData::GetInstance()->PlaySelectionChange();
+			messages.erase(messages.begin());
+			SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
+			images.erase(images.begin());
+			timer = 2.0f;
+		}
 
 
-
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || SGD::InputManager::GetInstance()->IsButtonPressed(0,1))
+		if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || SGD::InputManager::GetInstance()->IsButtonPressed(0,1)) && !m_auto)
 		{
 			if (timer <= 0)
 			{
@@ -118,7 +128,7 @@ void Dialogue::Render()
 		//render the rectangle
 		//SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
 		//lets render a scroll sideways, its gonna be rad
-		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 520.0f, 200.0f }, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, position, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
 
 
 
@@ -135,7 +145,7 @@ void Dialogue::Render()
 
 
 		//display at the bottom to continue
-		if (timer <= 0)
+		if (timer <= 0 && !m_auto)
 		{
 
 			GameData::GetInstance()->GetFont()->DrawString("Hit Enter", 250.0f, 350.0f, { 0, 0, 0 });
