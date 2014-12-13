@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <Name>Priest</Name>
+  <Name>Priestess</Name>
   <Side>Common</Side>
   <Element>Wind</Element>
   <Type>Enemies</Type>
@@ -41,7 +41,7 @@
     <Attack>null</Attack>
     <Death>null</Death>
   </Sound>
-  <Animation>DogAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Animation>CombatAnimations/PriestessAnimBattle.xml</Animation>
+  <Portrait>PortraitPriestess.png</Portrait>
+  <Timeline>TLPriestess.xml</Timeline>
 </Character>

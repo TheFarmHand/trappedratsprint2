@@ -725,7 +725,7 @@ void GamePlayState::Fight()
 						partyAbilities.push_back( MasterAbilityList[ "Stitch in Time" ] );
 						break;
 					case 7:
-						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priest.xml" );
+						tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priestess.xml" );
 						partyAbilities.push_back( MasterAbilityList[ "Healing Light" ] );
 						break;
 					default:
@@ -912,7 +912,7 @@ void GamePlayState::TownUpdate( float dt )
 							partyAbilities.push_back( MasterAbilityList[ "Stitch in Time" ] );
 							break;
 						case 7:
-							tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priest.xml" );
+							tempRandomEnemy = LoadEnemy( "../Trapped Rat/Assets/Scripts/Priestess.xml" );
 							partyAbilities.push_back( MasterAbilityList[ "Healing Light" ] );
 							break;
 						default:
