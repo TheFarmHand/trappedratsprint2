@@ -43,5 +43,5 @@
   </Sound>
   <Animation>RatAnimBattle.xml</Animation>
   <Portrait>pReplaceme.png</Portrait>
-  <Timeline>biggsAnimBattle.xml</Timeline>
+  <Timeline>TLRat.xml</Timeline>
 </Character>
