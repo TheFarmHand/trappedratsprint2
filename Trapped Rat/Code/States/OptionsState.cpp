@@ -77,7 +77,7 @@ void OptionsState::Update(float dt)
 	if (input->IsKeyPressed(SGD::Key::Escape) || input->IsButtonPressed(0, 2))
 	{
 		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
-		GameData::GetInstance()->PlaySelectionChange();
+		GameData::GetInstance()->PlayCancel();
 	}
 	if (menuindex == 0)
 	{
@@ -129,7 +129,7 @@ void OptionsState::Update(float dt)
 	{
 		if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 		{
-			GameData::GetInstance()->PlaySelectionChange();
+			GameData::GetInstance()->PlayCancel();
 			GameData::GetInstance()->SwapState(MainMenuState::GetInstance());
 			
 		}

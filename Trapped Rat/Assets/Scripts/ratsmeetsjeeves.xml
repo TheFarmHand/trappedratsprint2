@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>ARRRRRRRGhhhhhh</Words>
+  </Message>
+  <Message>
+    <Name>rats</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>What?</Words>
+  </Message>
+  <Message>
+    <Name>asdfa</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>BLEEERRRRGGGGHHHHHhhh</Words>
+  </Message>
+  <Message>
+    <Name>fasdfasdf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Oh ok then!
+_Join up!</Words>
+  </Message>
+</Dialogue>

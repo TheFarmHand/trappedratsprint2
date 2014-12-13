@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Hey</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Hey! Who are you?</Words>
+  </Message>
+  <Message>
+    <Name>rats</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>I am Ratsputin!
+_I am looking for the guy 
+_who killed my parents...
+_Cecil!</Words>
+  </Message>
+  <Message>
+    <Name>me too</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Cecil!!!!
+_I hate that jerk!
+_He kicked me off of his team
+_because I wasn't good enough...</Words>
+  </Message>
+  <Message>
+    <Name>cont</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>He is not in this town,
+_but I can tag along and help
+_you find him!</Words>
+  </Message>
+  <Message>
+    <Name>rats now</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Ok!</Words>
+  </Message>
+</Dialogue>

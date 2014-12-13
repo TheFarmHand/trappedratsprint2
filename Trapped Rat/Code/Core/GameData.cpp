@@ -53,6 +53,9 @@ bool GameData::Initialize()
 	//setting the time for delta time
 	lasttime = GetTickCount();
 
+
+	//have to do this so it does not break
+	menu_music = audio->LoadAudio("../Trapped Rat/Assets/Sounds/tower.xwm");
 	//mounting an initial state
 	CurrentState = MainMenuState::GetInstance();
 	//CurrentState = LoadGameState::GetInstance();
@@ -66,8 +69,9 @@ bool GameData::Initialize()
 
 	//load in some sound
 	selection_sound = audio->LoadAudio("../Trapped Rat/Assets/Sounds/selectionchange.wav");
-
-
+	confirm_sound = audio->LoadAudio("../Trapped Rat/Assets/Sounds/confirm.wav");
+	cancel_sound = audio->LoadAudio("../Trapped Rat/Assets/Sounds/cancel.wav");
+	
 	//load in the options
 	//read in the options based on which save file it is
 	std::ifstream fin;
@@ -93,6 +97,8 @@ bool GameData::Initialize()
 		else
 			GameData::GetInstance()->GetFont()->SetSpanish(false);
 
+		SetEffectVolume(effect_volume);
+		SetMusicVolume(music_volume);
 		fin.close();
 	}
 
@@ -151,8 +157,9 @@ void GameData::Terminate()
 
 	//get rid of the sound
 	SGD::AudioManager::GetInstance()->UnloadAudio(selection_sound);
-
-
+	SGD::AudioManager::GetInstance()->UnloadAudio(confirm_sound);
+	SGD::AudioManager::GetInstance()->UnloadAudio(cancel_sound);
+	SGD::AudioManager::GetInstance()->UnloadAudio(menu_music);
 	//terminate all wrappers
 	SGD::GraphicsManager::GetInstance()->Terminate();
 	SGD::GraphicsManager::GetInstance()->DeleteInstance();
@@ -325,4 +332,12 @@ void GameData::ResetPlayer()
 	delete overworldPlayer;
 	overworldPlayer = nullptr;
 	overworldPlayer = new Player();
+}
+void GameData::PlayConfirm()
+{
+	SGD::AudioManager::GetInstance()->PlayAudio(confirm_sound);
+}
+void GameData::PlayCancel()
+{
+	SGD::AudioManager::GetInstance()->PlayAudio(cancel_sound);
 }

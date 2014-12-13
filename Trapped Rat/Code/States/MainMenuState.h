@@ -14,7 +14,7 @@ private:
 	SGD::HTexture button = SGD::INVALID_HANDLE;
 	SGD::HTexture cursor = SGD::INVALID_HANDLE;
 	SGD::HTexture logo = SGD::INVALID_HANDLE;
-
+	
 	int index = 0;
 public:
 	static MainMenuState * GetInstance();

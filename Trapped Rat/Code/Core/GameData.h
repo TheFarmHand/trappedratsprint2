@@ -44,7 +44,9 @@ private:
 
 	//some sounds
 	SGD::HAudio selection_sound = SGD::INVALID_HANDLE;
-	
+	SGD::HAudio confirm_sound = SGD::INVALID_HANDLE;
+	SGD::HAudio cancel_sound = SGD::INVALID_HANDLE;
+	SGD::HAudio menu_music = SGD::INVALID_HANDLE;
 public:
 	static GameData * GetInstance();
 	void SetRunning(bool _run);
@@ -68,7 +70,9 @@ public:
 	bool GetWindowed(){ return is_windowed; }
 	int GetSaveFile(){ return save_file; }
 	void PlaySelectionChange();
-	
+	void PlayConfirm();
+	void PlayCancel();
+	SGD::HAudio GetMenuMusic(){ return menu_music; }
 	//mutators
 	void SetCamera(SGD::Point point){ CameraPos = point; }
 	void UpdateCamera(BaseObject* obj);
