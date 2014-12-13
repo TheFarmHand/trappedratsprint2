@@ -20,7 +20,7 @@ Dialogue::~Dialogue()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(pborder);
 	
 }
-void Dialogue::Load(std::string filepath, bool _auto, SGD::Point _pos)
+void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos)
 {
 	m_auto = _auto;
 	position = _pos;
@@ -134,12 +134,12 @@ void Dialogue::Render()
 
 		//render the words of the top message in the vector along with the portrait
 		std::string temp = messages.front().words;
-		GameData::GetInstance()->GetFont()->DrawString(temp, 250.0f, 225.0f, { 0, 0, 0 });
+		GameData::GetInstance()->GetFont()->DrawString(temp, position.x - 270.0f, position.y + 25.0f, { 0, 0, 0 });
 		if (images[0] != SGD::INVALID_HANDLE)
 		{
-			SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { 250.0f, 150.0f });
+			SGD::GraphicsManager::GetInstance()->DrawTexture(images[0], { position.x - 270.0f, position.y - 50.0f  });
 			//draw the border for the portrait
-			SGD::GraphicsManager::GetInstance()->DrawTexture(pborder, { 250.0f, 150.0f });
+			SGD::GraphicsManager::GetInstance()->DrawTexture(pborder, { position.x  - 270.0f, position.y - 50.0f });
 
 		}
 
