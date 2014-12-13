@@ -2990,11 +2990,11 @@
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="26" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="26" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
