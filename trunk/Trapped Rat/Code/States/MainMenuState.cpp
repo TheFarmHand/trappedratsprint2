@@ -30,7 +30,8 @@ void MainMenuState::Enter()
 	logo = SGD::GraphicsManager::GetInstance()->LoadTexture("../Trapped Rat/Assets/Textures/logo.png");
 	//here we should load in the music and play it
 	
-	SGD::AudioManager::GetInstance()->PlayAudio(GameData::GetInstance()->GetMenuMusic(), true);
+	if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(GameData::GetInstance()->GetMenuMusic()))
+		SGD::AudioManager::GetInstance()->PlayAudio(GameData::GetInstance()->GetMenuMusic(), true);
 	
 
 }
@@ -97,19 +98,21 @@ void MainMenuState::Update(float dt)
 		}
 	}
 
-	if (input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up))
+	if ((input->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		index--;
 		if (index < 0)
 			index = 4;
 		GameData::GetInstance()->PlaySelectionChange();
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
-	if (input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down))
+	if ((input->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		index++;
 		if (index > 4)
 			index = 0;
 		GameData::GetInstance()->PlaySelectionChange();
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
 }
 void const MainMenuState::Render()

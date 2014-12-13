@@ -130,17 +130,19 @@ void LoadGameState::Update(float dt)
 {
 	if (dt == 0.0f)
 		return;
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up))
+	if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) || SGD::InputManager::GetInstance()->GetLeftJoystick(0).y < 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		index--;
 		if (index < 0)
 			index = maxindex;
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down))
+	if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) || SGD::InputManager::GetInstance()->GetLeftJoystick(0).y > 0) && GameData::GetInstance()->input_timer < 0)
 	{
 		index++;
 		if (index > maxindex)
 			index = 0;
+		GameData::GetInstance()->input_timer = 0.15f;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || SGD::InputManager::GetInstance()->IsButtonPressed(0,1))
 	{

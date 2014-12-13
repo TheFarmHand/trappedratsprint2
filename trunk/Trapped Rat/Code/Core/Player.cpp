@@ -70,25 +70,25 @@ void Player::Update(float dt)
 
 	//if they are holding down the button
 		//move at a constant rate
-	if ((input->IsKeyDown(SGD::Key::Up) || input->IsDPadDown(0, SGD::DPad::Up)) && (int)(position.x - size.width / 2) % 8 == 0)
+	if ((input->IsKeyDown(SGD::Key::Up) || input->IsDPadDown(0, SGD::DPad::Up) ||input->GetLeftJoystick(0).y < 0) && (int)(position.x - size.width / 2) % 8 == 0)
 	{
 		velocity.y = -4.0f;
 		velocity.x = 0.0f;
 		dir = 'u';
 	}
-	else if ((input->IsKeyDown(SGD::Key::Down) || input->IsDPadDown(0, SGD::DPad::Down)) && (int)(position.x - size.width / 2) % 8 == 0)
+	else if ((input->IsKeyDown(SGD::Key::Down) || input->IsDPadDown(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0) && (int)(position.x - size.width / 2) % 8 == 0)
 	{
 		velocity.y = 4.0f;
 		velocity.x = 0.0;
 		dir = 'd';
 	}
-	else if ((input->IsKeyDown(SGD::Key::Left) || input->IsDPadDown(0, SGD::DPad::Left)) && (int)(position.y - size.height / 2) % 8 == 0)
+	else if ((input->IsKeyDown(SGD::Key::Left) || input->IsDPadDown(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0) && (int)(position.y - size.height / 2) % 8 == 0)
 	{
 		velocity.y = 0.0f;
 		velocity.x = -4.0f;
 		dir = 'l';
 	}
-	else if ((input->IsKeyDown(SGD::Key::Right) || input->IsDPadDown(0, SGD::DPad::Right)) && (int)(position.y - size.height / 2) % 8 == 0)
+	else if ((input->IsKeyDown(SGD::Key::Right) || input->IsDPadDown(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0) && (int)(position.y - size.height / 2) % 8 == 0)
 	{
 		velocity.y = 0.0f;
 		velocity.x = 4.0f;

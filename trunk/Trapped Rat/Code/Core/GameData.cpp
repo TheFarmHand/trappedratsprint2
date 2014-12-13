@@ -201,7 +201,7 @@ bool GameData::Update()
 	//update the current state
 	CurrentState->Update(deltatime);
 	CurrentState->Render();
-
+	input_timer -= deltatime;
 	return is_running;
 }
 void GameData::SwapState(GameState * _state)
