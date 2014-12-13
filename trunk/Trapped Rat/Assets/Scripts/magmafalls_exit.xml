@@ -3,7 +3,10 @@
   <Message>
     <Name>Bye</Name>
     <Portrait>Bowie4.png</Portrait>
-    <Words>You have completed Magma Falls!
-_Move on to the nearest town!</Words>
+    <Words>You have defeated the Warrior,
+_Magma Falls is complete!
+_Move on to Earthy Town,
+_Cecil passes through there
+_frequently!</Words>
   </Message>
 </Dialogue>
