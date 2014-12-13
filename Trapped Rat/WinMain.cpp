@@ -158,7 +158,7 @@ HWND MakeWindow(HINSTANCE hInstance)
 
 
 	// Setup window style flags
-	DWORD dwWindowStyleFlags = WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_MINIMIZEBOX | CW_USEDEFAULT;
+	DWORD dwWindowStyleFlags = WS_VISIBLE | WS_POPUP | WS_SYSMENU | WS_MINIMIZEBOX ;
 
 	// Setup the desired client area size
 	RECT rWindow;
