@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>sdfasdf</Name>
+    <Portrait>monkportrait.png</Portrait>
+    <Words>Oh no a Rat!
+_That will make for a good 
+_snack for my pet snake!</Words>
+  </Message>
+  <Message>
+    <Name>asdfasdf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Hey! Hey!
+_Watch it bud!</Words>
+  </Message>
+</Dialogue>

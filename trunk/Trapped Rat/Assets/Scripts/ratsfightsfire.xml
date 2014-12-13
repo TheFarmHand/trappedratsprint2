@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>dfgdfg</Name>
+    <Portrait>fireportrait.png</Portrait>
+    <Words>Hey is that a rat?</Words>
+  </Message>
+  <Message>
+    <Name>dasdf</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Hey is that a jerk!?!</Words>
+  </Message>
+</Dialogue>
