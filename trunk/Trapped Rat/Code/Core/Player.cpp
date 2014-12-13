@@ -370,34 +370,34 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	}
 	else if (pEvent->GetEventID() == "herokeepworld")
 	{
-		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
-		position.x = dest->x + (size.width / 2) -(int)TileSystem::GetInstance()->GetTileSize().width;
-		position.y = dest->y + size.height / 2;
-		GamePlayState::GetInstance()->PlaySoundEffect(0);
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 
 	}
 	else if (pEvent->GetEventID() == "herokeep")
 	{
-		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
-		position.x = dest->x + (size.width / 2) + (int)TileSystem::GetInstance()->GetTileSize().width;
-		position.y = dest->y + size.height / 2;
-		GamePlayState::GetInstance()->PlaySoundEffect(0);
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 
 	}
 	
 	else if(pEvent->GetEventID() == "herocaveworld")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
-		position.x = dest->x + ( size.width / 2 ) + (int)TileSystem::GetInstance( )->GetTileSize( ).width;
-		position.y = dest->y + size.height / 2;
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
 		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 	}
 
 	else if ( pEvent->GetEventID( ) == "herocave" )
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
-		position.x = dest->x + ( size.width / 2 ) + (int)TileSystem::GetInstance( )->GetTileSize( ).width;
-		position.y = dest->y + size.height / 2;
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
 		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 	}
 
