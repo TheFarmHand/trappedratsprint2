@@ -54,6 +54,8 @@ void CombatPlayer::Update( float dt )
 		}
 		if ( stepbackward == false && stepforward == false )
 		{
+			if (GamePlayState::GetInstance()->tutorial_incrememnt  < 4)
+				GamePlayState::GetInstance()->SetState(GPStates::Dia);
 			TurnManager::GetInstance()->setProgressFullReached( false );
 			TurnManager::GetInstance()->setTimeStop( false );
 			if ( runaway )
@@ -118,6 +120,40 @@ void CombatPlayer::Update( float dt )
 
 		if ( stepbackward == false && stepforward == false )
 		{
+			if (GamePlayState::GetInstance()->ignore_game_over && (states != 5 && states != 6 && states != 7 && states != 3))
+			{
+				switch (GamePlayState::GetInstance()->tutorial_incrememnt )
+				{
+				case 0:
+					//here we make sure they can only attack
+					SetSelection(0);
+					help->UpdateSelection(0, GamePlayState::GetInstance()->GetSelectableObjects()[0]);
+					hudSelection = 0;
+					break;
+				case 1:
+					//here we make sure they can only use abilities
+					SetSelection(2);
+					help->UpdateSelection(2, GamePlayState::GetInstance()->GetSelectableObjects()[2]);
+					hudSelection = 2;
+					break;
+				case 2:
+					//here we make sure they can only use items
+					SetSelection(1);
+					help->UpdateSelection(1, GamePlayState::GetInstance()->GetSelectableObjects()[1]);
+					hudSelection = 1;
+					break;
+				case 3:
+					//here we force them to use run
+					SetSelection(3);
+					help->UpdateSelection(3, GamePlayState::GetInstance()->GetSelectableObjects()[3]);
+					hudSelection = 3;
+					break;
+				case 4:
+					//here they can do whatever they want
+					//or maybe not i dunno
+					break;
+				}
+			}
 			if ( states == 0 )
 			{
 				HomeUpdate( dt );
@@ -614,6 +650,11 @@ void CombatPlayer::AttackUpdate( float dt )
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
+		if (GamePlayState::GetInstance()->is_done)
+		{
+			GamePlayState::GetInstance()->tutorial_incrememnt = 1;
+			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/abilitiestutorial.xml");
+		}
 		//GamePlayState::GetInstance()->PlaySoundEffect(6);
 		Attack( this, pTurn->GetEnemies()[ myTarget ] );
 		//	}
@@ -655,6 +696,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 	// Do player selection
 	if ( item_choose != nullptr )
 	{
+		
 		chosen = item_choose->chosen;
 		delete item_choose;
 		item_choose = nullptr;
@@ -684,6 +726,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
+		
 		//GamePlayState::GetInstance()->PlaySoundEffect(7);
 		//pTurn->HealTarget(pTurn->GetAllies()[myTarget], 15);
 		//this is where we say what the items do
@@ -852,7 +895,12 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		GamePlayState::GetInstance()->PlaySoundEffect(6);
+		if (GamePlayState::GetInstance()->is_done)
+		{
+			GamePlayState::GetInstance()->tutorial_incrememnt = 2;
+			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/itemstutorial.xml");
+			GamePlayState::GetInstance()->PlaySoundEffect(6);
+		}
 		if ( menu[ hudSelection ]->GetAbility() == nullptr )
 		{
 			return;
@@ -962,6 +1010,14 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
+		if (GamePlayState::GetInstance()->is_done)
+		{
+
+			GamePlayState::GetInstance()->tutorial_incrememnt = 4;
+			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/cantrunlol.xml");
+			GamePlayState::GetInstance()->SetState(GPStates::Dia);
+			GamePlayState::GetInstance()->is_done = false;
+		}
 	if ( GamePlayState::GetInstance()->MinibossFight || GamePlayState::GetInstance()->FinalBossFight || GamePlayState::GetInstance()->ignore_game_over )
 		{
 			// You can't run away

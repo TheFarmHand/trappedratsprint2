@@ -52,7 +52,7 @@ public:
 	void LevelUp( );
 
 	// End XP Functions
-
+	
 private:
 	
 	bool active;

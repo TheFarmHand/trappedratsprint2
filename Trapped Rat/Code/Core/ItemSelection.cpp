@@ -34,9 +34,15 @@ bool ItemSelection::Update(float dt)
 
 	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 	{
-		item_cursor;
-		CollectItem(item_cursor);
-		item_selected = true;
+		if (GamePlayState::GetInstance()->is_done)
+		{
+
+			GamePlayState::GetInstance()->tutorial_incrememnt = 3;
+			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/runtutorial.xml");
+			item_cursor;
+			CollectItem(item_cursor);
+			item_selected = true;
+		}
 	}
 	if (input->IsKeyPressed(SGD::Key::Up)||input->IsDPadPressed(0,SGD::DPad::Up))
 	{

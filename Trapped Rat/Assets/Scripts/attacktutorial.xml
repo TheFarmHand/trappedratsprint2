@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>asdfasd</Name>
+    <Portrait>Bowie4.png</Portrait>
+    <Words>Select Attack if you want to 
+_do basic Physical damage to an enemy.</Words>
+  </Message>
+</Dialogue>
