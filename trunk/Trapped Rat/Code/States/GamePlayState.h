@@ -181,6 +181,7 @@ public:
 	void SummaryRender();
 	void MapUpdate(float dt);
 	void MapRender();
+	void GoToTown();
 	SGD::HTexture getTurnInd() {return TurnIndicator;};
 	void AddTrap(std::string loot, SGD::Point pos);
 	//factory methods
