@@ -24,11 +24,11 @@
     </Magic>
     <Defense>
       <Base>6</Base>
-      <Scale>0.75</Scale>
+      <Scale>1.75</Scale>
     </Defense>
     <Speed>
       <Base>25</Base>
-      <Scale>0.3</Scale>
+      <Scale>0.32</Scale>
     </Speed>
     <Avoision>
       <Base>5</Base>
