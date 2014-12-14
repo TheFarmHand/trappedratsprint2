@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>jeeves</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>ARRRRRGGGGhhhhh</Words>
+  </Message>
+  <Message>
+    <Name>hate</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Yeah, I hate Earthy Town too.</Words>
+  </Message>
+  <Message>
+    <Name>plan</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Same plan as last town?</Words>
+  </Message>
+  <Message>
+    <Name>asdf</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>BLEEERRRRGGGGHHHHHhhh</Words>
+  </Message>
+  <Message>
+    <Name>ff</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Agreed.</Words>
+  </Message>
+</Dialogue>
