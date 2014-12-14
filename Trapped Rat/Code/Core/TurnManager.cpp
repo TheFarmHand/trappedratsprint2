@@ -98,7 +98,7 @@ void TurnManager::CombatLoot()
 				pGPS->AddItem( stupidcode );
 			}
 		}
-		pGPS->tripped_trap = -1;
+		//pGPS->tripped_trap = -1;  don't remember why this code got placed here, but it was bad
 	}
 	else
 

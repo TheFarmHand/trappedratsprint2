@@ -2,12 +2,14 @@
 #include "Character.h"
 #include "../Animation/AnimationSystem.h"
 #include "../SGD Wrappers/SGD_Listener.h"
+
 class Items;
+class Dialogue;
 class Player :
 	public Character, public SGD::Listener
 {
 	AnimationSystem* ansys;
-	
+	Dialogue* keepentry = nullptr;
 public:
 	Player();
 	virtual ~Player();

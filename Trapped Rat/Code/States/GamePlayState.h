@@ -60,12 +60,14 @@ class GamePlayState :
 	std::vector<HUDItem*> m_vhuditems;
 	SGD::HTexture combathud = SGD::INVALID_HANDLE;
 	Dialogue * dialogue = nullptr;
+	
 	std::vector<Guard*> guards;
 
 	SGD::HAudio m_Audio = SGD::INVALID_HANDLE;
 	SGD::HAudio m_overAudio = SGD::INVALID_HANDLE;
 	SGD::HAudio entercombat = SGD::INVALID_HANDLE;
 	SGD::HAudio m_Map = SGD::INVALID_HANDLE;
+	SGD::HAudio chime = SGD::INVALID_HANDLE;
 
 	SGD::HAudio m_SummaryAudio = SGD::INVALID_HANDLE;
 
@@ -135,7 +137,7 @@ private:
 	bool is_tutorial = false;
 	std::vector<Enemy*> tutorialenemy;
 	std::vector<CombatPlayer*> Parents;
-
+	bool triptern = true;
 
 
 public:
@@ -208,6 +210,7 @@ public:
 	HelpText* GetHelpText();
 	int GetGauge();
 	int GetMaxGauge();
+	int GetGuards();
 	
 	bool usingTernary();
 	void ClearTernary();
