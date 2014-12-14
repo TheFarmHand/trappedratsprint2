@@ -6,10 +6,10 @@ CutsceneManager * CutsceneManager::GetInstance()
 	static CutsceneManager data;
 	return &data;
 }
-void CutsceneManager::Initialize()
+void CutsceneManager::Initialize(int _index)
 {
 	Cutscene* cuts = new Cutscene();
-	cuts->LoadCutscene(0);
+	cuts->LoadCutscene(_index);
 	m_vCutscenes.push_back(cuts);
 }
 void CutsceneManager::Update(float dt)

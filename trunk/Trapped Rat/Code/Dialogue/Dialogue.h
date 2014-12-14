@@ -22,7 +22,7 @@ private:
 	bool m_auto = false;
 	SGD::Point position;
 public:
-	void Load(std::string filepath, bool _auto = false, SGD::Point _pos = { 520.0f, 200.0f });//load in the xml into the vector
+	void Load(std::string filepath, bool _auto = false, SGD::Point _pos = { 520.0f, 200.0f }, float _time = 5.0f);//load in the xml into the vector
 	bool Update(float dt);
 	void Render();
 	

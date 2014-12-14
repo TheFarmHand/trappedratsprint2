@@ -4,6 +4,7 @@
 #include "..\SGD Wrappers\SGD_Event.h"
 #include "..\SGD Wrappers\SGD_EventManager.h"
 #include "..\Core\GameData.h"
+#include "../States/GamePlayState.h"
 
 TileSystem * TileSystem::GetInstance()
 	{
@@ -57,6 +58,30 @@ void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char d
 				}
 			}
 		}
+
+	if (GamePlayState::GetInstance()->GetGuardsLeft())
+	{
+		if (layers.GetTileMap()[tileIndex].GetCollisionType() == 2)
+			collided = true;
+		else
+		{
+			tileIndex = GetTileIndex(rect.right - 1, rect.top);
+			if (layers.GetTileMap()[tileIndex].GetCollisionType() == 2)
+				collided = true;
+			else
+			{
+				tileIndex = GetTileIndex(rect.left + 1, rect.bottom - 1);
+				if (layers.GetTileMap()[tileIndex].GetCollisionType() == 2)
+					collided = true;
+				else
+				{
+					tileIndex = GetTileIndex(rect.right - 1, rect.bottom - 1);
+					if (layers.GetTileMap()[tileIndex].GetCollisionType() == 2)
+						collided = true;
+				}
+			}
+		}
+	}
 
 	if ( collided )
 		{

@@ -193,7 +193,7 @@ public:
 	void GuardAnimation();
 	void BossAnimation();
 	void Loading(std::string _loading);
-
+	int GetGuardsLeft(){ return guards.size(); }
 	//basic functions
 	static GamePlayState* GetInstance();
 	void virtual Enter();
@@ -214,6 +214,7 @@ public:
 	void AddTarget( );
 	bool RemoveTarget( );		// Returns true if there was a target able to be removed
 	void DeselectTernaryTarget();
+	
 
 	void CheckAbilityUnlocked( bool EOC = false );
 	std::map<std::string, Ability*> GetMasterList();
