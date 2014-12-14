@@ -149,6 +149,7 @@ void LoadGameState::Update(float dt)
 		/*GameData::GetInstance()->SetSaveFile(index);
 		GameData::GetInstance()->LoadSave();
 		GameData::GetInstance()->SwapState(MainMenuState::GetInstance());*/
+		SGD::AudioManager::GetInstance()->StopAudio(GameData::GetInstance()->GetMenuMusic());
 		int saveindex = index;
 			GameData::GetInstance()->SwapState(GamePlayState::GetInstance());
 			if (files[saveindex].playtime == 0)
