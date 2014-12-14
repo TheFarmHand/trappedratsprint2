@@ -650,7 +650,7 @@ void CombatPlayer::AttackUpdate( float dt )
 
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		if (GamePlayState::GetInstance()->is_done)
+		if (GamePlayState::GetInstance()->is_done&& GamePlayState::GetInstance()->ignore_game_over)
 		{
 			GamePlayState::GetInstance()->tutorial_incrememnt = 1;
 			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/abilitiestutorial.xml");
@@ -895,7 +895,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		if (GamePlayState::GetInstance()->is_done)
+		if (GamePlayState::GetInstance()->is_done&& GamePlayState::GetInstance()->ignore_game_over)
 		{
 			GamePlayState::GetInstance()->tutorial_incrememnt = 2;
 			GamePlayState::GetInstance()->GetDialogue()->Load("Assets/Scripts/itemstutorial.xml");
@@ -1010,7 +1010,7 @@ void CombatPlayer::RunUpdate( float dt )
 
 	if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 	{
-		if (GamePlayState::GetInstance()->is_done)
+		if (GamePlayState::GetInstance()->is_done && GamePlayState::GetInstance()->ignore_game_over)
 		{
 
 			GamePlayState::GetInstance()->tutorial_incrememnt = 4;
