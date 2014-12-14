@@ -34,7 +34,7 @@ bool ItemSelection::Update(float dt)
 
 	if (input->IsKeyPressed(SGD::Key::Enter) || input->IsButtonPressed(0,1))
 	{
-		if (GamePlayState::GetInstance()->is_done)
+		if (GamePlayState::GetInstance()->is_done&& GamePlayState::GetInstance()->ignore_game_over)
 		{
 
 			GamePlayState::GetInstance()->tutorial_incrememnt = 3;
