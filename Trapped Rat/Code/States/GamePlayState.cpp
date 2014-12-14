@@ -1035,16 +1035,33 @@ void GamePlayState::TownUpdate( float dt )
 			Enemy* temp;
 			guard_index = i;
 			std::vector<Ability*> partyAbilities;
+			SGD::Point characterOrderPosition;
+			std::vector<Enemy*> moreguards;
+			int templevel = Party[ 0 ]->GetLevel( );
+			templevel -= 2;
+			if ( templevel <= 0 ) templevel = 1;
+			templevel += ( rand( ) % 5 );
+
 
 			temp = LoadEnemy( "../Trapped Rat/Assets/Scripts/Guard.xml" );
-			SGD::Point characterOrderPosition;
+			temp->SetOrderPosition( 0 );
+			characterOrderPosition.x = 600.0f;
+			characterOrderPosition.y = (float)( temp->GetOrderPosition( ) * 100 + 150 + 16 );
+			temp->SetPosition( characterOrderPosition );
+			partyAbilities.push_back( MasterAbilityList[ "Rush" ] );
+			temp->InitializeAbilities( partyAbilities );
+			temp->SetLevel(templevel);
+			moreguards.push_back( temp );
+			partyAbilities.clear( );
+
+			temp = LoadEnemy( "../Trapped Rat/Assets/Scripts/Guard.xml" );
 			temp->SetOrderPosition( 1 );
 			characterOrderPosition.x = 600.0f;
 			characterOrderPosition.y = (float)( temp->GetOrderPosition() * 100 + 150 + 16 );
 			temp->SetPosition( characterOrderPosition );
-			std::vector<Enemy*> moreguards;
 			partyAbilities.push_back( MasterAbilityList[ "Rush" ] );
 			temp->InitializeAbilities( partyAbilities );
+			temp->SetLevel( templevel );
 			moreguards.push_back( temp );
 			partyAbilities.clear();
 
