@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>checkersAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>checkersportrait.png</Portrait>
   <Timeline>TLCheckers.xml</Timeline>
 </Character>

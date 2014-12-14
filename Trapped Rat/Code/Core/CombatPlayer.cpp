@@ -391,7 +391,7 @@ void CombatPlayer::TargetUnit( std::vector<Character*> &targets )
 	SGD::InputManager* pInput = SGD::InputManager::GetInstance();
 
 	// Find yoursel
-	if ( mySelection == self )
+	if ( mySelection == self)
 	{
 		myTarget = 0;
 		while(targets[myTarget] != this)
@@ -733,7 +733,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		//Select(pTurn->GetAllies()[myTarget]);
 		if ( chosen.GetName() == "Small Heal" )
 		{
-			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], 15 );
+		pTurn->HealTarget( pTurn->GetAllies()[myTarget], (int)(pTurn->GetAllies()[myTarget]->GetMaxHP() * 0.20f) );
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;
@@ -742,7 +742,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Large Heal" )
 		{
-			pTurn->HealTarget( pTurn->GetAllies()[ myTarget ], 30 );
+		pTurn->HealTarget( pTurn->GetAllies()[myTarget], (int)( pTurn->GetAllies()[myTarget]->GetMaxHP() * 0.45f ) );
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;
@@ -751,7 +751,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Small BP Restore" )
 		{
-			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 10;
+		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)(pTurn->GetAllies()[myTarget]->GetBP() * 0.20f);
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
@@ -763,7 +763,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Large BP Restore" )
 		{
-			int newBP = pTurn->GetAllies()[ myTarget ]->GetBP() + 15;
+		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)( pTurn->GetAllies()[myTarget]->GetBP() * 0.45f );
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
@@ -1417,9 +1417,9 @@ void CombatPlayer::SelectingItems( float dt )
 				GameData::GetInstance()->PlaySelectionChange();
 				mySelection = none;
 				states = 0;
-				TurnManager::GetInstance()->setProgressFullReached( false );
+				//TurnManager::GetInstance()->setProgressFullReached( false );
 				//pTurn->setTimeStop( false );
-				TurnManager::GetInstance()->setTurnPause( true );
+				//TurnManager::GetInstance()->setTurnPause( true );
 				hudSelection = 0;
 				help->UpdateSelection( 5 );
 				SetSelection( 0 );
@@ -1431,6 +1431,14 @@ void CombatPlayer::SelectingItems( float dt )
 		else
 		{
 			mySelection = player;
+			for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+				{
+				if ( this->GetName() == TurnManager::GetInstance()->GetAllies()[i]->GetName() )
+					{
+					myTarget = i;
+					break;
+					}
+				}
 			states = 5;
 
 		}

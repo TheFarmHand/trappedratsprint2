@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>biggsAnimBattleFinal.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>biggsportrait.png</Portrait>
   <Timeline>TLBiggs.xml</Timeline>
 </Character>
