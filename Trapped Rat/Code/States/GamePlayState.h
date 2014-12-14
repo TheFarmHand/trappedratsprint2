@@ -135,7 +135,7 @@ private:
 
 
 	//tutorial stuff
-	bool is_tutorial = false;
+	
 	std::vector<Enemy*> tutorialenemy;
 	std::vector<CombatPlayer*> Parents;
 	bool triptern = true;
@@ -145,6 +145,7 @@ public:
 	bool run_succeed = false;
 	bool MinibossFight = false;
 	bool FinalBossFight = false;
+	bool is_tutorial = false;
 	bool ignore_game_over = false;
 	bool AbilityUsed;
 	bool ItemUsed;

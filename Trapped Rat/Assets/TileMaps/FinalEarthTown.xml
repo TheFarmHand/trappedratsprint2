@@ -1113,7 +1113,7 @@
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="217" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="217" collision="0" event="EarthWorld1" onfire="EarthHouse1" objectID="0" objectNumber="0" />
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="575" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1785,9 +1785,9 @@
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="338" collision="0" event="EarthHouse2" onfire="EarthWorld2" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="338" collision="0" event="EarthHouse3" onfire="EarthHouse3" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -2343,8 +2343,8 @@
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="268" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="343" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="344" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="344" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="344" collision="0" event="EarthW1" onfire="EarthK1" objectID="0" objectNumber="0" />
+  <tiles id="344" collision="0" event="EarthW2" onfire="EarthK2" objectID="0" objectNumber="0" />
   <tiles id="345" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="270" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -4255,9 +4255,9 @@
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="241" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="241" collision="0" event="EarthWorld2" onfire="EarthHouse2" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="241" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="241" collision="0" event="EarthWorld3" onfire="EarthHouse3" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -7757,7 +7757,7 @@
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="338" collision="0" event="Monk" onfire="Monk" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -8111,7 +8111,7 @@
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="217" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="217" collision="0" event="EarthHouse1" onfire="EarthWorld1" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -8957,8 +8957,8 @@
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="251" collision="0" event="EarthK1" onfire="EarthW1" objectID="0" objectNumber="0" />
+  <tiles id="251" collision="0" event="EarthK2" onfire="EarthW2" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="269" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />

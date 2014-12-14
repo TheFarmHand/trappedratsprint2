@@ -9,7 +9,6 @@ class Player :
 	public Character, public SGD::Listener
 {
 	AnimationSystem* ansys;
-	Dialogue* keepentry = nullptr;
 public:
 	Player();
 	virtual ~Player();

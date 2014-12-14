@@ -1,6 +1,7 @@
 
 #include "HUDItem.h"
 #include "../Core/GameData.h"
+#include "../States/GamePlayState.h"
 #include "../Font/Font.h"
 
 HUDItem::HUDItem()

@@ -315,7 +315,8 @@ void CombatPlayer::Attack( Character* owner, Character * target )
 
 void CombatPlayer::UseItem( Character * target, Items item )
 {
-	//here we take in the item check what it does, then send the effects to the target
+	// Here we take in the item check what it does, then send the effects to the target
+	// Or we leave it blank
 }
 bool CombatPlayer::GetActive()
 {
