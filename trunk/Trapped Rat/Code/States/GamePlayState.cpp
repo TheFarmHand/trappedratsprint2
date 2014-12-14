@@ -3220,7 +3220,7 @@ void GamePlayState::CreateMinibossFight()
 					BWR2 = LoadEnemy( "../Trapped Rat/Assets/Scripts/Benevolent Wind Rogue.xml" );
 					BWR2->SetOrderPosition( 0 );
 					BWR2->SetLiving( false );
-					BWR2->SetHP( 0 );
+					//BWR2->SetHP( 0 );
 					characterOrderPosition.x = 1600.0f;
 					characterOrderPosition.y = (float)( BWR2->GetOrderPosition() * 100 + 150 + 16 );
 					BWR2->SetPosition( characterOrderPosition );
