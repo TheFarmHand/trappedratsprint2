@@ -1805,7 +1805,7 @@
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="251" collision="0" event="Warrior" onfire="Warrior" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
