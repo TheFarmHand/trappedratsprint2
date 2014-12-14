@@ -423,17 +423,23 @@ void Ability::RenderAnimation()
 		|| abilityName == "Leaf on the Wind" || abilityName == "Wind Vale" || abilityName == "Zephyr"
 		|| abilityName == "Tornado" 
 		|| abilityName == "Hedge Guard" 
-		|| abilityName == "Feral Bite")
+		|| abilityName == "Feral Bite"
+		|| abilityName == "Protect" 
+		|| abilityName == "Wind Split")
 	{
 		animate->Render(Abiltarget->GetPosition().x, Abiltarget->GetPosition().y);
 	}
-	else if ( abilityName == "Cover" )
+	else if ( abilityName == "Cover" || abilityName == "Holy Mace" || abilityName == "Holy Shield" || abilityName == "Earthen Mace" || abilityName == "Earthen Shield")
 		{
 		if ( Abiltarget->GetAlliance() == "Ally")
 			animate->Render( Abiltarget->GetPosition().x + 70.0f, Abiltarget->GetPosition().y + 20.0f);
 		else
 			animate->Render( Abiltarget->GetPosition().x - 70.0f, Abiltarget->GetPosition().y );
 
+		}
+	else if ( abilityName == "Holy Flare" || abilityName == "Flame Spout")
+		{
+		animate->Render( 300.0f, 250.0f );
 		}
 	//Adjusted Up and Left
 	else if ( abilityName == "Second Wind" || abilityName == "Healing Light")
@@ -461,10 +467,18 @@ void Ability::RenderAnimation()
 		animate->Render(Abiltarget->GetPosition().x - 50.0f, Abiltarget->GetPosition().y);
 	}
 	//Right of Target
-	else if (abilityName == "Emblazon" || abilityName == "Counter Claw" || abilityName == "Stitch in Time" || abilityName == "Fresh Meat" || abilityName == "Bellows Blast")
+	else if (abilityName == "Emblazon" || abilityName == "Counter Claw" || abilityName == "Stitch in Time" || abilityName == "Fresh Meat" || abilityName == "Bellows Blast" || abilityName == "Rush")
 	{
 		animate->Render( Abiltarget->GetPosition().x + 100.0f, Abiltarget->GetPosition().y );
 	}
+	else if ( abilityName == "Dia" )
+		{
+		animate->Render( Abiltarget->GetPosition().x + 220.0f, Abiltarget->GetPosition().y + 16.0f );
+		}
+	else if ( abilityName == "Sure Shot" )
+		{
+		animate->Render( Abiltarget->GetPosition().x + 60.0f, Abiltarget->GetPosition().y + 16.0f );
+		}
 	//Top of Enemy Side
 	else if (abilityName == "Acid Rain")
 	{
@@ -514,7 +528,7 @@ void Ability::RenderAnimation()
 		animate->Render(xpos, 200);
 	}
 	//Render on Top of all Targets
-	else if (abilityName == "Splash" || abilityName == "Whispering Wind" || abilityName == "Tremor")
+	else if (abilityName == "Splash" || abilityName == "Whispering Wind" || abilityName == "Tremor" || abilityName == "Barrage")
 	{
 	if ( Abiltarget->GetAlliance() == "Ally" )
 		{
@@ -538,7 +552,7 @@ void Ability::RenderAnimation()
 	animate->Render( Abiltarget->GetPosition().x - 40.0f, (float)(TurnManager::GetInstance()->GetEnemies()[0]->GetOrderPosition() * 100 + 150 + 16) );
 	}
 	//Render on Top of in front of Targets
-	else if ( abilityName == "Rampart" || abilityName == "Quake" )
+	else if ( abilityName == "Rampart" || abilityName == "Quake" || abilityName == "Retribution" || abilityName == "Haste")
 		{
 		if ( Abiltarget->GetAlliance() == "Ally" )
 			{
