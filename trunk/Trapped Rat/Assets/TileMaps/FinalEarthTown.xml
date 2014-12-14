@@ -36,8 +36,8 @@
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="1" event="WorldMap1" onfire="WorldMap1" objectID="0" objectNumber="0" />
+  <tiles id="54" collision="1" event="WorldMap1" onfire="WorldMap1" objectID="0" objectNumber="0" />
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="4" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />

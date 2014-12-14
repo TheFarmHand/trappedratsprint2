@@ -1389,6 +1389,7 @@ void CombatPlayer::SelectingItems( float dt )
 	tempitem->SetExplination( item_choose->GetCurrentExplanation() );
 	helpobject->SetItem( tempitem );
 	help->UpdateSelection( 2, helpobject );
+
 	if ( selected && item_choose != nullptr )
 	{
 		help->UpdateSelection( 4 );
@@ -1410,6 +1411,7 @@ void CombatPlayer::SelectingItems( float dt )
 					break;
 				}
 			}
+			
 			if ( !anyAllyDead )
 			{
 				GameData::GetInstance()->PlaySelectionChange();
@@ -1425,12 +1427,14 @@ void CombatPlayer::SelectingItems( float dt )
 				return;
 			}
 		}
+
 		else
 		{
 			mySelection = player;
 			states = 5;
 
 		}
+
 		if ( chosen.GetName() == "nothing" )
 		{
 			delete item_choose;

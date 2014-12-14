@@ -2628,7 +2628,7 @@
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="67" collision="0" event="Rogue" onfire="Rogue" objectID="0" objectNumber="0" />
+  <tiles id="67" collision="0" event="none" onfire="Rogue" objectID="0" objectNumber="0" />
   <tiles id="50" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
