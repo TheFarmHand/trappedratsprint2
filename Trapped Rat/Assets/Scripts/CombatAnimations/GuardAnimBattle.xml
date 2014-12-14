@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="3">
+  <Animation>
+    <Image numFrames="4">
+      <Path>EnemySprites/Guard.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>Idle</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="51" y="40" />
+      <DrawRect left="6" top="8" right="74" bottom="75" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="115" y="40" />
+      <DrawRect left="73" top="8" right="142" bottom="79" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="178" y="40" />
+      <DrawRect left="138" top="2" right="208" bottom="81" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="115" y="40" />
+      <DrawRect left="72" top="7" right="142" bottom="79" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="3">
+      <Path>EnemySprites/Guard.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Death</Name>
+    <NextName>dead</NextName>
+    <Frame delay="0.01">
+      <AnchorPoint x="55" y="113" />
+      <DrawRect left="9" top="88" right="72" bottom="144" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="114" y="107" />
+      <DrawRect left="75" top="85" right="139" bottom="147" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="164" y="106" />
+      <DrawRect left="141" top="79" right="202" bottom="143" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+  <Animation>
+    <Image numFrames="1">
+      <Path>EnemySprites/Guard.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>dead</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.2">
+      <AnchorPoint x="164" y="106" />
+      <DrawRect left="143" top="84" right="205" bottom="139" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
