@@ -20,7 +20,7 @@
 #include "LoadGameState.h"
 #include "../Core/WorldObject.h"
 
-#define MAXTG 250
+#define MAXTG 350
 #define MAXITEM 5
 #define MAXREV 1
 

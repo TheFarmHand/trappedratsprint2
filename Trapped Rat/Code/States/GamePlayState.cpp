@@ -1051,6 +1051,7 @@ void GamePlayState::TownUpdate( float dt )
 			partyAbilities.push_back( MasterAbilityList[ "Rush" ] );
 			temp->InitializeAbilities( partyAbilities );
 			temp->SetLevel(templevel);
+			temp->SetHP(temp->GetMaxHP());
 			moreguards.push_back( temp );
 			partyAbilities.clear( );
 
@@ -1062,6 +1063,7 @@ void GamePlayState::TownUpdate( float dt )
 			partyAbilities.push_back( MasterAbilityList[ "Rush" ] );
 			temp->InitializeAbilities( partyAbilities );
 			temp->SetLevel( templevel );
+			temp->SetHP( temp->GetMaxHP( ) );
 			moreguards.push_back( temp );
 			partyAbilities.clear();
 
@@ -1981,7 +1983,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>( ternary_bar )->SetPercentage( (float)ternary_gauge / MAXTG );
 
 
-	if ( run_succeed )// || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( run_succeed || input->IsKeyPressed( SGD::Key::Backspace ) )
 	{
 		state = GPStates::Town;
 		laststate = state;
@@ -1990,7 +1992,7 @@ void GamePlayState::CombatUpdate( float dt )
 		run_succeed = false;
 	}
 
-	/*if ( input->IsKeyPressed( SGD::Key::Eight ) )
+	if ( input->IsKeyPressed( SGD::Key::Eight ) )
 	{
 		Party[ 0 ]->SetBP( Party[ 0 ]->GetMaxBP() );
 	}
@@ -2014,7 +2016,7 @@ void GamePlayState::CombatUpdate( float dt )
 	if ( input->IsKeyPressed( SGD::Key::Nine ) )
 	{
 		ternary_gauge = MAXTG;
-	}*/
+	}
 
 	if ( state == GPStates::Town )
 	{
@@ -2763,20 +2765,20 @@ void GamePlayState::MapUpdate( float dt )
 	//}
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	//if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
-	//{
-	//	if ( unlockedTowns >= 1 )
-	//	{
-	//		unlockedTowns--;
-	//	}
-	//}
-	//else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Seven ) )
-	//{
-	//	if ( unlockedTowns <= 3 )
-	//	{
-	//		unlockedTowns++;
-	//	}
-	//}
+	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
+	{
+		if ( unlockedTowns >= 1 )
+		{
+			unlockedTowns--;
+		}
+	}
+	else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Seven ) )
+	{
+		if ( unlockedTowns <= 3 )
+		{
+			unlockedTowns++;
+		}
+	}
 
 	if ( WorldMapAnsys != nullptr )
 	{

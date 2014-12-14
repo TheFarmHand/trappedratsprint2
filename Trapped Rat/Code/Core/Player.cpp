@@ -66,9 +66,9 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent( "EarthWorld3" );
 	Listener::RegisterForEvent( "EarthHouse3" );
 	Listener::RegisterForEvent( "EarthW1" );
-	Listener::RegisterForEvent( "EarthH1" );
+	Listener::RegisterForEvent( "EarthK1" );
 	Listener::RegisterForEvent( "EarthW2" );
-	Listener::RegisterForEvent( "EarthH2" );
+	Listener::RegisterForEvent( "EarthK2" );
 
 	// World Map Teleportatoes
 	Listener::RegisterForEvent( "WorldMap0" );	// Wind Exit
