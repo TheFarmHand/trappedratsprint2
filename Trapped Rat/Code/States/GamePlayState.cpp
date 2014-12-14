@@ -2763,20 +2763,20 @@ void GamePlayState::MapUpdate( float dt )
 	//}
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
-	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
-	{
-		if ( unlockedTowns >= 1 )
-		{
-			unlockedTowns--;
-		}
-	}
-	else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Seven ) )
-	{
-		if ( unlockedTowns <= 3 )
-		{
-			unlockedTowns++;
-		}
-	}
+	//if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
+	//{
+	//	if ( unlockedTowns >= 1 )
+	//	{
+	//		unlockedTowns--;
+	//	}
+	//}
+	//else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Seven ) )
+	//{
+	//	if ( unlockedTowns <= 3 )
+	//	{
+	//		unlockedTowns++;
+	//	}
+	//}
 
 	if ( WorldMapAnsys != nullptr )
 	{
@@ -3103,9 +3103,12 @@ void GamePlayState::SummaryUpdate( float dt )
 		{
 			//Trigger Ending Cutscene or Dialouge
 			//for now we will have to just do dialogue
-			dialogue->Load( "../Trapped Rat/Assets/Scripts/cecildefeateddialogue.xml" );
-			state = Dia;
-			laststate = BattleSummary;
+//			dialogue->Load( "../Trapped Rat/Assets/Scripts/cecildefeateddialogue.xml" );
+		CutsceneManager::GetInstance()->Terminate();
+		CutsceneManager::GetInstance()->Initialize( 4 );
+		CutsceneManager::GetInstance()->Play( 0 );
+		state = Cuts;
+		laststate = Cuts;
 			//FinalBossFight = false;
 		}
 
