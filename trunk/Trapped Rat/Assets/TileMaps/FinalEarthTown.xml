@@ -3,7 +3,7 @@
   <layer height="100" width="100" />
   <tileset height="25" width="25" />
   <tilesize height="32" width="32" />
-  <player name="Player" startX="224" startY="1216" />
+  <player name="Player" startX="608" startY="64" />
   <guard name="Guard" startX="192" startY="1216">
     <waypoint tilePoint="3815" />
   </guard>
@@ -140,7 +140,7 @@
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="54" collision="0" event="none" onfire="none" objectID="p" objectNumber="0" />
+  <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -237,7 +237,7 @@
   <tiles id="54" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="178" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="178" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="201" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="201" collision="0" event="none" onfire="none" objectID="p" objectNumber="-1" />
   <tiles id="203" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="203" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="203" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1094,7 +1094,7 @@
   <tiles id="147" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="486" collision="0" event="none" onfire="none" objectID="g" objectNumber="1" />
+  <tiles id="486" collision="0" event="none" onfire="none" objectID="g" objectNumber="0" />
   <tiles id="486" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="486" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="486" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1427,7 +1427,7 @@
   <tiles id="182" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="182" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="250" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="251" collision="0" event="none" onfire="none" objectID="g" objectNumber="2" />
+  <tiles id="251" collision="0" event="none" onfire="none" objectID="g" objectNumber="1" />
   <tiles id="252" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="182" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="182" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -4470,7 +4470,7 @@
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="181" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="182" collision="0" event="none" onfire="none" objectID="g" objectNumber="3" />
+  <tiles id="182" collision="0" event="none" onfire="none" objectID="g" objectNumber="2" />
   <tiles id="183" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="202" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="200" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
