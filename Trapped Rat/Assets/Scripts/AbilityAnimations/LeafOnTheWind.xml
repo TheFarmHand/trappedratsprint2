@@ -4,7 +4,7 @@
     <Image numFrames="10">
       <Path>leafonwind_spriite_set.png</Path>
     </Image>
-    <Looping>False</Looping>
+    <Looping>True</Looping>
     <Name>none</Name>
     <NextName>none</NextName>
     <Frame delay="0.15">
