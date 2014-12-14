@@ -30,7 +30,7 @@
 GamePlayState* GamePlayState::GetInstance()
 {
 	static GamePlayState data;
-
+	 
 	return &data;
 }
 void GamePlayState::Enter()
@@ -1763,29 +1763,15 @@ void GamePlayState::MenuRender()
 					 //now display the players inventory
 					 GameData::GetInstance()->GetFont()->DrawString( "Your Inventory", 450.0f, 40.0f, { 0, 0, 0 }, 2.0f );
 					 SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 } );
-					 for ( unsigned int i = 0; i < inventory.size(); i++ )
+					 PopulateUniqueNames();
+					 for ( unsigned int i = 0; i < uniquenames.size(); i++ )
 					 {
-						 bool is_skip = false;
-						 for ( int j = i - 1; j > -1; j-- )
-						 {
-							 if ( inventory[ i ] == inventory[ j ] )
-							 {
-								 is_skip = true;
-							 }
-						 }
-						 if ( is_skip )
-							 continue;
-
-						 GameData::GetInstance()->GetFont()->DrawString( inventory[ i ].GetName(), 490.0f, 160.0f + ( i * 55 ), { 0, 0, 0 }, 1.5f );
-						 int count = 0;
-						 for ( unsigned int j = 0; j < inventory.size(); j++ )
-						 {
-							 if ( inventory[ i ] == inventory[ j ] )
-								 count++;
-						 }
+					
+						 
 
 						 std::ostringstream total;
-						 total << count << "/5";
+						 total << uniquecounts[i] << "/5";
+						 GameData::GetInstance()->GetFont()->DrawString(uniquenames[i], 490, 160.0f + (i * 55), { 0,0,0 },1.5f);
 						 GameData::GetInstance()->GetFont()->DrawString( total.str(), 490.0f, 185.0f + ( i * 55 ), { 155, 155, 155 }, 1.5f );
 					 }
 		}
