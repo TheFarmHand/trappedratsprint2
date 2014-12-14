@@ -142,6 +142,7 @@ private:
 
 
 public:
+	bool is_done = true;
 	bool run_succeed = false;
 	bool MinibossFight = false;
 	bool FinalBossFight = false;
@@ -260,7 +261,7 @@ public:
 	void PlaySoundEffect(int _index);
 	void SetTutorial(bool is){ is_tutorial = is; }
 	void AddToHUDItems(HUDItem* item);
-
+	Dialogue * GetDialogue(){ return dialogue; }
 	std::vector<WorldObject*> GetWorldObjects() {return overworldObjects;}
 };
 

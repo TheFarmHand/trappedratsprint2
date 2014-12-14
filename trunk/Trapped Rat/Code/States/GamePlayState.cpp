@@ -1845,6 +1845,8 @@ void GamePlayState::CombatUpdate( float dt )
 		state = Dia;
 		is_tutorial = false;
 		ignore_game_over = true;
+		dialogue->Load("../Trapped Rat/Assets/Scripts/attacktutorial.xml");
+
 	}
 	//run_succeed = false;
 	laststate = GPStates::Combat;
@@ -3994,6 +3996,8 @@ void GamePlayState::TutorialStart()
 		state = Combat;
 		laststate = Combat;
 		GameData::GetInstance()->SetIsInCombat(true);
+
+		inventory.push_back(shopinv[0]);
 	}
 }
 
