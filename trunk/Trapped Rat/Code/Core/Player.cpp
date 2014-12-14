@@ -704,7 +704,6 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	}
 	else if (pEvent->GetEventID() == "Rogue")
 	{ 
-		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
@@ -720,7 +719,6 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		}
 	else if ( pEvent->GetEventID() == "Warrior" )
 		{
-		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
@@ -736,7 +734,6 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		}
 	else if ( pEvent->GetEventID() == "Monk" )
 		{
-		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
@@ -752,7 +749,6 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		}
 	else if ( pEvent->GetEventID() == "Wizard" )
 		{
-		position.y -= 32;
 		GamePlayState::GetInstance()->CreateMinibossFight();
 		GamePlayState::GetInstance()->PlaySoundEffect( 0 );
 		std::vector<WorldObject*>::iterator iter = GamePlayState::GetInstance()->overworldObjects.begin();
