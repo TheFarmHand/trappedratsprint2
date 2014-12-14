@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>MeatCleaver.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="99" y="16" />
+      <DrawRect left="66" top="1" right="130" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="99" y="88" />
+      <DrawRect left="66" top="67" right="130" bottom="130" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="100" y="164" />
+      <DrawRect left="66" top="131" right="129" bottom="195" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="99" y="222" />
+      <DrawRect left="66" top="196" right="130" bottom="260" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

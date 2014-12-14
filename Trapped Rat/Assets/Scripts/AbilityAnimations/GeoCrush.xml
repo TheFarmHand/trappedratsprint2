@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>GeoCrush.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.15">
+      <AnchorPoint x="33" y="0" />
+      <DrawRect left="0" top="0" right="67" bottom="24" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="33" y="0" />
+      <DrawRect left="0" top="42" right="64" bottom="88" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="33" y="0" />
+      <DrawRect left="0" top="87" right="63" bottom="156" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="33" y="0" />
+      <DrawRect left="0" top="164" right="63" bottom="249" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

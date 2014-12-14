@@ -32,6 +32,7 @@ void TileSystem::Exit()
 void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char dir )
 	{
 	bool collided = false;
+	bool keep = false;
 	int tileIndex;
 	SGD::Point pos;
 	pos.x = x;
@@ -111,6 +112,10 @@ void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char d
 			}
 		x = pos.x;
 		y = pos.y;
+		}
+	if ( keep )
+		{
+
 		}
 	}
 

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="5">
+      <Path>whispering_wind_sprite_set.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="29" y="10" />
+      <DrawRect left="11" top="3" right="48" bottom="22" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="71" y="10" />
+      <DrawRect left="49" top="1" right="93" bottom="27" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="116" y="10" />
+      <DrawRect left="90" top="2" right="142" bottom="50" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="168" y="10" />
+      <DrawRect left="143" top="1" right="198" bottom="59" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.55">
+      <AnchorPoint x="222" y="11" />
+      <DrawRect left="197" top="0" right="257" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

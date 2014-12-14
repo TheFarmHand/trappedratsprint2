@@ -8,7 +8,7 @@
   <Healing Heals="false" />
   <UnlockLevel Level="2" />
   <Paths>
-    <AniPath Path="AbilityAnimations/p8.xml"/>
+    <AniPath Path="AbilityAnimations/RockSpike.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>

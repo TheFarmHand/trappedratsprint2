@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="7">
+      <Path>SpiritBombLikeAbility1.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.25">
+      <AnchorPoint x="123" y="15" />
+      <DrawRect left="100" top="0" right="153" bottom="32" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="123" y="117" />
+      <DrawRect left="93" top="80" right="160" bottom="155" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="122" y="256" />
+      <DrawRect left="64" top="207" right="178" bottom="298" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="124" y="367" />
+      <DrawRect left="52" top="303" right="202" bottom="429" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="123" y="497" />
+      <DrawRect left="52" top="431" right="202" bottom="575" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.25">
+      <AnchorPoint x="122" y="639" />
+      <DrawRect left="48" top="575" right="204" bottom="715" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.50">
+      <AnchorPoint x="696" y="460" />
+      <DrawRect left="334" top="232" right="1023" bottom="709" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

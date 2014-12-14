@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="6">
+      <Path>PowerShot.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.35">
+      <AnchorPoint x="40" y="35" />
+      <DrawRect left="1" top="1" right="65" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="40" y="100" />
+      <DrawRect left="1" top="66" right="65" bottom="130" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="41" y="164" />
+      <DrawRect left="1" top="131" right="65" bottom="195" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="49" y="230" />
+      <DrawRect left="1" top="196" right="65" bottom="260" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="171" y="35" />
+      <DrawRect left="66" top="1" right="130" bottom="65" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="239" y="99" />
+      <DrawRect left="67" top="66" right="130" bottom="130" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

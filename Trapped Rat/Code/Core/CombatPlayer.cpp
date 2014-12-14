@@ -210,7 +210,7 @@ void CombatPlayer::Render()
 	SGD::GraphicsManager *pGraphics = SGD::GraphicsManager::GetInstance();
 	TurnManager *pTurn = TurnManager::GetInstance();
 
-	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
+	/*GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 50, position.y - 30, { 200, 0, 255 }, 1.6f );
 	std::ostringstream sp;
 	sp << "Progress: " << progress;
@@ -229,7 +229,7 @@ void CombatPlayer::Render()
 	GameData::GetInstance()->GetFont()->DrawString( sav.str(), position.x + 50, position.y + 35, { 0, 0, 0 } );
 	std::ostringstream ss;
 	ss << "Speed: " << GetSpeed();
-	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );
+	GameData::GetInstance()->GetFont()->DrawString( ss.str(), position.x + 50, position.y + 45, { 0, 0, 0 } );*/
 
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 301, 451 + ( order*50.0f ), { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), 300, 450 + ( order*50.0f ), { 255, 0, 0 }, 1.6f );
