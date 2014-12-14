@@ -62,6 +62,14 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent( "EarthHouse2" );
 	Listener::RegisterForEvent( "EarthWorld3" );
 	Listener::RegisterForEvent( "EarthHouse3" );
+
+	// World Map Teleportatoes
+	Listener::RegisterForEvent( "WorldMap0" );	// Wind Exit
+	Listener::RegisterForEvent( "WorldMap" );	// Fire Exit
+	Listener::RegisterForEvent( "WorldMap1");	// Earth Exit
+	Listener::RegisterForEvent( "WorldMap2" );	// Water Exit
+	Listener::RegisterForEvent( "WorldMap3" );	// Hero's Landing Exit
+
 }
 
 
@@ -188,6 +196,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	{
 	if(pEvent->GetEventID() == "keepentry" )//&& GamePlayState::GetInstance()->GetGuards())
 	{
+
 	}
 	else if ( pEvent->GetEventID() == "World1" )
 		{
