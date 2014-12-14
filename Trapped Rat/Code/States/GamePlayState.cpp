@@ -2643,6 +2643,7 @@ int GamePlayState::GetGuards()
 
 void GamePlayState::MapUpdate( float dt )
 {
+	TileSystem::GetInstance()->Exit();
 
 	//if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_overAudio))
 	//{
@@ -3022,6 +3023,28 @@ void GamePlayState::SummaryUpdate( float dt )
 		m_vhuditems.clear();
 	}
 
+}
+
+void GamePlayState::GoToTown()
+{
+	for ( unsigned int i = 0; i < guards.size( ); i++ )
+	{
+		delete guards[ i ];
+		guards[ i ] = nullptr;
+	}
+	guards.clear( );
+
+	for ( unsigned int i = 0; i < traps.size(); i++ )
+	{
+		delete traps[i];
+		traps[i] = nullptr;
+	}
+	traps.clear();
+	//TileSystem::GetInstance( )->Exit( );
+	//here we load in the correct dialogue for which town we are exiting
+	//state = Dia;
+	laststate = Town;
+	state = Map;
 }
 void GamePlayState::SummaryRender()
 {

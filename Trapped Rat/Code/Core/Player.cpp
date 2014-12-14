@@ -769,12 +769,25 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 
 	else if ( pEvent->GetEventID( ) == "WorldMap0" )	// Wind Exit
 	{
-		
+		GamePlayState::GetInstance()->GoToTown();
 	}
-	else if ( pEvent->GetEventID( ) == "WorldMap" );	// Fire Exit
-	else if ( pEvent->GetEventID( ) == "WorldMap1" );	// Earth Exit
-	else if ( pEvent->GetEventID( ) == "WorldMap2" );	// Water Exit
-	else if ( pEvent->GetEventID( ) == "WorldMap3" );	// Hero's Landing Exit
+	else if ( pEvent->GetEventID( ) == "WorldMap" )
+	{
+		GamePlayState::GetInstance( )->GoToTown( );		// Fire Exit
+	}
+	
+	else if ( pEvent->GetEventID( ) == "WorldMap1" )	// Earth Exit
+	{
+		GamePlayState::GetInstance( )->GoToTown( );
+	}
+	else if ( pEvent->GetEventID( ) == "WorldMap2" )	// Water Exit
+	{
+		GamePlayState::GetInstance( )->GoToTown( );
+	}
+	else if ( pEvent->GetEventID( ) == "WorldMap3" )	// Hero's Landing Exit
+	{
+		GamePlayState::GetInstance( )->GoToTown( );
+	}
 
 	else if (pEvent->GetEventID() == "Trap")
 	{

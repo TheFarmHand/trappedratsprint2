@@ -1519,7 +1519,7 @@
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="53" collision="0" event="WorldMap0" onfire="" objectID="0" objectNumber="0" />
+  <tiles id="53" collision="0" event="WorldMap0" onfire="WorldMap0" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="p" objectNumber="-1" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1619,7 +1619,7 @@
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="67" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="53" collision="0" event="WorldMap0" onfire="" objectID="0" objectNumber="0" />
+  <tiles id="53" collision="0" event="WorldMap0" onfire="WorldMap0" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="53" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
