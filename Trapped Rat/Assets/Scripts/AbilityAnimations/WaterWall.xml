@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>Geyser.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.65">
+      <AnchorPoint x="91" y="121" />
+      <DrawRect left="67" top="59" right="114" bottom="135" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.55">
+      <AnchorPoint x="155" y="121" />
+      <DrawRect left="118" top="32" right="184" bottom="148" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.65">
+      <AnchorPoint x="235" y="121" />
+      <DrawRect left="189" top="0" right="261" bottom="145" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
