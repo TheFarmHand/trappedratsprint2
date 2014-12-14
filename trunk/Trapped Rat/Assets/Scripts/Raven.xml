@@ -20,15 +20,15 @@
     </Attack>
     <Magic>
       <Base>5</Base>
-      <Scale>0.3</Scale>
+      <Scale>1.5</Scale>
     </Magic>
     <Defense>
       <Base>4</Base>
-      <Scale>0.85</Scale>
+      <Scale>1.85</Scale>
     </Defense>
     <Speed>
       <Base>28</Base>
-      <Scale>0.25</Scale>
+      <Scale>0.325</Scale>
     </Speed>
     <Avoision>
       <Base>5</Base>
