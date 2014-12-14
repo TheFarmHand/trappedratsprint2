@@ -589,8 +589,6 @@ void CombatPlayer::HomeUpdate( float dt )
 						}
 
 					}
-
-
 					mySelection = enemy;
 					break;
 

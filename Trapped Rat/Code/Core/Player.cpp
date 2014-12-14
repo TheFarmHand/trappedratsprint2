@@ -36,12 +36,12 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("fireworld3");
 	Listener::RegisterForEvent("firekeep");
 	Listener::RegisterForEvent("firekeepworld");
-	Listener::RegisterForEvent("herohouse1");
-	Listener::RegisterForEvent("heroworld1");
-	Listener::RegisterForEvent("herohouse2");
-	Listener::RegisterForEvent("heroworld2");
-	Listener::RegisterForEvent("herohouse3");
-	Listener::RegisterForEvent("heroworld3");
+	Listener::RegisterForEvent("HeroW1");
+	Listener::RegisterForEvent("HeroH1");
+	Listener::RegisterForEvent("HeroW2");
+	Listener::RegisterForEvent("HeroH2");
+	Listener::RegisterForEvent("HeroW3");
+	Listener::RegisterForEvent("HeroH3");
 	Listener::RegisterForEvent("herokeep");
 	Listener::RegisterForEvent("herokeepworld");
 	Listener::RegisterForEvent("GainJeeves");
@@ -434,7 +434,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	}
 
 	
-	else if (pEvent->GetEventID() == "heroworld1")
+	else if (pEvent->GetEventID() == "HeroW1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
@@ -442,7 +442,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "herohouse1")
+	else if (pEvent->GetEventID() == "HeroH1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
@@ -450,7 +450,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "heroworld2")
+	else if (pEvent->GetEventID() == "HeroW2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
@@ -458,7 +458,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "herohouse2")
+	else if (pEvent->GetEventID() == "HeroH2")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
@@ -466,7 +466,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "heroworld3")
+	else if (pEvent->GetEventID() == "HeroW3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + (size.width / 2);
@@ -474,7 +474,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
-	else if (pEvent->GetEventID() == "herohouse3")
+	else if (pEvent->GetEventID() == "HeroH3")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
 		position.x = dest->x + size.width / 2;
