@@ -8,7 +8,7 @@
   <Healing Heals="false" />
   <UnlockLevel Level="0" />
   <Paths>
-    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <AniPath Path="AbilityAnimations/FeralBite.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>

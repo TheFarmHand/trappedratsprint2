@@ -8,7 +8,7 @@
   <Healing Heals="true" />
   <UnlockLevel Level="0" />
   <Paths>
-    <AniPath Path="AbilityAnimationPlaceholder.xml"/>
+    <AniPath Path="AbilityAnimations/StitchInTime.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>

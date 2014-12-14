@@ -8,7 +8,7 @@
   <Healing Heals="true" />
   <UnlockLevel Level="2" />
   <Paths>
-    <AniPath Path="AbilityAnimations/p16.xml"/>
+    <AniPath Path="AbilityAnimations/Zephyr.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>

@@ -8,7 +8,7 @@
   <Healing Heals="false" />
   <UnlockLevel Level="0" />
   <Paths>
-    <AniPath Path="AbilityAnimations/p4.xml"/>
+    <AniPath Path="AbilityAnimations/LeafOnTheWind.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>

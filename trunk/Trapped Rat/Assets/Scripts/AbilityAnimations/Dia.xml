@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="6">
+      <Path>Dia.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Name</Name>
+    <NextName>None</NextName>
+    <Frame delay="0.35">
+      <AnchorPoint x="224" y="31" />
+      <DrawRect left="202" top="10" right="241" bottom="57" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.45">
+      <AnchorPoint x="224" y="97" />
+      <DrawRect left="191" top="66" right="255" bottom="126" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="224" y="160" />
+      <DrawRect left="194" top="130" right="261" bottom="195" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="224" y="160" />
+      <DrawRect left="130" top="135" right="274" bottom="196" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.05">
+      <AnchorPoint x="224" y="160" />
+      <DrawRect left="66" top="135" right="263" bottom="198" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.65">
+      <AnchorPoint x="225" y="160" />
+      <DrawRect left="1" top="135" right="263" bottom="196" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

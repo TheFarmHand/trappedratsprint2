@@ -122,7 +122,7 @@ void Enemy::Update( float dt )
 				ShopkeeperAI();
 			else if ( name == "Tailor" )
 				TailorAI();
-			else if ( name == "Priest" )
+			else if ( name == "Priestess" )
 				PriestAI();
 			else if ( name == "Guard" )
 				GuardAI();
@@ -286,14 +286,14 @@ void Enemy::CatAI()
 			tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 			if ( lowestHp == 0 )
 				lowestHp = tempLow;
-			else if( lowestHp < tempLow )
+			if( tempLow < lowestHp )
 				{
 				lowestHp = tempLow;
 				target = i;
 				}
 			}
 		}
-	if ( lowestHp / TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP() < 0.4f
+	if ( lowestHp / (float)(TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP()) < 0.25f
 		 && TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		int dmg = rand() % tempAtk + tempAtk;
@@ -302,7 +302,7 @@ void Enemy::CatAI()
 			dmg = 0;
 		TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
 		}
-	else if ( lowestHp / TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP() < 0.6f
+	else if ( lowestHp / (float)(TurnManager::GetInstance()->GetAllies()[target]->GetMaxHP()) < 0.65f
 			  && TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
@@ -571,7 +571,7 @@ void Enemy::ShopkeeperAI()
 		target = lastAttacker;
 		}
 	int tempAtk = (int)( GetAttack() * 1.25f );
-	if ( GetHP() / (float)( GetMaxHP() ) > 0.5f )
+	if ( GetHP() / (float)( GetMaxHP() ) > 0.5f && !TurnManager::GetInstance()->GetAllies()[target]->HasEffect("Poison"))
 		{
 		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
 		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -871,7 +871,7 @@ void Enemy::WWWAI()
 			tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 			if ( lowestHp == 0 )
 				lowestHp = tempLow;
-			else if ( lowestHp < tempLow )
+			if ( tempLow < lowestHp )
 				{
 				lowestHp = tempLow;
 				target = i;
@@ -1109,9 +1109,8 @@ void Enemy::CecilPhaseTwo()
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		return;
 		}
-	//if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
-	if (true )
-	{
+	if ( TurnManager::GetInstance()->GetEnemies()[0]->JaneHit % 3 == 0 )
+		{
 		//cover code of Jane
 		TurnManager::GetInstance()->GetEnemies()[0]->JaneHit += 1;
 		abilityList[4]->CastAbility( this, TurnManager::GetInstance()->GetEnemies()[0] );
@@ -1346,7 +1345,7 @@ void Enemy::JohnAI()
 				tempLow = TurnManager::GetInstance()->GetAllies()[i]->GetHP();
 				if ( lowestHp == 0 )
 					lowestHp = tempLow;
-				else if ( lowestHp < tempLow )
+				if ( tempLow < lowestHp )
 					{
 					lowestHp = tempLow;
 					target = i;

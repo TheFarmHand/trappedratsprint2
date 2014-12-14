@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="3">
+      <Path>PinchSprites.png</Path>
+    </Image>
+    <Looping>True</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.45">
+      <AnchorPoint x="12" y="14" />
+      <DrawRect left="0" top="0" right="64" bottom="57" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.15">
+      <AnchorPoint x="112" y="14" />
+      <DrawRect left="97" top="1" right="164" bottom="64" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.40">
+      <AnchorPoint x="207" y="14" />
+      <DrawRect left="188" top="3" right="255" bottom="66" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

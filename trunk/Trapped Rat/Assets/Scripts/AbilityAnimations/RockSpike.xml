@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="8">
+      <Path>RockSpike.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>none</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.05">
+      <AnchorPoint x="20" y="0" />
+      <DrawRect left="0" top="0" right="64" bottom="101" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.75">
+      <AnchorPoint x="89" y="0" />
+      <DrawRect left="60" top="1" right="127" bottom="104" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="153" y="0" />
+      <DrawRect left="124" top="3" right="191" bottom="119" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="217" y="0" />
+      <DrawRect left="189" top="3" right="256" bottom="76" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="281" y="0" />
+      <DrawRect left="253" top="2" right="317" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="345" y="0" />
+      <DrawRect left="318" top="0" right="378" bottom="62" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="409" y="0" />
+      <DrawRect left="376" top="4" right="438" bottom="69" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.10">
+      <AnchorPoint x="474" y="0" />
+      <DrawRect left="439" top="6" right="505" bottom="67" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>

@@ -8,7 +8,7 @@
   <Healing Heals="true" />
   <UnlockLevel Level="6" />
   <Paths>
-    <AniPath Path="AbilityAnimations/p9.xml"/>
+    <AniPath Path="AbilityAnimations/SecondWind.xml"/>
     <WavPath Path="AbilityWavPlaceholder.wav"/>
   </Paths>
   <DamageInfo>
