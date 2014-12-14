@@ -728,7 +728,7 @@
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="225" collision="1" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
+  <tiles id="225" collision="0" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
   <tiles id="226" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="227" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -828,7 +828,7 @@
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="250" collision="1" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
+  <tiles id="250" collision="0" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="252" collision="0" event="none" onfire="none" objectID="p" objectNumber="-1" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -928,7 +928,7 @@
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="304" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="275" collision="1" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
+  <tiles id="275" collision="0" event="WorldMap2" onfire="WorldMap2" objectID="0" objectNumber="0" />
   <tiles id="276" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="277" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="254" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
