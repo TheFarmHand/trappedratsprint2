@@ -1143,12 +1143,17 @@ void GamePlayState::MenuUpdate( float dt )
 			break;
 		case MenuSubStates::Party:
 			maxindex = Party.size() - 1;
-			if ( select_first && selecting_party == false )
-				maxindex = 1;
+			if ( select_first && selecting_item == false && selecting_party == false )
+				maxindex = 2;
 			if ( selecting_ability )
 			{
 				GamePlayState::GetHelpText()->ManualOverride( Party[ character_index ]->GetAbility( menuindex )->GetExplination() );
 				maxindex = Party[ character_index ]->GetAbilitiesSize() - 1;
+			}
+			if (selecting_item)
+			{
+				PopulateUniqueNames();
+				maxindex = uniquenames.size() - 1;
 			}
 			if ( input->IsKeyPressed( SGD::Key::Escape ) || input->IsButtonPressed( 0, 2 ) )
 			{
@@ -1159,6 +1164,7 @@ void GamePlayState::MenuUpdate( float dt )
 					selecting_party = false;
 					select_first = false;
 					select_new = false;
+					selecting_item = false;
 					menuindex = 0;
 					oldindex = -1;
 				}
@@ -1314,7 +1320,7 @@ void GamePlayState::MenuUpdate( float dt )
 				break;
 			case MenuSubStates::Party:
 
-				if ( selecting_ability == false && selecting_party == false && select_first == false )
+				if ( selecting_ability == false && selecting_item == false &&selecting_party == false && select_first == false )
 				{
 					PlaySoundEffect( 6 );
 					select_first = true;
@@ -1322,26 +1328,102 @@ void GamePlayState::MenuUpdate( float dt )
 					menuindex = 0;
 					maxindex = 2;
 				}
-				else if ( selecting_ability == false && selecting_party == false && select_first == true )
+				else if ( selecting_ability == false && selecting_item == false && selecting_party == false && select_first == true )
 				{
 					PlaySoundEffect( 6 );
 					if ( menuindex == 0 )
 					{
 						//Hovering over Swap character
 						selecting_party = true;
+						menuindex = 0;
 					}
 					if ( menuindex == 1 )
 					{
 						//Hovering Over Swap Ability
 						selecting_ability = true;
+						menuindex = 0;
+					}
+					if (menuindex == 2)
+					{
+						selecting_item = true;
+						menuindex = 0;
 					}
 				}
-				/*else if (selecting_ability == false)
+				else if (selecting_item)
 				{
-				selecting_ability = true;
-				character_index = menuindex;
-				menuindex = 0;
-				}*/
+					if (uniquenames[menuindex] == "Small Heal")
+					{
+						int newhp = (int)(Party[character_index]->GetMaxHP() * .20f + Party[character_index]->GetHP());
+						if (newhp <= Party[character_index]->GetMaxHP())
+						{
+							Party[character_index]->SetHP(newhp);
+						}
+						else
+						{
+							Party[character_index]->SetHP(Party[character_index]->GetMaxHP());
+						}
+					}
+					if (uniquenames[menuindex] == "Large Heal")
+					{
+						int newhp = (int)(Party[character_index]->GetMaxHP() * .5f + Party[character_index]->GetHP());
+						if (newhp <= Party[character_index]->GetMaxHP())
+						{
+							Party[character_index]->SetHP(newhp);
+						}
+						else
+						{
+							Party[character_index]->SetHP(Party[character_index]->GetMaxHP());
+						}
+					}
+					if (uniquenames[menuindex] == "Small BP Restore")
+					{
+						int newbp =(int)(Party[character_index]->GetMaxBP() * .20f + Party[character_index]->GetBP());
+						if (newbp <= Party[character_index]->GetMaxBP())
+						{
+							Party[character_index]->SetBP(newbp);
+						}
+						else
+						{
+							Party[character_index]->SetBP(Party[character_index]->GetMaxBP());
+						}
+					}
+					if (uniquenames[menuindex] == "Large BP Restore")
+					{
+						int newbp = (int)(Party[character_index]->GetMaxBP() * .40f + Party[character_index]->GetBP());
+						if (newbp <= Party[character_index]->GetMaxBP())
+						{
+							Party[character_index]->SetBP(newbp);
+						}
+						else
+						{
+							Party[character_index]->SetBP(Party[character_index]->GetMaxBP());
+						}
+					}
+					if (uniquenames[menuindex] == "Revive")
+					{
+						if (Party[character_index]->isAlive())
+							return;
+						Party[character_index]->SetLiving(true);
+						Party[character_index]->SetHP((int)(Party[character_index]->GetMaxHP() * 0.25));
+					}
+					for (unsigned int i = 0; i < inventory.size(); i++)
+					{
+						if (uniquenames[menuindex] == inventory[i].GetName())
+						{
+							inventory.erase(inventory.begin() + i);
+							uniquenames.erase(uniquenames.begin() + menuindex);
+							uniquecounts.erase(uniquecounts.begin() + menuindex);
+							break;
+						}
+					}
+					selecting_ability = false;
+					selecting_party = false;
+					select_first = false;
+					select_new = false;
+					selecting_item = false;
+					menuindex = 0;
+					oldindex = -1;
+				}
 				else if ( selecting_ability && !select_new )
 				{
 					PlaySoundEffect( 6 );
@@ -1756,6 +1838,26 @@ void GamePlayState::MenuRender()
 				graphics->DrawTextureSection( cursor, { 400.0f, 160.0f + ( menuindex * 35 ) }, { 0, 0, 238, 73 } );
 				SGD::GraphicsManager::GetInstance()->DrawRectangle( { 480.0f, 180.0f, 715.0f, 320.0f }, { 0, 0, 0, 0 }, { 0, 0, 0 }, 2 );
 			}
+			else if (selecting_item)
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, { 440.0f, 50.0f }, { 0, 0, 300, 540 });
+				for (unsigned int i = 0; i < uniquenames.size(); i++)
+				{
+					GameData::GetInstance()->GetFont()->DrawString(uniquenames[i], 490.0f, 225.0f + (i * 40), { 0, 0, 0 }, 1.0f);
+					std::ostringstream total;
+					total << uniquecounts[i] << "/5";
+					GameData::GetInstance()->GetFont()->DrawString(total.str(), 490.0f, 245.0f + (i * 40), { 0, 0, 0 }, 1.0f);
+
+				}
+				if (uniquenames.size() == 0)
+				{
+					GameData::GetInstance()->GetFont()->DrawString("Empty", 490.0f, 225.0f, { 0, 0, 0 }, 1.0f);
+				}
+				else
+				{
+					SGD::GraphicsManager::GetInstance()->DrawTexture(cursor, { 400.0f, 225.0f + (menuindex * 40) }, 0.0f, {}, {}, { .75f, .75f });
+				}
+			}
 			else if ( selecting_party )
 			{
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 440.0f, 50.0f }, { 0, 0, 300, 240 } );
@@ -1767,6 +1869,7 @@ void GamePlayState::MenuRender()
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection( scroll, { 440.0f, 50.0f }, { 0, 0, 300, 240 } );
 				GameData::GetInstance()->GetFont()->DrawString( "Swap Character", 490.0f, 185.0f, { 0, 0, 0 }, 1.5f );
 				GameData::GetInstance()->GetFont()->DrawString( "Swap Ability", 490.0f, 220.0f, { 0, 0, 0 }, 1.5f );
+				GameData::GetInstance()->GetFont()->DrawString("Use Item", 490.0f, 255.0f, { 0, 0, 0 }, 1.5f);
 				graphics->DrawTextureSection( cursor, { 400.0f, 160.0f + ( menuindex * 35 ) }, { 0, 0, 238, 73 } );
 
 			}
@@ -4115,5 +4218,29 @@ void GamePlayState::PhaseSwitchDia( int _index )
 			laststate = Combat;
 			break;
 
+	}
+}
+void GamePlayState::PopulateUniqueNames()
+{
+	for (unsigned int i = 0; i < inventory.size(); i++)
+	{
+		int count = 0;
+		for (unsigned int j = 0; j < inventory.size(); j++)
+		{
+			if (inventory[i] == inventory[j])
+				count++;
+		}
+		bool is = true;
+		for (unsigned int j = 0; j < uniquenames.size(); j++)
+		{
+
+			if (inventory[i].GetName() == uniquenames[j])
+				is = false;
+		}
+		if (is)
+		{
+			uniquecounts.push_back(count);
+			uniquenames.push_back(inventory[i].GetName());
+		}
 	}
 }
