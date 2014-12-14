@@ -3231,7 +3231,7 @@ std::map<std::string, Ability*> GamePlayState::GetMasterList()
 void GamePlayState::CreateFinalFight()
 {
 
-	FinalBossFight = true;
+	//FinalBossFight = true;
 	SGD::Point characterOrderPosition;
 	std::vector<Enemy*> bosses;
 	std::vector<Ability*> partyAbilities;

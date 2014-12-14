@@ -1801,7 +1801,7 @@
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="338" collision="0" event="EarthHouse2" onfire="EarthWorld2" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="338" collision="0" event="EarthHouse3" onfire="EarthHouse3" objectID="0" objectNumber="0" />
+  <tiles id="338" collision="0" event="EarthHouse3" onfire="EarthWorld3" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
