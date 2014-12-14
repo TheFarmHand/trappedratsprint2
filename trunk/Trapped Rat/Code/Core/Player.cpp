@@ -7,6 +7,7 @@
 #include "..\Tile\TileSystem.h"
 #include "../SGD Wrappers/SGD_Event.h"
 #include "../SGD Wrappers/SGD_AudioManager.h"
+#include "../Dialogue/Dialogue.h"
 
 Player::Player() : Listener(this)
 {
@@ -17,6 +18,7 @@ Player::Player() : Listener(this)
 	ansys->Load("RatAnimOverworld.xml");
 	ansys->Play(0);
 	velocity = SGD::Vector(0, 0);
+	keepentry = new Dialogue();
 	Listener::RegisterForEvent( "World1" );
 	Listener::RegisterForEvent( "House1" );
 	Listener::RegisterForEvent( "World2" );
@@ -67,6 +69,9 @@ void Player::Update(float dt)
 	//udpate based on movement
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	char dir = 'a';
+
+	keepentry->Update(dt);
+	
 
 	//if they are holding down the button
 		//move at a constant rate
@@ -168,6 +173,8 @@ void Player::Render()
 	//SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, center, { 132, 1, 164, 33 });
 	ansys->Render(position.x,position.y);
 
+	keepentry->Render();
+
 }
 bool Player::IsMoving()
 {
@@ -176,7 +183,11 @@ bool Player::IsMoving()
 
 void Player::HandleEvent( const SGD::Event* pEvent )
 	{
-	if ( pEvent->GetEventID() == "World1" )
+	if(pEvent->GetEventID() == "keepentry" )//&& GamePlayState::GetInstance()->GetGuards())
+	{
+		keepentry->Load( "Assets/Scripts/keepentry.xml" );
+	}
+	else if ( pEvent->GetEventID() == "World1" )
 		{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData() );
 		position.x = dest->x + (size.width / 2);

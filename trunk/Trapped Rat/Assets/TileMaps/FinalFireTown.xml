@@ -4232,7 +4232,7 @@
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="241" collision="0" event="Pub1W" onfire="Pub1H" objectID="0" objectNumber="0" />
+  <tiles id="241" collision="0" event="fireworld1" onfire="firehouse1" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -8238,7 +8238,7 @@
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="435" collision="0" event="Pub1H" onfire="Pub1W" objectID="0" objectNumber="0" />
+  <tiles id="435" collision="0" event="firehouse1" onfire="fireworld1" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />

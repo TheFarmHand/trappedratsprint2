@@ -81,11 +81,12 @@ void  Bars::Render()
 			if(width >= (int)size.width)
 			{
 				// I think this means you have a full bar
-				GameData::GetInstance()->GetFont()->DrawString("Ternary Blast Ready!  Press O", position.x + 20, position.y + 10, { 255,0,150}, 1.1f);	
+				GameData::GetInstance()->GetFont()->DrawString("Ternary Blast Ready!  Press O", position.x + 10, position.y + 10, { 255,0,150}, 1.15f);	
+				// Render Cheese!  Ok no not here.  Somewhere else is smarter.
 			}
 			else
 			{
-				GameData::GetInstance( )->GetFont( )->DrawString( "Charging Ternary Blast!", position.x + 30, position.y + 10, { 255, 0, 150 }, 1.1f );
+				GameData::GetInstance( )->GetFont( )->DrawString( "Charging Ternary Blast!", position.x + 25, position.y + 10, { 255, 0, 150 }, 1.1f );
 			}
 
 		}
@@ -95,7 +96,10 @@ void  Bars::Render()
 		if(owner)
 			SGD::GraphicsManager::GetInstance()->DrawTexture(outlineimage, position, 0, {}, {}, { 2.0f, 1.0f });
 		else
+		{
 			SGD::GraphicsManager::GetInstance( )->DrawTexture( outlineimage, position, 0, { }, { }, { 4.0f, 2.0f } );
+			GameData::GetInstance( )->GetFont( )->DrawString( "Charging Ternary Blast!", position.x + 30, position.y + 10, { 255, 0, 150 }, 1.1f );
+		}
 	}
 	else
 	{

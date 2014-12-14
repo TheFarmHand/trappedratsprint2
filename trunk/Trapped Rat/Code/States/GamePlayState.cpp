@@ -81,7 +81,8 @@ void GamePlayState::Enter()
 	sts.avoision = 10;
 	sts.magic = 10;
 
-
+	
+	
 	TurnManager::GetInstance()->SetArrow( allytargeting, enemytargeting );
 
 	Loading( "Loading Text..." );
@@ -107,7 +108,7 @@ void GamePlayState::Enter()
 	helpback = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/HelpTextBox.png" );
 	helptextbox->SetImage( helpback );
 
-	ternary_bar = CreateBar( { 64, 16 }, { 250, 380 }, nullptr, { 255, 255, 0 }, { 0, 0 }, false );
+	ternary_bar = CreateBar( { 64, 16 }, { 250, 390 }, nullptr, { 255, 255, 0 }, { 0, 0 }, false );
 
 	std::fstream fin;
 
@@ -372,6 +373,7 @@ void GamePlayState::Enter()
 	m_overAudio = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/ZeldaMetal.xwm" );
 	entercombat = SGD::AudioManager::GetInstance()->LoadAudio( "../Trapped Rat/Assets/Sounds/entercombat.wav" );
 	m_Map = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Map.xwm");
+	chime = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Chime.wav");
 	if (m_Credits != SGD::INVALID_HANDLE)
 	{
 		m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
@@ -1900,6 +1902,14 @@ void GamePlayState::CombatUpdate( float dt )
 		m_vhuditems[ i ]->Update( dt );
 	}
 	
+	if(ternary_gauge == MAXTG && triptern)
+	{
+		SGD::AudioManager::GetInstance()->PlayAudio(chime);
+		triptern = false;
+	}
+
+	
+
 	TurnManager::GetInstance()->Update( dt );
 
 
@@ -1940,6 +1950,15 @@ void GamePlayState::CombatRender()
 		{
 			GameData::GetInstance()->GetFont()->DrawString( "Press Enter", 330.0f, 300.0f, { 0, 255, 0 } );
 		}
+	}
+
+	if(ternary_gauge == MAXTG)
+		//ternary_bar = CreateBar( { 64, 16 }, { 250, 390 }, nullptr, { 255, 255, 0 }, { 0, 0 }, false );
+	{
+		// Here!  Here is the Cheese!
+		graphics->DrawTexture(cursor, {180, 370});
+		graphics->DrawTexture(cursor, {580, 370},0.0f,{},{},{-1.0f, 1.0f});
+
 	}
 
 }
@@ -2450,10 +2469,10 @@ std::vector<Items> * GamePlayState::GetInventory()
 
 void GamePlayState::SetGauge( int val )
 {
-	if ( val > 0 )
+	if ( val >= 0 )
 		ternary_gauge = val;
-	else
-		ternary_gauge = 1;
+	if ( val == 0)
+		triptern = true;
 }
 
 int GamePlayState::GetGauge()
@@ -2593,6 +2612,11 @@ void GamePlayState::CheckAbilityUnlocked( bool EOC )
 	}
 }
 
+int GamePlayState::GetGuards()
+{
+	return guards.size();
+}
+
 void GamePlayState::MapUpdate( float dt )
 {
 
@@ -2693,7 +2717,7 @@ void GamePlayState::MapUpdate( float dt )
 			PlaySoundEffect(6);
 			case 0: //Wind
 				Loading( "Loading Map" ); 
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown2.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalFireTown.xml" );
 				//here we load in the dialogue
 			//	dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
 				CutsceneManager::GetInstance()->Terminate();
