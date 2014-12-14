@@ -776,6 +776,7 @@ void Enemy::FFWAI()
 			{
 			FlameSpout = true;
 			usingAbility << name << " starts casting Flame Spout";
+			GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance()->GetMasterList()["Flame Spout"];
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->abilityTimer = 2.0f;
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -785,6 +786,7 @@ void Enemy::FFWAI()
 			{
 			--FSCountdown;
 			usingAbility << FSCountdown << "...";
+			GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance()->GetMasterList()["Flame Spout"];
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->abilityTimer = 2.0f;
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -859,7 +861,7 @@ void Enemy::SEMAI()
 	}
 void Enemy::WWWAI()
 	{
-	int target;
+	int target = 0;
 	int lowestHp = 0;
 	int tempLow;
 	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
