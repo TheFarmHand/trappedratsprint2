@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Data numAnimations="1">
+  <Animation>
+    <Image numFrames="4">
+      <Path>holyshield.png</Path>
+    </Image>
+    <Looping>False</Looping>
+    <Name>Holy Shield</Name>
+    <NextName>none</NextName>
+    <Frame delay="0.35">
+      <AnchorPoint x="97" y="31" />
+      <DrawRect left="76" top="13" right="122" bottom="59" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.35">
+      <AnchorPoint x="97" y="98" />
+      <DrawRect left="75" top="69" right="116" bottom="118" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.35">
+      <AnchorPoint x="97" y="152" />
+      <DrawRect left="66" top="131" right="129" bottom="195" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+    <Frame delay="0.75">
+      <AnchorPoint x="98" y="220" />
+      <DrawRect left="66" top="196" right="130" bottom="260" />
+      <CollisionRect left="0" top="0" right="0" bottom="0" />
+      <Event>NoEvent</Event>
+    </Frame>
+  </Animation>
+</Data>
