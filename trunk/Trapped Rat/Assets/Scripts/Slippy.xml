@@ -20,7 +20,7 @@
     </Attack>
     <Magic>
       <Base>16</Base>
-      <Scale>2.9</Scale>
+      <Scale>3.35</Scale>
     </Magic>
     <Defense>
       <Base>7</Base>
@@ -35,7 +35,7 @@
       <Scale>0.5</Scale>
     </Avoision>
   </Stats>
-  <Level>10</Level>
+  <Level>8</Level>
   <Sound>
     <Hurt>null</Hurt>
     <Attack>null</Attack>

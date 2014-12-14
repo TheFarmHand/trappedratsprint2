@@ -1561,10 +1561,12 @@ void GamePlayState::TownRender()
 	}
 
 	// Render num Guards left!
-	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 637, 52, { 0, 0, 0 }, 1.5f );
-	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 633, 48, { 125, 0, 0 }, 1.5f );
+	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 636, 51, { 0, 0, 0 }, 1.5f );
+	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 634, 49, { 125, 0, 0 }, 1.5f );
 	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 635, 50, { 255, 0, 0 }, 1.5f );
 	
+	GameData::GetInstance( )->GetFont( )->DrawString( std::to_string( guards.size( ) ), 781, 51, { 0, 0, 0 }, 1.5f );
+	GameData::GetInstance( )->GetFont( )->DrawString( std::to_string( guards.size( ) ), 779, 49, { 0, 125, 0 }, 1.5f );
 	GameData::GetInstance()->GetFont()->DrawString(std::to_string(guards.size()),780,50, {0,255,0},1.5f);
 }
 
