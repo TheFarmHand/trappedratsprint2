@@ -1442,9 +1442,9 @@ void GamePlayState::MenuUpdate( float dt )
 	//changing the values for language
 
 
-	if ((input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x < 0 || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
+	if ((input->IsKeyPressed(SGD::Key::Left) || input->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Left) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x < 0 || input->GetLeftJoystick(0).x > 0) )
 	{
-		GameData::GetInstance()->input_timer = 0.15f;
+		
 		switch ( substate )
 		{
 			case None:
@@ -1840,7 +1840,8 @@ void GamePlayState::CombatUpdate( float dt )
 
 	if ( is_tutorial )
 	{
-		dialogue->Load( "Assets/Scripts/tutorialdialogue.xml" );
+		//dialogue->Load( "Assets/Scripts/tutorialdialogue.xml" );
+		//this is bad now everything needs to change
 		state = Dia;
 		is_tutorial = false;
 		ignore_game_over = true;
@@ -3755,6 +3756,7 @@ void GamePlayState::LoadGame( int index )
 			fin.ignore(INT_MAX, '\n');
 			CreateRatTrap(temp.GetPosition(), temp.items[0], temp.items[1], temp.items[2], temp.gold);*/
 		}//the problem this this is we need to know every trap...so we need a vector for each towns
+		CheckAbilityUnlocked(false);
 		fin.close();
 	}
 	else
@@ -4047,4 +4049,23 @@ bool GamePlayState::CheckIfExist(std::string _name)
 			return true;
 	}
 	return false;
+}
+void GamePlayState::PhaseSwitchDia(int _index)
+{
+	switch (_index)
+	{
+	case 1:
+			break;
+		case 2:
+			dialogue->Load("Assets/Scripts/phase1-2.xml");
+			state = Dia;
+			laststate = Combat;
+			break;
+		case 3:
+			dialogue->Load("Assets/Scripts/phase2-3.xml");
+			state = Dia;
+			laststate = Combat;
+			break;
+
+	}
 }

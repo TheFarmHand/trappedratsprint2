@@ -108,6 +108,7 @@ class GamePlayState :
 	
 	
 public:
+	int tutorial_incrememnt = 0;
 	int randomEnemyIndex;//move back to .cpp
 
 	int gold = 50;
@@ -233,6 +234,7 @@ public:
 	void AddToTB( Ability* abi, Character* target );
 	TernaryTargets myTernTargets;
 	std::vector<Items> * GetInventory();
+	void PhaseSwitchDia(int _index);
 
 	//Mutators
 	void SetSelectableObject(std::vector<SelectableObject*>_vec);

@@ -74,6 +74,8 @@ void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos, float _t
 }
 bool Dialogue::Update(float dt)
 {
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+		messages.clear();
 	if (messages.size() > 0)
 	{
 		//here we take in input and make sure they dont just spam through the whole dialogue
