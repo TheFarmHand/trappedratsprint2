@@ -766,7 +766,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Small BP Restore" )
 		{
-		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)(pTurn->GetAllies()[myTarget]->GetBP() * 0.20f);
+		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)(pTurn->GetAllies()[myTarget]->GetMaxBP() * 0.20f);
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
@@ -778,7 +778,7 @@ void CombatPlayer::ItemsUpdate( float dt )
 		}
 		if ( chosen.GetName() == "Large BP Restore" )
 		{
-		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)( pTurn->GetAllies()[myTarget]->GetBP() * 0.45f );
+		int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)( pTurn->GetAllies()[myTarget]->GetMaxBP() * 0.45f );
 			if ( newBP > pTurn->GetAllies()[ myTarget ]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[ myTarget ]->GetMaxBP();
 			pTurn->GetAllies()[ myTarget ]->SetBP( newBP );
@@ -1549,7 +1549,7 @@ void CombatPlayer::TernaryBlast( float dt )
 					{
 						for ( unsigned int targets = 0; targets < TurnManager::GetInstance()->GetAllies().size(); targets++ )
 						{
-							if ( TurnManager::GetInstance()->GetAllies()[ targets ]->isAlive() )
+						if ( TurnManager::GetInstance()->GetAllies()[targets]->isAlive() || GamePlayState::GetInstance()->myTernTargets.abilities[tern_index]->GetAbilityName() == "Second Wind" )
 							{
 								TurnManager::GetInstance()->UsingAbility(
 									this,
@@ -1574,7 +1574,7 @@ void CombatPlayer::TernaryBlast( float dt )
 				}
 
 				// If Not AOE, do one thing
-				if ( GamePlayState::GetInstance( )->myTernTargets.targets[ tern_index ]->isAlive( ) )
+				if ( GamePlayState::GetInstance()->myTernTargets.targets[tern_index]->isAlive() || GamePlayState::GetInstance()->myTernTargets.abilities[tern_index]->GetAbilityName() == "Second Wind" )
 				{
 				TurnManager::GetInstance()->UsingAbility(
 					this,
