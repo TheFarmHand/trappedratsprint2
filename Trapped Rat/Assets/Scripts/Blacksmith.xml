@@ -16,15 +16,15 @@
     </BattlePoints>
     <Attack>
       <Base>9</Base>
-      <Scale>0.5</Scale>
+      <Scale>1.2</Scale>
     </Attack>
     <Magic>
       <Base>7</Base>
       <Scale>0.3</Scale>
     </Magic>
     <Defense>
-      <Base>7</Base>
-      <Scale>0.7</Scale>
+      <Base>14</Base>
+      <Scale>2.3</Scale>
     </Defense>
     <Speed>
       <Base>26</Base>
