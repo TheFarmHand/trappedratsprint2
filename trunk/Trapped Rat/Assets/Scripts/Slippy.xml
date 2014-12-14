@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>slippyAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>slippyportrait.png</Portrait>
   <Timeline>TLSlippy.xml</Timeline>
 </Character>

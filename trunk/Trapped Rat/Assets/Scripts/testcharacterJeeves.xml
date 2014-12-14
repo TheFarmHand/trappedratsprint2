@@ -42,6 +42,6 @@
     <Death>null</Death>
   </Sound>
   <Animation>JeevesAnimBattle.xml</Animation>
-  <Portrait>pReplaceme.png</Portrait>
+  <Portrait>jeevesportrait.png</Portrait>
   <Timeline>TLJeeves.xml</Timeline>
 </Character>
