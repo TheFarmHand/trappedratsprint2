@@ -56,12 +56,17 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent( "Trap" );
 	Listener::RegisterForEvent( "herocave");
 	Listener::RegisterForEvent( "herocaveworld" );
+
 	Listener::RegisterForEvent( "EarthWorld1" );
 	Listener::RegisterForEvent( "EarthHouse1" );
 	Listener::RegisterForEvent( "EarthWorld2" );
 	Listener::RegisterForEvent( "EarthHouse2" );
 	Listener::RegisterForEvent( "EarthWorld3" );
 	Listener::RegisterForEvent( "EarthHouse3" );
+	Listener::RegisterForEvent( "EarthW1" );
+	Listener::RegisterForEvent( "EarthH1" );
+	Listener::RegisterForEvent( "EarthW2" );
+	Listener::RegisterForEvent( "EarthH2" );
 
 	// World Map Teleportatoes
 	Listener::RegisterForEvent( "WorldMap0" );	// Wind Exit
@@ -342,6 +347,93 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
 
 	}
+
+	else if ( pEvent->GetEventID( ) == "EarthWorld1" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "EarthHouse1" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+
+	else if ( pEvent->GetEventID( ) == "EarthWorld2" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "EarthHouse2" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+
+	else if ( pEvent->GetEventID( ) == "EarthWorld3" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "EarthHouse3" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+
+	else if ( pEvent->GetEventID( ) == "EarthW1" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "EarthH1" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+
+	else if ( pEvent->GetEventID( ) == "EarthW2" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "EarthH2" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+
+	
 	else if (pEvent->GetEventID() == "heroworld1")
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>(pEvent->GetData());
