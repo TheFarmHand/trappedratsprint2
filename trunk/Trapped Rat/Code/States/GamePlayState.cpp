@@ -853,10 +853,10 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 	}
-	if ( input->IsKeyPressed( SGD::Key::D ) && input->IsKeyDown( SGD::Key::G ) )
-	{
-		GamePlayState::GetInstance()->CreateMinibossFight();
-	}
+	//if ( input->IsKeyPressed( SGD::Key::D ) && input->IsKeyDown( SGD::Key::G ) )
+	//{
+	//	GamePlayState::GetInstance()->CreateMinibossFight();
+	//}
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
 		if ( TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
