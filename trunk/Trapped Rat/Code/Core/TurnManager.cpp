@@ -262,7 +262,7 @@ void TurnManager::Render()
 
 	if ( elementalgraphicactive )
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture( elementalImage, { 10, 200 } );
+		SGD::GraphicsManager::GetInstance()->DrawTexture( elementalImage, { 50, 200 } );
 	}
 
 
