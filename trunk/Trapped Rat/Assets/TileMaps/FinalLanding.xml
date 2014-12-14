@@ -7771,7 +7771,7 @@
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="118" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="119" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="119" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="119" collision="0" event="CecilFight" onfire="CecilFight" objectID="0" objectNumber="0" />
   <tiles id="119" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="120" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="251" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
