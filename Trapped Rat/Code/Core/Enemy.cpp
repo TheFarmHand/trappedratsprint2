@@ -197,7 +197,7 @@ void Enemy::UpdateAnimation( float dt )
 	}
 void Enemy::Render()
 	{
-	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
+	/*GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 51, position.y - 30, { 0, 0, 0 }, 1.6f );
 	GameData::GetInstance()->GetFont()->DrawString( name.c_str(), position.x + 50, position.y - 30, { 200, 0, 0 }, 1.6f );
 	std::ostringstream sp;
 	sp << "Progress: " << progress;
@@ -226,7 +226,7 @@ void Enemy::Render()
 		se << "Element: Earth";
 	if ( GetEType() == WATER )
 		se << "Element: Water";
-	GameData::GetInstance()->GetFont()->DrawString( se.str(), position.x + 50, position.y + 55, { 0, 0, 0 } );
+	GameData::GetInstance()->GetFont()->DrawString( se.str(), position.x + 50, position.y + 55, { 0, 0, 0 } );*/
 
 	if ( ansys != nullptr )
 		{

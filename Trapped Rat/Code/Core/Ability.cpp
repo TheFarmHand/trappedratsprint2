@@ -429,7 +429,7 @@ void Ability::RenderAnimation()
 	{
 		animate->Render(Abiltarget->GetPosition().x, Abiltarget->GetPosition().y);
 	}
-	else if ( abilityName == "Cover" || abilityName == "Holy Mace" || abilityName == "Holy Shield" || abilityName == "Earthen Mace" || abilityName == "Earthen Shield")
+	else if ( abilityName == "Cover" || abilityName == "Holy Mace" || abilityName == "Holy Shield" || abilityName == "Earthen Mace" || abilityName == "Earthen Shield" || abilityName == "Water Wall")
 		{
 		if ( Abiltarget->GetAlliance() == "Ally")
 			animate->Render( Abiltarget->GetPosition().x + 70.0f, Abiltarget->GetPosition().y + 20.0f);

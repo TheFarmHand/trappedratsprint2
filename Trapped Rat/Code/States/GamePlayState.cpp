@@ -2914,7 +2914,7 @@ void GamePlayState::MapUpdate( float dt )
 				//here we load in the dialogue
 				//dialogue->Load( "Assets/Scripts/heroslanding_enter.xml" );
 				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 4 );
+				CutsceneManager::GetInstance()->Initialize( 3 );
 				state = Cuts;
 				CutsceneManager::GetInstance()->Play( 0 );
 				if ( m_overAudio != SGD::INVALID_HANDLE )

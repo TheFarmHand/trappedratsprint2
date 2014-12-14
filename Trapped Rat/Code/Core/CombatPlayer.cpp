@@ -174,6 +174,7 @@ void CombatPlayer::Update( float dt )
 			}
 			else if ( states == 3 )// Ability Selection
 			{
+			
 				AbilityUpdate( dt );
 			}
 			else if ( states == 4 ) // Run update
@@ -596,7 +597,15 @@ void CombatPlayer::HomeUpdate( float dt )
 					myTarget = 0;
 					help->UpdateSelection( 2 );
 					states = 2;
-					mySelection = none;
+					mySelection = player;
+					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+						{
+						if ( this->GetName() == TurnManager::GetInstance()->GetAllies()[i]->GetName() )
+							{
+							myTarget = i;
+							break;
+							}
+						}
 					help->UpdateSelection( 4 );
 					item_choose = new ItemSelection();
 					break;
@@ -625,6 +634,14 @@ void CombatPlayer::HomeUpdate( float dt )
 					help->UpdateSelection( 6 );
 					states = 4;
 					mySelection = self;
+					for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+						{
+						if ( this->GetName() == TurnManager::GetInstance()->GetAllies()[i]->GetName() )
+							{
+							myTarget = i;
+							break;
+							}
+						}
 					break;
 			}
 			return;
