@@ -2,7 +2,7 @@
 <Data numAnimations="1">
   <Animation>
     <Image numFrames="10">
-      <Path>WindRogue.png</Path>
+      <Path>EnemySprites/WindRogue.png</Path>
     </Image>
     <Looping>False</Looping>
     <Name>none</Name>
