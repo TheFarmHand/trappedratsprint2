@@ -407,7 +407,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 
 	}
-	else if ( pEvent->GetEventID( ) == "EarthH1" )
+	else if ( pEvent->GetEventID( ) == "EarthK1" )
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
 		position.x = dest->x + size.width / 2;
@@ -424,7 +424,7 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 
 	}
-	else if ( pEvent->GetEventID( ) == "EarthH2" )
+	else if ( pEvent->GetEventID( ) == "EarthK2" )
 	{
 		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
 		position.x = dest->x + size.width / 2;
