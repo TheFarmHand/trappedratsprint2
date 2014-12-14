@@ -1964,7 +1964,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>( ternary_bar )->SetPercentage( (float)ternary_gauge / MAXTG );
 
 
-	if ( run_succeed || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( run_succeed )// || input->IsKeyPressed( SGD::Key::Backspace ) )
 	{
 		state = GPStates::Town;
 		laststate = state;
@@ -1973,7 +1973,7 @@ void GamePlayState::CombatUpdate( float dt )
 		run_succeed = false;
 	}
 
-	if ( input->IsKeyPressed( SGD::Key::Eight ) )
+	/*if ( input->IsKeyPressed( SGD::Key::Eight ) )
 	{
 		Party[ 0 ]->SetBP( Party[ 0 ]->GetMaxBP() );
 	}
@@ -1997,7 +1997,7 @@ void GamePlayState::CombatUpdate( float dt )
 	if ( input->IsKeyPressed( SGD::Key::Nine ) )
 	{
 		ternary_gauge = MAXTG;
-	}
+	}*/
 
 	if ( state == GPStates::Town )
 	{
