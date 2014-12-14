@@ -4231,7 +4231,7 @@
   <tiles id="474" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="602" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="241" collision="0" event="fireworld1" onfire="firehouse1" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="602" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />

@@ -116,6 +116,7 @@ void SelectableObject::Render()
 						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
 						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 50, 50, 50 }, scale);
 					}
+
 					else
 					{
 						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
@@ -124,8 +125,11 @@ void SelectableObject::Render()
 				}
 				else
 				{
-					if ( string == "Run" && ( GamePlayState::GetInstance( )->MinibossFight || GamePlayState::GetInstance( )->FinalBossFight ) || GamePlayState::GetInstance( )->is_tutorial )
-						GameData::GetInstance( )->GetFont( )->DrawString( string, position.x, position.y, { 150, 150, 150 }, scale );
+					if ( string == "Run" && ( GamePlayState::GetInstance( )->MinibossFight || GamePlayState::GetInstance( )->FinalBossFight ) )
+					{
+						GameData::GetInstance( )->GetFont( )->DrawString( string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale );
+						GameData::GetInstance( )->GetFont( )->DrawString( string, position.x + xoffset, position.y + 5, { 150, 150, 150 }, scale );
+					}
 
 					else
 					{

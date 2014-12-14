@@ -767,6 +767,15 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 			}
 		}
 
+	else if ( pEvent->GetEventID( ) == "WorldMap0" )	// Wind Exit
+	{
+		
+	}
+	else if ( pEvent->GetEventID( ) == "WorldMap" );	// Fire Exit
+	else if ( pEvent->GetEventID( ) == "WorldMap1" );	// Earth Exit
+	else if ( pEvent->GetEventID( ) == "WorldMap2" );	// Water Exit
+	else if ( pEvent->GetEventID( ) == "WorldMap3" );	// Hero's Landing Exit
+
 	else if (pEvent->GetEventID() == "Trap")
 	{
 		// Player trips the trap (wrote it elsewhere, pretending to plan to refactor it later)
