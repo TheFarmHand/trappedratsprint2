@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>tired</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>I'm getting really tired of going all around_the entire world.</Words>
+  </Message>
+  <Message>
+    <Name>water</Name>
+    <Portrait>checkersportrait.png</Portrait>
+    <Words>Come on Biggs.  Water is great!</Words>
+  </Message>
+  <Message>
+    <Name>jeevs</Name>
+    <Portrait>jeevesportrait.png</Portrait>
+    <Words>GRARRRRhhhh</Words>
+  </Message>
+  <Message>
+    <Name>rock</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Yeah, it seemed like the Rock Monk_was telling the truth.</Words>
+  </Message>
+  <Message>
+    <Name>asd</Name>
+    <Portrait>checkersportrait.png</Portrait>
+    <Words>It's cold out here.</Words>
+  </Message>
+  <Message>
+    <Name>keep</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Lets hurry to the keep.</Words>
+  </Message>
+</Dialogue>

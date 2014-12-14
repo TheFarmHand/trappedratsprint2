@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dialogue>
+  <Message>
+    <Name>Magma Falls</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>The Benevolent Wind Rouge told me_Cecil went here to_Magma Falls.</Words>
+  </Message>
+  <Message>
+    <Name>gethim</Name>
+    <Portrait>ratportrait.png</Portrait>
+    <Words>Lets go get him then!</Words>
+  </Message>
+  <Message>
+    <Name>keep</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>We should check the keep here too.</Words>
+  </Message>
+  <Message>
+    <Name>gyards</Name>
+    <Portrait>biggsportrait.png</Portrait>
+    <Words>Those guards look pretty tough._We should deal with them first.</Words>
+  </Message>
+</Dialogue>
