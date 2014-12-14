@@ -3003,6 +3003,11 @@ void GamePlayState::SummaryUpdate( float dt )
 			m_vhuditems[ i ] = nullptr;
 		}
 		m_vhuditems.clear();
+		for (unsigned int i = 0; i < guards.size(); i++)
+		{
+			delete guards[i];
+		}
+		guards.clear();
 		return;
 	}
 	GameData::GetInstance()->SetCamera( { 0, 0 } );
