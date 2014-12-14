@@ -2718,7 +2718,7 @@ void GamePlayState::MapUpdate( float dt )
 			PlaySoundEffect(6);
 			case 0: //Wind
 				Loading( "Loading Map" ); 
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalFireTown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown2.xml" );
 				//here we load in the dialogue
 			//	dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
 				CutsceneManager::GetInstance()->Terminate();

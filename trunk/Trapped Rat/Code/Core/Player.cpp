@@ -18,7 +18,6 @@ Player::Player() : Listener(this)
 	ansys->Load("RatAnimOverworld.xml");
 	ansys->Play(0);
 	velocity = SGD::Vector(0, 0);
-	keepentry = new Dialogue();
 	Listener::RegisterForEvent( "World1" );
 	Listener::RegisterForEvent( "House1" );
 	Listener::RegisterForEvent( "World2" );
@@ -55,6 +54,14 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent( "Monk" );
 	Listener::RegisterForEvent( "Wizard" );
 	Listener::RegisterForEvent( "Trap" );
+	Listener::RegisterForEvent( "herocave");
+	Listener::RegisterForEvent( "herocaveworld" );
+	Listener::RegisterForEvent( "EarthWorld1" );
+	Listener::RegisterForEvent( "EarthHouse1" );
+	Listener::RegisterForEvent( "EarthWorld2" );
+	Listener::RegisterForEvent( "EarthHouse2" );
+	Listener::RegisterForEvent( "EarthWorld3" );
+	Listener::RegisterForEvent( "EarthHouse3" );
 }
 
 
@@ -70,8 +77,6 @@ void Player::Update(float dt)
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	char dir = 'a';
 
-	keepentry->Update(dt);
-	
 
 	//if they are holding down the button
 		//move at a constant rate
@@ -173,8 +178,6 @@ void Player::Render()
 	//SGD::GraphicsManager::GetInstance()->DrawTextureSection(image, center, { 132, 1, 164, 33 });
 	ansys->Render(position.x,position.y);
 
-	keepentry->Render();
-
 }
 bool Player::IsMoving()
 {
@@ -185,7 +188,6 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 	{
 	if(pEvent->GetEventID() == "keepentry" )//&& GamePlayState::GetInstance()->GetGuards())
 	{
-		keepentry->Load( "Assets/Scripts/keepentry.xml" );
 	}
 	else if ( pEvent->GetEventID() == "World1" )
 		{

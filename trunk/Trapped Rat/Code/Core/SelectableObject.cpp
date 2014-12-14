@@ -1,6 +1,7 @@
 
 #include "SelectableObject.h"
 #include "../Core/GameData.h"
+#include "../States/GamePlayState.h"
 #include "../Font/Font.h"
 #include "TurnManager.h"
 SelectableObject::SelectableObject()
@@ -53,8 +54,14 @@ void SelectableObject::Render()
 			}
 			else
 			{
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
-				GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 180, 0, 180 }, 1.8f);
+				if ( string == "Run" && ( GamePlayState::GetInstance( )->MinibossFight || GamePlayState::GetInstance( )->FinalBossFight ) || GamePlayState::GetInstance( )->is_tutorial )
+					GameData::GetInstance( )->GetFont( )->DrawString( string, position.x, position.y, { 150, 150, 150 } );
+
+				else
+				{
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
+					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 180, 0, 180 }, 1.8f);
+				}
 			}
 		
 		}
@@ -117,8 +124,14 @@ void SelectableObject::Render()
 				}
 				else
 				{
-					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
-					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, scale);
+					if ( string == "Run" && ( GamePlayState::GetInstance( )->MinibossFight || GamePlayState::GetInstance( )->FinalBossFight ) || GamePlayState::GetInstance( )->is_tutorial )
+						GameData::GetInstance( )->GetFont( )->DrawString( string, position.x, position.y, { 150, 150, 150 }, scale );
+
+					else
+					{
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 1, position.y + 6, { 0, 0, 0 }, scale);
+						GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 128, 128, 255 }, scale);
+					}
 				}
 			}
 		}
