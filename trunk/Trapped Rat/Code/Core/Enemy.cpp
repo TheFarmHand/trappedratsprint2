@@ -782,7 +782,7 @@ void Enemy::FFWAI()
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 			FSCountdown = 4;
 			}
-		else if ( FSCountdown >= 1 )
+		else if ( FSCountdown > 1 )
 			{
 			--FSCountdown;
 			usingAbility << FSCountdown << "...";
@@ -982,7 +982,7 @@ void Enemy::CecilPhaseOne()
 			else
 				{
 				CecilPhase = 2;
-				SetHP( GetMaxHP() + 100 );
+				SetHP( GetMaxHP() + 200 );
 				stats.attack += 5;
 				stats.avoision += 5;
 				stats.defense += 10;
@@ -1195,7 +1195,7 @@ void Enemy::CecilPhaseThree()
 		GamePlayState::GetInstance()->abilityTimer = 2.0f;
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
 		}
-	else if ( HFCountdown >= 1 )
+	else if ( HFCountdown > 1 )
 		{
 		--HFCountdown;
 		//Dialogue for countdown
