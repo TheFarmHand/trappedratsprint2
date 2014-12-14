@@ -42,15 +42,15 @@ void GamePlayState::Enter()
 	FinalBossFight = false;
 	ignore_game_over = false;
 
-	townpoints[ 0 ] = SGD::Point( 600, 400 );
-	townpoints[ 1 ] = SGD::Point( 360, 130 );
-	townpoints[ 2 ] = SGD::Point( 120, 345 );
-	townpoints[ 3 ] = SGD::Point( 375, 490 );
-	townpoints[ 4 ] = SGD::Point( 370, 317 );
+	townpoints[ 0 ] = SGD::Point( 594, 388 );
+	townpoints[ 1 ] = SGD::Point( 348, 118 );
+	townpoints[ 2 ] = SGD::Point( 124, 365 );
+	townpoints[ 3 ] = SGD::Point( 365, 474 );
+	townpoints[ 4 ] = SGD::Point( 362, 298 );
 
 	WorldMapAnsys = new AnimationSystem();
 	WorldMapAnsys->Load( "RatAnimOverworld.xml" );
-	WorldMapAnsys->Play( 0 );
+	WorldMapAnsys->Play( "Up" );
 	WorldMap = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/world.png" );
 	PadLock = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/padlock.png" );
 
@@ -377,7 +377,7 @@ void GamePlayState::Enter()
 		m_Credits = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Credits.xwm");
 	}
 	m_SummaryAudio = SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Victory.xwm");
-	SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio, true );
+	SGD::AudioManager::GetInstance()->PlayAudio( m_Map, true );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::Music, GameData::GetInstance()->GetMusicVolume() );
 	SGD::AudioManager::GetInstance()->SetMasterVolume( SGD::AudioGroup::SoundEffects, GameData::GetInstance()->GetEffectVolume() );
 
@@ -390,12 +390,15 @@ void GamePlayState::Enter()
 	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/run.wav"));//5
 	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/confirm.wav"));//6
 	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/itemuse.wav"));//7
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/Rampart.wav"));//8
+	m_vsoundeffects.push_back(SGD::AudioManager::GetInstance()->LoadAudio("../Trapped Rat/Assets/Sounds/no.wav"));//9
+
 
 	GameData::GetInstance()->UpdateCamera( GameData::GetInstance()->GetOverworldPlayer() );
 	pStatManager = StatusEffectManager::GetInstance();
 	pStatManager->Initialize();
 
-	CutsceneManager::GetInstance()->Initialize();
+	
 	//state = GPStates::Cuts;
 	//CutsceneManager::GetInstance()->Play( 0 );
 	Loading( "Time to Play......." );
@@ -407,8 +410,20 @@ void GamePlayState::Enter()
 	state = Map;
 	laststate = Map;
 
-	TutorialStart();
+
+	if (is_tutorial)
+	{
+		TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\FinalLanding.xml");
+		CutsceneManager::GetInstance()->Terminate();
+		CutsceneManager::GetInstance()->Initialize(1);
+		CutsceneManager::GetInstance()->Play(0);
+		state = Cuts;
+		laststate = Cuts;
+	}
+	//TutorialStart();
 	//state = BattleSummary;
+
+
 }
 void const GamePlayState::Render()
 {
@@ -2613,42 +2628,54 @@ void GamePlayState::MapUpdate( float dt )
 		GameData::GetInstance()->SetCamera( { 0, 0 } );
 		WorldMapAnsys->Update( dt );
 	}
-	if ( unlockedTowns == 4 )
+	if ( unlockedTowns == 4  && SelectedTown !=4)
 	{
 		SelectedTown = 4;
+		WorldMapAnsys->Play("Down");
+
 	}
 	else
 	{
 		if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Right) || input->IsDPadPressed(0, SGD::DPad::Right) || input->GetLeftJoystick(0).x > 0) && GameData::GetInstance()->input_timer < 0)
 		{
-			SelectedTown = 0;
-			GameData::GetInstance()->PlaySelectionChange();
-			GameData::GetInstance()->input_timer = 0.15f;
+			if (unlockedTowns != 4)
+			{
+				SelectedTown = 0;
+				GameData::GetInstance()->PlaySelectionChange();
+				WorldMapAnsys->Play("Up");
+				GameData::GetInstance()->input_timer = 0.15f;
+			}
 		}
 		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Up) || input->IsDPadPressed(0, SGD::DPad::Up) || input->GetLeftJoystick(0).y < 0) && GameData::GetInstance()->input_timer < 0)
 		{
-			if ( unlockedTowns >= 1 )
+			if (unlockedTowns >= 1 && unlockedTowns != 4)
 			{
 				SelectedTown = 1;
 				GameData::GetInstance()->PlaySelectionChange();
+				WorldMapAnsys->Play("Left");
+
 				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
 		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Left) || input->IsDPadPressed(0, SGD::DPad::Left) || input->GetLeftJoystick(0).x < 0) && GameData::GetInstance()->input_timer < 0)
 		{
-			if ( unlockedTowns >= 2 )
+			if (unlockedTowns >= 2 && unlockedTowns != 4)
 			{
 				SelectedTown = 2;
 				GameData::GetInstance()->PlaySelectionChange();
+				WorldMapAnsys->Play("Down");
+
 				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
 		else if ((SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Down) || input->IsDPadPressed(0, SGD::DPad::Down) || input->GetLeftJoystick(0).y > 0) && GameData::GetInstance()->input_timer < 0)
 		{
-			if ( unlockedTowns >= 3 )
+			if ( unlockedTowns >= 3  && unlockedTowns != 4)
 			{
 				SelectedTown = 3;
 				GameData::GetInstance()->PlaySelectionChange();
+				WorldMapAnsys->Play("Right");
+
 				GameData::GetInstance()->input_timer = 0.15f;
 			}
 		}
@@ -2668,7 +2695,11 @@ void GamePlayState::MapUpdate( float dt )
 				Loading( "Loading Map" ); 
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown2.xml" );
 				//here we load in the dialogue
-				dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
+			//	dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
+				CutsceneManager::GetInstance()->Terminate();
+				CutsceneManager::GetInstance()->Initialize(5);
+				state = Cuts;
+				CutsceneManager::GetInstance()->Play(0);
 				//Load Audio
 				if (m_overAudio != SGD::INVALID_HANDLE)
 				{
@@ -2679,9 +2710,13 @@ void GamePlayState::MapUpdate( float dt )
 				break;
 			case 1://Fire
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\firetown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalFireTown.xml" );
 				//here we load in the dialogue
-				dialogue->Load( "Assets/Scripts/magmafalls_enter.xml" );
+				//dialogue->Load( "Assets/Scripts/magmafalls_enter.xml" );
+				CutsceneManager::GetInstance()->Terminate();
+				CutsceneManager::GetInstance()->Initialize(6);
+				state = Cuts;
+				CutsceneManager::GetInstance()->Play(0);
 				if (m_overAudio != SGD::INVALID_HANDLE)
 				{
 					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
@@ -2691,9 +2726,13 @@ void GamePlayState::MapUpdate( float dt )
 				break;
 			case 2://Earth
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\EarthTown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalEarthTown.xml" );
 				//here we load in the dialogue
-				dialogue->Load( "Assets/Scripts/earthytown_enter.xml" );
+				//dialogue->Load( "Assets/Scripts/earthytown_enter.xml" );
+				CutsceneManager::GetInstance()->Terminate();
+				CutsceneManager::GetInstance()->Initialize(7);
+				state = Cuts;
+				CutsceneManager::GetInstance()->Play(0);
 				if (m_overAudio != SGD::INVALID_HANDLE)
 				{
 					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
@@ -2703,10 +2742,13 @@ void GamePlayState::MapUpdate( float dt )
 				break;
 			case 3://Water
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WaterTown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalWaterTown.xml" );
 				//here we load in the dialogue
-				dialogue->Load( "Assets/Scripts/newwatercity_enter.xml" );
-
+				//dialogue->Load( "Assets/Scripts/newwatercity_enter.xml" );
+				CutsceneManager::GetInstance()->Terminate();
+				CutsceneManager::GetInstance()->Initialize(8);
+				state = Cuts;
+				CutsceneManager::GetInstance()->Play(0);
 				if (m_overAudio != SGD::INVALID_HANDLE)
 				{
 					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
@@ -2716,10 +2758,13 @@ void GamePlayState::MapUpdate( float dt )
 				break;
 			case 4://Final Town
 				Loading( "Loading Map" );
-				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\herotown.xml" );
+				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalLanding.xml" );
 				//here we load in the dialogue
-				dialogue->Load( "Assets/Scripts/heroslanding_enter.xml" );
-
+				//dialogue->Load( "Assets/Scripts/heroslanding_enter.xml" );
+				CutsceneManager::GetInstance()->Terminate();
+				CutsceneManager::GetInstance()->Initialize(4);
+				state = Cuts;
+				CutsceneManager::GetInstance()->Play(0);
 				if (m_overAudio != SGD::INVALID_HANDLE)
 				{
 					SGD::AudioManager::GetInstance()->UnloadAudio(m_overAudio);
@@ -2734,7 +2779,7 @@ void GamePlayState::MapUpdate( float dt )
 		StopAllBackgroundMusic();
 		SGD::AudioManager::GetInstance()->PlayAudio(m_overAudio);
 		laststate = Town;
-		state = Dia;
+		state = Cuts;
 		GameData::GetInstance()->PlaySelectionChange();
 
 	}
@@ -2806,15 +2851,21 @@ void GamePlayState::SummaryUpdate( float dt )
 	if ( ignore_game_over )
 	{
 		ignore_game_over = false;
-		dialogue->Load( "Assets/Scripts/tutorialfinish.xml" );
-		state = Dia;
-		laststate = Map;
+		//dialogue->Load( "Assets/Scripts/tutorialfinish.xml" );
+		//state = Dia;
+		//laststate = Map
+		CutsceneManager::GetInstance()->Terminate();
+		CutsceneManager::GetInstance()->Initialize(2);
+		CutsceneManager::GetInstance()->Play(0);
+		state = Cuts;
+		laststate = Cuts;
 		for ( unsigned int i = 0; i < m_vhuditems.size(); i++ )
 		{
 			delete m_vhuditems[ i ];
 			m_vhuditems[ i ] = nullptr;
 		}
 		m_vhuditems.clear();
+		return;
 	}
 	GameData::GetInstance()->SetCamera( { 0, 0 } );
 	for ( size_t i = 0; i < Party.size(); i++ )

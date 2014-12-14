@@ -923,8 +923,8 @@
   <tiles id="103" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="152" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="152" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="110" collision="0" event="World2" onfire="House2" objectID="0" objectNumber="0" />
-  <tiles id="111" collision="0" event="World2" onfire="House2" objectID="0" objectNumber="0" />
+  <tiles id="110" collision="2" event="World2" onfire="House2" objectID="0" objectNumber="0" />
+  <tiles id="111" collision="2" event="World2" onfire="House2" objectID="0" objectNumber="0" />
   <tiles id="152" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="152" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="103" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -1024,7 +1024,7 @@
   <tiles id="103" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="155" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="155" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="155" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="155" collision="2" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="155" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="103" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="103" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />

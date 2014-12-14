@@ -20,13 +20,13 @@ Dialogue::~Dialogue()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(pborder);
 	
 }
-void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos)
+void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos, float _time)
 {
 	m_auto = _auto;
 	position = _pos;
 	//unload the current thing
 
-
+	timer = _time;
 
 
 	//load in the stuff from the xml
@@ -85,7 +85,7 @@ bool Dialogue::Update(float dt)
 			messages.erase(messages.begin());
 			SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
 			images.erase(images.begin());
-			timer = 2.0f;
+			timer = 3.0f;
 		}
 
 
@@ -98,7 +98,7 @@ bool Dialogue::Update(float dt)
 				messages.erase(messages.begin());
 				SGD::GraphicsManager::GetInstance()->UnloadTexture(images[0]);
 				images.erase(images.begin());
-				timer = 2.0f;
+				timer = 3.0f;
 			}
 			else
 			{
@@ -128,11 +128,12 @@ void Dialogue::Render()
 		//render the rectangle
 		//SGD::GraphicsManager::GetInstance()->DrawRectangle({ 0.0, 400.0, 800.0, 600.0 }, { 155, 155, 155 }, {}, 5);
 		//lets render a scroll sideways, its gonna be rad
+		if (messages.front().words == ".")
+			return;
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(scroll, position, { 0, 0, 300, 540 }, SGD::PI / 2, { 112.5f, 27.5f });
 
 
-		if (messages.front().words == " ")
-			return;
+		
 		//render the words of the top message in the vector along with the portrait
 		std::string temp = messages.front().words;
 		GameData::GetInstance()->GetFont()->DrawString(temp, position.x - 270.0f, position.y + 25.0f, { 0, 0, 0 });

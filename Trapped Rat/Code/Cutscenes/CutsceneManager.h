@@ -13,7 +13,7 @@ public:
 
 	static CutsceneManager * GetInstance();
 
-	void Initialize();
+	void Initialize(int _index);
 	void Update(float dt);
 	void Render();
 	void Play(int _index);

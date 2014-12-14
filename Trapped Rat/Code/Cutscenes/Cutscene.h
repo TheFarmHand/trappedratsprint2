@@ -13,10 +13,13 @@ struct SceneObject
 	SGD::Point position;
 	std::vector<float> m_vWaitTimes;
 	float currentWait = 0.0f;
+
 };
 struct Scene
 {
 	std::vector<SceneObject*> m_vObjects;
+	int index = 0;
+	float eventTimer = 10.0f;
 };
 
 class Cutscene
