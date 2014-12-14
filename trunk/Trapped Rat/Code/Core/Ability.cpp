@@ -489,7 +489,7 @@ void Ability::RenderAnimation()
 	//Original Default
 	else
 	{
-		animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
+		//animate->Render( Abiltarget->GetPosition().x - 100.0f, Abiltarget->GetPosition().y );
 
 	}
 	}

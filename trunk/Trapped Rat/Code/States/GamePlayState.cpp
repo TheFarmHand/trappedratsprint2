@@ -582,7 +582,7 @@ void GamePlayState::Exit()
 		SGD::AudioManager::GetInstance()->UnloadAudio(m_Credits);
 		m_Credits = SGD::INVALID_HANDLE;
 	}
-
+	SGD::AudioManager::GetInstance()->UnloadAudio(chime);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Map);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_SummaryAudio);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture( WorldMap );
@@ -853,7 +853,10 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 	}
-
+	if (input->IsKeyPressed(SGD::Key::D) && input->IsKeyDown(SGD::Key::G))
+	{
+		GamePlayState::GetInstance()->CreateMinibossFight();
+	}
 	for ( unsigned int t = 0; t < traps.size(); t++ )
 	{
 		if ( TileSystem::GetInstance()->GetTileIndex( traps[ t ]->GetPosition().x, traps[ t ]->GetPosition().y )
@@ -3324,7 +3327,7 @@ void GamePlayState::CreateMinibossFight()
 					characterOrderPosition.y = (float)( SEM1->GetOrderPosition() * 100 + 150 + 16 );
 					SEM1->SetPosition( characterOrderPosition );
 					partyAbilities.push_back( MasterAbilityList[ "Earthen Shield" ] );
-					partyAbilities.push_back( MasterAbilityList[ "Earthen Ward" ] );
+					partyAbilities.push_back( MasterAbilityList[ "Earthen Mace" ] );
 					SEM1->InitializeAbilities( partyAbilities );
 					partyAbilities.clear();
 
@@ -3626,14 +3629,14 @@ void GamePlayState::LoadGame( int index )
 				characterOrderPosition.y = (float)( p4->GetOrderPosition() * 100 + 150 );
 				p4->SetPosition( characterOrderPosition );
 				p4->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList[ "Zephyr" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Leaf on the Wind" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Second Wind" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Whispering Wind" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Tailwind" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Tempest" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Tornado" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Wind Vale" ] );
+				partyAbilities.push_back(MasterAbilityList["Leaf on the Wind"]);
+				partyAbilities.push_back(MasterAbilityList["Zephyr"]);
+				partyAbilities.push_back(MasterAbilityList["Wind Vale"]);
+				partyAbilities.push_back(MasterAbilityList["Second Wind"]);
+				partyAbilities.push_back(MasterAbilityList["Tailwind"]);
+				partyAbilities.push_back(MasterAbilityList["Tornado"]);
+				partyAbilities.push_back(MasterAbilityList["Whispering Wind"]);
+				partyAbilities.push_back(MasterAbilityList["Tempest"]);
 				p4->InitializeAbilities( partyAbilities );
 				if ( Party.size() >= 3 )
 					p4->SetActive( false );
@@ -3654,14 +3657,14 @@ void GamePlayState::LoadGame( int index )
 				characterOrderPosition.y = (float)( p5->GetOrderPosition() * 100 + 150 );
 				p5->SetPosition( characterOrderPosition );
 				p5->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList[ "Collapse" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Emblazon" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Firefall" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Fire Spikes" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Ignite" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Scorch" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Rib-a-Rang" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Incinerate" ] );
+				partyAbilities.push_back(MasterAbilityList["Collapse"]);
+				partyAbilities.push_back(MasterAbilityList["Ignite"]);
+				partyAbilities.push_back(MasterAbilityList["Scorch"]);
+				partyAbilities.push_back(MasterAbilityList["Rib-a-Rang"]);
+				partyAbilities.push_back(MasterAbilityList["Emblazon"]);
+				partyAbilities.push_back(MasterAbilityList["Firefall"]);
+				partyAbilities.push_back(MasterAbilityList["Fire Spikes"]);
+				partyAbilities.push_back(MasterAbilityList["Incinerate"]);
 				p5->InitializeAbilities( partyAbilities );
 				if ( Party.size() >= 3 )
 					p5->SetActive( false );
@@ -3682,14 +3685,14 @@ void GamePlayState::LoadGame( int index )
 				characterOrderPosition.y = (float)( p3->GetOrderPosition() * 100 + 150 );
 				p3->SetPosition( characterOrderPosition );
 				p3->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList[ "Cover" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Geo Crush" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Pinch" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Quake" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Hedge Guard" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Rock Spike" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Rampart" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Tremor" ] );
+				partyAbilities.push_back(MasterAbilityList["Hedge Guard"]);
+				partyAbilities.push_back(MasterAbilityList["Rock Spike"]);
+				partyAbilities.push_back(MasterAbilityList["Rampart"]);
+				partyAbilities.push_back(MasterAbilityList["Tremor"]);
+				partyAbilities.push_back(MasterAbilityList["Cover"]);
+				partyAbilities.push_back(MasterAbilityList["Geo Crush"]);
+				partyAbilities.push_back(MasterAbilityList["Pinch"]);
+				partyAbilities.push_back(MasterAbilityList["Quake"]);
 				if ( Party.size() >= 3 )
 					p3->SetActive( false );
 				else
@@ -3710,14 +3713,14 @@ void GamePlayState::LoadGame( int index )
 				characterOrderPosition.y = (float)( p2->GetOrderPosition() * 100 + 150 );
 				p2->SetPosition( characterOrderPosition );
 				p2->SetSize( { 64, 64 } );
-				partyAbilities.push_back( MasterAbilityList[ "Puddle" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Whirlpool" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Acid Rain" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Torrent" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Flood" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Squirt" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Dissolve" ] );
-				partyAbilities.push_back( MasterAbilityList[ "Splash" ] );
+				partyAbilities.push_back(MasterAbilityList["Puddle"]);
+				partyAbilities.push_back(MasterAbilityList["Squirt"]);
+				partyAbilities.push_back(MasterAbilityList["Dissolve"]);
+				partyAbilities.push_back(MasterAbilityList["Splash"]);
+				partyAbilities.push_back(MasterAbilityList["Acid Rain"]);
+				partyAbilities.push_back(MasterAbilityList["Whirlpool"]);
+				partyAbilities.push_back(MasterAbilityList["Torrent"]);
+				partyAbilities.push_back(MasterAbilityList["Flood"]);
 				if ( Party.size() >= 3 )
 					p2->SetActive( false );
 				else
