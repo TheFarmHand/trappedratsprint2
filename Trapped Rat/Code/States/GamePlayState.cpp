@@ -1559,6 +1559,10 @@ void GamePlayState::TownRender()
 	{
 		traps[ i ]->Render();
 	}
+
+	// Render num Guards left!
+	GameData::GetInstance( )->GetFont( )->DrawString( "Guards Left:", 635, 50, { 255, 0, 0 }, 1.5f );
+	GameData::GetInstance()->GetFont()->DrawString(std::to_string(guards.size()),780,50, {0,255,0},1.5f);
 }
 void GamePlayState::MenuRender()
 {
