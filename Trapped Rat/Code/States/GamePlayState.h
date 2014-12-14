@@ -136,7 +136,7 @@ private:
 	int oldindex = -1;
 	bool select_first = false;
 	bool selecting_item = false;
-
+	void PopulateUniqueNames();
 
 	//tutorial stuff
 	
