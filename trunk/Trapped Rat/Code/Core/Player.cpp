@@ -42,6 +42,8 @@ Player::Player() : Listener(this)
 	Listener::RegisterForEvent("HeroH2");
 	Listener::RegisterForEvent("HeroW3");
 	Listener::RegisterForEvent("HeroH3");
+	Listener::RegisterForEvent( "HeroW4" );
+	Listener::RegisterForEvent( "HeroH4" );
 	Listener::RegisterForEvent("herokeep");
 	Listener::RegisterForEvent("herokeepworld");
 	Listener::RegisterForEvent("GainJeeves");
@@ -480,6 +482,22 @@ void Player::HandleEvent( const SGD::Event* pEvent )
 		position.x = dest->x + size.width / 2;
 		position.y = dest->y + (size.height / 2) - (int)TileSystem::GetInstance()->GetTileSize().height;
 		GamePlayState::GetInstance()->PlaySoundEffect(0);
+
+	}
+	else if ( pEvent->GetEventID( ) == "HeroW4" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + ( size.width / 2 );
+		position.y = dest->y + size.height / 2 + (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
+
+	}
+	else if ( pEvent->GetEventID( ) == "HeroH4" )
+	{
+		SGD::Point* dest = reinterpret_cast<SGD::Point*>( pEvent->GetData( ) );
+		position.x = dest->x + size.width / 2;
+		position.y = dest->y + ( size.height / 2 ) - (int)TileSystem::GetInstance( )->GetTileSize( ).height;
+		GamePlayState::GetInstance( )->PlaySoundEffect( 0 );
 
 	}
 	else if (pEvent->GetEventID() == "herokeepworld")
