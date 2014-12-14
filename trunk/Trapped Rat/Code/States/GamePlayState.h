@@ -98,6 +98,9 @@ class GamePlayState :
 	std::vector<ItemType> loot;
 	std::vector<RatTrap*> traps;
 
+	std::vector<std::string> uniquenames;
+	std::vector<int> uniquecounts;
+
 
 	int guard_index = -1;
 
@@ -132,6 +135,7 @@ private:
 	bool selecting_party = false;
 	int oldindex = -1;
 	bool select_first = false;
+	bool selecting_item = false;
 
 
 	//tutorial stuff
@@ -214,7 +218,7 @@ public:
 	int GetGauge();
 	int GetMaxGauge();
 	int GetGuards();
-	
+	void PopulateUniqueItems();
 	bool usingTernary();
 	void ClearTernary();
 	void AddTarget( );
