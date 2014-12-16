@@ -510,6 +510,7 @@ void GamePlayState::Update( float dt )
 void GamePlayState::Exit()
 	{
 	Loading( "Dumping..." );
+	GameData::GetInstance()->SetIsInCombat( false );
 	for ( size_t i = 0; i < m_vsoundeffects.size(); i++ )
 		{
 		SGD::AudioManager::GetInstance()->UnloadAudio( m_vsoundeffects[i] );

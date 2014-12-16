@@ -7,10 +7,11 @@
   <guard name="Guard" startX="608" startY="2304">
     <waypoint tilePoint="7216" />
   </guard>
-  <guard name="Guard" startX="1376" startY="864">
+  <guard name="Guard" startX="1376" startY="1024">
     <waypoint tilePoint="3843" />
     <waypoint tilePoint="3855" />
     <waypoint tilePoint="2755" />
+	<waypoint tilePoint="2742" />
   </guard>
   <guard name="Guard" startX="2112" startY="1376" />
   <guard name="Guard" startX="2080" startY="2688">

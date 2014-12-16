@@ -52,11 +52,12 @@ void Layer::Initialize( const char* path)
 		{
 		guard->Attribute( "startX", &x );
 		guard->Attribute( "startY", &y );
-		position.x = (float)x;
-		position.y = (float)y;
+	
 
 		//Change to guard objects
 		Guard * temp = new Guard();
+		position.x = (float)x + temp->GetSize().width / 2;
+		position.y = (float)y + temp->GetSize().height / 2;
 		temp->SetPosition(position);
 		//Read in waypoints for each guard
 		TiXmlElement * waypoint = guard->FirstChildElement("waypoint");
