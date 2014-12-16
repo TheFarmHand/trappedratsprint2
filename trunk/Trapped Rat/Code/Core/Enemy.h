@@ -6,7 +6,7 @@ class Enemy :
 {
 private:
 	AnimationSystem* ansys = nullptr;
-	int xp_value = 1000;	// Random Enemies get XP set at spawn, this should only affect bosses (... and guards; better go change that...)
+	int xp_value = 500;	// Random Enemies get XP set at spawn, this should only affect bosses (... and guards; better go change that...)
 	//int level;
 	bool firstBelowQuarter = false;
 	bool firstBelowHalf = false;

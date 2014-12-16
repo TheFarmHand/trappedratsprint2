@@ -88,6 +88,8 @@ class GamePlayState :
 	SGD::Point townpoints[5];
 	bool abilityunlocked;
 
+
+
 	std::map<std::string, Ability*> MasterAbilityList;
 	StatusEffectManager* pStatManager;
 
@@ -103,6 +105,7 @@ class GamePlayState :
 
 
 	int guard_index = -1;
+	float no_combat_timer = 0.0f;
 
 	//save stuff
 	int saveindex;

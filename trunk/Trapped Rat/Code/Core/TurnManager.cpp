@@ -737,7 +737,7 @@ void TurnManager::CombatUpdate( float dt )
 		else
 		{
 			AllCombatUnits[ 0 ]->Update( dt );
-			pauseTime = 2.0f;
+			pauseTime = 1.0f;
 		}
 	}
 	else

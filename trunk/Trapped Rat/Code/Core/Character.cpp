@@ -585,7 +585,7 @@ void Character::StatusTick()
 	}
 
 void Character::AddStatus( StatusEffect *status, Character* theGuard, bool ternary )
-// Needs access to attacker for damage calculations
+// Needs access to attacker for damage calculations (well that's just a lie, now isn't it?)
 	{
 	StatusEffect* temp = new StatusEffect();
 	// Setup damage values
@@ -597,6 +597,7 @@ void Character::AddStatus( StatusEffect *status, Character* theGuard, bool terna
 		}
 	else
 		{
+
 		temp->SetOwner( this );
 		temp->SetGuard( theGuard );
 		temp->SetTernEffect( ternary );
