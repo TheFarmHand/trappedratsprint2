@@ -86,6 +86,8 @@ void TurnManager::CombatLoot()
 
 
 	int i = pGPS->tripped_trap;
+	std::vector<Items>* tempInven = pGPS->GetInventory();
+	std::vector<Items> tempShop = pGPS->GetShop();
 	if ( i != -1 )
 	{
 		gold += pGPS->GetTraps()[ i ]->gold;
@@ -96,9 +98,24 @@ void TurnManager::CombatLoot()
 			if ( pGPS->GetTraps()[ i ]->items[ its ] < 5 && pGPS->GetTraps()[ i ]->items[ its ] >= 0 ) // proper item types
 			{
 				ItemType stupidcode = (ItemType)pGPS->GetTraps()[ i ]->items[ its ];
-				pGPS->AddItem( stupidcode );
+				int itemCounter = 0;
+				for ( unsigned int i = 0; i < (*tempInven).size(); i++ )
+					{
+					if ( (*tempInven)[i].GetName() == tempShop[(int)( stupidcode )].GetName() )
+						{
+						++itemCounter;
+						}
+					}
+				if ( itemCounter < 5 )
+					{
+					(*tempInven).push_back( tempShop[(int)( stupidcode )] );
+					pGPS->SetInventory( *tempInven );
+					}
+				else
+					gold += 50;
+				}
+
 			}
-		}
 		//pGPS->tripped_trap = -1;  don't remember why this code got placed here, but it was bad
 	}
 	else

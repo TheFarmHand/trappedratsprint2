@@ -82,7 +82,9 @@ void ItemSelection::Render()
 }
 void ItemSelection::PopulateUniqueItems()
 {
-	for (unsigned int i = 0; i < inventory->size(); i++)
+uniquecounts.clear();
+uniquenames.clear();
+for (unsigned int i = 0; i < inventory->size(); i++)
 	{
 		int count = 0;
 		for (unsigned int j = 0; j < inventory->size(); j++)

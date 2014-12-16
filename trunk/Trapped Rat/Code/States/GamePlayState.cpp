@@ -1040,16 +1040,30 @@ void GamePlayState::TownUpdate( float dt )
 				// Get loots bro
 				// Event?
 				int gold = traps[tripped_trap]->gold;
-				AddGold( gold );
 
 				for ( int its = 0; its < 3; its++ )
 					{
 					if ( traps[tripped_trap]->items[its] < 5 && traps[tripped_trap]->items[its] >= 0 ) // proper item types
 						{
 						ItemType stupidcode = (ItemType)traps[tripped_trap]->items[its];
-						AddItem( stupidcode );
+						int itemCounter = 0;
+						for ( unsigned int i = 0; i < inventory.size(); i++ )
+							{
+							if ( inventory[i].GetName() == shopinv[(int)(stupidcode)].GetName() )
+								{
+								++itemCounter;
+								}
+							}
+						if ( itemCounter < 5 )
+							{
+							inventory.push_back( shopinv[(int)( stupidcode )] );
+							}
+						else
+							gold += 50;
 						}
 					}
+				AddGold( gold );
+
 				loot.clear();
 				loot_gold = 0;
 				loot_xp = 0;
