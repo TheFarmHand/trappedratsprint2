@@ -75,7 +75,14 @@ void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos, float _t
 bool Dialogue::Update(float dt)
 {
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 2))
+	{
 		messages.clear();
+		for (unsigned int i = 0; i < images.size(); i++)
+		{
+			SGD::GraphicsManager::GetInstance()->UnloadTexture(images[i]);
+		}
+		images.clear();
+	}
 	if (messages.size() > 0)
 	{
 		//here we take in input and make sure they dont just spam through the whole dialogue
