@@ -7,6 +7,7 @@
 Guard::Guard()
 {
 	ansys = new AnimationSystem();
+	size = SGD::Size( 32, 32 );
 	ansys->Load("GuardOverWorld.xml");
 	ansys->Play(0);
 }
@@ -20,31 +21,51 @@ void Guard::Update(float dt)
 {
 	//ansys->ResetAll();
 	ansys->Update(dt);
-	
+	char dir = 'p';
 	AquireTarget();
-	position.x += velocity.x * dt;
-	position.y += velocity.y * dt;
+	SGD::Rectangle tempRect;
+	tempRect.left = (position.x + velocity.x * dt) - size.width / 2;
+	tempRect.top = position.y - size.height / 2;
+	tempRect.right = (position.x + velocity.x * dt) + size.width / 2;
+	tempRect.bottom = position.y + size.height / 2;
+	
+	if ( !TileSystem::GetInstance()->IsColliding( position.x + velocity.x * dt, position.y, tempRect ) )
+		position.x += velocity.x * dt;
+	
+	tempRect.left = position.x - size.width / 2;
+	tempRect.top = ( position.y + velocity.y * dt ) - size.height / 2;
+	tempRect.right = position.x + size.width / 2;
+	tempRect.bottom = ( position.y + velocity.y * dt ) + size.height / 2;
+	
+	if ( !TileSystem::GetInstance()->IsColliding( position.x, position.y + velocity.y * dt, tempRect ) )
+		position.y += velocity.y * dt;
+	
 	changedir -= dt;
 	if (velocity.x > 0.0f && changedir < 0.0f)
 	{
 		ansys->ResetAll();
 		ansys->Play("Right");
+		dir = 'r';
 	}
 	if (velocity.x < 0.0f && changedir < 0.0f)
 	{
 		ansys->ResetAll();
 		ansys->Play("Left");
+		dir = 'l';
 	}
 	if (velocity.y > 0.0f && changedir < 0.0f)
 	{
 		ansys->ResetAll();
 		ansys->Play("Down");
+		dir = 'd';
 	}
 	if (velocity.y < 0.0f && changedir < 0.0f)
 	{
 		ansys->ResetAll();
 		ansys->Play("Up");
+		dir = 'u';
 	}
+	//TileSystem::GetInstance()->TileCollision( position.x, position.y, GetRect(), dir );
 	//else
 	//{
 	//	ansys->ResetAll();
@@ -87,22 +108,22 @@ void Guard::AquireTarget()
 			{
 				if (position.x < GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x)
 				{
-					velocity.x = 50.0f;
+					velocity.x = 16.0f;
 				}
 				else
 				{
-					velocity.x = -50.0f;
+					velocity.x = -16.0f;
 				}
 			}
 			else
 			{
 				if (position.y < GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y)
 				{
-					velocity.y = 50.0f;
+					velocity.y = 16.0f;
 				}
 				else
 				{
-					velocity.y = -50.0f;
+					velocity.y = -16.0f;
 				}
 			}
 		}
@@ -110,10 +131,10 @@ void Guard::AquireTarget()
 		{
 			if (waypoints.size() <= 0)
 				return;
-			xdiff = abs(position.x - TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).x);
-			ydiff = abs(position.y - TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).y);
+			xdiff = abs(position.x - (TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).x + 17.0f));
+			ydiff = abs(position.y - (TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).y + 17.0f));
 			//Go to Waypoint
-			if (xdiff < 10.0f && ydiff < 10.0f)
+			if (xdiff < 1.0f && ydiff < 1.0f)
 			{
 				if (currentWaypoint + 1 < (int)waypoints.size())
 				{
@@ -125,24 +146,24 @@ void Guard::AquireTarget()
 
 			if (xdiff > ydiff)
 			{
-				if (position.x < TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).x)
+				if (position.x < TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).x + 17.0f)
 				{
-					velocity.x = 40.0f;
+					velocity.x = 32.0f;
 				}
 				else
 				{
-					velocity.x = -40.0f;
+					velocity.x = -32.0f;
 				}
 			}
 			else
 			{
-				if (position.y < TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).y)
+				if (position.y < TileSystem::GetInstance()->GetTilePosition(waypoints[currentWaypoint]).y + 17.0f)
 				{
-					velocity.y = 40.0f;
+					velocity.y = 32.0f;
 				}
 				else
 				{
-					velocity.y = -40.0f;
+					velocity.y = -32.0f;
 				}
 			}
 		}

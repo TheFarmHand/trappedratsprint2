@@ -32,7 +32,6 @@ void TileSystem::Exit()
 void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char dir )
 	{
 	bool collided = false;
-	bool keep = false;
 	int tileIndex;
 	SGD::Point pos;
 	pos.x = x;
@@ -112,10 +111,6 @@ void TileSystem::TileCollision( float &x, float &y, SGD::Rectangle &rect, char d
 			}
 		x = pos.x;
 		y = pos.y;
-		}
-	if ( keep )
-		{
-
 		}
 	}
 
@@ -211,4 +206,33 @@ int TileSystem::GetLayerWidth()
 int TileSystem::GetLayerHeight()
 	{
 	return layers.GetLayerHeight();
+	}
+
+bool TileSystem::IsColliding( float x, float y, SGD::Rectangle rect )
+	{
+	bool collided = false;
+	int tileIndex;
+
+	tileIndex = GetTileIndex( rect.left + 1, rect.top );
+	if ( layers.GetTileMap()[tileIndex].GetCollisionType() == 1 )
+		collided = true;
+	else
+		{
+		tileIndex = GetTileIndex( rect.right - 1, rect.top );
+		if ( layers.GetTileMap()[tileIndex].GetCollisionType() == 1 )
+			collided = true;
+		else
+			{
+			tileIndex = GetTileIndex( rect.left + 1, rect.bottom - 1 );
+			if ( layers.GetTileMap()[tileIndex].GetCollisionType() == 1 )
+				collided = true;
+			else
+				{
+				tileIndex = GetTileIndex( rect.right - 1, rect.bottom - 1 );
+				if ( layers.GetTileMap()[tileIndex].GetCollisionType() == 1 )
+					collided = true;
+				}
+			}
+		}
+	return collided;
 	}
