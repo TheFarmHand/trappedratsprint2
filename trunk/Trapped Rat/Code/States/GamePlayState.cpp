@@ -569,6 +569,7 @@ void GamePlayState::Exit()
 	tutorialenemy.clear();
 	guards.clear();
 	shopinv.clear();
+	inventory.clear();
 	Party.clear();
 	Parents.clear();
 	delete WorldMapAnsys;
@@ -1548,15 +1549,10 @@ void GamePlayState::MenuUpdate( float dt )
 					for ( unsigned int i = 0; i < inventory.size(); i++ )
 						{
 						if ( uniquenames[menuindex] == inventory[i].GetName() )
-							{
-							if ( uniquenames[menuindex] == inventory[i].GetName() )
-								{
+						{
 								inventory.erase( inventory.begin() + i );
-								uniquenames.erase( uniquenames.begin() + menuindex );
-								uniquecounts.erase( uniquecounts.begin() + menuindex );
 								break;
-								}
-							}
+						}
 						selecting_ability = false;
 						selecting_party = false;
 						select_first = false;
@@ -3814,9 +3810,6 @@ void GamePlayState::LoadGame( int index )
 	std::ifstream fin;
 	if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
 		{
-
-
-
 		if ( saveindex == 0 )
 			PathAppend( path, TEXT( "savegame0.txt" ) );
 		else if ( saveindex == 1 )
@@ -3848,13 +3841,17 @@ void GamePlayState::LoadGame( int index )
 		for ( int i = 0; i < count; i++ )//this is just for items
 			{
 			std::string temp;
-			fin >> temp;
-			fin.ignore( INT_MAX, '\n' );
+			char* string = new char[32];
+			fin.getline(string, 32, '\n');
+			temp = string;
+			delete[] string;
+			//fin.ignore( INT_MAX, '\n' );
 			for ( unsigned int j = 0; j < shopinv.size(); j++ )
 				{
 				if ( temp == shopinv[j].GetName() )
 					{
 					inventory.push_back( shopinv[j] );
+					break;
 					}
 				}
 			}
@@ -4056,6 +4053,15 @@ void GamePlayState::LoadGame( int index )
 	else
 		{
 		is_tutorial = true;
+		if (is_tutorial)
+		{
+			TileSystem::GetInstance()->Initialize("Assets\\TileMaps\\FinalLanding.xml");
+			CutsceneManager::GetInstance()->Terminate();
+			CutsceneManager::GetInstance()->Initialize(1);
+			CutsceneManager::GetInstance()->Play(0);
+			state = Cuts;
+			laststate = Cuts;
+		}
 		TutorialStart();
 		}
 
@@ -4367,6 +4373,8 @@ void GamePlayState::PhaseSwitchDia( int _index )
 	}
 void GamePlayState::PopulateUniqueNames()
 	{
+	uniquenames.clear();
+	uniquecounts.clear();
 	for ( unsigned int i = 0; i < inventory.size(); i++ )
 		{
 		int count = 0;
