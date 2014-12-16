@@ -50,7 +50,7 @@ public:
 	void AddXP( int xp );
 	void AddAbility( );
 	void LevelUp( );
-
+	void SethasLeveled(bool _leveled){ leveledup = _leveled; }
 	// End XP Functions
 	
 private:
