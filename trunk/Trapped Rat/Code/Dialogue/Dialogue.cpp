@@ -74,7 +74,7 @@ void Dialogue::Load(std::string filepath, bool _auto , SGD::Point _pos, float _t
 }
 bool Dialogue::Update(float dt)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonDown(0,2))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 2))
 		messages.clear();
 	if (messages.size() > 0)
 	{
