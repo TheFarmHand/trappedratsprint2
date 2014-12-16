@@ -110,7 +110,7 @@ void GamePlayState::Enter()
 
 	ternary_bar = CreateBar( { 64, 16 }, { 250, 390 }, nullptr, { 255, 255, 0 }, { 0, 0 }, false );
 
-	std::fstream fin;
+	std::ifstream fin;
 
 	Loading( "Loading Abilities..." );
 	fin.open( "Assets/Scripts/Abilities/AbilityList.txt" );
@@ -1983,7 +1983,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>( ternary_bar )->SetPercentage( (float)ternary_gauge / MAXTG );
 
 
-	if ( run_succeed || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( run_succeed  || input->IsKeyPressed( SGD::Key::Backspace ) )
 	{
 		state = GPStates::Town;
 		laststate = state;
