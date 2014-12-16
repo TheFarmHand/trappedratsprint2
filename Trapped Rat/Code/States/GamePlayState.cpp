@@ -683,7 +683,7 @@ void GamePlayState::Fight()
 			GameData::GetInstance()->SetIsInCombat( true );
 			state = GPStates::Combat;
 			std::vector<Enemy*> tempEnemy;
-
+			Party[0]->SetBP( 6 );
 
 
 			if ( enemy1 != nullptr )
@@ -1055,11 +1055,10 @@ void GamePlayState::TownUpdate( float dt )
 				break;
 			}
 		}
-	}
 	if ( invincTimer > 0.0f )
-	{
+		{
 		invincTimer -= dt;
-	}
+		}
 	else
 		tempInvinc = false;
 
@@ -1139,6 +1138,7 @@ void GamePlayState::TownUpdate( float dt )
 						m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[ i ]->GetOrderPosition()*50.0f ) ), Party[ i ], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
 					}
 				}
+					}
 
 
 				for ( size_t i = 0; i < moreguards.size(); i++ )
@@ -1518,6 +1518,7 @@ void GamePlayState::MenuUpdate( float dt )
 								return;
 							Party[ character_index ]->SetLiving( true );
 							Party[ character_index ]->SetHP( (int)( Party[ character_index ]->GetMaxHP() * 0.25 ) );
+						Party[character_index]->GetAnimations()->Play( 0 );
 						}
 					}
 					if ( uniquenames[ menuindex ] == "Revive" )
@@ -2881,19 +2882,19 @@ void GamePlayState::MapUpdate( float dt )
 
 	SGD::InputManager * input = SGD::InputManager::GetInstance();
 	if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Six ) )
-	{
+		{
 		if ( unlockedTowns >= 1 )
-		{
+			{
 			unlockedTowns--;
+			}
 		}
-	}
 	else if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Seven ) )
-	{
-		if ( unlockedTowns <= 3 )
 		{
+		if ( unlockedTowns <= 3 )
+			{
 			unlockedTowns++;
+			}
 		}
-	}
 
 	if ( WorldMapAnsys != nullptr )
 	{
@@ -3234,6 +3235,7 @@ void GamePlayState::SummaryUpdate( float dt )
 			//FinalBossFight = false;
 		}
 
+		// Guard Code
 		if ( guard_index != -1 && !runAway )
 			// We killed a guard, guard_index is the index of the array
 		{

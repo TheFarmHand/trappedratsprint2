@@ -34,6 +34,7 @@ void SelectableObject::Render()
 	{
 		std::string str = string;
 		str = GameData::GetInstance()->GetFont()->StringIfSpanish(str);
+		int localBP;
 		if (str.length())
 		{
 			int xoffset = 40 - (str.length() * 4);
@@ -41,7 +42,10 @@ void SelectableObject::Render()
 				xoffset = 0;
 			if (m_objecttype == 1)
 			{
-				if (TurnManager::GetInstance()->GetAll()[0]->GetBP() < m_ability->GetBPCost())
+			localBP = TurnManager::GetInstance()->GetAll()[0]->GetBP();
+			if ( GamePlayState::GetInstance()->ternary )
+				localBP /= 2;
+				if (localBP < m_ability->GetBPCost())
 				{
 					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset + 2, position.y + 7, { 0, 0, 0 }, 1.8f);
 					GameData::GetInstance()->GetFont()->DrawString(string, position.x + xoffset, position.y + 5, { 50, 50, 50 }, 1.8f);

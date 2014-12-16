@@ -581,7 +581,7 @@ void TurnManager::AttackTarget( Character* owner, Character* target, int value )
 
 }
 
-void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ability, bool ternary )
+void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ability, bool ternary, int aoeCounter)
 // Calculates and dishes out damage based on an ability
 {
 	// Room here for adding particle effects && Cecil!
@@ -612,7 +612,7 @@ void TurnManager::UsingAbility( Character* owner, Character* target, Ability* ab
 			ability->CastAbility( target, owner );
 		}
 		else
-			ability->CastAbility( owner, target, 0, ternary );
+			ability->CastAbility( owner, target, aoeCounter, ternary );
 	}
 }
 

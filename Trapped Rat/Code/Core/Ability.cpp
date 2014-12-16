@@ -241,9 +241,9 @@ void Ability::CastAbility( Character* owner, Character* target, int AoeCounter, 
 
 	if ( AoeCounter == 0 )
 		{
-		if ( GamePlayState::GetInstance()->usingTernary() )
-			owner->SetBP( owner->GetBP() - bpCost / 2 );
-		else
+		if ( !GamePlayState::GetInstance()->usingTernary() )
+		//	//owner->SetBP( owner->GetBP() - bpCost / 2 );
+		//else
 			owner->SetBP( owner->GetBP() - bpCost );
 		}
 	}
@@ -307,6 +307,8 @@ void Ability::CalculateFormula( Character* owner, Character* target )
 void Ability::CalcluateBpScaledCost( Character* owner )
 	{
 	bpCost = baseBP + (int)( owner->GetLevel() * 0.2f );
+	if ( GamePlayState::GetInstance()->ternary )
+		bpCost /= 2;
 	std::string temp = std::to_string( bpCost );
 	temp += " BP cost" + noBPexplination;
 	//explination = temp;

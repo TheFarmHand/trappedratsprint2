@@ -127,6 +127,7 @@ public:
 	bool runAway = false;
 	bool tempInvinc = false;
 	float invincTimer;
+	int ternaryBPTotal = 0;
 	HUDItem* ternary_bar;
 	void RemoveTrap(int);
 	std::vector<SGD::HAudio> m_vsoundeffects;
