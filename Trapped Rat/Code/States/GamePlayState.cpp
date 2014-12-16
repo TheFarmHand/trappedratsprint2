@@ -1410,6 +1410,10 @@ void GamePlayState::MenuUpdate( float dt )
 				else if ( selecting_item )
 					{
 					if ( uniquenames[menuindex] == "Small Heal" )
+						if (!Party[character_index]->isAlive())
+							break;
+						int newhp = (int)(Party[character_index]->GetMaxHP() * .20f + Party[character_index]->GetHP());
+						if (newhp <= Party[character_index]->GetMaxHP())
 						{
 						int newhp = (int)( Party[character_index]->GetMaxHP() * .20f + Party[character_index]->GetHP() );
 						if ( newhp <= Party[character_index]->GetMaxHP() )
@@ -1421,7 +1425,13 @@ void GamePlayState::MenuUpdate( float dt )
 							Party[character_index]->SetHP( Party[character_index]->GetMaxHP() );
 							}
 						}
-					if ( uniquenames[menuindex] == "Large Heal" )
+					}
+					if (uniquenames[menuindex] == "Large Heal")
+					{
+						if (!Party[character_index]->isAlive())
+							break;
+						int newhp = (int)(Party[character_index]->GetMaxHP() * .5f + Party[character_index]->GetHP());
+						if (newhp <= Party[character_index]->GetMaxHP())
 						{
 						int newhp = (int)( Party[character_index]->GetMaxHP() * .5f + Party[character_index]->GetHP() );
 						if ( newhp <= Party[character_index]->GetMaxHP() )
@@ -1433,7 +1443,13 @@ void GamePlayState::MenuUpdate( float dt )
 							Party[character_index]->SetHP( Party[character_index]->GetMaxHP() );
 							}
 						}
-					if ( uniquenames[menuindex] == "Small BP Restore" )
+					}
+					if (uniquenames[menuindex] == "Small BP Restore")
+					{
+						if (!Party[character_index]->isAlive())
+							break;
+						int newbp =(int)(Party[character_index]->GetMaxBP() * .20f + Party[character_index]->GetBP());
+						if (newbp <= Party[character_index]->GetMaxBP())
 						{
 						int newbp = (int)( Party[character_index]->GetMaxBP() * .20f + Party[character_index]->GetBP() );
 						if ( newbp <= Party[character_index]->GetMaxBP() )
@@ -1445,7 +1461,13 @@ void GamePlayState::MenuUpdate( float dt )
 							Party[character_index]->SetBP( Party[character_index]->GetMaxBP() );
 							}
 						}
-					if ( uniquenames[menuindex] == "Large BP Restore" )
+					}
+					if (uniquenames[menuindex] == "Large BP Restore")
+					{
+						if (!Party[character_index]->isAlive())
+							break;
+						int newbp = (int)(Party[character_index]->GetMaxBP() * .40f + Party[character_index]->GetBP());
+						if (newbp <= Party[character_index]->GetMaxBP())
 						{
 						int newbp = (int)( Party[character_index]->GetMaxBP() * .40f + Party[character_index]->GetBP() );
 						if ( newbp <= Party[character_index]->GetMaxBP() )

@@ -1508,7 +1508,7 @@ void CombatPlayer::TernaryBlast( float dt )
 	else
 		// Selected all the targets, cast them and get outta dodge
 		{
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonDown(0, 1))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1))
 			{
 			GamePlayState::GetInstance()->RemoveTarget();
 			GamePlayState::GetInstance()->DeselectTernaryTarget();
@@ -1518,7 +1518,7 @@ void CombatPlayer::TernaryBlast( float dt )
 			return;
 			}
 
-		if ( SGD::InputManager::GetInstance()->IsKeyPressed( SGD::Key::Enter )|| SGD::InputManager::GetInstance()->IsButtonDown(0,1 ))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1))
 			tern_confirm = true;
 		// Need to pick one ability out at a time, cast it, continue to update, and lalala.
 		// Carry index of current ability cast somewhere global, check for AOE and then do the things
