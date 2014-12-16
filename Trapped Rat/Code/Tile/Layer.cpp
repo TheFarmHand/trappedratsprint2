@@ -67,7 +67,7 @@ void Layer::Initialize( const char* path)
 			temp->AddWayPoint(way);
 			waypoint = waypoint->NextSiblingElement();
 		}
-		//GamePlayState::GetInstance()->AddGuard(temp);
+		GamePlayState::GetInstance()->AddGuard(temp);
 		guard = guard->NextSiblingElement( "guard" );
 		}
 

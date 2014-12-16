@@ -1651,7 +1651,7 @@ void CombatPlayer::AddXP( int xp )
 	{
 	leveledup = false;
 	XP += xp;
-	if ( XP >= nextlvl )
+	while ( XP >= nextlvl )
 		{
 		LevelUp();
 		}
