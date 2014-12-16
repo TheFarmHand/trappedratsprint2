@@ -36,7 +36,8 @@ CombatPlayer::~CombatPlayer()
 void CombatPlayer::Update( float dt )
 	{
 
-
+	if (!alive && stepbackward == false && stepforward == false)
+		return;
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 		progress += GetSpeed() * dt;
 	
@@ -67,8 +68,7 @@ void CombatPlayer::Update( float dt )
 
 		return;
 		}
-	if (!alive)
-		return;
+	
 		if ( progress >= 100.0f )
 			{
 			SGD::InputManager *pInput = SGD::InputManager::GetInstance();
