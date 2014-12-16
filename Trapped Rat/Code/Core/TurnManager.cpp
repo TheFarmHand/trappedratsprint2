@@ -145,6 +145,7 @@ void TurnManager::Update( float dt )
 			//GamePlayState::GetInstance()->EndOfCombatScreen();
 
 			//GamePlayState::GetInstance()->CheckAbilityUnlocked();
+			GamePlayState::GetInstance()->SetLastState(GPStates::BattleSummary);
 			GamePlayState::GetInstance()->SetState( GPStates::BattleSummary );
 			EndCombat();
 			return;

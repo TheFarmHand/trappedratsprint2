@@ -1074,7 +1074,7 @@ void GamePlayState::TownUpdate( float dt )
 				if ( TileSystem::GetInstance()->GetTileIndex( guards[i]->GetPosition().x, guards[i]->GetPosition().y )
 					 == TileSystem::GetInstance()->GetTileIndex(
 					 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x,
-					 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) )
+					 GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y ) && state != GPStates::Combat)
 
 					{
 					GuardAnimation();
@@ -1139,13 +1139,13 @@ void GamePlayState::TownUpdate( float dt )
 							m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point( 630, 465 + ( Party[i]->GetOrderPosition()*50.0f ) ), Party[i], SGD::Color( 0, 100, 255 ), SGD::Point( 0, 0 ), false ) );
 							}
 						}
-					}
-
-
-				for ( size_t i = 0; i < moreguards.size(); i++ )
+					for (size_t i = 0; i < moreguards.size(); i++)
 					{
-					m_vhuditems.push_back( CreateBar( { 64, 16 }, SGD::Point(), moreguards[i], SGD::Color( 0, 255, 0 ), SGD::Point( -30, -45 ) ) );
+						m_vhuditems.push_back(CreateBar({ 64, 16 }, SGD::Point(), moreguards[i], SGD::Color(0, 255, 0), SGD::Point(-30, -45)));
 					}
+					return;
+					}
+			
 				}
 			}
 		}
@@ -2098,7 +2098,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>( ternary_bar )->SetPercentage( (float)ternary_gauge / MAXTG );
 
 
-	if ( run_succeed ) // || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( run_succeed  || input->IsKeyPressed( SGD::Key::Backspace ) )
 		{
 		guard_index = -1;
 		no_combat_timer = 4.0f;
