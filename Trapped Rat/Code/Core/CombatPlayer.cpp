@@ -895,8 +895,9 @@ void CombatPlayer::AbilityUpdate( float dt )
 			{
 			if ( GamePlayState::GetInstance()->RemoveTarget() )
 				{
+				SetBP( GetBP() + GamePlayState::GetInstance()->myTernTargets.abilities[GamePlayState::GetInstance()->myTernTargets.abilities.size() - 1]->GetBPCost());
+
 				GamePlayState::GetInstance()->DeselectTernaryTarget();
-				SetBP( GetBP() + menu[hudSelection]->GetAbility()->GetBPCost() );
 				myTarget = 0;
 				mySelection = none;
 				states = 7;
