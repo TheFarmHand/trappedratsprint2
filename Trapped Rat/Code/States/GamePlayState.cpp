@@ -548,6 +548,8 @@ void GamePlayState::Exit()
 	if ( helptextbox != nullptr )
 		delete helptextbox;
 
+	GameData::GetInstance()->SetIsInCombat(false);
+
 	TurnManager::GetInstance()->Terminate();
 	delete ternary_bar;
 	for ( unsigned int i = 0; i < Party.size(); i++ )
@@ -877,6 +879,17 @@ void GamePlayState::TownUpdate( float dt )
 		CheckAbilityUnlocked();
 		state = GPStates::Menu;
 		}
+	if (input->IsKeyPressed(SGD::Key::F) && input->IsKeyPressed(SGD::Key::D))
+	{
+		for (unsigned int i = 0; i < guards.size(); ++i)
+		{
+			if (guards[i] != nullptr)
+			{
+				delete guards[i];
+			}
+		}
+		guards.clear();
+	}
 	if ( input->IsKeyPressed( SGD::Key::D ) && input->IsKeyDown( SGD::Key::One ) )
 		CreateEnemyFight( 0 );
 	else if ( input->IsKeyPressed( SGD::Key::D ) && input->IsKeyDown( SGD::Key::Two ) )
@@ -2972,6 +2985,23 @@ void GamePlayState::MapUpdate( float dt )
 			traps[i] = nullptr;
 			}
 		traps.clear();
+		for (unsigned int i = 0; i < overworldObjects.size(); ++i)
+		{
+			if (overworldObjects[i] != nullptr)
+			{
+				delete overworldObjects[i];
+			}
+		}
+		overworldObjects.clear();
+		for (unsigned int i = 0; i < guards.size(); ++i)
+		{
+			if (guards[i] != nullptr)
+			{
+				delete guards[i];
+			}
+		}
+		guards.clear();
+
 		switch ( SelectedTown )
 			{
 			PlaySoundEffect( 6 );
