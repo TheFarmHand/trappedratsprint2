@@ -21,8 +21,7 @@ Enemy::~Enemy()
 
 void Enemy::Update( float dt )
 	{
-	if ( !alive )
-		return;
+	
 
 	if ( TurnManager::GetInstance()->getTimeStop() == false && alive )
 		{
@@ -47,7 +46,8 @@ void Enemy::Update( float dt )
 			}
 		return;
 		}
-
+	if (!alive)
+		return;
 	if ( progress >= 100.0f )
 		{
 		if ( !TurnManager::GetInstance()->getProgressFullReached() )
