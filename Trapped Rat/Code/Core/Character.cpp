@@ -475,7 +475,11 @@ void Character::SetHP( int _hp )
 				progress = 100.0f;
 			}
 		else
+		{
 			alive = false;
+			dynamic_cast<Enemy*>(this)->GetAnimations()->ResetAll();
+			dynamic_cast<Enemy*>(this)->GetAnimations()->Play("Death");
+		}
 		}
 	else if ( HP <= 0 )
 		{
