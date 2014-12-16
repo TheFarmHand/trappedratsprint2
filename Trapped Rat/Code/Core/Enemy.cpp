@@ -326,6 +326,15 @@ void Enemy::CatAI()
 void Enemy::RavenAI()
 	{
 	int target;
+	int aliveCount = 0;
+	int atk = GetAttack();
+	int dmg = rand() % atk + atk;
+
+	for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
+		{
+		if ( TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+			++aliveCount;
+		}
 	target = rand() % TurnManager::GetInstance()->GetAllies().size();
 	while ( !TurnManager::GetInstance()->GetAllies()[target]->isAlive() )
 		{
@@ -334,8 +343,6 @@ void Enemy::RavenAI()
 	int elementalTarget;
 	if ( rand() % 5 > 3 || TurnManager::GetInstance()->GetAllies().size() < 2 )
 		{
-		int atk = GetAttack();
-		int dmg = rand() % atk + atk;
 		dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
 		if ( dmg <= 0 )
 			dmg = 0;
@@ -353,11 +360,11 @@ void Enemy::RavenAI()
 			elementalTarget = 0;
 		else
 			elementalTarget = rand() % 4;
-
+		
 		for ( unsigned int i = 0; i < TurnManager::GetInstance()->GetAllies().size(); i++ )
 			{
 			if ( elementalTarget == TurnManager::GetInstance()->GetAllies()[i]->GetEType() &&
-				 TurnManager::GetInstance()->GetAllies()[i]->isAlive() )
+				 TurnManager::GetInstance()->GetAllies()[i]->isAlive() && aliveCount > 1)
 				{
 				abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[i] );
 				GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
@@ -367,11 +374,21 @@ void Enemy::RavenAI()
 				return;
 				}
 			}
-		abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
-		GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
-		std::ostringstream usingAbility;
-		usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
-		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
+		if ( TurnManager::GetInstance()->GetAllies()[target]->isAlive() && aliveCount > 1)
+			{
+			abilityList[0]->CastAbility( this, TurnManager::GetInstance()->GetAllies()[target] );
+			GamePlayState::GetInstance()->HoldOntoAbility( abilityList[0] );
+			std::ostringstream usingAbility;
+			usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
+			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
+			}
+		else
+			{
+			dmg -= (int)( 0.25f * TurnManager::GetInstance()->GetAllies()[target]->GetDefense() );
+			if ( dmg <= 0 )
+				dmg = 0;
+			TurnManager::GetInstance()->AttackTarget( this, TurnManager::GetInstance()->GetAllies()[target], dmg );
+			}
 		}
 	}
 void Enemy::DogAI()
@@ -772,13 +789,13 @@ void Enemy::FFWAI()
 		{
 		target = rand() % TurnManager::GetInstance()->GetAllies().size();
 		}
-	if ( GetHP() / (float)( GetMaxHP() ) < 0.55f )
+	if ( GetHP() / (float)( GetMaxHP() ) < 0.65f )
 		{
 		if ( !FlameSpout )
 			{
 			FlameSpout = true;
 			usingAbility << name << " starts casting Flame Spout";
-			GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance()->GetMasterList()["Flame Spout"];
+			GamePlayState::GetInstance()->CurrentAbilityUsed = nullptr;
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->abilityTimer = 2.0f;
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -788,7 +805,7 @@ void Enemy::FFWAI()
 			{
 			--FSCountdown;
 			usingAbility << FSCountdown << "...";
-			GamePlayState::GetInstance()->CurrentAbilityUsed = GamePlayState::GetInstance()->GetMasterList()["Flame Spout"];
+			GamePlayState::GetInstance()->CurrentAbilityUsed = nullptr;
 			GamePlayState::GetInstance()->AbilityUsed = true;
 			GamePlayState::GetInstance()->abilityTimer = 2.0f;
 			GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -1193,6 +1210,7 @@ void Enemy::CecilPhaseThree()
 		damageDealt = 0.0f;
 		//Dialogue for casting/countdown
 		usingAbility << name << " starts casting Holy Flare";
+		GamePlayState::GetInstance()->CurrentAbilityUsed = nullptr;
 		GamePlayState::GetInstance()->AbilityUsed = true;
 		GamePlayState::GetInstance()->abilityTimer = 2.0f;
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );
@@ -1202,6 +1220,7 @@ void Enemy::CecilPhaseThree()
 		--HFCountdown;
 		//Dialogue for countdown
 		usingAbility << HFCountdown << "...";
+		GamePlayState::GetInstance()->CurrentAbilityUsed = nullptr;
 		GamePlayState::GetInstance()->AbilityUsed = true;
 		GamePlayState::GetInstance()->abilityTimer = 2.0f;
 		GamePlayState::GetInstance()->GetHelpText()->ManualOverride( usingAbility.str(), this );

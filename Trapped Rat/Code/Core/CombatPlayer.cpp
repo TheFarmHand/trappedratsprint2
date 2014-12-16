@@ -312,7 +312,7 @@ void CombatPlayer::Render()
 
 	if ( ansys != nullptr )
 		{
-		if ( GamePlayState::GetInstance()->AbilityUsed )
+		if ( GamePlayState::GetInstance()->AbilityUsed && GamePlayState::GetInstance()->CurrentAbilityUsed != nullptr)
 			{
 			if ( ( GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Burrow" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Puddle" || GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName() == "Collapse" ) && GamePlayState::GetInstance()->CurrentAbilityUsed->GetOwner() == this )
 				{
@@ -1055,6 +1055,9 @@ void CombatPlayer::RunUpdate( float dt )
 			{
 			//GamePlayState::GetInstance()->run_succeed = true;
 			runaway = true;
+			GamePlayState::GetInstance()->runAway = true;
+			GamePlayState::GetInstance()->tempInvinc = true;
+			GamePlayState::GetInstance()->invincTimer = 3.0f;
 
 			GamePlayState::GetInstance()->runTimer = 2.0f;
 			GamePlayState::GetInstance()->RunUsed = true;
