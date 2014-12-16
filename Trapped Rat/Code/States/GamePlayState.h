@@ -247,7 +247,9 @@ public:
 	struct TernaryTargets { std::vector<Character*> targets; std::vector<Ability*> abilities; int num_targets; };
 	void AddToTB( Ability* abi, Character* target );
 	TernaryTargets myTernTargets;
-	std::vector<Items> * GetInventory();
+	std::vector<Items>*  GetInventory();
+	void SetInventory( std::vector<Items> incoming ) { inventory = incoming; }
+	std::vector<Items> GetShop() { return shopinv; }
 	void PhaseSwitchDia(int _index);
 
 	//Mutators
