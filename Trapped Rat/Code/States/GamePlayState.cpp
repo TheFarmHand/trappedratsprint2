@@ -1424,6 +1424,7 @@ void GamePlayState::MenuUpdate( float dt )
 							return;
 						Party[character_index]->SetLiving(true);
 						Party[character_index]->SetHP((int)(Party[character_index]->GetMaxHP() * 0.25));
+						Party[character_index]->GetAnimations()->Play(0);
 					}
 					for (unsigned int i = 0; i < inventory.size(); i++)
 					{
@@ -1983,7 +1984,7 @@ void GamePlayState::CombatUpdate( float dt )
 	dynamic_cast<Bars*>( ternary_bar )->SetPercentage( (float)ternary_gauge / MAXTG );
 
 
-	if ( run_succeed  || input->IsKeyPressed( SGD::Key::Backspace ) )
+	if ( run_succeed) // || input->IsKeyPressed( SGD::Key::Backspace ) )
 	{
 		state = GPStates::Town;
 		laststate = state;
@@ -3056,7 +3057,12 @@ void GamePlayState::SummaryUpdate( float dt )
 		loot.clear();
 		loot_xp = 0;
 		loot_gold = 0;
-
+		for (unsigned int i = 0; i < Party.size(); i++)
+		{
+			if (Party[i]->hasLeveled())
+				Party[i]->SethasLeveled(false);
+		}
+		abilityunlocked = false;
 		if ( MinibossFight )
 		{
 			MinibossFight = false;
