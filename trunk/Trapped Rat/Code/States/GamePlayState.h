@@ -121,6 +121,9 @@ public:
 	int ternary_gauge = 0;
 	bool ternary = false;		// used to trip appropriate handling in AbilitySelection when using Ternary blast
 	bool trap_combat = false;
+	bool runAway = false;
+	bool tempInvinc = false;
+	float invincTimer;
 	HUDItem* ternary_bar;
 	void RemoveTrap(int);
 	std::vector<SGD::HAudio> m_vsoundeffects;
@@ -268,5 +271,7 @@ public:
 	void AddToHUDItems(HUDItem* item);
 	Dialogue * GetDialogue(){ return dialogue; }
 	std::vector<WorldObject*> GetWorldObjects() {return overworldObjects;}
+	void CreateEnemyFight( int index );
+
 };
 

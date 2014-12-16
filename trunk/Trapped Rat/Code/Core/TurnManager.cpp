@@ -25,6 +25,7 @@ void TurnManager::Initialize( std::vector<CombatPlayer*> playerParty, std::vecto
 	testCover = false;
 	//Safe to add code here
 
+	GamePlayState::GetInstance()->runAway = false;
 	//ElementalChartLoad
 	elementalImage = SGD::GraphicsManager::GetInstance()->LoadTexture( "../Trapped Rat/Assets/Textures/eletable.png" );
 	elementalgraphicactive = false;
@@ -40,7 +41,7 @@ void TurnManager::CombatLoot()
 {
 	GamePlayState* pGPS = GamePlayState::GetInstance();
 	int num_items = 0;
-	int gold = 10;
+	int gold = 0;
 	for ( unsigned int i = 0; i < EnemyUnits.size(); i++ )
 	{
 		int test = rand() % 100;
@@ -169,10 +170,10 @@ void TurnManager::Update( float dt )
 		elementalgraphicactive = !elementalgraphicactive;
 	}
 	//Debug Keys
-	//if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::A) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::D))
-	//{
-	//	AlliedUnits[0]->SetHP(1);
-	//}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::A) && SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::D))
+	{
+		AlliedUnits[0]->SetHP(1);
+	}
 	//*The core updates to take place during the overall update. Add what code you need to the appropriate section
 	//can modify order if needed, should not break
 	if ( !elementalgraphicactive )
@@ -253,7 +254,7 @@ void TurnManager::Render()
 	//*Anything added below will render on top of combat characters
 	if ( pPartMan != nullptr )
 		pPartMan->Render();
-	if ( GamePlayState::GetInstance()->AbilityUsed )
+	if ( GamePlayState::GetInstance()->AbilityUsed && GamePlayState::GetInstance()->CurrentAbilityUsed != nullptr)
 		GamePlayState::GetInstance()->CurrentAbilityUsed->Render();
 	//if ( testCover )
 	//SGD::GraphicsManager::GetInstance()->DrawString( L"Covered Ally!", SGD::Point( AlliedUnits[ 0 ]->GetPosition().x + 150, AlliedUnits[ 0 ]->GetPosition().y + 32 ), SGD::Color( 255, 100, 0 ) );
@@ -689,7 +690,7 @@ void TurnManager::EndCombat()
 }
 void TurnManager::CombatUpdate( float dt )
 {
-	if ( GamePlayState::GetInstance()->AbilityUsed )
+	if ( GamePlayState::GetInstance()->AbilityUsed && GamePlayState::GetInstance()->CurrentAbilityUsed != nullptr )
 	{
 		GamePlayState::GetInstance()->abilityTimer -= dt;
 		if ( GamePlayState::GetInstance()->abilityTimer <= 0.0f )
