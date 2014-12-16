@@ -60,23 +60,23 @@ bool ItemSelection::Update(float dt)
 void ItemSelection::Render()
 {
 	//display the scroll over the normal selection menu
-	SGD::GraphicsManager::GetInstance()->DrawTexture(scroll, { 300.0f, 175.0f }, 0.0f, {}, {}, { 1.25f, 1.25f });
+	SGD::GraphicsManager::GetInstance()->DrawTexture(scroll, { 300.0f, 100.0f }, 0.0f, {}, {}, { 1.25f, 1.75f });
 	//iterate throught the map to display the 
 	for (unsigned int i = 0; i < uniquenames.size(); i++)
 	{
-		GameData::GetInstance()->GetFont()->DrawString(uniquenames[i], 335.0f, 225.0f + (i * 40), { 0, 0, 0 }, 1.0f);
+		GameData::GetInstance()->GetFont()->DrawString(uniquenames[i], 335.0f, 150.0f + (i * 40), { 0, 0, 0 }, 1.0f);
 		std::ostringstream total;
 		total << uniquecounts[i] << "/5";
-		GameData::GetInstance()->GetFont()->DrawString(total.str(), 335.0f, 245.0f + (i * 40), { 0, 0, 0 }, 1.0f);
+		GameData::GetInstance()->GetFont()->DrawString(total.str(), 335.0f, 165.0f + (i * 40), { 0, 0, 0 }, 1.0f);
 
 	}
 	if (uniquenames.size() == 0)
 	{
-		GameData::GetInstance()->GetFont()->DrawString("Empty", 335.0f, 225.0f, { 0, 0, 0 }, 1.0f);
+		GameData::GetInstance()->GetFont()->DrawString("Empty", 335.0f, 150.0f, { 0, 0, 0 }, 1.0f);
 	}
 	else
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture(cursor, { 290.0f, 215.0f + (item_cursor * 40) }, 0.0f, {}, {}, { .75f, .75f });
+		SGD::GraphicsManager::GetInstance()->DrawTexture(cursor, { 290.0f, 140.0f + (item_cursor * 40) }, 0.0f, {}, {}, { .75f, .75f });
 	}
 
 }
