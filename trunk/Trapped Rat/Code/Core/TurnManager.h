@@ -34,7 +34,7 @@ public:
 	void HealTarget(Character* target, int value);
 	int ElementalMod( Character* target, int damage, ETYPE element );
 	void AttackTarget(Character* owner, Character* target, int value);
-	void UsingAbility( Character* owner, Character* attacker, Ability* ability, bool ternary = false );
+	void UsingAbility( Character* owner, Character* attacker, Ability* ability, bool ternary = false, int aoeCounter = 0);
 private:
 	std::vector<Character*> AllCombatUnits;
 	std::vector<Character*> AlliedUnits;

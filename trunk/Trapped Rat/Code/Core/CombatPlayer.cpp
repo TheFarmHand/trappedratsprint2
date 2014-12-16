@@ -545,6 +545,7 @@ void CombatPlayer::HomeUpdate( float dt )
 		else if ( GamePlayState::GetInstance()->GetGauge() >= MAXTG && pInput->IsKeyPressed( SGD::Key::O ) || pInput->IsButtonPressed( 0, 5 ) )
 			// Ternary Blast activation
 			{
+			GamePlayState::GetInstance()->ternaryBPTotal = GetBP();
 			GameData::GetInstance()->PlaySelectionChange();
 			// Ability Selecting copied from below, modified for TB
 			help->UpdateSelection( 1 );
@@ -844,6 +845,11 @@ void CombatPlayer::AbilityUpdate( float dt )
 	HelpText *help = game->GetHelpText();
 	bool anyAllyDead = false;
 
+	GetAbility( 0 )->CalcluateBpScaledCost( this );
+	GetAbility( 1 )->CalcluateBpScaledCost( this );
+	GetAbility( 2 )->CalcluateBpScaledCost( this );
+	GetAbility( 3 )->CalcluateBpScaledCost( this );
+
 	if ( ( pInput->IsKeyPressed( SGD::Key::Up ) || pInput->IsKeyPressed( SGD::Key::Up ) || pInput->GetLeftJoystick( 0 ).y < 0 ) && GameData::GetInstance()->input_timer < 0 )
 		{
 		GameData::GetInstance()->PlaySelectionChange();
@@ -890,6 +896,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 			if ( GamePlayState::GetInstance()->RemoveTarget() )
 				{
 				GamePlayState::GetInstance()->DeselectTernaryTarget();
+				SetBP( GetBP() + menu[hudSelection]->GetAbility()->GetBPCost() );
 				myTarget = 0;
 				mySelection = none;
 				states = 7;
@@ -911,6 +918,7 @@ void CombatPlayer::AbilityUpdate( float dt )
 
 	else if ( pInput->IsKeyPressed( SGD::Key::Enter ) || pInput->IsButtonPressed( 0, 1 ) )
 		{
+		int localBP = menu[hudSelection]->GetAbility()->GetBPCost();
 		if ( GamePlayState::GetInstance()->is_done&& GamePlayState::GetInstance()->ignore_game_over )
 			{
 			GamePlayState::GetInstance()->tutorial_incrememnt = 2;
@@ -921,7 +929,8 @@ void CombatPlayer::AbilityUpdate( float dt )
 			{
 			return;
 			}
-		else if ( menu[hudSelection]->GetAbility()->GetBPCost() <= GetBP() )
+		
+		else if ( localBP <= GetBP())
 			{
 			if ( menu[hudSelection]->GetAbility()->GetOffensive() )//Enemy attack
 				{
@@ -1140,6 +1149,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 				{
 				// If there was at least 1 queued up ability, stay in Ternary State
 				// Nothing should need to happen here
+				//SetBP( GetBP() + menu[hudSelection]->GetAbility()->GetBPCost() );
 
 				//GamePlayState::GetInstance()->DeselectTernaryTarget();
 				myTarget = 0;
@@ -1181,6 +1191,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 				/*GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetAllies()[ 0 ] );
 				GamePlayState::GetInstance()->AddTarget();*/
 				TernarySelection();
+				SetBP( GetBP() - menu[hudSelection]->GetAbility()->GetBPCost() );
 				return;
 				}
 
@@ -1222,6 +1233,7 @@ void CombatPlayer::AllySelectUpdate( float dt ) // Defensive ability use
 				GamePlayState::GetInstance()->AddTarget();*/
 				// Reset certain targety things
 				TernarySelection();
+				SetBP( GetBP() - menu[hudSelection]->GetAbility()->GetBPCost() );
 				//myTarget = 0;
 				//mySelection = none;
 				//states = 7;
@@ -1279,7 +1291,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 				{
 				// If there was at least 1 queued up ability, stay in Ternary State
 				// Reset targeting info and state
-
+				//SetBP( GetBP() + menu[hudSelection]->GetAbility()->GetBPCost() );
 				//GamePlayState::GetInstance()->DeselectTernaryTarget();
 				myTarget = 0;
 				mySelection = none;
@@ -1313,6 +1325,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 				/*GamePlayState::GetInstance()->AddToTB( menu[ hudSelection ]->GetAbility(), pTurn->GetEnemies()[ 0 ] );
 				GamePlayState::GetInstance()->AddTarget();*/
 				TernarySelection();
+				SetBP( GetBP() - menu[hudSelection]->GetAbility()->GetBPCost() );
 				return;
 				}
 			for ( size_t i = 0; i < pTurn->GetEnemies().size(); i++ )
@@ -1348,6 +1361,7 @@ void CombatPlayer::EnemySelectUpdate( float dt ) // Offensive Ability use
 				// Add selection to vector
 				GamePlayState::GetInstance()->AddToTB( menu[hudSelection]->GetAbility(), pTurn->GetEnemies()[myTarget] );
 				GamePlayState::GetInstance()->AddTarget();
+				SetBP( GetBP() - menu[hudSelection]->GetAbility()->GetBPCost());
 				// Reset certain targety things
 				myTarget = 0;
 				mySelection = none;
@@ -1512,6 +1526,7 @@ void CombatPlayer::TernaryBlast( float dt )
 			{
 			GamePlayState::GetInstance()->RemoveTarget();
 			GamePlayState::GetInstance()->DeselectTernaryTarget();
+			SetBP( GetBP() + menu[hudSelection]->GetAbility()->GetBPCost() );
 			myTarget = 0;
 			mySelection = none;
 			states = 7;
@@ -1541,7 +1556,8 @@ void CombatPlayer::TernaryBlast( float dt )
 									this,
 									TurnManager::GetInstance()->GetEnemies()[targets],
 									GamePlayState::GetInstance()->myTernTargets.abilities[tern_index],
-									true );	// true for ternary stuff	
+									true,
+									(int)(targets));	// true for ternary stuff	
 
 								ApplyTernary( GamePlayState::GetInstance()->myTernTargets.abilities[tern_index]->GetAbilityName(),
 											  TurnManager::GetInstance()->GetEnemies()[targets] );
@@ -1559,7 +1575,8 @@ void CombatPlayer::TernaryBlast( float dt )
 									this,
 									TurnManager::GetInstance()->GetAllies()[targets],
 									GamePlayState::GetInstance()->myTernTargets.abilities[tern_index],
-									true );	// true for ternary stuff	
+									true,
+									targets);	// true for ternary stuff	
 								GamePlayState::GetInstance()->HoldOntoAbility( GamePlayState::GetInstance()->myTernTargets.abilities[tern_index] );
 								std::ostringstream usingAbility;
 								usingAbility << name << " uses " << GamePlayState::GetInstance()->CurrentAbilityUsed->GetAbilityName();
