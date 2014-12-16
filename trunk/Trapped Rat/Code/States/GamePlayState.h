@@ -133,6 +133,7 @@ public:
 	std::vector<SGD::HAudio> m_vsoundeffects;
 	void StopAllBackgroundMusic();
 	SGD::HAudio m_Credits = SGD::INVALID_HANDLE;
+	int CutscenesPlayed = 0; //Amount of Intro Cutscenes played
 private:
 
 	//party & ability selection

@@ -425,7 +425,7 @@ void GamePlayState::Enter()
 	//TutorialStart();
 	//state = BattleSummary;
 
-
+	CutscenesPlayed = 0;
 	}
 void const GamePlayState::Render()
 	{
@@ -2980,10 +2980,19 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\WindTown2.xml" );
 				//here we load in the dialogue
 				//	dialogue->Load( "Assets/Scripts/windywoods_enter.xml" );
-				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 5 );
-				state = Cuts;
-				CutsceneManager::GetInstance()->Play( 0 );
+				if (CutscenesPlayed == 0)
+				{
+					CutsceneManager::GetInstance()->Terminate();
+					CutsceneManager::GetInstance()->Initialize(5);
+					state = Cuts;
+					CutsceneManager::GetInstance()->Play(0);
+					CutscenesPlayed++;
+				}
+				else
+				{
+					state = Town;
+				}
+
 				//Load Audio
 				if ( m_overAudio != SGD::INVALID_HANDLE )
 					{
@@ -2997,10 +3006,18 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalFireTown.xml" );
 				//here we load in the dialogue
 				//dialogue->Load( "Assets/Scripts/magmafalls_enter.xml" );
-				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 6 );
-				state = Cuts;
-				CutsceneManager::GetInstance()->Play( 0 );
+				if (CutscenesPlayed == 1)
+				{
+					CutsceneManager::GetInstance()->Terminate();
+					CutsceneManager::GetInstance()->Initialize(6);
+					state = Cuts;
+					CutsceneManager::GetInstance()->Play(0);
+					CutscenesPlayed++;
+				}
+				else
+				{
+					state = Town;
+				}
 				if ( m_overAudio != SGD::INVALID_HANDLE )
 					{
 					SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
@@ -3013,10 +3030,18 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalEarthTown.xml" );
 				//here we load in the dialogue
 				//dialogue->Load( "Assets/Scripts/earthytown_enter.xml" );
-				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 7 );
-				state = Cuts;
-				CutsceneManager::GetInstance()->Play( 0 );
+				if (CutscenesPlayed == 2)
+				{
+					CutsceneManager::GetInstance()->Terminate();
+					CutsceneManager::GetInstance()->Initialize(7);
+					state = Cuts;
+					CutsceneManager::GetInstance()->Play(0);
+					CutscenesPlayed++;
+				}
+				else
+				{
+					state = Town;
+				}
 				if ( m_overAudio != SGD::INVALID_HANDLE )
 					{
 					SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
@@ -3029,10 +3054,18 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalWaterTown.xml" );
 				//here we load in the dialogue
 				//dialogue->Load( "Assets/Scripts/newwatercity_enter.xml" );
-				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 8 );
-				state = Cuts;
-				CutsceneManager::GetInstance()->Play( 0 );
+				if (CutscenesPlayed == 3)
+				{
+					CutsceneManager::GetInstance()->Terminate();
+					CutsceneManager::GetInstance()->Initialize(8);
+					state = Cuts;
+					CutsceneManager::GetInstance()->Play(0);
+					CutscenesPlayed++;
+				}
+				else
+				{
+					state = Town;
+				}
 				if ( m_overAudio != SGD::INVALID_HANDLE )
 					{
 					SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
@@ -3045,10 +3078,18 @@ void GamePlayState::MapUpdate( float dt )
 				TileSystem::GetInstance()->Initialize( "Assets\\TileMaps\\FinalLanding.xml" );
 				//here we load in the dialogue
 				//dialogue->Load( "Assets/Scripts/heroslanding_enter.xml" );
-				CutsceneManager::GetInstance()->Terminate();
-				CutsceneManager::GetInstance()->Initialize( 3 );
-				state = Cuts;
-				CutsceneManager::GetInstance()->Play( 0 );
+				if (CutscenesPlayed == 4)
+				{
+					CutsceneManager::GetInstance()->Terminate();
+					CutsceneManager::GetInstance()->Initialize(3);
+					state = Cuts;
+					CutsceneManager::GetInstance()->Play(0);
+					CutscenesPlayed++;
+				}
+				else
+				{
+					state = Town;
+				}
 				if ( m_overAudio != SGD::INVALID_HANDLE )
 					{
 					SGD::AudioManager::GetInstance()->UnloadAudio( m_overAudio );
@@ -3063,7 +3104,6 @@ void GamePlayState::MapUpdate( float dt )
 		StopAllBackgroundMusic();
 		SGD::AudioManager::GetInstance()->PlayAudio( m_overAudio );
 		laststate = Town;
-		state = Cuts;
 		GameData::GetInstance()->PlaySelectionChange();
 
 		}
