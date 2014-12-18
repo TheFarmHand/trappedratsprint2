@@ -1538,7 +1538,7 @@ void CombatPlayer::TernaryBlast( float dt )
 	else
 		// Selected all the targets, cast them and get outta dodge
 		{
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 2))
 			{
 			GamePlayState::GetInstance()->RemoveTarget();
 			GamePlayState::GetInstance()->DeselectTernaryTarget();

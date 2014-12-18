@@ -155,7 +155,7 @@ void LoadGameState::Update(float dt)
 			if (files[saveindex].playtime == 0)
 				GamePlayState::GetInstance()->LoadGame(99);
 			else
-				GamePlayState::GetInstance()->LoadGame(index);
+				GamePlayState::GetInstance()->LoadGame(saveindex);
 			
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 2))
