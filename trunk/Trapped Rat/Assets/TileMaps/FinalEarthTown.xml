@@ -539,7 +539,7 @@
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="26" collision="0" event="GainCheckers" onfire="GainCheckers" objectID="0" objectNumber="0" />
+  <tiles id="26" collision="0" event="none" onfire="GainCheckers" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="26" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
@@ -798,7 +798,7 @@
   <tiles id="436" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="437" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="437" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
-  <tiles id="435" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
+  <tiles id="435" collision="0" event="GainCheckers" onfire="GainCheckers" objectID="0" objectNumber="0" />
   <tiles id="435" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="148" collision="1" event="none" onfire="none" objectID="0" objectNumber="0" />
   <tiles id="435" collision="0" event="none" onfire="none" objectID="0" objectNumber="0" />
