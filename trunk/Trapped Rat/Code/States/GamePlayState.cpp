@@ -3883,6 +3883,7 @@ void GamePlayState::LoadGame( int index )
 	}
 	playtime = files[ saveindex ].playtime;
 	std::ifstream fin;
+	saveindex = index;
 	if ( SUCCEEDED( SHGetFolderPath( NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path ) ) )
 	{
 		if ( saveindex == 0 )
@@ -4096,32 +4097,8 @@ void GamePlayState::LoadGame( int index )
 
 		}
 		fin >> ternary_gauge;
-		fin.ignore( INT_MAX, '\n' );
-		fin >> count;
-		fin.ignore( INT_MAX, '\n' );
-		for ( unsigned int i = 0; i < traps.size(); i++ )
-		{
-			delete traps[ i ];
-		}
-		traps.clear();
-		for ( int i = 0; i < count; i++ )
-		{
-			/*RatTrap temp;
-			fin >> x;
-			fin.ignore(INT_MAX, '\n');
-			fin >> y;
-			fin.ignore(INT_MAX, '\n');
-			temp.SetPosition({ x, y });
-			fin >> temp.gold;
-			fin.ignore(INT_MAX, '\n');
-			fin >> temp.items[0];
-			fin.ignore(INT_MAX, '\n');
-			fin >> temp.items[1];
-			fin.ignore(INT_MAX, '\n');
-			fin >> temp.items[2];
-			fin.ignore(INT_MAX, '\n');
-			CreateRatTrap(temp.GetPosition(), temp.items[0], temp.items[1], temp.items[2], temp.gold);*/
-		}//the problem this this is we need to know every trap...so we need a vector for each towns
+		fin.ignore(INT_MAX, '\n');
+		fin >> CutscenesPlayed;
 		CheckAbilityUnlocked( false );
 		fin.close();
 	}
@@ -4223,62 +4200,9 @@ void GamePlayState::SaveGame()
 			fout << Party[ i ]->GetBP() << "\n";
 		}
 		fout << ternary_gauge << "\n";//i think this is all we need for ternary stuff
-		for ( unsigned int i = 0; i < traps.size(); i++ )//now lets do some trap stuff
-		{
-			fout << traps[ i ]->GetPosition().x << "\n";
-			fout << traps[ i ]->GetPosition().y << "\n";
-			fout << traps[ i ]->gold << "\n";
-			fout << traps[ i ]->items[ 0 ] << "\n";
-			fout << traps[ i ]->items[ 1 ] << "\n";//lets get that trap data
-			fout << traps[ i ]->items[ 2 ] << "\n";
-
-		}
+		fout << CutscenesPlayed << "\n";
 		fout.close();
 	}
-
-	//save to this folder for testing
-	fout.open( "savegame.txt" );
-	if ( fout.is_open() )
-	{
-		//here we save
-		//first lets do what town we are in
-		fout << SelectedTown << "\n";
-		//now we write in what towns we have unlocked
-		fout << unlockedTowns << "\n";
-		//overworldinfo
-		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().x << "\n";
-		fout << GameData::GetInstance()->GetOverworldPlayer()->GetPosition().y << "\n";
-		fout << inventory.size() << "\n";
-		for ( unsigned int i = 0; i < inventory.size(); i++ )
-		{
-			fout << inventory[ i ].GetName() << "\n";//we only need the name
-			//when we load it in we will copy the item with the same name from the shopinv
-
-		}
-		fout << gold << "\n";//how much gold we got?
-		fout << Party.size() << "\n";
-		for ( unsigned int i = 0; i < Party.size(); i++ )
-		{
-			fout << Party[ i ]->GetName() << "\n";
-			fout << Party[ i ]->GetLevel() << "\n";
-			fout << Party[ i ]->GetHP() << "\n";
-			fout << Party[ i ]->GetBP() << "\n";
-		}
-		fout << ternary_gauge << "\n";//i think this is all we need for ternary stuff
-		fout << traps.size() << "\n";
-		for ( unsigned int i = 0; i < traps.size(); i++ )//now lets do some trap stuff
-		{
-			fout << traps[ i ]->GetPosition().x << "\n";
-			fout << traps[ i ]->GetPosition().y << "\n";
-			fout << traps[ i ]->gold << "\n";
-			fout << traps[ i ]->items[ 0 ] << "\n";
-			fout << traps[ i ]->items[ 1 ] << "\n";//lets get that trap data
-			fout << traps[ i ]->items[ 2 ] << "\n";
-
-		}
-		fout.close();
-	}
-
 }
 
 void GamePlayState::TutorialStart()
