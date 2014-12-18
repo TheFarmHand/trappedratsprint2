@@ -750,7 +750,10 @@ void CombatPlayer::ItemsUpdate( float dt )
 		//Select(pTurn->GetAllies()[myTarget]);
 		if ( chosen.GetName() == "Small Heal" )
 			{
-			pTurn->HealTarget( pTurn->GetAllies()[myTarget], (int)( pTurn->GetAllies()[myTarget]->GetMaxHP() * 0.20f ) );
+			int temphp = (int)( pTurn->GetAllies( )[ myTarget ]->GetMaxHP( ) * 0.20f );
+			if(temphp < 25) temphp = 25;
+			pTurn->HealTarget( pTurn->GetAllies()[myTarget], temphp );
+
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;
@@ -759,7 +762,10 @@ void CombatPlayer::ItemsUpdate( float dt )
 			}
 		if ( chosen.GetName() == "Large Heal" )
 			{
-			pTurn->HealTarget( pTurn->GetAllies()[myTarget], (int)( pTurn->GetAllies()[myTarget]->GetMaxHP() * 0.45f ) );
+			int temphp = (int)( pTurn->GetAllies( )[ myTarget ]->GetMaxHP( ) * 0.50f );
+			if ( temphp < 55 ) temphp = 55;
+			pTurn->HealTarget( pTurn->GetAllies( )[ myTarget ], temphp );
+
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;
@@ -768,10 +774,15 @@ void CombatPlayer::ItemsUpdate( float dt )
 			}
 		if ( chosen.GetName() == "Small BP Restore" )
 			{
-			int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)( pTurn->GetAllies()[myTarget]->GetMaxBP() * 0.20f );
+
+			int newBP = (int)( pTurn->GetAllies()[myTarget]->GetMaxBP() * 0.20f );
+			if(newBP < 10) newBP = 10;
+				newBP += pTurn->GetAllies( )[ myTarget ]->GetBP( );
+
 			if ( newBP > pTurn->GetAllies()[myTarget]->GetMaxBP() )
 				newBP = pTurn->GetAllies()[myTarget]->GetMaxBP();
 			pTurn->GetAllies()[myTarget]->SetBP( newBP );
+
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;
@@ -780,10 +791,14 @@ void CombatPlayer::ItemsUpdate( float dt )
 			}
 		if ( chosen.GetName() == "Large BP Restore" )
 			{
-			int newBP = pTurn->GetAllies()[myTarget]->GetBP() + (int)( pTurn->GetAllies()[myTarget]->GetMaxBP() * 0.45f );
-			if ( newBP > pTurn->GetAllies()[myTarget]->GetMaxBP() )
-				newBP = pTurn->GetAllies()[myTarget]->GetMaxBP();
-			pTurn->GetAllies()[myTarget]->SetBP( newBP );
+			int newBP = (int)( pTurn->GetAllies( )[ myTarget ]->GetMaxBP( ) * 0.45f );
+			if ( newBP < 25 ) newBP = 25;
+				newBP += pTurn->GetAllies( )[ myTarget ]->GetBP( );
+
+			if ( newBP > pTurn->GetAllies( )[ myTarget ]->GetMaxBP( ) )
+				newBP = pTurn->GetAllies( )[ myTarget ]->GetMaxBP( );
+			pTurn->GetAllies( )[ myTarget ]->SetBP( newBP );
+
 			GamePlayState::GetInstance()->itemTimer = 2.0f;
 			GamePlayState::GetInstance()->ItemUsed = true;
 			std::ostringstream usingItem;

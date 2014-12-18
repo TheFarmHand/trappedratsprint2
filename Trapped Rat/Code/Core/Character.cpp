@@ -168,6 +168,8 @@ void Character::TakeDamage( int dmg, bool firefall )
 		//GamePlayState::GetInstance()->AddToHUDItems( temp );
 
 		}
+
+	if(HP > GetMaxHP()) HP = GetMaxHP();
 	/*if (dmg < 0)
 	{
 	GamePlayState::GetInstance()->PlaySoundEffect(7);
